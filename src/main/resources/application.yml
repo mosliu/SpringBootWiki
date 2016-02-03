@@ -1,0 +1,13 @@
+spring:
+ profiles: development
+db:
+ url: jdbc:hsqldb:file:testdb
+ username: sa
+ password:
+---
+spring:
+ profiles: test
+db:
+ url: jdbc:mysql://localhost/test
+ username: test
+ password: test
