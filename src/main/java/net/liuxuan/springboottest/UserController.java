@@ -1,5 +1,7 @@
 package net.liuxuan.springboottest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 //@ComponentScan
 @RequestMapping("/user")
 public class UserController {
+    private static Log logger = LogFactory.getLog(UserController.class);
+
+
     @RequestMapping("/{id}")
     //在方法的参数中加上@PathVariable("variableName")，
     // 那么当请求被转发给该方法处理时，
@@ -22,6 +27,7 @@ public class UserController {
         User user = new User();
         user.setId(id);
         user.setName("zhang");
+
         return user;
     }
 }

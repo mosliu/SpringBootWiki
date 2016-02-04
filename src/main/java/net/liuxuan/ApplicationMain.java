@@ -1,11 +1,13 @@
 package net.liuxuan;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.util.Arrays;
 
 /**
  * Created by Moses on 2016/2/3.
@@ -23,20 +25,30 @@ import java.util.Arrays;
 
 @SpringBootApplication //等同于 @Configuration @EnableAutoConfiguration @ComponentScan
 public class ApplicationMain {
+    private static Logger log =  LoggerFactory.getLogger(ApplicationMain.class);
+
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(ApplicationMain.class);
         app.setBannerMode(Banner.Mode.OFF);
         ApplicationContext ctx = app.run(args);
 
-        String beanNames[] = ctx.getBeanDefinitionNames();
-        Arrays.sort(beanNames);
-        for (String beanName : beanNames) {
-            System.out.println(beanName);
-        }
+//        String beanNames[] = ctx.getBeanDefinitionNames();
+//        Arrays.sort(beanNames);
+//        for (String beanName : beanNames) {
+//            System.out.println(beanName);
+//        }
 
 //        SpringApplication.run(ApplicationMain.class, args);
         String a = "Application Started";
+        log.warn(a);
 
-
+        log.trace("======trace");
+        log.debug("======debug");
+        log.info("======info");
+        log.warn("======warn");
+        log.error("======error");
+//
+//        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+//        StatusPrinter.print(lc);
     }
 }
