@@ -1,0 +1,57 @@
+# Server settings 
+server: 
+  port:8080 
+  address:localhost 
+
+
+# DATASOURCE 
+#jdbc:
+#  driverLocation: D:\\repo\\mysql\\mysql-connector-java\\5.1.38\\mysql-connector-java-5.1.38.jar
+#  driverClass: com.mysql.jdbc.Driver
+#  url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8
+#  username: root
+#  password: 123456
+ 
+# SPRING PROFILES 
+spring:     
+  # HTTP ENCODING 
+  http:
+    encoding.charset: UTF-8
+    encoding:
+      enabled: true
+      force: true
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    test-on-borrow: true
+    validation-query: SELECT 1;
+    test-while-idle: true
+
+  jpa:
+    database: MYSQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate.show_sql: true
+      hibernate.dialect : org.hibernate.dialect.MySQL5Dialect
+
+  thymeleaf:
+    cache: false
+
+
+
+# MyBatis 
+#mybatis:
+#  typeAliasesPackage: com.modou.**.domain
+#  mapperLocations: classpath:/com/modou/**/mapper/*.xml
+#  configLocation: classpath:/mybatis-config.xml
+ 
+# LOGGING 
+logging:
+  level: 
+    com.ibatis:DEBUG 

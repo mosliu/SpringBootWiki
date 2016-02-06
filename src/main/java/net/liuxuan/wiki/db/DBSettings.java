@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2010-2016.  by Moses   All rights reserved.
+ *
+ */
+
 package net.liuxuan.wiki.db;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,7 +15,7 @@ import org.springframework.stereotype.Component;
 配置属性中以“db”为前缀的属性值会被自动绑定到 Java 类中同名的域上，
 如 url 域的值会对应属性“db.url”的值。
 只需要在应用的配置类中添加“@EnableConfigurationProperties”注解就可以启用该自动绑定功能。*/
-@Component
+
 @ConfigurationProperties(prefix = "db")
 public class DBSettings {
     private String url;

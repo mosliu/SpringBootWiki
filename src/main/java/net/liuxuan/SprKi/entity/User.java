@@ -1,4 +1,9 @@
-package net.liuxuan.springboottest;
+/*
+ * Copyright (c) 2010-2016.  by Moses   All rights reserved.
+ *
+ */
+
+package net.liuxuan.SprKi.entity;
 
 /**
  * Created by Moses on 2016/2/3.

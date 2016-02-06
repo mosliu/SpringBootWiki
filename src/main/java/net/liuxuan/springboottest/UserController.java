@@ -1,9 +1,16 @@
+/*
+ * Copyright (c) 2010-2016.  by Moses   All rights reserved.
+ *
+ */
+
 package net.liuxuan.springboottest;
 
+import net.liuxuan.SprKi.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,4 +37,14 @@ public class UserController {
 
         return user;
     }
+    @RequestMapping(value="/{user}", method= RequestMethod.GET)
+    public User getUser(@PathVariable Long user) {
+        // ...
+        User user1 = new User();
+        user1.setId(user);
+        user1.setName("zhang");
+
+        return user1;
+    }
+
 }

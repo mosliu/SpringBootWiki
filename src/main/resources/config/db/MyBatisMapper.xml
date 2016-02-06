@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2010-2016.  by Moses   All rights reserved.
+  ~
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="net.liuxuan.SprKi">
+
+    <select id="getUserCount" resultType="java.lang.Long">
+        select count(1) from SprKi_userinfo
+    </select>
+    <select id="getUser" resultType="net.liuxuan.SprKi.entity.User" parameterType="java.lang.Long">
+        select id, userName
+        from SprKi_userinfo
+        where id = #{id}
+    </select>
+
+    <select id="getUserMapList" resultType="java.util.HashMap">
+        select id, userName
+        from SprKi_userinfo
+    </select>
+
+    <insert id="saveUser" parameterType="net.liuxuan.SprKi.entity.User" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into SprKi_userinfo (userName) values(#{userName})
+    </insert>
+
+
+    <cache eviction="LRU" flushInterval="86400000" size="256" readOnly="false"/>
+</mapper>
