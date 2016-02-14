@@ -44,7 +44,6 @@ spring:
     cache: false
 
 
-
 # MyBatis 
 #mybatis:
 #  typeAliasesPackage: com.modou.**.domain
@@ -54,4 +53,5 @@ spring:
 # LOGGING 
 logging:
   level: 
-    com.ibatis:DEBUG 
+    com.ibatis: DEBUG
+    org.hibernate.SQL: DEBUG
