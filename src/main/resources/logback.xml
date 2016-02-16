@@ -61,7 +61,6 @@
               <level>INFO</level>
           </filter>-->
 
-
     </appender>
     <appender name="DEBUG_LEVEL_REMAPPER" class="org.springframework.boot.logging.logback.LevelRemappingAppender">
         <destinationLogger>org.springframework.boot</destinationLogger>
@@ -70,34 +69,38 @@
 
     <!-- Enable FILE and STDOUT appenders for all log messages.
          By default, only log at level INFO and above. -->
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <!-- For loggers in the these namespaces, log at all levels. -->
-    <logger name="pedestal" level="ALL"/>
-    <logger name="hammock-cafe" level="ALL"/>
-    <logger name="user" level="ALL"/>
-    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
-    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
-    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
-    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
-    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
-    <logger name="org.crsh.plugin" level="WARN"/>
-    <logger name="org.crsh.ssh" level="WARN"/>
-    <logger name="org.eclipse.jetty.util.component.AbstractLifeCycle" level="ERROR"/>
-    <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
-    <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="WARN"/>
+    <!-- For loggers in the these namespaces, log at separated levels. -->
+    <logger name="net.liuxuan" level="INFO"/>
+    <!--RequestMapping   set to INFO if you want to show-->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
+    <!--Mapping filter   set to INFO if you want to show-->
+    <logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="INFO"/>
+    <!--Mapping servlet   set to INFO if you want to show-->
+    <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
+    <!--URLinfo    set to Debug if you want to show-->
+    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="Debug"/>
+
+    <logger name="org.springframework.security" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.thymeleaf" level="INFO"/>
+
+    <logger name="org.apache.tomcat.util.net.NioEndpoint" level="INFO"/>
+
     <logger name="org.springframework.boot.actuate.endpoint.jmx" additivity="false">
         <appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
     </logger>
-    <logger name="org.thymeleaf" additivity="false">
+   <!-- <logger name="org.thymeleaf" additivity="false">
         <appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
-    </logger>
+    </logger>-->
     <!--控制logback.LogbackDemo类的日志打印，打印级别为“INFO”；
    additivity属性为false，表示此loger的打印信息不再向上级传递，
    指定了名字为“STDOUT”的appender。-->
+
     <logger name="logback" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>

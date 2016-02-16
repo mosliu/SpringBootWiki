@@ -1,7 +1,7 @@
 # Server settings 
 server: 
-  port:8080 
-  address:localhost 
+  port: 80
+  address: localhost
 
 
 # DATASOURCE 
@@ -20,6 +20,8 @@ spring:
     encoding:
       enabled: true
       force: true
+  thymeleaf:
+    cache: false
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -40,8 +42,6 @@ spring:
       hibernate.show_sql: true
       hibernate.dialect : org.hibernate.dialect.MySQL5Dialect
 
-  thymeleaf:
-    cache: false
 
 
 # MyBatis 

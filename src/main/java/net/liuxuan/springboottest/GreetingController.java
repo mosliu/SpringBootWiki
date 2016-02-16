@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
+import java.util.Map;
+
 /**
  * Created by Moses on 2016/2/3.
  */
@@ -12,9 +15,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class GreetingController {
 //    @RequestMapping(method=GET)
-    @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+@RequestMapping("/")
+public String home(Map<String, Object> model) {
+    model.put("message", "Hello World");
+    model.put("title", "Hello Home");
+    model.put("date", new Date());
+    return "home";
+}
+
+    @RequestMapping("/foo")
+    public String foo() {
+        throw new RuntimeException("Expected exception in controller");
     }
+
 }

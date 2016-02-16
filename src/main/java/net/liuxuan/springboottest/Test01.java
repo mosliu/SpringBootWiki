@@ -11,13 +11,14 @@
 package net.liuxuan.springboottest;
 
 
-import net.liuxuan.spring.boot.Config;
 import net.liuxuan.wiki.db.DBSettings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -34,19 +35,19 @@ public class Test01 {
     private String name;
     @Autowired
     DBSettings db;
-    @Autowired
-    Wisely2Settings wisely2Settings;
 
-    @RequestMapping("/")
-    
+
+
+    @RequestMapping("/asd")
     public String home() {
 
 //        System.out.println(conf.getServers().size());
-        System.out.println(db.getUrl());
+        System.out.println("dburl"+db.getUrl());
 //        Log.d(TAG, "home() called with " + name);
-        System.out.println(wisely2Settings.getGender()+"==="+wisely2Settings.getGender());
+
         return String.format("Hello %s!", name);
     }
+
 
 
 }

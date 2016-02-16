@@ -37,7 +37,8 @@ public class UserController {
 
         return user;
     }
-    @RequestMapping(value="/{user}", method= RequestMethod.GET)
+
+    @RequestMapping(value = "/{user}", method = RequestMethod.GET)
     public User getUser(@PathVariable Long user) {
         // ...
         User user1 = new User();
