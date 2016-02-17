@@ -1,25 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<!--[if lt IE 7 ]><html  lang="en" class="no-js ie6" > <![endif]-->
+<!--[if IE 7 ]><html  lang="en" class="no-js ie7" > <![endif]-->
+<!--[if IE 8 ]><html  lang="en" class="no-js ie8" > <![endif]-->
+<!--[if IE 9 ]><html  lang="en" class="no-js ie9" > <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html  lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!--<![endif]-->
+
+
 <head>
-<title>Layout</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
+	<meta charset="utf-8" />
+	<meta name="author" content="Moses" />
+	<meta name="keywords" content="" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Layout</title>
+	<!-- main JS libs -->
+	<script src="js/libs/modernizr.min.js" ></script>
+	<script src="js/libs/jquery-1.10.2.min.js" ></script>
+	<script src="js/libs/jquery-ui.min.js" ></script>
+	<script src="js/libs/bootstrap.min.js" ></script>
+
+	<!-- General Scripts -->
+	<script src="js/general.js" ></script>
+
+	<!-- Style CSS -->
+	<link href="css/bootstrap.css" th:href="@{/css/bootstrap.css}" media="screen" rel="stylesheet" />
+	<link href="css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}" media="screen" rel="stylesheet" />
+	<link href="css/style.css" th:href="@{/css/style.css}" media="screen" rel="stylesheet" />
+	<link href="css/moses.css" th:href="@{/css/moses.css}" media="screen" rel="stylesheet" />
+
+	<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+	<!--[if gte IE 9]>	<style type="text/css">.gradient {filter: none !important;}</style><![endif]-->
 </head>
-<body>
-	<div class="container">
-		<div class="navbar">
-			<div class="navbar-inner">
-				<a class="brand"
-					href="https://github.com/ultraq/thymeleaf-layout-dialect">
-					Thymeleaf - Layout </a>
-				<ul class="nav">
-					<li><a th:href="@{/msg/}" href="messages.html"> Messages </a></li>
-				</ul>
-			</div>
-		</div>
-		<h1 layout:fragment="header">Layout</h1>
-		<div layout:fragment="content">Fake content</div>
-	</div>
+<body class="body-wrap">
+<div class="container">
+	<div th:include="layouts/navbar::navbar"></div>
+	<h1 layout:fragment="header">Layout</h1>
+	<div layout:fragment="content" class="container">Fake content</div>
+</div>
+<footer>
+	<div class="container" th:include="layouts/footer::footer"></div>
+</footer>
 </body>
 </html>

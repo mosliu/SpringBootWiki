@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -26,7 +28,11 @@ public class ErrorHandleController implements ErrorController {
     private static final String ERROR_PATH = "/error";
 
     @RequestMapping(value=ERROR_PATH)
-    public String handleError(){
+    public String handleError(Map<String, Object> model){
+
+        model.put("message", "ERROR MSG");
+        model.put("title", "ERROR_404");
+        model.put("date", new Date());
         return "common/404";
     }
 

@@ -83,7 +83,7 @@
     <!--Mapping servlet   set to INFO if you want to show-->
     <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
     <!--URLinfo    set to Debug if you want to show-->
-    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="Debug"/>
+    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="INFO"/>
 
     <logger name="org.springframework.security" level="INFO"/>
     <logger name="org.hibernate" level="INFO"/>

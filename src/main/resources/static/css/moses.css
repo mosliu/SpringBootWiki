@@ -1,0 +1,51 @@
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 40px;
+    background-color: #f5f5f5;
+}
+
+#static_error_content {
+    line-height: 1.4em;
+    font-family: 'stratum-1-web', sans-serif;
+    color: #808080;
+    background-color: #fff;
+    margin: auto;
+    width: 823px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 1px #4b556a;
+    box-shadow-bottom: 1px #373c47
+}
+
+#static_error_content img {
+    display: block;
+    padding: 65px 50px 15px 50px;
+    margin: 7px auto;
+    background-color: #00bff3;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px
+}
+
+#static_error_content h1 {
+    font-size: 40px;
+    text-align: center;
+    margin: 70px 0 25px;
+    font-weight: normal;
+    padding: 0
+}
+
+#static_error_content h3 {
+    font-size: 23px;
+    text-align: center;
+    font-weight: normal;
+    padding-bottom: 70px
+}
+
+#static_error_content a {
+    color: #00bff3;
+    text-decoration: none
+}
+
+

@@ -8,6 +8,8 @@ package net.liuxuan.springboottest;
 import net.liuxuan.springboottest.message.Message;
 import net.liuxuan.springboottest.message.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +33,8 @@ public class MessageController {
     }
 
     @RequestMapping("/msg")
+//    @PreAuthorize("hasRole('ADMIN')")
+    @Secured("ROLE_ADMIN")
     public ModelAndView list() {
         Iterable<Message> messages = this.messageRepository.findAll();
         return new ModelAndView("messages/list", "messages", messages);

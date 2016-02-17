@@ -8,6 +8,7 @@ package net.liuxuan.spring.mvc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -127,7 +128,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new TestUrlInterceptor());
+//        registry.addInterceptor(new TestUrlInterceptor());
     }
 
     /**
@@ -140,6 +141,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
     @Override

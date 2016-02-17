@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="navbar" class="navbar">
+    <div class="row">
+        <ul class="menu clearfix gradient cl-lg-6">
+            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="/" th:href="@{/}">Home</a></li>
+            <li ><a href="#">MSG</a>
+                <ul>
+                    <li><a href="/msg" th:href="@{/msg}" >Message List</a></li>
+                    <li><a href="#">User interface</a></li>
+                    <li><a href="#">Social media&gt; </a>
+                        <ul>
+                            <li><a href="#">Gallery images</a></li>
+                            <li><a href="#">OneByOne Slider</a></li>
+                            <li><a href="#">Audio Player</a></li>
+                            <li><a href="#">Video Player</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li ><a href="#">Contacts</a></li>
+            <li class="pull-right"><form th:action="@{/logout}" method="post">
+                <span class="btn btn-small"><input type="submit"  value="退出登录"/></span>
+            </form></li>
+        </ul>
+
+    </div>
+</div>
+
+
+</body>
+</html>
