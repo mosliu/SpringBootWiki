@@ -1,13 +1,11 @@
 package net.liuxuan.SprKi.controller;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -24,18 +22,42 @@ import java.util.Map;
  */
 @Controller
 public class ErrorHandleController implements ErrorController {
+//public class ErrorHandleController  {
 
     private static final String ERROR_PATH = "/error";
 
-    @RequestMapping(value=ERROR_PATH)
-    public String handleError(Map<String, Object> model){
 
+    @RequestMapping(value = ERROR_PATH)
+    public String handleError(Map<String, Object> model) {
+//        error.hasErrors();
         model.put("message", "ERROR MSG");
         model.put("title", "ERROR_404");
         model.put("date", new Date());
         return "common/404";
     }
 
+    @RequestMapping(value = "/invalid")
+    public String handleInvalid(Map<String, Object> model) {
+
+        model.put("message", "INVALID MSG");
+        model.put("title", "INVALID");
+        model.put("date", new Date());
+        return "common/invalid";
+    }
+
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleAllException(Exception ex) {
+
+        ModelAndView model = new ModelAndView("common/temp");
+        model.getModel().put("message", "INVALID MSG");
+        model.getModel().put("title", "INVALID");
+        model.getModel().put("date", new Date());
+        model.addObject("errMsg", "this is Exception.class");
+
+        return model;
+
+    }
 
     /**
      * Returns the path of the error page.
@@ -44,19 +66,19 @@ public class ErrorHandleController implements ErrorController {
      */
     @Override
     public String getErrorPath() {
-//        return null;
         return ERROR_PATH;
     }
 
-    @ExceptionHandler
-    void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.BAD_REQUEST.value());
-    }
 
-    @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
-    void handleBadRequests(HttpServletResponse response) throws IOException {
-        response.sendError(HttpStatus.BAD_REQUEST.value());
-    }
+//    @ExceptionHandler
+//    void handleIllegalArgumentException(IllegalArgumentException e, HttpServletResponse response) throws IOException {
+//        response.sendError(HttpStatus.BAD_REQUEST.value());
+//    }
+//
+//    @ExceptionHandler({IllegalArgumentException.class, NullPointerException.class})
+//    void handleBadRequests(HttpServletResponse response) throws IOException {
+//        response.sendError(HttpStatus.BAD_REQUEST.value());
+//    }
 
 
 }

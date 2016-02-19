@@ -1,5 +1,6 @@
 package net.liuxuan.spring.security;
 
+import net.liuxuan.SprKi.service.security.SecurityUserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,15 @@ import javax.sql.DataSource;
 public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     private static Logger logger = LoggerFactory.getLogger(SecurityConfigration.class);
     @Autowired
+    SecurityUserDetailsServiceImpl securityUserDetailsService;
+    @Autowired
     private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/css/**", "/fonts/**", "/js/**").permitAll()
+//                .antMatchers("/").anonymous()
 //                .antMatchers("/msg/**").hasRole("ADMIN")
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .anyRequest().authenticated().and()
@@ -46,18 +50,16 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                The method formLogin().permitAll() statement instructs Spring Security to allow any access to any URL
 //                 (i.e. /login and /login?error) associated to formLogin().
                 .formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
+//                .logout().deleteCookies("JSESSIONID").permitAll().and()
 //                .logout().logoutUrl("/my/logout")
 //                .logoutSuccessUrl("/my/index")
                 // If logoutSuccessHandler specified, logoutSuccessUrl() is ignored.
-//                .logoutSuccessHandler(logoutSuccessHandler)
-//                .invalidateHttpSession(true)
-//                .addLogoutHandler(logoutHandler)
-//                .deleteCookies(cookieNamesToClear)
-//                .and()
                 .logout().permitAll().and()
-                .sessionManagement().invalidSessionUrl("/").and()
-                .jee()
-//                .mappableRoles("USER", "ADMIN");
+
+                .userDetailsService(securityUserDetailsService)
+                .sessionManagement().invalidSessionUrl("/invalid").and()
+                .jee().mappableRoles("USER", "ADMIN");
+
         ;
 //
 //        http.authorizeRequests().accessDecisionManager(accessDecisionManager())

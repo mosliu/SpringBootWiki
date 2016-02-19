@@ -1,5 +1,6 @@
 package net.liuxuan.springboottest;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +16,7 @@ import java.util.Map;
 @Controller
 public class GreetingController {
 //    @RequestMapping(method=GET)
-@RequestMapping("/")
-public String home(Map<String, Object> model) {
-    model.put("message", "Hello World");
-    model.put("title", "Hello Home");
-    model.put("date", new Date());
-    return "home";
-}
+
 
     @RequestMapping("/foo")
     public String foo() {

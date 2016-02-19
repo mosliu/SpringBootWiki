@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
  * ***************************************************************************
@@ -28,6 +31,7 @@ public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getRootConfigClasses() {
 //        return new Class<?>[0];
+//        return null;
         return new Class[] { RootConfiguration.class };
     }
 
@@ -43,6 +47,7 @@ public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class<?>[0];
+//        return new Class[] { MyWebConfig.class };
     }
 
     /**
@@ -54,5 +59,16 @@ public class MvcWebApplicationInitializer extends AbstractAnnotationConfigDispat
     @Override
     protected String[] getServletMappings() {
         return new String[0];
+//        return new String[] { "/" };
+    }
+
+    /**
+     * Specify filters to add and map to the {@code DispatcherServlet}.
+     * @return an array of filters or {@code null}
+     * @see #registerServletFilter(ServletContext, Filter)
+     */
+    protected Filter[] getServletFilters() {
+//        return new Filter[] { new HiddenHttpMethodFilter(), new CharacterEncodingFilter()
+        return null;
     }
 }

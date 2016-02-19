@@ -5,7 +5,7 @@ insert into users (USERNAME, PASSWORD, ENABLED, USERNAMECN, ROWID)
 values (''admin'', ''ceb4f32325eda6142bd65215f4c0f371'', 1, ''系统管理员'', ''AAAHmhAALAAAAAPAAA'');
 
 insert into users (USERNAME, PASSWORD, ENABLED, USERNAMECN, ROWID)
-values (''user'', ''47a733d60998c719cf3526ae7d106d13'', 1, ''普通用户'', ''AAAHmhAALAAAAAPAAB'');
+values (''users'', ''47a733d60998c719cf3526ae7d106d13'', 1, ''普通用户'', ''AAAHmhAALAAAAAPAAB'');
 
 insert into authorities (USERNAME, AUTHORITY, ROWID)
 values ('admin', 'ROLE_PLATFORMADMIN', 'AAAHmjAALAAAAAgAAA');
@@ -20,4 +20,4 @@ insert into authorities (USERNAME, AUTHORITY, ROWID)
 values ('lxb', 'ROLE_LOGINTOWELCOME', 'AAAHmjAALAAAAAeAAB');
 
 insert into authorities (USERNAME, AUTHORITY, ROWID)
-values ('user', 'ROLE_USER', 'AAAHmjAALAAAAAgAAC');
+values ('users', 'ROLE_USER', 'AAAHmjAALAAAAAgAAC');

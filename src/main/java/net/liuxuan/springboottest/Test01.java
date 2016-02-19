@@ -33,6 +33,7 @@ public class Test01 {
     //    @Value("name")
     @Value("${name:CCCC}")
     private String name;
+
     @Autowired
     DBSettings db;
 

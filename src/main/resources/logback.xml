@@ -52,7 +52,8 @@
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+                <!--%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}-->
+                %clr(%d{MM-dd HH:mm:ss}){faint}%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
             </pattern>
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
@@ -75,7 +76,9 @@
     </root>
 
     <!-- For loggers in the these namespaces, log at separated levels. -->
-    <logger name="net.liuxuan" level="INFO"/>
+    <logger name="net.liuxuan" level="DEBUG"/>
+
+
     <!--RequestMapping   set to INFO if you want to show-->
     <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
     <!--Mapping filter   set to INFO if you want to show-->
