@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+	  layout:decorator="layouts/mainlayout">
+<head>
+	<title>登录</title>
+	<!-- custom input -->
+	<script src="js/jquery.customInput.js"></script>
+	<script type="text/javascript" src="js/jquery.powerful-placeholder.min.js"></script>
+	<script src="js/chosen.jquery.min.js" type="text/javascript"></script>
+	<script>
+		jQuery(document).ready(function($) {
+			if($("[placeholder]").size() > 0) {
+				$.Placeholder.init();
+			}
+		});
+	</script>
+
+</head>
+
+<body onload="document.form.username.focus();">
+<h1 layout:fragment="header" class="hidden">登录</h1>
+
+<div layout:fragment="content" class="container">
+	<div class="content">
+		<p th:if="${param.logout}" class="alert alert-success">You have been logged out</p>
+		<p th:if="${param.error}" class="alert alert-danger">There was an error, please try again</p>
+		<h2>Login with Username and Password</h2>
+		<!-- Contact form -->
+		<div class="add-comment styled boxed" id="addcomments" style="width: 50%; margin:auto">
+			<div class="add-comment-title"><h3>Write a message</h3></div>
+			<div class="comment-form">
+				<form th:action="@{/login}" action="/login" id="loginForm" name="form" method="POST">
+					<div class="form-inner">
+
+						<div class="field_text lightPlaceholder">
+							<label for="username" class="label_title">Subject:</label>
+							<input type="text" name="username" id="username" value="" placeholder="Username" />
+						</div>
+						<div class="field_text lightPlaceholder">
+							<label for="password" class="label_title">Subject:</label>
+							<input type="password" name="password" id="password" value="" placeholder="Password" />
+						</div>
+					</div>
+					<div class="rowSubmit">
+						<a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
+						<span class="btn btn-send"><input type="submit" id="login" value="  Login  " /></span>
+					</div>
+
+				</form>
+			</div>
+		</div>
+		<!--/ Contact form -->
+
+
+	</div>
+</div>
+</body>
+</html>

@@ -15,7 +15,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import javax.servlet.FilterRegistration;
 
 /**
  * Created by Moses on 2016/2/3.
@@ -63,6 +66,10 @@ public class ApplicationMain extends SpringBootServletInitializer {
         log.info("\r\n==============\r\nApplication Started\n==============");
         mainTest();
 //
+
+
+
+
 
     }
 

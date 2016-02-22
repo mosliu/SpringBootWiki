@@ -1,7 +1,9 @@
 package net.liuxuan.SprKi.controller;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,7 +22,11 @@ import java.util.Map;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/15 |    Moses       |     Created
  */
+
+//注意使用注解@ControllerAdvice作用域是全局Controller范围
+ //可应用到所有@RequestMapping类或方法上的@ExceptionHandler、@InitBinder、@ModelAttribute，在这里是@ExceptionHandler
 @Controller
+@ControllerAdvice
 public class ErrorHandleController implements ErrorController {
 //public class ErrorHandleController  {
 
@@ -29,6 +35,20 @@ public class ErrorHandleController implements ErrorController {
 
     @RequestMapping(value = ERROR_PATH)
     public String handleError(Map<String, Object> model) {
+//        error.hasErrors();
+        model.put("message", "ERROR MSG");
+        model.put("title", "ERROR_404");
+        model.put("date", new Date());
+        return "common/404";
+    }
+
+    /**
+     * 处理碰到的找不到的页面，提示404错误
+     * @param model
+     * @return
+     */
+    @RequestMapping("*")
+    public String handle404(Map<String, Object> model) {
 //        error.hasErrors();
         model.put("message", "ERROR MSG");
         model.put("title", "ERROR_404");
@@ -46,19 +66,6 @@ public class ErrorHandleController implements ErrorController {
     }
 
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleAllException(Exception ex) {
-
-        ModelAndView model = new ModelAndView("common/temp");
-        model.getModel().put("message", "INVALID MSG");
-        model.getModel().put("title", "INVALID");
-        model.getModel().put("date", new Date());
-        model.addObject("errMsg", "this is Exception.class");
-
-        return model;
-
-    }
-
     /**
      * Returns the path of the error page.
      *
@@ -67,6 +74,33 @@ public class ErrorHandleController implements ErrorController {
     @Override
     public String getErrorPath() {
         return ERROR_PATH;
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleAllException(Exception ex) {
+
+        ModelAndView model = new ModelAndView("common/temp");
+        model.getModel().put("error", ex.getMessage());
+        model.getModel().put("title", "Error Happened");
+        model.getModel().put("message", "Error Happened");
+        model.getModel().put("date", new Date());
+        model.addObject("errMsg", "this is Exception.class");
+        ex.printStackTrace();
+        return model;
+
+    }
+
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ModelAndView handleAccessDeniedExceptionException(Exception ex) {
+        ModelAndView model = new ModelAndView("common/temp");
+        model.getModel().put("error", ex.getMessage());
+        model.getModel().put("message", "AccessDenied");
+        model.getModel().put("title", "AccessDenied");
+        model.getModel().put("date", new Date());
+
+        return model;
+
     }
 
 

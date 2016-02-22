@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Title</title>
 </head>
 <body>
@@ -11,9 +11,9 @@
         <ul class="menu clearfix gradient cl-lg-6">
             <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
             <li><a href="/" th:href="@{/}">Home</a></li>
-            <li ><a href="#">MSG</a>
+            <li><a href="#">MSG</a>
                 <ul>
-                    <li><a href="/msg" th:href="@{/msg}" >Message List</a></li>
+                    <li><a href="/msg" th:href="@{/msg}">Message List</a></li>
                     <li><a href="#">User interface</a></li>
                     <li><a href="#">Social media&gt; </a>
                         <ul>
@@ -25,12 +25,19 @@
                     </li>
                 </ul>
             </li>
-            <li ><a href="#">Contacts</a></li>
-            <li class="pull-right"><form th:action="@{/logout}" method="post">
-                <span class="btn btn-small"><input type="submit"  value="退出登录"/></span>
-            </form></li>
-        </ul>
+            <li><a href="#">Contacts</a></li>
 
+            <li class="pull-right" th:if="${#authorization.expression('hasRole(''USER'')')}">
+                <a href="#">User interface</a>
+                <ul>
+                    <li><a href="#" th:text="${#authentication.name}">USER INFO</a></li>
+                    <form th:action="@{/logout}" name="logoutform" method="post">
+                        <li><a href="#" onclick="logoutform.submit()">退出登录</a></li>
+                    </form>
+                </ul>
+            </li>
+
+        </ul>
     </div>
 </div>
 

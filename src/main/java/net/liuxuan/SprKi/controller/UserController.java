@@ -3,11 +3,7 @@ package net.liuxuan.SprKi.controller;
 import net.liuxuan.SprKi.service.security.SecurityUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +41,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(Map<String, Object> model){
         log.debug("Access UserController.login() GET Method");
-        return new ModelAndView("login", model);
+        return new ModelAndView("common/login", model);
     }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
@@ -54,7 +50,7 @@ public class UserController {
             @RequestParam(defaultValue = "") String password,
             HttpServletRequest request, Map<String, Object> model) {
 
-        log.debug("Access UserController.login() Post Method");
+//        log.debug("Access UserController.login() Post Method");
 
 //        if (!checkValidateCode(request)) {
 //            return new ModelAndView("common/temp", model);
@@ -90,6 +86,12 @@ public class UserController {
 //        }
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(Map<String, Object> model){
+//        log.debug("Access UserController.logout() GET Method");
+        return new ModelAndView("common/logout", model);
+    }
 
     /**
      * 验证码判断

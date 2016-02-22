@@ -10,9 +10,11 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -36,31 +38,52 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     @Autowired
     SecurityUserDetailsServiceImpl securityUserDetailsService;
     @Autowired
+    MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    @Resource
+    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
+    @Resource
+    MyLogoutHandler myLogoutHandler;
+    @Autowired
     private DataSource dataSource;
+
+    /**
+     * Override this method to configure {@link WebSecurity}. For example, if you wish to
+     * ignore certain requests.
+     */
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/resources/**");
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/css/**", "/fonts/**", "/js/**").permitAll()
+        http
+//                .exceptionHandling().authenticationEntryPoint(myLoginUrlAuthEntryPoint).and()
+                .authorizeRequests()
+                .antMatchers("/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
 //                .antMatchers("/").anonymous()
-//                .antMatchers("/msg/**").hasRole("ADMIN")
+                .antMatchers("/msg/**").hasRole("USER")
+                .and()
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
-                .anyRequest().authenticated().and()
+//                .anyRequest().authenticated().and()
 //                .anyRequest().fullyAuthenticated()
 //                The method formLogin().permitAll() statement instructs Spring Security to allow any access to any URL
 //                 (i.e. /login and /login?error) associated to formLogin().
-                .formLogin().loginPage("/login").failureUrl("/login?error").permitAll().and()
-//                .logout().deleteCookies("JSESSIONID").permitAll().and()
-//                .logout().logoutUrl("/my/logout")
-//                .logoutSuccessUrl("/my/index")
-                // If logoutSuccessHandler specified, logoutSuccessUrl() is ignored.
-                .logout().permitAll().and()
+                .formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler).failureUrl("/login?error").permitAll()
+                .and()
 
-                .userDetailsService(securityUserDetailsService)
-                .sessionManagement().invalidSessionUrl("/invalid").and()
-                .jee().mappableRoles("USER", "ADMIN");
+                .logout()
+//                .logoutSuccessHandler()
+//                .addLogoutHandler(myLogoutHandler)
+//                .logoutSuccessUrl("/logout")
+                .permitAll().and()
 
+//                .userDetailsService(securityUserDetailsService)
+//                .sessionManagement().invalidSessionUrl("/invalid").and()
+//                .jee().mappableRoles("USER", "ADMIN")
         ;
+
 //
 //        http.authorizeRequests().accessDecisionManager(accessDecisionManager())
 //                .expressionHandler(webSecurityExpressionHandler())
@@ -73,7 +96,8 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .dataSource(this.dataSource)
+                .dataSource(this.dataSource).and().userDetailsService(securityUserDetailsService)
+
 //                .withDefaultSchema()
 //                .withUser("user").password("user").roles("USER").and()
 //                .withUser("admin").password("password").roles("USER", "ADMIN")

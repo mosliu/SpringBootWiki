@@ -2,6 +2,7 @@ package net.liuxuan.spring.mvc;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -93,6 +94,14 @@ public class ThymeleafConfiguration {
         templateEngine.addDialect(new net.sourceforge.pagesdialect.PagesDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;
+    }
+
+
+    @Bean
+    public BeanNameViewResolver beanViewResolver() {
+        BeanNameViewResolver resolver = new BeanNameViewResolver();
+        resolver.setOrder(1);
+        return resolver;
     }
 
 

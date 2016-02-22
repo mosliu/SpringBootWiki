@@ -39,7 +39,7 @@ public class MvcBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String name) throws BeansException {
         if (bean instanceof RequestMappingHandlerAdapter) {
             // Modify properties of the adapter
-            log.debug("===MvcBeanPostProcessor noticed =RequestMappingHandlerAdapter= created===");
+            log.debug("===MvcBeanPostProcessor noticed RequestMappingHandlerAdapter created===");
         }
         return bean;
     }
