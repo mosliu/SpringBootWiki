@@ -16,19 +16,19 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<title>Layout</title>
 	<!-- main JS libs -->
-	<script src="js/libs/modernizr.min.js" ></script>
-	<script src="js/libs/jquery-1.10.2.min.js" ></script>
-	<script src="js/libs/jquery-ui.min.js" ></script>
-	<script src="js/libs/bootstrap.min.js" ></script>
+	<script src="/js/libs/modernizr.min.js" ></script>
+	<script src="/js/libs/jquery-1.10.2.min.js" ></script>
+	<script src="/js/libs/jquery-ui.min.js" ></script>
+	<script src="/js/libs/bootstrap.min.js" ></script>
 
 	<!-- General Scripts -->
-	<script src="js/general.js" ></script>
+	<script src="/js/general.js" ></script>
 
 	<!-- Style CSS -->
-	<link href="css/bootstrap.css" th:href="@{/css/bootstrap.css}" media="screen" rel="stylesheet" />
-	<link href="css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}" media="screen" rel="stylesheet" />
-	<link href="css/style.css" th:href="@{/css/style.css}" media="screen" rel="stylesheet" />
-	<link href="css/moses.css" th:href="@{/css/moses.css}" media="screen" rel="stylesheet" />
+	<link href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}" media="screen" rel="stylesheet" />
+	<link href="/css/jquery-ui.min.css" th:href="@{/css/jquery-ui.min.css}" media="screen" rel="stylesheet" />
+	<link href="/css/style.css" th:href="@{/css/style.css}" media="screen" rel="stylesheet" />
+	<link href="/css/moses.css" th:href="@{/css/moses.css}" media="screen" rel="stylesheet" />
 
 	<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
 	<!--[if gte IE 9]>	<style type="text/css">.gradient {filter: none !important;}</style><![endif]-->
@@ -39,6 +39,7 @@
 	<h1 layout:fragment="header">Layout</h1>
 	<div layout:fragment="content" class="container">Fake content</div>
 </div>
+<div style="height: 40px"></div>
 <footer>
 	<div class="container" th:include="layouts/footer::footer"></div>
 </footer>

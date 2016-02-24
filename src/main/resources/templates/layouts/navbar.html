@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
@@ -25,12 +25,14 @@
                     </li>
                 </ul>
             </li>
+            <li><a href="/editor" th:href="@{/editor}">Editor</a></li>
             <li><a href="#">Contacts</a></li>
 
-            <li class="pull-right" th:if="${#authorization.expression('hasRole(''USER'')')}">
+            <li class="pull-right" sec:authorize="hasRole('ROLE_USER')">
                 <a href="#">User interface</a>
                 <ul>
-                    <li><a href="#" th:text="${#authentication.name}">USER INFO</a></li>
+                    <li><a href="#" sec:authentication="name">USER INFO</a></li>
+                    <li><a href="#" sec:authentication="principal.authorities">USER INFO</a></li>
                     <form th:action="@{/logout}" name="logoutform" method="post">
                         <li><a href="#" onclick="logoutform.submit()">退出登录</a></li>
                     </form>

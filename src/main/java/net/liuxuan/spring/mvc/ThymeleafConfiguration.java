@@ -1,5 +1,6 @@
 package net.liuxuan.spring.mvc;
 
+import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
@@ -90,7 +91,8 @@ public class ThymeleafConfiguration {
 
 //        templateEngine.setTemplateResolver(servletContextTemplateResolver());
 //        templateEngine.addDialect(new org.thymeleaf.spring4.dialect.SpringStandardDialect());
-        templateEngine.addDialect(new nz.net.ultraq.thymeleaf.LayoutDialect());
+//        templateEngine.addDialect(new nz.net.ultraq.thymeleaf.LayoutDialect());
+        templateEngine.addDialect(new nz.net.ultraq.thymeleaf.LayoutDialect(new GroupingStrategy()));
         templateEngine.addDialect(new net.sourceforge.pagesdialect.PagesDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;

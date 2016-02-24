@@ -78,7 +78,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                .addLogoutHandler(myLogoutHandler)
 //                .logoutSuccessUrl("/logout")
                 .permitAll().and()
-
+                .headers().frameOptions().sameOrigin().and()
 //                .userDetailsService(securityUserDetailsService)
 //                .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")

@@ -12,8 +12,12 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 /**
  * Created by Moses on 2016/2/5.
@@ -65,9 +69,37 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         query = (query == null) ? "" : query;
 //        String url = request.getMethod() + "  " + request.getRequestURL().toString() + "?" + query;
 
-        log.debug("--PreCheck,url:{} {}? " , request.getMethod(),request.getRequestURL().toString(),query);
+
+        //request.getRequestURL()  ===>   http://127.0.0.1/login
+        //request.getRequestURI()  ===>   /login
+        log.debug("--PreCheck,url:{} {}?{} " , request.getMethod(),request.getRequestURL().toString(),query);
+        Cookie[] cookies = request.getCookies();
+        if(cookies!=null) {
+            for (int i = 0; i < cookies.length; i++) {
+                log.debug("--PreCheck,cookies:{} ", cookies[i]);
+            }
+        }
+        HttpSession session = request.getSession();
+        log.debug("--PreCheck,Session:{} ,is new:{} " ,session.getId(), session.isNew());
 
 //        System.out.println("--UrlInterceptor Pre--"+url);
+
+        //如果不是映射到方法直接通过
+//        if (!(handler instanceof HandlerMethod)) {
+//            return true;
+//        }
+//        HandlerMethod handlerMethod = (HandlerMethod) handler;
+//        Method method = handlerMethod.getMethod();
+//
+//        System.out.println(method);
+//
+//        Annotation[] annotations = method.getDeclaredAnnotations();
+//        for (int i = 0; i < annotations.length; i++) {
+//
+//            System.out.println(annotations[i].toString());
+//        }
+
+
 
         return true;
     }
