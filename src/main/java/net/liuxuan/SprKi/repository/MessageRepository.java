@@ -11,19 +11,14 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package net.liuxuan.springboottest.message;
+package net.liuxuan.SprKi.repository;
+
+import net.liuxuan.springboottest.message.Message;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @author Rob Winch
  */
-public interface MessageRepository {
-
-	Iterable<Message> findAll();
-
-	Message save(Message message);
-
-	Message findMessage(Long id);
-
-	void deleteMessage(Long id);
+public interface MessageRepository extends JpaRepository<Message, Long> {
 
 }

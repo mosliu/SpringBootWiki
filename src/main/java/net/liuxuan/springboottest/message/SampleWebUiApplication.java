@@ -25,7 +25,7 @@ import org.springframework.core.convert.converter.Converter;
 public class SampleWebUiApplication {
 
 	@Bean
-	public MessageRepository messageRepository() {
+	public MessageRepository2 messageRepository() {
 		return new InMemoryMessageRepository();
 	}
 

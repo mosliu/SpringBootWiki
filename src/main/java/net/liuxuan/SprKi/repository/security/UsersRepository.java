@@ -18,4 +18,8 @@ public interface UsersRepository extends JpaRepository<Users, String> {
 //    @Modifying
 //    @Query("update Users m set m.name=?1 where m.id=?2")
 //    public void update(String bannerName, Long id);
+
+//    @Query("select DISTINCT(u.username) from ActiveWebSocketUser u where u.username != ?#{principal?.username}")
+//    List<String> findAllActiveUsers();
+
 }

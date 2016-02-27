@@ -8,7 +8,12 @@ package net.liuxuan.SprKi.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +34,9 @@ public class IndexController {
     @RequestMapping("/")
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public String home(Map<String, Object> model) {
-        log.debug("Access IndexController.home() Method");
+        log.debug("-Access IndexController.home() Method");
+
+
 
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
@@ -38,9 +45,12 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/editor", method = RequestMethod.GET)
+//    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
+//    @Secured("${SprKi.editor.acl}")
     //@Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public String editor(Map<String, Object> model) {
-        log.debug("Access IndexController.editor() Method");
+        log.debug("-Access IndexController.editor() Method");
 
         model.put("message", "Editor");
         model.put("title", "Hello Editor");
@@ -50,6 +60,10 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/editor", method = RequestMethod.POST)
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @Secured("ROLE_USER")
+    @PreAuthorize("hasRole('ROLE_USER')")
+//    @Secured("${SprKi.editor.acl}")
     public String editorsave(HttpServletRequest request, Map<String, Object> model) {
 
         Map<String, String[]> parameterMap = request.getParameterMap();
@@ -60,7 +74,7 @@ public class IndexController {
             }
         }
 
-        log.debug("Access IndexController.editor() Post Method");
+        log.debug("-Access IndexController.editor() Post Method");
 
         model.put("message", "Editor");
         model.put("title", "Hello Editor");
@@ -68,5 +82,24 @@ public class IndexController {
         return "editor";
 
     }
+
+//    @PreAuthorize("#username == principal.username and hasRole('ROLE_USER')")
+//    public void changePassword(String username, String password);
+
+
+
+//    protected Authentication getAuthentication() {
+//        return SecurityContextHolder.getContext().getAuthentication();
+//    }
+//    @ModelAttribute("showLoginLink")
+//    public boolean getShowLoginLink() {
+//        for (GrantedAuthority authority : getAuthentication().
+//                getAuthorities()) {
+//            if(authority.getAuthority().equals("ROLE_USER")) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 
 }

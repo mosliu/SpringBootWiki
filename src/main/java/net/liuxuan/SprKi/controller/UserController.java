@@ -34,15 +34,30 @@ import java.util.Map;
  */
 @Controller
 public class UserController {
-    private static Logger log =  LoggerFactory.getLogger(UserController.class);
+    private static Logger log = LoggerFactory.getLogger(UserController.class);
     @Resource
     private SecurityUserDetailsService securityUserDetailsService;
 
+    public static User getLoginUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof User) {
+                return (User) principal;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(Map<String, Object> model){
+    public ModelAndView login(Map<String, Object> model) {
         log.debug("Access UserController.login() GET Method");
         return new ModelAndView("common/login", model);
     }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(
@@ -56,6 +71,7 @@ public class UserController {
 //            return new ModelAndView("common/temp", model);
 ////            return new LoginInfo().failed().msg("验证码错误！");
 //        }
+        log.debug("Access UserController.login() POST Method");
         username = username.trim();
 
         UserDetails userDetails = securityUserDetailsService.loadUserByUsername(username);
@@ -86,9 +102,8 @@ public class UserController {
 //        }
     }
 
-
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(Map<String, Object> model){
+    public ModelAndView logout(Map<String, Object> model) {
 //        log.debug("Access UserController.logout() GET Method");
         return new ModelAndView("common/logout", model);
     }
@@ -109,20 +124,6 @@ public class UserController {
 //            return false;
 //        }
         return true;
-    }
-
-    public static User getLoginUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof User) {
-                return (User) principal;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
     }
 
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upload image</title>
+    <meta http-equiv="Content-Language" content="zh-CN"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="/js/libs/jquery-1.12.0.min.js"></script>
+</head>
+<body>
+<style>
+    #feedback {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    #feedback img {
+        float: left;
+        width: 300px;
+        height: 300px;
+    }
+</style>
+
+<img src="/images/addfile.jpg"
+     onclick="getElementById('inputfile').click()" title="点击添加图片" alt="点击添加图片"/>
+<form id="my_image_upform" th:action="@{/upload/image}" action="/upload/image2" target="form_target" method="post"
+      enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+    <input type="file" name="image" style="opacity:0;filter:alpha(opacity=0);" id="inputfile"/>
+    <input name="image" type="file" onchange="$('#my_form').submit();this.value='';"/>
+</form>
+
+<div id="feedback" ></div>    <!-- 响应返回数据容器 -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#inputfile").change(function () {
+            //创建FormData对象
+            var formobj = document.getElementById("my_image_upform");
+            var data = new FormData(formobj);
+//            var data = new FormData();
+            //为FormData对象添加数据
+            //
+//            data.append('_csrf',$('input[name=_csrf]')[0].value);
+            $.each($('#inputfile')[0].files, function (i, file) {
+                data.append('image', file);
+            });
+
+            $.ajax({
+                url: '/upload/image2',
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,    //不可缺
+                processData: false,    //不可缺
+                success: function (data) {
+                    parent.tinymce.activeEditor.windowManager.getParams().oninsert(data);
+                    $('#feedback').eq(0).children().remove();
+                    $('<img/>').attr('src',data).appendTo('#feedback');
+
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -60,10 +60,54 @@
             // ===========================================
 
             relative_urls: false,
-            file_browser_callback: function(field_name, url, type, win) {
-                if(type=='image') $('#my_form input').click();
-            }
+//            file_browser_callback: function(field_name, url, type, win) {
+//                if(type=='image') $('#my_form input[name=image]').click();
+//            },
+            file_picker_callback: function(callback, value, meta) {
+                // Provide file and text for the link dialog
+                if (meta.filetype == 'file') {
+                    $('#my_form input[name=image]').click();
+                    callback('mypage.html', {text: 'My text'});
+                }
+
+                // Provide image and alt text for the image dialog
+                if (meta.filetype == 'image') {
+                    imageFilePicker(callback, value, meta);
+                    callback('myimage.jpg', {alt: 'My alt text'});
+                }
+
+                // Provide alternative source and posted for the media dialog
+                if (meta.filetype == 'media') {
+                    callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
+                }
+            },
         });
+        var imageFilePicker = function (callback, value, meta) {
+
+            tinymce.activeEditor.windowManager.open({
+                title: 'Image Picker',
+                url: '/upload/image',
+                width: 650,
+                height: 550,
+                buttons: [{
+                    text: 'Insert',
+                    onclick: function () {
+                        //.. do some work
+
+                        console.log("Insert");
+                        tinymce.activeEditor.windowManager.close();
+                    }
+                }, {
+                    text: 'Close',
+                    onclick: 'close'
+                }],
+            }, {
+                oninsert: function (url) {
+                    callback(url);
+                    console.log("derp");
+                },
+            });
+        };
     </script>
 </head>
 <body>
@@ -88,7 +132,7 @@
 
     <iframe id="form_target" name="form_target" style="display:none"></iframe>
     <form id="my_form" th:action="@{/upload/image}" action="/upload/image" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
-        <input name="image" type="file" onchange="$('#my_form').submit();this.value='';" />
+        <input name="image" type="file" onchange="$('#my_form').submit();this.value='';" id="inputfile"/>
     </form>
 
     <form method="post" th:action="@{/editor}">

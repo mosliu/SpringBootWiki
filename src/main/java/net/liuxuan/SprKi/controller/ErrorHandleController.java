@@ -3,11 +3,14 @@ package net.liuxuan.SprKi.controller;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Map;
 
@@ -34,12 +37,17 @@ public class ErrorHandleController implements ErrorController {
 
 
     @RequestMapping(value = ERROR_PATH)
-    public String handleError(Map<String, Object> model) {
+    public ModelAndView handleError(HttpServletRequest request,
+                              HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
-        model.put("message", "ERROR MSG");
-        model.put("title", "ERROR_404");
-        model.put("date", new Date());
-        return "common/404";
+        ModelAndView model = new ModelAndView("common/temp");
+        model.getModel().put("status",response.getStatus());
+        model.getModel().put("error",ex.getMessage());
+        model.getModel().put("message", ex.getMessage());
+        model.getModel().put("title", ex.getMessage());
+        model.getModel().put("date", new Date());
+//        return "common/temp";
+        return model;
     }
 
     /**
@@ -93,11 +101,23 @@ public class ErrorHandleController implements ErrorController {
 
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedExceptionException(Exception ex) {
+        ModelAndView model = new ModelAndView("common/accessdenied");
+        model.getModel().put("error", ex.getMessage());
+        model.getModel().put("title", "Access Denied");
+        model.getModel().put("message", "AccessDenied");
+        model.getModel().put("date", new Date());
+
+        return model;
+
+    }
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public ModelAndView handleMethodNotSupportedException(Exception ex) {
         ModelAndView model = new ModelAndView("common/temp");
         model.getModel().put("error", ex.getMessage());
-        model.getModel().put("message", "AccessDenied");
-        model.getModel().put("title", "AccessDenied");
+        model.getModel().put("title", "MethodNotSupported");
+        model.getModel().put("message", "MethodNotSupported");
         model.getModel().put("date", new Date());
+        model.getModel().put("status","405");
 
         return model;
 

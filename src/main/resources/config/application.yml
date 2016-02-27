@@ -50,8 +50,21 @@ spring:
 #  mapperLocations: classpath:/com/modou/**/mapper/*.xml
 #  configLocation: classpath:/mybatis-config.xml
  
-# LOGGING 
+#
+#  hornetq:
+#    embedded:
+#      cluster-password: # LOGGING
 logging:
   level: 
     com.ibatis: DEBUG
     org.hibernate.SQL: DEBUG
+
+
+
+#系统配置
+SprKi:
+  upload:
+    savepathroot: ./target/classes/static/
+    savepathchild: /uploaded/
+  editor:
+    acl: ROLE_USER

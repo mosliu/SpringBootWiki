@@ -56,17 +56,17 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 //        System.out.println("username is " + username);
-        log.info("username to login is {}",username);
+        log.debug("username to login is {}",username);
 
-        Users oneuser = usersRepository.findOne(username);
-        if(oneuser == null){
-            log.info("no user got {}",username);
+        Users user = usersRepository.findOne(username);
+        if(user == null){
+            log.debug("no user got {}",username);
             throw new UsernameNotFoundException(messages.getMessage(
                     "JdbcDaoImpl.notFound", new Object[] { username },
                     "Username {0} not found"));
         }
 //        List<GrantedAuthority> authorities = buildUserAuthority(oneuser.getAuths());
-        return buildUserForAuthentication(oneuser);
+        return buildUserForAuthentication(user);
     }
 
     /**

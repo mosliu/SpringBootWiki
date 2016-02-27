@@ -8,9 +8,11 @@ package net.liuxuan;
 import net.liuxuan.wiki.db.DBSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
@@ -50,10 +52,12 @@ public class ApplicationMain extends SpringBootServletInitializer {
 
     private static Logger log = LoggerFactory.getLogger(ApplicationMain.class);
 
+
     public static void main(String[] args) throws Exception {
         SpringApplication app = new SpringApplication(ApplicationMain.class);
         //app.setBannerMode(Banner.Mode.OFF);
         ApplicationContext ctx = app.run(args);
+
 
 
 //        String beanNames[] = ctx.getBeanDefinitionNames();
@@ -64,6 +68,7 @@ public class ApplicationMain extends SpringBootServletInitializer {
 
 //        SpringApplication.run(ApplicationMain.class, args);
         log.info("\r\n==============\r\nApplication Started\n==============");
+
         mainTest();
 //
 

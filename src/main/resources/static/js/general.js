@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
     }
 
 // Disable Empty Links
-    $("[href=#]").click(function(event){
+    $("[href='#']").click(function(event){
         event.preventDefault();
     });
 
@@ -121,7 +121,7 @@ jQuery(document).ready(function() {
     var locationPath = filterPath(location.pathname);
     var scrollElem = scrollableElement('html', 'body');
 
-    $('a[href*=#].anchor').each(function() {
+    $("a[href*='#'].anchor").each(function() {
         $(this).click(function(event) {
             var thisPath = filterPath(this.pathname) || locationPath;
             if (  locationPath == thisPath

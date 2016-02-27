@@ -13,6 +13,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
+import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -31,7 +34,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     private static Logger logger = LoggerFactory.getLogger(SecurityConfigration.class);
@@ -39,10 +42,12 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     SecurityUserDetailsServiceImpl securityUserDetailsService;
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-    @Resource
-    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
+//    @Resource
+//    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
     @Resource
     MyLogoutHandler myLogoutHandler;
+//    @Resource
+//    IPRoleAuthenticationFilter iPRoleAuthenticationFilter;
     @Autowired
     private DataSource dataSource;
 
@@ -54,17 +59,22 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
         web
                 .ignoring()
                 .antMatchers("/resources/**");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
 //                .exceptionHandling().authenticationEntryPoint(myLoginUrlAuthEntryPoint).and()
+//                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
+
 //                .antMatchers("/").anonymous()
                 .antMatchers("/msg/**").hasRole("USER")
+                .antMatchers("/editor/**").authenticated()
                 .and()
+
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 //                .anyRequest().authenticated().and()
 //                .anyRequest().fullyAuthenticated()
@@ -79,10 +89,15 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                .logoutSuccessUrl("/logout")
                 .permitAll().and()
                 .headers().frameOptions().sameOrigin().and()
+                .rememberMe().and()
+
 //                .userDetailsService(securityUserDetailsService)
 //                .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
+//                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
+
         ;
+
 
 //
 //        http.authorizeRequests().accessDecisionManager(accessDecisionManager())
@@ -102,6 +117,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                .withUser("user").password("user").roles("USER").and()
 //                .withUser("admin").password("password").roles("USER", "ADMIN")
         ;
+
     }
 
 

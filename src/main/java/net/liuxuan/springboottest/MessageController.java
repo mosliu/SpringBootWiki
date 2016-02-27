@@ -6,10 +6,9 @@
 package net.liuxuan.springboottest;
 
 import net.liuxuan.springboottest.message.Message;
-import net.liuxuan.springboottest.message.MessageRepository;
+import net.liuxuan.springboottest.message.MessageRepository2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.Date;
 
 /**
  * Created by Moses on 2016/2/14.
@@ -26,18 +25,19 @@ import java.util.Date;
 
 @Controller
 public class MessageController {
-    private final MessageRepository messageRepository;
+    @Resource
+    private final MessageRepository2 messageRepository2;
 
     @Autowired
-    public MessageController(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
+    public MessageController(MessageRepository2 messageRepository2) {
+        this.messageRepository2 = messageRepository2;
     }
 
     @RequestMapping("/msg")
 //    @PreAuthorize("hasRole('ADMIN')")
     @Secured("ROLE_ADMIN")
     public ModelAndView list() {
-        Iterable<Message> messages = this.messageRepository.findAll();
+        Iterable<Message> messages = this.messageRepository2.findAll();
         return new ModelAndView("messages/list", "messages", messages);
     }
 
@@ -62,7 +62,7 @@ public class MessageController {
         if (result.hasErrors()) {
             return new ModelAndView("messages/form", "formErrors", result.getAllErrors());
         }
-        message = this.messageRepository.save(message);
+        message = this.messageRepository2.save(message);
         redirect.addFlashAttribute("globalMessage", "Successfully created a new message");
         return new ModelAndView("redirect:msg/{message.id}", "message.id", message.getId());
     }
@@ -75,8 +75,8 @@ public class MessageController {
     //    @PathVariable：rest访问方式获取参数传递
     @RequestMapping(value = "/msg/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id) {
-        this.messageRepository.deleteMessage(id);
-        Iterable<Message> messages = this.messageRepository.findAll();
+        this.messageRepository2.deleteMessage(id);
+        Iterable<Message> messages = this.messageRepository2.findAll();
         return new ModelAndView("messages/list", "messages", messages);
     }
 

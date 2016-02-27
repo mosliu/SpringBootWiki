@@ -28,7 +28,8 @@
             <li><a href="/editor" th:href="@{/editor}">Editor</a></li>
             <li><a href="#">Contacts</a></li>
 
-            <li class="pull-right" sec:authorize="hasRole('ROLE_USER')">
+
+            <li class="pull-right"  sec:authorize="hasRole('ROLE_USER')">
                 <a href="#">User interface</a>
                 <ul>
                     <li><a href="#" sec:authentication="name">USER INFO</a></li>

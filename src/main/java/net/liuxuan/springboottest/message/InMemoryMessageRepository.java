@@ -16,6 +16,9 @@
 
 package net.liuxuan.springboottest.message;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -23,7 +26,9 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author Dave Syer
  */
-public class InMemoryMessageRepository implements MessageRepository {
+
+@Component
+public class InMemoryMessageRepository implements MessageRepository2 {
 
 	private static AtomicLong counter = new AtomicLong();
 

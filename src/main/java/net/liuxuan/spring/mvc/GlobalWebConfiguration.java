@@ -7,6 +7,10 @@ package net.liuxuan.spring.mvc;
 
 import groovy.util.logging.Slf4j;
 import org.jfree.util.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
@@ -19,10 +23,14 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Moses on 2016/2/5.
@@ -35,6 +43,12 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     private static final String RESOURCES_LOCATION = "/static/";
     //    private static final String RESOURCES_LOCATION = "/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
+
+    private static Logger log =  LoggerFactory.getLogger(GlobalWebConfiguration.class);
+
+//    @Value("${SprKi.editor.acl}")
+//    private String datasourceUrl;
+
 
     /**
      * Add {@link Converter}s and {@link Formatter}s in addition to the ones
@@ -183,7 +197,9 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+//        log.info("\r\n==============\r\n{}\n==============",datasourceUrl);
         registry.addInterceptor(new TestUrlInterceptor());
+//        registry.addInterceptor(localeChangeInterceptor());
 //        registry.addInterceptor(new LocaleInterceptor());
 //        registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
 //        registry.addInterceptor(new SecurityInterceptor()).addPathPatterns("/secure/*");
@@ -245,4 +261,19 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
     }
+
+//    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver slr = new SessionLocaleResolver();
+        slr.setDefaultLocale(Locale.US);
+        return slr;
+    }
+
+//    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        lci.setParamName("lang");
+        return lci;
+    }
+
 }
