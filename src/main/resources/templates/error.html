@@ -1,11 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Error</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-	href="../../css/bootstrap.min.css" />
 </head>
 <body>
+	<h1>Support Friendly Error Page</h1>
+
+
+
+
+
+
 	<div class="container">
 		<div class="navbar">
 			<div class="navbar-inner">
@@ -20,6 +26,10 @@
 		<h1 th:text="${title}">Title</h1>
 		<div id="created" th:text="${#dates.format(timestamp)}">July 11,
 			2012 2:17:16 PM CDT</div>
+		<p th:if="${status}">
+			<b>Response Status:</b> <span th:text="${status}">status-code</span> <span
+				th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+		</p>
 		<div>
 			There was an unexpected error (type=<span th:text="${error}">Bad</span>, status=<span th:text="${status}">500</span>).
 		</div>
@@ -27,6 +37,21 @@
 		<div>
 			Please contact the operator with the above information.
 		</div>
+
+		<p>Support may ask you to right click to view page source.</p>
+
+		<!--
+          // Hidden Exception Details  - this is not a recommendation, but here is
+          // how you hide an exception in the page using Thymeleaf
+          -->
+		<div th:utext="'&lt;!--'" th:remove="tag"></div>
+		<div th:utext="'Failed URL: ' +  ${url}" th:remove="tag">${url}</div>
+		<div th:utext="'Exception: ' + ${exception.message}" th:remove="tag">${exception.message}</div>
+		<ul th:remove="tag">
+			<li th:each="ste : ${exception.stackTrace}" th:remove="tag"><span
+					th:utext="${ste}" th:remove="tag">${ste}</span></li>
+		</ul>
+		<div th:utext="'--&gt;'" th:remove="tag"></div>
 	</div>
 </body>
 </html>
