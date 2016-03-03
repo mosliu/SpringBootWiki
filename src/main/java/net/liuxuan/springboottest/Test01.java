@@ -35,7 +35,7 @@ import java.nio.file.Paths;
  */
 
 
-@RestController
+//@RestController
 @RequestMapping("/api")
 public class Test01 {
 

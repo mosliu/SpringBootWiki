@@ -52,6 +52,7 @@ public class MvcServlet implements Servlet {
      */
     @Override
     public void init(ServletConfig arg0) throws ServletException {
+
         System.out.println("servlet init...");
     }
 

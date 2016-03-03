@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -33,13 +34,15 @@ import java.util.Set;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/17 |    Moses       |     Created
  */
+/**
+ * 参考 {@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl }
+ * 参考 {@link org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper }
+ */
+
 @Service(value="securityUserDetailsService")
 public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsService {
 
-    /**
-     * 参考 {@link org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl }
-     * 参考 {@link org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper }
-     */
+
     private static Logger log =  LoggerFactory.getLogger(SecurityUserDetailsServiceImpl.class);
 
 

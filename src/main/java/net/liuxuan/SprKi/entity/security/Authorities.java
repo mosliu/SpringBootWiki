@@ -19,10 +19,11 @@ import javax.persistence.*;
 @Table(name = "Sprki_Authorities")
 public class Authorities implements GrantedAuthority {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     // optional=true：可选，表示此对象可以没有，可以为null；false表示必须存在
-    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name="username")
     private Users username;
 

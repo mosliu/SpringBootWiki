@@ -5,24 +5,27 @@
 
 package net.liuxuan.spring.mvc;
 
-import groovy.util.logging.Slf4j;
-import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -199,6 +202,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
 //        log.info("\r\n==============\r\n{}\n==============",datasourceUrl);
         registry.addInterceptor(new TestUrlInterceptor());
+//        registry.addInterceptor(testUrlInterceptor());
 //        registry.addInterceptor(localeChangeInterceptor());
 //        registry.addInterceptor(new LocaleInterceptor());
 //        registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
@@ -263,7 +267,8 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
 //    @Bean
-    public LocaleResolver localeResolver() {
+//    public LocaleResolver localeResolver() {
+    public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.US);
         return slr;
@@ -276,4 +281,21 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
         return lci;
     }
 
+    /**
+     * 国际化
+     * @return
+     */
+//    @Bean
+//    @Qualifier("messageSource")
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
+        bundleMessageSource.setBasename("i18n.u1wan-i18n");
+        bundleMessageSource.setUseCodeAsDefaultMessage(true);
+        return bundleMessageSource;
+    }
+
+//    @Bean
+//    public TestUrlInterceptor testUrlInterceptor() {
+//        return new TestUrlInterceptor();
+//    }
 }

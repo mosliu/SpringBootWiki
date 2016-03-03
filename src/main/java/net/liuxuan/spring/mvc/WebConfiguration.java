@@ -3,6 +3,9 @@ package net.liuxuan.spring.mvc;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
+
+import javax.annotation.Resource;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -19,12 +22,23 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class WebConfiguration {
+
+
     @Bean
-    public FilterRegistrationBean filterRegistrationBean(MvcFilter mvcFilter){
+    public FilterRegistrationBean mvcfilterRegistrationBean(MvcFilter mvcFilter){
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(mvcFilter);
         filterRegistrationBean.setEnabled(true);
         filterRegistrationBean.addUrlPatterns("/bb");
         return filterRegistrationBean;
     }
+
+//    @Bean
+//    public FilterRegistrationBean filterRegistrationBean(OpenSessionInViewFilter openSessionInViewFilter){
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        filterRegistrationBean.setFilter(openSessionInViewFilter);
+//        filterRegistrationBean.setEnabled(true);
+//        filterRegistrationBean.addUrlPatterns("/*");
+//        return filterRegistrationBean;
+//    }
 }

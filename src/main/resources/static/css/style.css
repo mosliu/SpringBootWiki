@@ -1830,7 +1830,7 @@ textarea:focus {
 }
 .tabs .note {top: -8px; right: -4px;}
 
-/* Tab Content */
+/* Tab CMSContent */
 .tab-content.boxed {border-top-left-radius: 0; margin-bottom: 0;}
 
 .tab-content {
@@ -1863,7 +1863,7 @@ textarea:focus {
 .tab-image.pull-left{margin:5px 20px 5px 0;}
 .tab-image.pull-right{margin:5px 0 5px 20px;}
 
-/* Tab Content with Icon on the Left */
+/* Tab CMSContent with Icon on the Left */
 .tab-pane-icon {padding-left: 64px;}
 .tab-icon {position: absolute; top: 30px; left: 12px;}
 

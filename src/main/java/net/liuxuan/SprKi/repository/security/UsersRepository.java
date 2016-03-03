@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.repository.security;
 
 import net.liuxuan.SprKi.entity.security.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -14,6 +15,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/17 |    Moses       |     Created
  */
+@Transactional
 public interface UsersRepository extends JpaRepository<Users, String> {
 //    @Modifying
 //    @Query("update Users m set m.name=?1 where m.id=?2")

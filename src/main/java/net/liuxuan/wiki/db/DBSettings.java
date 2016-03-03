@@ -17,7 +17,8 @@ import org.springframework.stereotype.Component;
 如 url 域的值会对应属性“db.url”的值。
 只需要在应用的配置类中添加“@EnableConfigurationProperties”注解就可以启用该自动绑定功能。*/
 
-@ConfigurationProperties(prefix = "db")
+//@ConfigurationProperties(prefix = "db")
+
 public class DBSettings {
     private String url;
     private String username;

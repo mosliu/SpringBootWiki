@@ -16,7 +16,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -45,12 +50,15 @@ import javax.servlet.FilterRegistration;
 //@EnableAutoConfiguration
 //@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @SpringBootApplication //等同于 @Configuration @EnableAutoConfiguration @ComponentScan
-@EnableConfigurationProperties({DBSettings.class})
+//@ImportResource({ "classpath:config/webSecurityConfig.xml" })
+//@EnableConfigurationProperties({DBSettings.class})
 @EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository")
 //@EnableWebMvc
+@EnableTransactionManagement
+@EnableAspectJAutoProxy
 public class ApplicationMain extends SpringBootServletInitializer {
 
-    private static Logger log = LoggerFactory.getLogger(ApplicationMain.class);
+    private static Logger log  = LoggerFactory.getLogger(ApplicationMain.class);
 
 
     public static void main(String[] args) throws Exception {
@@ -96,4 +104,8 @@ public class ApplicationMain extends SpringBootServletInitializer {
         return application.sources(ApplicationMain.class);
 //        return super.configure(application);
     }
+
+
+
+
 }

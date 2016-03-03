@@ -42,7 +42,8 @@ public class Users {
     @Temporal(TemporalType.TIMESTAMP)
     private Date regdate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "username")
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "username")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "username")
     private Set<Authorities> auths = new HashSet<Authorities>();
 
     /**

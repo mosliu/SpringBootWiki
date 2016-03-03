@@ -73,14 +73,14 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         //request.getRequestURL()  ===>   http://127.0.0.1/login
         //request.getRequestURI()  ===>   /login
         log.debug("--PreCheck,url:{} {}?{} " , request.getMethod(),request.getRequestURL().toString(),query);
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null) {
-            for (int i = 0; i < cookies.length; i++) {
-                log.debug("--PreCheck,cookies:{} ", cookies[i]);
-            }
-        }
-        HttpSession session = request.getSession();
-        log.debug("--PreCheck,Session:{} ,is new:{} " ,session.getId(), session.isNew());
+//        Cookie[] cookies = request.getCookies();
+//        if(cookies!=null) {
+//            for (int i = 0; i < cookies.length; i++) {
+//                log.debug("--PreCheck,cookies:{} ", cookies[i]);
+//            }
+//        }
+//        HttpSession session = request.getSession();
+//        log.debug("--PreCheck,Session:{} ,is new:{} " ,session.getId(), session.isNew());
 
 //        System.out.println("--UrlInterceptor Pre--"+url);
 

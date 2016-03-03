@@ -40,7 +40,9 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate.show_sql: true
+      hibernate.format_sql: true
       hibernate.dialect : org.hibernate.dialect.MySQL5Dialect
+      hibernate.enable_lazy_load_no_trans: true
 
 
 

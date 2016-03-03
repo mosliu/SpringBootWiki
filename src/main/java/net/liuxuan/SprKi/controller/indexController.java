@@ -13,10 +13,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.MissingPathVariableException;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -41,6 +43,20 @@ public class IndexController {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
+        return "home";
+    }
+    @RequestMapping("/ex")
+    public String homeex(Map<String, Object> model) throws MissingServletRequestPartException {
+        log.debug("-Access IndexController.homeex() Method");
+
+
+
+        model.put("message", "Hello World");
+        model.put("title", "Hello Home");
+        model.put("date", new Date());
+        if(true) {
+            throw new MissingServletRequestPartException("400");
+        }
         return "home";
     }
 
