@@ -84,7 +84,7 @@ public class CMSContent {
 
     @ManyToMany
     @JoinTable (
-            name="Sprki_CMS_Content_Tags",
+            name="Sprki_CMS_Contents_Tags",
             joinColumns = {@JoinColumn(name="Content_ID")},
             inverseJoinColumns = {@JoinColumn(name="Tags_ID")}
     )

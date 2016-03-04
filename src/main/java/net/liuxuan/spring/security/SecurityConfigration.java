@@ -90,8 +90,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
                 .permitAll().and()
                 .headers().frameOptions().sameOrigin().and()
                 .rememberMe().and()
-
-//                .userDetailsService(securityUserDetailsService)
+                .userDetailsService(securityUserDetailsService)
 //                .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
 //                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
@@ -111,7 +110,8 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .dataSource(this.dataSource).and().userDetailsService(securityUserDetailsService)
+                .dataSource(this.dataSource)
+//                .and().userDetailsService(securityUserDetailsService)
 
 //                .withDefaultSchema()
 //                .withUser("user").password("user").roles("USER").and()

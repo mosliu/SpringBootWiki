@@ -37,6 +37,8 @@ public class LuceneConfiguration {
 
     @Bean
     public ChineseWordAnalyzer analyzer(){
+        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
+        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
         return new ChineseWordAnalyzer();
     }
 
@@ -44,6 +46,7 @@ public class LuceneConfiguration {
     @Bean
     public IndexWriter indexWriter(ChineseWordAnalyzer analyzer) throws IOException {
         //TODO YML化
+//        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         Path path = Paths.get("d:/logs2");
         Directory d = new SimpleFSDirectory(path);
 
@@ -52,13 +55,12 @@ public class LuceneConfiguration {
         IndexWriter indexWriter = new IndexWriter(d, conf);
         return indexWriter;
     }
-    @Bean
+//    @Bean
     public boolean doconfig(){
         WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
-
         DictionaryFactory.reload();//更改词典路径之后，重新加载词典
-        String path = WordConfTools.get("dic.path");
-        log.info("dic.path {}" ,path);
+//        String path = WordConfTools.get("dic.path");
+//        log.info("dic.path {}" ,path);
         return true;
     }
 }

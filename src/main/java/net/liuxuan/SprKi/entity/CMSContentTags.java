@@ -17,7 +17,7 @@ import java.util.Set;
  * 2016/3/3  |    Moses       |     Created
  */
 @Entity  //实体类
-@Table(name = "Sprki_CMS_Content_Tags")
+@Table(name = "Sprki_CMS_Tags")
 public class CMSContentTags {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
