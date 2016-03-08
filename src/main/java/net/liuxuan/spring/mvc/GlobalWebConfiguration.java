@@ -23,6 +23,7 @@ import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -298,4 +299,13 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //    public TestUrlInterceptor testUrlInterceptor() {
 //        return new TestUrlInterceptor();
 //    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(1024*1024*100);
+        resolver.setMaxInMemorySize(1024*100);
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
+    }
 }

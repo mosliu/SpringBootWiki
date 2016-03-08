@@ -1,5 +1,7 @@
 package net.liuxuan.SprKi.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.Set;
  * YYYY-MM-DD |    Author      |	 Change Description
  * 2016/3/3  |    Moses       |     Created
  */
+@Data
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Tags")
 public class CMSContentTags {

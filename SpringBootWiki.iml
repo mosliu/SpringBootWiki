@@ -1,2 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module classpath="eclipse" classpath-dir="$MODULE_DIR$" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4" />
+<module classpath="eclipse" classpath-dir="$MODULE_DIR$" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/config/webSecurityConfig.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/ApplicationMain.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/hibernate/HibernateConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/LuceneConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/QuartzConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/springboottest/message/SampleWebUiApplication.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/views/ThymeleafConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/WebConfiguration.java</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>

@@ -13,15 +13,29 @@ server:
 #  password: 123456
  
 # SPRING PROFILES 
-spring:     
-  # HTTP ENCODING 
+spring:
+  aop:
+    # Add @EnableAspectJAutoProxy.
+    auto: true
+    # Whether subclass-based (CGLIB) proxies are to be created (true) as opposed to standard Java interface-based proxies (false).
+    proxy-target-class: false
+
+
+
+  # HTTP ENCODING
   http:
     encoding.charset: UTF-8
     encoding:
       enabled: true
       force: true
+    # HTTP message conversion
+    # Preferred JSON mapper to use for HTTP message conversion. Set to "gson" to force the use of Gson when both it and Jackson are on the classpath.
+    converters:
+      preferred-json-mapper: gson
   thymeleaf:
     cache: false
+    # Comma-separated list of view names that should be excluded from resolution.
+    # excluded-view-names:
 
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -36,7 +50,9 @@ spring:
     database: MYSQL
     generate-ddl: true
     hibernate:
+      # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.
       ddl-auto: update
+      # ddl-auto: create
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate.show_sql: true

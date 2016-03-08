@@ -1,5 +1,7 @@
 package net.liuxuan.SprKi.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +15,7 @@ import javax.persistence.*;
  * YYYY-MM-DD |    Author      |	 Change Description
  * 2016/3/3  |    Moses       |     Created
  */
+@Data
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Category")
 public class CMSCategory {

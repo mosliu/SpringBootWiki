@@ -76,7 +76,7 @@
     </root>
 
     <!-- For loggers in the these namespaces, log at separated levels. -->
-    <logger name="net.liuxuan" level="DEBUG"/>
+    <logger name="net.liuxuan" level="TRACE"/>
 
 
     <!--RequestMapping   set to INFO if you want to show-->

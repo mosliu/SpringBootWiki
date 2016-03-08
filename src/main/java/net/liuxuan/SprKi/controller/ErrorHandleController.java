@@ -2,6 +2,11 @@ package net.liuxuan.SprKi.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowire;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.AbstractErrorController;
+import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -35,12 +40,13 @@ import java.util.Map;
 //可应用到所有@RequestMapping类或方法上的@ExceptionHandler、@InitBinder、@ModelAttribute，在这里是@ExceptionHandler
 @Controller
 @ControllerAdvice
-public class ErrorHandleController {
+public class ErrorHandleController  {
+//public class ErrorHandleController implements ErrorController {
 
     private static final String ERROR_PATH = "/error";
     private static Logger log = LoggerFactory.getLogger(ErrorHandleController.class);
 
-    //    @RequestMapping(value = ERROR_PATH)
+//        @RequestMapping(value = ERROR_PATH)
     public ModelAndView handleError(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
@@ -60,14 +66,14 @@ public class ErrorHandleController {
      * @param model
      * @return
      */
-    @RequestMapping("*")
-    public String handle404(Map<String, Object> model) {
-//        error.hasErrors();
-        model.put("message", "ERROR MSG");
-        model.put("title", "ERROR_404");
-        model.put("date", new Date());
-        return "common/404";
-    }
+//    @RequestMapping("*")
+//    public String handle404(Map<String, Object> model) {
+////        error.hasErrors();
+//        model.put("message", "ERROR MSG");
+//        model.put("title", "ERROR_404");
+//        model.put("date", new Date());
+//        return "common/404";
+//    }
 
     //    @RequestMapping(value = "/invalid")
     public String handleInvalid(Map<String, Object> model) {
@@ -115,8 +121,8 @@ public class ErrorHandleController {
     }
 
 
-    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
-    public ModelAndView handleNoHandlerFoundException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+//    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
+    public ModelAndView handle404Exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
 
 
         ModelAndView model = new ModelAndView("common/404");
@@ -165,6 +171,8 @@ public class ErrorHandleController {
 //    void handleBadRequests(HttpServletResponse response) throws IOException {
 //        response.sendError(HttpStatus.BAD_REQUEST.value());
 //    }
+
+
 
 
 }

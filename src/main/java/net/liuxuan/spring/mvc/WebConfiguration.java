@@ -4,6 +4,7 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.annotation.Resource;
 
@@ -32,6 +33,10 @@ public class WebConfiguration {
         filterRegistrationBean.addUrlPatterns("/bb");
         return filterRegistrationBean;
     }
+//    @Bean
+//    public SimpleMappingExceptionResolver springExceptionResolver(){
+//        return new MvcSimpleMappingExceptionResolver();
+//    }
 
 //    @Bean
 //    public FilterRegistrationBean filterRegistrationBean(OpenSessionInViewFilter openSessionInViewFilter){
@@ -41,4 +46,12 @@ public class WebConfiguration {
 //        filterRegistrationBean.addUrlPatterns("/*");
 //        return filterRegistrationBean;
 //    }
+//
+//    @Bean
+//    public OpenSessionInViewFilter openSessionInViewFilter(){
+//        return new OpenSessionInViewFilter();
+//    }
+
+
+
 }

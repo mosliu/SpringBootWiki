@@ -5,12 +5,15 @@
 
 package net.liuxuan.SprKi.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
  * Created by Moses on 2016/2/5.
  */
+@Data
 @Entity  //实体类
 @Table(name = "Sprki_banner")
 public class Banner {

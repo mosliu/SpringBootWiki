@@ -25,7 +25,7 @@ import java.io.IOException;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/19 |    Moses       |     Created
  */
-//@Component
+@Component
 public class MyLoginUrlAuthEntryPoint extends LoginUrlAuthenticationEntryPoint {
     private static Logger log =  LoggerFactory.getLogger(MyLoginUrlAuthEntryPoint.class);
     public static String loginFormUrl = "/login";
@@ -44,6 +44,11 @@ public class MyLoginUrlAuthEntryPoint extends LoginUrlAuthenticationEntryPoint {
         super.commence(request, response, authException);
     }
 
+
+//    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+//                throws IOException, ServletException {
+//        log.trace("!@!@$!@#%!#$%^!$^%$^@$%^@$#^@%$&*%*#%*$&");
+//    }
     protected String buildHttpReturnUrlForRequest(HttpServletRequest request)
             throws IOException, ServletException {
 

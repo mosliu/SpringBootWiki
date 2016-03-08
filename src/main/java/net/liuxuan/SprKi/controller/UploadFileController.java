@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,14 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -40,6 +44,9 @@ public class UploadFileController {
     private String picsavepathroot;
     @Value("${SprKi.upload.savepathchild}")
     private String picsavepathchild;
+
+    @Autowired
+    CommonsMultipartResolver multipartResolver;
 
     private static Logger log = LoggerFactory.getLogger(UploadFileController.class);
 
@@ -113,4 +120,35 @@ public class UploadFileController {
 
         return sb.toString();
     }
+
+
+    @RequestMapping("/fileUpload2.do")
+    public String fileUpload2(HttpServletRequest request,HttpServletResponse response){
+        long startTime=System.currentTimeMillis();   //获取开始时间
+
+//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+
+        if(multipartResolver.isMultipart(request)){ //判断request是否有文件上传
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;
+            Iterator<String> ite = multiRequest.getFileNames();
+            while(ite.hasNext()){
+                MultipartFile file = multiRequest.getFile(ite.next());
+                if(file!=null){
+                    File localFile = new File("D:/"+file.getOriginalFilename());
+                    try {
+                        file.transferTo(localFile); //将上传文件写到服务器上指定的文件
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        long endTime=System.currentTimeMillis(); //获取结束时间
+        System.out.println("上传文件共使用时间："+(endTime-startTime));
+
+        return "success";
+    }
+
 }
