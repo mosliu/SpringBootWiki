@@ -11,6 +11,9 @@
 
 <head>
 	<meta charset="utf-8" />
+	<!--<meta name="_csrf" th:content="${_csrf.token}"  content="46b70a7e-1aec-4a47-855f-5fd42cace13f"/>-->
+	<!-- default header name is X-CSRF-TOKEN -->
+	<!--<meta name="_csrf_header" th:content="${_csrf.headerName}" content="X-CSRF-TOKEN"/>-->
 	<meta name="author" content="Moses" />
 	<meta name="keywords" content="" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -36,7 +39,7 @@
 <body class="body-wrap">
 <div class="container">
 	<div th:include="layouts/navbar::navbar"></div>
-	<h1 layout:fragment="header">Layout</h1>
+	<h1 layout:fragment="header">mainlayout</h1>
 	<div layout:fragment="content" class="container">Fake content</div>
 </div>
 <div style="height: 40px"></div>

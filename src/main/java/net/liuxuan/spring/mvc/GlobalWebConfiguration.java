@@ -7,10 +7,9 @@ package net.liuxuan.spring.mvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
@@ -18,20 +17,20 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 
 import java.util.List;
 import java.util.Locale;
@@ -48,10 +47,13 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     //    private static final String RESOURCES_LOCATION = "/";
     private static final String RESOURCES_HANDLER = RESOURCES_LOCATION + "**";
 
-    private static Logger log =  LoggerFactory.getLogger(GlobalWebConfiguration.class);
+    private static Logger log = LoggerFactory.getLogger(GlobalWebConfiguration.class);
 
 //    @Value("${SprKi.editor.acl}")
 //    private String datasourceUrl;
+
+//    @Autowired
+//    private ThymeleafViewResolver thymeleafViewResolver;
 
 
     /**
@@ -70,6 +72,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      * default converter registration. To simply add a converter without impacting
      * default registration, consider using the method
      * {@link #extendMessageConverters(java.util.List)} instead.
+     *
      * @param converters initially an empty list of converters
      */
     @Override
@@ -91,8 +94,10 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         //The following is a Java config example that configures content negotiation view
         // resolution using FreeMarker HTML templates and Jackson as a default View for JSON rendering:
-//        registry.enableContentNegotiation(new MappingJackson2JsonView());
-//        registry.jsp();
+        registry.enableContentNegotiation(new MappingJackson2JsonView());
+        registry.jsp("", ".jsp").viewNames("/jsp");
+        registry.order(0);
+//        registry.viewResolver(thymeleafViewResolver);
     }
 
     /**
@@ -131,6 +136,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      * <li>ViewControllerMappings</li>
      * <li>ResourcesMappings</li>
      * </ul>
+     *
      * @since 4.0.3
      */
     @Override
@@ -148,6 +154,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      * <p>This does not override the built-in support for resolving handler
      * method arguments. To customize the built-in support for argument
      * resolution, configure {@link RequestMappingHandlerAdapter} directly.
+     *
      * @param argumentResolvers initially an empty list
      */
     @Override
@@ -159,6 +166,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      * <p>Using this option does not override the built-in support for handling
      * return values. To customize the built-in support for handling return
      * values, configure RequestMappingHandlerAdapter directly.
+     *
      * @param returnValueHandlers initially an empty list
      */
     @Override
@@ -169,6 +177,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      * Configure the {@link HandlerExceptionResolver}s to handle unresolved
      * controller exceptions. If no resolvers are added to the list, default
      * exception resolvers are added instead.
+     *
      * @param exceptionResolvers initially an empty list
      */
     @Override
@@ -247,11 +256,11 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
 
-
     /**
      * A hook for extending or modifying the list of converters after it has been
      * configured. This may be useful for example to allow default converters to
      * be registered and then insert a custom converter through this method.
+     *
      * @param converters the list of configured converters to extend.
      * @since 4.1.3
      */
@@ -261,13 +270,20 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 
     /**
      * Configure cross origin requests processing.
+     *
      * @since 4.2
      */
     @Override
     public void addCorsMappings(CorsRegistry registry) {
     }
 
-//    @Bean
+    @Bean
+    public FilterRegistrationBean hiddenFilterRegistrationBean() {
+        return new FilterRegistrationBean(new HiddenHttpMethodFilter());
+    }
+
+
+    //    @Bean
 //    public LocaleResolver localeResolver() {
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -275,7 +291,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
         return slr;
     }
 
-//    @Bean
+    //    @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
@@ -284,6 +300,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 
     /**
      * 国际化
+     *
      * @return
      */
 //    @Bean
@@ -300,12 +317,13 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //        return new TestUrlInterceptor();
 //    }
 
-    @Bean(name = "multipartResolver")
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
-        resolver.setMaxUploadSize(1024*1024*100);
-        resolver.setMaxInMemorySize(1024*100);
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
-    }
+    //启用后有问题
+//    @Bean(name = "multipartResolver")
+//    public CommonsMultipartResolver multipartResolver() {
+//        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+//        resolver.setMaxUploadSize(1024 * 1024 * 100);
+//        resolver.setMaxInMemorySize(1024 * 100);
+//        resolver.setDefaultEncoding("utf-8");
+//        return resolver;
+//    }
 }

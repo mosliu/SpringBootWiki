@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.entity.labthink;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
 import javax.persistence.*;
 /**
@@ -16,6 +17,7 @@ import javax.persistence.*;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "Sprki_CMS_ContentFAQ")
 @PrimaryKeyJoinColumn(name = "FAQ_ID")

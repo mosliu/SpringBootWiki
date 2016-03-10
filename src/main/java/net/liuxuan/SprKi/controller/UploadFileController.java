@@ -45,8 +45,8 @@ public class UploadFileController {
     @Value("${SprKi.upload.savepathchild}")
     private String picsavepathchild;
 
-    @Autowired
-    CommonsMultipartResolver multipartResolver;
+//    @Autowired
+//    CommonsMultipartResolver multipartResolver;
 
     private static Logger log = LoggerFactory.getLogger(UploadFileController.class);
 
@@ -126,7 +126,7 @@ public class UploadFileController {
     public String fileUpload2(HttpServletRequest request,HttpServletResponse response){
         long startTime=System.currentTimeMillis();   //获取开始时间
 
-//        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 
         if(multipartResolver.isMultipart(request)){ //判断request是否有文件上传
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)request;

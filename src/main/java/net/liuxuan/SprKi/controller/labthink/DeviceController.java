@@ -43,7 +43,7 @@ public class DeviceController {
     private DeviceTypeRepository deviceTypeRepository;
 
     @ResponseBody
-    @RequestMapping("/devices")
+    @RequestMapping("/api/devices")
     public String getDevices(HttpServletRequest request,
                              HttpServletResponse response, Object handler, Exception ex) {
         List<Devices> l = devicesRepository.findAll();
@@ -68,7 +68,7 @@ public class DeviceController {
     }
 
     @ResponseBody
-    @RequestMapping("/devices1")
+    @RequestMapping("/api/devices1")
     public String getDevices1(HttpServletRequest request,
                              HttpServletResponse response, Object handler, Exception ex) {
 

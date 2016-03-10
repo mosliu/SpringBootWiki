@@ -20,6 +20,9 @@ spring:
     # Whether subclass-based (CGLIB) proxies are to be created (true) as opposed to standard Java interface-based proxies (false).
     proxy-target-class: false
 
+  mvc:
+    throw-exception-if-no-handler-found: false
+
 
 
   # HTTP ENCODING
@@ -34,9 +37,13 @@ spring:
       preferred-json-mapper: gson
   thymeleaf:
     cache: false
-    # Comma-separated list of view names that should be excluded from resolution.
-    # excluded-view-names:
-
+    encoding: UTF-8
+    enabled: true
+    excluded-view-names: jsp/
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    template-resolver-order: 1
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8
@@ -45,6 +52,9 @@ spring:
     test-on-borrow: true
     validation-query: SELECT 1;
     test-while-idle: true
+
+
+
 
   jpa:
     database: MYSQL
@@ -82,7 +92,7 @@ logging:
 #系统配置
 SprKi:
   upload:
-    savepathroot: ./target/classes/static/
+    savepathroot: ./static/
     savepathchild: /uploaded/
   editor:
     acl: ROLE_USER

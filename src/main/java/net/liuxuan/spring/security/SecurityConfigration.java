@@ -91,6 +91,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin().and()
                 .rememberMe().and()
                 .userDetailsService(securityUserDetailsService)
+                .csrf().disable()
 //                .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
 //                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)

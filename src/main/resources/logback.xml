@@ -28,7 +28,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- rollover daily 配置日志所生成的目录以及生成文件名的规则 -->
             <!-- 按天来回滚，如果需要按小时来回滚，则设置为{yyyy-MM-dd_HH} -->
-            <fileNamePattern>log/mylog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <fileNamePattern>../../log/mylog-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- 如果按天来回滚，则最大保存时间为30天，30天之前的都将被清理掉 -->
             <maxHistory>30</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy
@@ -53,7 +53,8 @@
         <encoder>
             <pattern>
                 <!--%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-){faint}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}-->
-                %clr(%d{MM-dd HH:mm:ss}){faint}%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+                <!--%clr(%d{MM-dd HH:mm:ss}){faint}%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta}%clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}-->
+                %clr(%d{MM-dd HH:mm:ss}){faint}%clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
             </pattern>
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
         </encoder>
@@ -93,7 +94,9 @@
     <logger name="org.thymeleaf" level="INFO"/>
     <!--<logger name="org.thymeleaf.TemplateEngine" level="WARN"/>-->
 
-    <logger name="org.apache.tomcat.util.net.NioEndpoint" level="INFO"/>
+    <logger name="org.apache.tomcat.util" level="INFO"/>
+    <logger name="javax.management.mbeanserver" level="INFO"/>
+    <logger name="org.quartz.core" level="INFO"/>
     <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
     <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
     <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>

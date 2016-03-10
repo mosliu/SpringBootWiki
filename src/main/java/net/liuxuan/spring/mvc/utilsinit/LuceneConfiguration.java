@@ -1,5 +1,7 @@
 package net.liuxuan.spring.mvc.utilsinit;
 
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.SimpleAnalyzer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
@@ -32,17 +34,26 @@ public class LuceneConfiguration {
     private static Logger log =  LoggerFactory.getLogger(LuceneConfiguration.class);
 
 
+//    @Bean
+//    public ChineseWordAnalyzer analyzer(){
+//        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
+//        WordConfTools.set("auto.detect", "false");
+//        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
+//        return new ChineseWordAnalyzer();
+//    }
     @Bean
-    public ChineseWordAnalyzer analyzer(){
-        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
-        WordConfTools.set("auto.detect", "false");
-        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
-        return new ChineseWordAnalyzer();
+    public Analyzer analyzer(){
+        return new SimpleAnalyzer();
+//        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
+//        WordConfTools.set("auto.detect", "false");
+//        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
+//        return new ChineseWordAnalyzer();
     }
 
 
     @Bean
-    public IndexWriter indexWriter(ChineseWordAnalyzer analyzer) throws IOException {
+    public IndexWriter indexWriter(Analyzer analyzer) throws IOException {
+//    public IndexWriter indexWriter(ChineseWordAnalyzer analyzer) throws IOException {
         //TODO YML化
 //        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         Path path = Paths.get("d:/logs2");

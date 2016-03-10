@@ -8,11 +8,15 @@ package net.liuxuan.spring.mvc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -69,6 +73,17 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         //request.getRequestURL()  ===>   http://127.0.0.1/login
         //request.getRequestURI()  ===>   /login
         log.debug("--PreCheck,url:{} {}?{} ", request.getMethod(), request.getRequestURL().toString(), query);
+//        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
+        Enumeration<String> headerNames = request.getHeaderNames();
+        while(headerNames.hasMoreElements()){
+
+            log.debug("--PreCheck,has headerNames:{}", headerNames.nextElement());
+        }
+//        Collection<Part> parts = request.getParts();
+//
+//        for (Part part : parts) {
+//            log.debug("--PreCheck,has part:{} , size:{}", part.getName(),part.getSize());
+//        }
 //        Cookie[] cookies = request.getCookies();
 //        if(cookies!=null) {
 //            for (int i = 0; i < cookies.length; i++) {

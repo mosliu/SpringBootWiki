@@ -38,8 +38,6 @@ public class IndexController {
     public String home(Map<String, Object> model) {
         log.debug("-Access IndexController.home() Method");
 
-
-
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
@@ -98,6 +96,11 @@ public class IndexController {
         return "editor";
 
     }
+
+//    @RequestMapping("/jsp")
+//    public String jsp(){
+//        return "jsp/a.jsp";
+//    }
 
 //    @PreAuthorize("#username == principal.username and hasRole('ROLE_USER')")
 //    public void changePassword(String username, String password);

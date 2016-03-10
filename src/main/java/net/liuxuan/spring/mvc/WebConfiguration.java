@@ -1,6 +1,7 @@
 package net.liuxuan.spring.mvc;
 
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
@@ -33,6 +34,14 @@ public class WebConfiguration {
         filterRegistrationBean.addUrlPatterns("/bb");
         return filterRegistrationBean;
     }
+//    @Bean
+//    public ServletRegistrationBean mvcServletRegistrationBean(MvcServlet mvcServlet){
+//        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
+//        servletRegistrationBean.addUrlMappings("/jsp/");
+//        servletRegistrationBean.setServlet(mvcServlet);
+////        servletRegistrationBean.
+//        return servletRegistrationBean;
+//    }
 //    @Bean
 //    public SimpleMappingExceptionResolver springExceptionResolver(){
 //        return new MvcSimpleMappingExceptionResolver();
