@@ -19,7 +19,7 @@
         <!-- encoder defaults to ch.qos.logback.classic.encoder.PatternLayoutEncoder -->
         <encoder>
             <pattern>
-                %d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} :
+                %d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-60.60logger{59} :
                 %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
             </pattern>
             <charset>UTF-8</charset> <!-- 此处设置字符集 -->
@@ -40,7 +40,7 @@
 
 
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>DEBUG</level>
+            <level>INFO</level>
         </filter>
 
         <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
@@ -62,16 +62,15 @@
         <!--  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
               <level>INFO</level>
           </filter>-->
-
     </appender>
-    <appender name="DEBUG_LEVEL_REMAPPER" class="org.springframework.boot.logging.logback.LevelRemappingAppender">
-        <destinationLogger>org.springframework.boot</destinationLogger>
-    </appender>
+    <!--<appender name="DEBUG_LEVEL_REMAPPER" class="org.springframework.boot.logging.logback.LevelRemappingAppender">-->
+    <!--<destinationLogger>org.springframework.boot</destinationLogger>-->
+    <!--</appender>-->
 
 
     <!-- Enable FILE and STDOUT appenders for all log messages.
          By default, only log at level INFO and above. -->
-    <root level="INFO">
+    <root level="TRACE">
         <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT"/>
     </root>
@@ -80,36 +79,219 @@
     <logger name="net.liuxuan" level="TRACE"/>
 
 
-    <!--RequestMapping   set to INFO if you want to show-->
-    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
+    <!--<logger name="org.springframework.security" level="TRACE"/>-->
+    <logger name="org.hibernate.tool.hbm2ddl.TableMetadata" level="WARN"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.thymeleaf" level="INFO"/>
+    <logger name="nz.net.ultraq.thymeleaf" level="INFO"/>
+    <logger name="org.quartz.core" level="INFO"/>
+    <logger name="org.jboss.logging" level="INFO"/>
+    <logger name="javax.activation" level="INFO"/>
+
+    <!--<logger name="org.springframework.boot.context.embedded.ServletContextInitializerBeans" level="DEBUG"/>-->
+    <!--加载properties情况 Debug等级-->
+    <!--<logger name="org.springframework.web.context.support.StandardServletEnvironment" level="DEBUG"/>-->
+
+    <!--<logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>-->
+    <!--<logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>-->
+    <!--<logger name="org.springframework.core.env.PropertySourcesPropertyResolver" level="INFO"/>-->
+    <!--<logger name="org.springframework.boot.autoconfigure.logging" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+
+    <!-- =================================开Debug过滤项  BEGIN================================= -->
+
+
+
+    <logger name="javax.management.mbeanserver" level="INFO"/>
+    <logger name="javax.management.misc" level="INFO"/>
+
+    <!--URLinfo    set to Debug if you want to show-->
+    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="INFO"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="INFO"/>
+    <logger name="org.apache.coyote.http11.Http11NioProcessor" level="INFO"/>
+    <logger name="org.apache.catalina.loader.WebappClassLoaderBase" level="INFO"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="INFO"/>
+    <logger name="org.apache.catalina.mapper.MapperListener" level="INFO"/>
+    <logger name="org.apache.catalina.mapper.Mapper" level="INFO"/>
+    <logger name="org.apache.catalina.realm.RealmBase" level="INFO"/>
+    <logger name="org.apache.catalina.core.ContainerBase" level="INFO"/>
+    <logger name="org.apache.catalina.core.StandardContext" level="INFO"/>
+    <logger name="org.apache.catalina.core.StandardWrapper" level="INFO"/>
+    <!--display The variable [enc] has value [utf-8]-->
+    <logger name="org.apache.catalina.connector.CoyoteAdapter" level="INFO"/>
+    <logger name="org.apache.catalina.session.StandardManager" level="INFO"/>
+    <logger name="org.apache.catalina.session.ManagerBase" level="INFO"/>
+    <logger name="org.apache.catalina.loader.WebappLoader" level="INFO"/>
+    <logger name="org.apache.catalina.authenticator.AuthenticatorBase" level="INFO"/>
+    <logger name="org.apache.tomcat.util.net.NioEndpoint" level="INFO"/>
+    <!--Display Set query string encoding to UTF-8-->
+    <logger name="org.apache.tomcat.util.http.Parameters" level="INFO"/>
+    <!--Display cookies-->
+    <logger name="org.apache.tomcat.util.http.LegacyCookieProcessor" level="INFO"/>
+    <logger name="org.apache.tomcat.util.digester.Digester" level="INFO"/>
+    <logger name="org.apache.tomcat.util.modeler.Registry" level="INFO"/>
+    <logger name="org.apache.tomcat.util.modeler.BaseModelMBean" level="INFO"/>
+    <logger name="org.apache.tomcat.util.modeler.modules.MbeansDescriptorsIntrospectionSource" level="INFO"/>
+    <logger name="org.apache.tomcat.util.threads.LimitLatch" level="INFO"/>
+    <logger name="org.apache.tomcat.util.IntrospectionUtils" level="INFO"/>
+    <logger name="org.apache.tomcat.jdbc.pool.PooledConnection" level="INFO"/>
+    <logger name="org.apache.tomcat.jdbc.pool.ClassLoaderUtil" level="INFO"/>
+
+
+    <!--print AUTO-CONFIGURATION REPORT-->
+    <logger name="org.springframework.boot.context.config.ConfigFileApplicationListener" level="INFO"/>
+    <logger name="org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext"
+            level="INFO"/>
+    <logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory" level="INFO"/>
     <!--Mapping filter   set to INFO if you want to show-->
     <logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="INFO"/>
     <!--Mapping servlet   set to INFO if you want to show-->
     <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
-    <!--URLinfo    set to Debug if you want to show-->
-    <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="INFO"/>
+    <!--Added existing Filter initializer bean 'hiddenFilterRegistrationBean'; order=2147483647, resource=class path resource [net/liuxuan/spring/mvc/GlobalWebConfiguration.class]-->
+    <logger name="org.springframework.boot.context.embedded.ServletContextInitializerBeans" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedRequestContextFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedHttpPutFormContentFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedCharacterEncodingFilter" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer"
+            level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.AutoConfigurationPackages" level="DEBUG"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnClassCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnBeanCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnPropertyCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnJndiCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.condition.OnJavaCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.cache.CacheCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.web.OnEnabledResourceChainCondition" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.web.GsonHttpMessageConvertersConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.autoconfigure.security.BootGlobalAuthenticationConfiguration" level="INFO"/>
+    <logger name="org.springframework.boot.devtools.restart.OnInitializedRestarterCondition" level="INFO"/>
+    <logger name="org.springframework.boot.devtools.restart.Restarter" level="INFO"/>
+    <logger name="org.springframework.boot.devtools.livereload.LiveReloadServer" level="INFO"/>
+    <logger name="org.springframework.boot.bind.PropertiesConfigurationFactory" level="INFO"/>
 
-    <logger name="org.springframework.security" level="INFO"/>
-    <logger name="org.hibernate" level="INFO"/>
-    <logger name="org.thymeleaf" level="INFO"/>
-    <!--<logger name="org.thymeleaf.TemplateEngine" level="WARN"/>-->
+    <!--如PreAuthorize(value=hasRole('ROLE_USER'))-->
+    <logger name="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource" level="INFO"/>
+    <!--如'hasRole('ROLE_USER')'-->
+    <logger name="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource" level="INFO"/>
+    <logger name="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor" level="INFO"/>
+    <logger name="org.springframework.security.access.vote.AffirmativeBased" level="INFO"/>
+    <!--如：Adding web access control expression 'authenticated', for Ant [pattern='/editor/**']-->
+    <logger name="org.springframework.security.web.access.expression.ExpressionBasedFilterInvocationSecurityMetadataSource"
+            level="INFO"/>
+    <logger name="org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource" level="INFO"/>
+    <logger name="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" level="INFO"/>
+    <logger name="org.springframework.security.web.access.ExceptionTranslationFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.AnonymousAuthenticationFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.context.SecurityContextPersistenceFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.context.HttpSessionSecurityContextRepository" level="INFO"/>
+    <logger name="org.springframework.security.web.FilterChainProxy" level="INFO"/>
+    <logger name="org.springframework.security.web.util.matcher.AntPathRequestMatcher" level="INFO"/>
+    <logger name="org.springframework.security.web.util.matcher.AndRequestMatcher" level="INFO"/>
+    <logger name="org.springframework.security.web.util.matcher.MediaTypeRequestMatcher" level="INFO"/>
+    <logger name="org.springframework.security.web.savedrequest.HttpSessionRequestCache" level="INFO"/>
+    <logger name="org.springframework.security.web.DefaultRedirectStrategy" level="INFO"/>
+    <logger name="org.springframework.security.web.session.SessionManagementFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.header.writers.HstsHeaderWriter" level="INFO"/>
 
-    <logger name="org.apache.tomcat.util" level="INFO"/>
-    <logger name="javax.management.mbeanserver" level="INFO"/>
-    <logger name="org.quartz.core" level="INFO"/>
-    <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
-    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
-    <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
+
+    <!--Searching for key XX in XXX-->
     <logger name="org.springframework.core.env.PropertySourcesPropertyResolver" level="INFO"/>
-    <logger name="org.springframework.boot.autoconfigure.logging" level="INFO"/>
+    <logger name="org.springframework.core.env.MutablePropertySources" level="INFO"/>
+    <logger name="org.springframework.core.env.StandardEnvironment" level="INFO"/>
+    <logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="INFO"/>
+    <logger name="org.springframework.core.io.support.SpringFactoriesLoader" level="INFO"/>
+
+    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
+    <logger name="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" level="INFO"/>
+    <logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="INFO"/>
+    <logger name="org.springframework.beans.CachedIntrospectionResults" level="INFO"/>
+    <!--有报InvocationTargetException-->
+    <logger name="org.springframework.beans.AbstractNestablePropertyAccessor" level="INFO"/>
+    <logger name="org.springframework.beans.TypeConverterDelegate" level="INFO"/>
+
+    <logger name="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassEnhancer" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassPostProcessor" level="INFO"/>
+    <logger name="org.springframework.context.event.EventListenerMethodProcessor" level="INFO"/>
+    <logger name="org.springframework.context.event.ApplicationListenerMethodAdapter" level="INFO"/>
+    <logger name="org.springframework.context.support.DefaultLifecycleProcessor" level="INFO"/>
 
 
-    <logger name="org.springframework.boot.actuate.endpoint.jmx" additivity="false">
-        <appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
-    </logger>
-   <!-- <logger name="org.thymeleaf" additivity="false">
-        <appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
-    </logger>-->
+    <logger name="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" level="INFO"/>
+    <logger name="org.springframework.aop.framework.CglibAopProxy" level="INFO"/>
+    <logger name="org.springframework.aop.framework.JdkDynamicAopProxy" level="INFO"/>
+    <logger name="org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper" level="INFO"/>
+
+
+    <logger name="org.springframework.web.filter.DelegatingFilterProxy" level="INFO"/>
+    <logger name="org.springframework.web.method.support.HandlerMethodArgumentResolverComposite" level="INFO"/>
+    <logger name="org.springframework.web.context.support.StandardServletEnvironment" level="INFO"/>
+    <logger name="org.springframework.web.context.ContextLoader" level="INFO"/>
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
+    <!--Display like Matching patterns for request [/css/bootstrap.css] are [/**]-->
+    <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
+    <logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="INFO"/>
+    <!--resource handler mapping:   set to Debug if you want to show-->
+    <logger name="org.springframework.web.servlet.resource.ResourceUrlProvider" level="INFO"/>
+    <logger name="org.springframework.web.servlet.resource.PathResourceResolver" level="INFO"/>
+    <logger name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler" level="INFO"/>
+    <!--RequestMapping   set to INFO if you want to show-->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="INFO"/>
+    <!--display Method [login] returned [ModelAndView: reference to view with name 'common/login'; model is {}]-->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="INFO"/>
+    <logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="INFO"/>
+    <logger name="org.springframework.web.servlet.view.InternalResourceViewResolver" level="INFO"/>
+
+
+
+    <logger name="org.springframework.data.repository.config.RepositoryComponentProvider" level="INFO"/>
+    <logger name="org.springframework.data.repository.config.RepositoryConfigurationDelegate" level="INFO"/>
+    <logger name="org.springframework.data.jpa.repository.query.JpaQueryFactory" level="INFO"/>
+
+    <logger name="org.springframework.ui.context.support.UiApplicationContextUtils" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.SharedEntityManagerCreator" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.EntityManagerFactoryUtils" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" level="INFO"/>
+
+    <logger name="org.springframework.util.PropertyPlaceholderHelper" level="INFO"/>
+    <logger name="org.springframework.jmx.support.JmxUtils" level="INFO"/>
+    <logger name="org.springframework.jmx.export.annotation.AnnotationMBeanExporter" level="INFO"/>
+    <logger name="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" level="INFO"/>
+    <logger name="org.springframework.transaction.support.TransactionSynchronizationManager" level="INFO"/>
+
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+    <!--<logger name="" level="INFO"/>-->
+
+    <!-- =================================开Debug过滤项    END================================= -->
+
+
+    <!--<logger name="org.springframework.boot.actuate.endpoint.jmx" additivity="false">-->
+    <!--<appender-ref ref="DEBUG_LEVEL_REMAPPER"/>-->
+    <!--</logger>-->
+    <!-- <logger name="org.thymeleaf" additivity="false">
+         <appender-ref ref="DEBUG_LEVEL_REMAPPER"/>
+     </logger>-->
     <!--控制logback.LogbackDemo类的日志打印，打印级别为“INFO”；
    additivity属性为false，表示此loger的打印信息不再向上级传递，
    指定了名字为“STDOUT”的appender。-->

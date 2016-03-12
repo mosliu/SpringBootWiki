@@ -1,6 +1,7 @@
 package com.baidu.ueditor.hunter;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
@@ -12,17 +13,20 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.MultiState;
 import com.baidu.ueditor.define.State;
+import org.apache.xmlbeans.impl.store.Path;
 
 public class FileManager {
 
 	private String dir = null;
 	private String rootPath = null;
+	private File Pathroot = null;
 	private String[] allowFiles = null;
 	private int count = 0;
 	
 	public FileManager ( Map<String, Object> conf ) {
 
 		this.rootPath = (String)conf.get( "rootPath" );
+		Pathroot = new File(rootPath);
 		this.dir = this.rootPath + (String)conf.get( "dir" );
 		this.allowFiles = this.getAllowFiles( conf.get("allowFiles") );
 		this.count = (Integer)conf.get( "count" );
@@ -71,6 +75,7 @@ public class FileManager {
 			}
 			file = (File)obj;
 			fileState = new BaseState( true );
+//			System.out.println("###################"+PathFormat.format( this.getPath( file ) ));
 			fileState.putInfo( "url", PathFormat.format( this.getPath( file ) ) );
 			state.addState( fileState );
 		}
@@ -80,10 +85,10 @@ public class FileManager {
 	}
 	
 	private String getPath ( File file ) {
-		
 		String path = file.getAbsolutePath();
-		
-		return path.replace( this.rootPath, "/" );
+
+
+		return path.replace( Pathroot.getAbsolutePath(), "" );
 		
 	}
 	

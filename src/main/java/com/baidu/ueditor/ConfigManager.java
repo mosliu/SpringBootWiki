@@ -87,7 +87,7 @@ public final class ConfigManager {
 		
 		Map<String, Object> conf = new HashMap<String, Object>();
 		String savePath = null;
-		System.out.println("==================="+type);
+//		System.out.println("==================="+type);
 
 		switch ( type ) {
 		

@@ -277,10 +277,10 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
     }
 
-    @Bean
-    public FilterRegistrationBean hiddenFilterRegistrationBean() {
-        return new FilterRegistrationBean(new HiddenHttpMethodFilter());
-    }
+//    @Bean
+//    public FilterRegistrationBean hiddenFilterRegistrationBean() {
+//        return new FilterRegistrationBean(new HiddenHttpMethodFilter());
+//    }
 
 
     //    @Bean

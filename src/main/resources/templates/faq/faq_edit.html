@@ -16,53 +16,74 @@
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
+        function doSubmit1(aaa){
+            alert(aaa);
+            return true;
+        }
     </script>
 </head>
 <body>
 <h1 layout:fragment="header" class="hidden">FAQ</h1>
-<div>
-    <h1>完整demo</h1>
-    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
-</div>
 
 <div class="container" layout:fragment="content">
     <h1 th:text="${title}">FAQ 编辑界面</h1>
 
 
-    <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+    <div class="faqs styled boxed" id="faqs" style="width: 100%; margin:auto">
+
+        <div class="faqs-form">
+            <form th:action="@{/faqpost}" action="/login" id="loginForm" name="form" method="POST" onsubmit="doSubmit1('cc')">
+                <div class="form-inner">
+
+                    <div class="field_text lightPlaceholder">
+                        <label for="category" class="label_title">category:</label>
+                        <input type="text" name="category" id="category" value="" placeholder="Category" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="source" class="label_title">转载来源:</label>
+                        <input type="text" name="source" id="source" value="" placeholder="转载来源" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="sourceUrl" class="label_title">转载来源URL:</label>
+                        <input type="text" name="sourceUrl" id="sourceUrl" value="" placeholder="转载来源URL" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="title" class="label_title">title:</label>
+                        <input type="text" name="title" id="title" value="" placeholder="title" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="subtitle" class="label_title">subtitle:</label>
+                        <input type="text" name="subtitle" id="subtitle" value="" placeholder="subtitle" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="fullTitle" class="label_title">fullTitle:</label>
+                        <input type="text" name="fullTitle" id="fullTitle" value="" placeholder="fullTitle" />
+                    </div>
+                    <div class="field_text lightPlaceholder">
+                        <label for="description" class="label_title">description:</label>
+                        <input type="text" name="description" id="description" value="" placeholder="description" />
+                    </div>
+                    <div class="rowSubmit">
+                        <a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
+                        <span class="btn btn-send"><input type="submit" id="submit" value="SUBMIT " onClick="return doSubmit1('dd');" /></span>
+                    </div>
+                </div>
 
 
-    <form method="post" th:action="@{/faqpost}">
-        <div class="field_text">
-            <input type="text" name="name" id="name" placeholder="Name" />
+                <div class="form-inner"><script id="editor" type="text/plain" style="height:500px;"></script></div>
+
+            </form>
+
         </div>
 
-        <div class="field_text omega">
-            <input type="text" name="email" id="email" placeholder="Email" />
-        </div>
-        <div class="field_text field_textarea">
-            <textarea id="mytextarea"  name="mytextarea"></textarea>
-        </div>
-        <button class="btn btn-alt btn-blue" name="submitbtn">submit</button>
-    </form>
 
+        <div></div>
 
-
-
-    <div th:if="${#httpServletRequest.remoteUser != null}">
-        remoteuser:
-        <p th:text="${#httpServletRequest.remoteUser}">
-            sample_user
-        </p>
     </div>
-    <div th:if="${#httpServletRequest.authType != null}">
-        getAuthType:
-        <p th:text="${#httpServletRequest.authType}">
-            sample_user
-        </p>
-    </div>
+
 
 
 </div>
+
 </body>
 </html>

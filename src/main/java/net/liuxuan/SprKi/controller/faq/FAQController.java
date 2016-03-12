@@ -39,6 +39,7 @@ public class FAQController {
     @RequestMapping(value = "/faqpost", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String postFAQ(HttpServletRequest request, Map<String, Object> model) {
+
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (String s : parameterMap.keySet()) {
             String[] strings = parameterMap.get(s);

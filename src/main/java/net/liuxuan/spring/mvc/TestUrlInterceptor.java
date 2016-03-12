@@ -74,11 +74,11 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         //request.getRequestURI()  ===>   /login
         log.debug("--PreCheck,url:{} {}?{} ", request.getMethod(), request.getRequestURL().toString(), query);
 //        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while(headerNames.hasMoreElements()){
-
-            log.debug("--PreCheck,has headerNames:{}", headerNames.nextElement());
-        }
+//        Enumeration<String> headerNames = request.getHeaderNames();
+//        while(headerNames.hasMoreElements()){
+//
+//            log.debug("--PreCheck,has headerNames:{}", headerNames.nextElement());
+//        }
 //        Collection<Part> parts = request.getParts();
 //
 //        for (Part part : parts) {

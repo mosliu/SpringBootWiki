@@ -49,3 +49,37 @@ footer {
 }
 
 
+
+/*-----------------------------------*/
+/* Contact Form styled */
+/*-----------------------------------*/
+
+.faqs.styled .faqs-title {display: none;}
+
+.faqs input[type="text"],
+.faqs input[type="password"] {
+    background: #fff;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #dedede;
+}
+.faqs.styled .faqs-form {padding: 32px 36px 26px 26px;}
+.faqs.styled .faqs-form textarea {height: 52px;}
+
+.faqs.styled .field_text.field_textarea {margin-bottom: 16px;}
+
+.faqs.styled .label_title {
+    /*position: absolute;*/
+    top: 9px;
+    left: -70px;
+    font-size: 12px;
+    color: #6f6f6f;
+    text-align: right;
+    width: 200px;
+}
+
+@media (max-width: 479px), (min-width: 768px) and (max-width: 991px) {
+    .faqs.styled .faqs-form {padding: 18px;}
+    .faqs.styled .label_title {position: static; text-align: left;}
+}
+
