@@ -31,7 +31,7 @@ import java.io.IOException;
 public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 
-    private static Logger log =  LoggerFactory.getLogger(MyAuthenticationSuccessHandler.class);
+    private static Logger log = LoggerFactory.getLogger(MyAuthenticationSuccessHandler.class);
 
     private RequestCache requestCache = new HttpSessionRequestCache();
 
@@ -58,35 +58,29 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
                                         HttpServletResponse response, Authentication auth)
             throws IOException, ServletException {
 
+//        log.debug("===onAuthenticationSuccess()");
         SavedRequest savedRequest = requestCache.getRequest(request, response);
+        String targetUrl = getDefaultTargetUrl();
         if (savedRequest == null) {
-            clearAuthenticationAttributes(request);
-            return;
-        }
-        String targetUrlParam = getTargetUrlParameter();
-        if (isAlwaysUseDefaultTargetUrl() ||
-                (targetUrlParam != null &&
-                        StringUtils.hasText(request.getParameter(targetUrlParam)))) {
-            requestCache.removeRequest(request, response);
-            clearAuthenticationAttributes(request);
-            return;
-        }
+//            log.debug("===savedRequest is null");
+        } else {
+            String targetUrlParam = getTargetUrlParameter();
+//            log.debug("===TargetUrlParam is {}", targetUrlParam);
+            if (isAlwaysUseDefaultTargetUrl() ||
+                    (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
+                requestCache.removeRequest(request, response);
+            }else{
+                targetUrl =savedRequest.getRedirectUrl();;
+            }
 
+
+        }
         clearAuthenticationAttributes(request);
 
         // Use the DefaultSavedRequest URL
-        String targetUrl = savedRequest.getRedirectUrl();
+
         logger.debug("Redirecting to DefaultSavedRequest Url: " + targetUrl);
-        getRedirectStrategy().sendRedirect(
-                request,
-                response,
-                targetUrl);
-
-
-
-
-
-
+        getRedirectStrategy().sendRedirect(request, response, targetUrl);
 //
 //
 //
@@ -116,7 +110,6 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
 //        clearAuthenticationAttributes(request);
 
     }
-
 
 
     public void setRequestCache(RequestCache requestCache) {
