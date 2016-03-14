@@ -4,6 +4,8 @@
 	<contentEntry url="file://$MODULE_DIR$">
 		<testFolder url="file://$MODULE_DIR$/src/test/java"/>
 		<excludeFolder url="file://$MODULE_DIR$/src/NoUseCode"/>
+		<excludeFolder url="file://$MODULE_DIR$/src/main/resources/static/nouse"/>
+		<excludeFolder url="file://$MODULE_DIR$/src/main/resources/templates/noues"/>
 		<excludeFolder url="file://$MODULE_DIR$/target"/>
 	</contentEntry>
 	<lib name="Maven: org.yaml:snakeyaml:1.16" scope="RUNTIME"/>
@@ -88,6 +90,12 @@
 		<level name="Maven: org.springframework.security:spring-security-config:4.0.3.RELEASE" value="project"/>
 		<level name="Maven: org.springframework.security:spring-security-core:4.0.3.RELEASE" value="project"/>
 		<level name="Maven: org.springframework.security:spring-security-web:4.0.3.RELEASE" value="project"/>
+		<level name="Maven: org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:2.1.1.RELEASE" value="project"/>
+		<level name="Maven: org.thymeleaf:thymeleaf:2.1.4.RELEASE" value="project"/>
+		<level name="Maven: ognl:ognl:3.0.8" value="project"/>
+		<level name="Maven: org.unbescape:unbescape:1.1.0.RELEASE" value="project"/>
+		<level name="Maven: org.attoparser:attoparser:1.3" value="project"/>
+		<level name="Maven: org.slf4j:slf4j-api:1.7.16" value="project"/>
 		<level name="Maven: org.springframework:spring-context-support:4.2.5.RELEASE" value="project"/>
 		<level name="Maven: org.springframework:spring-beans:4.2.5.RELEASE" value="project"/>
 		<level name="Maven: org.springframework:spring-context:4.2.5.RELEASE" value="project"/>
@@ -121,10 +129,6 @@
 		<level name="Maven: net.sf.barcode4j:barcode4j:2.0" value="project"/>
 		<level name="Maven: avalon-framework:avalon-framework-impl:4.2.0" value="project"/>
 		<level name="Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE" value="project"/>
-		<level name="Maven: org.thymeleaf:thymeleaf:2.1.4.RELEASE" value="project"/>
-		<level name="Maven: ognl:ognl:3.0.8" value="project"/>
-		<level name="Maven: org.unbescape:unbescape:1.1.0.RELEASE" value="project"/>
-		<level name="Maven: org.slf4j:slf4j-api:1.7.16" value="project"/>
 		<level name="Maven: org.apdplat:word:1.3" value="project"/>
 		<level name="Maven: ch.qos.logback:logback-classic:1.1.5" value="project"/>
 		<level name="Maven: ch.qos.logback:logback-core:1.1.5" value="project"/>

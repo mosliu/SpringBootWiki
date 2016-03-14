@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/mainlayout">
+      layout:decorator="layouts/base">
 <head>
     <!-- 配置文件 -->
     <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
@@ -63,15 +63,15 @@
                         <label for="description" class="label_title">description:</label>
                         <input type="text" name="description" id="description" value="" placeholder="description" />
                     </div>
-                    <div class="rowSubmit">
-                        <a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
-                        <span class="btn btn-send"><input type="submit" id="submit" value="SUBMIT " onClick="return doSubmit1('dd');" /></span>
-                    </div>
+
                 </div>
 
 
                 <div class="form-inner"><script id="editor" type="text/plain" style="height:500px;"></script></div>
-
+                <div class="rowSubmit">
+                    <a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
+                    <span class="btn btn-send"><input type="submit" id="submit" value="SUBMIT " onClick="return doSubmit1('dd');" /></span>
+                </div>
             </form>
 
         </div>

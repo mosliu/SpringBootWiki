@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
+
+<head>
+    <meta name="keywords" content="HTML5,CSS3,Template"/>
+    <meta name="description" content=""/>
+</head>
+<body class="smoothscroll enable-animation">
+
+<div layout:fragment="content">
+    <!-- WELCOME -->
+    <section>
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <header class="margin-bottom-40">
+                        <h1 class="weight-300">Welcome to Smarty</h1>
+                        <h2 class="weight-300 letter-spacing-1 size-13"><span>THE MOST COMPLETE TEMPLATE EVER</span>
+                        </h2>
+                    </header>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero quod consequuntur quibusdam, enim
+                        expedita sed quia nesciunt incidunt accusamus necessitatibus modi adipisci officia libero
+                        accusantium esse hic, obcaecati, ullam, laboriosam!</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti vero, animi suscipit id facere
+                        officia. Aspernatur, quo, quos nisi dolorum aperiam fugiat deserunt velit rerum laudantium cum
+                        magnam.</p>
+
+
+                    <hr/>
+
+                    <!--
+                        controlls-over		= navigation buttons over the image
+                        buttons-autohide 	= navigation buttons visible on mouse hover only
+
+                        data-plugin-options:
+                            "singleItem": true
+                            "autoPlay": true (or ms. eg: 4000)
+                            "navigation": true
+                            "pagination": true
+                    -->
+                    <div class="text-center margin-top-30">
+                        <div class="owl-carousel nomargin"
+                             data-plugin-options='{"navigation": false, "pagination": false, "singleItem": false, "autoPlay": 3400, "items":"3"}'>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/1.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/2.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/3.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/4.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/5.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/6.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/7.jpg" alt=""/>
+                            </div>
+                            <div>
+                                <img class="img-responsive" src="/ui/smarty/images/demo/brands/8.jpg" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+
+                    <!--
+                        controlls-over		= navigation buttons over the image
+                        buttons-autohide 	= navigation buttons visible on mouse hover only
+
+                        data-plugin-options:
+                            "singleItem": true
+                            "autoPlay": true (or ms. eg: 4000)
+                            "navigation": true
+                            "pagination": true
+                            "transitionStyle":"fadeUp" (fade,backSlide,goDown,fadeUp)
+                    -->
+                    <div class="owl-carousel buttons-autohide controlls-over"
+                         data-plugin-options='{"singleItem": true, "autoPlay": 3400, "navigation": true, "pagination": true, "transitionStyle":"fadeUp"}'>
+                        <div>
+                            <img class="img-responsive" src="/ui/smarty/images/demo/index/support.jpg" alt=""/>
+                        </div>
+                        <div>
+                            <img class="img-responsive" src="/ui/smarty/images/demo/index/girl_looking-min.jpg" alt=""/>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- /WELCOME -->
+
+
+    <!-- -->
+    <section>
+        <div class="container">
+
+            <div class="row">
+
+                <!-- toggle -->
+                <div class="col-md-4 col-sm-4">
+                    <div class="toggle toggle-accordion toggle-transparent toggle-bordered-full">
+
+                        <div class="toggle active">
+                            <label>Lorem ipsum dolor.</label>
+                            <div class="toggle-content">
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                                    architecto beatae vitae dicta sunt explicabo.</p>
+                            </div>
+                        </div>
+
+                        <div class="toggle">
+                            <label>Sit amet, consectetur.</label>
+                            <div class="toggle-content">
+                                <p>Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc.</p>
+                            </div>
+                        </div>
+
+                        <div class="toggle">
+                            <label>Consectetur adipiscing elit.</label>
+                            <div class="toggle-content">
+                                <p>Ut enim massa, sodales tempor convallis et, iaculis ac massa.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /toggle -->
+
+                <!-- skills -->
+                <div class="col-md-4 col-sm-4">
+                    <h4>Our Skills</h4>
+
+                    <label>
+                        <span class="pull-right">60%</span>
+                        MARKETING
+                    </label>
+                    <div class="progress progress-xxs">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 60%; min-width: 2em;"></div>
+                    </div>
+
+                    <label>
+                        <span class="pull-right">88%</span>
+                        SALES
+                    </label>
+                    <div class="progress progress-xxs">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 88%; min-width: 2em;"></div>
+                    </div>
+
+                    <label>
+                        <span class="pull-right">93%</span>
+                        DESIGN
+                    </label>
+                    <div class="progress progress-xxs">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 93%; min-width: 2em;"></div>
+                    </div>
+
+                    <label>
+                        <span class="pull-right">77%</span>
+                        DEVELOPMENT
+                    </label>
+                    <div class="progress progress-xxs">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 77%; min-width: 2em;"></div>
+                    </div>
+
+                    <label>
+                        <span class="pull-right">99%</span>
+                        OTHER
+                    </label>
+                    <div class="progress progress-xxs">
+                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 99%; min-width: 2em;"></div>
+                    </div>
+
+                </div>
+                <!-- /skills -->
+
+                <!-- recent news -->
+                <div class="col-md-4 col-sm-4">
+                    <h4>Recent News</h4>
+
+                    <div class="row tab-post"><!-- post -->
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <a href="blog-sidebar-left.html">
+                                <img src="/ui/smarty/images/demo/people/300x300/1-min.jpg" width="50" alt=""/>
+                            </a>
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <a href="blog-sidebar-left.html" class="tab-post-link">Maecenas metus nulla</a>
+                            <small>June 29 2014</small>
+                        </div>
+                    </div><!-- /post -->
+
+                    <div class="row tab-post"><!-- post -->
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <a href="blog-sidebar-left.html">
+                                <img src="/ui/smarty/images/demo/people/300x300/2-min.jpg" width="50" alt=""/>
+                            </a>
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <a href="blog-sidebar-left.html" class="tab-post-link">Curabitur pellentesque neque eget</a>
+                            <small>June 29 2014</small>
+                        </div>
+                    </div><!-- /post -->
+
+                    <div class="row tab-post"><!-- post -->
+                        <div class="col-md-2 col-sm-2 col-xs-3">
+                            <a href="blog-sidebar-left.html">
+                                <img src="/ui/smarty/images/demo/people/300x300/3-min.jpg" width="50" alt=""/>
+                            </a>
+                        </div>
+                        <div class="col-md-10 col-sm-10 col-xs-9">
+                            <a href="blog-sidebar-left.html" class="tab-post-link">Nam et lacus neque. Ut enim massa</a>
+                            <small>June 29 2014</small>
+                        </div>
+                    </div><!-- /post -->
+
+                </div>
+                <!-- /recent news -->
+
+            </div>
+
+        </div>
+    </section>
+    <!-- / -->
+
+
+    <!-- BUTTON CALLOUT -->
+    <a href="#purchase" rel="nofollow" target="_blank"
+       class="btn btn-xlg btn-default size-20 fullwidth nomargin noradius padding-40 noborder-left noborder-right noborder-bottom">
+				<span class="font-lato size-30">
+					Did Smarty convinced you?
+					<strong>Purchase now &raquo;</strong>
+				</span>
+    </a>
+    <!-- /BUTTON CALLOUT -->
+</div>
+
+
+
+</body>
+</html>

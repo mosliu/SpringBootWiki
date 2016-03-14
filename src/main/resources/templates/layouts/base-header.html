@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+
+
+<!-- SEARCH HEADER -->
+<div th:fragment="searchHeader" class="search-box over-header">
+    <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
+
+    <form action="page-search-result-1.html" method="get">
+        <input type="text" class="form-control" placeholder="SEARCH"/>
+    </form>
+</div>
+<!-- /SEARCH HEADER -->
+
+<!-- TOP NAV -->
+<header th:fragment="topNav" id="topNav">
+    <div class="container">
+
+        <!-- Mobile Menu Button -->
+        <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <!-- BUTTONS -->
+        <ul class="pull-right nav nav-pills nav-second-main">
+
+            <!-- SEARCH -->
+            <li class="search">
+                <a href="javascript:;">
+                    <i class="fa fa-search"></i>
+                </a>
+            </li>
+            <!-- /SEARCH -->
+
+            <!-- QUICK SHOP CART-->
+            <!-- //TODO 改用做Users -->
+            <li class="quick-cart">
+                <a href="#">
+                    <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                    <i class="fa fa-shopping-cart"></i>
+                </a>
+                <div class="quick-cart-box">
+                    <h4>Shop Cart</h4>
+
+                    <div class="quick-cart-wrapper">
+
+                        <a href="#"><!-- cart item -->
+                            <img src="/ui/smarty/images/demo/people/300x300/4-min.jpg" width="45" height="45"
+                                 alt=""/>
+                            <h6><span>2x</span> RED BAG WITH HUGE POCKETS</h6>
+                            <small>$37.21</small>
+                        </a><!-- /cart item -->
+
+                        <a href="#"><!-- cart item -->
+                            <img src="/ui/smarty/images/demo/people/300x300/5-min.jpg" width="45" height="45"
+                                 alt=""/>
+                            <h6><span>2x</span> THIS IS A VERY LONG TEXT AND WILL BE TRUNCATED</h6>
+                            <small>$17.18</small>
+                        </a><!-- /cart item -->
+
+                        <!-- cart no items example -->
+                        <!--
+                        <a class="text-center" href="#">
+                            <h6>0 ITEMS ON YOUR CART</h6>
+                        </a>
+                        -->
+
+                    </div>
+
+                    <!-- quick cart footer -->
+                    <div class="quick-cart-footer clearfix">
+                        <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VIEW CART</a>
+                        <span class="pull-left"><strong>TOTAL:</strong> $54.39</span>
+                    </div>
+                    <!-- /quick cart footer -->
+
+                </div>
+            </li>
+            <!-- /QUICK SHOP CART -->
+
+        </ul>
+        <!-- /BUTTONS -->
+
+
+        <!-- Logo -->
+        <!-- //TODO 改LOGO-->
+        <a class="logo pull-left" href="index.html">
+            <img src="/ui/smarty/images/logo_dark.png" alt=""/>
+        </a>
+
+        <!--  Top Nav -->
+        <div class="navbar-collapse pull-right nav-main-collapse collapse ">
+            <nav class="nav-main">
+                <ul id="topMain" class="nav nav-pills nav-main">
+                    <li class="dropdown active">
+                        <a href="#" th:href="@{/}"><span class="fa fa-home"></span>HOME</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#">MSG</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/msg" th:href="@{/msg}">Message List</a></li>
+                            <li><a href="#">User interface</a></li>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" href="#">
+                                    Social media
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Gallery images</a></li>
+                                    <li><a href="#">OneByOne Slider</a></li>
+                                    <li><a href="#">Audio Player</a></li>
+                                    <li><a href="#">Video Player</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/editor" th:href="@{/editor}">Editor</a>
+                    </li>
+                    <li class="dropdown mega-menu">
+                        <a class="dropdown-toggle" href="#"> Lucene</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="row">
+
+                                    <div class="col-md-5th">
+                                        <ul class="list-unstyled">
+                                            <li><span>GRID</span></li>
+                                            <li><a href="/lucene" th:href="@{/lucene}"><i
+                                                    class="et-browser"></i>Lucene</a></li>
+                                            <li><a href="#">User interface</a></li>
+                                            <li><a href="portfolio-grid-1-columns.html">1 COLUMN</a></li>
+                                            <li><a href="portfolio-grid-6-columns.html">6 COLUMNS</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-5th">
+                                        <ul class="list-unstyled">
+                                            <li><span>MASONRY</span></li>
+                                            <li><a href="portfolio-masonry-2-columns.html">2 COLUMNS</a></li>
+
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-5th">
+                                        <ul class="list-unstyled">
+                                            <li><span>SINGLE</span></li>
+                                            <li><a href="portfolio-single-embed-video.html">EMBED VIDEO</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-5th">
+                                        <ul class="list-unstyled">
+                                            <li><span>LAYOUT</span></li>
+                                            <li><a href="portfolio-layout-fullwidth.html">FULL WIDTH (100%)</a>
+                                            </li>
+                                            <li><a href="portfolio-layout-tabfilter.html">TAB FILTER &amp;
+                                                PAGINATION</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="col-md-5th">
+                                        <ul class="list-unstyled">
+                                            <li><span>LOADING</span></li>
+                                            <li><a href="portfolio-loading-pagination.html">PAGINATION</a></li>
+                                            <li><a href="portfolio-loading-ajax-modal.html">AJAX IN MODAL</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown active">
+                        <a href="/FAQ" th:href="@{/faq}">FAQ</a>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+
+    </div>
+</header>
+<!-- /Top Nav -->
+
+</body>
+</html>

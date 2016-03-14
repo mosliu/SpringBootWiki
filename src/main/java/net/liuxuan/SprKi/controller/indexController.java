@@ -41,7 +41,7 @@ public class IndexController {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        return "home";
+        return "index";
     }
     @RequestMapping("/ex")
     public String homeex(Map<String, Object> model) throws MissingServletRequestPartException {
@@ -55,7 +55,7 @@ public class IndexController {
         if(true) {
             throw new MissingServletRequestPartException("400");
         }
-        return "home";
+        return "index";
     }
 
     @RequestMapping(value = "/editor", method = RequestMethod.GET)
