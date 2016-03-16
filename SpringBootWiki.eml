@@ -149,6 +149,8 @@
 		<level name="Maven: commons-fileupload:commons-fileupload:1.3.1" value="project"/>
 		<level name="Maven: commons-io:commons-io:2.2" value="project"/>
 		<level name="Maven: commons-codec:commons-codec:1.10" value="project"/>
+		<level name="Maven: org.freemarker:freemarker:2.3.23" value="project"/>
+		<level name="Maven: javax.servlet:jstl:1.2" value="project"/>
 		<level name="Maven: org.projectlombok:lombok:1.16.8" value="project"/>
 		<level name="Maven: org.jsoup:jsoup:1.8.3" value="project"/>
 		<level name="Maven: com.google.code.gson:gson:2.6.2" value="project"/>
