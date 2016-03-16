@@ -33,7 +33,7 @@ public class CMSContent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    protected int id;
+    protected Long id;
 
     /**
      * The Category.
@@ -87,7 +87,7 @@ public class CMSContent {
     /**
      * 主标题
      */
-    @Column(length = 200)
+    @Column(length = 200,nullable = false)
     protected String title; // 主标题
     /**
      * 副标题

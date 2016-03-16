@@ -9,78 +9,132 @@
     <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
 
 
-
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
     <!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
-        function doSubmit1(aaa){
+        function doSubmit1(aaa) {
             alert(aaa);
-            return true;
+            return jQuery('form.validate-plugin').validate().form();
         }
     </script>
 </head>
 <body>
-<h1 layout:fragment="header" class="hidden">FAQ</h1>
-
 <div class="container" layout:fragment="content">
     <h1 th:text="${title}">FAQ 编辑界面</h1>
+    <div class="faqs-form">
+        <form th:action="@{/faqpost}" action="/login" id="loginForm" name="form" method="POST"
+              class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
+              th:object="${faq}">
 
-
-    <div class="faqs styled boxed" id="faqs" style="width: 100%; margin:auto">
-
-        <div class="faqs-form">
-            <form th:action="@{/faqpost}" action="/login" id="loginForm" name="form" method="POST" onsubmit="doSubmit1('cc')">
-                <div class="form-inner">
-
-                    <div class="field_text lightPlaceholder">
-                        <label for="category" class="label_title">category:</label>
-                        <input type="text" name="category" id="category" value="" placeholder="Category" />
+            <fieldset>
+                <!--title-->
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>名称</label>
+                            <div class="fancy-form">
+                                <i class="fa fa-list-alt"></i>
+                                <input type="text" th:field="*{title}"  class="form-control required"/>
+                                <!-- tooltip - optional, bootstrap tooltip can be used instead -->
+                                <span class="fancy-tooltip top-left">
+                                <!-- positions: .top-left | .top-right -->
+                                    <em>定义一个名称</em>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="source" class="label_title">转载来源:</label>
-                        <input type="text" name="source" id="source" value="" placeholder="转载来源" />
-                    </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="sourceUrl" class="label_title">转载来源URL:</label>
-                        <input type="text" name="sourceUrl" id="sourceUrl" value="" placeholder="转载来源URL" />
-                    </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="title" class="label_title">title:</label>
-                        <input type="text" name="title" id="title" value="" placeholder="title" />
-                    </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="subtitle" class="label_title">subtitle:</label>
-                        <input type="text" name="subtitle" id="subtitle" value="" placeholder="subtitle" />
-                    </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="fullTitle" class="label_title">fullTitle:</label>
-                        <input type="text" name="fullTitle" id="fullTitle" value="" placeholder="fullTitle" />
-                    </div>
-                    <div class="field_text lightPlaceholder">
-                        <label for="description" class="label_title">description:</label>
-                        <input type="text" name="description" id="description" value="" placeholder="description" />
-                    </div>
-
                 </div>
 
 
-                <div class="form-inner"><script id="editor" type="text/plain" style="height:500px;"></script></div>
-                <div class="rowSubmit">
-                    <a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
-                    <span class="btn btn-send"><input type="submit" id="submit" value="SUBMIT " onClick="return doSubmit1('dd');" /></span>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4">
+                            <label>分类 *</label>
+
+                            <select th:field="*{category}" class="form-control pointer required">
+                                <option th:each="type : ${Category_list}"
+                                        th:value="${type.id}"
+                                        th:text="${'category:' + type.name}">FAQ</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <label>来源部门 *</label>
+
+                            <select th:field="*{department}" class="form-control pointer required">
+                                <option th:each="type : ${Department_list}"
+                                        th:value="${type.id}"
+                                        th:text="${'department:' + type.departmentName}">售后</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <label>设备 *</label>
+
+                            <select th:field="*{devices}" class="form-control pointer required">
+                                <option th:each="type : ${Devices_list}"
+                                        th:value="${type.id}"
+                                        th:text="${'devices:' + type.devicename}">W3/230</option>
+                            </select>
+
+                        </div>
+                    </div>
                 </div>
-            </form>
-
-        </div>
 
 
-        <div></div>
+
+
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-6 col-sm-6">
+                            <label>提问时间 *</label>
+                            <input type="text" th:field="*{questionDate}"
+                                   class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en"
+                                   data-RTL="false"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>Experience *</label>
+                            <textarea th:field="*{question}"  class="summernote form-control required" data-height="200" data-lang="en-US"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <script id="editor" type="text/plain" style="height:500px;"></script>
+            </fieldset>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
+                        SEND APPLICATION
+                        <span class="block font-lato">We'll get back to you within 48 hours</span>
+                    </button>
+                </div>
+            </div>
+
+
+
+
+            <div class="rowSubmit">
+                <a onclick="document.getElementById('loginForm').reset(); return false" href="#"
+                   class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
+                    <span class="btn btn-send"><input type="submit" id="submit" value="SUBMIT "
+                                                      onClick="return doSubmit1('dd');"/></span>
+            </div>
+        </form>
 
     </div>
 
+
+    <div></div>
 
 
 </div>

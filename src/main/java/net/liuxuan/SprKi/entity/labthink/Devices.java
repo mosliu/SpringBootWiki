@@ -23,10 +23,14 @@ public class Devices {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     @Column(nullable = false,length = 100)
     String devicename;
+    @Column(nullable = false,length = 100)
+    String devicenameCN;
+    @Column(nullable = false,length = 100)
+    String devicenameEN;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     DeviceType deviceType;

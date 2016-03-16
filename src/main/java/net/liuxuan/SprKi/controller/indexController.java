@@ -97,10 +97,10 @@ public class IndexController {
 
     }
 
-//    @RequestMapping("/jsp")
-//    public String jsp(){
-//        return "jsp/a.jsp";
-//    }
+    @RequestMapping("/jsp")
+    public String jsp(){
+        return "aaajsp";
+    }
 
 //    @PreAuthorize("#username == principal.username and hasRole('ROLE_USER')")
 //    public void changePassword(String username, String password);

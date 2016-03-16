@@ -10,6 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -21,6 +23,9 @@ public final class SystemHelper {
     private SystemHelper() {
         throw new Error("工具类不能实例化！");
     }
+
+
+
 
     /**
      * 退出系统并清空session
@@ -164,6 +169,13 @@ public final class SystemHelper {
             authorities = (List<GrantedAuthority>) authentication.getAuthorities();
         }
         return authorities;
+    }
+
+    public static WebApplicationContext getContext() {
+
+        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
+//        wac.get
+        return wac;
     }
 
 }

@@ -13,8 +13,17 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -24,7 +33,9 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -114,13 +125,79 @@ public class ThymeleafConfiguration {
         return templateEngine;
     }
 
-
+//
 //    @Bean
 //    public BeanNameViewResolver beanViewResolver() {
 //        BeanNameViewResolver resolver = new BeanNameViewResolver();
-//        resolver.setOrder(1);
+//        resolver.setOrder(10);
 //        return resolver;
 //    }
+
+//    @Bean
+//    public MarshallingHttpMessageConverter marshallingMessageConverter() {
+//        MarshallingHttpMessageConverter converter= new MarshallingHttpMessageConverter(
+//                jaxb2Marshaller(),
+//                jaxb2Marshaller()
+//        );
+//        List<MediaType> mediaTypes = new ArrayList<MediaType>();
+//        mediaTypes.add(MediaType.APPLICATION_XML);
+//        converter.setSupportedMediaTypes(mediaTypes);
+//        return converter;
+//    }
+
+
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        RestTemplate restTemplate = new RestTemplate();
+//        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
+//
+//        converters.add(stringHttpMessageConverter());
+//        converters.add(marshallingJsonConverter());
+//        converters.add(marshallingMessageConverter());
+//        restTemplate.setMessageConverters(converters);
+//
+//        return restTemplate;
+//    }
+
+//    @Bean
+//    public StringHttpMessageConverter stringHttpMessageConverter(){
+//        return new StringHttpMessageConverter();
+//    }
+
+
+
+//    @Bean
+//    public ThymeleafTilesConfigurer tilesConfigurer() {
+//        ThymeleafTilesConfigurer tilesConfigurer = new ThymeleafTilesConfigurer();
+//        tilesConfigurer.setDefinitions(new String[]{"/WEB-INF/tiles.xml"});
+//        return tilesConfigurer;
+//    }
+
+//    @Bean
+//    public TilesDialect tilesDialect(){
+//        TilesDialect dialect = new TilesDialect();
+//        return dialect;
+//    }
+
+//    @Bean
+//    public ThymeleafViewResolver thymeleafViewResolver() {
+//        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+//        resolver.setTemplateEngine(templateEngine());
+//        resolver.setViewClass(ThymeleafTilesView.class);
+//        resolver.setOrder(2);
+//        resolver.setCharacterEncoding("UTF-8");
+//        String[] views = {"*.html","*.xhtml"};
+//        resolver.setViewNames(views);
+//        return resolver;
+//    }
+
+
+
+
+
+
+
+
 
 
     //    //ThymeleafViewResolver页面解析器
@@ -149,17 +226,34 @@ public class ThymeleafConfiguration {
 
     }
 
+    @Bean
+    public InternalResourceViewResolver internalResourceViewResolver(){
+        InternalResourceViewResolver irvr = new InternalResourceViewResolver();
+        irvr.setViewClass(JstlView.class);
+        irvr.setCache(false);
+        irvr.setPrefix("classpath:/templates/");
+        irvr.setSuffix(".jsp");
+        String[] views = {"*jsp"};
+        irvr.setViewNames(views);
+        irvr.setOrder(1);
+
+        return irvr;
+    }
+
+//    /**
+//     * Create the CNVR. Get Spring to inject the ContentNegotiationManager
+//     * created by the configurer (see previous method).
+//     */
 //    @Bean
-//    public InternalResourceViewResolver internalResourceViewResolver(){
-//        InternalResourceViewResolver irvr = new InternalResourceViewResolver();
-//
-//        irvr.setCache(false);
-//        irvr.setPrefix("templates/");
-//        irvr.setSuffix(".jsp");
-//        String[] views = {"jsp/*"};
-//        irvr.setViewNames(views);
-//        irvr.setOrder(1);
-//        return irvr;
+//    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+//        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+//        resolver.setContentNegotiationManager(manager);
+//        List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
+//        viewResolvers.add(beanViewResolver());
+//        viewResolvers.add(thymeleafViewResolver());
+//        viewResolvers.add(internalResourceViewResolver());
+//        resolver.setViewResolvers(viewResolvers);
+//        return resolver;
 //    }
 
     @Bean

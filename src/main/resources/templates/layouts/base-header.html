@@ -27,6 +27,24 @@
         <!-- BUTTONS -->
         <ul class="pull-right nav nav-pills nav-second-main">
 
+            <li class="text-welcome" sec:authorize="hasRole('ROLE_USER')">Welcome , <strong sec:authentication="name">John Doe</strong></li>
+            <li>
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i class="fa fa-user hidden-xs"></i> MY ACCOUNT</a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="-1" href="#"><i class="fa fa-history"></i> ORDER HISTORY</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> MY WISHLIST</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> MY REVIEWS</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> MY SETTINGS</a></li>
+                    <li class="divider"></li>
+
+                    <form th:action="@{/logout}" name="logoutform" method="post">
+                        <li><a tabindex="-1" href="#" onclick="logoutform.submit()"><i class="fa fa-power-off "></i> 退出登录</a></li>
+                    </form>
+                </ul>
+            </li>
+            <li th:if="${#authentication==null || #authentication.name == 'anonymousUser'}"><a href="/login" th:href="@{/login}">LOGIN</a></li>
+
             <!-- SEARCH -->
             <li class="search">
                 <a href="javascript:;">
@@ -48,15 +66,13 @@
                     <div class="quick-cart-wrapper">
 
                         <a href="#"><!-- cart item -->
-                            <img src="/ui/smarty/images/demo/people/300x300/4-min.jpg" width="45" height="45"
-                                 alt=""/>
+                            <!--<img src="/ui/smarty/images/demo/people/300x300/4-min.jpg" width="45" height="45" alt=""/>-->
                             <h6><span>2x</span> RED BAG WITH HUGE POCKETS</h6>
                             <small>$37.21</small>
                         </a><!-- /cart item -->
 
                         <a href="#"><!-- cart item -->
-                            <img src="/ui/smarty/images/demo/people/300x300/5-min.jpg" width="45" height="45"
-                                 alt=""/>
+                            <!--<img src="/ui/smarty/images/demo/people/300x300/5-min.jpg" width="45" height="45" alt=""/>-->
                             <h6><span>2x</span> THIS IS A VERY LONG TEXT AND WILL BE TRUNCATED</h6>
                             <small>$17.18</small>
                         </a><!-- /cart item -->
@@ -90,6 +106,9 @@
         <a class="logo pull-left" href="index.html">
             <img src="/ui/smarty/images/logo_dark.png" alt=""/>
         </a>
+
+
+
 
         <!--  Top Nav -->
         <div class="navbar-collapse pull-right nav-main-collapse collapse ">

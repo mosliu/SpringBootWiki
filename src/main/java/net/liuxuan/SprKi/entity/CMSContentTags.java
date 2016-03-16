@@ -25,7 +25,7 @@ public class CMSContentTags {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     @Column(length = 100,nullable = false)
     private String name;

@@ -1,5 +1,6 @@
 package net.liuxuan.SprKi.controller;
 
+import net.liuxuan.utils.freemarker.FreeMarkerUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,8 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class IndexRestController {
-//    @RequestMapping(value = "/error")
-//    public String error() {
-//        return "Error handling";
-//    }
+    @RequestMapping(value = "/freemarker")
+    public String freemarker() {
+        FreeMarkerUtil hf = new FreeMarkerUtil();
+        try {
+            hf.init();
+            hf.process(hf);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "down";
+    }
 }

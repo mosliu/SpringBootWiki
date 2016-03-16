@@ -69,7 +69,6 @@ public class ApplicationMain extends SpringBootServletInitializer {
         ApplicationContext ctx = app.run(args);
 
 
-
 //        String beanNames[] = ctx.getBeanDefinitionNames();
 //        Arrays.sort(beanNames);
 //        for (String beanName : beanNames) {
@@ -77,6 +76,7 @@ public class ApplicationMain extends SpringBootServletInitializer {
 //        }
 
 //        SpringApplication.run(ApplicationMain.class, args);
+
         log.info("\r\n==============\r\nApplication Started\n==============");
 
         mainTest();

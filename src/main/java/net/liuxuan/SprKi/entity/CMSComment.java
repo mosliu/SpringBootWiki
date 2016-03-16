@@ -24,7 +24,7 @@ public class CMSComment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    protected int id;
+    protected Long id;
     @Column(nullable = false)
     protected boolean disabled = false; ////是否删除
     @Column(columnDefinition = "TIMESTAMP")

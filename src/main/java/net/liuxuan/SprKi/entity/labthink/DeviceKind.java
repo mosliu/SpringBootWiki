@@ -25,17 +25,20 @@ public class DeviceKind {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     //类型名
     @Column(nullable = false,length = 100)
     String deviceKindName;
 
     @Column(nullable = false,length = 100)
+    String deviceKindNameEN;
+
+    @Column(nullable = false,length = 100)
     String deviceKindNameCN;
 
     boolean enable=true;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "deviceKind")
-    private Set<Devices> items = new HashSet<Devices>();
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "deviceKind")
+//    private Set<Devices> items = new HashSet<Devices>();
 }

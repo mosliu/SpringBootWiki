@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
 import javax.persistence.*;
+import java.util.Date;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
  * ***************************************************************************
@@ -38,6 +40,10 @@ public class FAQContent extends CMSContent{
     @Column(columnDefinition = "mediumtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
     protected String answer =""; // 正文
+
+    @Column(columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    protected Date questionDate; // 问题的时间
 
 
 }

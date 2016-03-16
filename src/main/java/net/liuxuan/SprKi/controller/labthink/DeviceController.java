@@ -74,11 +74,11 @@ public class DeviceController {
 
         DeviceType dt = new DeviceType();
         dt.setDeviceTypeName("ddd");
-        dt.setDeviceTypeNameCN("短短的");
+        dt.setDeviceTypeNameEN("短短的");
 
         DeviceKind dk = new DeviceKind();
         dk.setDeviceKindName("ccc");
-        dk.setDeviceKindNameCN("茶厂村");
+        dk.setDeviceKindNameEN("茶厂村");
 
         Devices ox = new Devices();
         ox.setDeviceKind(dk);

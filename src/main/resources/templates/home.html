@@ -3,11 +3,14 @@
 	  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
 	  layout:decorator="layouts/mainlayout">
 <head>
+	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+
 	<title th:text="${title}">Title</title>
 </head>
 <body>
 <h1 layout:fragment="header" class="hidden">404</h1>
 <div class="container" layout:fragment="content">
+
 	<div class="navbar">
 		<div class="navbar-inner">
 			<a class="brand" href="http://www.thymeleaf.org"> Thymeleaf -

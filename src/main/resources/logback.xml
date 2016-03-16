@@ -84,7 +84,7 @@
     <logger name="org.hibernate" level="INFO"/>
     <logger name="org.thymeleaf" level="INFO"/>
     <logger name="nz.net.ultraq.thymeleaf" level="INFO"/>
-    <logger name="org.quartz.core" level="INFO"/>
+    <logger name="org.quartz" level="INFO"/>
     <logger name="org.jboss.logging" level="INFO"/>
     <logger name="javax.activation" level="INFO"/>
 
@@ -271,14 +271,14 @@
     <logger name="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" level="INFO"/>
     <logger name="org.springframework.transaction.support.TransactionSynchronizationManager" level="INFO"/>
 
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
-    <!--<logger name="" level="INFO"/>-->
+    <logger name="org.springframework.orm.hibernate4.HibernateTransactionManager" level="INFO"/>
+    <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="INFO"/>
+    <logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices" level="DEBUG"/>
+    <logger name="rg.springframework.beans.factory.support.DisposableBeanAdapter" level="INFO"/>
+    <logger name="org.springframework.web.cors.DefaultCorsProcessor" level="INFO"/>
     <!--<logger name="" level="INFO"/>-->
     <!--<logger name="" level="INFO"/>-->
     <!--<logger name="" level="INFO"/>-->

@@ -2,6 +2,9 @@ package net.liuxuan.SprKi.entity.labthink;
 
 import javax.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import net.liuxuan.SprKi.entity.Base;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
  * ***************************************************************************
@@ -14,17 +17,22 @@ import lombok.Data;
  * 2016/3/8  |    Moses       |     Created
  */
 @Data
+@NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_Labthink_Department")
-public class Department {
+public class Department extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     @Column(nullable = false,length = 80)
     String departmentName;
 
     @Column(nullable = false,length = 80)
     String departmentNameCN;
+
+    public Department(Long id) {
+        super(id);
+    }
 }

@@ -1,58 +1,142 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-	  layout:decorator="layouts/base">
+      layout:decorator="layouts/base">
 <head>
-	<title>登录</title>
-	<!-- custom input -->
-	<script src="js/jquery.customInput.js"></script>
-	<script type="text/javascript" src="js/jquery.powerful-placeholder.min.js"></script>
-	<script src="js/chosen.jquery.min.js" type="text/javascript"></script>
-	<script>
-		jQuery(document).ready(function($) {
-			if($("[placeholder]").size() > 0) {
-				$.Placeholder.init();
-			}
-		});
-	</script>
-
+    <title>登录</title>
+    <!-- custom input -->
 </head>
 
 <body onload="document.form.username.focus();">
 <h1 layout:fragment="header" class="hidden">登录</h1>
 
-<div layout:fragment="content" class="container">
-	<div class="content">
-		<p th:if="${param.logout}" class="alert alert-success">You have been logged out</p>
-		<p th:if="${param.error}" class="alert alert-danger">There was an error, please try again</p>
-		<h2>Login with Username and Password</h2>
-		<!-- Contact form -->
-		<div class="add-comment styled boxed" id="addcomments" style="width: 50%; margin:auto">
-			<div class="add-comment-title"><h3>Write a message</h3></div>
-			<div class="comment-form">
-				<form th:action="@{/login}" action="/login" id="loginForm" name="form" method="POST">
-					<div class="form-inner">
+<div layout:fragment="content" class="container" style="background:url('/ui/smarty/images/backgrounds/wall2.jpg')">
+    <!-- SLIDE TOP -->
+    <section >
 
-						<div class="field_text lightPlaceholder">
-							<label for="username" class="label_title">Subject:</label>
-							<input type="text" name="username" id="username" value="" placeholder="Username" />
-						</div>
-						<div class="field_text lightPlaceholder">
-							<label for="password" class="label_title">Subject:</label>
-							<input type="password" name="password" id="password" value="" placeholder="Password" />
-						</div>
-					</div>
-					<div class="rowSubmit">
-						<a onclick="document.getElementById('loginForm').reset(); return false" href="#" class="link-reset btn btn-middle btn-gray"><span>清空重填</span></a>
-						<span class="btn btn-send"><input type="submit" id="login" value="  Login  " /></span>
-					</div>
+        <div class="display-table">
+            <div class="display-table-cell vertical-align-middle">
 
-				</form>
-			</div>
-		</div>
-		<!--/ Contact form -->
+                <div class="container">
+
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-4 col-md-push-7 col-lg-push-8 col-sm-push-7">
+
+                            <!-- ALERT -->
+                            <!--
+                            <div class="alert alert-mini alert-danger margin-bottom-30">
+                                <strong>Oh snap!</strong> Login Incorrect!
+                            </div>
+                            -->
+                            <!-- /ALERT -->
+
+                            <!-- login form -->
+                            <form action="/login" th:action="@{/login}" method="post" class="sky-form boxed">
+                                <header><i class="fa fa-user fa-lg"></i> Sign In</header>
+
+                                <fieldset class="nomargin">
+                                    <p th:if="${param.logout}" class="alert alert-success">You have been logged out</p>
+                                    <p th:if="${param.error}" class="alert alert-danger">There was an error, please try
+                                        again</p>
+
+                                    <label class="label margin-top-20" for="username">Username</label>
+                                    <label class="input">
+                                        <i class="ico-append fa fa-user"></i>
+                                        <input type="text" name="username" id="username" value=""
+                                               placeholder="Username"/>
+                                        <span class="tooltip tooltip-top-right">UserName</span>
+                                    </label>
+
+                                    <label for="password" class="label margin-top-20">Password</label>
+                                    <label class="input">
+                                        <i class="ico-append fa fa-lock"></i>
+                                        <input type="password" name="password" id="password" value=""
+                                               placeholder="Password"/>
+                                        <b class="tooltip tooltip-top-right">Type your Password</b>
+                                    </label>
+                                    <label class="checkbox margin-top-20">
+                                        <input id="_spring_security_remember_me" name="_spring_security_remember_me" type="checkbox" value="true"/>
+                                        <i></i> Keep me logged in
+                                    </label>
+
+                                </fieldset>
+
+                                <footer class="celarfix">
+                                    <button type="submit" class="btn btn-primary noradius pull-right"><i
+                                            class="fa fa-check"></i> OK, LOG IN
+                                    </button>
+                                    <div class="login-forgot-password pull-left">
+                                        <a href="page-password.html">Forgot password?</a>
+                                    </div>
+                                </footer>
+                            </form>
+                            <!-- /login form -->
+
+                            <div class="socials margin-top10 text-center"><!-- more buttons: ui-buttons.html -->
+                                <a href="#" class="social-icon social-facebook" data-toggle="tooltip"
+                                   data-placement="top" title="Facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
+                                <a href="#" class="social-icon social-twitter" data-toggle="tooltip"
+                                   data-placement="top" title="Twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
+                                <a href="#" class="social-icon social-google" data-toggle="tooltip" data-placement="top"
+                                   title="Google">
+                                    <i class="icon-google-plus"></i>
+                                    <i class="icon-google-plus"></i>
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-md-7 col-sm-7 col-lg-8 col-lg-pull-4 col-md-pull-5 col-sm-pull-5">
 
 
-	</div>
+                            <h2 class="size-20 text-center-xs">支持系统</h2>
+
+                            <p>Lorem ipsum dolor sit amet. Sed ut perspiciatis unde omnis iste natus error sit
+                                voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.Lorem ipsum
+                                dolor sit amet. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>
+
+                            <ul class="list-unstyled login-features">
+                                <li>
+                                    <i class="glyphicon glyphicon-road"></i> <strong>Lorem ipsum</strong> dolor sit
+                                    amet.
+                                </li>
+                                <li>
+                                    <i class="glyphicon glyphicon-cog"></i> <strong>Sed ut perspiciatis</strong> unde
+                                    omnis iste.
+                                </li>
+                                <li>
+                                    <i class="glyphicon glyphicon-tint"></i> <strong>Et harum quidem</strong> rerum
+                                    facilis est et expedita distinctio.
+                                </li>
+                                <li>
+                                    <i class="glyphicon glyphicon-screenshot"></i> <strong>Nam libero</strong> tempore,
+                                    cum soluta nobis.
+                                </li>
+                                <li>
+                                    <i class="glyphicon glyphicon-fire"></i> <strong>Est eligendi</strong> voluptatem
+                                    accusantium.
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- /SLIDE TOP -->
 </div>
 </body>
 </html>

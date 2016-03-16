@@ -55,7 +55,16 @@ html, body {
 body {
 	color:#666;
 	background-color:#fff;
-	font-family:'Open Sans',Arial,Helvetica,sans-serif;
+	/*background-image:url('/ui/smarty/images/backgrounds/wall2.jpg');*/
+	/*background-repeat:no-repeat;*/
+	/*background-attachment:fixed;*/
+	/*background-position:center;*/
+	/*-moz-background-size:cover;*/
+	/*-webkit-background-size:cover;*/
+	/*-o-background-size:cover;*/
+	/*background-size:cover;*/
+
+	font-family:'Open Sans',Arial,Helvetica,sans-serif,"Microsoft YaHei","黑体","宋体";
 	-webkit-font-smoothing: antialiased;
 
 	font-size:14px; line-height:1.5;
@@ -1125,7 +1134,7 @@ section.dark.page-header ul.page-options a {
 	position: relative;
 	left:0; top:0; right:0;
 	z-index:1000;
-	background-color:#fff;
+	background-color:#eee;
 	border-bottom: rgba(0,0,0,0.05) 1px solid;
 
 	-webkit-box-shadow: 0 0 2px rgba(0,0,0,.1) !important;

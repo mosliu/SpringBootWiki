@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,6 +14,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
@@ -58,7 +62,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**");
+                .antMatchers("/resources/**","/static/**");
 
     }
 
@@ -89,9 +93,11 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                .logoutSuccessUrl("/logout")
                 .permitAll().and()
                 .headers().frameOptions().sameOrigin().and()
-                .rememberMe().and()
+//                .rememberMe().rememberMeParameter("_spring_security_remember_me").userDetailsService(securityUserDetailsService).and()
+                //TODO rememberMe
                 .userDetailsService(securityUserDetailsService)
                 .csrf().disable()
+        //TODO <form action="./upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 //                .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
 //                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
@@ -183,4 +189,26 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //        webExpressionVoter.setExpressionHandler(webSecurityExpressionHandler());
 //        return webExpressionVoter;
 //    }
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        PasswordEncoder encoder = new BCryptPasswordEncoder();
+//        return encoder;
+//    }
+//
+//    @Bean
+//    public UserDetailsService loginService(){
+//        UserDetailsService service = new LoginService();
+//        return service;
+//    }
+//
+//    @Override
+//    protected void registerAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .jdbcAuthentication().and()
+//                .eraseCredentials(true)
+//                .userDetailsService(loginService())
+//                .passwordEncoder(passwordEncoder());
+//    }
+
 }

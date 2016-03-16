@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -16,13 +17,14 @@ import javax.persistence.*;
  * 2016/3/3  |    Moses       |     Created
  */
 @Data
+@NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Category")
-public class CMSCategory {
+public class CMSCategory extends Base{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;//名称
@@ -36,4 +38,8 @@ public class CMSCategory {
     private int pageSize;//每页数据
     @Column(name = "disabled", nullable = false)
     private boolean disabled=true;
+
+    public CMSCategory(Long id) {
+        super(id);
+    }
 }

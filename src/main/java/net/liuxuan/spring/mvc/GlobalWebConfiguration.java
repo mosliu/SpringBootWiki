@@ -5,10 +5,10 @@
 
 package net.liuxuan.spring.mvc;
 
+import net.liuxuan.SprKi.entity.labthink.String2DevicesConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.Converter;
@@ -19,18 +19,18 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.web.context.support.ServletContextResource;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodReturnValueHandler;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.XmlViewResolver;
 
 import java.util.List;
 import java.util.Locale;
@@ -56,12 +56,15 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //    private ThymeleafViewResolver thymeleafViewResolver;
 
 
+
     /**
      * Add {@link Converter}s and {@link Formatter}s in addition to the ones
      * registered by default.
      */
     @Override
     public void addFormatters(FormatterRegistry registry) {
+//        registry.addFormatter();
+//        registry.addConverter(string2DevicesConverter);
     }
 
     /**
@@ -94,9 +97,9 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         //The following is a Java config example that configures content negotiation view
         // resolution using FreeMarker HTML templates and Jackson as a default View for JSON rendering:
-        registry.enableContentNegotiation(new MappingJackson2JsonView());
-        registry.jsp("", ".jsp").viewNames("/jsp");
-        registry.order(0);
+//        registry.enableContentNegotiation(new MappingJackson2JsonView());
+//        registry.jsp("", ".jsp").viewNames("/jsp");
+//        registry.order(0);
 //        registry.viewResolver(thymeleafViewResolver);
     }
 
@@ -116,8 +119,17 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.mediaType("json", MediaType.APPLICATION_JSON);
-        configurer.mediaType("xml", MediaType.APPLICATION_XML);
+//        configurer.favorPathExtension(true).useJaf(false)
+//                .favorParameter(true).parameterName("mediaType")
+//                .ignoreAcceptHeader(true)
+////                .defaultContentType(MediaType.APPLICATION_JSON)
+//                .defaultContentType(MediaType.TEXT_HTML)
+//                .mediaType("xml", MediaType.APPLICATION_XML)
+//                .mediaType("json", MediaType.APPLICATION_JSON);
+//
+        configurer
+                .mediaType("json", MediaType.APPLICATION_JSON)
+                .mediaType("xml", MediaType.APPLICATION_XML);
     }
 
     /**
@@ -240,7 +252,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(RESOURCES_LOCATION);
+        registry.addResourceHandler(RESOURCES_HANDLER).addResourceLocations(RESOURCES_LOCATION,"static/");
 //        registry.addResourceHandler("/resources/**")
 //                .addResourceLocations("/", "classpath:/META-INF/public-web-resources/");
     }
@@ -253,6 +265,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
     }
 
 
@@ -312,6 +325,28 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
         return bundleMessageSource;
     }
 
+
+    // Provides internationalization of messages
+//    @Bean
+//    public ReloadableResourceBundleMessageSource messageSource() {
+//        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+//        source.setBasename("messages");
+//        source.setDefaultEncoding("UTF-8");
+//        return source;
+//    }
+
+    // Only needed if we are using @Value and ${...} when referencing properties
+//    @Bean
+//    public static PropertySourcesPlaceholderConfigurer properties() {
+//        PropertySourcesPlaceholderConfigurer propertySources = new PropertySourcesPlaceholderConfigurer();
+//        Resource[] resources = new ClassPathResource[] { new ClassPathResource(
+//                "spring.properties") };
+//        propertySources.setLocations(resources);
+//        propertySources.setIgnoreUnresolvablePlaceholders(true);
+//        return propertySources;
+//    }
+
+
 //    @Bean
 //    public TestUrlInterceptor testUrlInterceptor() {
 //        return new TestUrlInterceptor();
@@ -326,4 +361,26 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //        resolver.setDefaultEncoding("utf-8");
 //        return resolver;
 //    }
+
+    // Will map to a bean called "accounts/list" in "spreadsheet-views.xml"
+//    @Bean(name="excelViewResolver")
+//    public ViewResolver getXmlViewResolver() {
+//        XmlViewResolver resolver = new XmlViewResolver();
+//        resolver.setLocation(new ServletContextResource(servletContext,
+//                "/WEB-INF/spring/spreadsheet-views.xml"));
+//        resolver.setOrder(1);
+//        return resolver;
+//    }
+
+    // Will map to the JSP page: "WEB-INF/views/accounts/list.jsp"
+//    @Bean(name="jspViewResolver")
+//    public ViewResolver getJspViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("templates/jsp/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setOrder(2);
+//        return resolver;
+//    }
+
+
 }
