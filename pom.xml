@@ -19,7 +19,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <java.version>1.8</java.version>
         <spring.boot.version>1.3.3.RELEASE</spring.boot.version>
-        <lucene>5.2.1</lucene>
+        <spring.framework.version>4.2.5.RELEASE</spring.framework.version>
+        <lucene.version>5.2.1</lucene.version>
+        <mysql.connector.version>5.1.38</mysql.connector.version>
+        <dandelion.version>1.1.0</dandelion.version>
+        <dandelion-datatables.version>1.1.0</dandelion-datatables.version>
+
     </properties>
 
     <parent>
@@ -28,7 +33,6 @@
         <version>1.3.3.RELEASE</version>
         <!--<version>${spring.boot.version}</version>-->
     </parent>
-
 
     <!-- Add typical dependencies for a web application -->
     <dependencies>
@@ -46,47 +50,50 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+            <version>${spring.boot.version}</version>
         </dependency>
         <!--热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <!--用Thymeleaf模板引擎进行模板渲染-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <version>${spring.boot.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
-            <!--<version>2.1.1.RELEASE</version>-->
-        </dependency>
+
 
 
         <!--<dependency>
@@ -111,7 +118,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>4.2.5.RELEASE</version>
+            <version>${spring.framework.version}</version>
         </dependency>
 
 
@@ -126,6 +133,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.connector.version}</version>
         </dependency>
 
 
@@ -156,6 +164,12 @@
 
 
         <!--==========================Thymeleaf 系列==========================-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-conditionalcomments</artifactId>
+            <!--<version>2.1.1.RELEASE</version>-->
+        </dependency>
+
         <!--模板分页插件-->
         <dependency>
             <groupId>net.sourceforge.pagesdialect</groupId>
@@ -170,6 +184,18 @@
             <version>2.1.2.RELEASE</version>
         </dependency>
 
+        <!--==========================Dandelion 系列==========================-->
+        <!-- Dandelion-DataTables -->
+        <!--<dependency>
+            <groupId>com.github.dandelion</groupId>
+            <artifactId>datatables-thymeleaf</artifactId>
+            <version>${dandelion-datatables.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dandelion</groupId>
+            <artifactId>dandelion-thymeleaf</artifactId>
+            <version>${dandelion.version}</version>
+        </dependency>-->
         <!--==========================分词 系列==========================-->
         <!--分词-->
         <dependency>
@@ -181,12 +207,12 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-highlighter</artifactId>
-            <version>${lucene}</version>
+            <version>${lucene.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-memory</artifactId>
-            <version>${lucene}</version>
+            <version>${lucene.version}</version>
         </dependency>
 
 

@@ -68,14 +68,40 @@
     </div>
 
 
-    <script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
         $(document).ready(function () {
 //            alert("haha");
             $('#myTableId').dataTable({
                 "processing": true,
                 "serverSide": true,
-                "ajax": "/dp4",
-                searchDelay: 2000
+                "searchDelay": 2000,
+                "ajax": {
+                    "url": "/dp4A",
+//                    "dataSrc": function ( json ) {
+//                        for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
+////                            json.data[i][1] = '<a href="/message/'+json.data[i][1]+'>View message</a>';
+//                            json.data[i][1] = 'CCCCCCCCCCCCC'+json.data[i][1]+'';
+//                        }
+//                        return json.data;
+//                    }
+
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "lastName" },
+                    { "data": "firstName" },
+                    { "data": "address.town.name" },
+                    { "data": "mail" },
+                    { "data": "salary" },
+                    { "data": "birthDate" },
+                    {
+                        "data": "company.name",
+                        "render": function ( data, type, full, meta ) {
+                            return '<a href="'+data+'">Download</a>';
+                        }
+                    }
+                ]
             });
         });
         // Call datatables, and return the API to the variable for use in our code
@@ -96,7 +122,7 @@
                     }
                     return;
                 });
-
+        /*]]>*/
     </script>
 
 </div>
