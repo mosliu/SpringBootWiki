@@ -99,7 +99,7 @@ public class IndexController {
 
     @RequestMapping("/jsp")
     public String jsp(){
-        return "aaajsp";
+        return "jsp/aaajsp";
     }
 
 //    @PreAuthorize("#username == principal.username and hasRole('ROLE_USER')")

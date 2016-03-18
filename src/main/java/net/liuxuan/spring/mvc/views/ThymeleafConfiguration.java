@@ -1,5 +1,8 @@
 package net.liuxuan.spring.mvc.views;
 
+//import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
+//import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
+import freemarker.template.TemplateException;
 import net.sourceforge.pagesdialect.PagesDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
@@ -17,6 +20,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ViewResolver;
@@ -24,6 +28,9 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -33,6 +40,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -126,12 +134,12 @@ public class ThymeleafConfiguration {
     }
 
 //
-//    @Bean
-//    public BeanNameViewResolver beanViewResolver() {
-//        BeanNameViewResolver resolver = new BeanNameViewResolver();
-//        resolver.setOrder(10);
-//        return resolver;
-//    }
+    @Bean
+    public BeanNameViewResolver beanViewResolver() {
+        BeanNameViewResolver resolver = new BeanNameViewResolver();
+        resolver.setOrder(10);
+        return resolver;
+    }
 
 //    @Bean
 //    public MarshallingHttpMessageConverter marshallingMessageConverter() {
@@ -240,27 +248,66 @@ public class ThymeleafConfiguration {
         return irvr;
     }
 
-//    /**
-//     * Create the CNVR. Get Spring to inject the ContentNegotiationManager
-//     * created by the configurer (see previous method).
-//     */
-//    @Bean
-//    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
-//        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-//        resolver.setContentNegotiationManager(manager);
-//        List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
-//        viewResolvers.add(beanViewResolver());
-//        viewResolvers.add(thymeleafViewResolver());
-//        viewResolvers.add(internalResourceViewResolver());
-//        resolver.setViewResolvers(viewResolvers);
-//        return resolver;
-//    }
+
+    //TODO 返回名必须是viewResolver  所以不起作用
+
+
+
+    /**
+     * Create the CNVR. Get Spring to inject the ContentNegotiationManager
+     * created by the configurer (see previous method).
+     */
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setContentNegotiationManager(manager);
+        List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
+        viewResolvers.add(beanViewResolver());
+        viewResolvers.add(thymeleafViewResolver());
+        viewResolvers.add(internalResourceViewResolver());
+        resolver.setViewResolvers(viewResolvers);
+        return resolver;
+    }
+
+
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver()  {
+
+        FreeMarkerViewResolver freeMarkerViewResolver= new FreeMarkerViewResolver();
+        freeMarkerViewResolver.setSuffix(".ftl");
+        freeMarkerViewResolver.setViewClass(FreeMarkerView.class);
+        freeMarkerViewResolver.setCache(false);
+        freeMarkerViewResolver.setOrder(3);
+        freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
+        return freeMarkerViewResolver;
+    }
+
+    @Bean
+    public FreeMarkerConfigurer freemarkerConfig() throws IOException, TemplateException {
+
+        FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationFactory();
+        factory.setTemplateLoaderPath("classpath:/templates/");
+        factory.setDefaultEncoding("UTF-8");
+        FreeMarkerConfigurer result = new FreeMarkerConfigurer();
+        result.setConfiguration(factory.createConfiguration());
+        return result;
+    }
 
     @Bean
     @ConditionalOnMissingBean
     public PagesDialect pagesDialect() {
         return new PagesDialect();
     }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public DandelionDialect dandelionDialect() {
+//        return new DandelionDialect();
+//    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public DataTablesDialect dataTablesDialect() {
+//        return new DataTablesDialect();
+//    }
 //    @Autowired
 //    private ThymeleafProperties properties;
 //

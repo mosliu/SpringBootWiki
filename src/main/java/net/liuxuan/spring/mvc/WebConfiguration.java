@@ -1,10 +1,13 @@
 package net.liuxuan.spring.mvc;
 
+//import com.github.dandelion.core.web.DandelionFilter;
+//import com.github.dandelion.core.web.DandelionServlet;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import javax.annotation.Resource;
@@ -34,6 +37,28 @@ public class WebConfiguration {
         filterRegistrationBean.addUrlPatterns("/bb");
         return filterRegistrationBean;
     }
+
+//    @Bean
+//    public FilterRegistrationBean dandelionFilterRegistrationBean(){
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+//        DandelionFilter dandelionFilter =new DandelionFilter();
+//        filterRegistrationBean.setFilter(dandelionFilter);
+//        filterRegistrationBean.setEnabled(true);
+//        filterRegistrationBean.addUrlPatterns("/*");
+//        return filterRegistrationBean;
+//    }
+//
+//    @Bean
+//    public ServletRegistrationBean dandelionServletRegistrationBean(){
+//        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
+//        DandelionServlet dandelionServlet = new DandelionServlet();
+//        servletRegistrationBean.setServlet(dandelionServlet);
+//        servletRegistrationBean.setLoadOnStartup(2);
+//        servletRegistrationBean.addUrlMappings("/dandelion-assets/*");
+////        servletRegistrationBean.
+//        return servletRegistrationBean;
+//    }
+
 //    @Bean
 //    public ServletRegistrationBean mvcServletRegistrationBean(MvcServlet mvcServlet){
 //        ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();

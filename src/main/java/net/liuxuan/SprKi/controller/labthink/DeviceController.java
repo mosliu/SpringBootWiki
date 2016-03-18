@@ -60,7 +60,7 @@ public class DeviceController {
 
 
 //        Gson j = EntityGsonHelper.goGsonBuilder(Devices.class).setExclusionStrategies(ts_devicetype,ts_devicekind).create();
-        Gson j = EntityGsonHelper.goEntityGson(Devices.class);
+        Gson j = EntityGsonHelper.goEntityWithCollection2Gson(Devices.class);
         String rtn = j.toJson(l);
 //        return "common/temp";
         System.out.println(rtn);

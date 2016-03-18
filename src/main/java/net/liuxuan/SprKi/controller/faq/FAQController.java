@@ -3,22 +3,17 @@ package net.liuxuan.SprKi.controller.faq;
 import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
 import net.liuxuan.SprKi.entity.labthink.Department;
-import net.liuxuan.SprKi.entity.labthink.DepartmentEditor;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.repository.CMSCategoryRepository;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
-import net.liuxuan.spring.Helper.SystemHelper;
-import org.hibernate.jpa.HibernateQuery;
+import net.liuxuan.SprKi.service.faq.FAQContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.orm.hibernate4.HibernateTemplate;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -60,6 +55,10 @@ public class FAQController {
     @Resource
     CMSCategoryRepository cmsCategoryRepository;
 
+    @Autowired
+    FAQContentService faqContentService;
+
+
 
 
     @RequestMapping(value = "/faq", method = RequestMethod.GET)
@@ -91,7 +90,9 @@ public class FAQController {
                 log.info("===Parameter key:{} ,values{}:{}",s,i,strings[i]);
             }
         }
-//        FAQContent faq = new FAQContent();
+
+        faqContentService.saveFAQContent(faq);
+
         faq.setDescription("cccccc");
         model.put("faq", faq);
         model.put("title", "FAQ 编辑界面");

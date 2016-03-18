@@ -4,6 +4,9 @@ import lombok.Data;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.spring.Helper.SystemHelper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import javax.persistence.spi.ClassTransformer;
@@ -164,19 +167,25 @@ public class CMSContent {
     protected String metaKeywords; // 关键字
 
 
+
     /**
-     * Publish time.
+     * Publish time,publish author
      */
     @PrePersist
-    void publishTime() {
+    void PrePersist() {
+        //Publish time.
         this.publishDate = this.lastUpdateDate = new Date();
+//        UserDetails principal = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+//
+//        Assert.notNull(null);
+//        this.author = this.lastUpdateUser = new Users();
     }
 
     /**
      * Last update time.
      */
     @PreUpdate
-    void lastUpdateTime() {
+    void PreUpdate() {
         this.lastUpdateDate = new Date();
     }
 

@@ -34,20 +34,33 @@ public class EntityGsonHelper {
         return b;
     }
 
-    public static Gson goEntityGson(Class<?> a){
+    public static Gson goGsonWithNoCheck(){
+//        if(o==null){
+        GsonBuilder b = new GsonBuilder();
+        b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+        return b.create();
+    }
+
+    public static Gson goEntityWithCollection2Gson(Class<?>... a ){
 //        if(o==null){
 //            return new Gson();
 //        }
+
 //        Class<?> a = o.getClass();
         GsonBuilder b = new GsonBuilder();
-        if(a.isAnnotationPresent(Entity.class)){
-            b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY).setExclusionStrategies(new EntityTargetStrategy());
-        }else{
-            return new Gson();
+        for (int i = 0; i < a.length; i++)
+        {
+            if(a[i].isAnnotationPresent(Entity.class)){
+                b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY).setExclusionStrategies(new EntityTargetStrategy());
+            }else{
+                return new Gson();
+            }
         }
         Gson gson = b.create();
         return gson;
 //        return b;
     }
+
+
 
 }

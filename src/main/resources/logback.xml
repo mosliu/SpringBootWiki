@@ -101,6 +101,7 @@
 
     <!-- =================================开Debug过滤项  BEGIN================================= -->
 
+    <logger name="com.github.dandelion" level="INFO"/>
 
 
     <logger name="javax.management.mbeanserver" level="INFO"/>

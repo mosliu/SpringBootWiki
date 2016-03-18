@@ -2,7 +2,9 @@
 server: 
   port: 80
   address: localhost
-
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain
 
 # DATASOURCE 
 #jdbc:
@@ -65,7 +67,7 @@ spring:
       # ddl-auto: create
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
-      hibernate.show_sql: true
+      hibernate.show_sql: false
       hibernate.format_sql: true
       hibernate.dialect : org.hibernate.dialect.MySQL5Dialect
       hibernate.enable_lazy_load_no_trans: true
@@ -82,10 +84,10 @@ spring:
 #  hornetq:
 #    embedded:
 #      cluster-password: # LOGGING
-logging:
-  level: 
-    com.ibatis: DEBUG
-    org.hibernate.SQL: DEBUG
+#logging:
+#  level:
+#    com.ibatis: DEBUG
+#    org.hibernate.SQL: DEBUG
 
 
 

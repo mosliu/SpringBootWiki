@@ -6423,7 +6423,8 @@ section.dark .nav-tabs>li>a:hover {
 }
 .pagination > li > a {
 	margin-right:4px;
-	color:#666 !important;
+	/*color:#666 !important;*/
+	color:#666 ;
 
 	-webkit-border-radius: 3px !important;
 	   -moz-border-radius: 3px !important;
