@@ -14,6 +14,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -25,6 +28,8 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +48,7 @@ import java.util.Map;
  */
 
 @Controller
+@PreAuthorize("hasRole('ROLE_USER')")
 public class FAQController {
     private static Logger log =  LoggerFactory.getLogger(FAQController.class);
 
@@ -63,7 +69,8 @@ public class FAQController {
 
     @RequestMapping(value = "/faq", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQ(Map<String, Object> model) {
+    public String getFAQ(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
         log.info("-FAQController.getFAQ() Method");
 //        model.put("message", "Editor");
         model.put("title", "FAQ 编辑界面");
@@ -130,7 +137,8 @@ public class FAQController {
         binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        dateFormat.setLenient(false);
+//        dateFormat.setLenient(false);
+        dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
 //        binder.registerCustomEditor(CMSCategory.class,cmsCategoryEditor());
 //        binder.registerCustomEditor(Department.class,new DepartmentEditor());

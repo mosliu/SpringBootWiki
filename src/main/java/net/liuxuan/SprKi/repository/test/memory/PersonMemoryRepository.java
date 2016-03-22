@@ -534,4 +534,12 @@ public class PersonMemoryRepository  {
 		return persons;
 	}
 
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public List<Person> findLimited(int maxResult) {
+		return persons.subList(0, maxResult);
+	}
 }

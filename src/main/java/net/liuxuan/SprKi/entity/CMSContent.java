@@ -1,17 +1,10 @@
 package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
-import net.liuxuan.SprKi.entity.labthink.Devices;
-import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
-import net.liuxuan.spring.Helper.SystemHelper;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import javax.persistence.*;
-import javax.persistence.spi.ClassTransformer;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -175,7 +168,12 @@ public class CMSContent {
     void PrePersist() {
         //Publish time.
         this.publishDate = this.lastUpdateDate = new Date();
-//        UserDetails principal = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+
+//
+//        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
+//                .getAuthentication().getPrincipal();
+//        this.author = this.lastUpdateUser = ui.getUsers();
+
 //
 //        Assert.notNull(null);
 //        this.author = this.lastUpdateUser = new Users();
@@ -187,6 +185,9 @@ public class CMSContent {
     @PreUpdate
     void PreUpdate() {
         this.lastUpdateDate = new Date();
+//        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
+//                .getAuthentication().getPrincipal();
+//        this.lastUpdateUser = ui.getUsers();
     }
 
 

@@ -108,6 +108,8 @@
     <logger name="javax.management.misc" level="INFO"/>
 
     <!--URLinfo    set to Debug if you want to show-->
+    <logger name="org.apache.commons.beanutils" level="INFO"/>
+    <logger name="org.apache.http" level="INFO"/>
     <logger name="org.apache.coyote.http11.InternalNioInputBuffer" level="INFO"/>
     <logger name="org.apache.coyote.http11.Http11NioProtocol" level="INFO"/>
     <logger name="org.apache.coyote.http11.Http11NioProcessor" level="INFO"/>
@@ -139,6 +141,11 @@
     <logger name="org.apache.tomcat.jdbc.pool.PooledConnection" level="INFO"/>
     <logger name="org.apache.tomcat.jdbc.pool.ClassLoaderUtil" level="INFO"/>
 
+
+    <logger name="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" level="INFO"/>
+    <logger name="org.springframework.aop.framework.CglibAopProxy" level="INFO"/>
+    <logger name="org.springframework.aop.framework.JdkDynamicAopProxy" level="INFO"/>
+    <logger name="org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper" level="INFO"/>
 
     <!--print AUTO-CONFIGURATION REPORT-->
     <logger name="org.springframework.boot.context.config.ConfigFileApplicationListener" level="INFO"/>
@@ -178,6 +185,57 @@
     <logger name="org.springframework.boot.devtools.livereload.LiveReloadServer" level="INFO"/>
     <logger name="org.springframework.boot.bind.PropertiesConfigurationFactory" level="INFO"/>
 
+
+    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
+    <logger name="org.springframework.beans.factory.support.DisposableBeanAdapter" level="INFO"/>
+    <logger name="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" level="INFO"/>
+    <logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="INFO"/>
+    <logger name="org.springframework.beans.factory.xml.BeansDtdResolver" level="INFO"/>
+    <logger name="org.springframework.beans.CachedIntrospectionResults" level="INFO"/>
+    <!--有报InvocationTargetException-->
+    <logger name="org.springframework.beans.AbstractNestablePropertyAccessor" level="INFO"/>
+    <logger name="org.springframework.beans.TypeConverterDelegate" level="INFO"/>
+
+
+
+    <!--Searching for key XX in XXX-->
+    <logger name="org.springframework.core.env.PropertySourcesPropertyResolver" level="INFO"/>
+    <logger name="org.springframework.core.env.MutablePropertySources" level="INFO"/>
+    <logger name="org.springframework.core.env.StandardEnvironment" level="INFO"/>
+    <logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="INFO"/>
+    <logger name="org.springframework.core.io.support.SpringFactoriesLoader" level="INFO"/>
+
+    <logger name="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassEnhancer" level="INFO"/>
+    <logger name="org.springframework.context.annotation.ConfigurationClassPostProcessor" level="INFO"/>
+    <logger name="org.springframework.context.event.EventListenerMethodProcessor" level="INFO"/>
+    <logger name="org.springframework.context.event.ApplicationListenerMethodAdapter" level="INFO"/>
+    <logger name="org.springframework.context.support.DefaultLifecycleProcessor" level="INFO"/>
+
+    <logger name="org.springframework.data.repository.core.support.TransactionalRepositoryProxyPostProcessor" level="INFO"/>
+    <logger name="org.springframework.data.repository.config.RepositoryComponentProvider" level="INFO"/>
+    <logger name="org.springframework.data.repository.config.RepositoryConfigurationDelegate" level="INFO"/>
+    <logger name="org.springframework.data.jpa.repository.query.JpaQueryFactory" level="INFO"/>
+
+    <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="INFO"/>
+    <!--Setting SQL statement parameter value: column index 1, parameter value [user], value class [java.lang.String], SQL type unknown-->
+    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="INFO"/>
+    <!--Executing prepared SQL statement [insert into persistent_logins (username, series, token, last_used) values(?,?,?,?)]-->
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="INFO"/>
+
+    <logger name="org.springframework.jmx.support.JmxUtils" level="INFO"/>
+    <logger name="org.springframework.jmx.export.annotation.AnnotationMBeanExporter" level="INFO"/>
+
+
+    <logger name="org.springframework.orm.jpa.SharedEntityManagerCreator" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.EntityManagerFactoryUtils" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.ExtendedEntityManagerCreator" level="INFO"/>
+    <logger name="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" level="INFO"/>
+    <logger name="org.springframework.orm.hibernate4.HibernateTransactionManager" level="INFO"/>
+
     <!--如PreAuthorize(value=hasRole('ROLE_USER'))-->
     <logger name="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource" level="INFO"/>
     <!--如'hasRole('ROLE_USER')'-->
@@ -191,95 +249,58 @@
     <logger name="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" level="INFO"/>
     <logger name="org.springframework.security.web.access.ExceptionTranslationFilter" level="INFO"/>
     <logger name="org.springframework.security.web.authentication.AnonymousAuthenticationFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" level="INFO"/>
+    <logger name="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices" level="DEBUG"/>
+    <!--SecurityContextHolder not populated with remember-me token, as it already contained: 'org.springframework.security.authentication.UsernamePasswordAuthenticationToken@c2436841: Principal: org.springframework.security.core.userdetails.User@36ebcb: Username: user; Password: [PROTECTED]; Enabled: true; AccountNonExpired: true; credentialsNonExpired: true; AccountNonLocked: true; Granted Authorities: Authorities(id=2, username=net.liuxuan.SprKi.entity.security.Users@57b88c83, authority=ROLE_USER); Credentials: [PROTECTED]; Authenticated: true; Details: org.springframework.security.web.authentication.WebAuthenticationDetails@957e: RemoteIpAddress: 127.0.0.1; SessionId: null; Granted Authorities: Authorities(id=2, username=net.liuxuan.SprKi.entity.security.Users@57b88c83, authority=ROLE_USER)'-->
+    <logger name="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter" level="INFO"/>
     <logger name="org.springframework.security.web.context.SecurityContextPersistenceFilter" level="INFO"/>
     <logger name="org.springframework.security.web.context.HttpSessionSecurityContextRepository" level="INFO"/>
     <logger name="org.springframework.security.web.FilterChainProxy" level="INFO"/>
     <logger name="org.springframework.security.web.util.matcher.AntPathRequestMatcher" level="INFO"/>
     <logger name="org.springframework.security.web.util.matcher.AndRequestMatcher" level="INFO"/>
     <logger name="org.springframework.security.web.util.matcher.MediaTypeRequestMatcher" level="INFO"/>
+    <logger name="org.springframework.security.web.util.matcher.NegatedRequestMatcher" level="INFO"/>
     <logger name="org.springframework.security.web.savedrequest.HttpSessionRequestCache" level="INFO"/>
+    <logger name="org.springframework.security.web.savedrequest.DefaultSavedRequest" level="INFO"/>
     <logger name="org.springframework.security.web.DefaultRedirectStrategy" level="INFO"/>
     <logger name="org.springframework.security.web.session.SessionManagementFilter" level="INFO"/>
     <logger name="org.springframework.security.web.header.writers.HstsHeaderWriter" level="INFO"/>
 
+    <logger name="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" level="INFO"/>
+    <logger name="org.springframework.transaction.support.TransactionSynchronizationManager" level="INFO"/>
+    <logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="INFO"/>
 
-    <!--Searching for key XX in XXX-->
-    <logger name="org.springframework.core.env.PropertySourcesPropertyResolver" level="INFO"/>
-    <logger name="org.springframework.core.env.MutablePropertySources" level="INFO"/>
-    <logger name="org.springframework.core.env.StandardEnvironment" level="INFO"/>
-    <logger name="org.springframework.core.io.support.PathMatchingResourcePatternResolver" level="INFO"/>
-    <logger name="org.springframework.core.io.support.SpringFactoriesLoader" level="INFO"/>
+    <logger name="org.springframework.ui.context.support.UiApplicationContextUtils" level="INFO"/>
+    <logger name="org.springframework.util.PropertyPlaceholderHelper" level="INFO"/>
 
-    <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
-    <logger name="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" level="INFO"/>
-    <logger name="org.springframework.beans.factory.annotation.InjectionMetadata" level="INFO"/>
-    <logger name="org.springframework.beans.CachedIntrospectionResults" level="INFO"/>
-    <!--有报InvocationTargetException-->
-    <logger name="org.springframework.beans.AbstractNestablePropertyAccessor" level="INFO"/>
-    <logger name="org.springframework.beans.TypeConverterDelegate" level="INFO"/>
-
-    <logger name="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" level="INFO"/>
-    <logger name="org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider" level="INFO"/>
-    <logger name="org.springframework.context.annotation.ClassPathBeanDefinitionScanner" level="INFO"/>
-    <logger name="org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader" level="INFO"/>
-    <logger name="org.springframework.context.annotation.ConfigurationClassEnhancer" level="INFO"/>
-    <logger name="org.springframework.context.annotation.ConfigurationClassPostProcessor" level="INFO"/>
-    <logger name="org.springframework.context.event.EventListenerMethodProcessor" level="INFO"/>
-    <logger name="org.springframework.context.event.ApplicationListenerMethodAdapter" level="INFO"/>
-    <logger name="org.springframework.context.support.DefaultLifecycleProcessor" level="INFO"/>
-
-
-    <logger name="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" level="INFO"/>
-    <logger name="org.springframework.aop.framework.CglibAopProxy" level="INFO"/>
-    <logger name="org.springframework.aop.framework.JdkDynamicAopProxy" level="INFO"/>
-    <logger name="org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper" level="INFO"/>
-
-
-    <logger name="org.springframework.web.filter.DelegatingFilterProxy" level="INFO"/>
-    <logger name="org.springframework.web.method.support.HandlerMethodArgumentResolverComposite" level="INFO"/>
+    <logger name="org.springframework.web.cors.DefaultCorsProcessor" level="INFO"/>
     <logger name="org.springframework.web.context.support.StandardServletEnvironment" level="INFO"/>
     <logger name="org.springframework.web.context.ContextLoader" level="INFO"/>
+    <logger name="org.springframework.web.filter.DelegatingFilterProxy" level="INFO"/>
+    <logger name="org.springframework.web.method.support.HandlerMethodArgumentResolverComposite" level="INFO"/>
     <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
     <!--Display like Matching patterns for request [/css/bootstrap.css] are [/**]-->
     <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
     <logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="INFO"/>
-    <!--resource handler mapping:   set to Debug if you want to show-->
-    <logger name="org.springframework.web.servlet.resource.ResourceUrlProvider" level="INFO"/>
-    <logger name="org.springframework.web.servlet.resource.PathResourceResolver" level="INFO"/>
-    <logger name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler" level="INFO"/>
     <!--RequestMapping   set to INFO if you want to show-->
     <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="INFO"/>
     <!--display Method [login] returned [ModelAndView: reference to view with name 'common/login'; model is {}]-->
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="INFO"/>
+    <!--resource handler mapping:   set to Debug if you want to show-->
+    <logger name="org.springframework.web.servlet.resource.ResourceUrlProvider" level="INFO"/>
+    <logger name="org.springframework.web.servlet.resource.PathResourceResolver" level="INFO"/>
+    <logger name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler" level="INFO"/>
     <logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="INFO"/>
     <logger name="org.springframework.web.servlet.view.InternalResourceViewResolver" level="INFO"/>
 
 
 
-    <logger name="org.springframework.data.repository.config.RepositoryComponentProvider" level="INFO"/>
-    <logger name="org.springframework.data.repository.config.RepositoryConfigurationDelegate" level="INFO"/>
-    <logger name="org.springframework.data.jpa.repository.query.JpaQueryFactory" level="INFO"/>
 
-    <logger name="org.springframework.ui.context.support.UiApplicationContextUtils" level="INFO"/>
-    <logger name="org.springframework.orm.jpa.SharedEntityManagerCreator" level="INFO"/>
-    <logger name="org.springframework.orm.jpa.EntityManagerFactoryUtils" level="INFO"/>
-    <logger name="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" level="INFO"/>
 
-    <logger name="org.springframework.util.PropertyPlaceholderHelper" level="INFO"/>
-    <logger name="org.springframework.jmx.support.JmxUtils" level="INFO"/>
-    <logger name="org.springframework.jmx.export.annotation.AnnotationMBeanExporter" level="INFO"/>
-    <logger name="org.springframework.transaction.annotation.AnnotationTransactionAttributeSource" level="INFO"/>
-    <logger name="org.springframework.transaction.support.TransactionSynchronizationManager" level="INFO"/>
 
-    <logger name="org.springframework.orm.hibernate4.HibernateTransactionManager" level="INFO"/>
-    <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="INFO"/>
-    <logger name="org.springframework.transaction.interceptor.TransactionInterceptor" level="INFO"/>
-    <logger name="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy" level="INFO"/>
-    <logger name="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" level="INFO"/>
-    <logger name="org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices" level="DEBUG"/>
-    <logger name="rg.springframework.beans.factory.support.DisposableBeanAdapter" level="INFO"/>
-    <logger name="org.springframework.web.cors.DefaultCorsProcessor" level="INFO"/>
+
     <!--<logger name="" level="INFO"/>-->
     <!--<logger name="" level="INFO"/>-->
     <!--<logger name="" level="INFO"/>-->

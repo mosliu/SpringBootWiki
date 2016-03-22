@@ -1,6 +1,8 @@
 package net.liuxuan.spring.mvc;
 
 import org.apache.catalina.security.SecurityConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -27,6 +29,7 @@ import javax.servlet.ServletRegistration;
 @Controller
 public class AppInitializer  extends AbstractAnnotationConfigDispatcherServletInitializer  {
 
+    private static Logger log =  LoggerFactory.getLogger(AppInitializer.class);
     /**
      * Specify {@link Configuration @Configuration}
      * and/or {@link Component @Component} classes to be
@@ -37,6 +40,7 @@ public class AppInitializer  extends AbstractAnnotationConfigDispatcherServletIn
      */
     @Override
     protected Class<?>[] getRootConfigClasses() {
+        log.debug("=====================***********1*************===================");
 //        return new Class[] {ServicesConfig.class, PersistenceConfig.class, SecurityConfig.class};
         return null;
     }
@@ -52,6 +56,7 @@ public class AppInitializer  extends AbstractAnnotationConfigDispatcherServletIn
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
+        log.debug("=====================************2************===================");
 //        return new Class<?>[0];
         return null;
     }
@@ -64,19 +69,20 @@ public class AppInitializer  extends AbstractAnnotationConfigDispatcherServletIn
      */
     @Override
     protected String[] getServletMappings() {
+        log.debug("=====================***********3*************===================");
         return new String[]{"/"};
     }
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        System.out.println("=====================************************===================");
+        log.debug("=====================*************4***********===================");
         registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
     @Override
     protected DispatcherServlet createDispatcherServlet(WebApplicationContext servletAppContext) {
         final DispatcherServlet dispatcherServlet = (DispatcherServlet) super.createDispatcherServlet(servletAppContext);
-        System.out.println("=====================************************===================");
+        log.debug("=====================*************5***********===================");
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
         return dispatcherServlet;
     }

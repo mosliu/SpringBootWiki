@@ -3,6 +3,7 @@ package net.liuxuan.spring.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -13,6 +14,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -59,7 +61,9 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
             throws IOException, ServletException {
 
 //        log.debug("===onAuthenticationSuccess()");
+
         SavedRequest savedRequest = requestCache.getRequest(request, response);
+//        log.debug("======savedRequest is: {}",savedRequest);
         String targetUrl = getDefaultTargetUrl();
         if (savedRequest == null) {
 //            log.debug("===savedRequest is null");
@@ -70,7 +74,7 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
                     (targetUrlParam != null && StringUtils.hasText(request.getParameter(targetUrlParam)))) {
                 requestCache.removeRequest(request, response);
             }else{
-                targetUrl =savedRequest.getRedirectUrl();;
+                targetUrl =savedRequest.getRedirectUrl();
             }
 
 
@@ -78,7 +82,6 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
         clearAuthenticationAttributes(request);
 
         // Use the DefaultSavedRequest URL
-
         logger.debug("Redirecting to DefaultSavedRequest Url: " + targetUrl);
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
 //
@@ -115,5 +118,8 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
     public void setRequestCache(RequestCache requestCache) {
         this.requestCache = requestCache;
     }
+
+
+
 
 }

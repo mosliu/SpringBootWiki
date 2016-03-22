@@ -2,7 +2,6 @@ package net.liuxuan.SprKi.entity.test.model;
 
 
 import lombok.Data;
-
 import javax.persistence.*;
 
 /**

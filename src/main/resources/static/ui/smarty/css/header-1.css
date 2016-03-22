@@ -1,6 +1,6 @@
 #topMain>li>a {
-	height:96px;
-	line-height:76px;
+	height:80px;
+	line-height:66px;
 }
 #topMain.nav-pills>li>a {
 	color:#1F262D;
@@ -50,8 +50,8 @@
 }
 
 #topNav a.logo {
-	height:96px;
-	line-height:96px;
+	height:80px;
+	line-height:80px;
 	overflow:hidden;
 	display:inline-block;
 }

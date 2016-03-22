@@ -15,8 +15,9 @@
     <!-- 实例化编辑器 -->
     <script type="text/javascript">
         var ue = UE.getEditor('editor');
-        function doSubmit1(aaa) {
-            alert(aaa);
+        function doSubmit1() {
+//            document.faqform.answer.value = 111
+//            $('input[name=answer]:first').val(ue.getContent());
             return jQuery('form.validate-plugin').validate().form();
         }
     </script>
@@ -25,12 +26,13 @@
 <div class="container" layout:fragment="content">
     <h1 th:text="${title}">FAQ 编辑界面</h1>
     <div class="faqs-form">
-        <form th:action="@{/faqpost}" action="/login" id="loginForm" name="form" method="POST"
+        <form th:action="@{/faqpost}" action="/login" id="faqform" name="faqform" method="POST"
               class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
               th:object="${faq}">
 
             <fieldset>
                 <!--title-->
+                <input type="hidden" th:field="*{Id}" />
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">
@@ -102,18 +104,29 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">
-                            <label>Experience *</label>
+                            <label>问题 *</label>
                             <textarea th:field="*{question}"  class="summernote form-control required" data-height="200" data-lang="en-US"></textarea>
                         </div>
                     </div>
                 </div>
 
-                <script id="editor" type="text/plain" style="height:500px;"></script>
+                <!--<input type="hidden" th:field="*{answer}" />-->
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>答复 *</label>
+                            <textarea id="editor" type="text/plain" style="height:500px;" th:field="*{answer}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
             </fieldset>
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
+                    <button type="submit" onClick="return doSubmit1();" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
                         SEND APPLICATION
                         <span class="block font-lato">We'll get back to you within 48 hours</span>
                     </button>
@@ -135,7 +148,6 @@
 
 
     <div></div>
-
 
 </div>
 

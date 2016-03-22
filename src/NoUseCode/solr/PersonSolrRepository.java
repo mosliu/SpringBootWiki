@@ -1,11 +1,8 @@
 package net.liuxuan.SprKi.repository.test;
 
 
-import net.liuxuan.SprKi.entity.test.model.Company;
-import net.liuxuan.SprKi.entity.test.model.Person;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
+import net.liuxuan.SprKi.entity.test.model.PersonSolr;
+import org.springframework.data.solr.repository.SolrCrudRepository;
 
 /**
  * Repository interface for the <code>Person</code> domain object.
@@ -13,7 +10,7 @@ import java.util.List;
  * @author Thibault Duchateau
  */
 //public interface PersonRepository extends SolrCrudRepository<Person, Long>, JpaSpecificationExecutor<Person> {
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface PersonSolrRepository extends SolrCrudRepository<PersonSolr, Long> {
 //public interface PersonRepository {
 
 //	/**
@@ -27,5 +24,5 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
 //	 * @return a limited list of persons.
 //	 */
 //	public List<Person> findLimited(int maxResult);
-    public List<Person> findByCompany(Company company);
+//    public List<Person> findByCompany(Company company);
 }

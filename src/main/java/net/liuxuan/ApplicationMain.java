@@ -54,6 +54,7 @@ import javax.servlet.FilterRegistration;
 //@ImportResource({ "classpath:config/webSecurityConfig.xml" })
 //@EnableConfigurationProperties({DBSettings.class})
 @EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository")
+
 //@EnableWebMvc
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
@@ -95,7 +96,6 @@ public class ApplicationMain extends SpringBootServletInitializer {
         log.info("======info");
         log.warn("======warn");
         log.error("======error");
-
 
 //        LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 //        StatusPrinter.print(lc);

@@ -36,8 +36,10 @@
 
                                 <fieldset class="nomargin">
                                     <p th:if="${param.logout}" class="alert alert-success">You have been logged out</p>
-                                    <p th:if="${param.error}" class="alert alert-danger">There was an error, please try
-                                        again</p>
+                                    <p th:if="${param.error}" class="alert alert-danger" th:text="${session.errorMessage}">
+                                        There was an error, please try again
+                                    </p>
+
 
                                     <label class="label margin-top-20" for="username">Username</label>
                                     <label class="input">
@@ -55,7 +57,7 @@
                                         <b class="tooltip tooltip-top-right">Type your Password</b>
                                     </label>
                                     <label class="checkbox margin-top-20">
-                                        <input id="_spring_security_remember_me" name="_spring_security_remember_me" type="checkbox" value="true"/>
+                                        <input id="remember-me" name="remember-me" type="checkbox" value="true"/>
                                         <i></i> Keep me logged in
                                     </label>
 
@@ -96,34 +98,17 @@
                         <div class="col-xs-12 col-md-7 col-sm-7 col-lg-8 col-lg-pull-4 col-md-pull-5 col-sm-pull-5">
 
 
-                            <h2 class="size-20 text-center-xs">支持系统</h2>
+                            <h2 class="size-30 text-center-xs">支持系统</h2>
 
-                            <p>Lorem ipsum dolor sit amet. Sed ut perspiciatis unde omnis iste natus error sit
-                                voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.Lorem ipsum
-                                dolor sit amet. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>
+                            <p>欢迎使用支持服务系统，该系统前端集成Bootstrap3前端CSS框架,Jquery轻量级JS库，并使用多项基于此二者之上的开源开发库。</p>
+                            <p>后端采用Spring Boot为基础框架，使用Thymeleaf、FreeMarker模板引擎进行渲染，其他开源工具还包括:</p>
 
                             <ul class="list-unstyled login-features">
-                                <li>
-                                    <i class="glyphicon glyphicon-road"></i> <strong>Lorem ipsum</strong> dolor sit
-                                    amet.
-                                </li>
-                                <li>
-                                    <i class="glyphicon glyphicon-cog"></i> <strong>Sed ut perspiciatis</strong> unde
-                                    omnis iste.
-                                </li>
-                                <li>
-                                    <i class="glyphicon glyphicon-tint"></i> <strong>Et harum quidem</strong> rerum
-                                    facilis est et expedita distinctio.
-                                </li>
-                                <li>
-                                    <i class="glyphicon glyphicon-screenshot"></i> <strong>Nam libero</strong> tempore,
-                                    cum soluta nobis.
-                                </li>
-                                <li>
-                                    <i class="glyphicon glyphicon-fire"></i> <strong>Est eligendi</strong> voluptatem
-                                    accusantium.
-                                </li>
+                                <li><i class="glyphicon glyphicon-road"></i> <strong>Lucene 5</strong> 全文检索引擎</li>
+                                <li><i class="glyphicon glyphicon-cog"></i> <strong>Quartz 2</strong> 作业调度框架 </li>
+                                <li><i class="glyphicon glyphicon-tint"></i> <strong>Uditor 1.4</strong> 百度富文本编辑器 </li>
+                                <li><i class="glyphicon glyphicon-screenshot"></i> <strong>Spring Security 4</strong> 安全认证服务框架 </li>
+                                <li><i class="glyphicon glyphicon-fire"></i> <strong>Hibernate 3</strong> 对象关系映射框架 </li>
                             </ul>
 
                         </div>

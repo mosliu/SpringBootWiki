@@ -4,10 +4,9 @@
       layout:decorator="layouts/base">
 <head>
     <title th:text="${title}">Title</title>
-    <link href="css/cssfont.css" th:href="@{/css/cssfont.css}" media="screen" rel="stylesheet"/>
 </head>
 <body>
-<h1 layout:fragment="header" class="hidden">Access Denied</h1>
+<h1 layout:fragment="header" class="hidden">访问受限制，请确定您的权限。</h1>
 <div class="container" layout:fragment="content">
     <h1 th:text="${title}">Title</h1>
     <div id="created" th:text="${#dates.format(date)}">July 11,

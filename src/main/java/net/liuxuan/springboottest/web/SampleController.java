@@ -3,10 +3,7 @@ package net.liuxuan.springboottest.web;
 import com.google.gson.Gson;
 import net.liuxuan.SprKi.entity.test.model.Company;
 import net.liuxuan.SprKi.entity.test.model.Person;
-import net.liuxuan.SprKi.repository.test.AddressRepository;
-import net.liuxuan.SprKi.repository.test.CompanyRepository;
-import net.liuxuan.SprKi.repository.test.PersonRepository;
-import net.liuxuan.SprKi.repository.test.TownRepository;
+import net.liuxuan.SprKi.repository.test.*;
 import net.liuxuan.SprKi.repository.test.memory.PersonMemoryRepository;
 import net.liuxuan.spring.Helper.gson.EntityGsonHelper;
 import org.slf4j.Logger;
@@ -21,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 
@@ -43,6 +41,7 @@ public class SampleController {
     TownRepository townRepository;
     @Autowired
     CompanyRepository companyRepository;
+
     PersonMemoryRepository personMemoryRepository = new PersonMemoryRepository();
 
     /**
@@ -66,7 +65,7 @@ public class SampleController {
 
     @RequestMapping(value = "dp1")
     public ModelAndView goToIndex1(HttpServletRequest request, ModelAndView modelAndView) {
-        List<Person> all = personMemoryRepository.findAll();
+        List<Person> all = personMemoryRepository.findLimited(100);
         for (Person person : all) {
             townRepository.save(person.getAddress().getTown());
             addressRepository.save(person.getAddress());
@@ -82,6 +81,39 @@ public class SampleController {
         modelAndView.getModelMap().put("persons", personRepository.findAll());
         return modelAndView;
     }
+//    @RequestMapping(value = "dp1S")
+//    public ModelAndView goToIndex1S(HttpServletRequest request, ModelAndView modelAndView) {
+//        List<Person> all = personMemoryRepository.findLimited(10);
+//
+//        log.trace("11111111111111111111  solrTemplate is null?:{}",solrTemplate==null);
+//        for (Person person : all) {
+//            townRepository.save(person.getAddress().getTown());
+//            addressRepository.save(person.getAddress());
+//            Company company = person.getCompany();
+//            List<Company> byName = companyRepository.findByName(company.getName());
+//            if (byName.size() > 0) {
+//                company.setId(byName.get(0).getId());
+//            }
+//            companyRepository.save(company);
+//            personRepository.save(person);
+//            try {
+//                PersonSolr personSolr = person.createSolr();
+//                personSolrRepository.save(personSolr);
+//
+//                log.trace("11111111111111111111  personSolrRepository is null?:{}",personSolrRepository==null);
+//                Iterable<PersonSolr> all1 = personSolrRepository.findAll();
+//                log.trace("11111111111111111111  all1:{}",all.size());
+//            } catch (InvocationTargetException e) {
+//                e.printStackTrace();
+//            } catch (IllegalAccessException e) {
+//                e.printStackTrace();
+//            }
+//
+//        }
+//        modelAndView.setViewName("dp");
+//        modelAndView.getModelMap().put("persons", personRepository.findAll());
+//        return modelAndView;
+//    }
 
     @RequestMapping(value = "dp2")
     public ModelAndView goToIndex2(HttpServletRequest request, ModelAndView modelAndView) {

@@ -71,23 +71,23 @@ public class UserController {
 //            return new ModelAndView("common/temp", model);
 ////            return new LoginInfo().failed().msg("验证码错误！");
 //        }
-        log.debug("Access UserController.login() POST Method");
-        username = username.trim();
-
-        UserDetails userDetails = securityUserDetailsService.loadUserByUsername(username);
-
-
-        PreAuthenticatedAuthenticationToken authentication =
-                new PreAuthenticatedAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
-
-        //设置authentication中details
-        authentication.setDetails(new WebAuthenticationDetails(request));
-
-        //存放authentication到SecurityContextHolder
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        HttpSession session = request.getSession(true);
-        //在session中存放security context,方便同一个session中控制用户的其他操作
-        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+//        log.debug("Access UserController.login() POST Method");
+//        username = username.trim();
+//
+//        UserDetails userDetails = securityUserDetailsService.loadUserByUsername(username);
+//
+//
+//        PreAuthenticatedAuthenticationToken authentication =
+//                new PreAuthenticatedAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+//
+//        //设置authentication中details
+//        authentication.setDetails(new WebAuthenticationDetails(request));
+//
+//        //存放authentication到SecurityContextHolder
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        HttpSession session = request.getSession(true);
+//        //在session中存放security context,方便同一个session中控制用户的其他操作
+//        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
 
         return new ModelAndView("common/temp", model);

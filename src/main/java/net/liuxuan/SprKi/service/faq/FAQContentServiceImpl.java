@@ -1,8 +1,13 @@
 package net.liuxuan.SprKi.service.faq;
 
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.entity.security.Users;
 import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
+import net.liuxuan.spring.Helper.SystemHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +33,12 @@ public class FAQContentServiceImpl implements FAQContentService {
 
     @Override
     public void saveFAQContent(FAQContent faqContent) {
-        //Column 'author' cannot be null
-        //Column 'last_update_user' cannot be null
+        User ui = (User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        Users u = new Users();
+        u.setUsername(ui.getUsername());
+        faqContent.setAuthor(u);
+        faqContent.setLastUpdateUser(u);
         faqContentRepository.save(faqContent);
     }
 

@@ -14,12 +14,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
-import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
-import org.springframework.security.web.authentication.switchuser.SwitchUserFilter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -38,7 +35,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     private static Logger logger = LoggerFactory.getLogger(SecurityConfigration.class);
@@ -46,11 +43,13 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     SecurityUserDetailsServiceImpl securityUserDetailsService;
     @Autowired
     MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
-//    @Resource
+    @Autowired
+    MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    //    @Resource
 //    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
     @Resource
     MyLogoutHandler myLogoutHandler;
-//    @Resource
+    //    @Resource
 //    IPRoleAuthenticationFilter iPRoleAuthenticationFilter;
     @Autowired
     private DataSource dataSource;
@@ -62,48 +61,52 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers("/resources/**","/static/**");
+                .antMatchers("/resources/**", "/static/**");
 
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-//                .exceptionHandling().authenticationEntryPoint(myLoginUrlAuthEntryPoint).and()
-//                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
-
-//                .antMatchers("/").anonymous()
+                .antMatchers("/ui/**","/images/**","/tinymce/**","/ueditor/**","/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
                 .antMatchers("/msg/**").hasRole("USER")
-                .antMatchers("/editor/**").authenticated()
-                .and()
-
+                .antMatchers("/editor/**").authenticated();
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 //                .anyRequest().authenticated().and()
 //                .anyRequest().fullyAuthenticated()
+//                .antMatchers("/").anonymous()
+//                .exceptionHandling().authenticationEntryPoint(myLoginUrlAuthEntryPoint).and()
+//                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
+
 //                The method formLogin().permitAll() statement instructs Spring Security to allow any access to any URL
 //                 (i.e. /login and /login?error) associated to formLogin().
-                .formLogin().loginPage("/login").successHandler(myAuthenticationSuccessHandler).failureUrl("/login?error").permitAll()
-                .and()
-
-                .logout()
+        http.formLogin()
+                .loginPage("/login")
+                .successHandler(myAuthenticationSuccessHandler)
+                .failureHandler(myAuthenticationFailureHandler)
+                .failureUrl("/login?error")
+                .permitAll();
+        http.logout()
+                .permitAll();
 //                .logoutSuccessHandler()
 //                .addLogoutHandler(myLogoutHandler)
 //                .logoutSuccessUrl("/logout")
-                .permitAll().and()
-                .headers().frameOptions().sameOrigin().and()
-//                .rememberMe().rememberMeParameter("_spring_security_remember_me").userDetailsService(securityUserDetailsService).and()
-                //TODO rememberMe
+        http.headers().frameOptions().sameOrigin();
+        http.rememberMe()
                 .userDetailsService(securityUserDetailsService)
-                .csrf().disable()
+                .rememberMeParameter("remember-me")
+                .tokenRepository(persistentTokenRepository())
+                .tokenValiditySeconds(86400);
+//                .rememberMe().rememberMeParameter("_spring_security_remember_me").userDetailsService(securityUserDetailsService).and()
+        http.requestCache();
+//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        http.userDetailsService(securityUserDetailsService);
+        http.csrf().disable();
         //TODO <form action="./upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
-//                .sessionManagement().invalidSessionUrl("/invalid").and()
+// .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
 //                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
-
-        ;
-
 
 //
 //        http.authorizeRequests().accessDecisionManager(accessDecisionManager())
@@ -116,19 +119,24 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication()
-                .dataSource(this.dataSource)
+//        auth.jdbcAuthentication()
+//                .dataSource(this.dataSource);
+        auth.userDetailsService(securityUserDetailsService);
 //                .and().userDetailsService(securityUserDetailsService)
 
 //                .withDefaultSchema()
 //                .withUser("user").password("user").roles("USER").and()
 //                .withUser("admin").password("password").roles("USER", "ADMIN")
-        ;
 
     }
 
 
-//    @Bean
+//    @Autowired
+//    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(securityUserDetailsService);
+//    }
+
+           //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        logger.info("UserDetailsService");
 //        UserDetailsService userDetailsService = new UserDetailsService();
@@ -210,5 +218,13 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
 //                .userDetailsService(loginService())
 //                .passwordEncoder(passwordEncoder());
 //    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
+//        tokenRepositoryImpl.setCreateTableOnStartup(true);
+        tokenRepositoryImpl.setDataSource(dataSource);
+        return tokenRepositoryImpl;
+    }
 
 }

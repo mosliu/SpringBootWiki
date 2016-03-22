@@ -2,25 +2,21 @@ package net.liuxuan.SprKi.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.AbstractErrorController;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
-import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
-import org.springframework.web.servlet.mvc.multiaction.NoSuchRequestHandlingMethodException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
@@ -40,13 +36,13 @@ import java.util.Map;
 //可应用到所有@RequestMapping类或方法上的@ExceptionHandler、@InitBinder、@ModelAttribute，在这里是@ExceptionHandler
 @Controller
 @ControllerAdvice
-public class ErrorHandleController  {
+public class ErrorHandleController {
 //public class ErrorHandleController implements ErrorController {
 
     private static final String ERROR_PATH = "/error";
     private static Logger log = LoggerFactory.getLogger(ErrorHandleController.class);
 
-//        @RequestMapping(value = ERROR_PATH)
+    //        @RequestMapping(value = ERROR_PATH)
     public ModelAndView handleError(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
@@ -96,7 +92,7 @@ public class ErrorHandleController  {
     }
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleAllException(HttpServletRequest req,Exception ex) throws Exception {
+    public ModelAndView handleAllException(HttpServletRequest req, Exception ex) throws Exception {
         log.debug("-ErrorHandleController.handleAllException() invoked");
 
         // If the exception is annotated with @ResponseStatus rethrow it and let
@@ -121,7 +117,7 @@ public class ErrorHandleController  {
     }
 
 
-//    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
+    //    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
     public ModelAndView handle404Exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
 
 
@@ -136,9 +132,28 @@ public class ErrorHandleController  {
     }
 
 
+    /**
+     * 处理访问受限
+     *
+     * @param request
+     * @param response
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(AccessDeniedException.class)
-    public ModelAndView handleAccessDeniedException(HttpServletRequest request, HttpServletResponse response, Exception ex) {
+    public ModelAndView handleAccessDeniedException(HttpServletRequest request, HttpServletResponse response, Exception ex) throws ServletException, IOException {
 //        log.debug("-ErrorHandleController.handleAccessDeniedException() invoked");
+//        if (request.getRemoteUser() == null) {
+
+        if (!request.authenticate(response)) {
+            RequestCache requestCache = new HttpSessionRequestCache();
+            requestCache.saveRequest(request, response);
+            //尚未登录，转到登录页面
+            return null;
+//            return new ModelAndView("redirect:/login");
+//            request.getRequestDispatcher("/login").forward(request, response);
+
+        }
         ModelAndView model = new ModelAndView("common/accessdenied");
         model.getModel().put("error", ex.getMessage());
         model.getModel().put("title", "Access Denied!");
@@ -171,8 +186,6 @@ public class ErrorHandleController  {
 //    void handleBadRequests(HttpServletResponse response) throws IOException {
 //        response.sendError(HttpStatus.BAD_REQUEST.value());
 //    }
-
-
 
 
 }

@@ -202,12 +202,6 @@ public class ThymeleafConfiguration {
 
 
 
-
-
-
-
-
-
     //    //ThymeleafViewResolver页面解析器
 //    @Bean
     public ThymeleafViewResolver thymeleafViewResolver() {
@@ -215,6 +209,11 @@ public class ThymeleafConfiguration {
 
         resolver.setTemplateEngine(templateEngine());
         resolver.setCharacterEncoding("UTF-8");
+//        resolver.setViewClass(ThymeleafTilesView.class);
+//        resolver.setOrder(2);
+//        resolver.setCharacterEncoding("UTF-8");
+//        String[] views = {"*.html","*.xhtml"};
+//        resolver.setViewNames(views);
 //        String[] views = {"*.html", "*.xhtml", "templates/*","/*"};
 //        String[] views = {"*.html", "*.xhtml", "templates/*","/**"};
 //        resolver.setViewNames(views);
@@ -222,7 +221,7 @@ public class ThymeleafConfiguration {
 //        String[] excludedviews = {"jsp/*"};
 //        resolver.setExcludedViewNames(excludedviews);
         resolver.setOrder(2);
-        String[] viewNames = resolver.getViewNames();
+//        String[] viewNames = resolver.getViewNames();
 //        if(viewNames!=null) {
 //            for (String s : viewNames) {
 //                log.info("##thymeleafViewResolver.views:{}", s);
