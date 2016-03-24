@@ -2,8 +2,11 @@ package net.liuxuan.SprKi.repository.labthink;
 
 import net.liuxuan.SprKi.entity.CMSContentTags;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -17,4 +20,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * 2016/3/16  |    Moses       |     Created
  */
 public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, JpaSpecificationExecutor<FAQContent> {
+
+    List<FAQContent> findTop100ByDisabled(Boolean disabled);
 }

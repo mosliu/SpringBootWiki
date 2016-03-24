@@ -58,7 +58,7 @@ public class UEditorController {
         JSONObject jsonConfig = new JSONObject(back);
 //        Gson g = new Gson();
 //        back = StringEscapeUtils.unescapeJava(back);
-        log.info("===Action is {} , Return message is:{}", action, StringEscapeUtils.unescapeJava(back));
+//        log.trace("===Action is {} , Return message is:{}", action, StringEscapeUtils.unescapeJava(back));
 //        log.info("===back message is:{}", back);
 //        return jsonConfig.toString();
         try {

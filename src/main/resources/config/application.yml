@@ -56,12 +56,13 @@ spring:
     test-on-borrow: true
     validation-query: SELECT 1;
     test-while-idle: true
+    type: com.alibaba.druid.pool.DruidDataSource
 
-  data:
-    solr:
-      host: http://127.0.0.1:8983/solr
-      repositories:
-        enabled: true
+#  data:
+#    solr:
+#      host: http://127.0.0.1:8983/solr
+#      repositories:
+#        enabled: true
 
 
   jpa:
@@ -73,10 +74,14 @@ spring:
       # ddl-auto: create
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
-      hibernate.show_sql: false
+      hibernate.show_sql: true
       hibernate.format_sql: true
-      hibernate.dialect : org.hibernate.dialect.MySQL5Dialect
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate.max_fetch_depth: 3
       hibernate.enable_lazy_load_no_trans: true
+      hibernate.jdbc.fetch_size: 50
+
+
 
 
 
@@ -104,3 +109,13 @@ SprKi:
     savepathchild: /uploaded/
   editor:
     acl: ROLE_USER
+
+#JMX
+#
+#management:
+#
+#  port: 8081
+#  address: 127.0.0.1
+#  security:
+#    enabled: false
+#  context-path: /manage

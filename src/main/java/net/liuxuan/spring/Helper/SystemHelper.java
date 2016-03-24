@@ -2,8 +2,11 @@ package net.liuxuan.spring.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +17,8 @@ import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
  * 系统帮助工具类
@@ -23,7 +28,6 @@ public final class SystemHelper {
     private SystemHelper() {
         throw new Error("工具类不能实例化！");
     }
-
 
 
 
@@ -171,9 +175,10 @@ public final class SystemHelper {
         return authorities;
     }
 
-    public static WebApplicationContext getContext() {
-
-        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
+    public static WebApplicationContext getWebAppContext(HttpServletRequest request) {
+        WebApplicationContext wac = RequestContextUtils.findWebApplicationContext(request);
+//        WebApplicationContextUtils.
+//        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
 //        wac.get
         return wac;
     }

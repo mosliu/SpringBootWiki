@@ -5,8 +5,14 @@
 
 package net.liuxuan.SprKi.controller;
 
+import com.baidu.ueditor.ActionEnter;
+import com.google.gson.Gson;
+import net.liuxuan.spring.Helper.SystemHelper;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -14,14 +20,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -105,7 +113,17 @@ public class IndexController {
 //    @PreAuthorize("#username == principal.username and hasRole('ROLE_USER')")
 //    public void changePassword(String username, String password);
 
-
+//    @RequestMapping(value="json")
+//    public ModelAndView json(ModelAndView m,HttpServletRequest request) {
+//        MappingJackson2JsonView jsonView = SystemHelper.getWebAppContext(request).getBean(MappingJackson2JsonView.class);
+//        m.setView(jsonView);
+//        m.getModel().put("name", "javacoder.cn");
+////        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        m.getModel().put("list", new ArrayList<String>());
+////        model.put("principal", principal);
+//        return m;
+//    }
+//
 
 //    protected Authentication getAuthentication() {
 //        return SecurityContextHolder.getContext().getAuthentication();

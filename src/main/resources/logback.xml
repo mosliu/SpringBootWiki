@@ -104,8 +104,8 @@
     <logger name="com.github.dandelion" level="INFO"/>
 
 
-    <logger name="javax.management.mbeanserver" level="INFO"/>
-    <logger name="javax.management.misc" level="INFO"/>
+    <logger name="javax.management" level="INFO"/>
+    <logger name="sun.rmi" level="INFO"/>
 
     <!--URLinfo    set to Debug if you want to show-->
     <logger name="org.apache.commons.beanutils" level="INFO"/>
@@ -147,23 +147,15 @@
     <logger name="org.springframework.aop.framework.JdkDynamicAopProxy" level="INFO"/>
     <logger name="org.springframework.aop.framework.autoproxy.BeanFactoryAdvisorRetrievalHelper" level="INFO"/>
 
-    <!--print AUTO-CONFIGURATION REPORT-->
-    <logger name="org.springframework.boot.context.config.ConfigFileApplicationListener" level="INFO"/>
-    <logger name="org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext"
-            level="INFO"/>
-    <logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory" level="INFO"/>
-    <!--Mapping filter   set to INFO if you want to show-->
-    <logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="INFO"/>
-    <!--Mapping servlet   set to INFO if you want to show-->
-    <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
-    <!--Added existing Filter initializer bean 'hiddenFilterRegistrationBean'; order=2147483647, resource=class path resource [net/liuxuan/spring/mvc/GlobalWebConfiguration.class]-->
-    <logger name="org.springframework.boot.context.embedded.ServletContextInitializerBeans" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedRequestContextFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedHttpPutFormContentFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedCharacterEncodingFilter" level="INFO"/>
+
+    <logger name="org.springframework.boot.actuate.autoconfigure" level="INFO"/>
+    <logger name="org.springframework.boot.actuate.endpoint.mvc" level="INFO"/>
+    <logger name="org.springframework.boot.actuate.condition" level="INFO"/>
+    <logger name="org.springframework.boot.actuate.trace" level="INFO"/>
+
+
     <logger name="org.springframework.boot.autoconfigure.logging.AutoConfigurationReportLoggingInitializer"
-            level="INFO"/>
+    level="INFO"/>
     <logger name="org.springframework.boot.autoconfigure.MessageSourceAutoConfiguration" level="INFO"/>
     <logger name="org.springframework.boot.autoconfigure.AutoConfigurationPackages" level="DEBUG"/>
     <logger name="org.springframework.boot.autoconfigure.condition.OnClassCondition" level="INFO"/>
@@ -185,6 +177,21 @@
     <logger name="org.springframework.boot.devtools.livereload.LiveReloadServer" level="INFO"/>
     <logger name="org.springframework.boot.bind.PropertiesConfigurationFactory" level="INFO"/>
 
+    <!--print AUTO-CONFIGURATION REPORT-->
+    <logger name="org.springframework.boot.context.config.ConfigFileApplicationListener" level="INFO"/>
+    <logger name="org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext"
+            level="INFO"/>
+    <logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory" level="INFO"/>
+    <!--Mapping filter   set to INFO if you want to show-->
+    <logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="WARN"/>
+    <!--Mapping servlet   set to INFO if you want to show-->
+    <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
+    <!--Added existing Filter initializer bean 'hiddenFilterRegistrationBean'; order=2147483647, resource=class path resource [net/liuxuan/spring/mvc/GlobalWebConfiguration.class]-->
+    <logger name="org.springframework.boot.context.embedded.ServletContextInitializerBeans" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedRequestContextFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedHttpPutFormContentFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter" level="INFO"/>
+    <logger name="org.springframework.boot.context.web.OrderedCharacterEncodingFilter" level="INFO"/>
 
     <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
     <logger name="org.springframework.beans.factory.support.DisposableBeanAdapter" level="INFO"/>
@@ -214,11 +221,13 @@
     <logger name="org.springframework.context.event.EventListenerMethodProcessor" level="INFO"/>
     <logger name="org.springframework.context.event.ApplicationListenerMethodAdapter" level="INFO"/>
     <logger name="org.springframework.context.support.DefaultLifecycleProcessor" level="INFO"/>
+    <logger name="org.springframework.context.support.PostProcessorRegistrationDelegate" level="WARN"/>
 
     <logger name="org.springframework.data.repository.core.support.TransactionalRepositoryProxyPostProcessor" level="INFO"/>
     <logger name="org.springframework.data.repository.config.RepositoryComponentProvider" level="INFO"/>
     <logger name="org.springframework.data.repository.config.RepositoryConfigurationDelegate" level="INFO"/>
     <logger name="org.springframework.data.jpa.repository.query.JpaQueryFactory" level="INFO"/>
+    <logger name="org.springframework.data.jpa.repository.query.NamedQuery" level="INFO"/>
 
     <logger name="org.springframework.jdbc.datasource.DataSourceUtils" level="INFO"/>
     <!--Setting SQL statement parameter value: column index 1, parameter value [user], value class [java.lang.String], SQL type unknown-->
@@ -235,6 +244,8 @@
     <logger name="org.springframework.orm.jpa.ExtendedEntityManagerCreator" level="INFO"/>
     <logger name="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" level="INFO"/>
     <logger name="org.springframework.orm.hibernate4.HibernateTransactionManager" level="INFO"/>
+
+    <logger name="org.springframework.scheduling.annotation.ScheduledAnnotationBeanPostProcessor" level="INFO"/>
 
     <!--如PreAuthorize(value=hasRole('ROLE_USER'))-->
     <logger name="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource" level="INFO"/>
@@ -257,10 +268,8 @@
     <logger name="org.springframework.security.web.context.SecurityContextPersistenceFilter" level="INFO"/>
     <logger name="org.springframework.security.web.context.HttpSessionSecurityContextRepository" level="INFO"/>
     <logger name="org.springframework.security.web.FilterChainProxy" level="INFO"/>
-    <logger name="org.springframework.security.web.util.matcher.AntPathRequestMatcher" level="INFO"/>
-    <logger name="org.springframework.security.web.util.matcher.AndRequestMatcher" level="INFO"/>
-    <logger name="org.springframework.security.web.util.matcher.MediaTypeRequestMatcher" level="INFO"/>
-    <logger name="org.springframework.security.web.util.matcher.NegatedRequestMatcher" level="INFO"/>
+    <logger name="org.springframework.security.web.DefaultSecurityFilterChain" level="INFO"/>
+    <logger name="org.springframework.security.web.util.matcher" level="INFO"/>
     <logger name="org.springframework.security.web.savedrequest.HttpSessionRequestCache" level="INFO"/>
     <logger name="org.springframework.security.web.savedrequest.DefaultSavedRequest" level="INFO"/>
     <logger name="org.springframework.security.web.DefaultRedirectStrategy" level="INFO"/>
@@ -279,6 +288,7 @@
     <logger name="org.springframework.web.context.ContextLoader" level="INFO"/>
     <logger name="org.springframework.web.filter.DelegatingFilterProxy" level="INFO"/>
     <logger name="org.springframework.web.method.support.HandlerMethodArgumentResolverComposite" level="INFO"/>
+    <logger name="org.springframework.web.method.support.InvocableHandlerMethod" level="INFO"/>
     <logger name="org.springframework.web.servlet.DispatcherServlet" level="INFO"/>
     <!--Display like Matching patterns for request [/css/bootstrap.css] are [/**]-->
     <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
@@ -294,7 +304,6 @@
     <logger name="org.springframework.web.servlet.resource.ResourceHttpRequestHandler" level="INFO"/>
     <logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="INFO"/>
     <logger name="org.springframework.web.servlet.view.InternalResourceViewResolver" level="INFO"/>
-
 
 
 

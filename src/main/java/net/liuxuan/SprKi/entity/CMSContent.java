@@ -115,7 +115,7 @@ public class CMSContent {
      * 浏览总数
      */
     @Column(length = 8)
-    protected Integer clicks=0; // 浏览总数
+    protected Integer clicks=1; // 浏览总数
     /**
      * 评论总数
      */
@@ -164,31 +164,34 @@ public class CMSContent {
     /**
      * Publish time,publish author
      */
-    @PrePersist
-    void PrePersist() {
-        //Publish time.
-        this.publishDate = this.lastUpdateDate = new Date();
-
+//    @PrePersist
+//    void PrePersist() {
+//        //Publish time.
+////        System.out.println("!!!!!!!!!!!!!!!!!PrePersist");
+//        this.publishDate = this.lastUpdateDate = new Date();
 //
-//        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
-//                .getAuthentication().getPrincipal();
-//        this.author = this.lastUpdateUser = ui.getUsers();
-
+////
+////        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
+////                .getAuthentication().getPrincipal();
+////        this.author = this.lastUpdateUser = ui.getUsers();
 //
-//        Assert.notNull(null);
-//        this.author = this.lastUpdateUser = new Users();
-    }
+////
+////        Assert.notNull(null);
+////        this.author = this.lastUpdateUser = new Users();
+//
+//    }
 
     /**
      * Last update time.
      */
-    @PreUpdate
-    void PreUpdate() {
-        this.lastUpdateDate = new Date();
-//        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
-//                .getAuthentication().getPrincipal();
-//        this.lastUpdateUser = ui.getUsers();
-    }
+//    @PreUpdate
+//    void PreUpdate() {
+////        System.out.println("!!!!!!!!!!!!!!!!!PreUpdate");
+//        this.lastUpdateDate = new Date();
+////        UserInfo ui = (UserInfo) SecurityContextHolder.getContext()
+////                .getAuthentication().getPrincipal();
+////        this.lastUpdateUser = ui.getUsers();
+//    }
 
 
 

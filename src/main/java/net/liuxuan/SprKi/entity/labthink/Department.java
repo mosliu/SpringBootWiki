@@ -25,7 +25,6 @@ public class Department extends Base{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
     private Long id;
-
     @Column(nullable = false,length = 80)
     String departmentName;
 

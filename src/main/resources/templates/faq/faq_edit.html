@@ -95,8 +95,8 @@
                         <div class="col-md-6 col-sm-6">
                             <label>提问时间 *</label>
                             <input type="text" th:field="*{questionDate}"
-                                   class="form-control datepicker required" data-format="yyyy-mm-dd" data-lang="en"
-                                   data-RTL="false"/>
+                                   class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
+                                   data-RTL="false" readonly="true"/>
                         </div>
                     </div>
                 </div>
@@ -127,7 +127,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <button type="submit" onClick="return doSubmit1();" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
-                        SEND APPLICATION
+                    <!--<button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">-->
+                        提交内容
                         <span class="block font-lato">We'll get back to you within 48 hours</span>
                     </button>
                 </div>

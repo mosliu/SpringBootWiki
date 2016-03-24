@@ -31,6 +31,7 @@ import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -220,7 +221,7 @@ public class ThymeleafConfiguration {
         //默认是null
 //        String[] excludedviews = {"jsp/*"};
 //        resolver.setExcludedViewNames(excludedviews);
-        resolver.setOrder(2);
+        resolver.setOrder(20);
 //        String[] viewNames = resolver.getViewNames();
 //        if(viewNames!=null) {
 //            for (String s : viewNames) {
@@ -292,6 +293,14 @@ public class ThymeleafConfiguration {
         return result;
     }
 
+//
+//    @Bean(name = {"jsonView"})
+//    public MappingJackson2JsonView jsonView(){
+////        log.debug("======jasonView registered");
+//        return new MappingJackson2JsonView();
+//    }
+
+    /*******************Dialect 注册**********************/
     @Bean
     @ConditionalOnMissingBean
     public PagesDialect pagesDialect() {

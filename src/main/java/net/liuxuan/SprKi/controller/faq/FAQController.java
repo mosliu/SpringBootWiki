@@ -19,10 +19,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.annotation.Resource;
@@ -85,6 +82,43 @@ public class FAQController {
         return "faq/faq_edit";
     }
 
+    @RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
+        FAQContent faq = faqContentService.findById(id);
+
+
+        log.trace("faq to show publish_date is:{}",faq.getPublishDate());
+        log.trace("faq to show lastUpdate_date is:{}",faq.getLastUpdateDate());
+
+        model.put("faq", faq);
+//        devicesRepository.findAll();
+        List<Devices> devicesAll = devicesRepository.findAll();
+//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
+//        model.put("devicesAll",devicesAll);
+//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+        return "faq/faq_edit";
+    }
+
+    @RequestMapping(value = "/faq/delete/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String deleteFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
+//        FAQContent faq = faqContentService.findById(id);
+        faqContentService.deleteFAQContentById(id);
+        return "redirect:/faqlist";
+    }
+
+
+    @RequestMapping(value = "/faqlist")
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getFAQList(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+        List<FAQContent> allFAQContents = faqContentService.findAllFAQContents();
+        model.put("allfaqlist",allFAQContents);
+        return "faq/faq_list";
+    }
+
 
     @RequestMapping(value = "/faqpost", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
@@ -98,7 +132,13 @@ public class FAQController {
             }
         }
 
+        log.trace("faq to save_pre publish_date is:{}",faq.getPublishDate());
+        log.trace("faq to save_pre lastUpdate_date is:{}",faq.getLastUpdateDate());
+
         faqContentService.saveFAQContent(faq);
+
+        log.trace("faq to save_after publish_date is:{}",faq.getPublishDate());
+        log.trace("faq to save_after lastUpdate_date is:{}",faq.getLastUpdateDate());
 
         faq.setDescription("cccccc");
         model.put("faq", faq);
@@ -106,6 +146,8 @@ public class FAQController {
         return "faq/faq_edit";
 
     }
+
+
 
 
     @ModelAttribute("Devices_list")
@@ -120,7 +162,6 @@ public class FAQController {
     public List<CMSCategory> Categorylist() {
         return cmsCategoryRepository.findAll();
     }
-
 
 //    @Autowired
 //    CMSCategoryEditor cmsCategoryEditor;

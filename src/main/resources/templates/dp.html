@@ -3,22 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base">
 
 <head>
-    <!--<link href="/ui/smarty/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
-    <!--<script type="text/javascript" src="/ui/datatables/jQuery-2.2.0/jquery-2.2.0.min.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="/ui/datatables/datatables-1.10.11/css/datatables.bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/ui/datatables/Buttons-1.1.2/css/buttons.bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/ui/datatables/ColReorder-1.3.1/css/colReorder.bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/ui/datatables/FixedHeader-3.1.1/css/fixedHeader.bootstrap.min.css"/>
-    <script type="text/javascript" src="/ui/datatables/pdfmake-0.1.18/build/pdfmake.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/pdfmake-0.1.18/build/vfs_fonts.js"></script>
-    <script type="text/javascript" src="/ui/datatables/datatables-1.10.11/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" src="/ui/datatables/datatables-1.10.11/js/datatables.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/datatables.buttons.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.bootstrap.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.colVis.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.html5.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/ColReorder-1.3.1/js/datatables.colReorder.min.js"></script>
-    <script type="text/javascript" src="/ui/datatables/FixedHeader-3.1.1/js/datatables.fixedHeader.min.js"></script>
 </head>
 <body class="smoothscroll enable-animation">
 
@@ -36,7 +20,7 @@
         <div class="row-fluid">
             <div class="span12">
 
-                <table id="myTableId" class="display">
+                <table id="myTableId" class="table table-striped table-bordered table-hover" >
                     <thead>
                     <tr>
                         <th>id</th>
@@ -67,12 +51,62 @@
         </div>
     </div>
 
-
+    <!-- CSS DATATABLES -->
+    <link href="/ui/smarty/css/layout-datatables.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/ui/smarty/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/ui/smarty/plugins/datatables/js/dataTables.tableTools.min.js"></script>
+    <script type="text/javascript" src="/ui/smarty/plugins/datatables/js/dataTables.colReorder.min.js"></script>
+    <script type="text/javascript" src="/ui/smarty/plugins/datatables/js/dataTables.scroller.min.js"></script>
+    <script type="text/javascript" src="/ui/smarty/plugins/datatables/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="/ui/smarty/plugins/select2/js/select2.full.min.js"></script>
     <script th:inline="javascript">
         /*<![CDATA[*/
-        $(document).ready(function () {
-//            alert("haha");
-            $('#myTableId').dataTable({
+
+        function initTable2() {
+            var table = jQuery('#myTableId');
+
+            $.extend(true, $.fn.DataTable.TableTools.classes, {
+                "container": "btn-group tabletools-btn-group pull-right",
+                "buttons": {
+                    "normal": "btn btn-sm btn-default",
+                    "disabled": "btn btn-sm btn-default disabled"
+                }
+            });
+
+            var oTable = table.dataTable({
+                "order": [
+                    [0, 'asc']
+                ],
+                "lengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+
+                // set the initial value
+//                "pageLength": 10,
+                "dom": "<'row' <'col-md-12'T>><'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r><'table-scrollable't><'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>", // horizobtal scrollable datatable
+
+                "tableTools": {
+                    "sSwfPath": "/ui/smarty/plugins/datatables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+                    "aButtons": [{
+                        "sExtends": "pdf",
+                        "sButtonText": "PDF"
+                    }, {
+                        "sExtends": "csv",
+                        "sButtonText": "CSV"
+                    }, {
+                        "sExtends": "xls",
+                        "sButtonText": "Excel"
+                    }, {
+                        "sExtends": "print",
+                        "sButtonText": "Print",
+                        "sInfo": 'Please press "CTRL+P" to print or "ESC" to quit',
+                        "sMessage": "Generated by DataTables"
+                    }, {
+                        "sExtends": "copy",
+                        "sButtonText": "Copy"
+                    }]
+                },
                 "processing": true,
                 "serverSide": true,
                 "searchDelay": 2000,
@@ -102,17 +136,27 @@
                         }
                     }
                 ]
+
             });
-        });
+
+            var tableWrapper = jQuery('#myTableId_wrapper'); // datatable creates the table wrapper by adding with id {your_table_jd}_wrapper
+            tableWrapper.find('#myTableId_length select').select2(); // initialize select2 dropdown
+        }
+
+
+        // Table Init
+        initTable2();
+
+
         // Call datatables, and return the API to the variable for use in our code
         // Binds datatables to all elements with a class of datatable
-        var dtable = $(".dataTable").dataTable().api();
+        var dtable = $("#dataTable").dataTable().api();
 
-        $(".dataTables_filter input")
+        $("#myTableId_filter input")
                 .unbind('keypress keyup change') // Unbind previous default bindings
                 .bind('keypress keyup change', function (e) { // Bind our desired behavior
                     // If the length is 3 or more characters, or the user pressed ENTER, search
-                    if (this.val().length >= 5 || e.keyCode == 13) {
+                    if (this.val().length >= 3 || e.keyCode == 13) {
                         // Call the API search function
                         dtable.search(this.value).draw();
                     }

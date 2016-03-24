@@ -100,7 +100,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(86400);
 //                .rememberMe().rememberMeParameter("_spring_security_remember_me").userDetailsService(securityUserDetailsService).and()
         http.requestCache();
-//        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
         http.userDetailsService(securityUserDetailsService);
         http.csrf().disable();
         //TODO <form action="./upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">

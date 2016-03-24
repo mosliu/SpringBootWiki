@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base">
+
+<head>
+    <!--<link href="/ui/smarty/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>-->
+    <!--<script type="text/javascript" src="/ui/datatables/jQuery-2.2.0/jquery-2.2.0.min.js"></script>-->
+    <link rel="stylesheet" type="text/css" href="/ui/datatables/datatables-1.10.11/css/datatables.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/ui/datatables/Buttons-1.1.2/css/buttons.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/ui/datatables/ColReorder-1.3.1/css/colReorder.bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/ui/datatables/FixedHeader-3.1.1/css/fixedHeader.bootstrap.min.css"/>
+    <script type="text/javascript" src="/ui/datatables/pdfmake-0.1.18/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/pdfmake-0.1.18/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="/ui/datatables/datatables-1.10.11/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="/ui/datatables/datatables-1.10.11/js/datatables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/datatables.buttons.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/Buttons-1.1.2/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/ColReorder-1.3.1/js/datatables.colReorder.min.js"></script>
+    <script type="text/javascript" src="/ui/datatables/FixedHeader-3.1.1/js/datatables.fixedHeader.min.js"></script>
+</head>
+<body class="smoothscroll enable-animation">
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="row-fluid row-intro">
+            <div class="span12">
+                <h3>Jquery Table Usage Show</h3>
+                <p>The following table uses the default configuration.</p>
+                <p>Open your browser debugger and take a look at the generated parameters!</p>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+
+                <table id="myTableId" class="display">
+                    <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>lastName</th>
+                        <th>firstName</th>
+                        <th>City</th>
+                        <th>Mail</th>
+                        <th>Salary</th>
+                        <th>Birthdate</th>
+                        <th>Company</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="person : ${persons}">
+                        <td th:text="${person?.id}">1</td>
+                        <td th:text="${person?.lastName}">Doe</td>
+                        <td th:text="${person?.firstName}">John</td>
+                        <td th:text="${person?.address?.town?.name}">Nobody knows!</td>
+                        <td th:text="${person?.mail}">john@doe.com</td>
+                        <td th:text="${person?.salary}">&euro;1000</td>
+                        <td th:text="${#dates.format(person?.birthDate, 'dd-MM-yyyy')}">23-10-1980</td>
+                        <td th:text="${person?.company?.name}">Amazon</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(document).ready(function () {
+//            alert("haha");
+            $('#myTableId').dataTable({
+                "processing": true,
+                "serverSide": true,
+                "searchDelay": 2000,
+                "ajax": {
+                    "url": "/dp4A",
+//                    "dataSrc": function ( json ) {
+//                        for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
+////                            json.data[i][1] = '<a href="/message/'+json.data[i][1]+'>View message</a>';
+//                            json.data[i][1] = 'CCCCCCCCCCCCC'+json.data[i][1]+'';
+//                        }
+//                        return json.data;
+//                    }
+
+                },
+                "columns": [
+                    { "data": "id" },
+                    { "data": "lastName" },
+                    { "data": "firstName" },
+                    { "data": "address.town.name" },
+                    { "data": "mail" },
+                    { "data": "salary" },
+                    { "data": "birthDate" },
+                    {
+                        "data": "company.name",
+                        "render": function ( data, type, full, meta ) {
+                            return '<a href="'+data+'">Download</a>';
+                        }
+                    }
+                ]
+            });
+        });
+        // Call datatables, and return the API to the variable for use in our code
+        // Binds datatables to all elements with a class of datatable
+        var dtable = $(".dataTable").dataTable().api();
+
+        $(".dataTables_filter input")
+                .unbind('keypress keyup change') // Unbind previous default bindings
+                .bind('keypress keyup change', function (e) { // Bind our desired behavior
+                    // If the length is 3 or more characters, or the user pressed ENTER, search
+                    if (this.val().length >= 5 || e.keyCode == 13) {
+                        // Call the API search function
+                        dtable.search(this.value).draw();
+                    }
+                    // Ensure we clear the search if they backspace far enough
+                    if (this.val() == "") {
+                        dtable.search("").draw();
+                    }
+                    return;
+                });
+        /*]]>*/
+    </script>
+
+</div>
+
+
+
+</body>
+</html>
