@@ -1,7 +1,10 @@
 package net.liuxuan.SprKi.repository.security;
 
 import net.liuxuan.SprKi.entity.security.Authorities;
+import net.liuxuan.SprKi.entity.security.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -15,4 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 2016/3/22  |    Moses       |     Created <br/>
  */
 public interface AuthoritiesRepository extends JpaRepository<Authorities, Long> {
+    List<Authorities> findByAuthority(String authority);
+    List<Authorities> findByUsername(Users username);
+    Authorities findByUsernameAndAuthority(Users username, String authority);
 }

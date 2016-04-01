@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.controller.faq;
 
 import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
+import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
@@ -113,9 +114,19 @@ public class FAQController {
 
     @RequestMapping(value = "/faqlist")
 //    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQList(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
-        List<FAQContent> allFAQContents = faqContentService.findAllFAQContents();
+    public String getFAQList(FAQSearchDTO dto, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+        log.debug("===getFAQList logged ,the DTO value is : {}",dto);
+//        log.debug("===getFAQList logged ,the isnull is : {}",dto.isAllNull());
+        boolean dtoAllNull = dto.isAllNull();
+        model.put("dtoNull", dtoAllNull);
+        if(dtoAllNull){
+            //参数全为空
+        }
+
+        List<FAQContent> allFAQContents = faqContentService.findAllFAQContentsByDto(dto);
+        log.info("list size is {}",allFAQContents.size());
         model.put("allfaqlist",allFAQContents);
+        model.put("dto",dto);
         return "faq/faq_list";
     }
 
@@ -132,13 +143,9 @@ public class FAQController {
             }
         }
 
-        log.trace("faq to save_pre publish_date is:{}",faq.getPublishDate());
-        log.trace("faq to save_pre lastUpdate_date is:{}",faq.getLastUpdateDate());
 
         faqContentService.saveFAQContent(faq);
 
-        log.trace("faq to save_after publish_date is:{}",faq.getPublishDate());
-        log.trace("faq to save_after lastUpdate_date is:{}",faq.getLastUpdateDate());
 
         faq.setDescription("cccccc");
         model.put("faq", faq);
@@ -180,7 +187,7 @@ public class FAQController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        dateFormat.setLenient(false);
         dateFormat.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 //        binder.registerCustomEditor(CMSCategory.class,cmsCategoryEditor());
 //        binder.registerCustomEditor(Department.class,new DepartmentEditor());
     }

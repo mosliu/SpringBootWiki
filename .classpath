@@ -27,7 +27,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-cli:commons-cli:1.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-configuration:commons-configuration:1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-lang:commons-lang:2.6"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.servlet:javax.servlet-api:3.1.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: joda-time:joda-time:2.8.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: log4j:log4j:1.2.17"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.antlr:antlr4-runtime:4.5.1-1"/>
@@ -58,6 +57,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.ow2.asm:asm-commons:5.0.4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.restlet.jee:org.restlet:2.3.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.restlet.jee:org.restlet.ext.servlet:2.3.0"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-web:1.3.3.RELEASE"/>
@@ -144,34 +145,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.unbescape:unbescape:1.1.0.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.attoparser:attoparser:1.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.slf4j:slf4j-api:1.7.16"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sourceforge.pagesdialect:pagesdialect-core:2.1.6"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sourceforge.dynamicreports:dynamicreports-core:2.5.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sf.jasperreports:jasperreports:4.5.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-beanutils:commons-beanutils:1.9.2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-collections:commons-collections:3.2.2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-digester:commons-digester:2.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-logging:commons-logging:1.1.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.lowagie:itext:2.1.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: bouncycastle:bcprov-jdk14:138"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: jfree:jcommon:1.0.15"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: jfree:jfreechart:1.0.12"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: eclipse:jdtcore:3.1.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.codehaus.castor:castor:1.2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.poi:poi-ooxml:3.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.poi:poi:3.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.poi:poi-ooxml-schemas:3.7"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.xmlbeans:xmlbeans:2.3.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: stax:stax-api:1.0.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.geronimo.specs:geronimo-stax-api_1.0_spec:1.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.codehaus.jackson:jackson-core-lgpl:1.7.4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.codehaus.jackson:jackson-mapper-lgpl:1.7.4"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.commons:commons-lang3:3.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: com.sun.xml.bind:jaxb-impl:2.2.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.xml.bind:jaxb-api:2.2.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.xml.stream:stax-api:1.0-2"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.activation:activation:1.1"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: net.sf.barcode4j:barcode4j:2.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: avalon-framework:avalon-framework-impl:4.2.0"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apdplat:word:1.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: ch.qos.logback:logback-classic:1.1.5"/>
@@ -193,6 +166,9 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-fileupload:commons-fileupload:1.3.1"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-io:commons-io:2.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-codec:commons-codec:1.10"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-beanutils:commons-beanutils:1.9.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: commons-collections:commons-collections:3.2.2"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apache.commons:commons-lang3:3.4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.freemarker:freemarker:2.3.23"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: javax.servlet:jstl:1.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.projectlombok:lombok:1.16.8"/>

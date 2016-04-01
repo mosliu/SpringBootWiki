@@ -4,6 +4,8 @@ import net.liuxuan.utils.freemarker.FreeMarkerUtil;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
  * ***************************************************************************
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/15 |    Moses       |     Created
  */
+// 注解“@RestController”和”@RequestMapping”由 spring MVC 提供，用来创建 REST 服务。
+// 这两个注解和 spring boot 本身并没有关系。
 @RestController
 public class IndexRestController {
     @RequestMapping(value = "/freemarker")
@@ -27,6 +31,6 @@ public class IndexRestController {
             e.printStackTrace();
             return "error";
         }
-        return "down";
+        return "Freemarker Make File Done At"+new Date();
     }
 }

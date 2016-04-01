@@ -3,10 +3,9 @@ package net.liuxuan.spring.mvc.views;
 //import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
 //import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
 import freemarker.template.TemplateException;
-import net.sourceforge.pagesdialect.PagesDialect;
+//import net.sourceforge.pagesdialect.PagesDialect;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
-import org.jfree.util.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,18 +128,18 @@ public class ThymeleafConfiguration {
 //        templateEngine.addDialect(new org.thymeleaf.spring4.dialect.SpringStandardDialect());
 //        templateEngine.addDialect(new nz.net.ultraq.thymeleaf.LayoutDialect());
         templateEngine.addDialect(new nz.net.ultraq.thymeleaf.LayoutDialect(new GroupingStrategy()));
-        templateEngine.addDialect(new net.sourceforge.pagesdialect.PagesDialect());
+//        templateEngine.addDialect(new net.sourceforge.pagesdialect.PagesDialect());
         templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;
     }
 
 //
-    @Bean
-    public BeanNameViewResolver beanViewResolver() {
-        BeanNameViewResolver resolver = new BeanNameViewResolver();
-        resolver.setOrder(10);
-        return resolver;
-    }
+//    @Bean
+//    public BeanNameViewResolver beanViewResolver() {
+//        BeanNameViewResolver resolver = new BeanNameViewResolver();
+//        resolver.setOrder(10);
+//        return resolver;
+//    }
 
 //    @Bean
 //    public MarshallingHttpMessageConverter marshallingMessageConverter() {
@@ -262,7 +261,7 @@ public class ThymeleafConfiguration {
         ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
         resolver.setContentNegotiationManager(manager);
         List<ViewResolver> viewResolvers = new ArrayList<ViewResolver>();
-        viewResolvers.add(beanViewResolver());
+//        viewResolvers.add(beanViewResolver());
         viewResolvers.add(thymeleafViewResolver());
         viewResolvers.add(internalResourceViewResolver());
         resolver.setViewResolvers(viewResolvers);
@@ -301,11 +300,11 @@ public class ThymeleafConfiguration {
 //    }
 
     /*******************Dialect 注册**********************/
-    @Bean
-    @ConditionalOnMissingBean
-    public PagesDialect pagesDialect() {
-        return new PagesDialect();
-    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    public PagesDialect pagesDialect() {
+//        return new PagesDialect();
+//    }
 //    @Bean
 //    @ConditionalOnMissingBean
 //    public DandelionDialect dandelionDialect() {

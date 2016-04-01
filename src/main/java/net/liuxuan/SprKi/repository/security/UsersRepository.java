@@ -4,6 +4,8 @@ import net.liuxuan.SprKi.entity.security.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
  * ***************************************************************************
@@ -23,5 +25,8 @@ public interface UsersRepository extends JpaRepository<Users, String> {
 
 //    @Query("select DISTINCT(u.username) from ActiveWebSocketUser u where u.username != ?#{principal?.username}")
 //    List<String> findAllActiveUsers();
+    List<Users> findByEnabled(boolean enable);
+
+
 
 }

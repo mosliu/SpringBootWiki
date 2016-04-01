@@ -1,5 +1,7 @@
 package net.liuxuan.SprKi.entity.security;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -17,14 +19,16 @@ import javax.persistence.*;
  * 2016/2/17 |    Moses       |     Created
  */
 @Entity  //实体类
-@Data
+//@Data
 @Table(name = "Sprki_Authorities")
 public class Authorities implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonIgnore
     // optional=true：可选，表示此对象可以没有，可以为null；false表示必须存在
+//    @JsonBackReference
     @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name="username")
     private Users username;
@@ -32,4 +36,28 @@ public class Authorities implements GrantedAuthority {
     @Column(length = 30,nullable = false)
     private String authority;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Users getUsername() {
+        return username;
+    }
+
+    public void setUsername(Users username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
 }

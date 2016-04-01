@@ -36,6 +36,7 @@ public class CMSCategory extends Base{
     private CMSCategory parentId;//父分类
     private String url;//地址
     private int pageSize;//每页数据
+
     @Column(name = "disabled", nullable = false)
     private boolean disabled=true;
 

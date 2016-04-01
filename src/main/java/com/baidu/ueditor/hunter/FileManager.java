@@ -13,7 +13,6 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.MultiState;
 import com.baidu.ueditor.define.State;
-import org.apache.xmlbeans.impl.store.Path;
 
 public class FileManager {
 

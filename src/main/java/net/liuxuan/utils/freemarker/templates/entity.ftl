@@ -4,7 +4,6 @@ package net.liuxuan.SprKi.entity${subpackage};
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.liuxuan.SprKi.entity.Base;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -21,7 +20,7 @@ import net.liuxuan.SprKi.entity.Base;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "${table_name}")
-public class ${model_name} extends Base{
+public class ${model_name} {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
@@ -33,8 +32,6 @@ public class ${model_name} extends Base{
     @Column(nullable = false,length = 80)
     String ${model_name_firstSmall}NameCN;
 
-    public ${model_name}(Long id) {
-        super(id);
-    }
-
+    @Column(name = "disabled", nullable = false)
+    boolean disabled=true;
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="ie ie8" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8"/>
+    <title> Smarty Admin</title>
+    <meta name="Author" content="LiuXuan "/>
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0"/>
+    <!--[if IE]>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+
+    <!-- WEB FONTS -->
+    <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800&amp;subset=latin,latin-ext,cyrillic,cyrillic-ext"
+          rel="stylesheet" type="text/css"/>-->
+    <link href="/ui/smarty/css/googlefont.css"
+          rel="stylesheet" type="text/css"/>
+
+    <!-- CORE CSS -->
+    <link href="/ui/smarty/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- THEME CSS -->
+    <link href="/ui/smarty/admin/css/essentials.css" rel="stylesheet" type="text/css"/>
+    <link href="/ui/smarty/admin/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="/ui/smarty/admin/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme"/>
+    <script type="text/javascript" src="/ui/smarty/admin/plugins/jquery/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+
+
+<!-- wrapper -->
+<div id="wrapper clearfix">
+
+    <aside th:replace="admin/layouts/base-header::aside"></aside>
+
+    <header id="header" th:replace="admin/layouts/base-header::header"></header>
+
+
+    <div layout:fragment="replaceContainer" class="container">Fake content</div>
+
+
+
+</div>
+<!-- /wrapper -->
+
+<!-- JAVASCRIPT FILES -->
+<script type="text/javascript">var plugin_path = '/ui/smarty/admin/plugins/';</script>
+
+<script type="text/javascript" src="/ui/smarty/admin/js/app.js"></script>
+<!-- PAGE LEVEL SCRIPT -->
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    /*]]>*/
+</script>
+
+<!-- STYLESWITCHER - REMOVE -->
+<!--<script async="true" type="text/javascript" src="/ui/smarty/plugins/styleswitcher/styleswitcher.js"></script>-->
+</body>
+</html>

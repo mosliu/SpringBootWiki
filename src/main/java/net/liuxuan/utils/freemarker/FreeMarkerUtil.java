@@ -4,6 +4,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import net.liuxuan.spring.constants.SystemConstants;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.Date;
@@ -23,6 +24,9 @@ import java.util.Map;
  */
 public class FreeMarkerUtil {
     private Configuration cfg;
+
+    String model_name = "UserDetailInfo";
+    String subpackage = ".user";//如果需要放到labthink下，则为".labthink"
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();
@@ -46,40 +50,54 @@ public class FreeMarkerUtil {
 
         Map root = new HashMap();
 
-        String subpackage = "";//如果需要放到labthink下，则为".labthink"
+
 
         root.put("author", "Moses");
         root.put("subpackage", subpackage);
         root.put("date", new Date());
-        String model_name = "ImageUrl";
+
         root.put("model_name", model_name);//模块名称
         char a = model_name.charAt(0);
         root.put("model_name_firstSmall", model_name.replaceFirst(a + "", Character.toLowerCase(a) + ""));//模块名称
-        root.put("table_name", "Sprki_Labthink_ImageUrl");//表名称
+        root.put("table_name", "Sprki_Labthink_"+model_name);//表名称
 
 
         String projectPath = "F:/SyncDisk/Dropbox/Workspaces/Maven/SpringBootTest/src/main/java/net/liuxuan/Sprki/";
 
-        String savePath = "/entity/";
+        String savePath = getPathString("/entity/");
         String fileName = model_name + ".java";
         Template template = cfg.getTemplate("entity.ftl");
         util.buildTemplate(root, projectPath, savePath, fileName, template);
 
         fileName = model_name + "Repository.java";
-        savePath = "/repository/";
+        savePath = getPathString("/repository/");
         template = cfg.getTemplate("repository.ftl");
         util.buildTemplate(root, projectPath, savePath, fileName, template);
-//
-//        fileName = model_name + "Service.java";
-//        savePath = "/service/";
-//        template = cfg.getTemplate("Service.ftl");
-//        util.buildTemplate(root, projectPath, savePath, fileName, template);
-//
-//        fileName = model_name + "ServiceImpl.java";
-//        savePath = "src//com//media//service//impl//";
-//        template = cfg.getTemplate("ServiceImpl.ftl");
-//        util.buildTemplate(root, projectPath, savePath, fileName, template);
 
+        fileName = model_name + "Service.java";
+        savePath = getPathString("/service/");
+        template = cfg.getTemplate("service.ftl");
+        util.buildTemplate(root, projectPath, savePath, fileName, template);
+//
+        fileName = model_name + "ServiceImpl.java";
+        savePath = getPathString("/service/");
+        template = cfg.getTemplate("serviceimpl.ftl");
+        util.buildTemplate(root, projectPath, savePath, fileName, template);
+
+    }
+
+    public String getPathString(String savePath) {
+        if(StringUtils.isNotBlank(subpackage)){
+            savePath = savePath+subpackage.substring(1);
+
+            if(savePath.endsWith("/")){
+
+            }else{
+                savePath = savePath+"/";
+            }
+        }
+
+        return savePath;
     }
 
     public void buildTemplate(Map root, String projectPath, String savePath,

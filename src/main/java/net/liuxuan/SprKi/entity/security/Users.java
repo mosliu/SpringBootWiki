@@ -6,7 +6,9 @@
 package net.liuxuan.SprKi.entity.security;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,7 +19,7 @@ import java.util.Set;
 /**
  * Created by Moses on 2016/2/3.
  */
-
+@ToString
 @Entity  //实体类
 @Table(name = "Sprki_User")
 public class Users {
@@ -33,7 +35,7 @@ public class Users {
 
     @NotNull
     @Column(nullable = false)
-    private boolean enabled;
+    private boolean enabled = true;
 
     @NotNull
     @Column(length = 30)
@@ -45,6 +47,7 @@ public class Users {
     private Date regdate;
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "username")
+//@JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "username")
     private Set<Authorities> auths = new HashSet<Authorities>();
 
@@ -109,12 +112,26 @@ public class Users {
     public void setRegdate(Date regdate) {
         this.regdate = regdate;
     }
-
+//    @JsonIgnore
     public Set<Authorities> getAuths() {
         return auths;
     }
-
+//    @JsonIgnore
     public void setAuths(Set<Authorities> auths) {
         this.auths = auths;
+    }
+
+    @PrePersist
+    void fillnull(){
+        if(regdate==null){
+            regdate = new Date();
+        }
+        if(usernameAlias==null){
+            usernameAlias= username;
+        }
+        if(password == null){
+            password = username;
+        }
+
     }
 }

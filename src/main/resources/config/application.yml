@@ -82,9 +82,6 @@ spring:
       hibernate.jdbc.fetch_size: 50
 
 
-
-
-
 # MyBatis 
 #mybatis:
 #  typeAliasesPackage: com.modou.**.domain

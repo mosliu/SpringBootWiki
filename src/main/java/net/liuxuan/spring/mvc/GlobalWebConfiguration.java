@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
@@ -40,7 +41,7 @@ import java.util.Locale;
  * 9.自定义SpringMVC的拦截器，但不破坏Spring Boot HibernateInterceptort的默认加载和封装
  * http://blog.csdn.net/ba5189tsl/article/details/46912471
  */
-@Controller
+@Configuration
 public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     //静态资源Handlers
     private static final String RESOURCES_LOCATION = "/static/";
@@ -127,9 +128,9 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //                .mediaType("xml", MediaType.APPLICATION_XML)
 //                .mediaType("json", MediaType.APPLICATION_JSON);
 //
-        configurer
-                .mediaType("json", MediaType.APPLICATION_JSON)
-                .mediaType("xml", MediaType.APPLICATION_XML);
+//        configurer
+//                .mediaType("json", MediaType.APPLICATION_JSON)
+//                .mediaType("xml", MediaType.APPLICATION_XML);
     }
 
     /**

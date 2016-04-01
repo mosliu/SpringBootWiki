@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<!--用户修改Div-->
+<div th:fragment="useredit">
+
+    <!-- header modal -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>
+    </div>
+    <form id="updateform" action="/admin/user_ajax?action=update" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${user}">
+        <!-- body modal -->
+        <div class="modal-body">
+            <div class="login-box">
+
+                <header><i class="fa fa-users"></i> 修改账户
+                    <small class="note bold">请谨慎操作</small>
+                </header>
+
+                <fieldset>
+
+                    <input type="hidden" th:field="*{users.username}"/>
+                    <input type="hidden" th:field="*{users.enabled}"/>
+                    <label>修改密码</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        <input type="password" th:field="*{users.password}" name="password"
+                               placeholder="Password"/>
+                        <b class="tooltip tooltip-bottom-right">修改密码</b>
+                    </label>
+                    <label>账户别名</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        <input type="text" th:field="*{users.usernameAlias}" name="usernameAlias"
+                               placeholder="账户别名"/>
+                        <b class="tooltip tooltip-bottom-right">账户别名</b>
+                    </label>
+                </fieldset>
+
+                <fieldset>
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <label>姓</label>
+                            <label class="input">
+                                <input type="text" th:field="*{lastName}" placeholder="Last name"/>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>名</label>
+                            <label class="input">
+                                <input type="text" th:field="*{firstName}" placeholder="First name"/>
+                            </label>
+                        </div>
+                    </div>
+                    <label>性别</label>
+                    <label class="select">
+
+                        <select th:field="*{gender}">
+                            <option value="0" selected="" disabled="">Gender</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Other</option>
+                        </select>
+                        <i></i>
+                    </label>
+                    <label>部门</label>
+                    <label class="select">
+                        <select th:field="*{department}" class="form-control pointer required">
+                            <option th:each="type : ${Department_list}"
+                                    th:value="${type.id}"
+                                    th:text="${'department:' + type.departmentName}">售后
+                            </option>
+                        </select>
+                    </label>
+                </fieldset>
+
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="alert('kk')">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+    </form>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var callback = function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+        $("#updateform").on("submit", function (e) {
+            alert($(this).serialize());
+//            e.preventDefault();
+            $.post(this.action, $(this).serialize(), callback);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
+
+
+</body>
+</html>

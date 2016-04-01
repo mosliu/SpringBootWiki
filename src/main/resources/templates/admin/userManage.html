@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/ui/smarty/admin/css/layout.css" rel="stylesheet" type="text/css"/>
+
+</head>
+<body><!--
+				MIDDLE
+			-->
+<section id="middle" th:fragment="middle">
+
+
+    <!-- page title -->
+    <header id="page-header">
+        <h1>用户管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">系统管理</a></li>
+            <li class="active">用户管理</li>
+        </ol>
+    </header>
+    <!-- /page title -->
+
+    <div id="panel-misc-portlet-r2" class="panel panel-default">
+
+        <div class="panel-heading">
+
+            <!-- tabs nav -->
+            <ul class="nav nav-tabs pull-left">
+                <li class="active"><!-- TAB 1 -->
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建用户 <span
+                            class="label label-danger">label</span></a>
+                </li>
+                <li class=""><!-- TAB 2 -->
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 用户列表 <span class="caret"></span></a>
+                </li>
+                <li class=""><!-- TAB 2 -->
+                    <a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>
+                </li>
+            </ul>
+            <!-- /tabs nav -->
+
+            &nbsp; <!-- needed if title missing . avoid using .clearfix -->
+
+            <!-- right options -->
+            <ul class="options pull-right list-inline">
+                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title=""
+                                data-placement="bottom" data-original-title="Colapse"></a></li>
+                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title=""
+                       data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
+            </ul>
+            <!-- /right options -->
+
+        </div>
+
+        <!-- panel content -->
+        <div class="panel-body" style="display: block;">
+
+            <!-- tabs content -->
+            <div class="tab-content transparent">
+
+                <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
+                    <div class="login-box">
+                        <form action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
+                              th:object="${user}">
+                            <header><i class="fa fa-users"></i> Create Account
+                                <small class="note bold">IT'S FREE</small>
+                            </header>
+
+                            <fieldset>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" th:field="*{users.username}" name="username"
+                                           placeholder="Username" minlength="4" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                </label>
+
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" th:field="*{users.password}" name="password"
+                                           placeholder="Password" minlength="4" required="true" class="form-control"/>
+                                    <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                                </label>
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="input">
+                                            <input type="text" th:field="*{firstName}" placeholder="First name"
+                                                   class="form-control"/>
+                                        </label>
+                                    </div>
+                                    <div class="col col-md-6">
+                                        <label class="input">
+                                            <input type="text" th:field="*{lastName}" placeholder="Last name"
+                                                   class="form-control"/>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <label class="select">
+                                    <select th:field="*{gender}" class="form-control">
+                                        <option value="0" selected="" disabled="">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                    <i></i>
+                                </label>
+
+                                <label class="select">
+                                    <select th:field="*{department}" class="form-control pointer required">
+                                        <option th:each="type : ${Department_list}"
+                                                th:value="${type.id}"
+                                                th:text="${'department:' + type.departmentName}">售后
+                                        </option>
+                                    </select>
+                                </label>
+                            </fieldset>
+
+                            <footer>
+                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
+                                    Create Account
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                    <p>tab1</p>
+                </div><!-- /TAB 1 CONTENT -->
+
+                <div id="ttab2l_nobg" class="tab-pane "><!-- TAB 2 CONTENT -->
+                    <table id="myTableId" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>用户名</th>
+                            <th>密码</th>
+                            <th>启用</th>
+                            <th>别名</th>
+                            <th>注册日期</th>
+                            <th>权限</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="u : ${users}">
+                            <td th:text="${u?.username}">Doe</td>
+                            <td th:text="${u?.password}">John</td>
+                            <td th:text="${u?.enabled}">John</td>
+                            <td th:text="${u?.usernameAlias}">John</td>
+                            <td th:text="${u?.regdate}">John</td>
+                            <td>
+                                <ul th:each="auth : ${u?.auths}">
+                                    <li th:text="${auth?.authority}"></li>
+                                </ul>
+                            </td>
+                            <td th:text="${u?.username}">Doe</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /TAB 2 CONTENT -->
+
+                <div id="ttab3l_nobg" class="tab-pane "><!-- TAB 2 CONTENT -->
+                    <p>tab2</p>
+                    <a class=" btn btn-primary" href="/admin/user?action=edit&amp;sid=user" data-target="#ajax"
+                       data-toggle="modal">Ajax Modal</a>
+                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Bootstrap Modal
+                    </button>
+                </div><!-- /TAB 3 CONTENT -->
+
+            </div>
+            <!-- /tabs content -->
+
+        </div>
+        <!-- /panel content -->
+        <div class="modal fade " tabindex="-1" id="ajax" role="basic" aria-hidden="true">
+            <div class="modal-dialog  modal-full">
+                <div class="modal-content">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <h4>Text in a modal</h4>
+                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+
+                        <h4>Popover in a modal</h4>
+                        <p>This <a href="#" data-toggle="popover" class="btn btn-default" title="A Title"
+                                   data-content="And here's some amazing content. It's very engaging. right?">button</a>
+                            should trigger a popover on click.</p>
+
+                        <h4>Tooltips in a modal</h4>
+                        <p><a href="#" data-toggle="tooltip" title="Tooltip">This link</a> and <a href="#"
+                                                                                                  data-toggle="tooltip"
+                                                                                                  title="Tooltip">that
+                            link</a> should have tooltips on hover.</p>
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        //必须重新初始化，否则不起作用
+        jQuery(window).ready(function () {
+            Init(true);
+            initTable2();
+            initCreate();
+
+            //不注册则不重新加载
+            $('.modal').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+//                $(this).empty();
+            })
+
+        });
+
+        function deleteUsers(btn, sid) {
+            console.log(btn);
+            console.log(sid);
+            var tourl = "/admin/user?action=delete&sid="+sid;
+            jQuery.ajax({
+                url:  tourl,
+                context: btn,
+                success: function (data) {
+                    alert(data);
+                    $(this).parents("tr").addClass("disable_done");
+                    var table = $('#myTableId').DataTable();
+                    table.row('.disable_done').remove().draw( false );
+
+                }
+            });
+        }
+
+        function initTable2() {
+
+            loadScript(plugin_path + "datatables/js/jquery.dataTables.min.js", function () {
+                loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function () {
+
+                    if (jQuery().dataTable) {
+
+                        var table = jQuery('#myTableId');
+                        table.dataTable({
+
+                            "columns": [
+                                {"data": "username"},
+                                {"orderable": true, "data": "password"},
+                                {"orderable": true, "data": "enabled"},
+                                {"orderable": true, "data": "usernameAlias"},
+                                {"orderable": true, "data": "regdate"},
+                                {"orderable": true, "data": "auth"},
+                                {
+                                    "orderable": true,
+                                    "data": "username",
+                                    "render": function (data, type, full, meta) {
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/user?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteUsers(this,\'' + data + '\')" href="#' + data + '"> 停用 </a> ';
+                                    }
+                                },
+                            ],
+                            "lengthMenu": [
+                                [5, 15, 20, -1],
+                                [5, 15, 20, "All"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 5,
+                            "pagingType": "bootstrap_full_number",
+                            "order": [
+                                [1, "asc"],
+                            ], // set first column as a default sort by asc
+                            language: {
+                                "sProcessing": "处理中...",
+                                "sLengthMenu": "显示 _MENU_ 项结果",
+                                "sZeroRecords": "没有匹配结果",
+                                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                                "sInfoPostFix": "",
+                                "sSearch": "在表格中搜索:",
+                                "sUrl": "",
+                                "sEmptyTable": "表中数据为空",
+                                "sLoadingRecords": "载入中...",
+                                "sInfoThousands": ",",
+                                "oPaginate": {
+                                    "sFirst": "首页",
+                                    "sPrevious": "上页",
+                                    "sNext": "下页",
+                                    "sLast": "末页"
+                                },
+                                "oAria": {
+                                    "sSortAscending": ": 以升序排列此列",
+                                    "sSortDescending": ": 以降序排列此列"
+                                }
+                            },
+                        });
+
+                        var tableWrapper = jQuery('#datatable_sample_wrapper');
+
+                        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+
+                    }
+
+                });
+            });
+
+
+        }
+
+        function initCreate() {
+            if (jQuery().validate) {
+
+
+                jQuery('form.validate-plugin').each(function () {
+
+                    var _t = jQuery(this),
+                            _Tposition = _t.attr('data-toastr-position') || "top-full-width";
+                    _Turl = _t.attr('data-toastr-url') || false;
+
+                    toastr.options = {
+                        "timeOut": "10000",
+                        "progressBar": true,
+                    }
+
+                    // Append 'is_ajax' hidden input field!
+                    _t.append('<input type="hidden" name="is_ajax" value="true" />');
+
+                    _t.validate({
+                        submitHandler: function (form) {
+
+
+                            jQuery(form).ajaxSubmit({
+
+                                target: jQuery(form).find('.validate-result').length > 0 ? jQuery(form).find('.validate-result') : '',
+
+                                error: function (data) {
+                                    _toastr("Sent Failed!", _Tposition, "error", false);
+                                },
+
+                                success: function (data, textStatus) {
+
+//                                var data = data.trim();
+                                    alert(textStatus);
+                                    if (data.status == "success") {
+                                        _toastr(data.msg, _Tposition, "success", _Turl);
+                                        // Clear the form
+                                        jQuery(form).find('input.form-control').val('');
+                                    } else {
+                                        _toastr(data.msg, _Tposition, "error", false);
+
+                                    }
+
+                                }
+                            });
+
+                        }
+                    });
+
+                });
+
+            }
+        }
+
+        /*]]>*/
+    </script>
+    <link href="/ui/smarty/css/layout-datatables.css" rel="stylesheet" type="text/css"/>
+
+</section>
+<!-- /MIDDLE -->
+</body>
+</html>

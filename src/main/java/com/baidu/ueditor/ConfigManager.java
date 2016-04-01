@@ -10,7 +10,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jfree.util.Log;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.service.faq;
 
 
+import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  */
 public interface FAQContentService {
     void saveFAQContent(FAQContent faq);
-    public List<FAQContent> findAllFAQContents();
+    public List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto);
     public void deleteFAQContentById(Long id);
     public FAQContent findById(Long id);
 }

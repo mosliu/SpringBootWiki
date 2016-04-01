@@ -22,4 +22,6 @@ import java.util.List;
 public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, JpaSpecificationExecutor<FAQContent> {
 
     List<FAQContent> findTop100ByDisabled(Boolean disabled);
+
+
 }

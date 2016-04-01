@@ -2,7 +2,7 @@ package net.liuxuan.spring.Helper.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.liuxuan.spring.mvc.utilsinit.hibernate.HibernateProxyTypeAdapter;
+import net.liuxuan.spring.mvc.utilconf.hibernate.HibernateProxyTypeAdapter;
 
 import javax.persistence.Entity;
 
