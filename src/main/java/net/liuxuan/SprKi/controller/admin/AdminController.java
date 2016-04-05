@@ -4,11 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
-import org.apache.commons.lang3.StringUtils;
+import net.liuxuan.spring.Helper.RequestHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -67,7 +66,7 @@ public class AdminController {
 
     @RequestMapping("{pageName}_admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String profile(@PathVariable("pageName") String pageName, Map<String, Object> model) {
+    public String getPages(@PathVariable("pageName") String pageName, Map<String, Object> model) {
 //
         UserDetailInfo userDetailInfo = new UserDetailInfo();
         List<Users> users = userDetailInfoService.listAllUsers();
@@ -80,30 +79,49 @@ public class AdminController {
     @RequestMapping("user")
 //    @ResponseBody
     public String userManage(@ModelAttribute("dto") BaseDTO dto, UserDetailInfo userDetailInfo, HttpServletRequest request,
-                             HttpServletResponse response,RedirectAttributesModelMap redirectAttributesModelMap) {
-//Map<String, Object> model
+                             HttpServletResponse response, Map<String, Object> model, RedirectAttributesModelMap redirectAttributesModelMap) {
+//
         log.info("===userManage logged ,the value is : {}", dto.toString());
         log.info("===userManage logged ,the value is : {}", userDetailInfo.toString());
 //        log.info("===userManage logged ,the value is : {}",userDetailInfo.getUsers().toString());
 
 
-        response.setContentType("application/json");
+        Users u = new Users();
+        u.setUsername(dto.sid);
+
         switch (dto.action) {
             case "edit":
-                Users u = new Users();
-                u.setUsername(dto.sid);
+
                 userDetailInfo = userDetailInfoService.findUserDetailInfoByUsers(u);
                 if (userDetailInfo == null) {
-                    redirectAttributesModelMap.put("error","无用户，请检查进入入口");
+                    redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
 //                    model.put("error","无用户，请检查进入入口");
                 }
-                redirectAttributesModelMap.put("user", userDetailInfo);
-//                model.put("user", userDetailInfo);
+//                redirectAttributesModelMap.put("user", userDetailInfo);
+                model.put("user", userDetailInfo);
                 return "admin/snipplets/div_user :: useredit";
 //                break;
+            case "authedit":
+                userDetailInfo = userDetailInfoService.findUserDetailInfoByUsers(u);
+                if (userDetailInfo == null) {
+                    redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
+//                    model.put("error","无用户，请检查进入入口");
+                }
+                List<String> authslist = userDetailInfoService.listAuths();
+                redirectAttributesModelMap.put("user", userDetailInfo);
+                redirectAttributesModelMap.put("authslist", authslist);
+                model.put("user", userDetailInfo);
+                model.put("authslist", authslist);
+                Set<Authorities> authoritiesSet = userDetailInfo.getUsers().getAuths();
+                Set<String> userauth = new HashSet<String>();
+                authoritiesSet.forEach(auths -> userauth.add(auths.getAuthority()));
+                model.put("userauth", userauth);
+
+                return "admin/snipplets/div_user :: authedit";
+//                break;
             default:
-                redirectAttributesModelMap.addFlashAttribute("dto",dto);
-                redirectAttributesModelMap.addFlashAttribute("userDetailInfo",userDetailInfo);
+                redirectAttributesModelMap.addFlashAttribute("dto", dto);
+                redirectAttributesModelMap.addFlashAttribute("userDetailInfo", userDetailInfo);
                 return "redirect:/admin/user_ajax";
 //                break;
         }
@@ -113,8 +131,8 @@ public class AdminController {
     @RequestMapping("user_ajax")
 //    @ResponseBody
     public void userManageAjax(@ModelAttribute("dto") BaseDTO dto, UserDetailInfo userDetailInfo, HttpServletRequest request,
-                             HttpServletResponse response ) throws IOException {
-
+                               HttpServletResponse response) throws IOException {
+//        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
 
         log.info("===userManageAjax logged ,the value is : {}", dto.toString());
@@ -127,31 +145,31 @@ public class AdminController {
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (dto.action) {
             case "add":
-                if(userDetailInfoService.checkUsersExists(userDetailInfo)){
+                if (userDetailInfoService.checkUsersExists(userDetailInfo)) {
                     log.info("===userManageAjax logged ,新用户已存在 : {}");
-                    rtnData.put("error","ERROR_UserExists");
-                    rtnData.put("status","fail");
-                    rtnData.put("msg","用户已经存在");
-                }else {
-                    rtnData.put("status","success");
-                    rtnData.put("msg","成功添加用户");
+                    rtnData.put("error", "ERROR_UserExists");
+                    rtnData.put("status", "fail");
+                    rtnData.put("msg", "用户已经存在");
+                } else {
+                    rtnData.put("status", "success");
+                    rtnData.put("msg", "成功添加用户");
                     userDetailInfoService.saveUserDetailInfo(userDetailInfo);
                 }
                 break;
             case "delete":
                 boolean b = userDetailInfoService.deleteUsersByUsername(dto.sid);
-                if(b){
-                    rtnData.put("status","success");
-                    rtnData.put("msg","成功删除用户");
-                }else{
-                    rtnData.put("error","ERROR_UserNotExists");
-                    rtnData.put("status","fail");
-                    rtnData.put("msg","用户不存在，删除失败");
+                if (b) {
+                    rtnData.put("status", "success");
+                    rtnData.put("msg", "成功删除用户");
+                } else {
+                    rtnData.put("error", "ERROR_UserNotExists");
+                    rtnData.put("status", "fail");
+                    rtnData.put("msg", "用户不存在，删除失败");
                 }
                 break;
             case "update":
                 userDetailInfoService.saveUserDetailInfo(userDetailInfo);
-                rtnData.put("success1","success!");
+                rtnData.put("success1", "success!");
                 break;
             case "list":
                 List<Users> users = userDetailInfoService.listAllUsers();
@@ -160,11 +178,23 @@ public class AdminController {
 //                    return mapper.writeValueAsString(users);
 //                return EntityGsonHelper.goEntityWithCollection2Gson(Users.class);
                 break;
+            case "updateauth":
+                RequestHelper.showParameters(request.getParameterMap());
+                String[] authArrays = request.getParameterValues("authArray");
+                String newauth = request.getParameter("newAuth");
+                Map<String, Object> map = userDetailInfoService.updateAuths(userDetailInfo, authArrays, newauth);
+                rtnData.putAll(map);
+
+//                return users;
+//                    return mapper.writeValueAsString(users);
+//                return EntityGsonHelper.goEntityWithCollection2Gson(Users.class);
+                break;
             default:
+
                 break;
         }
 //        return "";
-        mapper.writeValue(response.getWriter(),rtnData);
+        mapper.writeValue(response.getWriter(), rtnData);
     }
 
     @ModelAttribute("Department_list")

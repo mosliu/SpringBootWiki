@@ -4,10 +4,12 @@ package net.liuxuan.SprKi.service.user;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -85,4 +87,21 @@ public interface UserDetailInfoService {
      * @return the boolean
      */
     public boolean checkUsersExists(UserDetailInfo userDetailInfo);
+
+    /**
+     * List auths list.
+     *
+     * @return the list
+     */
+    List<String> listAuths();
+
+    /**
+     * Update auths boolean.
+     *
+     * @param userDetailInfo the user detail info
+     * @param authArrays     the auth arrays
+     * @param newauth        the newauth
+     * @return the Map<String, Object>
+     */
+    Map<String, Object> updateAuths(UserDetailInfo userDetailInfo, String[] authArrays, String newauth);
 }

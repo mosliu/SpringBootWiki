@@ -8,6 +8,7 @@ import net.liuxuan.SprKi.repository.security.AuthoritiesRepository;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,8 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -65,7 +65,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         Users u_saved;
         if (usersRepository.exists(uname)) {
             u_saved = usersRepository.findOne(uname);
-            if(StringUtils.isNotBlank(user.getPassword())){
+            if (StringUtils.isNotBlank(user.getPassword())) {
                 u_saved.setPassword(user.getPassword());
             }
             u_saved.setEnabled(user.isEnabled());
@@ -83,7 +83,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         } else {
             //new
             u_saved = user;
-            log.info("===saveOrUpdateUsers logged ,Saved a new User: {}",uname);
+            log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", uname);
             usersRepository.save(u_saved);
         }
 //        return u_saved;
@@ -102,18 +102,18 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         Assert.hasText(uname, "希望更新的user，用户名不应该为空");
     }
 
-    public boolean checkUsersExists(Users u){
+    public boolean checkUsersExists(Users u) {
         assertUsersNotNull(u);
         return usersRepository.exists(u.getUsername());
     }
 
-    public boolean checkUsersExists(UserDetailInfo userDetailInfo){
+    public boolean checkUsersExists(UserDetailInfo userDetailInfo) {
         Assert.notNull(userDetailInfo);
         return checkUsersExists(userDetailInfo.getUsers());
     }
 
 
-            @Override
+    @Override
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
         Users u = userDetailInfo.getUsers();
         Assert.notNull(u, "传入的user不应该为空");
@@ -124,7 +124,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 //        usersRepository.save(u);
 
         Set<Authorities> auths = u.getAuths();
-        log.info("===saveUserDetailInfo logged ,the auths.size is : {}",auths.size());
+        log.info("===saveUserDetailInfo logged ,the auths.size is : {}", auths.size());
 //        for (Authorities auth : auths) {
 //            if(auth.getAuthority().equals("ROLE_USER")){
 //
@@ -138,7 +138,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             auth.setAuthority("ROLE_USER");
             authoritiesRepository.save(auth);
             auths.add(auth);
-            log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]",auths.size(),u.getUsername());
+            log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]", auths.size(), u.getUsername());
         }
 
 
@@ -205,10 +205,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      */
     @Override
     public boolean deleteUsersByUsername(String sid) {
-        if(usersRepository.exists(sid)){
+        if (usersRepository.exists(sid)) {
             usersRepository.findOne(sid).setEnabled(false);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -217,6 +217,87 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     public List<Users> listAllUsers() {
 //        return usersRepository.findAll();
         return usersRepository.findByEnabled(true);
+    }
+
+    @Override
+    public List<String> listAuths() {
+        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
+
+        return distinctAuthority;
+//        return usersRepository.findAll();
+    }
+
+    @Override
+    public Map<String, Object> updateAuths(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Users users = usersRepository.findOne(userDetailInfo.getUsers().getUsername());
+        Set<Authorities> old_auths = users.getAuths();
+        Set<Authorities> new_auths = new HashSet<Authorities>();
+
+
+        if (ArrayUtils.isEmpty(authArrays)) {
+            //提交错误了啊。。
+            map.put("error", "提交出错！请检查");
+            return map;
+        }
+        for (int i = 0; i < authArrays.length; i++) {
+            String s_newauth = authArrays[i];
+
+            boolean inold = false;
+            for (Authorities old_auth : old_auths) {
+                if (old_auth.getAuthority().toUpperCase().equals(s_newauth)) {
+                    new_auths.add(old_auth);
+                    old_auths.remove(old_auth);
+                    inold = true;
+                    log.info("===用户【{}】 保持 权限【{}】 不变", users.getUsername(), s_newauth);
+                    break;
+                }
+            }
+
+            if (inold == true) {
+                inold = false;
+            } else {
+                Authorities new_authorities = new Authorities();
+                new_authorities.setUsername(users);
+                new_authorities.setAuthority(s_newauth);
+                authoritiesRepository.save(new_authorities);
+                new_auths.add(new_authorities);
+                log.info("===用户【{}】 增加了 权限【{}】", new_authorities.getUsername().getUsername(), new_authorities.getAuthority());
+            }
+        }
+        for (Authorities old_auth : old_auths) {
+            authoritiesRepository.delete(old_auth);
+            log.info("===用户【{}】 移除了 权限【{}】", users.getUsername(), old_auth.getAuthority());
+        }
+
+
+        if (StringUtils.isNotBlank(newauth)) {
+            if (!newauth.toUpperCase().startsWith("ROLE_")) {
+                newauth = "ROLE_" + newauth.toUpperCase();
+            }
+            boolean parseflag = true;
+            for (Authorities auth : old_auths) {
+                if (auth.getAuthority().equals(newauth)) {
+                    parseflag = false;
+                }
+            }
+            for (Authorities auth : new_auths) {
+                if (auth.getAuthority().equals(newauth)) {
+                    parseflag = false;
+                }
+            }
+
+            if (parseflag) {
+                Authorities new_authorities = new Authorities();
+                new_authorities.setUsername(users);
+                new_authorities.setAuthority(newauth);
+                authoritiesRepository.save(new_authorities);
+                log.info("===用户【{}】 增加了 权限【{}】", new_authorities.getUsername().getUsername(), new_authorities.getAuthority());
+            }
+        }
+        map.put("success", "权限处理成功");
+        return map;
     }
 
 

@@ -150,9 +150,13 @@
                             <td th:text="${u?.usernameAlias}">John</td>
                             <td th:text="${u?.regdate}">John</td>
                             <td>
-                                <ul th:each="auth : ${u?.auths}">
-                                    <li th:text="${auth?.authority}"></li>
-                                </ul>
+
+                                    <ul th:each="auth : ${u?.auths}">
+                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal" th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}">
+                                            <li th:text="${auth?.authority}"></li>
+                                        </a>
+                                    </ul>
+
                             </td>
                             <td th:text="${u?.username}">Doe</td>
                         </tr>
@@ -198,18 +202,7 @@
                     <!-- Modal Body -->
                     <div class="modal-body">
                         <h4>Text in a modal</h4>
-                        <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
-                        <h4>Popover in a modal</h4>
-                        <p>This <a href="#" data-toggle="popover" class="btn btn-default" title="A Title"
-                                   data-content="And here's some amazing content. It's very engaging. right?">button</a>
-                            should trigger a popover on click.</p>
-
-                        <h4>Tooltips in a modal</h4>
-                        <p><a href="#" data-toggle="tooltip" title="Tooltip">This link</a> and <a href="#"
-                                                                                                  data-toggle="tooltip"
-                                                                                                  title="Tooltip">that
-                            link</a> should have tooltips on hover.</p>
                     </div>
 
                     <!-- Modal Footer -->
@@ -241,15 +234,15 @@
         function deleteUsers(btn, sid) {
             console.log(btn);
             console.log(sid);
-            var tourl = "/admin/user?action=delete&sid="+sid;
+            var tourl = "/admin/user?action=delete&sid=" + sid;
             jQuery.ajax({
-                url:  tourl,
+                url: tourl,
                 context: btn,
                 success: function (data) {
                     alert(data);
                     $(this).parents("tr").addClass("disable_done");
                     var table = $('#myTableId').DataTable();
-                    table.row('.disable_done').remove().draw( false );
+                    table.row('.disable_done').remove().draw(false);
 
                 }
             });

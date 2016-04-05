@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.repository.security;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface AuthoritiesRepository extends JpaRepository<Authorities, Long> 
     List<Authorities> findByAuthority(String authority);
     List<Authorities> findByUsername(Users username);
     Authorities findByUsernameAndAuthority(Users username, String authority);
+    @Query("SELECT DISTINCT c.authority FROM Authorities c")
+    List<String> findAllAuthorities();
+
 }
