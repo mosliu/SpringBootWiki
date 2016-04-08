@@ -1,5 +1,7 @@
 package net.liuxuan.spring.security;
 
+import com.google.code.kaptcha.Producer;
+import com.google.code.kaptcha.util.Config;
 import net.liuxuan.SprKi.service.security.SecurityUserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -69,7 +72,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/ui/**","/images/**","/tinymce/**","/ueditor/**","/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
+                .antMatchers("/ui/**", "/images/**", "/tinymce/**", "/ueditor/**", "/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
                 .antMatchers("/msg/**").hasRole("USER")
                 .antMatchers("/editor/**").authenticated();
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
@@ -85,7 +88,8 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .successHandler(myAuthenticationSuccessHandler)
                 .failureHandler(myAuthenticationFailureHandler)
-                .failureUrl("/login?error")
+//                .failureUrl("/login?error")
+                .authenticationDetailsSource(captchaAuthenticationDetailsSource())
                 .permitAll();
         http.logout()
                 .permitAll();
@@ -103,11 +107,11 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
         http.userDetailsService(securityUserDetailsService);
         http.csrf().disable();
+        http.authenticationProvider(insertCaptchaDaoAuthenticationProvider());
         //TODO <form action="./upload?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 // .sessionManagement().invalidSessionUrl("/invalid").and()
 //                .jee().mappableRoles("USER", "ADMIN")
 //                .addFilterBefore(iPRoleAuthenticationFilter,AnonymousAuthenticationFilter.class)
-
 //
 //        http.authorizeRequests().accessDecisionManager(accessDecisionManager())
 //                .expressionHandler(webSecurityExpressionHandler())
@@ -121,7 +125,9 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.jdbcAuthentication()
 //                .dataSource(this.dataSource);
-        auth.userDetailsService(securityUserDetailsService);
+//        auth.userDetailsService(securityUserDetailsService);
+//        auth.authenticationProvider(insertCaptchaDaoAuthenticationProvider());
+
 //                .and().userDetailsService(securityUserDetailsService)
 
 //                .withDefaultSchema()
@@ -131,12 +137,27 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
     }
 
 
+    @Bean
+    public CaptchaDaoAuthenticationProvider insertCaptchaDaoAuthenticationProvider() {
+        CaptchaDaoAuthenticationProvider provider = new CaptchaDaoAuthenticationProvider();
+        provider.setUserDetailsService(securityUserDetailsService);
+
+        return provider;
+    }
+
+    @Bean
+    public CaptchaAuthenticationDetailsSource captchaAuthenticationDetailsSource() {
+        CaptchaAuthenticationDetailsSource captchaAuthenticationDetailsSource = new CaptchaAuthenticationDetailsSource();
+        return captchaAuthenticationDetailsSource;
+    }
+
+
 //    @Autowired
 //    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(securityUserDetailsService);
 //    }
 
-           //    @Bean
+    //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        logger.info("UserDetailsService");
 //        UserDetailsService userDetailsService = new UserDetailsService();
@@ -226,5 +247,46 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
         tokenRepositoryImpl.setDataSource(dataSource);
         return tokenRepositoryImpl;
     }
+
+    @Bean(name = "captchaProducer")
+    public Producer captchaProducer() {
+        /*
+            kaptcha.border  是否有边框  默认为true  我们可以自己设置yes，no
+            kaptcha.border.color   边框颜色   默认为Color.BLACK
+            kaptcha.border.thickness  边框粗细度  默认为1
+            kaptcha.producer.impl   验证码生成器  默认为DefaultKaptcha
+            kaptcha.textproducer.impl   验证码文本生成器  默认为DefaultTextCreator
+            kaptcha.textproducer.char.string   验证码文本字符内容范围  默认为abcde2345678gfynmnpwx
+            kaptcha.textproducer.char.length   验证码文本字符长度  默认为5
+            kaptcha.textproducer.font.names    验证码文本字体样式  默认为new Font("Arial", 1, fontSize), new Font("Courier", 1, fontSize)
+            kaptcha.textproducer.font.size   验证码文本字符大小  默认为40
+            kaptcha.textproducer.font.color  验证码文本字符颜色  默认为Color.BLACK
+            kaptcha.textproducer.char.space  验证码文本字符间距  默认为2
+            kaptcha.noise.impl    验证码噪点生成对象  默认为DefaultNoise
+            kaptcha.noise.color   验证码噪点颜色   默认为Color.BLACK
+            kaptcha.obscurificator.impl   验证码样式引擎  默认为WaterRipple
+            kaptcha.word.impl   验证码文本字符渲染   默认为DefaultWordRenderer
+            kaptcha.background.impl   验证码背景生成器   默认为DefaultBackground
+            kaptcha.background.clear.from   验证码背景颜色渐进   默认为Color.LIGHT_GRAY
+            kaptcha.background.clear.to   验证码背景颜色渐进   默认为Color.WHITE
+            kaptcha.image.width   验证码图片宽度  默认为200
+            kaptcha.image.height  验证码图片高度  默认为50
+         */
+
+        Properties props = new Properties();
+        props.put("kaptcha.border", "yes");
+        props.put("kaptcha.border.color", "105,179,90");
+        props.put("kaptcha.textproducer.font.color", "blue");
+        props.put("kaptcha.textproducer.font.names", "宋体,楷体,微软雅黑");
+        props.put("kaptcha.textproducer.char.size", "45");
+        props.put("kaptcha.textproducer.char.length", "4");
+        props.put("kaptcha.image.width", "125");
+        props.put("kaptcha.image.height", "45");
+        props.put("kaptcha.session.key", "code");
+        Config config = new Config(props);
+        Producer captchaProducer = config.getProducerImpl();
+        return captchaProducer;
+    }
+
 
 }

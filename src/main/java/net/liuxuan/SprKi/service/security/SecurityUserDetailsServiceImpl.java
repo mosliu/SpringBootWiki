@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.service.security;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.Users;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
+import net.liuxuan.spring.security.CaptchaAuthenticationDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -68,7 +69,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
                     "Username {0} not found"));
         }
 //        List<GrantedAuthority> authorities = buildUserAuthority(oneuser.getAuths());
-        return buildUserForAuthentication(users);
+        return buildUserDetailsForAuthentication(users);
 //        return new UserInfo(users);
     }
 
@@ -93,7 +94,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
      * @param oneuser
      * @return
      */
-    private User buildUserForAuthentication(Users oneuser) {
+    private UserDetails buildUserDetailsForAuthentication(Users oneuser) {
 //        return null;
 
         User ui = new User(

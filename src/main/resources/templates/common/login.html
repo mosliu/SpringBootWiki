@@ -6,7 +6,7 @@
     <!-- custom input -->
 </head>
 
-<body onload="document.form.username.focus();">
+<body >
 <h1 layout:fragment="header" class="hidden">登录</h1>
 
 <div layout:fragment="content" class="container" style="background:url('/ui/smarty/images/backgrounds/wall2.jpg')">
@@ -31,21 +31,21 @@
                             <!-- /ALERT -->
 
                             <!-- login form -->
-                            <form action="/login" th:action="@{/login}" method="post" class="sky-form boxed">
-                                <header><i class="fa fa-user fa-lg"></i> Sign In</header>
+                            <form action="/login" id="loginform" name="loginform" th:action="@{/login}" method="post" class="validate-plugin sky-form boxed">
+                                <header><i class="fa fa-user fa-lg"></i> 登录系统</header>
 
                                 <fieldset class="nomargin">
                                     <p th:if="${param.logout}" class="alert alert-success">You have been logged out</p>
+                                    <!--TODO errormessage-->
                                     <p th:if="${param.error}" class="alert alert-danger" th:text="${session.errorMessage}">
                                         There was an error, please try again
                                     </p>
-
 
                                     <label class="label margin-top-20" for="username">Username</label>
                                     <label class="input">
                                         <i class="ico-append fa fa-user"></i>
                                         <input type="text" name="username" id="username" value=""
-                                               placeholder="Username"/>
+                                               placeholder="Username" minlength="4" required="true"/>
                                         <span class="tooltip tooltip-top-right">UserName</span>
                                     </label>
 
@@ -53,23 +53,36 @@
                                     <label class="input">
                                         <i class="ico-append fa fa-lock"></i>
                                         <input type="password" name="password" id="password" value=""
-                                               placeholder="Password"/>
+                                               placeholder="Password" minlength="4" required="true"/>
                                         <b class="tooltip tooltip-top-right">Type your Password</b>
                                     </label>
+
+
+                                    <label for="j_captcha" class="label margin-top-20">验证码</label>
+                                    <label for="j_captcha" class="label margin-top-20">
+                                        <img src="/captcha.jpg" id="kaptchaImage"  style="margin-bottom: -3px"/>
+                                        <a href="#" onclick="changeCode()">看不清?换一张</a>
+                                    </label>
+                                    <label class="input">
+                                        <i class="ico-append fa fa-lock"></i>
+                                        <input type="text" name="j_captcha" id="j_captcha" value=""
+                                               placeholder="验证码" minlength="4" required="true"/>
+                                        <b class="tooltip tooltip-top-right">请输入验证码</b>
+                                    </label>
+
                                     <label class="checkbox margin-top-20">
                                         <input id="remember-me" name="remember-me" type="checkbox" value="true"/>
                                         <i></i> Keep me logged in
                                     </label>
-
                                 </fieldset>
 
                                 <footer class="celarfix">
-                                    <button type="submit" class="btn btn-primary noradius pull-right"><i
+                                    <button type="submit" onclick="$('#loginform').validate().form()" class="btn btn-primary noradius pull-right"><i
                                             class="fa fa-check"></i> OK, LOG IN
                                     </button>
-                                    <div class="login-forgot-password pull-left">
-                                        <a href="page-password.html">Forgot password?</a>
-                                    </div>
+                                    <!--<div class="login-forgot-password pull-left">-->
+                                        <!--<a href="page-password.html">Forgot password?</a>-->
+                                    <!--</div>-->
                                 </footer>
                             </form>
                             <!-- /login form -->
@@ -122,6 +135,16 @@
 
     </section>
     <!-- /SLIDE TOP -->
+    <script type="text/javascript">
+        $(function(){  //生成验证码
+            $('#kaptchaImage').click(function () {
+                $(this).hide().attr('src', '/captcha.jpg?' + Math.floor(Math.random()*500) ).fadeIn(); });
+        });
+        function changeCode() {  //刷新
+            $('#kaptchaImage').hide().attr('src', '/captcha.jpg?' + Math.floor(Math.random()*500) ).fadeIn();
+            event.cancelBubble=true;
+        }
+    </script>
 </div>
 </body>
 </html>

@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Open Sans Light'), local('OpenSans-Light'), url(/ui/smarty/fonts/google/Open-Sans-Light.ttf) format('truetype'), url(/ui/smarty/fonts/google/Open-Sans-Light.woff) format('woff'), url(/ui/smarty/fonts/google/Open-Sans-Light.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/ui/smarty/fonts/google/Open-Sans.eot);
+    src: local('Open Sans'), local('OpenSans'), url(/ui/smarty/fonts/google/Open-Sans.ttf) format('truetype'), url(/ui/smarty/fonts/google/Open-Sans.eot?#iefix) format('embedded-opentype'), url(/ui/smarty/fonts/google/Open-Sans.woff) format('woff'), url(/ui/smarty/fonts/google/Open-Sans.woff2) format('woff2'), url(/ui/smarty/fonts/google/Open-Sans.svg#OpenSans) format('svg');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(/ui/smarty/fonts/google/Open-Sans-Bold.ttf) format('truetype'), url(/ui/smarty/fonts/google/Open-Sans-Bold.woff) format('woff'), url(/ui/smarty/fonts/google/Open-Sans-Bold.woff2) format('woff2');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: local('Open Sans Extrabold'), local('OpenSans-Extrabold'), url(/ui/smarty/fonts/google/Open-Sans-Extrabold.ttf) format('truetype'), url(/ui/smarty/fonts/google/Open-Sans-Extrabold.woff) format('woff'), url(/ui/smarty/fonts/google/Open-Sans-Extrabold.woff2) format('woff2');
+}
+

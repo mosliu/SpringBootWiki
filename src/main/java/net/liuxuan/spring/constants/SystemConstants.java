@@ -13,4 +13,9 @@ package net.liuxuan.spring.constants;
  */
 public interface SystemConstants {
     public static final String SYSTEM_ENCODING = "UTF-8";
+
+
+    public static final String CAPTCHA_SESSION_KEY = "j_captcha";
+
+
 }

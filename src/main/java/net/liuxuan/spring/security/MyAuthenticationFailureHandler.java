@@ -54,7 +54,8 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 //        super.onAuthenticationFailure(request, response, exception);
         saveException(request, exception);
         request.getSession().setAttribute("errorDetail","Login Error,Please Check!");
-        request.getSession().setAttribute("errorMessage",exception.getMessage());
+//        request.getSession().setAttribute("errorMessage",exception.getMessage());
+        request.getSession().setAttribute("errorMessage","登录失败！");
 
 //        logger.trace("===Redirecting to " + FailureUrl);
 

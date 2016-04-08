@@ -173,6 +173,7 @@
 		<level name="Maven: commons-beanutils:commons-beanutils:1.9.2" value="project"/>
 		<level name="Maven: commons-collections:commons-collections:3.2.2" value="project"/>
 		<level name="Maven: org.apache.commons:commons-lang3:3.4" value="project"/>
+		<level name="Maven: com.jhlabs:filters:2.0.235-1" value="project"/>
 		<level name="Maven: org.freemarker:freemarker:2.3.23" value="project"/>
 		<level name="Maven: javax.servlet:jstl:1.2" value="project"/>
 		<level name="Maven: org.projectlombok:lombok:1.16.8" value="project"/>

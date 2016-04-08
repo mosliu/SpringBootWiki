@@ -19,6 +19,8 @@
 <header th:fragment="topNav" id="topNav">
     <div class="container">
 
+
+
         <!-- Mobile Menu Button -->
         <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
             <i class="fa fa-bars"></i>
@@ -26,18 +28,16 @@
 
         <!-- BUTTONS -->
         <ul class="pull-right nav nav-pills nav-second-main">
-
-            <li class="text-welcome" sec:authorize="hasRole('ROLE_USER')">Welcome , <strong sec:authentication="name">John
-                Doe</strong></li>
-            <li>
+            <li sec:authorize="hasRole('ROLE_USER')">
                 <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i
-                        class="fa fa-user hidden-xs"></i> MY ACCOUNT</a>
+                        class="fa fa-user hidden-xs"></i> <strong sec:authentication="name">John
+                    Doe</strong></a>
                 <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> ORDER HISTORY</a></li>
+                    <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
                     <li class="divider"></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> MY WISHLIST</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> MY REVIEWS</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> MY SETTINGS</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> test-2</a></li>
+                    <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> test-3</a></li>
                     <li class="divider"></li>
 
                     <form th:action="@{/logout}" name="logoutform" method="post">
@@ -47,7 +47,7 @@
                 </ul>
             </li>
             <li th:if="${#authentication==null || #authentication.name == 'anonymousUser'}"><a href="/login"
-                                                                                               th:href="@{/login}">LOGIN</a>
+                                                                                               th:href="@{/login}">登录</a>
             </li>
 
             <!-- SEARCH -->
@@ -117,18 +117,31 @@
         <div class="navbar-collapse pull-right nav-main-collapse collapse ">
             <nav class="nav-main">
                 <ul id="topMain" class="nav nav-pills nav-main">
-                    <li class="dropdown active">
-                        <a href="#" th:href="@{/}"><span class="fa fa-home"></span>HOME</a>
+                    <li class="dropdown">
+                        <a href="#" th:href="@{/}"><span class="fa fa-home"></span>主页</a>
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#">MSG</a>
+                        <a class="dropdown-toggle" href="#">支持信息库</a>
+                        <ul class="dropdown-menu">
+                            <li><a  href="/faq" th:href="@{/faq}">发布新信息</a></li>
+                            <li><a  href="/faqlist" th:href="@{/faqlist}">信息列表查看</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#">测试</a>
                         <ul class="dropdown-menu">
                             <li><a href="/msg" th:href="@{/msg}">Message List</a></li>
+                            <li class="dropdown">
+                                <a href="/editor" th:href="@{/editor}">Editor</a>
+                            </li>
+                            <li><a href="/lucene" th:href="@{/lucene}"><i
+                                    class="et-browser"></i>Lucene</a></li>
                             <li><a href="#">User interface</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" href="#">
-                                    Social media
+                                    sublist test
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Gallery images</a></li>
@@ -139,74 +152,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="/editor" th:href="@{/editor}">Editor</a>
-                    </li>
-                    <li class="dropdown mega-menu">
-                        <a class="dropdown-toggle" href="#"> Lucene</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="row">
-
-                                    <div class="col-md-5th">
-                                        <ul class="list-unstyled">
-                                            <li><span>GRID</span></li>
-                                            <li><a href="/lucene" th:href="@{/lucene}"><i
-                                                    class="et-browser"></i>Lucene</a></li>
-                                            <li><a href="#">User interface</a></li>
-                                            <li><a href="portfolio-grid-1-columns.html">1 COLUMN</a></li>
-                                            <li><a href="portfolio-grid-6-columns.html">6 COLUMNS</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-5th">
-                                        <ul class="list-unstyled">
-                                            <li><span>MASONRY</span></li>
-                                            <li><a href="portfolio-masonry-2-columns.html">2 COLUMNS</a></li>
-
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-5th">
-                                        <ul class="list-unstyled">
-                                            <li><span>SINGLE</span></li>
-                                            <li><a href="portfolio-single-embed-video.html">EMBED VIDEO</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-5th">
-                                        <ul class="list-unstyled">
-                                            <li><span>LAYOUT</span></li>
-                                            <li><a href="portfolio-layout-fullwidth.html">FULL WIDTH (100%)</a>
-                                            </li>
-                                            <li><a href="portfolio-layout-tabfilter.html">TAB FILTER &amp;
-                                                PAGINATION</a></li>
-                                        </ul>
-                                    </div>
-
-                                    <div class="col-md-5th">
-                                        <ul class="list-unstyled">
-                                            <li><span>LOADING</span></li>
-                                            <li><a href="portfolio-loading-pagination.html">PAGINATION</a></li>
-                                            <li><a href="portfolio-loading-ajax-modal.html">AJAX IN MODAL</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </li>
 
 
-                        </ul>
-                    </li>
-
-                    <li class="dropdown active">
-                        <a class="dropdown-toggle" href="#">支持信息库</a>
-                        <ul class="dropdown-menu">
-                            <li><a  href="/faq" th:href="@{/faq}">New FAQ</a></li>
-                            <li><a  href="/faqlist" th:href="@{/faqlist}">FAQ List</a></li>
-                        </ul>
-                    </li>
                 </ul>
 
             </nav>
