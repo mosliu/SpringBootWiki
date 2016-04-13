@@ -159,7 +159,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
 //            throw new Exception("not find this path!!!!!");
         } else {
             Map<String, Object> model = modelAndView.getModel();
-            model.forEach((k, v) -> log.trace("Key: {} ,Value:{}",k, ( v.toString().length() )>100?v.toString().substring(0,100):v));
+            model.forEach((k, v) -> log.trace("Key: {} ,Value:{}",k, v==null?"":(( v.toString().length() )>100?v.toString().substring(0,100):v)));
         }
         log.trace("********************Model************************");
 //        log.trace("*************************************************");

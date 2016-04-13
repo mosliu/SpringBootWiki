@@ -4,6 +4,7 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.liuxuan.SprKi.entity.Base;
+import org.hibernate.search.annotations.Field;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -25,6 +26,7 @@ public class Department extends Base{
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
     private Long id;
+    @Field
     @Column(nullable = false,length = 80)
     String departmentName;
 

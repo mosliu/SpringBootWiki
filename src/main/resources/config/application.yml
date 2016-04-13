@@ -72,14 +72,21 @@ spring:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.
       ddl-auto: update
       # ddl-auto: create
+      # Naming strategy
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
     properties:
       hibernate.show_sql: true
       hibernate.format_sql: true
+      # Allows Hibernate to generate SQL optimized for a particular DBMS
       hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
       hibernate.max_fetch_depth: 3
       hibernate.enable_lazy_load_no_trans: true
       hibernate.jdbc.fetch_size: 50
+      hibernate.search.default.directory_provider: filesystem
+      hibernate.search.default.indexBase: d:/logs2
+      hibernate.search.jmx_enabled: true
+      hibernate.search.generate_statistics: true
+      hibernate.search.lucene_version: LUCENE_CURRENT
 
 
 # MyBatis 
@@ -101,6 +108,8 @@ spring:
 
 #系统配置
 SprKi:
+  lucene:
+    init: false
   upload:
     savepathroot: ./static/
     savepathchild: /uploaded/

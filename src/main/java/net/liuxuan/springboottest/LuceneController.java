@@ -1,6 +1,9 @@
 package net.liuxuan.springboottest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.google.gson.Gson;
+import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.document.Document;
@@ -27,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -54,7 +58,7 @@ public class LuceneController {
 
     @ResponseBody
     @RequestMapping("listIndexed")
-    public String listIndexed() throws CorruptIndexException, IOException {
+    public void listIndexed(HttpServletResponse response) throws CorruptIndexException, IOException {
         IndexSearcher indexSearcher = getSearcher();
         int size = indexWriter.maxDoc();
         Document doc = null;
@@ -67,18 +71,37 @@ public class LuceneController {
             news.setUrl(doc.get("url"));
             list.add(news);
         }
-        Gson g = new Gson();
-        return g.toJson(list);
+//        Gson g = new Gson();
+//        response.getWriter().write(g.toJson(list));
+//        return g.toJson(list);
+
+
+//        FAQContent faqContent = null;
+//        List<FAQContent> list = new ArrayList<FAQContent>();
+//        for (int i = 0; i < size; i++) {
+//            faqContent = new FAQContent();
+//            doc = indexSearcher.doc(i);
+//            faqContent.setAnswer(doc.get("answer"));
+//            faqContent.setQuestion(doc.get("question"));
+//            faqContent.setTitle(doc.get("title"));
+////            faqContent.setUrl(doc.get("url"));
+//            list.add(faqContent);
+//        }
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        mapper.writeValue(response.getWriter(), list);
+
 //        return JSONObject.toJSONString(list);
     }
 
-    @ResponseBody
+    //    @ResponseBody
     @RequestMapping("indexFiles")
-    public String indexFiles() throws IOException {
+    public void indexFiles(HttpServletResponse response) throws IOException {
         Directory d = indexWriter.getDirectory();
         String[] fs = d.listAll();
         Gson g = new Gson();
-        return g.toJson(fs);
+        response.getWriter().write(g.toJson(fs));
+//        return g.toJson(fs);
 //        return JSONObject.toJSONString(fs);
     }
 
@@ -130,8 +153,8 @@ public class LuceneController {
 //        QueryParser parser = new QueryParser("title",analyzer);
 
         QueryParser parser = new MultiFieldQueryParser(new String[]{"title", "content"}, analyzer);
-        log.info("parser null? :{}",parser==null);
-        log.info("analyzer null? :{}",analyzer==null);
+        log.info("parser null? :{}", parser == null);
+        log.info("analyzer null? :{}", analyzer == null);
 
 
         Query query = parser.parse(text);

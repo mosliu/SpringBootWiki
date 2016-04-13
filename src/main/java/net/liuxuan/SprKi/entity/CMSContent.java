@@ -2,10 +2,16 @@ package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
 import net.liuxuan.SprKi.entity.security.Users;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.Store;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+
+//import org.hibernate.search.annotations.Field;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -19,6 +25,7 @@ import java.util.Set;
  * 2016/3/3  |    Moses       |     Created
  */
 @Data
+@Indexed
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Content")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -35,6 +42,7 @@ public class CMSContent {
      * The Category.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @IndexedEmbedded(depth = 1, prefix = "categoryBy_")
     protected CMSCategory category; // 栏目
 
 
@@ -93,6 +101,14 @@ public class CMSContent {
     /**
      * 完整标题,带html，可以赋不同颜色和样式？
      */
+    // You have to mark the fields you want to make searchable annotating them
+    // with Field.
+    // The parameter Store.NO ensures that the actual data will not be stored in
+    // the index (mantaining the ability to search for it): Hibernate Search
+    // will execute a Lucene query in order to find the database identifiers of
+    // the entities matching the query and use these identifiers to retrieve
+    // managed objects from the database.
+    @Field(store = Store.NO)
     @Column(length = 1000)
     protected String fullTitle; // 完整标题,带html，可以赋不同颜色和样式？
 
@@ -106,6 +122,7 @@ public class CMSContent {
      * 正文
      */
     @Lob
+    @Field
     @Column(columnDefinition = "mediumtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
     protected String infoText =""; // 正文
@@ -157,6 +174,7 @@ public class CMSContent {
     /**
      * The Meta keywords.
      */
+    @Field
     protected String metaKeywords; // 关键字
 
 

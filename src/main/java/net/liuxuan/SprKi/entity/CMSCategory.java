@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 
@@ -27,6 +28,7 @@ public class CMSCategory extends Base{
     private Long id;
 
     @Column(name = "name", nullable = false, length = 50)
+    @Field
     private String name;//名称
 
     @Column(length = 50)

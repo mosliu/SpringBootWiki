@@ -10,7 +10,7 @@
 	<meta http-equiv="expires" content="0" />
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 	<meta http-equiv="description" content="This is my page" />
-	<script type="text/javascript" src="/js/libs/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="/ui/smarty/plugins/jquery/jquery-2.1.4.min.js"></script>
 	<style type="text/css">
 		.container{
 			margin:0 auto;
@@ -132,7 +132,7 @@
 		 $.ajax({
 		 type: "post",
 		 url: "lucene/indexFiles",
-		 data: {"_csrf":$('input[name=_csrf]')[0].value},
+		 //data: {"_csrf":$('input[name=_csrf]')[0].value},
 		 dataType: "json",
 		 success: function(data){
 		 var html="<ul>";
@@ -154,7 +154,7 @@
 		 $.ajax({
 		 type: "post",
 		 url: "lucene/deleteIndexes",
-		 data: {"_csrf":$('input[name=_csrf]')[0].value},
+		 //data: {"_csrf":$('input[name=_csrf]')[0].value},
 		 dataType: "text",
 		 success: function(data){
 		 if(data=="suc"){
@@ -171,7 +171,7 @@
 		 $.ajax({
 		 type: "post",
 		 url: "lucene/listIndexed",
-		 data: {"_csrf":$('input[name=_csrf]')[0].value},
+		 //data: {"_csrf":$('input[name=_csrf]')[0].value},
 		 dataType: "json",
 		 success: function(data){
 		 var html="<ul>";
@@ -193,7 +193,8 @@
 		 $.ajax({
 		 type: "post",
 		 url: "lucene/search",
-		 data: {"text":$("#keyword").val(),"_csrf":$('input[name=_csrf]')[0].value},
+		 //data: {"text":$("#keyword").val(),"_csrf":$('input[name=_csrf]')[0].value},
+		 data: {"text":$("#keyword").val()},
 		 dataType: "json",
 		 success: function(data){
 		 console.log(data);

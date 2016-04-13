@@ -305,6 +305,7 @@
     <logger name="org.springframework.web.servlet.view.ContentNegotiatingViewResolver" level="INFO"/>
     <logger name="org.springframework.web.servlet.view.InternalResourceViewResolver" level="INFO"/>
 
+    <logger name="org.apdplat.word" level="INFO"/>
 
 
 

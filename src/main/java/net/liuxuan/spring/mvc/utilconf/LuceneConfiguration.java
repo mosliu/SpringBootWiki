@@ -6,7 +6,9 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
+import org.apache.lucene.util.Version;
 import org.apdplat.word.dictionary.DictionaryFactory;
+import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.apdplat.word.util.WordConfTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,10 +45,6 @@ public class LuceneConfiguration {
     @Bean
     public Analyzer analyzer(){
         return new SimpleAnalyzer();
-//        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
-//        WordConfTools.set("auto.detect", "false");
-//        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
-//        return new ChineseWordAnalyzer();
     }
 
 
@@ -55,11 +53,11 @@ public class LuceneConfiguration {
 //    public IndexWriter indexWriter(ChineseWordAnalyzer analyzer) throws IOException {
         //TODO YML化
 //        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        Path path = Paths.get("d:/logs2");
-        Directory d = new SimpleFSDirectory(path);
+        Path path = Paths.get("d:/logs2/");
+        Directory d = new SimpleFSDirectory(path.toFile());
 
 //        Analyzer analyzer = new ChineseWordAnalyzer();
-        IndexWriterConfig conf = new IndexWriterConfig(analyzer);
+        IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_4_10_4,analyzer);
         IndexWriter indexWriter = new IndexWriter(d, conf);
         return indexWriter;
     }

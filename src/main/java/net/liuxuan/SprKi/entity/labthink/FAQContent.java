@@ -3,6 +3,12 @@ package net.liuxuan.SprKi.entity.labthink;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
+import org.apdplat.word.lucene.ChineseWordAnalyzer;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,22 +27,27 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity
+@Indexed
+@Analyzer(impl = ChineseWordAnalyzer.class)
 @Table(name = "Sprki_CMS_ContentFAQ")
 @PrimaryKeyJoinColumn(name = "FAQ_ID")
 public class FAQContent extends CMSContent{
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @IndexedEmbedded(depth = 1, prefix = "departmentBy_")
     protected Department department;//来源部门
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     protected Devices devices;//设备
 
     @Lob
+    @Field
     @Column(columnDefinition = "mediumtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
     protected String question =""; // 正文
 
     @Lob
+    @Field
     @Column(columnDefinition = "mediumtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
     protected String answer =""; // 正文
