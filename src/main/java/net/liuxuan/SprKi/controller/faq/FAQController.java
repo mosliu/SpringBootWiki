@@ -9,15 +9,13 @@ import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.repository.CMSCategoryRepository;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
-import net.liuxuan.SprKi.service.faq.FAQContentService;
+import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +25,6 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -100,6 +97,21 @@ public class FAQController {
 //        model.put("devicesAll",devicesAll);
 //        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
         return "faq/faq_edit";
+    }
+
+    @RequestMapping(value = "/faq/show/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
+        FAQContent faq = faqContentService.findById(id);
+
+        model.put("faq", faq);
+//        devicesRepository.findAll();
+        List<Devices> devicesAll = devicesRepository.findAll();
+//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
+//        model.put("devicesAll",devicesAll);
+//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+        return "faq/faq_show";
     }
 
     @RequestMapping(value = "/faq/delete/{id}", method = RequestMethod.GET)

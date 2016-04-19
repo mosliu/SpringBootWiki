@@ -32,21 +32,29 @@
                     <i class="main-icon fa fa-gears"></i> <span>系统管理</span>
                 </a>
                 <ul><!-- submenus -->
-                    <li><a href="#" onclick="$('#replaceContainer').load('/admin/userManage_admin')"><i class="fa fa-users"></i> 用户管理</a></li>
-                    <li><a href="ui-buttons.html">Buttons</a></li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/userManage')">
+                            <i class="fa fa-users"></i> 用户管理
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/departmentManage')">
+                            <i class="fa fa-university"></i> 部门配置
+                        </a></li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-menu-arrow pull-right"></i>
-                            Icons
+                            设备配置
                         </a>
                         <ul>
-                            <li><a href="ui-icons-fontawsome.html">Fontawsome</a></li>
-                            <li><a href="ui-icons-etline.html">Et-Line Icons</a></li>
-                            <li><a href="ui-icons-glyphicons.html">Glyph Icons</a></li>
-                            <li><a href="ui-icons-flags.html">Flags</a></li>
+                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceManage')">设备配置</a></li>
+                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceTypeManage')">设备类型配置</a></li>
+                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceKindManage')">设备性质配置</a></li>
                         </ul>
                     </li>
-                    <li><a href="ui-alerts-dialogs.html">Alerts &amp; Dialogs</a></li>
+
+
                     <li><a href="ui-tabs-acordion-navs.html">Tabs, Acordion &amp; Navs</a></li>
                     <li><a href="ui-knob.html">Knob Circles</a></li>
                     <li><a href="ui-nestable.html">Nestable List</a></li>
@@ -359,7 +367,8 @@
                         </a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_USER')"><!-- settings -->
-                        <a href="#" onclick="$('#replaceContainer').load('/admin/profile_admin')"><i class="fa fa-cogs"></i>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/profile_admin')"><i
+                                class="fa fa-cogs"></i>
                             Settings</a>
                     </li>
 

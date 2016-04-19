@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('editor');
+        function doSubmit1() {
+//            document.faqform.answer.value = 111
+//            $('input[name=answer]:first').val(ue.getContent());
+            return jQuery('form.validate-plugin').validate().form();
+        }
+    </script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <div>
+        <p/>
+        <!-- breadcrumbs -->
+        <h1 class="blog-post-title" th:text="${faq.title}">BLOG POST TITLE HERE</h1>
+        <ul class="blog-post-info list-inline">
+            <li><a href="#"> <i class="fa fa-clock-o"></i> 创建：<span class="font-lato" th:text="${faq.publishDate}">June 29, 2015</span>
+            </a></li>
+            <li><a href="#"> <i class="fa fa-clock-o"></i> 更新：<span class="font-lato" th:text="${faq.lastUpdateDate}">June 29, 2015</span>
+            </a></li>
+            <li><a href="#"> <i class="fa fa-comment-o"></i> <span class="font-lato" th:text="${faq.commentsCount}">28 Comments</span><span
+                    class="font-lato"> 评论</span> </a></li>
+            <li>
+                <i class="fa fa-folder-open-o"></i>
+                <a class="category" href="#"> <span class="font-lato">faq</span> </a>
+                <a class="category" href="#"> <span class="font-lato">xxxx</span> </a>
+            </li>
+            <li><a href="#"> <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author.username}">John Doe</span>
+            </a></li>
+        </ul>
+    </div>
+    <ul class="row clearfix testimonial-dotted list-unstyled">
+        <li class="col-md-9">
+            <blockquote>
+                <div th:utext="${faq.question}">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+                <cite th:text="'咨询时间 @'+${#calendars.format(faq.questionDate,' yyyy MMM dd')}"></cite>
+            </blockquote>
+        </li>
+        <li class="col-md-3">
+            <ul class="side-nav list-group margin-bottom-80">
+                <li class="list-group-item"><a href="#"><i class="fa fa-eye"></i> 部门：<span
+                        th:text="${faq.department.departmentName}">department</span></a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-comments-o"></i> 设备： <span
+                        th:text="${faq.devices.devicename}">devices</span></a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-history"></i> 分类：<span
+                        th:text="${faq.category.name}">category</span></a></li>
+            </ul>
+        </li>
+    </ul>
+    <div class="divider divider-center divider-color"><!-- divider -->
+        <i class="fa fa-chevron-down"></i>
+    </div>
+    <div>
+        <blockquote>
+            <h2>
+                解答：
+            </h2>
+            <div th:utext="${faq.answer}">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            </div>
+        </blockquote>
+    </div>
+
+
+    <div>
+        <div class="divider divider-dotted"><!-- divider --></div>
+
+
+        <!-- TAGS -->
+        <a class="tag" href="#">
+
+            <span class="txt"><i class="fa fa-tag"></i>RESPONSIVE</span>
+            <span class="num">12</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>CSS</span>
+            <span class="num">3</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>HTML</span>
+            <span class="num">1</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>JAVASCRIPT</span>
+            <span class="num">28</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DESIGN</span>
+            <span class="num">6</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DEVELOPMENT</span>
+            <span class="num">3</span>
+        </a>
+        <!-- /TAGS --></div>
+
+</div>
+
+</body>
+</html>

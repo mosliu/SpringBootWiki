@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<!--修改设备种类Div-->
+<div th:fragment="devicetypeedit">
+
+    <!-- header modal -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myLargeModalLabel">修改设备种类</h4>
+    </div>
+    <form id="updateform" action="/admin/device_type_ajax?action=update" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${Devices}">
+        <!-- body modal -->
+        <div class="modal-body">
+            <div class="login-box">
+
+                <header><i class="fa fa-users"></i> 修改设备种类  <b><span th:text="*{deviceTypeName}">zhangsan</span></b>
+                    <small class="note bold">请谨慎操作</small>
+                </header>
+
+                <fieldset>
+
+                    <input type="hidden" th:field="*{id}"/>
+                    <label>修改设备种类名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{deviceTypeName}"
+                               placeholder="修改设备种类名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备种类名称</b>
+                    </label>
+                    <label>修改设备种类中文名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{deviceTypeNameCN}"
+                               placeholder="设备种类中文名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备种类中文名称</b>
+                    </label>
+                    <label>修改设备种类英文名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{deviceTypeNameEN}"
+                               placeholder="设备种类英文名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备种类英文名称</b>
+                    </label>
+                </fieldset>
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+            <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+    </form>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var callback = function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+        $("#updateform").on("submit", function (e) {
+//            alert($(this).serialize());
+//            e.preventDefault();
+            $.post(this.action, $(this).serialize(), callback);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
+
+</body>
+</html>

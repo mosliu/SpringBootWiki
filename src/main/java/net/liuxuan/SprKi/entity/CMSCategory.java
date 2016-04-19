@@ -21,7 +21,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Category")
-public class CMSCategory extends Base{
+public class CMSCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
@@ -41,8 +41,4 @@ public class CMSCategory extends Base{
 
     @Column(name = "disabled", nullable = false)
     private boolean disabled=true;
-
-    public CMSCategory(Long id) {
-        super(id);
-    }
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<!--修改设备属性Div-->
+<div th:fragment="deviceedit">
+
+    <!-- header modal -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myLargeModalLabel">修改设备属性</h4>
+    </div>
+    <form id="updateform" action="/admin/devices_ajax?action=update" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${Devices}">
+        <!-- body modal -->
+        <div class="modal-body">
+            <div class="login-box">
+
+                <header><i class="fa fa-users"></i> 修改设备属性  <b><span th:text="*{devicename}">zhangsan</span></b>
+                    <small class="note bold">请谨慎操作</small>
+                </header>
+
+                <fieldset>
+
+                    <input type="hidden" th:field="*{id}"/>
+                    <label>修改设备属性名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{devicename}"
+                               placeholder="修改设备名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备名称</b>
+                    </label>
+                    <label>修改设备中文名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{devicenameCN}"
+                               placeholder="设备属性中文名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备中文名称</b>
+                    </label>
+                    <label>修改设备英文名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <input type="text" th:field="*{devicenameEN}"
+                               placeholder="设备属性英文名称"/>
+                        <b class="tooltip tooltip-bottom-right">设备英文名称</b>
+                    </label>
+                    <label>修改设备类型</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <select th:field="*{deviceType}" class="form-control pointer required">
+                            <option th:each="type : ${allDeviceType}"
+                                    th:value="${type.id}"
+                                    th:text="${'设备种类:' + type.deviceTypeName}">W3/230</option>
+                        </select>
+                        <b class="tooltip tooltip-bottom-right">设备类型</b>
+                    </label>
+                    <label>修改设备性质</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <select th:field="*{deviceKind}" class="form-control pointer required">
+                            <option th:each="type : ${allDeviceKind}"
+                                    th:value="${type.id}"
+                                    th:text="${'设备性质:' + type.deviceKindName}">W3/230</option>
+                        </select>
+                        <b class="tooltip tooltip-bottom-right">设备性质</b>
+                    </label>
+                </fieldset>
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+            <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+    </form>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var callback = function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+        $("#updateform").on("submit", function (e) {
+//            alert($(this).serialize());
+//            e.preventDefault();
+            $.post(this.action, $(this).serialize(), callback);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
+
+</body>
+</html>

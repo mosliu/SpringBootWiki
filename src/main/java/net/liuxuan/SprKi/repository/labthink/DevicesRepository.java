@@ -3,6 +3,9 @@ package net.liuxuan.SprKi.repository.labthink;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.<br />
@@ -15,7 +18,12 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * YYYY-MM-DD |    Author      |	 Change Description<br/>
  * 2016/3/7  |    Moses       |     Created<br/>
  */
+@Repository
 public interface DevicesRepository extends JpaRepository<Devices, Long> , JpaSpecificationExecutor<Devices> {
-//public interface DevicesRepository extends GenericRepository<Devices, Long>, JpaSpecificationExecutor<Devices> {
+
+    List<Devices> findByDevicenameOrDevicenameENOrDevicenameCN(String  devicename,String  devicenameen,String  devicenamecn);
+    List<Devices> findByDevicename(String  devicename);
+
+    List<Devices> findByDevicenameNot(String  notDevicename);
 
 }

@@ -21,21 +21,38 @@ import java.util.Date;
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Comment")
 public class CMSComment {
+    /**
+     * The Id.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
     protected Long id;
+
+    /**
+     * The Disabled.
+     */
     @Column(nullable = false)
     protected boolean disabled = false; ////是否删除
+
+    /**
+     * The Publish date.
+     */
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date publishDate; // 发布日期
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Users username;
+    private Users author;
+
     @Column(length = 40, nullable = true)
     private String commentIP;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     private CMSComment parent;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    private CMSContent content;
     /**
      * 评论类型
      */
@@ -46,8 +63,12 @@ public class CMSComment {
     /**
      * 评论内容
      */
+    @Column(columnDefinition = "text", nullable = false)
     private String commentContent;
 
+    /**
+     * Publish time.
+     */
     @PrePersist
     void publishTime() {
         this.publishDate = new Date();

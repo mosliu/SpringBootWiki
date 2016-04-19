@@ -1,4 +1,4 @@
-package net.liuxuan.SprKi.service.faq;
+package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
@@ -212,6 +212,11 @@ public class FAQContentServiceImpl implements FAQContentService {
         faq.setClicks(faq.getClicks() + 1);
 //        faqContentRepository.save(faq);
         return faq;
+    }
+
+    @Override
+    public long getFAQContentsCount() {
+        return faqContentRepository.count();
     }
 
 

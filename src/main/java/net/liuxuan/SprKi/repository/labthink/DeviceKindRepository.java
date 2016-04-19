@@ -2,6 +2,9 @@ package net.liuxuan.SprKi.repository.labthink;
 
 import net.liuxuan.SprKi.entity.labthink.DeviceKind;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -14,5 +17,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * YYYY-MM-DD |    Author      |	 Change Description	<br/>
  * 2016/3/7  |    Moses       |     Created <br/>
  */
+@Repository
 public interface DeviceKindRepository extends JpaRepository<DeviceKind, Long> {
+    List<DeviceKind> findByDeviceKindNameOrDeviceKindNameENOrDeviceKindNameCN(String  deviceKindName,String  deviceKindNameEN,String  deviceKindNameCN);
+    List<DeviceKind> findByDeviceKindName(String  deviceKindName);
+
+    List<DeviceKind> findByDeviceKindNameNot(String  notdeviceKindName);
 }

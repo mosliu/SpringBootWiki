@@ -1,10 +1,10 @@
 package net.liuxuan.SprKi.entity.labthink;
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.liuxuan.SprKi.entity.Base;
 import org.hibernate.search.annotations.Field;
+
+import javax.persistence.*;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -21,7 +21,7 @@ import org.hibernate.search.annotations.Field;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_Labthink_Department")
-public class Department extends Base{
+public class Department{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
@@ -33,7 +33,6 @@ public class Department extends Base{
     @Column(nullable = false,length = 80)
     String departmentNameCN;
 
-    public Department(Long id) {
-        super(id);
-    }
+
+
 }

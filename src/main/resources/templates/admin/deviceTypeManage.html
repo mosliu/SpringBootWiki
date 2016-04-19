@@ -12,10 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>用户管理</h1>
+        <h1>设备品种管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
-            <li class="active">用户管理</li>
+            <li>设备管理</li>
+            <li class="active">设备种类管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -26,15 +27,12 @@
 
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
-                <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建用户 <span
+                <li class=""><!-- TAB 1 -->
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建设备种类 <span
                             class="label label-danger">label</span></a>
                 </li>
-                <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 用户列表 <span class="caret"></span></a>
-                </li>
-                <li class=""><!-- TAB 2 -->
-                    <a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>
+                <li class="active"><!-- TAB 2 -->
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 设备种类列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -58,120 +56,68 @@
             <!-- tabs content -->
             <div class="tab-content transparent">
 
-                <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
+                <div id="ttab1l_nobg" class="tab-pane"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
-                              th:object="${user}">
-                            <header><i class="fa fa-users"></i> Create Account
-                                <small class="note bold">IT'S FREE</small>
+                        <form action="/admin/device_type_ajax?action=add" method="post"
+                              class="validate-plugin sky-form boxed"
+                        >
+                            <header><i class="fa fa-users"></i> 新建设备种类
+                                <small class="note bold">例如“力与强度”</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
                                     <i class="icon-append fa fa-user"></i>
-                                    <input type="text" th:field="*{users.username}" name="username"
-                                           placeholder="Username" minlength="4" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                    <input type="text" id="device_type_name" name="device_type_name"
+                                           placeholder="设备种类名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">Needed to typeify the device</b>
                                 </label>
-
                                 <label class="input">
-                                    <i class="icon-append fa fa-lock"></i>
-                                    <input type="password" th:field="*{users.password}" name="password"
-                                           placeholder="Password" minlength="4" required="true" class="form-control"/>
-                                    <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" id="device_type_name_cn" name="device_type_name_cn"
+                                           placeholder="设备种类名称(中文)" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">Needed to typeify the device</b>
                                 </label>
-                            </fieldset>
-
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="input">
-                                            <input type="text" th:field="*{firstName}" placeholder="First name"
-                                                   class="form-control"/>
-                                        </label>
-                                    </div>
-                                    <div class="col col-md-6">
-                                        <label class="input">
-                                            <input type="text" th:field="*{lastName}" placeholder="Last name"
-                                                   class="form-control"/>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <label class="select">
-                                    <select th:field="*{gender}" class="form-control">
-                                        <option value="0" selected="" disabled="">Gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
-                                    </select>
-                                    <i></i>
-                                </label>
-
-                                <label class="select">
-                                    <select th:field="*{department}" class="form-control pointer required">
-                                        <option th:each="type : ${Department_list}"
-                                                th:value="${type.id}"
-                                                th:text="${'department:' + type.departmentName}">售后
-                                        </option>
-                                    </select>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" id="device_type_name_en" name="device_type_name_en"
+                                           placeholder="设备种类名称(英文)" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">Needed to typeify the device</b>
                                 </label>
                             </fieldset>
 
                             <footer>
                                 <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
-                                    Create Account
+                                    确认新建
                                 </button>
                             </footer>
 
                         </form>
                     </div>
-                    <p>tab1</p>
                 </div><!-- /TAB 1 CONTENT -->
 
-                <div id="ttab2l_nobg" class="tab-pane "><!-- TAB 2 CONTENT -->
+                <div id="ttab2l_nobg" class="tab-pane active"><!-- TAB 2 CONTENT -->
                     <table id="myTableId" class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>用户名</th>
-                            <th>密码</th>
-                            <th>启用</th>
-                            <th>别名</th>
-                            <th>注册日期</th>
-                            <th>权限</th>
+                            <th>ID</th>
+                            <th>设备种类名称</th>
+                            <th>设备种类中文名称</th>
+                            <th>设备种类英文名称</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="u : ${users}">
-                            <td th:text="${u?.username}">Doe</td>
-                            <td th:text="${u?.password}">John</td>
-                            <td th:text="${u?.enabled}">John</td>
-                            <td th:text="${u?.usernameAlias}">John</td>
-                            <td th:text="${u?.regdate}">John</td>
-                            <td>
-
-                                    <ul th:each="auth : ${u?.auths}">
-                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal" th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}">
-                                            <li th:text="${auth?.authority}"></li>
-                                        </a>
-                                    </ul>
-
-                            </td>
-                            <td th:text="${u?.username}">Doe</td>
+                        <tr th:each="d : ${alllist}">
+                            <td th:text="${d.id}">Doe</td>
+                            <td th:text="${d?.deviceTypeName}">name</td>
+                            <td th:text="${d?.deviceTypeNameCN}">名字</td>
+                            <td th:text="${d?.deviceTypeNameEN}">mingzi</td>
+                            <td th:text="${d?.id}">操作</td>
                         </tr>
                         </tbody>
                     </table>
                 </div><!-- /TAB 2 CONTENT -->
-
-                <div id="ttab3l_nobg" class="tab-pane "><!-- TAB 2 CONTENT -->
-                    <p>tab2</p>
-                    <a class=" btn btn-primary" href="/admin/user?action=edit&amp;sid=user" data-target="#ajax"
-                       data-toggle="modal">Ajax Modal</a>
-                    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                        Bootstrap Modal
-                    </button>
-                </div><!-- /TAB 3 CONTENT -->
 
             </div>
             <!-- /tabs content -->
@@ -228,13 +174,13 @@
                 $(this).removeData('bs.modal');
 //                $(this).empty();
             })
-
+//            console.log("hello!");
         });
 
-        function deleteUsers(btn, sid) {
+        function deleteObject(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
-            var tourl = "/admin/user?action=delete&sid=" + sid;
+            var tourl = "/admin/device_type_ajax?action=delete&sid=" + sid;
             jQuery.ajax({
                 url: tourl,
                 context: btn,
@@ -259,30 +205,28 @@
                         table.dataTable({
 
                             "columns": [
-                                {"data": "username"},
-                                {"orderable": true, "data": "password"},
-                                {"orderable": true, "data": "enabled"},
-                                {"orderable": true, "data": "usernameAlias"},
-                                {"orderable": true, "data": "regdate"},
-                                {"orderable": true, "data": "auth"},
+                                {"data": "did"},
+                                {"orderable": true, "data": "name"},
+                                {"orderable": true, "data": "namecn"},
+                                {"orderable": true, "data": "nameen"},
                                 {
                                     "orderable": true,
-                                    "data": "username",
+                                    "data": "did",
+                                    "type" :"display",
                                     "render": function (data, type, full, meta) {
-                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/user?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteUsers(this,\'' + data + '\')" href="#' + data + '"> 停用 </a> ';
+//                                        console.log(full);
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/devices?action=edit_DeviceType&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteObject(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
-                                },
+                                }
                             ],
                             "lengthMenu": [
-                                [5, 15, 20, -1],
-                                [5, 15, 20, "All"] // change per page values here
+                                [5, 10, 20, -1],
+                                [5, 10, 20, "All"] // change per page values here
                             ],
                             // set the initial value
                             "pageLength": 5,
                             "pagingType": "bootstrap_full_number",
-                            "order": [
-                                [1, "asc"],
-                            ], // set first column as a default sort by asc
+
                             language: {
                                 "sProcessing": "处理中...",
                                 "sLengthMenu": "显示 _MENU_ 项结果",
@@ -354,7 +298,7 @@
                                 success: function (data, textStatus) {
 
 //                                var data = data.trim();
-                                    alert(textStatus);
+//                                    console.log(textStatus);
                                     if (data.status == "success") {
                                         _toastr(data.msg, _Tposition, "success", _Turl);
                                         // Clear the form

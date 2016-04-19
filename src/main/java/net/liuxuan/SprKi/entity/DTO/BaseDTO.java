@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.entity.DTO;
 
 import lombok.Data;
 import lombok.ToString;
+import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -26,4 +27,18 @@ public class BaseDTO {
      * The ID.
      */
     public String sid;
+
+    /**
+     * Get str 2 long id long.
+     * if id is wrong,return negative value -1;
+     *
+     * @return the long
+     */
+    public Long getStr2LongID(){
+        if(NumberUtils.isNumber(sid)){
+            return Long.parseLong(sid);
+        }
+        return -1L;
+    }
+
 }
