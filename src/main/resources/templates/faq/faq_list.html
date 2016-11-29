@@ -235,7 +235,10 @@
                 "columns": [
                     {},
                     {"data": "category.name"},
-                    {"data": "title"},
+                    {"data": "title",
+                        "render": function (data, type, full, meta) {
+                            return '<a href="/faq/show/' + full.id + '"> '+ data +' </a>';
+                        }},
                     {"data": "department.departmentName"},
                     {"data": "devices.devicename"},
                     {"data": "author.username"},

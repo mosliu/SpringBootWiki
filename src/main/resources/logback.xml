@@ -103,6 +103,8 @@
 
     <logger name="com.github.dandelion" level="INFO"/>
 
+    <logger name="com.sun.mail.smtp" level="DEBUG"/>
+
 
     <logger name="javax.management" level="INFO"/>
     <logger name="sun.rmi" level="INFO"/>

@@ -46,6 +46,7 @@ public class ErrorHandleController {
     public ModelAndView handleError(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
+        log.error("ERROR Happend! handleError() invoked!");
         ModelAndView model = new ModelAndView("common/temp");
         model.getModel().put("status", response.getStatus());
         model.getModel().put("error", ex.getMessage());
@@ -93,7 +94,7 @@ public class ErrorHandleController {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllException(HttpServletRequest req, Exception ex) throws Exception {
-        log.debug("-ErrorHandleController.handleAllException() invoked");
+        log.error("-ErrorHandleController.handleAllException() invoked");
 
         // If the exception is annotated with @ResponseStatus rethrow it and let
         // the framework handle it - like the OrderNotFoundException example
@@ -120,7 +121,7 @@ public class ErrorHandleController {
     //    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
     public ModelAndView handle404Exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
 
-
+        log.error("-ErrorHandleController.handle404Exception() invoked");
         ModelAndView model = new ModelAndView("common/404");
         model.getModel().put("status", response.getStatus());
         model.getModel().put("error", ex.getMessage());
@@ -145,6 +146,8 @@ public class ErrorHandleController {
 //        log.debug("-ErrorHandleController.handleAccessDeniedException() invoked");
 //        if (request.getRemoteUser() == null) {
 
+
+
         if (!request.authenticate(response)) {
             RequestCache requestCache = new HttpSessionRequestCache();
             requestCache.saveRequest(request, response);
@@ -165,6 +168,7 @@ public class ErrorHandleController {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ModelAndView handleMethodNotSupportedException(Exception ex) {
+        log.error("handleMethodNotSupportedException() invoked");
         ModelAndView model = new ModelAndView("common/temp");
         model.getModel().put("error", ex.getMessage());
         model.getModel().put("title", "MethodNotSupported");

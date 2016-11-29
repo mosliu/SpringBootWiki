@@ -52,11 +52,11 @@
         </li>
         <li class="col-md-3">
             <ul class="side-nav list-group margin-bottom-80">
-                <li class="list-group-item"><a href="#"><i class="fa fa-eye"></i> 部门：<span
+                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?department='+${faq?.department.id}"><i class="fa fa-eye"></i> 部门：<span
                         th:text="${faq.department.departmentName}">department</span></a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-comments-o"></i> 设备： <span
+                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?devices='+${faq?.devices.id}"><i class="fa fa-comments-o"></i> 设备： <span
                         th:text="${faq.devices.devicename}">devices</span></a></li>
-                <li class="list-group-item"><a href="#"><i class="fa fa-history"></i> 分类：<span
+                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?category='+${faq?.category.id}"><i class="fa fa-history"></i> 分类：<span
                         th:text="${faq.category.name}">category</span></a></li>
             </ul>
         </li>

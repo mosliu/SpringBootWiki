@@ -35,17 +35,17 @@ public class LuceneConfiguration {
     private static Logger log =  LoggerFactory.getLogger(LuceneConfiguration.class);
 
 
-//    @Bean
-//    public ChineseWordAnalyzer analyzer(){
-//        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
-//        WordConfTools.set("auto.detect", "false");
-//        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
-//        return new ChineseWordAnalyzer();
-//    }
     @Bean
-    public Analyzer analyzer(){
-        return new SimpleAnalyzer();
+    public ChineseWordAnalyzer analyzer(){
+        WordConfTools.set("dic.storeDir","classpath:dic.txt，classpath:config/mydic.txt");
+        WordConfTools.set("auto.detect", "false");
+        log.info("#######################Initialized ChineseWordAnalyzer ###########################");
+        return new ChineseWordAnalyzer();
     }
+//    @Bean
+//    public Analyzer analyzer(){
+//        return new SimpleAnalyzer();
+//    }
 
 
     @Bean
@@ -63,10 +63,10 @@ public class LuceneConfiguration {
     }
 //    @Bean
     public boolean doconfig(){
-        WordConfTools.set("dic.path","classpath:dic.txt，classpath:config/mydic.txt");
+        WordConfTools.set("dic.storeDir","classpath:dic.txt，classpath:config/mydic.txt");
         DictionaryFactory.reload();//更改词典路径之后，重新加载词典
-//        String path = WordConfTools.get("dic.path");
-//        log.info("dic.path {}" ,path);
+//        String storeDir = WordConfTools.get("dic.storeDir");
+//        log.info("dic.storeDir {}" ,storeDir);
         return true;
     }
 }

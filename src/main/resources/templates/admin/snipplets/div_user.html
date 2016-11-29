@@ -30,7 +30,7 @@
                     <label class="input">
                         <i class="icon-append fa fa-lock"></i>
                         <input type="password" th:field="*{users.password}" name="password"
-                               placeholder="Password"/>
+                               placeholder="密码"/>
                         <b class="tooltip tooltip-bottom-right">修改密码</b>
                     </label>
                     <label>账户别名</label>
@@ -57,6 +57,13 @@
                             </label>
                         </div>
                     </div>
+                    <label>邮件地址</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        <input type="text" th:field="*{email}" name="usernameAlias"
+                               placeholder="邮件地址"/>
+                        <b class="tooltip tooltip-bottom-right">邮件地址</b>
+                    </label>
                     <label>性别</label>
                     <label class="select">
 
@@ -73,7 +80,7 @@
                         <select th:field="*{department}" class="form-control pointer required">
                             <option th:each="type : ${Department_list}"
                                     th:value="${type.id}"
-                                    th:text="${'department:' + type.departmentName}">售后
+                                    th:text="${'部门:' + type.departmentName}">售后
                             </option>
                         </select>
                     </label>

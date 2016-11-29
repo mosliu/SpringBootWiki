@@ -2,16 +2,22 @@ package net.liuxuan.spring.Helper;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
+import net.liuxuan.SprKi.repository.security.UsersRepository;
+import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
@@ -29,7 +35,11 @@ public final class SystemHelper {
         throw new Error("工具类不能实例化！");
     }
 
+    @Resource
+    static UserDetailInfoRepository userDetailInfoRepository;
 
+    @Resource
+    static UsersRepository usersRepository;
 
     /**
      * 退出系统并清空session
@@ -148,6 +158,14 @@ public final class SystemHelper {
         }
         return currentUserIp;
     }
+
+    public static UserDetailInfo getCurrentUserDetailInfo(){
+        UserDetails userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+        Users u = usersRepository.findOne(userDetails.getUsername());
+        UserDetailInfo udi =userDetailInfoRepository.findByUsers(u);
+        return udi;
+    }
+
 
     /**
      * 得到当前SessionId

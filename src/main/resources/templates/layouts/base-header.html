@@ -29,9 +29,11 @@
         <!-- BUTTONS -->
         <ul class="pull-right nav nav-pills nav-second-main">
             <li sec:authorize="hasRole('ROLE_USER')">
-                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#"><i
-                        class="fa fa-user hidden-xs"></i> <strong sec:authentication="name">John
-                    Doe</strong></a>
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user hidden-xs"></i>
+                    <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                    <strong sec:authentication="name">John Doe</strong>
+                </a>
                 <ul class="dropdown-menu">
                     <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
                     <li class="divider"></li>
@@ -58,50 +60,6 @@
             </li>
             <!-- /SEARCH -->
 
-            <!-- QUICK SHOP CART-->
-            <!-- //TODO 改用做Users -->
-            <li class="quick-cart">
-                <a href="#">
-                    <span class="badge badge-aqua btn-xs badge-corner">2</span>
-                    <i class="fa fa-shopping-cart"></i>
-                </a>
-                <div class="quick-cart-box">
-                    <h4>Shop Cart</h4>
-
-                    <div class="quick-cart-wrapper">
-
-                        <a href="#"><!-- cart item -->
-                            <!--<img src="/ui/smarty/images/demo/people/300x300/4-min.jpg" width="45" height="45" alt=""/>-->
-                            <h6><span>2x</span> RED BAG WITH HUGE POCKETS</h6>
-                            <small>$37.21</small>
-                        </a><!-- /cart item -->
-
-                        <a href="#"><!-- cart item -->
-                            <!--<img src="/ui/smarty/images/demo/people/300x300/5-min.jpg" width="45" height="45" alt=""/>-->
-                            <h6><span>2x</span> THIS IS A VERY LONG TEXT AND WILL BE TRUNCATED</h6>
-                            <small>$17.18</small>
-                        </a><!-- /cart item -->
-
-                        <!-- cart no items example -->
-                        <!--
-                        <a class="text-center" href="#">
-                            <h6>0 ITEMS ON YOUR CART</h6>
-                        </a>
-                        -->
-
-                    </div>
-
-                    <!-- quick cart footer -->
-                    <div class="quick-cart-footer clearfix">
-                        <a href="shop-cart.html" class="btn btn-primary btn-xs pull-right">VIEW CART</a>
-                        <span class="pull-left"><strong>TOTAL:</strong> $54.39</span>
-                    </div>
-                    <!-- /quick cart footer -->
-
-                </div>
-            </li>
-            <!-- /QUICK SHOP CART -->
-
         </ul>
         <!-- /BUTTONS -->
 
@@ -122,10 +80,28 @@
                     </li>
 
                     <li class="dropdown">
+                        <a class="dropdown-toggle" href="#">问题提交</a>
+                        <ul class="dropdown-menu">
+                            <li><a  href="/ticket" th:href="@{/ticket}">新问题</a></li>
+                            <li><a  href="/faqlist" th:href="@{/ticketlist}">所提问题查看--这里应该有权限管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
                         <a class="dropdown-toggle" href="#">支持信息库</a>
                         <ul class="dropdown-menu">
                             <li><a  href="/faq" th:href="@{/faq}">发布新信息</a></li>
                             <li><a  href="/faqlist" th:href="@{/faqlist}">信息列表查看</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#">支持工具</a>
+                        <ul class="dropdown-menu">
+                            <li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>
+                            <li><a  href="/tools/unitconv" th:href="@{/tools/unitconv}">单位转换工具</a></li>
+                            <li><a  href="/tools/formula/vacuum" th:href="@{/tools/formula/vacuum}">压差法数据计算工具</a></li>
+                            <li><a  href="/tools/OCR" th:href="@{/tools/formula/vacuum}">OCR工具</a></li>
                         </ul>
                     </li>
 

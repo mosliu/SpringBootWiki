@@ -43,6 +43,8 @@ public class UserDetailInfo {
     @Column(nullable = true ,length = 20)
     String gender;
 
+    @Column(nullable = true ,length = 50)
+    String email;
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     Department department;
 

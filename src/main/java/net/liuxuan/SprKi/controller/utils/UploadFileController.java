@@ -1,11 +1,9 @@
-package net.liuxuan.SprKi.controller;
+package net.liuxuan.SprKi.controller.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,22 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.nio.file.Paths;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
  * ***************************************************************************
- * 源文件名:  net.liuxuan.SprKi.controller.UploadFileController
+ * 源文件名:  net.liuxuan.SprKi.controller.utils.UploadFileController
  * 功能:
  * 版本:	@version 1.0
  * 编制日期: 2016/2/23 15:45
@@ -41,9 +35,9 @@ import java.util.Iterator;
 public class UploadFileController {
 
     @Value("${SprKi.upload.savepathroot}")
-    private String picsavepathroot;
+    private String picSavePathRoot;
     @Value("${SprKi.upload.savepathchild}")
-    private String picsavepathchild;
+    private String picSavePathChild;
 
 //    @Autowired
 //    CommonsMultipartResolver multipartResolver;
@@ -90,7 +84,7 @@ public class UploadFileController {
         MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
         MultipartFile imgFile1  =  multipartRequest.getFile("image");
         log.debug("-Entered /upload/image2 UploadFileController.handleUploadProcess2() ");
-        File path = new File(picsavepathroot+picsavepathchild+"/");
+        File path = new File(picSavePathRoot + picSavePathChild +"/");
         path.mkdirs();
 //        System.out.println(path.getAbsolutePath());
 //        if(path.exists()){
@@ -115,7 +109,7 @@ public class UploadFileController {
 
         model.addAttribute("success", "true");
         StringBuilder sb = new StringBuilder();
-        sb.append(picsavepathchild+storename);
+        sb.append(picSavePathChild +storename);
         log.debug("uploaded file {},stored at ",storename,saveimg.getAbsolutePath());
 
         return sb.toString();

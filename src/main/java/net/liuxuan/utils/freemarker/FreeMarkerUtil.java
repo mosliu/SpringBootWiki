@@ -25,8 +25,8 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "UserDetailInfo";
-    String subpackage = ".user";//如果需要放到labthink下，则为".labthink"
+    String model_name = "SecurityLog";
+    String subpackage = ".security";//如果需要放到labthink下，则为".labthink"
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();

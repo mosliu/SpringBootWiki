@@ -7,12 +7,17 @@ package net.liuxuan.spring.mvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.validation.MessageCodesResolver;
 import org.springframework.validation.Validator;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -132,9 +137,9 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     }
 
     /**
-     * Helps with configuring HandlerMappings path matching options such as trailing slash match,
-     * suffix registration, path matcher and path helper.
-     * Configured path matcher and path helper instances are shared for:
+     * Helps with configuring HandlerMappings storeDir matching options such as trailing slash match,
+     * suffix registration, storeDir matcher and storeDir helper.
+     * Configured storeDir matcher and storeDir helper instances are shared for:
      * <ul>
      * <li>RequestMappings</li>
      * <li>ViewControllerMappings</li>
@@ -239,7 +244,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 
     /**
      * Add handlers to serve static resources such as images, js, and, css
-     * files from specific locations under web application root, the classpath,
+     * uploadFiles from specific locations under web application root, the classpath,
      * and others.
      */
     @Override
@@ -375,4 +380,21 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //    }
 
 
+    @Bean(name = "mailSender")
+    public JavaMailSender mailSender(){
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.qiye.163.com");
+        mailSender.setUsername("liuxuan@labthink.com");
+        mailSender.setPassword("Moses0319");
+        mailSender.setPort(25);
+        return mailSender ;
+    }
+
+    @Bean(name = "templateMessage")
+    public SimpleMailMessage templateMessage(){
+        SimpleMailMessage templateMessage = new SimpleMailMessage();
+        templateMessage.setFrom("liuxuan@labthink.com");
+        templateMessage.setSubject("AAA");
+        return templateMessage ;
+    }
 }

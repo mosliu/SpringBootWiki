@@ -2,10 +2,7 @@ package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
 import net.liuxuan.SprKi.entity.security.Users;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
-import org.hibernate.search.annotations.Store;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,6 +31,8 @@ public class CMSContent {
      * The Id.
      */
     @Id
+    //@DocumentId:标明Car的id字段应该被用作Lucene索引中文档的ID，这几乎总是和数据库中实体的主键是同一个字段。
+    @DocumentId
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
     protected Long id;
@@ -123,7 +122,7 @@ public class CMSContent {
      */
     @Lob
     @Field
-    @Column(columnDefinition = "mediumtext", nullable = false)
+    @Column(columnDefinition = "longtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
     protected String infoText =""; // 正文
 

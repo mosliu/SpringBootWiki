@@ -63,21 +63,21 @@
                         <form action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
                               th:object="${user}">
                             <header><i class="fa fa-users"></i> Create Account
-                                <small class="note bold">IT'S FREE</small>
+                                <small class="note bold">IT'S EASY</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
                                     <i class="icon-append fa fa-user"></i>
                                     <input type="text" th:field="*{users.username}" name="username"
-                                           placeholder="Username" minlength="4" required="true" class="form-control "/>
+                                           placeholder="用户名" minlength="4" required="true" class="form-control "/>
                                     <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
                                 </label>
 
                                 <label class="input">
                                     <i class="icon-append fa fa-lock"></i>
                                     <input type="password" th:field="*{users.password}" name="password"
-                                           placeholder="Password" minlength="4" required="true" class="form-control"/>
+                                           placeholder="密码" minlength="4" required="true" class="form-control"/>
                                     <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
                                 </label>
                             </fieldset>
@@ -97,13 +97,16 @@
                                         </label>
                                     </div>
                                 </div>
-
+                                <label class="input">
+                                    <input type="text" th:field="*{email}" required="true" placeholder="Email 地址"
+                                           class="form-control"/>
+                                </label>
                                 <label class="select">
                                     <select th:field="*{gender}" class="form-control">
                                         <option value="0" selected="" disabled="">Gender</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                        <option value="3">其他</option>
                                     </select>
                                     <i></i>
                                 </label>
@@ -112,7 +115,7 @@
                                     <select th:field="*{department}" class="form-control pointer required">
                                         <option th:each="type : ${Department_list}"
                                                 th:value="${type.id}"
-                                                th:text="${'department:' + type.departmentName}">售后
+                                                th:text="${'部门:' + type.departmentName}">售后
                                         </option>
                                     </select>
                                 </label>
@@ -151,11 +154,12 @@
                             <td th:text="${u?.regdate}">John</td>
                             <td>
 
-                                    <ul th:each="auth : ${u?.auths}">
-                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal" th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}">
-                                            <li th:text="${auth?.authority}"></li>
-                                        </a>
-                                    </ul>
+                                <ul th:each="auth : ${u?.auths}">
+                                    <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
+                                       th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}">
+                                        <li th:text="${auth?.authority}"></li>
+                                    </a>
+                                </ul>
 
                             </td>
                             <td th:text="${u?.username}">Doe</td>

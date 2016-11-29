@@ -1,0 +1,1066 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
+<head>
+    <title>Messages : View</title>
+</head>
+<body>
+<h1 layout:fragment="header">Messages : Create</h1>
+<div layout:fragment="content" class="container">
+    <div class="nrd">
+        <br/>
+        <div class="cyhs">
+            <p align="center">
+                <a href="#pressure">压力单位换算器</a>&nbsp;|
+                <a href="#length">长度单位换算</a>&nbsp;|
+                <a href="#area">面积单位换算</a>&nbsp;|
+                <a href="#power">功率计量单位</a>&nbsp;|
+                <a href="#volume">体积和容量计量单位</a>&nbsp;|
+                <a href="#energy">功、能和热量转换</a>&nbsp;|
+                <a href="#temperature">温度转换</a>&nbsp;|
+                <a href="#weight">重量单位换算</a>&nbsp;
+            </p>
+        </div>
+        <br/>
+        <script type="text/javascript">
+            $('#header').toggleClass('shadow-after-3');
+        </script>
+        <script type="text/javascript" src="/commons/js/unitconv.js"></script>
+        <div class="special_recommend_periodic">
+            <div class="container">
+                <!--压力计量单位-->
+                <div id="converter8">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle"><b><a id="pressure"
+                                                                                       name="pressure"></a>压力计量单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">巴(bar)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="mBar"/>
+                                    <input onclick="if (checkNum(mBar.value)) compute(this.form,mBar.name,press_data)"
+                                           value="换算" type="button" name="mBar_bt"/></td>
+                                <td nowrap="" align="right" width="20%">千帕(kPa)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="mKilopascal"/> <input
+                                        onclick="if (checkNum(mKilopascal.value)) compute(this.form,mKilopascal.name,press_data)"
+                                        value="换算" type="button" name="mKilopascal_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">百帕(hPa)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12"
+                                           name="mHectopascal"/> <input
+                                        onclick="if (checkNum(mHectopascal.value)) compute(this.form,mHectopascal.name,press_data)"
+                                        value="换算" type="button" name="mHectopascal_bt"/></td>
+                                <td nowrap="" align="right" width="20%">毫巴(mbar)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="mMillibar"/>
+                                    <input onclick="if (checkNum(mMillibar.value)) compute(this.form,mMillibar.name,press_data)"
+                                           value="换算" type="button" name="mMillibar_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">帕斯卡(Pa = N/m2)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="mPascal"/>
+                                    <input onclick="if (checkNum(mPascal.value)) compute(this.form,mPascal.name,press_data)"
+                                           value="换算" type="button" name="mPascal_bt"/></td>
+                                <td nowrap="" align="right" width="20%">标准大气压(atm)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="mAtm"/>
+                                    <input onclick="if (checkNum(mAtm.value)) compute(this.form,mAtm.name,press_data)"
+                                           value="换算" type="button" name="mAtm_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">毫米汞柱(托)(mm Hg = Torr)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12"
+                                           name="mMillimeter_Hg"/> <input
+                                        onclick="if (checkNum(mMillimeter_Hg.value)) compute(this.form,mMillimeter_Hg.name,press_data)"
+                                        value="换算" type="button" name="mMillimeter_Hg_bt"/></td>
+                                <td nowrap="" align="right" width="20%">磅力/英尺2(lbf/ft2)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="engPound_sq_foot"/> <input
+                                        onclick="if (checkNum(engPound_sq_foot.value)) compute(this.form,engPound_sq_foot.name,press_data)"
+                                        value="换算" type="button" name="engPound_sq_foot_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">磅力/英寸2(lbf/in2 = PSI)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12"
+                                           name="engPound_sq_inch"/> <input
+                                        onclick="if (checkNum(engPound_sq_inch.value)) compute(this.form,engPound_sq_inch.name,press_data)"
+                                        value="换算" type="button" name="engPound_sq_inch_bt"/></td>
+                                <td nowrap="" align="right" width="20%">英吋汞柱(in?Hg)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="engInch_Hg"/> <input
+                                        onclick="if (checkNum(engInch_Hg.value)) compute(this.form,engInch_Hg.name,press_data)"
+                                        value="换算" type="button" name="engInch_Hg_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">公斤力/厘米2(kgf/cm2)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12"
+                                           name="xpressKg_sq_cm"/> <input
+                                        onclick="if (checkNum(xpressKg_sq_cm.value)) compute(this.form,xpressKg_sq_cm.name,press_data)"
+                                        value="换算" type="button" name="xpressKg_sq_cm_bt"/></td>
+                                <td nowrap="" align="right" width="20%">公斤力/米2(kgf/m2)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="xpressKg_sq_m"/> <input
+                                        onclick="if (checkNum(xpressKg_sq_m.value)) compute(this.form,xpressKg_sq_m.name,press_data)"
+                                        value="换算" type="button" name="xpressKg_sq_m_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">毫米水柱(mmH2O)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="mmmH2O"/>
+                                    <input onclick="if (checkNum(mmmH2O.value)) compute(this.form,mmmH2O.name,press_data)"
+                                           value="换算" type="button" name="mmmH2O_bt"/></td>
+                                <td colspan="2">
+                                    <div align="right">　</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="center" colspan="4">
+                                    <input value="数据重置" type="reset"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div><!--/ result-->
+            </div>
+            <div class="container">
+                <div id="converter1">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%" align="center">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle">
+                                    <a id="length" name="length"></a><b>长度单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">公里(km)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mKilometer"/>
+                                    <input onclick="if (checkNum(mKilometer.value)) compute(this.form,mKilometer.name,length_data)"
+                                           value="换算" type="button" name="mKilometer_bt"/>
+                                </td>
+                                <td nowrap="" align="right" width="18%">米(m)</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="mMeter"/>
+                                    <input onclick="if (checkNum(mMeter.value)) compute(this.form,mMeter.name,length_data)"
+                                           value="换算" type="button" name="mMeter_bt"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">分米(dm)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mDecimeter"/>
+                                    <input onclick="if (checkNum(mDecimeter.value)) compute(this.form,mDecimeter.name,length_data)"
+                                           value="换算" type="button" name="mDecimeter_bt"/>
+                                </td>
+                                <td nowrap="" align="right" width="18%">厘米(cm)</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="mCentimeter"/> <input
+                                        onclick="if (checkNum(mCentimeter.value)) compute(this.form,mCentimeter.name,length_data)"
+                                        value="换算" type="button" name="mCentimeter_bt"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">毫米(mm)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mMillimeter"/>
+                                    <input
+                                            onclick="if (checkNum(mMillimeter.value)) compute(this.form,mMillimeter.name,length_data)"
+                                            value="换算" type="button" name="mMillimeter_bt"/>
+                                </td>
+                                <td nowrap="" align="right" width="18%">微米(um)</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="mMicronmeter"/>
+                                    <input
+                                            onclick="if (checkNum(mMicronmeter.value)) compute(this.form,mMicronmeter.name,length_data)"
+                                            value="换算" type="button" name="mMicronmeter_bt"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">里</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mLimeter"/>
+                                    <input onclick="if (checkNum(mLimeter.value)) compute(this.form,mLimeter.name,length_data)"
+                                           value="换算" type="button" name="mLimeter_bt"/></td>
+                                <td nowrap="" align="right" width="18%">丈</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15"
+                                           name="mZhangmeter"/> <input
+                                        onclick="if (checkNum(mZhangmeter.value)) compute(this.form,mZhangmeter.name,length_data)"
+                                        value="换算" type="button" name="mZhangmeter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">尺</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mChimeter"/>
+                                    <input onclick="if (checkNum(mChimeter.value)) compute(this.form,mChimeter.name,length_data)"
+                                           value="换算" type="button" name="mChimeter_bt"/></td>
+                                <td nowrap="" align="right" width="18%">寸</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="mCunmeter"/>
+                                    <input onclick="if (checkNum(mCunmeter.value)) compute(this.form,mCunmeter.name,length_data)"
+                                           value="换算" type="button" name="mCunmeter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">分</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mFenmeter"/>
+                                    <input onclick="if (checkNum(mFenmeter.value)) compute(this.form,mFenmeter.name,length_data)"
+                                           value="换算" type="button" name="mFenmeter_bt"/></td>
+                                <td nowrap="" align="right" width="18%">厘</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="mmLimeter"/>
+                                    <input onclick="if (checkNum(mmLimeter.value)) compute(this.form,mmLimeter.name,length_data)"
+                                           value="换算" type="button" name="mmLimeter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">海里(nmi)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="nautMile"/>
+                                    <input onclick="if (checkNum(nautMile.value)) compute(this.form,nautMile.name,length_data)"
+                                           value="换算" type="button" name="nautMile_bt"/></td>
+                                <td nowrap="" align="right" width="18%">英寻</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15"
+                                           name="nautFathom"/> <input
+                                        onclick="if (checkNum(nautFathom.value)) compute(this.form,nautFathom.name,length_data)"
+                                        value="换算" type="button" name="nautFathom_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英里(mi)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="engMile"/>
+                                    <input onclick="if (checkNum(engMile.value)) compute(this.form,engMile.name,length_data)"
+                                           value="换算" type="button" name="engMile_bt"/></td>
+                                <td nowrap="" align="right" width="18%">弗隆(fur)</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15"
+                                           name="engFurlong"/> <input
+                                        onclick="if (checkNum(engFurlong.value)) compute(this.form,engFurlong.name,length_data)"
+                                        value="换算" type="button" name="engFurlong_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">码(yd)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="engYard"/>
+                                    <input onclick="if (checkNum(engYard.value)) compute(this.form,engYard.name,length_data)"
+                                           value="换算" type="button" name="engYard_bt"/></td>
+                                <td nowrap="" align="right" width="18%">英尺(ft)</td>
+                                <td align="left" width="32%">
+                                    <input class="int" size="15" name="engFoot"/>
+                                    <input onclick="if (checkNum(engFoot.value)) compute(this.form,engFoot.name,length_data)"
+                                           value="换算" type="button" name="engFoot_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英寸(in)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="engInch"/>
+                                    <input onclick="if (checkNum(engInch.value)) compute(this.form,engInch.name,length_data)"
+                                           value="换算" type="button" name="engInch_bt"/></td>
+                                <td colspan="2">
+                                    <div align="right">　</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" colspan="4">
+                                    <p align="center">
+                                        <input value="数据重置" type="reset"/></p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+                <div id="converter2">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle">
+                                    <a id="area" name="area"></a><b>面积单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">平方公里(km2)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15"
+                                           name="mSquare_kilometer"/> <input
+                                        onclick="if (checkNum(mSquare_kilometer.value)) compute(this.form,mSquare_kilometer.name,area_data)"
+                                        value="换算" type="button" name="mSquare_kilometer_bt"/></td>
+                                <td nowrap="" align="right" width="20%">公顷(ha)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15" name="mHectare"/>
+                                    <input onclick="if (checkNum(mHectare.value)) compute(this.form,mHectare.name,area_data)"
+                                           value="换算" type="button" name="mHectare_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">市亩</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="mAre"/>
+                                    <input onclick="if (checkNum(mAre.value)) compute(this.form,mAre.name,area_data)"
+                                           value="换算" type="button" name="mAre_bt"/></td>
+                                <td nowrap="" align="right" width="20%">平方米(m2)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15"
+                                           name="mSquare_meter"/> <input
+                                        onclick="if (checkNum(mSquare_meter.value)) compute(this.form,mSquare_meter.name,area_data)"
+                                        value="换算" type="button" name="mSquare_meter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">平方分米(dm2)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15"
+                                           name="mSquare_decimeter"/> <input
+                                        onclick="if (checkNum(mSquare_decimeter.value)) compute(this.form,mSquare_decimeter.name,area_data)"
+                                        value="换算" type="button" name="mSquare_decimeter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">平方厘米(cm2)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15"
+                                           name="mSquare_centimeter"/> <input
+                                        onclick="if (checkNum(mSquare_centimeter.value)) compute(this.form,mSquare_centimeter.name,area_data)"
+                                        value="换算" type="button" name="mSquare_centimeter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">平方毫米(mm2)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15"
+                                           name="mSquare_millimeter"/> <input
+                                        onclick="if (checkNum(mSquare_millimeter.value)) compute(this.form,mSquare_millimeter.name,area_data)"
+                                        value="换算" type="button" name="mSquare_millimeter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">平方英里(sq mi)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15"
+                                           name="engSquare_mile"/> <input
+                                        onclick="if (checkNum(engSquare_mile.value)) compute(this.form,engSquare_mile.name,area_data)"
+                                        value="换算" type="button" name="engSquare_mile_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英亩</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15" name="engAcre"/>
+                                    <input onclick="if (checkNum(engAcre.value)) compute(this.form,engAcre.name,area_data)"
+                                           value="换算" type="button" name="engAcre_bt"/></td>
+                                <td nowrap="" align="right" width="20%">平方竿(sq rd)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15"
+                                           name="usSquare_rod"/> <input
+                                        onclick="if (checkNum(usSquare_rod.value)) compute(this.form,usSquare_rod.name,area_data)"
+                                        value="换算" type="button" name="usSquare_rod_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">平方码(sq yd)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15"
+                                           name="engSquare_yard"/> <input
+                                        onclick="if (checkNum(engSquare_yard.value)) compute(this.form,engSquare_yard.name,area_data)"
+                                        value="换算" type="button" name="engSquare_yard_bt"/></td>
+                                <td nowrap="" align="right" width="20%">平方英尺(sq ft)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="15"
+                                           name="engSquare_foot"/> <input
+                                        onclick="if (checkNum(engSquare_foot.value)) compute(this.form,engSquare_foot.name,area_data)"
+                                        value="换算" type="button" name="engSquare_foot_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">平方英寸(sq in)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="15"
+                                           name="engSquare_inch"/> <input
+                                        onclick="if (checkNum(engSquare_inch.value)) compute(this.form,engSquare_inch.name,area_data)"
+                                        value="换算" type="button" name="engSquare_inch_bt"/></td>
+                                <td colspan="2">
+                                    <div align="right">　</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="center" colspan="4">
+                                    <input value="数据重置" type="reset"/></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div class="container">
+                <div id="converter3">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" width="100%" cellspacing="0">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle">
+                                    <b><a id="power" name="power"></a>功率计量单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="22%">瓦(W)</td>
+                                <td align="left" width="26%">
+                                    <input class="int" size="10" name="Watt"/>
+                                    <input onclick="if (checkNum(Watt.value)) compute(this.form,Watt.name,power_data)"
+                                           value="换算" type="button" name="Watt_bt"/></td>
+                                <td nowrap="" align="right" width="21%">千瓦(kW)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="10"
+                                           name="Kilowatt"/> <input
+                                        onclick="if (checkNum(Kilowatt.value)) compute(this.form,Kilowatt.name,power_data)"
+                                        value="换算" type="button" name="Kilowatt_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="22%">英制马力(HP)</td>
+                                <td align="left" width="26%">
+                                    <input class="int" size="10"
+                                           name="Horsepower"/> <input
+                                        onclick="if (checkNum(Horsepower.value)) compute(this.form,Horsepower.name,power_data)"
+                                        value="换算" type="button" name="Horsepower_bt"/></td>
+                                <td nowrap="" align="right" width="21%">米制马力(PS)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="10"
+                                           name="mHorsepower"/> <input
+                                        onclick="if (checkNum(mHorsepower.value)) compute(this.form,mHorsepower.name,power_data)"
+                                        value="换算" type="button" name="mHorsepower_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="22%">公斤·米/秒(kg·m/s)</td>
+                                <td align="left" width="26%">
+                                    <input class="int" size="10" name="kgms"/>
+                                    <input onclick="if (checkNum(kgms.value)) compute(this.form,kgms.name,power_data)"
+                                           value="换算" type="button" name="kgms_bt"/></td>
+                                <td nowrap="" align="right" width="21%">千卡/秒(kcal/s)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="10" name="kcals"/>
+                                    <input onclick="if (checkNum(kcals.value)) compute(this.form,kcals.name,power_data)"
+                                           value="换算" type="button" name="kcals_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="22%">英热单位/秒(Btu/s)</td>
+                                <td align="left" width="26%">
+                                    <input class="int" size="10" name="Btus"/>
+                                    <input onclick="if (checkNum(Btus.value)) compute(this.form,Btus.name,power_data)"
+                                           value="换算" type="button" name="Btus_bt"/></td>
+                                <td nowrap="" align="right" width="21%">英尺·磅/秒(ft·lb/s)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="10" name="ftlbs"/>
+                                    <input onclick="if (checkNum(ftlbs.value)) compute(this.form,ftlbs.name,power_data)"
+                                           value="换算" type="button" name="ftlbs_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="22%">焦耳/秒(J/s)</td>
+                                <td align="left" width="26%">
+                                    <input class="int" size="10" name="Js"/>
+                                    <input onclick="if (checkNum(Js.value)) compute(this.form,Js.name,power_data)"
+                                           value="换算" type="button" name="Js_bt"/></td>
+                                <td nowrap="" align="right" width="21%">牛顿·米/秒(N·m/s)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="10" name="Nms"/>
+                                    <input onclick="if (checkNum(Nms.value)) compute(this.form,Nms.name,power_data)"
+                                           value="换算" type="button" name="Nms_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div align="center">
+                                        <input value="数据重置" type="reset"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div><!--/ result--></div>
+
+            <div class="container">
+                <div id="converter4">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle">
+                                    <b><a id="volume" name="volume"></a>体积和容量计量单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖公　制〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">立方米(m3)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="mCubic_meter"/> <input
+                                        onclick="if (checkNum(mCubic_meter.value)) compute(this.form,mCubic_meter.name,vol_data)"
+                                        value="换算" type="button" name="mCubic_meter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">公石(hl)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="mHectoliter"/> <input
+                                        onclick="if (checkNum(mHectoliter.value)) compute(this.form,mHectoliter.name,vol_data)"
+                                        value="换算" type="button" name="mHectoliter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">十升(dal)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="mDekaliter"/> <input
+                                        onclick="if (checkNum(mDekaliter.value)) compute(this.form,mDekaliter.name,vol_data)"
+                                        value="换算" type="button" name="mDekaliter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">立方分米<br/>(dm3)=升(l)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="mLiter"/>
+                                    <input onclick="if (checkNum(mLiter.value)) compute(this.form,mLiter.name,vol_data)"
+                                           value="换算" type="button" name="mLiter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">分升(dl)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="mDeciliter"/> <input
+                                        onclick="if (checkNum(mDeciliter.value)) compute(this.form,mDeciliter.name,vol_data)"
+                                        value="换算" type="button" name="mDeciliter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">厘升(cl)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="mCentiliter"/> <input
+                                        onclick="if (checkNum(mCentiliter.value)) compute(this.form,mCentiliter.name,vol_data)"
+                                        value="换算" type="button" name="mCentiliter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">立方厘米(cm3)=毫升(ml)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="mMilliliter"/> <input
+                                        onclick="if (checkNum(mMilliliter.value)) compute(this.form,mMilliliter.name,vol_data)"
+                                        value="换算" type="button" name="mMilliliter_bt"/></td>
+                                <td nowrap="" align="right" width="20%">立方毫米(mm3)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="mCubic_millimeter"/> <input
+                                        onclick="if (checkNum(mCubic_millimeter.value)) compute(this.form,mCubic_millimeter.name,vol_data)"
+                                        value="换算" type="button" name="mCubic_millimeter_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖美制干量〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">桶</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="usdBarrel"/>
+                                    <input onclick="if (checkNum(usdBarrel.value)) compute(this.form,usdBarrel.name,vol_data)"
+                                           value="换算" type="button" name="usdBarrel_bt"/></td>
+                                <td nowrap="" align="right" width="20%">蒲式耳(bu)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="usdBushel"/>
+                                    <input onclick="if (checkNum(usdBushel.value)) compute(this.form,usdBushel.name,vol_data)"
+                                           value="换算" type="button" name="usdBushel_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">配克(pk)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="usdPeck"/>
+                                    <input onclick="if (checkNum(usdPeck.value)) compute(this.form,usdPeck.name,vol_data)"
+                                           value="换算" type="button" name="usdPeck_bt"/></td>
+                                <td nowrap="" align="right" width="20%">夸脱(qt)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="usdQuart"/>
+                                    <input onclick="if (checkNum(usdQuart.value)) compute(this.form,usdQuart.name,vol_data)"
+                                           value="换算" type="button" name="usdQuart_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">品脱(pt)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="usdPint"/>
+                                    <input onclick="if (checkNum(usdPint.value)) compute(this.form,usdPint.name,vol_data)"
+                                           value="换算" type="button" name="usdPint_bt"/></td>
+                                <td colspan="3"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖英制液量和干量〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">桶</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="briBarrel"/>
+                                    <input onclick="if (checkNum(briBarrel.value)) compute(this.form,briBarrel.name,vol_data)"
+                                           value="换算" type="button" name="briBarrel_bt"/></td>
+                                <td nowrap="" align="right" width="20%">蒲式耳</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="briBushel"/>
+                                    <input onclick="if (checkNum(briBushel.value)) compute(this.form,briBushel.name,vol_data)"
+                                           value="换算" type="button" name="briBushel_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">加仑(bal)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="briGallon"/>
+                                    <input onclick="if (checkNum(briGallon.value)) compute(this.form,briGallon.name,vol_data)"
+                                           value="Go!" type="button" name="briGallon_bt"/></td>
+                                <td nowrap="" align="right" width="20%">品脱(pt)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="briPint"/>
+                                    <input onclick="if (checkNum(briPint.value)) compute(this.form,briPint.name,vol_data)"
+                                           value="换算" type="button" name="briPint_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">液量盎司(fl oz)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="briFluid_ounce"/> <input
+                                        onclick="if (checkNum(briFluid_ounce.value)) compute(this.form,briFluid_ounce.name,vol_data)"
+                                        value="换算" type="button" name="briFluid_ounce_bt"/></td>
+                                <td colspan="2">　</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖公制烹调制式〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">汤勺<br/>(Table spoon)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="mcTable_spoon"/> <input
+                                        onclick="if (checkNum(mcTable_spoon.value)) compute(this.form,mcTable_spoon.name,vol_data)"
+                                        value="换算" type="button" name="mcTable_spoon_bt"/></td>
+                                <td nowrap="" align="right" width="20%">调羹<br/>(Tea spoon)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="mcTea_spoon"/> <input
+                                        onclick="if (checkNum(mcTea_spoon.value)) compute(this.form,mcTea_spoon.name,vol_data)"
+                                        value="换算" type="button" name="mcTea_spoon_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖美制烹调制式〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">汤勺(Tbs)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="uscTable_spoon"/> <input
+                                        onclick="if (checkNum(uscTable_spoon.value)) compute(this.form,uscTable_spoon.name,vol_data)"
+                                        value="换算" type="button" name="uscTable_spoon_bt"/></td>
+                                <td nowrap="" align="right" width="20%">调羹(tsp)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="uscTea_spoon"/> <input
+                                        onclick="if (checkNum(uscTea_spoon.value)) compute(this.form,uscTea_spoon.name,vol_data)"
+                                        value="换算" type="button" name="uscTea_spoon_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">杯(fl oz)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="uscCup"/>
+                                    <input onclick="if (checkNum(uscCup.value)) compute(this.form,uscCup.name,vol_data)"
+                                           value="换算" type="button" name="uscCup_bt"/></td>
+                                <td colspan="2">　</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖美制液量〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">桶[42加仑]</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="uslBarrel"/>
+                                    <input onclick="if (checkNum(uslBarrel.value)) compute(this.form,uslBarrel.name,vol_data)"
+                                           value="换算" type="button" name="uslBarrel_bt"/></td>
+                                <td nowrap="" align="right" width="20%">加仑(gal)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="uslGallon"/>
+                                    <input onclick="if (checkNum(uslGallon.value)) compute(this.form,uslGallon.name,vol_data)"
+                                           value="换算" type="button" name="uslGallon_spoon_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">夸脱(qt)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="uslQuart"/>
+                                    <input onclick="if (checkNum(uslQuart.value)) compute(this.form,uslQuart.name,vol_data)"
+                                           value="换算" type="button" name="uslQuart_bt"/></td>
+                                <td nowrap="" align="right" width="20%">品脱(pt)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="uslPint"/>
+                                    <input onclick="if (checkNum(uslPint.value)) compute(this.form,uslPint.name,vol_data)"
+                                           value="换算" type="button" name="uslPint_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">及耳(gi)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="uslGill"/>
+                                    <input onclick="if (checkNum(uslGill.value)) compute(this.form,uslGill.name,vol_data)"
+                                           value="换算" type="button" name="uslGill_bt"/></td>
+                                <td nowrap="" align="right" width="20%">液量盎司(fl oz)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="uslFluid_ounce"/> <input
+                                        onclick="if (checkNum(uslFluid_ounce.value)) compute(this.form,uslFluid_ounce.name,vol_data)"
+                                        value="换算" type="button" name="uslFluid_ounce_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">液量打兰(fl dr)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="uslFluid_dram"/> <input
+                                        onclick="if (checkNum(uslFluid_dram.value)) compute(this.form,uslFluid_dram.name,vol_data)"
+                                        value="换算" type="button" name="uslFluid_dram_bt"/></td>
+                                <td nowrap="" align="right" width="20%">量滴(min)</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12" name="uslMinim"/>
+                                    <input onclick="if (checkNum(uslMinim.value)) compute(this.form,uslMinim.name,vol_data)"
+                                           value="换算" type="button" name="uslMinim_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖美英同制体积计量〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">亩英尺</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="uscAcre_foot"/> <input
+                                        onclick="if (checkNum(uscAcre_foot.value)) compute(this.form,uscAcre_foot.name,vol_data)"
+                                        value="换算" type="button" name="uscAcre_foot_bt"/></td>
+                                <td nowrap="" align="right" width="20%">立方码</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="uscCubic_yard"/> <input
+                                        onclick="if (checkNum(uscCubic_yard.value)) compute(this.form,uscCubic_yard.name,vol_data)"
+                                        value="换算" type="button" name="uscCubic_yard_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="24%">立方英尺</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12"
+                                           name="uscCubic_foot"/> <input
+                                        onclick="if (checkNum(uscCubic_foot.value)) compute(this.form,uscCubic_foot.name,vol_data)"
+                                        value="换算" type="button" name="uscCubic_foot_bt"/></td>
+                                <td nowrap="" align="right" width="20%">立方英寸</td>
+                                <td align="left" width="30%">
+                                    <input class="int" size="12"
+                                           name="uscCubic_inch"/> <input
+                                        onclick="if (checkNum(uscCubic_inch.value)) compute(this.form,uscCubic_inch.name,vol_data)"
+                                        value="换算" type="button" name="uscCubic_inch_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div align="center">
+                                        <input value="数据重置" type="reset"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div><!--/ result-->
+            </div>
+            <div class="container">
+
+                <div id="converter5">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle">
+                                    <b><a id="energy" name="energy"></a>功、能和热量转换换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">焦耳(J)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="Joule"/>
+                                    <input onclick="if (checkNum(Joule.value)) compute(this.form,Joule.name,heat_data)"
+                                           value="换算" type="button" name="Joule_bt"/></td>
+                                <td nowrap="" align="right" width="25%">公斤·米(kg·m)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="Kgm"/>
+                                    <input onclick="if (checkNum(Kgm.value)) compute(this.form,Kgm.name,heat_data)"
+                                           value="换算" type="button" name="Kgm_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">米制马力·时<br/>(PS·h)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="Psh"/>
+                                    <input onclick="if (checkNum(Psh.value)) compute(this.form,Psh.name,heat_data)"
+                                           value="换算" type="button" name="Psh_bt"/></td>
+                                <td nowrap="" align="right" width="25%">英制马力·时(HP·h)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="Hph"/>
+                                    <input onclick="if (checkNum(Hph.value)) compute(this.form,Hph.name,heat_data)"
+                                           value="换算" type="button" name="Hph_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">千瓦·时(kW·h)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="Kwh"/>
+                                    <input onclick="if (checkNum(Kwh.value)) compute(this.form,Kwh.name,heat_data)"
+                                           value="换算" type="button" name="Kwh_bt"/></td>
+                                <td nowrap="" align="right" width="25%">千卡(kcal)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="Kcal"/>
+                                    <input onclick="if (checkNum(Kcal.value)) compute(this.form,Kcal.name,heat_data)"
+                                           value="换算" type="button" name="Kcal_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英热单位(Btu)</td>
+                                <td align="left" width="25%">
+                                    <input class="int" size="12" name="Btu"/>
+                                    <input onclick="if (checkNum(Btu.value)) compute(this.form,Btu.name,heat_data)"
+                                           value="换算" type="button" name="Btu_bt"/></td>
+                                <td nowrap="" align="right" width="25%">英尺·磅(ft·lb)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="Ftlb"/>
+                                    <input onclick="if (checkNum(Ftlb.value)) compute(this.form,Ftlb.name,heat_data)"
+                                           value="换算" type="button" name="Ftlb_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <div align="center">
+                                        <input value="数据重置" type="reset"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="container">
+
+                <div id="converter6">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle"><b><a id="temperature"
+                                                                                       name="temperature"></a>温度单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">摄氏度(C)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="12"
+                                           name="tempCelsius"/> <input
+                                        onclick="if (checkNum(tempCelsius.value)) computeTempC(this.form)"
+                                        value="换算" type="button"/></td>
+                                <td nowrap="" align="right" width="18%">华氏度(F)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="tempFahr"/>
+                                    <input onclick="if (checkNum(tempFahr.value)) computeTempF(this.form)"
+                                           value="换算" type="button"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">开氏度(K)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="12"
+                                           name="tempKelvin"/> <input
+                                        onclick="if (checkNum(tempKelvin.value)) computeTempK(this.form)"
+                                        value="换算" type="button"/></td>
+                                <td nowrap="" align="right" width="18%">兰氏度(Ra)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="tempRankine"/> <input
+                                        onclick="if (checkNum(tempRankine.value)) computeTempRa(this.form)"
+                                        value="换算" type="button"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">列氏度(Re)</td>
+                                <td align="left" width="28%">
+                                    <input class="int" size="12"
+                                           name="tempReaumur"/> <input
+                                        onclick="if (checkNum(tempReaumur.value)) computeTempRe(this.form)"
+                                        value="换算" type="button"/></td>
+                                <td colspan="2">
+                                    <div align="right">　</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="center" colspan="4">
+                                    <input value="数据重置" type="reset"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div><!--/ result-->
+            </div>
+            <div class="container">
+                <div id="converter7">
+                    <form>
+                        <table style="BORDER: #ace 1px solid" cellspacing="0" width="100%">
+                            <tbody>
+                            <tr height="10">
+                                <td bgcolor="#DEE7FE" colspan="4" align="middle"><b>
+                                    <a id="weight" name="weight"></a>重量单位换算器</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖公　制〗</strong></td>
+                                <iframe id="tmp_downloadhelper_iframe" style="display: none;"
+                                        src="./单位换算_尺寸换算_单位换算器_重量换算_长度单位换算—走114查询网_files/saved_resource.html"></iframe>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">吨</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="mTon"/>
+                                    <input onclick="if (checkNum(mTon.value)) compute(this.form,mTon.name,weight_data)"
+                                           value="换算" type="button" name="mTon_bt"/></td>
+                                <td nowrap="" align="right" width="19%">公斤(kg)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="mKilogram"/>
+                                    <input onclick="if (checkNum(mKilogram.value)) compute(this.form,mKilogram.name,weight_data)"
+                                           value="换算" type="button" name="mKilogram_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">克(g)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="mGram"/>
+                                    <input onclick="if (checkNum(mGram.value)) compute(this.form,mGram.name,weight_data)"
+                                           value="换算" type="button" name="mGram_bt"/></td>
+                                <td nowrap="" align="right" width="19%">毫克(mg)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12"
+                                           name="mMilligram"/> <input
+                                        onclick="if (checkNum(mMilligram.value)) compute(this.form,mMilligram.name,weight_data)"
+                                        value="换算" type="button" name="mMilligram_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖市　制〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">市斤</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="cJin"/>
+                                    <input onclick="if (checkNum(cJin.value)) compute(this.form,cJin.name,weight_data)"
+                                           value="换算" type="button" name="cJin_bt"/></td>
+                                <td nowrap="" align="right" width="19%">担</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="cDan"/>
+                                    <input onclick="if (checkNum(cDan.value)) compute(this.form,cDan.name,weight_data)"
+                                           value="换算" type="button" name="cDan_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">两</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="cLiang"/>
+                                    <input onclick="if (checkNum(cLiang.value)) compute(this.form,cLiang.name,weight_data)"
+                                           value="换算" type="button" name="cLiang_bt"/></td>
+                                <td nowrap="" align="right" width="19%">钱</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="cQian"/>
+                                    <input onclick="if (checkNum(cQian.value)) compute(this.form,cQian.name,weight_data)"
+                                           value="换算" type="button" name="cQian_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖金　衡　制〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">金衡磅(lb?t)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="troyPound"/>
+                                    <input onclick="if (checkNum(troyPound.value)) compute(this.form,troyPound.name,weight_data)"
+                                           value="换算" type="button" name="troyPound_bt"/></td>
+                                <td nowrap="" align="right" width="19%">金衡盎司(oz?t)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="troyOunce"/>
+                                    <input onclick="if (checkNum(troyOunce.value)) compute(this.form,troyOunce.name,weight_data)"
+                                           value="换算" type="button" name="troyOunce_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英钱(dwt)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="troyDWT"/>
+                                    <input onclick="if (checkNum(troyDWT.value)) compute(this.form,troyDWT.name,weight_data)"
+                                           value="换算" type="button" name="troyDWT_bt"/></td>
+                                <td nowrap="" align="right" width="19%">金衡格令</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="troyGrain"/>
+                                    <input onclick="if (checkNum(troyGrain.value)) compute(this.form,troyGrain.name,weight_data)"
+                                           value="换算" type="button" name="troyGrain_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" align="middle"><strong>〖常　衡　制〗</strong></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">(英制)长吨</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="briTon"/>
+                                    <input onclick="if (checkNum(briTon.value)) compute(this.form,briTon.name,weight_data)"
+                                           value="换算" type="button" name="briTon_bt"/></td>
+                                <td nowrap="" align="right" width="19%">(美制)短吨</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="usTon"/>
+                                    <input onclick="if (checkNum(usTon.value)) compute(this.form,usTon.name,weight_data)"
+                                           value="换算" type="button" name="usTon_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英担(cwt)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="briCWT"/>
+                                    <input onclick="if (checkNum(briCWT.value)) compute(this.form,briCWT.name,weight_data)"
+                                           value="换算" type="button" name="briCWT_bt"/></td>
+                                <td nowrap="" align="right" width="19%">美担(cwt)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="usCWT"/>
+                                    <input onclick="if (checkNum(usCWT.value)) compute(this.form,usCWT.name,weight_data)"
+                                           value="换算" type="button" name="usCWT_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">英石</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="briStone"/>
+                                    <input onclick="if (checkNum(briStone.value)) compute(this.form,briStone.name,weight_data)"
+                                           value="换算" type="button" name="briStone_bt"/></td>
+                                <td nowrap="" align="right" width="19%">磅(lb)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="avdpPound"/>
+                                    <input onclick="if (checkNum(avdpPound.value)) compute(this.form,avdpPound.name,weight_data)"
+                                           value="换算" type="button" name="avdpPound_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">盎司(oz)</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="avdpOunce"/>
+                                    <input onclick="if (checkNum(avdpOunce.value)) compute(this.form,avdpOunce.name,weight_data)"
+                                           value="换算" type="button" name="avdpOunce_bt"/></td>
+                                <td nowrap="" align="right" width="19%">打兰(dr)</td>
+                                <td align="left" width="31%">
+                                    <input class="int" size="12" name="avdpDram"/>
+                                    <input onclick="if (checkNum(avdpDram.value)) compute(this.form,avdpDram.name,weight_data)"
+                                           value="换算" type="button" name="avdpDram_bt"/></td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="right" width="21%">格令</td>
+                                <td align="left" width="27%">
+                                    <input class="int" size="12" name="avdpGrain"/>
+                                    <input onclick="if (checkNum(avdpGrain.value)) compute(this.form,avdpGrain.name,weight_data)"
+                                           value="换算" type="button" name="avdpGrain_bt"/></td>
+                                <td colspan="2">
+                                    <div align="right">　</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td nowrap="" align="center" colspan="4">
+                                    <input value="数据重置" type="reset"/>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div><!--/ result-->
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

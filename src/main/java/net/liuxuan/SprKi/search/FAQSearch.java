@@ -7,7 +7,6 @@ import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.search.query.dsl.TermTermination;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,7 +31,7 @@ public class FAQSearch {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @RequestMapping("/search")
+//    @RequestMapping("/search")
     public List search(String text) {
 
         // get the full text entity manager
@@ -46,7 +45,7 @@ public class FAQSearch {
                         .buildQueryBuilder().forEntity(FAQContent.class).get();
 
         // a very basic query by keywords
-        org.apache.lucene.search.Query query ;
+        Query query ;
         TermTermination matching = queryBuilder
                 .keyword()
                 .onFields("question", "answer","categoryBy_name","departmentBy_departmentName")

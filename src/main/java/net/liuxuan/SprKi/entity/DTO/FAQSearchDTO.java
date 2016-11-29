@@ -21,8 +21,5 @@ import java.util.Locale;
  */
 @Data
 @ToString(callSuper=true, includeFieldNames=true)
-public class FAQSearchDTO extends BaseSearchDTO {
-    public CMSCategory category;
-    public Devices devices;
-    public Department department;
+public class FAQSearchDTO extends LabthinkSearchDTO {
 }

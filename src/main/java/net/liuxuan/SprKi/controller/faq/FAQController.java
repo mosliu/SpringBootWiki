@@ -19,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.annotation.Resource;
@@ -145,8 +146,8 @@ public class FAQController {
 
     @RequestMapping(value = "/faqpost", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
-    public String postFAQ(FAQContent faq,HttpServletRequest request, Map<String, Object> model) {
-
+    public String postFAQ(FAQContent faq, MultipartHttpServletRequest request, Map<String, Object> model) {
+//        log.debug("request type is",request.getClass().getCanonicalName());
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (String s : parameterMap.keySet()) {
             String[] strings = parameterMap.get(s);
