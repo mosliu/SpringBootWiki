@@ -1,8 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f244a0bd-925e-4d61-96e3-c360fd887d54" name="默认的" comment="添加了FAQ的 show界面">
+    <list default="true" id="f244a0bd-925e-4d61-96e3-c360fd887d54" name="默认的" comment="一个可用版本。">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/History.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/NoUseCode/utility/HttpClientOCR.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/build/package.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/DruidConfiguration.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/OCRUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/mosesadd/jquery.json-viewer.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/mosesadd/jquery.json-viewer.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/mosesadd/jquery.jsonview.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/mosesadd/jquery.jsonview.min.js" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/OCRController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/OCRController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ticket/TicketController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ticket/TicketController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UEditorController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UEditorController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UploadFileController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UploadFileController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/CMSCategoryRepository.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/CMSCategoryRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DepartmentRepository.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DepartmentRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DevicesRepository.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DevicesRepository.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/search/SearchController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/search/SearchController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/TestUrlInterceptor.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/TestUrlInterceptor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/WebConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/WebConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/LuceneConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/LuceneConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config/application.yml" afterPath="$PROJECT_DIR$/src/main/resources/config/application.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/import.sql" afterPath="$PROJECT_DIR$/src/main/resources/import.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/ueditor.config.js" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/ueditor.config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/css/layout.css" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/css/layout.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/Base.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/Base.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-footer.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-footer.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/search.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/search.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_list.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/tools/ocr.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/tools/ocr.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/templates/common/uplaodimage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/common/uploadimage.html" />
     </list>
     <ignored path="SpringBootTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,70 +71,116 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
+  <component name="DatabaseView">
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="SpringBootTest" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="HttpClientOCR.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java">
+      <file leaf-file-name="UserManagementController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/UserManagementController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="userManage.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="239">
+              <caret line="109" column="40" selection-start-line="109" selection-start-column="40" selection-end-line="109" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="webSecurityConfig.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/webSecurityConfig.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="29" />
-              <folding>
-                <element signature="method#doAPost#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="docComment;method#encodeImgageToBase64#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="method#sha256Hex#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="method#getCanonicalQueryString#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="docComment;method#normalize#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="class#OCRException#0;class#HttpClientOCR#0" expanded="false" />
-                <element signature="e#38911#38912#0" expanded="false" />
-                <element signature="e#38949#38950#0" expanded="false" />
-                <element signature="e#39273#39274#0" expanded="false" />
-                <element signature="e#39318#39319#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="458">
-              <caret line="512" column="21" selection-start-line="512" selection-start-column="21" selection-end-line="512" selection-end-column="21" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OCRController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/OCRController.java">
+      <file leaf-file-name="application.properties" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/application.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
-              <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ocr.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/tools/ocr.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
-              <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ticket_post.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html">
+      <file leaf-file-name="application.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/config/application.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+            <state relative-caret-position="477">
+              <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="660">
+                <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+          <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scripts.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="2233" column="36" selection-start-line="2233" selection-start-column="29" selection-end-line="2233" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="185">
+              <caret line="604" column="22" selection-start-line="604" selection-start-column="22" selection-end-line="604" selection-end-column="95" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserDetailInfoServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/user/UserDetailInfoServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="154">
+              <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -108,57 +201,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/TicketContentRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/test.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base.html" />
-        <option value="$PROJECT_DIR$/src/main/java/test/PID.java" />
-        <option value="$PROJECT_DIR$/src/main/java/test/PID_Struct.java" />
-        <option value="$PROJECT_DIR$/src/main/java/test/PIDtest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/test/Qsort.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/unitconv.html" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/AdminController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/error.html" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ErrorHandleController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/tools/unitconv2.html" />
-        <option value="$PROJECT_DIR$/target/classes/templates/tools/unitconv2.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/tools/unitconv.js" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/commons/js/unitconv.js" />
-        <option value="$PROJECT_DIR$/target/classes/templates/tools/unitconv.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/tools/unitconv.html" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/UnitConverterController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/FormulaComputeController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/tools/vacuum.html" />
-        <option value="$PROJECT_DIR$/WORKCOUNT.MD" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/FAQContent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/CMSContent.java" />
-        <option value="$PROJECT_DIR$/src/main/banner.txt" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UploadFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/config/application.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/SummerNoteController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/JsonUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/upload/UploadUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/banner.txt" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/search/FAQSearch.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/LuceneConfiguration.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/TicketContent.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/LabthinkSearchDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/FAQSearchDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/TicketSearchDTO.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentService.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ticket/TicketController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_list.html" />
-        <option value="$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java" />
         <option value="$PROJECT_DIR$/src/main/java/test/PicOcrTest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UploadFileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base-footer.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/ui/smarty/css/layout.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base.html" />
+        <option value="$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/OCRUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/OCRController.java" />
+        <option value="$PROJECT_DIR$/target/classes/templates/tools/ocr.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/tools/ocr.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/search/SearchController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/TestUrlInterceptor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/WebConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_list.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ticket/TicketController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/search.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/LuceneConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/build/package.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/ueditor/ueditor.config.js" />
+        <option value="$PROJECT_DIR$/target/classes/static/ueditor/ueditor.config.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/home.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UEditorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DevicesRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/DepartmentRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/CMSCategoryRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/import.sql" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base.html" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" />
+        <option value="$PROJECT_DIR$/target/classes/templates/faq/faq_edit.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html" />
+        <option value="$PROJECT_DIR$/target/classes/templates/ticket/ticket_post.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/logback.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/druidWallFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/config/application.yml" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/DruidConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/index.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html" />
+        <option value="$PROJECT_DIR$/History.md" />
       </list>
     </option>
   </component>
@@ -173,6 +266,9 @@
         <option name="mavenHome" value="Bundled (Maven 3)" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
   </component>
   <component name="PhpServers">
     <servers />
@@ -215,7 +311,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Changed Files">
           <PATH>
@@ -226,7 +321,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -237,6 +332,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,11 +344,12 @@
     <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\templates\tools" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\NoUseCode\utility" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\static\ui\mosesadd" />
+      <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\templates\tools" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.ApplicationMain">
@@ -620,7 +717,17 @@
       <workItem from="1480035157171" duration="2295000" />
       <workItem from="1480054138721" duration="15109000" />
       <workItem from="1480304796555" duration="12626000" />
-      <workItem from="1480323534310" duration="4245000" />
+      <workItem from="1480323534310" duration="18767000" />
+      <workItem from="1480488070925" duration="10580000" />
+      <workItem from="1480642825569" duration="1479000" />
+      <workItem from="1480656148565" duration="14433000" />
+      <workItem from="1481002993561" duration="2596000" />
+      <workItem from="1481347206076" duration="28178000" />
+      <workItem from="1481696037907" duration="22562000" />
+      <workItem from="1482106889704" duration="1959000" />
+      <workItem from="1482123867571" duration="18137000" />
+      <workItem from="1482465924847" duration="4500000" />
+      <workItem from="1483428464994" duration="13970000" />
     </task>
     <task id="LOCAL-00001" summary="before change theme">
       <created>1457751173953</created>
@@ -734,11 +841,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480383642227</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="一个可用版本。">
+      <created>1480383667797</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1480383667797</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="793785000" />
+    <option name="totallyTimeSpent" value="926701000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-8" width="1296" height="1000" extended-state="6" />
@@ -746,45 +860,45 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35603344" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3236715" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.50970876" order="2" side_tool="true" content_ui="tabs" x="1294" y="314" width="1252" height="333" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36084142" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26164874" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56642514" sideWeight="0.5194805" order="2" side_tool="true" content_ui="tabs" x="1294" y="314" width="1252" height="333" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35841423" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.260454" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31421745" sideWeight="0.4935275" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="1272" y="-8" width="1296" height="1000" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735962" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel remote servers log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48028675" sideWeight="0.512945" order="18" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32524273" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45550162" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32281554" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32200646" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28640777" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1766" y="59" width="308" height="865" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34708738" sideWeight="0.5164076" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4097969" sideWeight="0.48051947" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Jindent" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="依赖查看器" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="combo" />
       <window_info id="版本控制" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="设计师" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35005975" sideWeight="0.487055" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="层次结构" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32497013" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3611111" sideWeight="0.48786408" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31421745" sideWeight="0.4935275" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="消息" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38541666" sideWeight="0.4830097" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6689815" sideWeight="0.46763754" order="20" side_tool="false" content_ui="tabs" />
       <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="文档" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="1372" y="92" width="1094" height="800" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="找到" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -793,41 +907,41 @@
       <window_info id="Jindent" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.50970876" order="2" side_tool="true" content_ui="tabs" x="1294" y="314" width="1252" height="333" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36084142" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.56642514" sideWeight="0.5194805" order="2" side_tool="true" content_ui="tabs" x="1294" y="314" width="1252" height="333" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35841423" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="依赖查看器" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="combo" />
       <window_info id="版本控制" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32281554" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32200646" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="设计师" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28640777" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1766" y="59" width="308" height="865" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35005975" sideWeight="0.487055" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4097969" sideWeight="0.48051947" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35603344" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="层次结构" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32497013" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3236715" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3611111" sideWeight="0.48786408" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26164874" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31421745" sideWeight="0.4935275" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.260454" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31421745" sideWeight="0.4935275" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="消息" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38541666" sideWeight="0.4830097" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Thumbnails" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="1272" y="-8" width="1296" height="1000" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735962" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6689815" sideWeight="0.46763754" order="20" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel remote servers log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48028675" sideWeight="0.512945" order="18" side_tool="true" content_ui="tabs" />
       <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="文档" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="1372" y="92" width="1094" height="800" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32524273" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45550162" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297491" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34708738" sideWeight="0.5164076" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="找到" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
@@ -858,7 +972,8 @@
     <MESSAGE value="添加登录验证码" />
     <MESSAGE value="添加了hibernate search。" />
     <MESSAGE value="添加了FAQ的 show界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了FAQ的 show界面" />
+    <MESSAGE value="一个可用版本。" />
+    <option name="LAST_COMMIT_MESSAGE" value="一个可用版本。" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,18 +1020,6 @@
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/gson/EntityTargetStrategy.java</url>
-          <line>48</line>
-          <properties />
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/baidu/ueditor/define/BaseState.java</url>
-          <line>29</line>
-          <properties />
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/baidu/ueditor/upload/BinaryUploader.java</url>
           <line>105</line>
           <properties />
@@ -941,12 +1044,6 @@
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.3.RELEASE/spring-security-core-4.0.3.RELEASE-sources.jar!/org/springframework/security/authentication/dao/DaoAuthenticationProvider.java</url>
-          <line>97</line>
-          <properties />
-          <option name="timeStamp" value="113" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/springboottest/LuceneController.java</url>
           <line>99</line>
           <properties />
@@ -966,7 +1063,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java</url>
-          <line>142</line>
+          <line>143</line>
           <properties />
           <option name="timeStamp" value="137" />
         </line-breakpoint>
@@ -1001,46 +1098,10 @@
           <option name="timeStamp" value="170" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/baidu/ueditor/upload/Uploader.java</url>
-          <line>11</line>
-          <properties />
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/baidu/ueditor/ActionEnter.java</url>
-          <line>101</line>
-          <properties />
-          <option name="timeStamp" value="173" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/baidu/ueditor/upload/Uploader.java</url>
-          <line>17</line>
-          <properties />
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/SummerNoteController.java</url>
           <line>65</line>
           <properties />
           <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/utils/upload/UploadUtil.java</url>
-          <line>62</line>
-          <properties />
-          <option name="timeStamp" value="183" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/search/SearchController.java</url>
-          <line>43</line>
-          <properties />
-          <option name="timeStamp" value="186" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java</url>
-          <line>150</line>
-          <properties />
-          <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentServiceImpl.java</url>
@@ -1109,28 +1170,46 @@
           <option name="timeStamp" value="221" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java</url>
+          <url>file://$PROJECT_DIR$/src/NoUseCode/utility/HttpClientOCR.java</url>
           <line>325</line>
           <properties />
           <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java</url>
+          <url>file://$PROJECT_DIR$/src/NoUseCode/utility/HttpClientOCR.java</url>
           <line>105</line>
           <properties />
           <option name="timeStamp" value="228" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java</url>
+          <url>file://$PROJECT_DIR$/src/NoUseCode/utility/HttpClientOCR.java</url>
           <line>246</line>
           <properties />
           <option name="timeStamp" value="230" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java</url>
+          <url>file://$PROJECT_DIR$/src/NoUseCode/utility/HttpClientOCR.java</url>
           <line>167</line>
           <properties />
           <option name="timeStamp" value="232" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/MvcFilter.java</url>
+          <line>80</line>
+          <properties />
+          <option name="timeStamp" value="240" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/IPRoleAuthenticationFilter.java</url>
+          <line>48</line>
+          <properties />
+          <option name="timeStamp" value="241" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java</url>
+          <line>58</line>
+          <properties />
+          <option name="timeStamp" value="265" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js</url>
@@ -1146,7 +1225,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="233" />
+      <option name="time" value="284" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
@@ -1156,528 +1235,436 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/SummerNoteController.java">
+    <entry file="file://$PROJECT_DIR$/target/classes/templates/faq/faq_edit.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="66" column="41" selection-start-line="66" selection-start-column="41" selection-end-line="66" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state relative-caret-position="360">
+          <caret line="22" column="17" selection-start-line="0" selection-start-column="0" selection-end-line="143" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/utils/upload/UploadUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_postOK.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="621">
-          <caret line="66" column="34" selection-start-line="66" selection-start-column="8" selection-end-line="66" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/AbstractBceClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/services/sms/SmsClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="93" column="55" selection-start-line="93" selection-start-column="55" selection-end-line="93" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/services/sms/SmsClientSupport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="128" column="56" selection-start-line="128" selection-start-column="56" selection-end-line="128" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/BceClientConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="944" column="11" selection-start-line="944" selection-start-column="11" selection-end-line="944" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/client/HttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="48" column="17" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/impl/client/DefaultHttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="112" column="49" selection-start-line="112" selection-start-column="32" selection-end-line="112" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/io/Closeable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/impl/client/HttpClientBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="918" column="32" selection-start-line="918" selection-start-column="32" selection-end-line="918" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/client/config/RequestConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="406" column="8" selection-start-line="406" selection-start-column="8" selection-end-line="406" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.6.2/gson-2.6.2-sources.jar!/com/google/gson/JsonObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.2.5.RELEASE/spring-web-4.2.5.RELEASE-sources.jar!/org/springframework/http/HttpStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="393" column="12" selection-start-line="393" selection-start-column="12" selection-end-line="393" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/StatusLine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="47" column="8" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/client/methods/HttpRequestBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="841">
-          <caret line="99" column="38" selection-start-line="99" selection-start-column="38" selection-end-line="99" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.8.2/joda-time-2.8.2-sources.jar!/org/joda/time/DateTimeZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1469">
-          <caret line="101" column="22" selection-start-line="101" selection-start-column="22" selection-end-line="101" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/util/DateUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="41" column="73" selection-start-line="41" selection-start-column="73" selection-end-line="41" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/joda-time/joda-time/2.8.2/joda-time-2.8.2-sources.jar!/org/joda/time/UTCDateTimeZone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="23" column="41" selection-start-line="23" selection-start-column="41" selection-end-line="23" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/BceClientException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="48" column="1" selection-start-line="26" selection-start-column="0" selection-end-line="48" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/Header.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27">
-          <caret line="49" column="17" selection-start-line="49" selection-start-column="17" selection-end-line="49" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/SortedMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="770">
-          <caret line="112" column="17" selection-start-line="112" selection-start-column="17" selection-end-line="112" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/message/AbstractHttpMessage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="73" column="14" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/auth/SignOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="88" column="23" selection-start-line="88" selection-start-column="23" selection-end-line="88" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/http/Headers.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/util/HttpUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="50" column="4" selection-start-line="50" selection-start-column="4" selection-end-line="76" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/protocol/ImmutableHttpProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1-sources.jar!/org/apache/http/impl/client/CloseableHttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="77" column="33" selection-start-line="77" selection-start-column="33" selection-end-line="77" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.6.2/gson-2.6.2-sources.jar!/com/google/gson/JsonElement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-225">
-          <caret line="32" column="22" selection-start-line="32" selection-start-column="22" selection-end-line="32" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/internal/InternalRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="86" column="24" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/jre/lib/rt.jar!/sun/misc/CharacterEncoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/entity/ContentType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="342" column="42" selection-start-line="342" selection-start-column="30" selection-end-line="342" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4-sources.jar!/org/apache/http/util/EntityUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="155" column="25" selection-start-line="155" selection-start-column="25" selection-end-line="155" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.6.2/gson-2.6.2-sources.jar!/com/google/gson/JsonParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="55" column="20" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/jre/lib/rt.jar!/sun/misc/BASE64Encoder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpasyncclient/4.1.1/httpasyncclient-4.1.1.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="51" column="16" selection-start-line="51" selection-start-column="16" selection-end-line="51" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1.pom">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-58">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://MAVEN/net.liuxuan:SpringBootTest:1.0-SNAPSHOT">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>MAVEN</ID>
-          <OriginalElement>net.liuxuan:SpringBootTest:1.0-SNAPSHOT</OriginalElement>
-          <nodes>
-            <node x="" y="">net.liuxuan:SpringBootTest:1.0-SNAPSHOT</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:1.3.3.RELEASE/org.slf4j:jul-to-slf4j:jar:1.7.16</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-logging:jar:1.3.3.RELEASE/org.slf4j:log4j-over-slf4j:jar:1.7.16</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter:jar:1.3.3.RELEASE/org.yaml:snakeyaml:jar:1.16</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:1.3.3.RELEASE/org.apache.tomcat.embed:tomcat-embed-core:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:1.3.3.RELEASE/org.apache.tomcat.embed:tomcat-embed-el:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:1.3.3.RELEASE/org.apache.tomcat.embed:tomcat-embed-logging-juli:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-tomcat:jar:1.3.3.RELEASE/org.apache.tomcat.embed:tomcat-embed-websocket:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:1.3.3.RELEASE/org.hibernate:hibernate-validator:jar:5.2.4.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:1.3.3.RELEASE/org.hibernate:hibernate-validator:jar:5.2.4.Final/javax.validation:validation-api:jar:1.1.0.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-validation:jar:1.3.3.RELEASE/org.hibernate:hibernate-validator:jar:5.2.4.Final/com.fasterxml:classmate:jar:1.1.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/com.fasterxml.jackson.core:jackson-databind:jar:2.6.5</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/com.fasterxml.jackson.core:jackson-databind:jar:2.6.5/com.fasterxml.jackson.core:jackson-annotations:jar:2.6.5</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/com.fasterxml.jackson.core:jackson-databind:jar:2.6.5/com.fasterxml.jackson.core:jackson-core:jar:2.6.5</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework:spring-web:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework:spring-webmvc:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-web:jar:1.3.3.RELEASE/org.springframework:spring-webmvc:jar:4.2.5.RELEASE/org.springframework:spring-expression:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/junit:junit:jar:4.12</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.mockito:mockito-core:jar:1.10.19</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.mockito:mockito-core:jar:1.10.19/org.objenesis:objenesis:jar:2.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.hamcrest:hamcrest-core:jar:1.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.hamcrest:hamcrest-library:jar:1.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.springframework:spring-core:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-test:jar:1.3.3.RELEASE/org.springframework:spring-test:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-configuration-processor:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-configuration-processor:jar:1.3.3.RELEASE/org.json:json:jar:20140107</node>
-            <node x="" y="">org.springframework.boot:spring-boot-devtools:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-devtools:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-devtools:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-autoconfigure:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-thymeleaf:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-thymeleaf:jar:1.3.3.RELEASE/org.thymeleaf:thymeleaf-spring4:jar:2.1.4.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-thymeleaf:jar:1.3.3.RELEASE/nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:jar:1.3.3</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-thymeleaf:jar:1.3.3.RELEASE/nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:jar:1.3.3/org.codehaus.groovy:groovy:jar:2.4.6</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-aop:jar:1.3.3.RELEASE/org.aspectj:aspectjweaver:jar:1.8.8</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-jdbc:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-jdbc:jar:1.3.3.RELEASE/org.apache.tomcat:tomcat-jdbc:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-jdbc:jar:1.3.3.RELEASE/org.apache.tomcat:tomcat-jdbc:jar:8.0.32/org.apache.tomcat:tomcat-juli:jar:8.0.32</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-starter-jdbc:jar:1.3.3.RELEASE/org.springframework:spring-jdbc:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/org.jboss.logging:jboss-logging:jar:3.3.0.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/org.jboss.logging:jboss-logging-annotations:jar:1.2.0.Beta1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/dom4j:dom4j:jar:1.6.1</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/dom4j:dom4j:jar:1.6.1/xml-apis:xml-apis:jar:1.0.b2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/org.hibernate.common:hibernate-commons-annotations:jar:4.0.5.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/org.hibernate.javax.persistence:hibernate-jpa-2.1-api:jar:1.0.0.Final</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.hibernate:hibernate-entitymanager:jar:4.3.11.Final/org.javassist:javassist:jar:3.18.1-GA</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/javax.transaction:javax.transaction-api:jar:1.2</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.data:spring-data-jpa:jar:1.9.4.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.data:spring-data-jpa:jar:1.9.4.RELEASE/org.springframework.data:spring-data-commons:jar:1.11.4.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.data:spring-data-jpa:jar:1.9.4.RELEASE/org.springframework:spring-orm:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.data:spring-data-jpa:jar:1.9.4.RELEASE/org.springframework:spring-tx:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework.data:spring-data-jpa:jar:1.9.4.RELEASE/org.slf4j:jcl-over-slf4j:jar:1.7.16</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-data-jpa:jar:1.3.3.RELEASE/org.springframework:spring-aspects:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE/org.springframework:spring-aop:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE/org.springframework:spring-aop:jar:4.2.5.RELEASE/aopalliance:aopalliance:jar:1.0</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE/org.springframework.security:spring-security-config:jar:4.0.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE/org.springframework.security:spring-security-config:jar:4.0.3.RELEASE/org.springframework.security:spring-security-core:jar:4.0.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-security:jar:1.3.3.RELEASE/org.springframework.security:spring-security-web:jar:4.0.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-actuator:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework.boot:spring-boot-starter-actuator:jar:1.3.3.RELEASE/org.springframework.boot:spring-boot-actuator:jar:1.3.3.RELEASE</node>
-            <node x="" y="">org.springframework:spring-context-support:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework:spring-context-support:jar:4.2.5.RELEASE/org.springframework:spring-beans:jar:4.2.5.RELEASE</node>
-            <node x="" y="">org.springframework:spring-context-support:jar:4.2.5.RELEASE/org.springframework:spring-context:jar:4.2.5.RELEASE</node>
-            <node x="" y="">mysql:mysql-connector-java:jar:5.1.38</node>
-            <node x="" y="">com.alibaba:druid:jar:1.0.18</node>
-            <node x="" y="">com.alibaba:druid:jar:1.0.18/com.alibaba:jconsole:jar:1.8.0</node>
-            <node x="" y="">com.alibaba:druid:jar:1.0.18/com.alibaba:tools:jar:1.8.0</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE/org.thymeleaf:thymeleaf:jar:2.1.4.RELEASE</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE/org.thymeleaf:thymeleaf:jar:2.1.4.RELEASE/ognl:ognl:jar:3.0.8</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE/org.thymeleaf:thymeleaf:jar:2.1.4.RELEASE/org.unbescape:unbescape:jar:1.1.0.RELEASE</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE/org.attoparser:attoparser:jar:1.3</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:jar:2.1.1.RELEASE/org.slf4j:slf4j-api:jar:1.7.16</node>
-            <node x="" y="">org.thymeleaf.extras:thymeleaf-extras-springsecurity4:jar:2.1.2.RELEASE</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/ch.qos.logback:logback-classic:jar:1.1.5</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/ch.qos.logback:logback-classic:jar:1.1.5/ch.qos.logback:logback-core:jar:1.1.5</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-core:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-queryparser:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-queryparser:jar:4.10.4/org.apache.lucene:lucene-sandbox:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-analyzers-common:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-suggest:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/org.apache.lucene:lucene-suggest:jar:4.10.4/org.apache.lucene:lucene-misc:jar:4.10.4</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/redis.clients:jedis:jar:2.7.3</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/redis.clients:jedis:jar:2.7.3/org.apache.commons:commons-pool2:jar:2.4.2</node>
-            <node x="" y="">org.apdplat:word:jar:1.3.1/com.belerweb:pinyin4j:jar:2.5.0</node>
-            <node x="" y="">org.apache.lucene:lucene-highlighter:jar:5.3.1</node>
-            <node x="" y="">org.apache.lucene:lucene-highlighter:jar:5.3.1/org.apache.lucene:lucene-join:jar:5.3.1</node>
-            <node x="" y="">org.apache.lucene:lucene-highlighter:jar:5.3.1/org.apache.lucene:lucene-queries:jar:5.3.1</node>
-            <node x="" y="">org.apache.lucene:lucene-memory:jar:5.3.1</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-search-engine:jar:5.3.0.Final</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-search-engine:jar:5.3.0.Final/org.apache.lucene:lucene-facet:jar:4.10.4</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-core:jar:4.3.11.Final</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-core:jar:4.3.11.Final/org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:jar:1.0.0.Final</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-core:jar:4.3.11.Final/antlr:antlr:jar:2.7.7</node>
-            <node x="" y="">org.hibernate:hibernate-search-orm:jar:5.3.0.Final/org.hibernate:hibernate-core:jar:4.3.11.Final/org.jboss:jandex:jar:1.1.0.Final</node>
-            <node x="" y="">commons-fileupload:commons-fileupload:jar:1.3.1</node>
-            <node x="" y="">commons-fileupload:commons-fileupload:jar:1.3.1/commons-io:commons-io:jar:2.2</node>
-            <node x="" y="">commons-codec:commons-codec:jar:1.10</node>
-            <node x="" y="">commons-beanutils:commons-beanutils:jar:1.9.2</node>
-            <node x="" y="">commons-beanutils:commons-beanutils:jar:1.9.2/commons-collections:commons-collections:jar:3.2.2</node>
-            <node x="" y="">org.apache.commons:commons-lang3:jar:3.4</node>
-            <node x="" y="">com.jhlabs:filters:jar:2.0.235-1</node>
-            <node x="" y="">org.freemarker:freemarker:jar:2.3.23</node>
-            <node x="" y="">javax.servlet:jstl:jar:1.2</node>
-            <node x="" y="">org.projectlombok:lombok:jar:1.16.8</node>
-            <node x="" y="">org.jsoup:jsoup:jar:1.8.3</node>
-            <node x="" y="">com.google.code.gson:gson:jar:2.6.2</node>
-            <node x="" y="">org.quartz-scheduler:quartz:jar:2.2.2</node>
-            <node x="" y="">org.quartz-scheduler:quartz:jar:2.2.2/c3p0:c3p0:jar:0.9.1.1</node>
-            <node x="" y="">com.sun.mail:javax.mail:jar:1.5.6</node>
-            <node x="" y="">com.sun.mail:javax.mail:jar:1.5.6/javax.activation:activation:jar:1.1</node>
-            <node x="" y="">org.apache.httpcomponents:httpclient:jar:4.5.1</node>
-            <node x="" y="">org.apache.httpcomponents:httpclient:jar:4.5.1/org.apache.httpcomponents:httpcore:jar:4.4.4</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="1.097990902198635" x="1161.0" y="5106.0" />
-          <SelectedNodes />
-          <Categories />
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>All</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/baidubce/bce-java-sdk/0.10.15/bce-java-sdk-0.10.15-sources.jar!/com/baidubce/auth/BceV1Signer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="167" column="43" selection-start-line="167" selection-start-column="43" selection-end-line="167" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/NoUseCode/utility/PicOcrTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <marker date="1480321178388" expanded="false" signature="6453:6461" placeholder="&lt;~&gt;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/test/HttpClientOCR.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="29" />
-          <folding>
-            <element signature="method#doAPost#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="docComment;method#encodeImgageToBase64#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="method#sha256Hex#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="method#getCanonicalQueryString#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="docComment;method#normalize#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="class#OCRException#0;class#HttpClientOCR#0" expanded="false" />
-            <element signature="e#38911#38912#0" expanded="false" />
-            <element signature="e#38949#38950#0" expanded="false" />
-            <element signature="e#39273#39274#0" expanded="false" />
-            <element signature="e#39318#39319#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/ApplicationMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="880">
-          <caret line="56" column="28" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="458">
-          <caret line="512" column="21" selection-start-line="512" selection-start-column="21" selection-end-line="512" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/views/ThymeleafConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1826">
-          <caret line="287" column="48" selection-start-line="287" selection-start-column="39" selection-end-line="287" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ticket/TicketController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2899">
-          <caret line="56" column="13" selection-start-line="56" selection-start-column="13" selection-end-line="56" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="1122">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/UnitConverterController.java">
+    <entry file="file://$PROJECT_DIR$/target/classes/templates/ticket/ticket_post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="272">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/FormulaComputeController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="35" column="5" selection-start-line="26" selection-start-column="4" selection-end-line="35" selection-end-column="5" />
+        <state relative-caret-position="286">
+          <caret line="13" column="42" selection-start-line="13" selection-start-column="42" selection-end-line="13" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="81" column="91" selection-start-line="81" selection-start-column="91" selection-end-line="81" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2552">
+          <caret line="386" column="0" selection-start-line="386" selection-start-column="0" selection-end-line="386" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="103" column="52" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="52" />
+        <state relative-caret-position="440">
+          <caret line="50" column="50" selection-start-line="50" selection-start-column="50" selection-end-line="50" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5830">
+          <caret line="265" column="33" selection-start-line="265" selection-start-column="33" selection-end-line="265" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/CaptchaAuthenticationDetailsSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/supporttools/OCRController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/CaptchaAuthenticationDetails.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        <state relative-caret-position="88">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/CaptchaDaoAuthenticationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="20" column="66" selection-start-line="20" selection-start-column="66" selection-end-line="20" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.3.RELEASE/spring-security-core-4.0.3.RELEASE-sources.jar!/org/springframework/security/core/userdetails/UserDetailsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.3.RELEASE/spring-security-core-4.0.3.RELEASE-sources.jar!/org/springframework/security/authentication/dao/DaoAuthenticationProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="60" column="29" selection-start-line="60" selection-start-column="29" selection-end-line="60" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.3.RELEASE/spring-security-core-4.0.3.RELEASE-sources.jar!/org/springframework/security/core/userdetails/jdbc/JdbcDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2266">
+          <caret line="135" column="33" selection-start-line="135" selection-start-column="33" selection-end-line="135" selection-end-column="33" />
+          <folding>
+            <marker date="1455437969590" expanded="true" signature="4555:4630" placeholder="select usern... users" />
+            <marker date="1455437969590" expanded="true" signature="4698:4772" placeholder="select usern... authorities" />
+            <marker date="1455437969590" expanded="true" signature="4846:5039" placeholder="select g.id,... groups" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.0.3.RELEASE/spring-security-core-4.0.3.RELEASE-sources.jar!/org/springframework/security/access/prepost/PreAuthorize.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="6" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+          <folding>
+            <element signature="n#ul#0;n#li#5;n#ul#0;n#nav#0;n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#li#6;n#ul#0;n#nav#0;n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#a#0;n#li#6;n#ul#0;n#nav#0;n#aside#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="55" column="59" selection-start-line="55" selection-start-column="33" selection-end-line="55" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/security/IPRoleAuthenticationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="29" column="3" selection-start-line="29" selection-start-column="3" selection-end-line="29" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/logback.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-110">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/security/Users.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/data/spring-data-commons/1.11.4.RELEASE/spring-data-commons-1.11.4.RELEASE-sources.jar!/org/springframework/data/repository/CrudRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="62" column="12" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/druidWallFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" column="3" selection-start-line="16" selection-start-column="3" selection-end-line="16" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.2.5.RELEASE/spring-aop-4.2.5.RELEASE-sources.jar!/org/springframework/aop/support/AopUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="306" column="0" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/wall/WallFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2526">
+          <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#65967#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/wall/WallUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/support/http/WebStatFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="53" column="13" selection-start-line="53" selection-start-column="13" selection-end-line="53" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/wall/WallConfigMBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="129" column="38" selection-start-line="129" selection-start-column="38" selection-end-line="129" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/wall/WallConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6248">
+          <caret line="24" column="43" selection-start-line="24" selection-start-column="43" selection-end-line="24" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#22862#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/user/UserDetailInfoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="88" column="29" selection-start-line="88" selection-start-column="29" selection-end-line="88" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/GlobalWebConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="49" column="31" selection-start-line="49" selection-start-column="21" selection-end-line="49" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/proxy/jdbc/DataSourceProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="27" column="32" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#1315#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/ApplicationMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/javax/sql/DataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/pool/DruidDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="101" column="49" selection-start-line="101" selection-start-column="49" selection-end-line="101" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/user/UserDetailInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/filter/stat/StatFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="57" column="23" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#39489#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/filter/Filter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="60" column="23" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/alibaba/druid/1.0.18/druid-1.0.18-sources.jar!/com/alibaba/druid/pool/DruidAbstractDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="1192" column="11" selection-start-line="1192" selection-start-column="11" selection-end-line="1192" selection-end-column="24" />
+          <folding>
+            <element signature="e#41979#41980#0" expanded="false" />
+            <element signature="e#42009#42010#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/DruidConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="76" column="66" selection-start-line="76" selection-start-column="35" selection-end-line="76" selection-end-column="66" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/tools/ocr.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/user/UserDetailInfoServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="31" column="45" selection-start-line="31" selection-start-column="45" selection-end-line="31" selection-end-column="45" />
+        <state relative-caret-position="154">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_post.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/UserManagementController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="80" column="20" selection-start-line="80" selection-start-column="20" selection-end-line="80" selection-end-column="20" />
+        <state relative-caret-position="269">
+          <caret line="129" column="0" selection-start-line="129" selection-start-column="0" selection-end-line="129" selection-end-column="0" />
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="2233" column="36" selection-start-line="2233" selection-start-column="29" selection-end-line="2233" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="604" column="22" selection-start-line="604" selection-start-column="22" selection-end-line="604" selection-end-column="95" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="109" column="40" selection-start-line="109" selection-start-column="40" selection-end-line="109" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/webSecurityConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/config/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="86" column="20" selection-start-line="86" selection-start-column="20" selection-end-line="86" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/History.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="44">
+            <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MultiMarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="660">
+            <caret line="30" column="11" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="MultiMarkdownFxPreviewEditor">
+        <state />
       </provider>
     </entry>
   </component>

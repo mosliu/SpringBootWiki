@@ -1,13 +1,15 @@
 # Server settings 
 server: 
   port: 80
-  address: localhost
+  address: 0.0.0.0
 # 24 hours
   session:
     timeout: 86400
   compression:
     enabled: true
     mime-types: application/json,application/xml,text/html,text/xml,text/plain
+  tomcat:
+    basedir: /
 # DATASOURCE
 #jdbc:
 #  driverLocation: D:\\repo\\mysql\\mysql-connector-java\\5.1.38\\mysql-connector-java-5.1.38.jar
@@ -49,13 +51,35 @@ spring:
     template-resolver-order: 1
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
-    test-on-borrow: true
     validation-query: SELECT 1;
+    test-on-borrow: true
     test-while-idle: true
     type: com.alibaba.druid.pool.DruidDataSource
+    # 下面为连接池的补充设置，应用到上面所有数据源中
+    # 初始化大小，最小，最大
+    initial-size:  5
+    min-idle: 5
+    minimum-idle: 5
+    max-active: 20
+    # 配置获取连接等待超时的时间
+    max-wait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    time-between-eviction-runs-millis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    min-evictable-idle-time-millis: 300000
+    filters: stat,wall,slf4j
+    #proxyFilters: wall2
+    #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;druid.wall.selectWhereAlwayTrueCheck=false;druid.wall.conditionAndAlwayTrueAllow=true
+    pool-prepared-statements: true
+    max-open-prepared-statements: 20
+
+
+
+
+
 
 #  data:
 #    solr:
@@ -114,8 +138,14 @@ multipart:
 security:
   user:
     name: root
-    password: Nwcmoses
-management.security.roles: SUPERUSER
+    password: Moses12345
+management:
+  security:
+    roles: SUPERUSER
+  context-path: /admins
+
+
+
 #JMX
 #
 #management:

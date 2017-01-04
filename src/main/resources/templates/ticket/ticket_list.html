@@ -11,7 +11,7 @@
     <div class="container">
         <div class="row-fluid row-intro">
             <div class="span12">
-                <h3>支持信息查询</h3>
+                <h3>提交问题查看</h3>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
                         <th>lastUpdateDate</th>
                         <th>Operate</th>
                         <th class="hidden">question</th>
-                        <th class="hidden">answer</th>
+                        <!--<th class="hidden">answer</th>-->
                     </tr>
                     </thead>
                     <tbody>
@@ -246,11 +246,11 @@
                     {
                         "data": "id",
                         "render": function (data, type, full, meta) {
-                            return '<a href="/faq/' + data + '"> Edit </a> <a href="/faq/delete/' + data + '"> Delete </a> ';
+                            return '<a href="/ticket/' + data + '"> Edit </a> <a href="/ticket/delete/' + data + '"> Delete </a> ';
                         }
                     },
                     {"data": "question"},
-                    {"data": "answer"},
+                    //{"data": "answer"},
                 ]
 
             });

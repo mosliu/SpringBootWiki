@@ -26,10 +26,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
 import javax.annotation.Resource;
@@ -110,6 +107,33 @@ public class TicketController {
         return "ticket/ticket_post";
     }
 
+    @RequestMapping(value = "/ticket/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getTicketID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
+        TicketContent content = ticketContentService.findById(id);
+        log.trace("Ticket to show publish_date is:{}",content.getPublishDate());
+        log.trace("Ticket to show lastUpdate_date is:{}",content.getLastUpdateDate());
+
+        model.put("ticket", content);
+//        devicesRepository.findAll();
+        List<Devices> devicesAll = devicesRepository.findAll();
+//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
+//        model.put("devicesAll",devicesAll);
+//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+        return "ticket/ticket_post";
+    }
+
+    @RequestMapping(value = "/ticket/delete/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String deleteTicketID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model)  {
+
+//        FAQContent faq = faqContentService.findById(id);
+        ticketContentService.deleteTicketContentById(id);
+        return "redirect:/ticketlist";
+    }
+
+
     @RequestMapping(value = "/ticket", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public String postTicket(TicketContent ticket,HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
@@ -149,6 +173,8 @@ public class TicketController {
 //        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
         return "ticket/ticket_post";
     }
+
+
 
     @RequestMapping(value = "/ticketlist")
 //    @PreAuthorize("hasRole('ROLE_USER')")

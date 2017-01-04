@@ -281,7 +281,7 @@ public class SecurityConfigration extends WebSecurityConfigurerAdapter {
         props.put("kaptcha.textproducer.char.size", "45");
         props.put("kaptcha.textproducer.char.length", "4");
         props.put("kaptcha.image.width", "125");
-        props.put("kaptcha.image.height", "45");
+        props.put("kaptcha.image.height", "50");
         props.put("kaptcha.session.key", "code");
         Config config = new Config(props);
         Producer captchaProducer = config.getProducerImpl();

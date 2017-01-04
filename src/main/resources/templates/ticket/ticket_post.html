@@ -3,6 +3,21 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layouts/base">
 <head>
+    <script type="text/javascript">
+        function doSubmit1() {
+//            document.faqform.answer.value = 111
+//            $('input[name=answer]:first').val(ue.getContent());
+            return jQuery('form.validate-plugin').validate({
+                        submitHandler: function (form) {
+                            $("#submitBtn").attr("disabled", true);
+                            //alert("submitted");
+                            form.submit();
+                        }
+                    }
+
+            );
+        }
+    </script>
 </head>
 <body>
 <div class="container" layout:fragment="content">
@@ -95,7 +110,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
+                    <button type="submit" id="submitBtn" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
                         提交内容
                     </button>
                 </div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 </head>
@@ -126,7 +127,7 @@
                         <td th:text="${faq?.department?.departmentName}">Nobody knows!</td>
                         <td th:text="${faq?.devices?.devicename}">pc</td>
                         <td th:text="${faq?.author?.username}">&euro;1000</td>
-                        <td th:text="${#dates.format(faq?.lastUpdateDate, 'dd-MM-yyyy')}">23-10-1980</td>
+                        <td th:text="${#dates.format(faq?.lastUpdateDate, 'yyyy-MM-dd')}">2016-12-16</td>
                         <td th:text="${faq?.id}">dddd</td>
                         <td class="hidden" th:text="${faq?.question}">1</td>
                         <td class="hidden" th:text="${faq?.answer}">1</td>
@@ -146,8 +147,14 @@
     <script type="text/javascript" src="/ui/smarty/plugins/datatables/js/dataTables.scroller.min.js"></script>
     <script type="text/javascript" src="/ui/smarty/plugins/datatables/dataTables.bootstrap.js"></script>
     <script type="text/javascript" src="/ui/smarty/plugins/select2/js/select2.full.min.js"></script>
+    <script th:inline="javascript" sec:authorize="hasRole('ROLE_ADMIN')">
+        var admin_operate = true;
+    </script>
     <script th:inline="javascript">
         /*<![CDATA[*/
+
+        var authname = [[${#authentication.name}]];
+//        alert(cccc);
 
         function initTable2() {
             var tableaa = jQuery('#myTableId');
@@ -246,7 +253,19 @@
                     {
                         "data": "id",
                         "render": function (data, type, full, meta) {
-                            return '<a href="/faq/' + data + '"> Edit </a> <a href="/faq/delete/' + data + '"> Delete </a> ';
+                            if(typeof admin_operate ==='undefined'){
+                                admin_operate = false;
+                            }
+                            if(admin_operate){
+                                return '<a href="/faq/' + data + '"> Edit </a> <a href="/faq/delete/' + data + '"> Delete </a> ';
+                            }else{
+                                if(full.author.username === authname){
+                                    return '<a href="/faq/' + data + '"> Edit </a> ';
+                                }else{
+                                    return '';
+                                }
+                            }
+
                         }
                     },
                     {"data": "question"},

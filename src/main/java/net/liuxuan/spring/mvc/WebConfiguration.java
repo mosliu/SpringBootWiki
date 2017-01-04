@@ -34,7 +34,10 @@ public class WebConfiguration {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(mvcFilter);
         filterRegistrationBean.setEnabled(true);
+        filterRegistrationBean.setName("MvcFilter");
+        filterRegistrationBean.setOrder(1);
         filterRegistrationBean.addUrlPatterns("/bb");
+//        filterRegistrationBean.addUrlPatterns("/url/*");
         return filterRegistrationBean;
     }
 

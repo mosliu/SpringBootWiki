@@ -14,7 +14,15 @@
         function doSubmit1() {
 //            document.faqform.answer.value = 111
 //            $('input[name=answer]:first').val(ue.getContent());
-            return jQuery('form.validate-plugin').validate().form();
+            return jQuery('form.validate-plugin').validate({
+                        submitHandler: function (form) {
+                            $("#submitBtn").attr("disabled", true);
+                            //alert("submitted");
+                            form.submit();
+                        }
+                    }
+
+            );
         }
     </script>
 </head>
@@ -54,7 +62,7 @@
                             <select th:field="*{category}" class="form-control pointer required">
                                 <option th:each="type : ${Category_list}"
                                         th:value="${type.id}"
-                                        th:text="${'category:' + type.name}">FAQ</option>
+                                        th:text="${type.name}">FAQ</option>
                             </select>
 
                         </div>
@@ -64,7 +72,7 @@
                             <select th:field="*{department}" class="form-control pointer required">
                                 <option th:each="type : ${Department_list}"
                                         th:value="${type.id}"
-                                        th:text="${'department:' + type.departmentName}">售后</option>
+                                        th:text="${type.departmentName}">售后</option>
                             </select>
 
                         </div>
@@ -74,7 +82,7 @@
                             <select th:field="*{devices}" class="form-control pointer required">
                                 <option th:each="type : ${Devices_list}"
                                         th:value="${type.id}"
-                                        th:text="${'devices:' + type.devicename}">W3/230</option>
+                                        th:text="${type.devicename+':'+ type.deviceType.deviceTypeName}">W3/230</option>
                             </select>
 
                         </div>
@@ -116,7 +124,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
+                    <button type="submit" id="submitBtn" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
                         提交内容
                     </button>
                 </div>

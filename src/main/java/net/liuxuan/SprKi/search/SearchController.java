@@ -1,5 +1,7 @@
 package net.liuxuan.SprKi.search;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ import java.util.List;
  */
 @Controller
 public class SearchController {
+    private static Log logger = LogFactory.getLog(SearchController.class);
+
     @Autowired
     private FAQSearch faqSearch;
 
@@ -41,6 +45,7 @@ public class SearchController {
             // ...
             // throw ex;
         }
+        logger.debug("Search results total number:"+searchResults.size());
         model.addAttribute("searchResults", searchResults);
         return "search";
     }

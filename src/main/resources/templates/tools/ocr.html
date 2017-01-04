@@ -1,8 +1,22 @@
-<html
-        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-        layout:decorator="layouts/base">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
 <head>
     <title>Messages : View</title>
+    <style>
+        body {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-justify-content: center;
+            justify-content: center;
+        }
+
+        #tar_box {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+        }
+    </style>
 </head>
 <body>
 <h1 layout:fragment="header">Messages : Create</h1>
@@ -11,7 +25,7 @@
     <div class="nrd">
         <div class="container">
             <p align="center">
-                <h1>OCR工具</h1>
+            <h1>OCR工具</h1>
             </p>
         </div>
         <script type="text/javascript">
@@ -19,218 +33,151 @@
         </script>
         <div class="container">
 
-            <form class="form-horizontal">
+            <form th:action="@{/tools/OCR}" action="/ticket" id="faqform" name="faqform" method="POST"
+                  class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
+                  enctype="multipart/form-data">
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">参数</label>
-                    <div class="col-sm-3">
-                        <label for="Volume">Volume(ml)</label>
-                        <input type="text" class="form-control" id="Volume" value="8.01"/>
-                        <label for="Area">Area(m2)</label>
-                        <input type="text" class="form-control" id="Area" value="0.003848"/>
-                        <label for="Temprature">T(℃)</label>
-                        <input type="text" class="form-control" id="Temprature" value="25"/>
-                        <label for="t0">T0(K)</label>
-                        <input type="text" class="form-control" id="t0" value="273.15"/>
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="p0">P0(Pa)</label>
-                        <input type="text" class="form-control" id="p0" value="101300"/>
-                        <label for="p1">P1(0.1MPa)</label>
-                        <input type="text" class="form-control" id="p1" value="1"/>
-                        <label for="p2">P2(0.1MPa)</label>
-                        <input type="text" class="form-control" id="p2" value="0"/>
-                        <label for="deltaT">Δt(s)</label>
-                        <input type="text" class="form-control" id="deltaT" value="3600"/>
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="deltaPStart">ΔP_start(Pa)</label>
-                        <input type="text" class="form-control" id="deltaPStart" value="9"/>
-                        <label for="deltaPEnd">ΔP_end(Pa)</label>
-                        <input type="text" class="form-control" id="deltaPEnd" value="150"/>
-                        <label for="coefficient">膜标定系数</label>
-                        <input type="text" class="form-control" id="coefficient" value="0.78"/>
-                        <label for="num">n(件数)：</label>
-                        <input type="text" class="form-control" id="num" value="3"/>
-                    </div>
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">计算渗透、扩散系数</label>
-                    <div class="col-sm-3">
-                        <label for="dimension">d(μm)</label>
-                        <input type="text" class="form-control" id="dimension" value="125"/>
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="p1kuosan">p1(Pa)</label>
-                        <input type="text" class="form-control" id="p1kuosan" value="150"/>
-                        <label for="p2kuosan">p2</label>
-                        <input type="text" class="form-control" id="p2kuosan" value="100"/>
-                    </div>
-                    <div class="col-sm-3">
-                        <label for="t1kuosan">t1</label>
-                        <input type="text" class="form-control" id="t1kuosan" value="7200"/>
-                        <label for="t2kuosan">t2(Pa)</label>
-                        <input type="text" class="form-control" id="t2kuosan" value="0"/>
-                    </div>
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Device Preset</label>
-                    <div class="col-sm-10">
-                        <div class="">
-                            <div class="btn-group" role="group" aria-label="...">
-                                <button type="button" id="btnDeviceVACV2" class="btn btn-default">VAC-V2</button>
-                                <button type="button" id="btnDeviceVACVBS" class="btn btn-default">VAC-VBS</button>
-                                <button type="button" id="btnDeviceG2131" class="btn btn-default">G2-131</button>
-                                <button type="button" id="btnDeviceG2132" class="btn btn-default">G2-132</button>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>贴图 *</label>
+                            <div id="picbox" class="" contenteditable="true"
+                                 style="width: 60%;height: 200px; background: #f0fff0 ;border: 3px solid #ccc;overflow: scroll">
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr/>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Formula</label>
-                    <div class="col-sm-10">
-                        <strong>O2GTR=（ΔP/Δt）•［V(/nS）］•［T0 / (P0T)］•［24 / (P1- P2)］</strong>
-                        <br/>
-                        <label id="result"></label>
-                    </div>
-                </div>
-                <hr/>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" id="btnCompute" class="btn btn-default">Compute</button>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>识别</label>
+                            <div id="ocrtext" class=""
+                                 style="width: 60%;height: 200px; border: 3px solid #ccc;overflow: scroll">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
-
-            <script type="text/javascript">
-                'use strict';
-                var V, S, T, T0, P0, P1, P2, deltaT, deltaPstart, deltaPend, n, d, kuosanp1, kuosanp2, kuosant1, kuosant2, filmcali, deltaP;
-                var O2_GTR, O2_Pg, theta, O2_D, O2_S;
-
-                $('#btnCompute').click(function () {
-                    computeResult()
-                });
-                $('#btnDeviceG2131').click(function () {
-                    Number($('#Volume').val(11.166));
-                    S = Number($('#Area').val(0.003848));
-                    T = Number($('#Temprature').val(25));
-                    T0 = Number($('#t0').val(273.15));
-                    P0 = Number($('#p0').val(101300));
-                    P1 = Number($('#p1').val(1));
-                    P2=Number($('#p2').val(0));
-                    deltaT = Number($('#deltaT').val(3600));
-                    deltaPstart = Number($('#deltaPStart').val(9));
-                    deltaPend = Number($('#deltaPEnd').val(150));
-                    n = Number($('#num').val(3));
-                    d = Number($('#dimension').val(125));
-                    kuosanp1 = Number($('#p1kuosan').val(150));
-                    kuosanp2 = Number($('#p2kuosan').val(100));
-                    kuosant1 = Number($('#t1kuosan').val(7200));
-                    kuosant2 = Number($('#t2kuosan').val(0));
-                    //		filmcali=Number($('').val());
-                });
-                $('#btnDeviceG2132').click(function () {
-                    Number($('#Volume').val(8.010));
-                    S = Number($('#Area').val(0.003848));
-                    T = Number($('#Temprature').val(25));
-                    T0 = Number($('#t0').val(273.15));
-                    P0 = Number($('#p0').val(101300));
-                    P1 = Number($('#p1').val(1));
-                    P2=Number($('#p2').val(0));
-                    deltaT = Number($('#deltaT').val(3600));
-                    deltaPstart = Number($('#deltaPStart').val(9));
-                    deltaPend = Number($('#deltaPEnd').val(150));
-                    n = Number($('#num').val(3));
-                    d = Number($('#dimension').val(125));
-                    kuosanp1 = Number($('#p1kuosan').val(150));
-                    kuosanp2 = Number($('#p2kuosan').val(100));
-                    kuosant1 = Number($('#t1kuosan').val(7200));
-                    kuosant2 = Number($('#t2kuosan').val(0));
-                    //		filmcali=Number($('').val());
-                });
-                $('#btnDeviceVACVBS').click(function () {
-                    Number($('#Volume').val(20.2389));
-                    S = Number($('#Area').val(0.002827));
-                    T = Number($('#Temprature').val(25));
-                    T0 = Number($('#t0').val(273.15));
-                    P0 = Number($('#p0').val(101300));
-                    P1 = Number($('#p1').val(1.01));
-                    P2=Number($('#p2').val(0));
-                    deltaT = Number($('#deltaT').val(3600));
-                    deltaPstart = Number($('#deltaPStart').val(9));
-                    deltaPend = Number($('#deltaPEnd').val(150));
-                    n = Number($('#num').val(3));
-                    d = Number($('#dimension').val(125));
-                    kuosanp1 = Number($('#p1kuosan').val(150));
-                    kuosanp2 = Number($('#p2kuosan').val(100));
-                    kuosant1 = Number($('#t1kuosan').val(7200));
-                    kuosant2 = Number($('#t2kuosan').val(0));
-                    //		filmcali=Number($('').val());
-                });
-                $('#btnDeviceVACV2').click(function () {
-                    Number($('#Volume').val(8.010));
-                    S = Number($('#Area').val(0.003848));
-                    T = Number($('#Temprature').val(25));
-                    T0 = Number($('#t0').val(273.15));
-                    P0 = Number($('#p0').val(101300));
-                    P1 = Number($('#p1').val(1));
-                    P2=Number($('#p2').val(0));
-                    deltaT = Number($('#deltaT').val(3600));
-                    deltaPstart = Number($('#deltaPStart').val(9));
-                    deltaPend = Number($('#deltaPEnd').val(150));
-                    n = Number($('#num').val(3));
-                    d = Number($('#dimension').val(125));
-                    kuosanp1 = Number($('#p1kuosan').val(150));
-                    kuosanp2 = Number($('#p2kuosan').val(100));
-                    kuosant1 = Number($('#t1kuosan').val(7200));
-                    kuosant2 = Number($('#t2kuosan').val(0));
-                    //		filmcali=Number($('').val());
-                });
-
-                function updateData() {
-                    V = Number($('#Volume').val());
-                    S = Number($('#Area').val());
-                    T = Number($('#Temprature').val());
-                    T += 273.15;
-                    T0 = Number($('#t0').val());
-                    P0 = Number($('#p0').val());
-                    P1 = Number($('#p1').val());
-                    P2 = Number($('#p2').val());
-                    deltaT = Number($('#deltaT').val());
-                    deltaPstart = Number($('#deltaPStart').val());
-                    deltaPend = Number($('#deltaPEnd').val());
-                    deltaP = deltaPend - deltaPstart;
-                    n = Number($('#num').val());
-                    d = Number($('#dimension').val());
-                    d = d / 10000;
-                    kuosanp1 = Number($('#p1kuosan').val());
-                    kuosanp2 = Number($('#p2kuosan').val());
-
-                    kuosant1 = Number($('#t1kuosan').val());
-                    kuosant2 = Number($('#t2kuosan').val());
-                    filmcali = Number($('#coefficient').val());
-                }
-
-                function computeResult() {
-
-                    updateData();
-                    O2_GTR = (deltaP / (deltaT / 3600)) * (V / (n * S)) * (T0 / P0 / T) * (24 / (P1 - P2)) * filmcali;
-                    O2_Pg = O2_GTR / 24 * d;
-                    O2_Pg = O2_GTR / 24 * d;//渗透系数
-                    theta = (kuosant1 - kuosanp1 * ((kuosant1 - kuosant2) / (kuosanp1 - kuosanp2))) / 3600; //θ
-                    O2_D = d * d / (6 * theta);//扩散系数
-                    O2_S = O2_Pg / O2_D;//溶解度系数
-                    var result = "透气量O2_GTR结果为：" + O2_GTR.toExponential(6) + "  cm3/m2·24h·0.1MPa" + "<br/>渗透系数Pg结果为：" + O2_Pg.toExponential(6) + " cm3·cm/m2·h·0.1MPa" + "<br/>扩散系数D结果为：" + O2_D.toExponential(6) + "  cm2/h，" + "   θ值为：" + theta + "<br/>溶解度系数S结果为：" + O2_S.toExponential(6) + "  cm2/m2·0.1Mpa";
-                    console.log(result);
-                    $('#result').html(result);
-                }
-            </script>
-
+            <br/><br/><br/>
 
         </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var ocrtext = $('#ocrtext');
+            var picbox = $('#picbox');
+
+            picbox.on('paste', function (event) {
+                var isChrome = false;
+                let clipboardData = (event.clipboardData || event.originalEvent.clipboardData);
+                if (clipboardData) {
+
+                    if (clipboardData.items) {
+                        //for chrome
+                        let items = clipboardData.items;
+                        let len = items.length;
+                        let blob = null;
+                        isChrome = true;
+                        //firefox 50.0 支持chrome的方法。
+                        //items.length比较有意思，初步判断是根据mime类型来的，即有几种mime类型，长度就是几（待验证）
+                        //如果粘贴纯文本，那么len=1，如果粘贴网页图片，len=2, items[0].type = 'text/plain', items[1].type = 'image/*'
+                        //如果使用截图工具粘贴图片，len=1, items[0].type = 'image/png'
+                        //如果粘贴纯文本+HTML，len=2, items[0].type = 'text/plain', items[1].type = 'text/html'
+                        //阻止默认行为即不让剪贴板内容在div中显示出来
+                        event.preventDefault();
+//在items里找粘贴的image,据上面分析,需要循环
+                        for (let i = 0; i < len; i++) {
+                            if (items[i].type.indexOf("image") !== -1) {
+                                //getAsFile()  此方法只是living standard  firefox ie11 并不支持
+                                blob = items[i].getAsFile();
+                                //let reader = new FileReader();
+
+                            }
+                        }
+                        if (blob !== null) {
+                            let reader = new FileReader();
+                            reader.onload = function (event) {
+                                // event.target.result 即为图片的Base64编码字符串
+                                let base64_str = event.target.result
+                                //可以在这里写上传逻辑 直接将base64编码的字符串上传（可以尝试传入blob对象，看看后台程序能否解析）
+                                let img = document.createElement('img');
+                                img.className = 'my_img';
+                                img.src = base64_str;
+                                picbox.append(img);
+                                uploadImgFromPaste(base64_str, 'paste', isChrome);
+                            };
+                            reader.readAsDataURL(blob);
+                        }
+                    }
+                } else {
+                    //for ie11
+                    setTimeout(function () {
+                        var imgList = $('#picbox img'),
+                                len = imgList.length,
+                                src_str = '',
+                                i;
+                        for (i = 0; i < len; i++) {
+                            if (imgList[i].className !== 'my_img') {
+                                src_str = imgList[i].src;
+                            }
+                        }
+                        uploadImgFromPaste(src_str, 'paste', isChrome);
+                    }, 1);
+                }
+            });
+
+
+            function uploadImgFromPaste(file, type, isChrome) {
+                var formData = new FormData();
+                formData.append('file', file);
+                formData.append('type', type);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/tools/ocrImgUpload');
+                xhr.onload = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            var data = JSON.parse(xhr.responseText);
+//                            var ocrtext = document.getElementById('ocrtext');
+//                            var picbox = document.getElementById('picbox');
+                            var v_ocrtext = '';
+                            for (var index1 = 0; index1 < data.results.length; index1++) {
+                                v_ocrtext += data.results[index1].word + '<br/>';
+                            }
+                            ocrtext.innerText = v_ocrtext;
+                            ocrtext.html(v_ocrtext);
+                            if (isChrome) {
+//                                var img = document.createElement('img');
+//                                img.className = 'my_img';
+//                                img.src = file;
+//                                picbox.appendChild(img);
+                            } else {
+                                var imgList = document.querySelectorAll('#picbox img'),
+                                        len = imgList.length,
+                                        index2;
+                                for (index2 = 0; index2 < len; index2++) {
+                                    if (imgList[index2].className !== 'my_img') {
+                                        imgList[index2].className = 'my_img';
+                                        imgList[index2].src = file;
+                                    }
+                                }
+                            }
+
+                        } else {
+                            console.log(xhr.statusText);
+                        }
+                    }
+
+                };
+                xhr.onerror = function (e) {
+                    console.log(xhr.statusText);
+                };
+                xhr.send(formData);
+            }
+
+            /*]]>*/
+        </script>
+
+
     </div>
 </div>
 </body>

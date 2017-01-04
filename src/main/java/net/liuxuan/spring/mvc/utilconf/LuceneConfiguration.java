@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -53,7 +54,11 @@ public class LuceneConfiguration {
 //    public IndexWriter indexWriter(ChineseWordAnalyzer analyzer) throws IOException {
         //TODO YML化
 //        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        Path path = Paths.get("d:/logs2/");
+        Path path = Paths.get("d:/LuceneData/");
+        File f =path.toFile();
+        if(!f.exists()){
+            f.mkdirs();
+        }
         Directory d = new SimpleFSDirectory(path.toFile());
 
 //        Analyzer analyzer = new ChineseWordAnalyzer();

@@ -23,4 +23,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     List<Department> findBydepartmentName(String  departmentName);
 
     List<Department> findBydepartmentNameNot(String  departmentNotName);
+
+    List<Department> findBydepartmentNameNotOrderByDepartmentName(String  departmentNotName);
 }

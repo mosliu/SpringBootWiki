@@ -9,8 +9,8 @@
 <div th:fragment="searchHeader" class="search-box over-header">
     <a id="closeSearch" href="#" class="glyphicon glyphicon-remove"></a>
 
-    <form action="page-search-result-1.html" method="get">
-        <input type="text" class="form-control" placeholder="SEARCH"/>
+    <form action="/search" method="get">
+        <input type="text" name="q" class="form-control" placeholder="SEARCH"/>
     </form>
 </div>
 <!-- /SEARCH HEADER -->
@@ -31,16 +31,16 @@
             <li sec:authorize="hasRole('ROLE_USER')">
                 <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
                     <i class="fa fa-user hidden-xs"></i>
-                    <span class="badge badge-aqua btn-xs badge-corner">2</span>
+                    <span class="badge badge-aqua btn-xs badge-corner">0</span>
                     <strong sec:authentication="name">John Doe</strong>
                 </a>
                 <ul class="dropdown-menu">
                     <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
                     <li class="divider"></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
+<!--                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
                     <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> test-2</a></li>
                     <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> test-3</a></li>
-                    <li class="divider"></li>
+                    <li class="divider"></li>-->
 
                     <form th:action="@{/logout}" name="logoutform" method="post">
                         <li><a tabindex="-1" href="#" onclick="logoutform.submit()"><i class="fa fa-power-off "></i>
@@ -48,8 +48,8 @@
                     </form>
                 </ul>
             </li>
-            <li th:if="${#authentication==null || #authentication.name == 'anonymousUser'}"><a href="/login"
-                                                                                               th:href="@{/login}">登录</a>
+            <li th:if="${#authentication==null || #authentication.name == 'anonymousUser'}">
+                <a href="/login" th:href="@{/login}">登录</a>
             </li>
 
             <!-- SEARCH -->
@@ -98,12 +98,13 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">支持工具</a>
                         <ul class="dropdown-menu">
-                            <li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>
+                            <!--<li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>-->
                             <li><a  href="/tools/unitconv" th:href="@{/tools/unitconv}">单位转换工具</a></li>
                             <li><a  href="/tools/formula/vacuum" th:href="@{/tools/formula/vacuum}">压差法数据计算工具</a></li>
-                            <li><a  href="/tools/OCR" th:href="@{/tools/formula/vacuum}">OCR工具</a></li>
+                            <li><a  href="/tools/OCR" th:href="@{/tools/OCR}">OCR工具</a></li>
                         </ul>
                     </li>
+<!--
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">测试</a>
@@ -128,6 +129,7 @@
                             </li>
                         </ul>
                     </li>
+-->
 
 
                 </ul>

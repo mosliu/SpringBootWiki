@@ -55,7 +55,8 @@ public class DevicesServiceImpl implements DevicesService {
      */
     @Override
     public List<Devices> getAllDevices() {
-        return devicesRepository.findByDevicenameNot(JPAConstants.DELETEDOBJECTSTR);
+//        return devicesRepository.findByDevicenameNot(JPAConstants.DELETEDOBJECTSTR);
+        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
     }
 
     /**

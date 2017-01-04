@@ -47,7 +47,7 @@ public class UploadFileController {
     @Secured("ROLE_USER")
     @RequestMapping(value = "/image", method = RequestMethod.GET)
     public ModelAndView getImageUploadURL(){
-        return new ModelAndView("common/uplaodimage");
+        return new ModelAndView("common/uploadimage");
     }
 
     @RequestMapping(value = "/image", method = RequestMethod.POST)

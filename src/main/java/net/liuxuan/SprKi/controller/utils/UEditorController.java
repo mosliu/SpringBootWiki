@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller.utils;
 
 import com.baidu.ueditor.ActionEnter;
+import net.liuxuan.spring.Helper.SystemHelper;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -50,7 +51,8 @@ public class UEditorController {
             @RequestParam(defaultValue = "") String action,
             HttpServletRequest request, HttpServletResponse response) {
 
-        String rootPath = context.getRealPath("/");
+//        String rootPath = context.getRealPath("/");
+        String rootPath = SystemHelper.getRootPath()+"/static/";
 //        log.info("===rootPath:{} , action:{}", rootPath, action);
         //修改了ActionEnter
         ActionEnter actionEnter = new ActionEnter(request, rootPath);

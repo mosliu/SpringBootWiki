@@ -25,5 +25,6 @@ public interface DevicesRepository extends JpaRepository<Devices, Long> , JpaSpe
     List<Devices> findByDevicename(String  devicename);
 
     List<Devices> findByDevicenameNot(String  notDevicename);
+    List<Devices> findByDevicenameNotOrderByDevicename(String  notDevicename);
 
 }

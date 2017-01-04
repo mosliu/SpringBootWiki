@@ -1,15 +1,21 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Messages : View</title>
 </head>
 <body>
+<h1 layout:fragment="header">Messages : Create</h1>
+<div layout:fragment="content" class="container">
+    <br/>
 <ol>
-    <li th:each="faq : ${searchResults}">
-        <b><span th:text="${faq.title}"></span></b> -
-        <span th:text="${faq.question}"></span> -
-        <span th:text="${faq.answer}"></span>
+    <span th:if="${searchResults.isEmpty()}"><strong>未查询到相关信息</strong></span>
+    <li th:each="faq:${searchResults}">
+        <b><span th:utext="${faq.title}"></span></b> -
+        <span th:utext="${faq.question}"></span> -
+        <span th:utext="${faq.answer}"></span>
     </li>
 </ol>
+</div>
 </body>
 </html>

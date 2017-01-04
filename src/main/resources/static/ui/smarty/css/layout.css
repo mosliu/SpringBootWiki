@@ -6877,7 +6877,7 @@ ul.search-history {
 #footer>.copyright {
 	background-color:rgba(0,0,0,0.2);
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-	padding:8px 0 3px 0;
+	padding:4px 0 3px 0;
 	font-size:13px;
 	display:block;
 }
@@ -7217,16 +7217,25 @@ ul.search-history {
 
 /** Fixed Footer
  ** ************************ **/
+.pusher {
+	margin-bottom: -19px;
+}
+.pusher:after {
+	content: "";
+	display: block;
+	height: 19px;
+}
+
 #footer.footer-fixed {
 	position:fixed;
 	left:0; right:0;
 	bottom:0;
 	width:100%;
-	z-index:30;
-	padding:10px 0;
+	z-index:999;
+	/*padding:10px 0;*/
 
-	filter: Alpha(Opacity=95);
-	opacity:0.95;
+	filter: Alpha(Opacity=75);
+	opacity:0.75;
 }
 #footer.footer-fixed .social-icon {
 	margin-top:0;

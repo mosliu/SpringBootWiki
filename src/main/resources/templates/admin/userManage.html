@@ -60,10 +60,10 @@
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
+                        <form id="createUserForm" action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
                               th:object="${user}">
-                            <header><i class="fa fa-users"></i> Create Account
-                                <small class="note bold">IT'S EASY</small>
+                            <header><i class="fa fa-users"></i> 新建用户
+                                <small class="note bold">注意</small>
                             </header>
 
                             <fieldset>
@@ -98,7 +98,7 @@
                                     </div>
                                 </div>
                                 <label class="input">
-                                    <input type="text" th:field="*{email}" required="true" placeholder="Email 地址"
+                                    <input type="email" th:field="*{email}" required="true" placeholder="Email 地址"
                                            class="form-control"/>
                                 </label>
                                 <label class="select">
@@ -106,7 +106,7 @@
                                         <option value="0" selected="" disabled="">Gender</option>
                                         <option value="1">男</option>
                                         <option value="2">女</option>
-                                        <option value="3">其他</option>
+                                        <!--<option value="3">其他</option>-->
                                     </select>
                                     <i></i>
                                 </label>
@@ -122,7 +122,7 @@
                             </fieldset>
 
                             <footer>
-                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
+                                <button id="createUserBtn" type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
                                     Create Account
                                 </button>
                             </footer>
@@ -231,9 +231,53 @@
             $('.modal').on('hidden.bs.modal', function () {
                 $(this).removeData('bs.modal');
 //                $(this).empty();
-            })
+            });
+
+            $('form#createUserForm').submit(
+                    function (e) {
+                        //prevent Default functionality
+                        e.preventDefault();
+
+                        //get the action-url of the form
+                        var actionurl = e.currentTarget.action;
+
+                        //do your own request an handle the results
+                        $.ajax({
+                            url: actionurl,
+                            type: 'post',
+                            dataType: 'json',
+                            data: $("#createUserForm").serialize(),
+                            success: function(data) {
+
+
+                                console.log(data);
+                                if(typeof(data.error) === "undefined"){
+                                    _toastr(data.msg, "top-center", "success", "#");
+                                }else{
+                                    _toastr(data.msg, "top-center", "warning", "#");
+                                }
+                            }
+                        });
+                    }
+            );
+
+
+//            $('#createUserBtn').click( function() {
+//                $.ajax({
+//                    url: '/admin/user_ajax?action=add',
+//                    type: 'post',
+//                    dataType: 'json',
+//                    data: $('form#createUserForm').serialize(),
+//                    success: function(data) {
+//                        console.log(data);
+//                    }
+//                });
+//            });
 
         });
+
+
+
 
         function deleteUsers(btn, sid) {
 //            console.log(btn);

@@ -7,16 +7,13 @@ package net.liuxuan.spring.mvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import java.util.Collection;
-import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -25,6 +22,8 @@ import java.util.Map;
 
 public class TestUrlInterceptor implements HandlerInterceptor {
     private static Logger log = LoggerFactory.getLogger(TestUrlInterceptor.class);
+    private NamedThreadLocal<Long> startTimeThreadLocal =
+            new NamedThreadLocal<Long>("StopWatch-StartTime");
 
     public TestUrlInterceptor() {
         log.debug("--------------- TestUrlInterceptor initialize -------------");
@@ -56,7 +55,8 @@ public class TestUrlInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-
+        long beginTime = System.currentTimeMillis();//1、开始时间
+        startTimeThreadLocal.set(beginTime);//线程绑定变量（该数据只有当前请求的线程可见）
 
 //        if(request.getRequestURI().equals("/error")){
 //            System.out.println("------------------error path");
@@ -159,8 +159,14 @@ public class TestUrlInterceptor implements HandlerInterceptor {
 //            throw new Exception("not find this path!!!!!");
         } else {
             Map<String, Object> model = modelAndView.getModel();
-            model.forEach((k, v) -> log.trace("Key: {} ,Value:{}",k, v==null?"":(( v.toString().length() )>100?v.toString().substring(0,100):v)));
+            model.forEach((k, v) -> log.trace("Key: {} ,Value:{}", k, v == null ? "" : ((v.toString().length()) > 100 ? v.toString().substring(0, 100) : v)));
         }
+
+        long endTime = System.currentTimeMillis();//2、结束时间
+        long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
+        long consumeTime = endTime - beginTime;//3、消耗的时间
+        log.trace("Consume Time {} ms",consumeTime);
+
         log.trace("********************Model************************");
 //        log.trace("*************************************************");
 //        log.trace("*************************************************");

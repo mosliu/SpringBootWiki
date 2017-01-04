@@ -1,5 +1,6 @@
 package net.liuxuan.spring.Helper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
@@ -199,6 +200,18 @@ public final class SystemHelper {
 //        WebApplicationContext wac = ContextLoader.getCurrentWebApplicationContext();
 //        wac.get
         return wac;
+    }
+
+    public static String getRootPath(){
+        File root = new File(SystemHelper.class.getProtectionDomain().getCodeSource().getLocation().getFile());
+        if(root.isFile()){
+            root = new File(root.getParent());
+        }
+//        System.out.println("root is file?:"+root.isFile());
+//        System.out.println("root parent is :"+root.getParent());
+//        System.out.println(f.getAbsolutePath());
+//        return SystemHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        return root.getAbsolutePath();
     }
 
 }
