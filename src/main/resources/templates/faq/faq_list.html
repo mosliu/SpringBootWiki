@@ -23,7 +23,7 @@
                 <label th:unless="${dtoNull}">查询条件(生效)</label>
                 <div class="toggle-content">
                     <div class="alert alert-bordered-dotted" style="margin: 10px">
-                        <form th:action="@{/faqlist}" action="/faqlist" id="faqqueryform" name="faqqueryform"
+                        <form th:action="@{/faq/list}" action="/faq/list" id="faqqueryform" name="faqqueryform"
                               method="POST"
                               class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
                               th:object="${dto}">
@@ -91,7 +91,7 @@
 
                             <input type="submit" id="submit" value="SUBMIT "/>
                         </form>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                        <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>-->
                     </div>
 
                 </div>
@@ -108,13 +108,13 @@
                     <thead>
                     <tr>
                         <th class="table-checkbox"></th>
-                        <th>category</th>
-                        <th>title</th>
-                        <th>department</th>
-                        <th>devices</th>
-                        <th>author</th>
-                        <th>lastUpdateDate</th>
-                        <th>Operate</th>
+                        <th>分类</th>
+                        <th>标题</th>
+                        <th>部门</th>
+                        <th>设备</th>
+                        <th>作者</th>
+                        <th>最后更新</th>
+                        <th>操作</th>
                         <th class="hidden">question</th>
                         <th class="hidden">answer</th>
                     </tr>
@@ -342,24 +342,6 @@
         initTable2();
 
 
-        // Call datatables, and return the API to the variable for use in our code
-        // Binds datatables to all elements with a class of datatable
-        var dtable = $("#dataTable").dataTable().api();
-
-        //        $("#myTableId_filter input")
-        //                .unbind('keypress keyup change') // Unbind previous default bindings
-        //                .bind('keypress keyup change', function (e) { // Bind our desired behavior
-        //                    // If the length is 3 or more characters, or the user pressed ENTER, search
-        //                    if (this.val().length >= 3 || e.keyCode == 13) {
-        //                        // Call the API search function
-        //                        dtable.search(this.value).draw();
-        //                    }
-        //                    // Ensure we clear the search if they backspace far enough
-        //                    if (this.val() == "") {
-        //                        dtable.search("").draw();
-        //                    }
-        //                    return;
-        //                });
         /*]]>*/
     </script>
 

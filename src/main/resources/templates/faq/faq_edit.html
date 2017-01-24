@@ -30,7 +30,7 @@
 <div class="container" layout:fragment="content">
     <h1 th:text="${title}">FAQ 编辑界面</h1>
     <div class="faqs-form">
-        <form th:action="@{/faqpost}" action="/login" id="faqform" name="faqform" method="POST"
+        <form th:action="@{/faq/post}" action="/login" id="faqform" name="faqform" method="POST"
               class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
               th:object="${faq}">
 

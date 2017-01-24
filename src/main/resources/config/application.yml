@@ -54,6 +54,10 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+    usedatabase: spring
+    backupdir: "d:/backup"
+    aabackupcron: "0 0/1 * * * ? *"
+    backupcron: "0 0 1 1/1 * ? *"
     validation-query: SELECT 1;
     test-on-borrow: true
     test-while-idle: true
@@ -167,5 +171,7 @@ SprKi:
     savepathchild: /uploaded/
     #访问文件的地址
     accesspath: /uploaded/
+    #备份位置
+    backupattachpath: d:/backup/attachments/
   editor:
     acl: ROLE_USER

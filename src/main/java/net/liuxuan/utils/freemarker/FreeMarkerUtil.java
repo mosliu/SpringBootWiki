@@ -37,7 +37,7 @@ public class FreeMarkerUtil {
     public void init() throws Exception {
         // 初始化FreeMarker配置
         // 创建一个Configuration实例
-        cfg = new Configuration();
+        cfg = new Configuration(Configuration.VERSION_2_3_0);
         // 设置FreeMarker的模版文件位置
         // 步骤一：指定 模板文件从何处加载的数据源，这里设置一个文件目录
         cfg.setDirectoryForTemplateLoading(new File(

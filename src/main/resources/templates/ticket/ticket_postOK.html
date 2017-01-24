@@ -9,7 +9,7 @@
     <h1 th:text="${title}">问题提交界面</h1>
     0
     <div class="faqs-form">
-        <form th:action="@{/faqpost}" action="/login" id="faqform" name="faqform" method="POST"
+        <form th:action="@{/faq/post}" action="/faq/post" id="faqform" name="faqform" method="POST"
               class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
               th:object="${faq}"  enctype="multipart/form-data">
 

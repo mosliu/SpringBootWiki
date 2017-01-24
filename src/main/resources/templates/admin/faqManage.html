@@ -23,7 +23,7 @@
     <div class="">
         <div class="">
             <div class="alert alert-bordered-dotted" style="margin: 10px">
-                <form th:action="@{/faqlist}" action="/faqlist" id="faqqueryform" name="faqqueryform"
+                <form th:action="@{/faq/list}" action="/faq/list" id="faqqueryform" name="faqqueryform"
                       method="POST"
                       class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
                       th:object="${dto}">
@@ -256,11 +256,11 @@
                                 admin_operate = false;
                             }
                             if (admin_operate) {
-                                return '<a href="#" onclick="reverttopic(' + data + ')"> 恢复 </a> ' +
-                                        '<a href="#" onclick="removetopic(' + data + ')"> 彻底删除 </a> ';
+                                return '<a href="#" onclick="reverttopic(this,' + data + ')"> 恢复 </a> ' +
+                                        '<a href="#" onclick="removetopic(this,' + data + ')"> 彻底删除 </a> ';
                             } else {
                                 if (full.author.username === authname) {
-                                    return '<a href="/admin/faq/revert/' + data + '"> 恢复 </a> ';
+                                    return '<a href="#" onclick="reverttopic(this,' + data + ')"> 恢复 </a> ';
                                 } else {
                                     return '';
                                 }
@@ -338,44 +338,33 @@
         }
 
 
-        // Table Init
         initTable2();
 
 
-        // Call datatables, and return the API to the variable for use in our code
-        // Binds datatables to all elements with a class of datatable
-        var dtable = $("#dataTable").dataTable().api();
 
-        //        $("#myTableId_filter input")
-        //                .unbind('keypress keyup change') // Unbind previous default bindings
-        //                .bind('keypress keyup change', function (e) { // Bind our desired behavior
-        //                    // If the length is 3 or more characters, or the user pressed ENTER, search
-        //                    if (this.val().length >= 3 || e.keyCode == 13) {
-        //                        // Call the API search function
-        //                        dtable.search(this.value).draw();
-        //                    }
-        //                    // Ensure we clear the search if they backspace far enough
-        //                    if (this.val() == "") {
-        //                        dtable.search("").draw();
-        //                    }
-        //                    return;
-        //                });
-
-
-        function removetopic(id) {
+        function removetopic(obj, id) {
 //            $("body").addClass("body1");
             if (confirm("你确信要删除？？")) {
                 $.post("/admin/faq/deleteforever/" + id, function (data) {
                     alert("deleted:" + id + " ,    " + data.status);
+                    if (data.status === 'success') {
+                        jQuery('#myTableId').DataTable().row($(obj).parents('tr')).remove().draw();
+                    }
                 });
 //                alert("deleted:" + id);
             }
         }
-        function reverttopic(id) {
+        function reverttopic(obj, id) {
+//            console.dir($(obj).parents('tr'));
+
+
 //            $("body").addClass("body1");
 //            if (confirm("你确信要删除？？")) {
             $.post("/admin/faq/revert/" + id, function (data) {
                 alert("reverted:" + id + " ,    " + data.status);
+                if (data.status === 'success') {
+                    jQuery('#myTableId').DataTable().row($(obj).parents('tr')).remove().draw();
+                }
             });
 //                alert("deleted:" + id);
 //            }

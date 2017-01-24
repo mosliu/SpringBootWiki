@@ -5,6 +5,7 @@ import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -22,6 +23,11 @@ import java.util.List;
 public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, JpaSpecificationExecutor<FAQContent> {
 
     List<FAQContent> findTop100ByDisabled(Boolean disabled);
+    List<FAQContent>  findTop100ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
+
+
+    @Query(value = "select count(v) as cnt, v.devices from FAQContent v group by v.devices")
+    public List<?> findGroupByCount();
 
 
 }

@@ -1,6 +1,5 @@
 package net.liuxuan.SprKi.service.labthink;
 
-import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.Users;
@@ -84,7 +83,7 @@ public class TicketContentServiceImpl implements TicketContentService {
 
         if (dto.isAllNull()) {
             //全空，返回top100
-            return ticketContentRepository.findTop100ByDisabled(false);
+            return ticketContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
         }
 
         return ticketContentRepository.findAll(new Specification<TicketContent>() {
@@ -94,35 +93,32 @@ public class TicketContentServiceImpl implements TicketContentService {
                 //形成条件列表
                 List<Predicate> pl = new ArrayList<Predicate>();
 
+                //按lastUpdateDate比较时间条件
+                List<Predicate> pl_datecompare = buildDateComparePredicates(root, cb, "lastUpdateDate", dto.fromDate, dto.toDate);
+
+                pl.addAll(pl_datecompare);
+
                 String[] sl_and = {"category", "devices", "department", "disabled"};
 
                 //先将Object 转为Map，这样好向内添加属性
                 Map<String, Object> objectMap = object2Map(dto);
                 objectMap.put("disabled", false);
 
-                pl.addAll(buildEqualsAndPredicateBuilder(root, cb, sl_and, objectMap));
 
-                Map<String, Object> orMap = new LinkedHashMap<String, Object>();
+                pl.addAll(buildEqualsAndPredicate(root, cb, sl_and, objectMap));
+
+                //比较用户名项的比较列
                 String[] sl_or = {"author", "lastUpdateUser"};
-
-                if (StringUtils.isNotBlank(dto.user)) {
-                    Users users = new Users();
-                    users.setUsername(dto.user);
-                    orMap.put("author", users);
-                    orMap.put("lastUpdateUser", users);
-                }
-
-                pl.addAll(convertToOrPredict(buildEqualsAndPredicateBuilder(root, cb, sl_or, orMap),cb));
+                List<Predicate> pl_usercompare = buildUserEqualsPredicates(root, cb, sl_or, dto.user);
+                pl.addAll(pl_usercompare);
 
                 //TODO 这里有问题
-                String[] likepaths ={"title","question","answer"};
-                String keyword = dto.keyword;
-
-                pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, keyword),cb));
+                String[] likepaths = {"title", "question"};
+                pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, dto.keyword), cb));
 
 
                 log.debug("pl size is:{}", pl.size());
-                query.where(pl.toArray(new Predicate[pl.size()]));
+                query.where(pl.toArray(new Predicate[pl.size()])).orderBy(cb.desc(root.get("lastUpdateDate")));
 //                query.where(cb.like(namePath, "%李%"), cb.like(nicknamePath, "%王%")); //这里可以设置任意条查询条件
 //                Path<String> nameExp = root.get("name");
                 return null;
@@ -131,8 +127,6 @@ public class TicketContentServiceImpl implements TicketContentService {
 
 //        return ticketContentRepository.findAll();
     }
-
-
 
 
     @Override

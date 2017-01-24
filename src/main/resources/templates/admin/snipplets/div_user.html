@@ -47,13 +47,13 @@
                         <div class="col col-md-6">
                             <label>姓</label>
                             <label class="input">
-                                <input type="text" th:field="*{lastName}" placeholder="Last name"/>
+                                <input type="text" th:field="*{lastName}" placeholder="姓"/>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label>名</label>
                             <label class="input">
-                                <input type="text" th:field="*{firstName}" placeholder="First name"/>
+                                <input type="text" th:field="*{firstName}" placeholder="名"/>
                             </label>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
     </script>
 </div>
 
-<!--用户修改Div-->
+<!--权限修改Div-->
 <div th:fragment="authedit">
 
     <!-- header modal -->
@@ -160,11 +160,14 @@
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         var callback = function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+            if(status==="success"){
+                alert('修改成功！');
+            }
+            console.dir("Data: " + data + "\nStatus: " + status);
         }
 
         $("#updateform").on("submit", function (e) {
-            alert($(this).serialize());
+            //alert($(this).serialize());
 //            e.preventDefault();
             $.post(this.action, $(this).serialize(), callback);
             return false;

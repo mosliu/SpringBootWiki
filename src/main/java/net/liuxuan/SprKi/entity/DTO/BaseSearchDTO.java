@@ -54,6 +54,10 @@ public class BaseSearchDTO extends BaseDTO{
     public Integer limit;
 
     /**
+     * 是否禁用
+     */
+    public boolean disabled;
+    /**
      * Is all null boolean.
      *
      * @return the boolean

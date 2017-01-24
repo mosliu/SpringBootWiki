@@ -20,7 +20,6 @@
     <div class="container">
 
 
-
         <!-- Mobile Menu Button -->
         <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
             <i class="fa fa-bars"></i>
@@ -37,10 +36,10 @@
                 <ul class="dropdown-menu">
                     <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
                     <li class="divider"></li>
-<!--                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> test-2</a></li>
-                    <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> test-3</a></li>
-                    <li class="divider"></li>-->
+                    <!--                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
+                                        <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> test-2</a></li>
+                                        <li><a tabindex="-1" href="#"><i class="fa fa-cog"></i> test-3</a></li>
+                                        <li class="divider"></li>-->
 
                     <form th:action="@{/logout}" name="logoutform" method="post">
                         <li><a tabindex="-1" href="#" onclick="logoutform.submit()"><i class="fa fa-power-off "></i>
@@ -66,7 +65,7 @@
 
         <!-- Logo -->
         <!-- //TODO 改LOGO-->
-        <a class="logo pull-left" href="index.html">
+        <a class="logo pull-left" href="/index.html">
             <img src="/images/smarty.png" alt=""/>
         </a>
 
@@ -82,16 +81,17 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">问题提交</a>
                         <ul class="dropdown-menu">
-                            <li><a  href="/ticket" th:href="@{/ticket}">新问题</a></li>
-                            <li><a  href="/faqlist" th:href="@{/ticketlist}">所提问题查看--这里应该有权限管理</a></li>
+                            <li><a href="/ticket" th:href="@{/ticket}">新问题</a></li>
+                            <li><a href="/ticketlist" th:href="@{/ticketlist}">所提问题查看--这里应该有权限管理</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#">支持信息库</a>
                         <ul class="dropdown-menu">
-                            <li><a  href="/faq" th:href="@{/faq}">发布新信息</a></li>
-                            <li><a  href="/faqlist" th:href="@{/faqlist}">信息列表查看</a></li>
+                            <li><a href="/faq" th:href="@{/faq}">发布新信息</a></li>
+                            <li><a href="/faq/list" th:href="@{/faq/list}">信息列表查看</a></li>
+                            <li><a href="/faq/list" th:href="@{/faq/count}">信息情况总览</a></li>
                         </ul>
                     </li>
 
@@ -99,37 +99,37 @@
                         <a class="dropdown-toggle" href="#">支持工具</a>
                         <ul class="dropdown-menu">
                             <!--<li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>-->
-                            <li><a  href="/tools/unitconv" th:href="@{/tools/unitconv}">单位转换工具</a></li>
-                            <li><a  href="/tools/formula/vacuum" th:href="@{/tools/formula/vacuum}">压差法数据计算工具</a></li>
-                            <li><a  href="/tools/OCR" th:href="@{/tools/OCR}">OCR工具</a></li>
+                            <li><a href="/tools/unitconv" th:href="@{/tools/unitconv}">单位转换工具</a></li>
+                            <li><a href="/tools/formula/vacuum" th:href="@{/tools/formula/vacuum}">压差法数据计算工具</a></li>
+                            <li><a href="/tools/OCR" th:href="@{/tools/OCR}">OCR工具</a></li>
                         </ul>
                     </li>
-<!--
+                    <!--
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" href="#">测试</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/msg" th:href="@{/msg}">Message List</a></li>
-                            <li class="dropdown">
-                                <a href="/editor" th:href="@{/editor}">Editor</a>
-                            </li>
-                            <li><a href="/lucene" th:href="@{/lucene}"><i
-                                    class="et-browser"></i>Lucene</a></li>
-                            <li><a href="#">User interface</a></li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" href="#">
-                                    sublist test
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Gallery images</a></li>
-                                    <li><a href="#">OneByOne Slider</a></li>
-                                    <li><a href="#">Audio Player</a></li>
-                                    <li><a href="#">Video Player</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
--->
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" href="#">测试</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/msg" th:href="@{/msg}">Message List</a></li>
+                                                <li class="dropdown">
+                                                    <a href="/editor" th:href="@{/editor}">Editor</a>
+                                                </li>
+                                                <li><a href="/lucene" th:href="@{/lucene}"><i
+                                                        class="et-browser"></i>Lucene</a></li>
+                                                <li><a href="#">User interface</a></li>
+                                                <li class="dropdown">
+                                                    <a class="dropdown-toggle" href="#">
+                                                        sublist test
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="#">Gallery images</a></li>
+                                                        <li><a href="#">OneByOne Slider</a></li>
+                                                        <li><a href="#">Audio Player</a></li>
+                                                        <li><a href="#">Video Player</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                    -->
 
 
                 </ul>

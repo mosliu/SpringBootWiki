@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.entity.labthink;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,9 +33,11 @@ public class Devices {
     @Column(nullable = false,length = 100)
     String devicenameEN;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     DeviceType deviceType;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     DeviceKind deviceKind;
 

@@ -10,6 +10,7 @@ import net.liuxuan.SprKi.repository.CMSCategoryRepository;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
+import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.constants.JPAConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,8 +27,10 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -103,7 +106,6 @@ public class FAQController {
     public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
         FAQContent faq = faqContentService.findById(id);
-
         model.put("faq", faq);
 //        devicesRepository.findAll();
 //        List<Devices> devicesAll = devicesRepository.findAll();
@@ -119,11 +121,11 @@ public class FAQController {
 
 //        FAQContent faq = faqContentService.findById(id);
         faqContentService.deleteFAQContentById(id);
-        return "redirect:/faqlist";
+        return "redirect:/faq/list";
     }
 
 
-    @RequestMapping(value = "/faqlist")
+    @RequestMapping(value = "/faq/list")
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQList(FAQSearchDTO dto, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         log.debug("===getFAQList logged ,the DTO value is : {}", dto);
@@ -135,14 +137,14 @@ public class FAQController {
         }
 
         List<FAQContent> allFAQContents = faqContentService.findAllFAQContentsByDto(dto);
-        log.info("list size is {}", allFAQContents.size());
+        log.debug("faq list size is {}", allFAQContents.size());
         model.put("allfaqlist", allFAQContents);
         model.put("dto", dto);
         return "faq/faq_list";
     }
 
 
-    @RequestMapping(value = "/faqpost", method = RequestMethod.POST)
+    @RequestMapping(value = "/faq/post", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String postFAQ(FAQContent faq, HttpServletRequest request, Map<String, Object> model) {
 //        log.debug("request type is",request.getClass().getCanonicalName());
@@ -161,8 +163,44 @@ public class FAQController {
         faq.setDescription("cccccc");
         model.put("faq", faq);
         model.put("title", "FAQ 编辑界面--FAQ提交完成，可继续编辑以更新");
-        return "faq/faq_edit";
+        return "faq/faq_show";
 
+    }
+
+
+    @RequestMapping(value = "/faq/count_ajax", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public void getFAQCount_ajax(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+
+        Map<String, Object> rtnDate = new HashMap<String, Object>();
+        log.info("-FAQController.getFAQCount() Method");
+//        model.put("message", "Editor");
+        rtnDate.put("title", "FAQ count");
+
+        List l = faqContentService.getFaqGroupByCount();
+
+        l.forEach(item -> {
+            Object[] objects = (Object[]) item;
+            rtnDate.put(((Devices)objects[1]).getDevicename(),objects[0]);
+        });
+//        for (int i = 0; i < l.size(); i++) {
+//
+//        }
+        rtnDate.put("data", l);
+
+        ResponseHelper.writeMAPtoResponseAsJson(response, rtnDate);
+    }
+    @RequestMapping(value = "/faq/count", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String getFAQCount(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+
+        log.info("-FAQController.getFAQCount() Method");
+        List l = faqContentService.getFaqGroupByCount();
+        long total = faqContentService.getFAQContentsCount();
+
+        model.put("allCount", l);
+        model.put("total",total);
+        return "faq/faq_count";
     }
 
 

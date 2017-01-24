@@ -64,6 +64,7 @@ public class SummerNoteController {
     public void uploadMultipleFileHandler(@RequestParam("file") MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws IOException {
 //        File path = new File(picSavePathRoot + picSavePathChild +"/");
 //        String back = UploadUtil.uploadImage(request.getServletContext().getRealPath("/"), files);
+
         String back = UploadUtil.uploadImage(picSavePathRoot + picSavePathChild +"/",picAccessPath, files);
         try {
             response.getWriter().write(back);

@@ -65,14 +65,14 @@ public class TestUrlInterceptor implements HandlerInterceptor {
 //        }
 //        HandlerMethod  hm = (HandlerMethod) handler;
 
-        String query = request.getQueryString();
-        query = (query == null) ? "" : query;
+//        String query = request.getQueryString();
+//        query = (query == null) ? "" : query;
 //        String url = request.getMethod() + "  " + request.getRequestURL().toString() + "?" + query;
 
 
         //request.getRequestURL()  ===>   http://127.0.0.1/login
         //request.getRequestURI()  ===>   /login
-        log.debug("--PreCheck,url:{} {}?{} ", request.getMethod(), request.getRequestURL().toString(), query);
+//        log.debug("--PreCheck,url:{} {}?{} ", request.getMethod(), request.getRequestURL().toString(), query);
 //        MultipartHttpServletRequest multipartRequest  =  (MultipartHttpServletRequest) request;
 //        Enumeration<String> headerNames = request.getHeaderNames();
 //        while(headerNames.hasMoreElements()){
@@ -148,8 +148,11 @@ public class TestUrlInterceptor implements HandlerInterceptor {
 
 //        System.out.println(handler.getClass());
 
+        String query = request.getQueryString();
+        query = (query == null) ? "" : query;
         log.debug("--Handler:{}", handler.toString());
         log.debug("--Viewname: {} & User: {}--", viewname, user);
+        log.info("Access Log, User:{} ,url:{} {}?{} ", user,request.getMethod(), request.getRequestURL().toString(), query);
 
         log.trace("********************Model************************");
         if (modelAndView == null) {
@@ -204,7 +207,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
             throws Exception {
         if (ex != null) {
 //            ex.printStackTrace();
-            log.debug("--ErrorFound:{} Happened@ {}", ex.getMessage(), handler.toString());
+            log.warn("--ErrorFound:{} Happened@ {}", ex.getMessage(), handler.toString());
 //            System.out.println("--ErrorFount" + ex.getMessage());
         }
     }

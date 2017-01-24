@@ -3,42 +3,80 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layouts/base">
 <head>
-    <!-- 配置文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
-    <!-- 实例化编辑器 -->
-    <script type="text/javascript">
-        var ue = UE.getEditor('editor');
-        function doSubmit1() {
-//            document.faqform.answer.value = 111
-//            $('input[name=answer]:first').val(ue.getContent());
-            return jQuery('form.validate-plugin').validate().form();
+    <script th:inline="javascript">
+
+
+        function doRemove(){
+            var id = [[${faq.Id}]];
+//            alert(id);
+            window.location.href="/faq/delete/"+id;
+        }
+
+        function removetopic() {
+//            $("body").addClass("body1");
+
+            $("#myModal").modal();
+
         }
     </script>
 </head>
 <body>
 <div class="container" layout:fragment="content">
 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div id="confirmdiv"  class="modal-dialog" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">删除</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label >确定删除本条支持信息？</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                    <button type="button" id="delete_submit" class="btn btn-warning" onclick="doRemove()" ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>确定删除！！</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div>
         <p/>
         <!-- breadcrumbs -->
         <h1 class="blog-post-title" th:text="${faq.title}">BLOG POST TITLE HERE</h1>
         <ul class="blog-post-info list-inline">
-            <li><a href="#"> <i class="fa fa-clock-o"></i> 创建：<span class="font-lato" th:text="${faq.publishDate}">June 29, 2015</span>
+            <li><a href="#">
+                <i class="fa fa-clock-o"></i> 创建：
+                <span class="font-lato" th:text="${faq.publishDate}">June 29, 2015</span>
             </a></li>
-            <li><a href="#"> <i class="fa fa-clock-o"></i> 更新：<span class="font-lato" th:text="${faq.lastUpdateDate}">June 29, 2015</span>
+            <li><a href="#">
+                <i class="fa fa-clock-o"></i> 更新：
+                <span class="font-lato" th:text="${faq.lastUpdateDate}">June 29, 2015</span>
             </a></li>
-            <li><a href="#"> <i class="fa fa-comment-o"></i> <span class="font-lato" th:text="${faq.commentsCount}">28 Comments</span><span
-                    class="font-lato"> 评论</span> </a></li>
+            <li><a href="#">
+                <i class="fa fa-comment-o"></i>
+                <span class="font-lato" th:text="${faq.commentsCount}">28 Comments</span>
+                <span class="font-lato"> 评论</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fa fa-comment-o"></i>
+                <span class="font-lato"> 热度： <span class="font-lato" th:text="${faq.clicks}" th:remove="tag">28 Comments</span> ℃ </span>
+            </a></li>
             <li>
                 <i class="fa fa-folder-open-o"></i>
                 <a class="category" href="#"> <span class="font-lato">faq</span> </a>
                 <a class="category" href="#"> <span class="font-lato">xxxx</span> </a>
             </li>
-            <li><a href="#"> <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author.username}">John Doe</span>
-            </a></li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author.username}">John Doe</span>
+                </a>
+            </li>
+
         </ul>
     </div>
     <ul class="row clearfix testimonial-dotted list-unstyled">
@@ -52,12 +90,33 @@
         </li>
         <li class="col-md-3">
             <ul class="side-nav list-group margin-bottom-80">
-                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?department='+${faq?.department.id}"><i class="fa fa-eye"></i> 部门：<span
-                        th:text="${faq.department.departmentName}">department</span></a></li>
-                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?devices='+${faq?.devices.id}"><i class="fa fa-comments-o"></i> 设备： <span
-                        th:text="${faq.devices.devicename}">devices</span></a></li>
-                <li class="list-group-item"><a href="#" th:href="@{/faqlist}+'?category='+${faq?.category.id}"><i class="fa fa-history"></i> 分类：<span
-                        th:text="${faq.category.name}">category</span></a></li>
+                <li class="list-group-item">
+                    <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department.id}">
+                        <i class="fa fa-2x fa-eye"></i> &nbsp;&nbsp;&nbsp;部门：<span
+                            th:text="${faq.department.departmentName}">department</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices.id}">
+                        <i class="fa fa-2x fa-comments-o"></i>&nbsp;&nbsp;&nbsp;设备： <span
+                            th:text="${faq.devices.devicename}">devices</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">
+                        <i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a th:href="'/faq/'+${faq.Id}" style="background-color:#9ACD32">
+                        <i class="fa fa-2x fa-edit"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;编辑</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a th:onclick="'removetopic()'" style="background-color:#1E8BC3">
+                        <i class="fa fa-2x fa-recycle"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;删除</span>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
@@ -106,7 +165,8 @@
             <span class="txt"><i class="fa fa-tag"></i>DEVELOPMENT</span>
             <span class="num">3</span>
         </a>
-        <!-- /TAGS --></div>
+        <!-- /TAGS -->
+    </div>
 
 </div>
 

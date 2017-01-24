@@ -125,7 +125,7 @@
 
 		jQuery(window).load(function() {
 
-			jQuery('#preloader').fadeOut(1000, function() {
+			jQuery('#preloader').fadeOut(100, function() {
 				jQuery('#preloader').remove();
 			});
 

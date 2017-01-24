@@ -20,7 +20,7 @@ import java.util.List;
  */
 public interface TicketContentRepository extends JpaRepository<TicketContent, Long>, JpaSpecificationExecutor<TicketContent> {
 
-    List<TicketContent> findTop100ByDisabled(Boolean disabled);
+    List<TicketContent> findTop100ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
 
 
 }

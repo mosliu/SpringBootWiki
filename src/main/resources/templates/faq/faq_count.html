@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/base">
+<head>
+
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <div>
+        <p/>
+        <a href="#" class="size-25 text-muted">
+            <i class="fa fa-signal"></i>经过长期的总结，当前支持信息的总数量为：
+            <span th:text="'('+${total}+')'" > (3)</span>
+        </a>
+    </div>
+    <div class="divider divider-center divider-color"><!-- divider -->
+        <i class="fa fa-chevron-down"></i>
+    </div>
+    <div class=" list-group margin-bottom-80">
+        <p/>
+        <ul class="list-group list-unstyled">
+            <div th:each="devs:${allCount}"  th:remove="tag">
+                <li class="list-group-item col-md-3 ">
+                    <a href="#" th:href="@{/faq/list}+'?devices='+${devs[1]?.id}">
+                        <span class="size-16 text-muted pull-right margin-right-40"
+                              th:text="'('+${devs[0]}+')'"> (3)</span>
+                        <i class="fa fa-columns"></i>
+                        <span th:text="${devs[1].devicename}" th:remove="tag"></span>
+                    </a>
+                    <!--<span th:text="${devs[1].devicename}"></span><span th:text="${devs[0]}"></span>-->
+                </li>
+                <li class=" col-md-1 "></li>
+            </div>
+        </ul>
+        <!-- breadcrumbs -->
+    </div>
+
+
+</div>
+
+</body>
+</html>

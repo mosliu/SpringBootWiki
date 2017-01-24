@@ -1,10 +1,9 @@
 package net.liuxuan.SprKi.controller.admin.labthink;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.service.labthink.DepartmentService;
+import net.liuxuan.spring.Helper.ResponseHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,9 +76,9 @@ public class DepartmentManagementController {
         Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("===departmentManageAjax logged ,the value is : {}", _dto.toString());
 
-        response.setContentType("application/json");
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+//        response.setContentType("application/json");
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
                 String department_name = request.getParameter("department_name");
@@ -119,7 +118,8 @@ public class DepartmentManagementController {
                 break;
         }
 //        return "";
-        mapper.writeValue(response.getWriter(), rtnData);
+//        mapper.writeValue(response.getWriter(), rtnData);
+        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
     }
 
 

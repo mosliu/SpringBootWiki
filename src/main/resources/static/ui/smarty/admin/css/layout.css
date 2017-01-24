@@ -86,8 +86,10 @@ body {
 		content: "\f0c9";
 	}
 	#mobileMenuBtn.active:before {
-		font-family: 'Glyphicons Halflings';
-		content: "\e014";
+		/*font-family: 'Glyphicons Halflings';*/
+		/*content: "\e014";*/
+		font-family:'FontAwesome';
+		content: "\f0c9";
 		line-height:50px;
 	}
 

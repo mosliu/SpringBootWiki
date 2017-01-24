@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -38,6 +40,13 @@ public class UEditorController {
     @Autowired
     ServletContext context;
 
+
+    @Value("${SprKi.upload.savepathroot}")
+    private String picSavePathRoot;
+    @Value("${SprKi.upload.savepathchild}")
+    private String picSavePathChild;
+    @Value("${SprKi.upload.accesspath}")
+    private String picAccessPath;
     /**
      * Do action.
      *
@@ -53,6 +62,13 @@ public class UEditorController {
 
 //        String rootPath = context.getRealPath("/");
         String rootPath = SystemHelper.getRootPath()+"/static/";
+//        String rootPath = picSavePathRoot + picSavePathChild +"/";
+
+        File storePath = new File(rootPath);
+        if (!storePath.exists()) {
+            storePath.mkdirs();
+        }
+
 //        log.info("===rootPath:{} , action:{}", rootPath, action);
         //修改了ActionEnter
         ActionEnter actionEnter = new ActionEnter(request, rootPath);

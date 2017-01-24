@@ -1,11 +1,11 @@
-package net.liuxuan.spring.mvc.utilconf;
+package net.liuxuan.spring.mvc.utilconf.QuartzJobs;
 
 import org.springframework.stereotype.Service;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
  * ***************************************************************************
- * 源文件名:  net.liuxuan.spring.mvc.utilconf.MyJobOne
+ * 源文件名:  net.liuxuan.spring.mvc.utilconf.QuartzJobs.MyJobOne
  * 功能:
  * 版本:	@version 1.0
  * 编制日期: 2016/3/7 14:41

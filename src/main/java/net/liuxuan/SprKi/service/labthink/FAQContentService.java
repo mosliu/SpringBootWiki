@@ -34,11 +34,24 @@ public interface FAQContentService {
     List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto);
 
     /**
-     * Delete faq content by id.
+     * Disable faq content by id.
      *
      * @param id the id
      */
     void deleteFAQContentById(Long id);
+    /**
+     * Revert faq content by id.
+     *
+     * @param id the id
+     */
+    void revertFAQContentById(Long id);
+
+    /**
+     * Delete faq content by id,FOR EVER!!!
+     *
+     * @param id the id
+     */
+    void deleteForEverFAQContentById(Long id);
 
     /**
      * Find by id faq content.
@@ -54,4 +67,7 @@ public interface FAQContentService {
      * @return the faq contents count
      */
     long getFAQContentsCount();
+
+
+    List<?> getFaqGroupByCount();
 }

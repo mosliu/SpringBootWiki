@@ -1580,7 +1580,7 @@
 		jQuery("#mobileMenuBtn").bind("click", function(e) {
 			e.preventDefault();
 
-			jQuery(this).toggleClass('active');
+			// jQuery(this).toggleClass('active');
 
 			if(window.width > 768) {
 
@@ -1960,7 +1960,7 @@
 						_preventDuplicates	= jQuery(this).attr('data-preventDuplicates') 	== "true" ? true : false,
 						_showDuration 		= jQuery(this).attr('data-showDuration') 		|| "300",
 						_hideDuration 		= jQuery(this).attr('data-hideDuration') 		|| "1000",
-						_timeOut 			= jQuery(this).attr('data-timeOut') 			|| "5000",
+						_timeOut 			= jQuery(this).attr('data-timeOut') 			|| "10000",
 						_extendedTimeOut	= jQuery(this).attr('data-extendedTimeOut')		|| "1000",
 						_showEasing 		= jQuery(this).attr('data-showEasing') 			|| "swing",
 						_hideEasing 		= jQuery(this).attr('data-hideEasing') 			|| "linear",
@@ -2011,7 +2011,7 @@
 						"onclick": 				onclick,
 						"showDuration": 		"300",
 						"hideDuration": 		"1000",
-						"timeOut": 				"5000",
+						"timeOut": 				"10000",
 						"extendedTimeOut": 		"1000",
 						"showEasing": 			"swing",
 						"hideEasing": 			"linear",

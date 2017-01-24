@@ -48,6 +48,8 @@
         <prudent>true</prudent>
     </appender>
 
+
+
     <!-- Console output -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -70,14 +72,14 @@
 
     <!-- Enable FILE and STDOUT appenders for all log messages.
          By default, only log at level INFO and above. -->
-    <root level="TRACE">
+    <root level="WARN">
         <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT"/>
     </root>
 
     <!-- For loggers in the these namespaces, log at separated levels. -->
     <logger name="net.liuxuan" level="TRACE"/>
-
+    <logger name="net.liuxuan.spring" level="DEBUG"/>
 
     <!--<logger name="org.springframework.security" level="TRACE"/>-->
     <logger name="org.hibernate.tool.hbm2ddl.TableMetadata" level="WARN"/>
@@ -101,7 +103,7 @@
 
     <!-- =================================开Debug过滤项  BEGIN================================= -->
 
-    <logger name="net.liuxuan.spring" level="DEBUG"/>
+
     <logger name="druid.sql" level="INFO"/>
 
     <logger name="com.github.dandelion" level="INFO"/>
@@ -154,7 +156,8 @@
 
 
     <logger name="org.springframework.boot.actuate.autoconfigure" level="INFO"/>
-    <logger name="org.springframework.boot.actuate.endpoint.mvc" level="INFO"/>
+    <!-- endpoint Mapping,set level to Info to show-->
+    <logger name="org.springframework.boot.actuate.endpoint.mvc" level="WARN"/>
     <logger name="org.springframework.boot.actuate.condition" level="INFO"/>
     <logger name="org.springframework.boot.actuate.trace" level="INFO"/>
 
@@ -300,7 +303,7 @@
     <logger name="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping" level="INFO"/>
     <logger name="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" level="INFO"/>
     <!--RequestMapping   set to INFO if you want to show-->
-    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="INFO"/>
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="WARN"/>
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="INFO"/>
     <!--display Method [login] returned [ModelAndView: reference to view with name 'common/login'; model is {}]-->
     <logger name="org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod" level="INFO"/>

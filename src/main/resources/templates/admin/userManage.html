@@ -33,9 +33,9 @@
                 <li class=""><!-- TAB 2 -->
                     <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 用户列表 <span class="caret"></span></a>
                 </li>
-                <li class=""><!-- TAB 2 -->
-                    <a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>
-                </li>
+                <!--<li class="">&lt;!&ndash; TAB 2 &ndash;&gt;-->
+                    <!--<a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>-->
+                <!--</li>-->
             </ul>
             <!-- /tabs nav -->
 
@@ -84,18 +84,19 @@
 
                             <fieldset>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="input">
-                                            <input type="text" th:field="*{firstName}" placeholder="First name"
-                                                   class="form-control"/>
-                                        </label>
-                                    </div>
                                     <div class="col col-md-6">
                                         <label class="input">
-                                            <input type="text" th:field="*{lastName}" placeholder="Last name"
+                                            <input type="text" th:field="*{lastName}" placeholder="姓"
                                                    class="form-control"/>
                                         </label>
                                     </div>
+                                    <div class="col-md-6">
+                                        <label class="input">
+                                            <input type="text" th:field="*{firstName}" placeholder="名"
+                                                   class="form-control"/>
+                                        </label>
+                                    </div>
+
                                 </div>
                                 <label class="input">
                                     <input type="email" th:field="*{email}" required="true" placeholder="Email 地址"
@@ -137,7 +138,7 @@
                         <thead>
                         <tr>
                             <th>用户名</th>
-                            <th>密码</th>
+                            <!--<th>密码</th>-->
                             <th>启用</th>
                             <th>别名</th>
                             <th>注册日期</th>
@@ -148,17 +149,20 @@
                         <tbody>
                         <tr th:each="u : ${users}">
                             <td th:text="${u?.username}">Doe</td>
-                            <td th:text="${u?.password}">John</td>
+                            <!--<td th:text="${u?.password}">John</td>-->
                             <td th:text="${u?.enabled}">John</td>
                             <td th:text="${u?.usernameAlias}">John</td>
                             <td th:text="${u?.regdate}">John</td>
                             <td>
 
-                                <ul th:each="auth : ${u?.auths}">
-                                    <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
-                                       th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}">
-                                        <li th:text="${auth?.authority}"></li>
-                                    </a>
+                                <ul>
+                                    <li th:each="auth : ${u?.auths}">
+                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
+                                           th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}"
+                                           th:text="${auth?.authority}">
+                                        </a>
+                                    </li>
+
                                 </ul>
 
                             </td>
@@ -308,7 +312,7 @@
 
                             "columns": [
                                 {"data": "username"},
-                                {"orderable": true, "data": "password"},
+                                //{"orderable": true, "data": "password"},
                                 {"orderable": true, "data": "enabled"},
                                 {"orderable": true, "data": "usernameAlias"},
                                 {"orderable": true, "data": "regdate"},
@@ -322,8 +326,8 @@
                                 },
                             ],
                             "lengthMenu": [
-                                [5, 15, 20, -1],
-                                [5, 15, 20, "All"] // change per page values here
+                                [5, 15, 50, -1],
+                                [5, 15, 50, "All"] // change per page values here
                             ],
                             // set the initial value
                             "pageLength": 5,
@@ -379,10 +383,10 @@
                             _Tposition = _t.attr('data-toastr-position') || "top-full-width";
                     _Turl = _t.attr('data-toastr-url') || false;
 
-                    toastr.options = {
-                        "timeOut": "10000",
-                        "progressBar": true,
-                    }
+//                    toastr.options = {
+//                        "timeOut": "10000",
+//                        "progressBar": true,
+//                    }
 
                     // Append 'is_ajax' hidden input field!
                     _t.append('<input type="hidden" name="is_ajax" value="true" />');

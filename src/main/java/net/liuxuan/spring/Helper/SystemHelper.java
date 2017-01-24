@@ -202,6 +202,10 @@ public final class SystemHelper {
         return wac;
     }
 
+    /**
+     * 得到运行目录
+     * @return
+     */
     public static String getRootPath(){
         File root = new File(SystemHelper.class.getProtectionDomain().getCodeSource().getLocation().getFile());
         if(root.isFile()){
@@ -212,6 +216,20 @@ public final class SystemHelper {
 //        System.out.println(f.getAbsolutePath());
 //        return SystemHelper.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         return root.getAbsolutePath();
+    }
+
+    /**
+     * 得到方法的调用者。
+     */
+    public static void getCaller() {
+        StackTraceElement[] stack = (new Throwable()).getStackTrace();
+        for (int i = 0; i < stack.length; i++) {
+            StackTraceElement ste = stack[i];
+            System.out.println(ste.getClassName() + "." + ste.getMethodName() + "(...);");
+            System.out.println(i + "--" + ste.getMethodName());
+            System.out.println(i + "--" + ste.getFileName());
+            System.out.println(i + "--" + ste.getLineNumber());
+        }
     }
 
 }
