@@ -5,6 +5,9 @@
 <head>
     <meta name="keywords" content="HTML5,CSS3,Template"/>
     <meta name="description" content=""/>
+    <link href="/ui/smarty/plugins/slider.nivo/nivo-slider.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/ui/smarty/plugins/slider.nivo/jquery.nivo.slider.pack.js"></script>
+    <script type="text/javascript" src="/ui/smarty/js/view/demo.nivo_slider.js"></script>
 </head>
 <body class="smoothscroll enable-animation">
 
@@ -15,7 +18,7 @@
 
             <div class="row">
 
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <header class="margin-bottom-40">
                         <h1 class="weight-300"><strong>欢迎使用支持系统</strong></h1>
                         <h2 class="weight-300 letter-spacing-1 size-13"><span>及时提供所需的各种支持信息</span>
@@ -28,9 +31,24 @@
 
                     <p>完善的权限管理功能</p>
                     <hr/>
-                    <p><strong>最新上线<a href="/tools/OCR" th:href="@{/tools/OCR}">在线OCR 系统</a></strong>， 快速转换图片中的文字，极大方便日常工作</p>
-
-
+                    <p><strong>最新上线<a href="/tools/OCR" th:href="@{/tools/OCR}">在线OCR 系统</a></strong>，
+                        快速转换图片中的文字，极大方便日常工作</p>
+                </div>
+                <div class="col-sm-7">
+                    <div class="nivoSlider" data-controlNav="false" data-pauseOnHover="false">
+                        <!-- Slide 1 -->
+                        <!--<img src="/images/demo/indexSlide1.jpg" alt="Slide 2"/>-->
+                        <!-- Slide 2 -->
+                        <!--<img src="/images/demo/indexSlide2.png" alt="Slide 2"/>-->
+                        <a href="#">
+                            <img src="/images/demo/slide-0.png" alt="Slide 1" title="#htmlcaption"/>
+                        </a>
+                        <img src="/images/demo/slide-4.jpg" alt="Slide 3"/>
+                        <img src="/images/demo/slide-5.jpg" alt="Slide 3"/>
+                    </div>
+                    <div id="htmlcaption" class="nivo-html-caption">
+                        国内技术支持组恭祝您<strong>鸡年大吉</strong>.
+                    </div>
                 </div>
 
 
@@ -179,9 +197,6 @@
                     </div><!-- /post -->
 
 
-
-
-
                 </div>
                 <!-- /recent news -->
 
@@ -202,7 +217,6 @@
     </a>
     <!-- /BUTTON CALLOUT -->
 </div>
-
 
 
 </body>

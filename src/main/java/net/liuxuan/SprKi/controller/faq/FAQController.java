@@ -28,11 +28,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -181,7 +179,7 @@ public class FAQController {
 
         l.forEach(item -> {
             Object[] objects = (Object[]) item;
-            rtnDate.put(((Devices)objects[1]).getDevicename(),objects[0]);
+            rtnDate.put(((Devices) objects[1]).getDevicename(), objects[0]);
         });
 //        for (int i = 0; i < l.size(); i++) {
 //
@@ -190,16 +188,48 @@ public class FAQController {
 
         ResponseHelper.writeMAPtoResponseAsJson(response, rtnDate);
     }
+
     @RequestMapping(value = "/faq/count", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQCount(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
 
         log.info("-FAQController.getFAQCount() Method");
-        List l = faqContentService.getFaqGroupByCount();
+        List faqGroupByCountList = faqContentService.getFaqGroupByCount();
         long total = faqContentService.getFAQContentsCount();
+        List<Object[]> faqGroupByAuthorAndDateList = faqContentService.getFaqGroupByAuthorAndDate();
+        faqGroupByAuthorAndDateList.sort(
+                (p1, p2) -> ((int) ((Object[]) p2)[1]) - ((int) ((Object[]) p1)[1])
+        );
+        Map<Integer, Map<String, Integer>> AuthorDateCounttempMap = new LinkedHashMap<>();
 
-        model.put("allCount", l);
-        model.put("total",total);
+//        List<LinkedHashMap<String, String>> AuthorCountList = new ArrayList<>();
+        for (int i = 0; i < faqGroupByAuthorAndDateList.size(); i++) {
+            Object[] objs = (Object[]) faqGroupByAuthorAndDateList.get(i);
+            int nums = ((BigInteger) objs[0]).intValue();
+            int date = (int) objs[1];
+            String author = (String) objs[2];
+            Map<String, Integer> map = AuthorDateCounttempMap.get(date);
+            if(map==null){
+                map = new LinkedHashMap<>();
+                map.put("总数",nums);
+                map.put(author,nums);
+                AuthorDateCounttempMap.put(date,map);
+                //不存在
+            }else{
+                map.replace("总数",map.get("总数")+nums);
+                map.put(author,nums);
+                //已存在
+            }
+
+
+            LinkedHashMap<String, String> infos = new LinkedHashMap<>();
+
+        }
+
+
+        model.put("allCount", faqGroupByCountList);
+        model.put("allAuthor", AuthorDateCounttempMap);
+        model.put("total", total);
         return "faq/faq_count";
     }
 

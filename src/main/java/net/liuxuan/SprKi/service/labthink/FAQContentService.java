@@ -70,4 +70,6 @@ public interface FAQContentService {
 
 
     List<?> getFaqGroupByCount();
+
+    List<Object[]> getFaqGroupByAuthorAndDate();
 }

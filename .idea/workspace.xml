@@ -1,56 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f244a0bd-925e-4d61-96e3-c360fd887d54" name="默认的" comment="1.1版本&#10;修正admin中user在添加了druid后的提交出错问题">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/images/Icons-Land-Vista-People-Occupations-Technical-Support-Representative-Male-Light.ico" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/images/Occupations-Technical-Support-Representative-Male-Light-icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/images/oc_support_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/FaqManagementController.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/ResponseHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/ZipHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzJobs/DataBackupJob.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/test/Person.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+    <list default="true" id="f244a0bd-925e-4d61-96e3-c360fd887d54" name="默认的" comment="添加按设备分类">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DepartmentManagementController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DepartmentManagementController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/SummerNoteController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/SummerNoteController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UEditorController.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/utils/UEditorController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/BaseSearchDTO.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/BaseSearchDTO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/Devices.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/Devices.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/TicketContentRepository.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/TicketContentRepository.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/util/SearchHelper.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/util/SearchHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/TestUrlInterceptor.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/TestUrlInterceptor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzConfiguration.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzConfiguration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/freemarker/FreeMarkerUtil.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/utils/freemarker/FreeMarkerUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/config/application.yml" afterPath="$PROJECT_DIR$/src/main/resources/config/application.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ueditor/jsp/config.json" afterPath="$PROJECT_DIR$/src/main/resources/static/ueditor/jsp/config.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/admin/css/layout.css" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/admin/css/layout.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/admin/js/app.js" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/admin/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js" afterPath="$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/departmentManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/departmentManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceKindManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceKindManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceTypeManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/deviceTypeManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/faqManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/faqManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/snipplets/div_user.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/snipplets/div_user.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_show.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/faq/faq_show.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_postOK.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_postOK.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/MyJobOne.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzJobs/MyJobOne.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/MyJobTwo.java" afterPath="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzJobs/MyJobTwo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" />
     </list>
     <ignored path="SpringBootTest.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,44 +45,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="FAQController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java">
+      <file leaf-file-name="entity.ftl" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/utils/freemarker/templates/entity.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="235">
-              <caret line="194" column="62" selection-start-line="194" selection-start-column="62" selection-end-line="194" selection-end-column="62" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#7208#7224#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FAQContentService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="68" column="28" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="28" />
+            <state relative-caret-position="257">
+              <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="logback.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/logback.xml">
+      <file leaf-file-name="DeviceManagementController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="faq_count.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-114">
-              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
+            <state relative-caret-position="220">
+              <caret line="129" column="30" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -131,21 +68,30 @@
       <file leaf-file-name="faq_show.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_show.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="99" column="32" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="85" />
+            <state relative-caret-position="272">
+              <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="faq_list.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html">
+      <file leaf-file-name="FAQController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="122" column="53" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="53" />
+            <state relative-caret-position="251">
+              <caret line="202" column="80" selection-start-line="202" selection-start-column="80" selection-end-line="202" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="faq_count.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="48" column="65" selection-start-line="48" selection-start-column="65" selection-end-line="48" selection-end-column="65" />
               <folding>
-                <marker date="1484892404635" expanded="true" signature="15744:15756" placeholder="..." />
-                <marker date="1484892404635" expanded="true" signature="15958:15970" placeholder="..." />
+                <element signature="n#style#0;n#span#0;n#h3#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -166,9 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/TicketContentRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/TicketContentServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/snipplets/div_user.html" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/MyJobTwo.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzJobs/MyJobTwo.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/BuildSearchIndex.java" />
@@ -199,9 +142,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/FaqManagementController.java" />
         <option value="$PROJECT_DIR$/target/classes/templates/admin/faqManage.html" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/Devices.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/deviceTypeManage.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/deviceManage.html" />
@@ -214,7 +154,13 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/faqManage.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/ui/smarty/plugins/slider.nivo/nivo-slider.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_show.html" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html" />
       </list>
@@ -233,7 +179,32 @@
     </option>
   </component>
   <component name="MavenProjectNavigator">
-    <treeState />
+    <treeState>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="SpringBootTest" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$RootNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="SpringBootTest" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$ProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Lifecycle" />
+          <option name="myItemType" value="org.jetbrains.idea.maven.navigator.MavenProjectsStructure$LifecycleNode" />
+        </PATH_ELEMENT>
+      </PATH>
+    </treeState>
   </component>
   <component name="PhpServers">
     <servers />
@@ -311,7 +282,14 @@
         </subPane>
       </pane>
       <pane id="ProjectPane">
-        <subPane />
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SpringBootWiki" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
       </pane>
     </panes>
   </component>
@@ -325,11 +303,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\static\images\demo" />
       <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\static\images" />
       <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\templates\faq" />
       <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\templates\admin" />
       <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\static\ui\mosesadd" />
-      <recent name="F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\src\main\resources\templates\tools" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="net.liuxuan.SprKi.controller.admin.labthink" />
@@ -740,7 +718,7 @@
       <workItem from="1482465924847" duration="4500000" />
       <workItem from="1483428464994" duration="42054000" />
       <workItem from="1483687347523" duration="37841000" />
-      <workItem from="1484273120762" duration="51460000" />
+      <workItem from="1484273120762" duration="70365000" />
     </task>
     <task id="LOCAL-00001" summary="before change theme">
       <created>1457751173953</created>
@@ -875,11 +853,18 @@
       <option name="project" value="LOCAL" />
       <updated>1484704736447</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="添加按设备分类">
+      <created>1485228966056</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1485228966056</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1044086000" />
+    <option name="totallyTimeSpent" value="1062991000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1272" y="-8" width="1296" height="1000" extended-state="6" />
@@ -898,7 +883,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735962" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel remote servers log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46117085" sideWeight="0.50566345" order="20" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24838188" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28640777" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32200646" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -906,7 +891,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28640777" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1766" y="59" width="308" height="865" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34708738" sideWeight="0.5164076" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46117085" sideWeight="0.49433658" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4647551" sideWeight="0.49433658" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Jindent" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -947,7 +932,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28640777" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" x="1766" y="59" width="308" height="865" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46117085" sideWeight="0.49433658" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.45878136" sideWeight="0.49433658" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.35603344" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="层次结构" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32258064" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
@@ -965,7 +950,7 @@
       <window_info id="JRebel remote servers log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46117085" sideWeight="0.50566345" order="20" side_tool="true" content_ui="tabs" />
       <window_info id="控制板" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="文档" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" x="1372" y="92" width="1094" height="800" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24838188" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28640777" sideWeight="0.4835924" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32928804" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32735962" sideWeight="0.487055" order="9" side_tool="false" content_ui="tabs" />
@@ -1002,7 +987,8 @@
     <MESSAGE value="一个可用版本。" />
     <MESSAGE value="1.1版本&#10;修正admin中user在添加了druid后的提交出错问题" />
     <MESSAGE value="1.2版本&#10;增加标识为disabled的信息的彻底删除和恢复&#10;在后台中" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.2版本&#10;增加标识为disabled的信息的彻底删除和恢复&#10;在后台中" />
+    <MESSAGE value="添加按设备分类" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加按设备分类" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1080,7 +1066,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java</url>
-          <line>231</line>
+          <line>232</line>
           <properties />
           <option name="timeStamp" value="136" />
         </line-breakpoint>
@@ -1248,7 +1234,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="321" />
+      <option name="time" value="322" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
@@ -1258,344 +1244,135 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/DTO/LabthinkSearchDTO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="21" column="46" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/backgrounds/background-light-white.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/util/SearchHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/buttons/btn-appstore-dark.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/SystemHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="221" column="16" selection-start-line="221" selection-start-column="16" selection-end-line="221" selection-end-column="16" />
-          <folding>
-            <element signature="e#1527#1528#0" expanded="false" />
-            <element signature="e#1571#1572#0" expanded="false" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/buttons/btn-googleplay-dark.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DepartmentManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1151">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/flags/bi.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1513">
-          <caret line="37" column="13" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/flags/au.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/layouts/base-header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="81" column="37" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/flags/ao.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/ErrorHandleController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="175" column="49" selection-start-line="175" selection-start-column="49" selection-end-line="175" selection-end-column="49" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/flags/ad.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/RequestHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="20" column="64" selection-start-line="20" selection-start-column="64" selection-end-line="20" selection-end-column="64" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/cc/payments.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/classes/templates/admin/faqManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="371" column="21" selection-start-line="0" selection-start-column="0" selection-end-line="400" selection-end-column="7" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/cc/Cirrus.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/scripts.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="2767" column="22" selection-start-line="2767" selection-start-column="22" selection-end-line="2767" selection-end-column="22" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/loaders/2.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/CMSComment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="71" column="15" selection-start-line="71" selection-start-column="15" selection-end-line="71" selection-end-column="15" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shadow3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/CMSContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-439">
-          <caret line="134" column="7" selection-start-line="134" selection-start-column="7" selection-end-line="134" selection-end-column="7" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shadow2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/FAQContent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="42" column="29" selection-start-line="42" selection-start-column="22" selection-end-line="42" selection-end-column="29" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shadow1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2244">
-          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shop/shop_modal.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.6.5/jackson-databind-2.6.5-sources.jar!/com/fasterxml/jackson/databind/ObjectMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="2905" column="16" selection-start-line="2905" selection-start-column="16" selection-end-line="2905" selection-end-column="16" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shop/girl.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="110" column="17" selection-start-line="110" selection-start-column="17" selection-end-line="110" selection-end-column="17" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shop/girl2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
-          <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/icon-amazon.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="142" column="29" selection-start-line="142" selection-start-column="29" selection-end-line="142" selection-end-column="29" />
-          <folding>
-            <element signature="e#3348#3359#0" expanded="true" />
-            <element signature="e#5669#5670#0" expanded="true" />
-            <element signature="e#5720#5721#0" expanded="true" />
-            <element signature="e#5777#5778#0" expanded="true" />
-            <element signature="e#5839#5840#0" expanded="true" />
-          </folding>
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/misc/shop/shop_modal_pattern.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/spring/Helper/ResponseHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="24" column="24" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/patterns/pattern3.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/DeviceType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="490">
-          <caret line="42" column="34" selection-start-line="42" selection-start-column="34" selection-end-line="42" selection-end-column="34" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/plugins/slider.nivo/bullets.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/DeviceKind.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/avatar.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.6.5/jackson-annotations-2.6.5-sources.jar!/com/fasterxml/jackson/annotation/JsonIgnore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="946">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/logo-footer.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/security/Authorities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="28" column="10" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="15" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/playing-dark.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/DevicesServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/images/submenu_inverse_light.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/deviceTypeManage.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/view/demo.music.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="278" column="34" selection-start-line="278" selection-start-column="27" selection-end-line="278" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/deviceManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="306" column="40" selection-start-line="306" selection-start-column="22" selection-end-line="306" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/admin/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="2013" column="51" selection-start-line="2013" selection-start-column="51" selection-end-line="2013" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/departmentManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="262" column="37" selection-start-line="262" selection-start-column="37" selection-end-line="265" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/deviceKindManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="277" column="37" selection-start-line="277" selection-start-column="37" selection-end-line="280" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/userManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="391" column="57" selection-start-line="391" selection-start-column="57" selection-end-line="391" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/function/Consumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="48" column="9" selection-start-line="48" selection-start-column="9" selection-end-line="48" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="32" column="32" selection-start-line="32" selection-start-column="32" selection-end-line="32" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/ticket/ticket_postOK.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/FaqManagementController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/faqManage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="118" column="44" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1484892404692" expanded="true" signature="15232:15244" placeholder="..." />
-            <marker date="1484892404692" expanded="true" signature="15446:15458" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/dp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3452">
+        <state relative-caret-position="-2772">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/test/test.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/IndexController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="91" column="18" selection-start-line="91" selection-start-column="18" selection-end-line="91" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/layouts/base-header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="88" column="41" selection-start-line="88" selection-start-column="41" selection-end-line="88" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/utils/DefaultRepositoryFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1144">
-          <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/test/model/Town.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/js/view/demo.nivo_slider.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
@@ -1603,86 +1380,188 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/test/PIDtest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/indexSlide1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/indexSlide2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/plugins/slider.nivo/demo/demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="147" column="28" selection-start-line="147" selection-start-column="28" selection-end-line="147" selection-end-column="28" />
+        <state relative-caret-position="257">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_list.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-4.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-3.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-2.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-0.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/plugins/slider.nivo/nivo-slider.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="122" column="53" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="53" />
-          <folding>
-            <marker date="1484892404635" expanded="true" signature="15744:15756" placeholder="..." />
-            <marker date="1484892404635" expanded="true" signature="15958:15970" placeholder="..." />
-          </folding>
+        <state relative-caret-position="190">
+          <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/demo/slide-5.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="46" column="71" selection-start-line="46" selection-start-column="71" selection-end-line="46" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/user/UserDetailInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/ui/smarty/css/essentials.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="505" column="1" selection-start-line="505" selection-start-column="1" selection-end-line="505" selection-end-column="16" />
+        <state relative-caret-position="140">
+          <caret line="473" column="1" selection-start-line="473" selection-start-column="1" selection-end-line="473" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/utils/freemarker/templates/entity.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/CMSContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="335">
+          <caret line="52" column="30" selection-start-line="52" selection-start-column="19" selection-end-line="52" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/FAQContent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="35" column="35" selection-start-line="35" selection-start-column="35" selection-end-line="35" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/Comparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="68" column="28" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="28" />
+        <state relative-caret-position="247">
+          <caret line="73" column="33" selection-start-line="73" selection-start-column="33" selection-end-line="73" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/entity/labthink/Devices.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/service/labthink/FAQContentServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="29" column="21" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="21" />
+        <state relative-caret-position="181">
+          <caret line="172" column="46" selection-start-line="172" selection-start-column="46" selection-end-line="172" selection-end-column="46" />
+          <folding>
+            <element signature="e#5777#5778#0" expanded="false" />
+            <element signature="e#5839#5840#0" expanded="false" />
+            <element signature="e#5911#5912#0" expanded="false" />
+            <element signature="e#5981#5982#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/repository/labthink/FAQContentRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="29" column="32" selection-start-line="29" selection-start-column="32" selection-end-line="29" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/util/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="211" column="6" selection-start-line="211" selection-start-column="6" selection-end-line="211" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/faq/FAQController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="194" column="62" selection-start-line="194" selection-start-column="62" selection-end-line="194" selection-end-column="62" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7208#7224#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="251">
+          <caret line="202" column="80" selection-start-line="202" selection-start-column="80" selection-end-line="202" selection-end-column="80" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_show.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="99" column="32" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="85" />
+        <state relative-caret-position="272">
+          <caret line="118" column="24" selection-start-line="118" selection-start-column="24" selection-end-line="118" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/images/oc_support_icon.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/SprKi/controller/admin/labthink/DeviceManagementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="129" column="30" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/faq/faq_count.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-114">
-          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/logback.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="125">
+          <caret line="48" column="65" selection-start-line="48" selection-start-column="65" selection-end-line="48" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#h3#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

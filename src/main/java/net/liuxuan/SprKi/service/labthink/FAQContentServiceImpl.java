@@ -168,5 +168,10 @@ public class FAQContentServiceImpl implements FAQContentService {
         return faqContentRepository.findGroupByCount();
     }
 
+    @Override
+    public List<Object[]> getFaqGroupByAuthorAndDate() {
+        return faqContentRepository.findGroupByAuthorAndDate();
+    }
+
 
 }

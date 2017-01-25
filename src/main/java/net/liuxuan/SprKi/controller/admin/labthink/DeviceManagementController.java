@@ -130,8 +130,9 @@ public class DeviceManagementController {
         switch (_dto.action) {
             case "add":
                 boolean ObjExists = DevicesService.checkDevicesExists(_devices.getDevicename())
-                        ||DevicesService.checkDevicesExists(_devices.getDevicenameCN())
-                        ||DevicesService.checkDevicesExists(_devices.getDevicenameEN());
+//                        ||DevicesService.checkDevicesExists(_devices.getDevicenameCN())
+//                        ||DevicesService.checkDevicesExists(_devices.getDevicenameEN())
+                        ;
                 if (ObjExists) {
                     log.info("===deviceManageAjax logged ,添加设备已存在 : {}");
                     rtnData.put("error", "ERROR_DevicesExists");

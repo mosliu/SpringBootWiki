@@ -1,8 +1,6 @@
 package net.liuxuan.SprKi.repository.labthink;
 
-import net.liuxuan.SprKi.entity.CMSContentTags;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -27,7 +25,7 @@ public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, J
 
 
     @Query(value = "select count(v) as cnt, v.devices from FAQContent v group by v.devices")
-    public List<?> findGroupByCount();
-
-
+    List<?> findGroupByCount();
+    @Query(value = "select count(*),EXTRACT(YEAR_MONTH FROM last_update_date) date,author FROM sprki_cms_content GROUP BY date,author", nativeQuery = true)
+    List<Object[]> findGroupByAuthorAndDate();
 }

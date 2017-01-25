@@ -12,30 +12,58 @@
         <p/>
         <a href="#" class="size-25 text-muted">
             <i class="fa fa-signal"></i>经过长期的总结，当前支持信息的总数量为：
-            <span th:text="'('+${total}+')'" > (3)</span>
+            <span th:text="'('+${total}+')'"> (3)</span>
         </a>
     </div>
-    <div class="divider divider-center divider-color"><!-- divider -->
-        <i class="fa fa-chevron-down"></i>
-    </div>
-    <div class=" list-group margin-bottom-80">
-        <p/>
-        <ul class="list-group list-unstyled">
-            <div th:each="devs:${allCount}"  th:remove="tag">
-                <li class="list-group-item col-md-3 ">
-                    <a href="#" th:href="@{/faq/list}+'?devices='+${devs[1]?.id}">
+    <div class="divider  divider-dotted"><!-- divider --></div>
+    <div class="container">
+        <div class="list-group margin-bottom-100">
+            <p/>
+            <ul class="list-group list-unstyled">
+                <div th:each="devs:${allCount}" th:remove="tag">
+                    <li class="list-group-item col-md-3 ">
+                        <a href="#" th:href="@{/faq/list}+'?devices='+${devs[1]?.id}">
                         <span class="size-16 text-muted pull-right margin-right-40"
                               th:text="'('+${devs[0]}+')'"> (3)</span>
-                        <i class="fa fa-columns"></i>
-                        <span th:text="${devs[1].devicename}" th:remove="tag"></span>
-                    </a>
-                    <!--<span th:text="${devs[1].devicename}"></span><span th:text="${devs[0]}"></span>-->
-                </li>
-                <li class=" col-md-1 "></li>
-            </div>
-        </ul>
-        <!-- breadcrumbs -->
+                            <i class="fa fa-columns"></i>
+                            <span th:text="${devs[1].devicename}" th:remove="tag"></span>
+                        </a>
+                        <!--<span th:text="${devs[1].devicename}"></span><span th:text="${devs[0]}"></span>-->
+                    </li>
+                    <li class=" col-md-1 "></li>
+                </div>
+            </ul>
+            <!-- breadcrumbs -->
+        </div>
     </div>
+    <div class="divider  divider-dotted"><!-- divider -->
+    </div>
+
+    <div class="divider divider-center divider-circle divider-color"><!-- divider -->
+        <Strong>时间线</Strong>
+    </div>
+    <ul class="timeline_center list-unstyled">
+        <li th:each="element : ${allAuthor}">
+            <h3>
+                <span style="font-size: 20px;">
+                    <span th:text="|${#strings.substring(element.key,0,4)}年${#strings.substring(element.key,4,6)}月|" th:remove="tag">2017.01</span>
+                </span>
+                总数：<span th:text="${element.value.remove('总数')}" th:remove="tag"></span>
+            </h3>
+            <div class="timeline-desc timeline-desc-line">
+                <div class="list-group">
+                    <div th:each="everyone : ${element.value}" th:remove="tag">
+                        <a href="#" class="list-group-item">
+                            <strong th:text="${everyone.key}">a</strong> 共提交了 <strong th:text="${everyone.value}">a</strong> 条信息
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn btn-xs btn-default margin-top-20">more...</a>
+        </li>
+
+
+    </ul>
 
 
 </div>
