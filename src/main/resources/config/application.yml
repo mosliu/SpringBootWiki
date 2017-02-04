@@ -166,7 +166,7 @@ management:
 #系统配置
 SprKi:
   lucene:
-    init: true
+    init: false
   upload:
     #建议不要修改，否则无法访问到
     savepathroot: ./static/
