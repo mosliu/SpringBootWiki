@@ -43,15 +43,18 @@ public class CMSComment {
     protected Date publishDate; // 发布日期
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="author")
     private Users author;
 
     @Column(length = 40, nullable = true)
     private String commentIP;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="parent")
     private CMSComment parent;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="content")
     private CMSContent content;
     /**
      * 评论类型

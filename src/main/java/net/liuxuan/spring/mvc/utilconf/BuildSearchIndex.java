@@ -1,13 +1,20 @@
 package net.liuxuan.spring.mvc.utilconf;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -23,10 +30,10 @@ import javax.persistence.PersistenceContext;
  */
 @Component
 public class BuildSearchIndex implements ApplicationListener {
+    private static Logger log =  LoggerFactory.getLogger(BuildSearchIndex.class);
 
-
-    @PersistenceContext
-    private EntityManager entityManager;
+    @Autowired
+    private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
     @Value("${SprKi.lucene.init}")
     private String init;
@@ -49,13 +56,13 @@ public class BuildSearchIndex implements ApplicationListener {
         count++;
         try {
             FullTextEntityManager fullTextEntityManager =
-                    Search.getFullTextEntityManager(entityManager);
+                    Search.getFullTextEntityManager(entityManagerFactory.getNativeEntityManagerFactory().createEntityManager());
+//                    Search.getFullTextEntityManager(entityManager);
             fullTextEntityManager.createIndexer().startAndWait();
         }
         catch (InterruptedException e) {
-            System.out.println(
-                    "An error occurred trying to build the serach index: " +
-                            e.toString());
+//            e.printStackTrace();
+            log.error("An error occurred trying to build the serach index! ",e);
         }
         return;
     }

@@ -18,6 +18,7 @@ public class Address {
 	private Long id;
 	private String street;
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="town")
 	private Town town;
 
 	public Address() {

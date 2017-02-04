@@ -1,8 +1,9 @@
 package net.liuxuan.utils.upload;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -20,6 +21,7 @@ import java.io.IOException;
  * 2016/11/11  |    Moses       |     Created
  */
 public class UploadUtil {
+    private static Log logger = LogFactory.getLog(UploadUtil.class);
 
 
     /**
@@ -74,6 +76,7 @@ public class UploadUtil {
         try {
             uploadFile.transferTo(saveimg);
         } catch (IOException e) {
+            logger.error(e.getLocalizedMessage());
             e.printStackTrace();
         }
     }

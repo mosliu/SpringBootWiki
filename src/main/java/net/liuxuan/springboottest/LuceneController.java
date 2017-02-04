@@ -116,11 +116,13 @@ public class LuceneController {
             indexWriter.commit();
             flag = "suc";
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IOException!",e);
+//            e.printStackTrace();
             try {
                 indexWriter.rollback();
             } catch (IOException e1) {
-                e1.printStackTrace();
+                log.error("RollBack Error!",e1);
+//                e1.printStackTrace();
             }
             flag = "error";
         }

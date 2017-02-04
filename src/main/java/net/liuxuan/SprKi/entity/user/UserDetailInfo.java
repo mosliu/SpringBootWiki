@@ -29,6 +29,7 @@ public class UserDetailInfo {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="users")
     Users users;
 
     @Column(name = "disabled", nullable = false)
@@ -46,6 +47,7 @@ public class UserDetailInfo {
     @Column(nullable = true ,length = 50)
     String email;
     @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="department")
     Department department;
 
 

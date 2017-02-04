@@ -42,6 +42,7 @@ public class CMSContent {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @IndexedEmbedded(depth = 1, prefix = "categoryBy_")
+    @JoinColumn(name="category")
     protected CMSCategory category; // 栏目
 
 
@@ -79,12 +80,14 @@ public class CMSContent {
      * The Author.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="author")
     protected Users author; // 作者
 
     /**
      * The Last update user.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="last_update_user")
     protected Users lastUpdateUser;
 
     /**

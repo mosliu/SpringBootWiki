@@ -104,6 +104,7 @@ public class ErrorHandleController {
             log.debug("-Rethrow the EX");
             throw ex;
         }
+        log.error("Error caught by handleAllException!",ex);
 
         ModelAndView model = new ModelAndView("common/temp");
         model.getModel().put("error", ex.getMessage());
@@ -112,6 +113,7 @@ public class ErrorHandleController {
         model.getModel().put("date", new Date());
         model.getModel().put("url", req.getRequestURL());
         model.addObject("errMsg", "this is Exception.class");
+
         ex.printStackTrace();
         return model;
 

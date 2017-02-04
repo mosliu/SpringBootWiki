@@ -5,9 +5,6 @@ import com.baidu.ueditor.define.AppInfo;
 import com.baidu.ueditor.define.BaseState;
 import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,14 +14,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 public class BinaryUploader {
-
     private static Logger log =  LoggerFactory.getLogger(BinaryUploader.class);
     
     public static final State save(HttpServletRequest request,
@@ -98,7 +92,8 @@ public class BinaryUploader {
 
             return storageState;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("IOException",e);
+//            e.printStackTrace();
         }
 
 

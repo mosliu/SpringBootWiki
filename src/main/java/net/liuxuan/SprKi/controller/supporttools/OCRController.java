@@ -6,6 +6,8 @@ import net.liuxuan.utils.OCRUtils;
 import net.liuxuan.utils.upload.UploadUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,7 +34,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("/tools")
 public class OCRController {
-    private static Log logger = LogFactory.getLog(OCRController.class);
+//    private static Log logger = LogFactory.getLog(OCRController.class);
+    private static Logger log =  LoggerFactory.getLogger(OCRController.class);
     @RequestMapping("/OCR")
     public String getOCR(HttpServletRequest request,
                                HttpServletResponse response, Map<String, Object> model){
@@ -61,7 +64,8 @@ public class OCRController {
         try {
             response.getWriter().write(res);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Io Exception!",e);
+//            e.printStackTrace();
         }
 
     }

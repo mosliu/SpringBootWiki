@@ -58,7 +58,7 @@ public class UEditorController {
     @RequestMapping(value = "/utils/ueditor", produces = "application/json")
     public void doAction(
             @RequestParam(defaultValue = "") String action,
-            HttpServletRequest request, HttpServletResponse response) {
+            HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 //        String rootPath = context.getRealPath("/");
         String rootPath = SystemHelper.getRootPath()+"/static/";
@@ -79,11 +79,11 @@ public class UEditorController {
 //        log.trace("===Action is {} , Return message is:{}", action, StringEscapeUtils.unescapeJava(back));
 //        log.info("===back message is:{}", back);
 //        return jsonConfig.toString();
-        try {
+//        try {
             response.getWriter().write(back);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
 //        return back;

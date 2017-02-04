@@ -1,11 +1,7 @@
 package net.liuxuan.SprKi.controller.utils;
 
-import com.baidu.ueditor.ActionEnter;
 import net.liuxuan.utils.upload.UploadUtil;
 import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.io.File;
 import java.io.IOException;
 
 import static org.apache.commons.logging.LogFactory.getLog;
@@ -53,7 +46,6 @@ public class SummerNoteController {
 
 
     /**
-     *
      * @param files
      * @param request
      * @param response
@@ -65,14 +57,9 @@ public class SummerNoteController {
 //        File path = new File(picSavePathRoot + picSavePathChild +"/");
 //        String back = UploadUtil.uploadImage(request.getServletContext().getRealPath("/"), files);
 
-        String back = UploadUtil.uploadImage(picSavePathRoot + picSavePathChild +"/",picAccessPath, files);
-        try {
-            response.getWriter().write(back);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String back = UploadUtil.uploadImage(picSavePathRoot + picSavePathChild + "/", picAccessPath, files);
+        response.getWriter().write(back);
     }
-
 
 
 }

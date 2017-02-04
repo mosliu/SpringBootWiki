@@ -31,9 +31,11 @@ public class Person {
     private String salary;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="company")
     private Company company;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="address")
     private Address address;
 
     public Person() {

@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.baidu.ueditor.define.ActionMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 配置管理器
@@ -21,6 +23,7 @@ import com.baidu.ueditor.define.ActionMap;
  *
  */
 public final class ConfigManager {
+	private static Logger log =  LoggerFactory.getLogger(ConfigManager.class);
 
 	private final String rootPath;
 	private final String originalPath;
@@ -151,7 +154,7 @@ public final class ConfigManager {
 		
 	}
 	
-	private void initEnv () throws FileNotFoundException, IOException {
+	private void initEnv () throws  IOException {
 		
 		File file = new File( this.originalPath );
 		
@@ -167,7 +170,8 @@ public final class ConfigManager {
 			JSONObject jsonConfig = new JSONObject( configContent );
 			this.jsonConfig = jsonConfig;
 		} catch ( Exception e ) {
-			e.printStackTrace();
+			log.error("Json化失败。",e);
+//			e.printStackTrace();
 			this.jsonConfig = null;
 		}
 		

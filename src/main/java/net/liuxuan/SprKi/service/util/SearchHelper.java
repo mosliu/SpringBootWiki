@@ -1,6 +1,5 @@
 package net.liuxuan.SprKi.service.util;
 
-import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.Users;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,8 +17,7 @@ import java.util.*;
  * The type Search helper.
  */
 public class SearchHelper {
-
-    private static Logger log = LoggerFactory.getLogger(SearchHelper.class);
+    private static Logger log =  LoggerFactory.getLogger(SearchHelper.class);
 
     /**
      * 对取值对象中的所有属性进行遍历，针对输入的需要处理的属性生产Predict
@@ -68,7 +66,8 @@ public class SearchHelper {
             try {
                 map.put(field.getName(), field.get(object));
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("object to map error",e);
+//                e.printStackTrace();
             }
         }
         //getDeclaredFields()获得某个类的所有申明的字段，即包括public、private和proteced，但是不包括父类的申明字段。
@@ -77,7 +76,8 @@ public class SearchHelper {
             try {
                 map.put(field.getName(), field.get(object));
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("object to map error",e);
+//                e.printStackTrace();
             }
         }
         return map;

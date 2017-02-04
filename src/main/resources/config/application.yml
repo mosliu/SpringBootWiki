@@ -94,6 +94,7 @@ spring:
 
   jpa:
     database: MYSQL
+    database-platform: MYSQL
     generate-ddl: true
     hibernate:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.
@@ -114,6 +115,7 @@ spring:
       hibernate.search.jmx_enabled: true
       hibernate.search.generate_statistics: true
       hibernate.search.lucene_version: LUCENE_CURRENT
+
 
 
 # MyBatis 
@@ -164,7 +166,7 @@ management:
 #系统配置
 SprKi:
   lucene:
-    init: false
+    init: true
   upload:
     #建议不要修改，否则无法访问到
     savepathroot: ./static/

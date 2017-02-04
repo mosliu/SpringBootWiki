@@ -35,7 +35,9 @@ public class CMSCategory {
     private String englishName;//英文名
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="parent_id")
     private CMSCategory parentId;//父分类
+
     private String url;//地址
     private int pageSize;//每页数据
 

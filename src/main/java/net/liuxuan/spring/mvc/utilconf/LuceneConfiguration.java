@@ -59,10 +59,12 @@ public class LuceneConfiguration {
         if(!f.exists()){
             f.mkdirs();
         }
-        Directory d = new SimpleFSDirectory(path.toFile());
+//        Directory d = new SimpleFSDirectory(path.toFile());
+        Directory d = new SimpleFSDirectory(path);
 
 //        Analyzer analyzer = new ChineseWordAnalyzer();
-        IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_4_10_4,analyzer);
+//        IndexWriterConfig conf = new IndexWriterConfig(Version.LUCENE_4_10_4,analyzer);
+        IndexWriterConfig conf = new IndexWriterConfig(analyzer);
         IndexWriter indexWriter = new IndexWriter(d, conf);
         return indexWriter;
     }

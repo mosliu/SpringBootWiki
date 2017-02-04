@@ -7,6 +7,8 @@ import com.google.common.collect.Sets;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.config.RequestConfig;
@@ -78,6 +80,8 @@ public class OCRUtils {
             PERCENT_ENCODED_STRINGS[i] = String.format("%%%02X", i);
         }
     }
+
+    private static Log logger = LogFactory.getLog(OCRUtils.class);
 
     public static String getOcrByBase64(String base64){
         JsonObject json = new JsonObject();
@@ -183,6 +187,7 @@ public class OCRUtils {
             in.read(data);
             in.close();
         } catch (IOException e) {
+            logger.error(e.getLocalizedMessage());
             e.printStackTrace();
         }
 

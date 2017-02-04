@@ -37,9 +37,11 @@ public class FAQContent extends CMSContent{
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "departmentBy_")
+    @JoinColumn(name="department")
     protected Department department;//来源部门
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="devices")
     protected Devices devices;//设备
 
     @Lob

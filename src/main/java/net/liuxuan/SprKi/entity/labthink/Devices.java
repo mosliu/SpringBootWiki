@@ -35,10 +35,12 @@ public class Devices {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="device_type")
     DeviceType deviceType;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="device_kind")
     DeviceKind deviceKind;
 
 }
