@@ -17,6 +17,8 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -81,7 +83,7 @@ public class OCRUtils {
         }
     }
 
-    private static Log logger = LogFactory.getLog(OCRUtils.class);
+    private static Logger log =  LoggerFactory.getLogger(OCRUtils.class);
 
     public static String getOcrByBase64(String base64){
         JsonObject json = new JsonObject();
@@ -187,8 +189,8 @@ public class OCRUtils {
             in.read(data);
             in.close();
         } catch (IOException e) {
-            logger.error(e.getLocalizedMessage());
-            e.printStackTrace();
+            log.error("IOException",e);
+//            e.printStackTrace();
         }
 
         // 对字节数组Base64编码

@@ -157,9 +157,11 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             try {
                 BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(saved_UserDetailInfo, userDetailInfo);
             } catch (InvocationTargetException e) {
-                e.printStackTrace();
+                log.error("Copy UserDetailInfo error!",e);
+//                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("Copy UserDetailInfo error!",e);
+//                e.printStackTrace();
             }
         }
 

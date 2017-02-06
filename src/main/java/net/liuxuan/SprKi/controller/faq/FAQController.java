@@ -6,6 +6,7 @@ import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.repository.CMSCategoryRepository;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
@@ -104,6 +105,9 @@ public class FAQController {
     public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
         FAQContent faq = faqContentService.findById(id);
+        if(faq==null){
+            throw new ContentNotFoundException("",id);
+        }
         model.put("faq", faq);
 //        devicesRepository.findAll();
 //        List<Devices> devicesAll = devicesRepository.findAll();

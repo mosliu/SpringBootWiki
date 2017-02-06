@@ -39,7 +39,6 @@ import java.nio.file.Paths;
 @RequestMapping("/api")
 public class Test01 {
 
-    private static Log logger = LogFactory.getLog(Test01.class);
     @Autowired
     DBSettings db;
     //    @Value("name")

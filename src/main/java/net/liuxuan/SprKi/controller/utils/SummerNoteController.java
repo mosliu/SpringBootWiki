@@ -29,7 +29,6 @@ import static org.apache.commons.logging.LogFactory.getLog;
  */
 @Controller
 public class SummerNoteController {
-    private static Log logger = getLog(SummerNoteController.class);
 
 
     @Value("${SprKi.upload.savepathroot}")

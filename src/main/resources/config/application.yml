@@ -54,6 +54,8 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/spring?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
+    #username: rootsa
+    #password: Moses12345
     usedatabase: spring
     backupdir: "d:/backup"
     aabackupcron: "0 0/1 * * * ? *"
@@ -105,6 +107,9 @@ spring:
     properties:
       hibernate.show_sql: true
       hibernate.format_sql: true
+      #hibernate.show_sql: false
+      #hibernate.format_sql: false
+
       # Allows Hibernate to generate SQL optimized for a particular DBMS
       hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
       hibernate.max_fetch_depth: 3
@@ -166,6 +171,7 @@ management:
 #系统配置
 SprKi:
   lucene:
+    chinese: false
     init: false
   upload:
     #建议不要修改，否则无法访问到

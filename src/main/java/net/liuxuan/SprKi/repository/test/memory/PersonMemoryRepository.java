@@ -6,6 +6,8 @@ import java.util.List;
 
 import net.liuxuan.SprKi.entity.test.model.Person;
 import net.liuxuan.SprKi.repository.test.PersonRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PersonMemoryRepository  {
 
+	private static Logger log =  LoggerFactory.getLogger(PersonMemoryRepository.class);
 	private static List<Person> persons;
 	
 	static {
@@ -526,7 +529,8 @@ public class PersonMemoryRepository  {
 			persons.add(new Person(500,"Montana","Holder","blandit@tellus.ca","1979-02-22","171,780","Google","7422 Eu, Av.","Hattem","80553"));
 
 		} catch (ParseException e) {
-			e.printStackTrace();
+			log.error("ParseException",e);
+//			e.printStackTrace();
 		}
 	}
 

@@ -5,6 +5,8 @@ import net.liuxuan.spring.Helper.ZipHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import java.io.File;
@@ -32,7 +34,8 @@ import java.util.Date;
 public class DataBackupJob extends QuartzJobBean {
 
     public static final String LAST_BACKUP = "LastBackup";
-    private static Log logger = LogFactory.getLog(DataBackupJob.class);
+//    private static Log logger = LogFactory.getLog(DataBackupJob.class);
+    private static Logger log =  LoggerFactory.getLogger(DataBackupJob.class);
     private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 //    private String path = SystemHelper.getRootPath() + "/backup/";
 //    private String sqlFileName = null;
@@ -72,11 +75,11 @@ public class DataBackupJob extends QuartzJobBean {
         File tempfile = new File(sqlFileName);
         mysqlDumpString.append(tempfile.getAbsolutePath());
         try {
-            logger.info("数据库备份指令：  " + mysqlDumpString.toString());
+            log.info("数据库备份指令：  " + mysqlDumpString.toString());
             excuteCmd(mysqlDumpString.toString());
-            logger.info("Success Backup to  " + sqlFileName + "  ,Finished at:" + sdf.format(new Date()));
+            log.info("Success Backup to  " + sqlFileName + "  ,Finished at:" + sdf.format(new Date()));
         } catch (IOException e) {
-            logger.error(e);
+            log.error("IOException",e);
 //            e.printStackTrace();
         }
 
@@ -91,11 +94,11 @@ public class DataBackupJob extends QuartzJobBean {
             attatchBackupString.append(attachBackupPath);
             attatchBackupString.append(" >> ").append(attachBackupPath).append("\\backup.log");
             try {
-                logger.info("文件备份指令：  " + attatchBackupString.toString());
+                log.info("文件备份指令：  " + attatchBackupString.toString());
                 excuteCmd(attatchBackupString.toString());
-                logger.info("Success Backup to  " + attachBackupPath+"\\backup.log" + "  ,Finished at:" + sdf.format(new Date()));
+                log.info("Success Backup to  " + attachBackupPath+"\\backup.log" + "  ,Finished at:" + sdf.format(new Date()));
             } catch (IOException e) {
-                logger.error(e);
+                log.error("IOException",e);
 //            e.printStackTrace();
             }
         }
@@ -108,7 +111,7 @@ public class DataBackupJob extends QuartzJobBean {
         String[] sl = {sqlFileName};
         boolean zipped = ZipHelper.zipCompress(sl, mysqlBackupPath + "\\" + db + ".zip");
         if (zipped) {
-            logger.info("压缩了sql文件");
+            log.info("压缩了sql文件");
         }
 
 

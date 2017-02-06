@@ -1,9 +1,8 @@
 package net.liuxuan.SprKi.search;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +22,7 @@ import java.util.List;
  */
 @Controller
 public class SearchController {
-    private static Log logger = LogFactory.getLog(SearchController.class);
-
+    private static Logger log = LoggerFactory.getLogger(SearchController.class);
     @Autowired
     private FAQSearch faqSearch;
 
@@ -36,16 +34,15 @@ public class SearchController {
     @RequestMapping("/search")
     public String search(String q, Model model) {
         List searchResults = null;
-        try {
-            searchResults = faqSearch.search(q);
-        }
-        catch (Exception ex) {
-            ex.printStackTrace();
-            // here you should handle unexpected errors
-            // ...
-            // throw ex;
-        }
-        logger.debug("Search results total number:"+searchResults.size());
+//        try {
+        searchResults = faqSearch.search(q);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            // here you should handle unexpected errors
+//            // ...
+//            // throw ex;
+//        }
+        log.debug("Search results total number:{}" , searchResults.size());
         model.addAttribute("searchResults", searchResults);
         return "search";
     }

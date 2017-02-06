@@ -95,6 +95,10 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-web:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-logging:1.4.3.RELEASE"/>
@@ -137,9 +141,10 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-autoconfigure:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-thymeleaf:1.4.3.RELEASE"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf:thymeleaf-spring4:2.1.5.RELEASE"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:1.4.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf:thymeleaf-spring4:3.0.3.RELEASE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.1.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.codehaus.groovy:groovy:2.4.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: nz.net.ultraq.thymeleaf:thymeleaf-expression-processor:1.1.2"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-data-jpa:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.springframework.boot:spring-boot-starter-aop:1.4.3.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.aspectj:aspectjweaver:1.8.9"/>
@@ -178,12 +183,12 @@
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/jconsole.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.8.0_31/lib/tools.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf.extras:thymeleaf-extras-conditionalcomments:2.1.2.RELEASE"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf:thymeleaf:2.1.5.RELEASE"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: ognl:ognl:3.0.8"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.unbescape:unbescape:1.1.0.RELEASE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf:thymeleaf:3.0.3.RELEASE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: ognl:ognl:3.1.12"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.unbescape:unbescape:1.1.4.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.attoparser:attoparser:2.0.0.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.slf4j:slf4j-api:1.7.22"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.1.RELEASE"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.apdplat:word:1.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: ch.qos.logback:logback-classic:1.1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: ch.qos.logback:logback-core:1.1.8"/>

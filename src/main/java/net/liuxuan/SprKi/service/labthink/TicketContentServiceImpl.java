@@ -67,9 +67,11 @@ public class TicketContentServiceImpl implements TicketContentService {
                 BeanHelper.copyWhenDestFiledNull(ticket, load);
                 log.trace("===saveTicketContent logged ,the value After  COPY is : {}", ticket);
             } catch (InvocationTargetException e) {
-                e.printStackTrace();
+                log.error("Copy ticket error!",e);
+//                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("Copy ticket error!",e);
+//                e.printStackTrace();
             }
         }
 

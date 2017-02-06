@@ -69,9 +69,11 @@ public class FAQContentServiceImpl implements FAQContentService {
                 BeanHelper.copyWhenDestFiledNull(faq, load);
                 log.trace("===saveFAQContent logged ,the value After  COPY is : {}", faq);
             } catch (InvocationTargetException e) {
-                e.printStackTrace();
+                log.error("Copy faq error!",e);
+//                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                e.printStackTrace();
+                log.error("Copy faq error!",e);
+//                e.printStackTrace();
             }
         }
 
@@ -153,7 +155,9 @@ public class FAQContentServiceImpl implements FAQContentService {
     @Override
     public FAQContent findById(Long id) {
         FAQContent faq = faqContentRepository.findOne(id);
-        faq.setClicks(faq.getClicks() + 1);
+        if(faq!=null){
+            faq.setClicks(faq.getClicks() + 1);
+        }
 //        faqContentRepository.save(faq);
         return faq;
     }

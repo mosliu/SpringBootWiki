@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,7 +43,7 @@ public class ErrorHandleController {
     private static final String ERROR_PATH = "/error";
     private static Logger log = LoggerFactory.getLogger(ErrorHandleController.class);
 
-    //        @RequestMapping(value = ERROR_PATH)
+//    @RequestMapping(value = ERROR_PATH)
     public ModelAndView handleError(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
@@ -87,7 +88,6 @@ public class ErrorHandleController {
      *
      * @return the error path
      */
-//    @Override
     public String getErrorPath() {
         return ERROR_PATH;
     }
@@ -104,7 +104,7 @@ public class ErrorHandleController {
             log.debug("-Rethrow the EX");
             throw ex;
         }
-        log.error("Error caught by handleAllException!",ex);
+        log.error("Error caught by handleAllException!", ex);
 
         ModelAndView model = new ModelAndView("common/temp");
         model.getModel().put("error", ex.getMessage());
@@ -147,7 +147,6 @@ public class ErrorHandleController {
     public ModelAndView handleAccessDeniedException(HttpServletRequest request, HttpServletResponse response, Exception ex) throws ServletException, IOException {
 //        log.debug("-ErrorHandleController.handleAccessDeniedException() invoked");
 //        if (request.getRemoteUser() == null) {
-
 
 
         if (!request.authenticate(response)) {

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +46,7 @@ public class IndexController {
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
     public String home(Map<String, Object> model) {
         log.debug("-Access IndexController.home() Method");
+//        System.out.println(new File(".").getAbsolutePath());
 
         model.put("message", "Hello World");
         model.put("title", "Hello Home");

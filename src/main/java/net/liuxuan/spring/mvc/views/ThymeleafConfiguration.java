@@ -2,35 +2,25 @@ package net.liuxuan.spring.mvc.views;
 
 //import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
 //import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
+
 import freemarker.template.TemplateException;
-//import net.sourceforge.pagesdialect.PagesDialect;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
 import nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 import org.springframework.web.accept.ContentNegotiationManager;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
@@ -38,13 +28,15 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-import org.thymeleaf.templateresolver.TemplateResolver;
 
+import javax.servlet.ServletContext;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+//import net.sourceforge.pagesdialect.PagesDialect;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.
@@ -66,15 +58,20 @@ public class ThymeleafConfiguration {
     //    private static final String VIEWS = "/WEB-INF/views/";
     private static final String VIEWS = "templates/";
 
+    @Autowired
+    ServletContext context;
+    @Autowired
+    private ApplicationContext appContext;
 
     //模版解析器
 //    @Bean
-    public TemplateResolver servletContextTemplateResolver() {
-        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+    public ServletContextTemplateResolver servletContextTemplateResolver() {
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(context);
 
 //        templateResolver.setPrefix(VIEWS);
+//        templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheable(false);
         templateResolver.setOrder(2);
@@ -82,13 +79,13 @@ public class ThymeleafConfiguration {
     }
 
 //    @Bean
-    public TemplateResolver classLoaderTemplateResolver() {
-        TemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+    public ClassLoaderTemplateResolver classLoaderTemplateResolver() {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 
         templateResolver.setPrefix(VIEWS);
 //        templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheable(false);
         templateResolver.setOrder(3);
@@ -101,12 +98,13 @@ public class ThymeleafConfiguration {
      * @return TemplateResolver
      */
 //    @Bean
-    public TemplateResolver springResourceTemplateResolver() {
-        TemplateResolver templateResolver = new SpringResourceTemplateResolver();
-
+    public SpringResourceTemplateResolver springResourceTemplateResolver() {
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        templateResolver.setApplicationContext(appContext);
+//        templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setPrefix("classpath:/templates/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheable(false);
         templateResolver.setOrder(1);
@@ -118,9 +116,10 @@ public class ThymeleafConfiguration {
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         Set<ITemplateResolver> resolvers = new HashSet<ITemplateResolver>();
-//        resolvers.add(springResourceTemplateResolver());
+
+        resolvers.add(springResourceTemplateResolver());
         resolvers.add(classLoaderTemplateResolver());
-        resolvers.add(servletContextTemplateResolver());
+//        resolvers.add(servletContextTemplateResolver());
 
         templateEngine.setTemplateResolvers(resolvers);
 
@@ -132,72 +131,6 @@ public class ThymeleafConfiguration {
         templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;
     }
-
-//
-//    @Bean
-//    public BeanNameViewResolver beanViewResolver() {
-//        BeanNameViewResolver resolver = new BeanNameViewResolver();
-//        resolver.setOrder(10);
-//        return resolver;
-//    }
-
-//    @Bean
-//    public MarshallingHttpMessageConverter marshallingMessageConverter() {
-//        MarshallingHttpMessageConverter converter= new MarshallingHttpMessageConverter(
-//                jaxb2Marshaller(),
-//                jaxb2Marshaller()
-//        );
-//        List<MediaType> mediaTypes = new ArrayList<MediaType>();
-//        mediaTypes.add(MediaType.APPLICATION_XML);
-//        converter.setSupportedMediaTypes(mediaTypes);
-//        return converter;
-//    }
-
-
-//    @Bean
-//    public RestTemplate restTemplate() {
-//        RestTemplate restTemplate = new RestTemplate();
-//        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
-//
-//        converters.add(stringHttpMessageConverter());
-//        converters.add(marshallingJsonConverter());
-//        converters.add(marshallingMessageConverter());
-//        restTemplate.setMessageConverters(converters);
-//
-//        return restTemplate;
-//    }
-
-//    @Bean
-//    public StringHttpMessageConverter stringHttpMessageConverter(){
-//        return new StringHttpMessageConverter();
-//    }
-
-
-
-//    @Bean
-//    public ThymeleafTilesConfigurer tilesConfigurer() {
-//        ThymeleafTilesConfigurer tilesConfigurer = new ThymeleafTilesConfigurer();
-//        tilesConfigurer.setDefinitions(new String[]{"/WEB-INF/tiles.xml"});
-//        return tilesConfigurer;
-//    }
-
-//    @Bean
-//    public TilesDialect tilesDialect(){
-//        TilesDialect dialect = new TilesDialect();
-//        return dialect;
-//    }
-
-//    @Bean
-//    public ThymeleafViewResolver thymeleafViewResolver() {
-//        ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-//        resolver.setTemplateEngine(templateEngine());
-//        resolver.setViewClass(ThymeleafTilesView.class);
-//        resolver.setOrder(2);
-//        resolver.setCharacterEncoding("UTF-8");
-//        String[] views = {"*.html","*.xhtml"};
-//        resolver.setViewNames(views);
-//        return resolver;
-//    }
 
 
 

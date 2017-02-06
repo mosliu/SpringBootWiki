@@ -22,7 +22,7 @@ import java.util.Date;
 @Data
 @ToString(callSuper=true, includeFieldNames=true)
 public class BaseSearchDTO extends BaseDTO{
-
+    private static Logger log =  LoggerFactory.getLogger(BaseSearchDTO.class);
     /**
      * The Id.
      */
@@ -73,6 +73,7 @@ public class BaseSearchDTO extends BaseDTO{
 //                log.debug("===isAllNull logged ,the value {} is null?: {}", fields[i].getName(),tempbo) ;
                 rtn = rtn && tempbo;
             } catch (IllegalAccessException e) {
+                log.error("IllegalAccessException",e);
                 e.printStackTrace();
             }
         }

@@ -132,9 +132,11 @@ public class UploadFileController {
                     try {
                         file.transferTo(localFile); //将上传文件写到服务器上指定的文件
                     } catch (IllegalStateException e) {
-                        e.printStackTrace();
+                        log.error("IllegalStateException!",e);
+//                        e.printStackTrace();
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        log.error("IOException!",e);
+//                        e.printStackTrace();
                     }
                 }
             }

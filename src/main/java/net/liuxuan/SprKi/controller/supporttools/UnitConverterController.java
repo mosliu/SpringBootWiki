@@ -25,7 +25,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/tools")
 public class UnitConverterController {
-    private static Log logger = LogFactory.getLog(UnitConverterController.class);
 
     @RequestMapping("/unitconv")
     public String getConverter(HttpServletRequest request,

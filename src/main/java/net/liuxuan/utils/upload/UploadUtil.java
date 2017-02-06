@@ -2,12 +2,14 @@ package net.liuxuan.utils.upload;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+
+import static org.apache.commons.logging.LogFactory.getLog;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -21,8 +23,7 @@ import java.io.IOException;
  * 2016/11/11  |    Moses       |     Created
  */
 public class UploadUtil {
-    private static Log logger = LogFactory.getLog(UploadUtil.class);
-
+    private static Logger log =  LoggerFactory.getLogger(UploadUtil.class);
 
     /**
      * 上传一个文件，保存在disk上，返回一个文件地址。
@@ -76,8 +77,8 @@ public class UploadUtil {
         try {
             uploadFile.transferTo(saveimg);
         } catch (IOException e) {
-            logger.error(e.getLocalizedMessage());
-            e.printStackTrace();
+            log.error("IOException",e);
+//            e.printStackTrace();
         }
     }
 

@@ -23,7 +23,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/tools")
 public class FormulaComputeController {
-    private static Log logger = LogFactory.getLog(FormulaComputeController.class);
     @RequestMapping("/formula/vacuum")
     public String getConverter(HttpServletRequest request,
                                HttpServletResponse response, Map<String, Object> model){

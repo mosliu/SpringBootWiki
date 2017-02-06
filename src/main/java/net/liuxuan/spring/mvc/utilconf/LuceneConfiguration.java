@@ -12,6 +12,7 @@ import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.apdplat.word.util.WordConfTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -35,9 +36,16 @@ import java.nio.file.Paths;
 public class LuceneConfiguration {
     private static Logger log =  LoggerFactory.getLogger(LuceneConfiguration.class);
 
+    @Value("${SprKi.lucene.chinese}")
+    private String chinese;
 
     @Bean
-    public ChineseWordAnalyzer analyzer(){
+    public Analyzer analyzer(){
+        //无大用 还是会启动中文分词，只是调用的不是中文分词了。
+        //不会减少启动速度
+        if(chinese.equalsIgnoreCase("false")){
+            return new SimpleAnalyzer();
+        }
         WordConfTools.set("dic.storeDir","classpath:dic.txt，classpath:config/mydic.txt");
         WordConfTools.set("auto.detect", "false");
         log.info("#######################Initialized ChineseWordAnalyzer ###########################");
