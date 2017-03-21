@@ -5,6 +5,7 @@ import lombok.ToString;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.AnnotatedType;
 import java.lang.reflect.Field;
 import java.util.Date;
 
@@ -69,7 +70,14 @@ public class BaseSearchDTO extends BaseDTO{
         for (int i = 0; i < fields.length; i++) {
             boolean tempbo = false;
             try {
-                tempbo =  (fields[i].get(this)== null);
+                String fieldtype = fields[i].getAnnotatedType().getType().getTypeName();
+                if(fieldtype.equalsIgnoreCase("boolean")){
+                    tempbo =  ((fields[i].get(this)== null)
+                            ||((Boolean)fields[i].get(this))== false);
+                }else{
+                    tempbo =  fields[i].get(this)== null;
+                }
+
 //                log.debug("===isAllNull logged ,the value {} is null?: {}", fields[i].getName(),tempbo) ;
                 rtn = rtn && tempbo;
             } catch (IllegalAccessException e) {

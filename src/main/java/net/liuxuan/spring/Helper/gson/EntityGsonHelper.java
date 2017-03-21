@@ -33,6 +33,13 @@ public class EntityGsonHelper {
 //        return gson;
         return b;
     }
+    public static Gson goGsonwithEntityCheck(Class<?> a){
+        GsonBuilder b = new GsonBuilder();
+        if(a.isAnnotationPresent(Entity.class)){
+            b.registerTypeAdapterFactory(HibernateProxyTypeAdapter.FACTORY);
+        }
+        return b.create();
+    }
 
     public static Gson goGsonWithNoCheck(){
 //        if(o==null){

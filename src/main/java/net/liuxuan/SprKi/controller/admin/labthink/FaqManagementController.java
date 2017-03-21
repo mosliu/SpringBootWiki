@@ -2,8 +2,10 @@ package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import net.liuxuan.spring.Helper.ResponseHelper;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +66,8 @@ public class FaqManagementController {
 
         Map<String, Object> rtnData = new HashMap<String, Object>();
 //        FAQContent faq = faqContentService.findById(id);
-        faqContentService.deleteForEverFAQContentById(id);
+        SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.DELETE, faqContentService.findById(id), "彻底删除了文章", "/faq/show/" + id);
+        faqContentService.deleteFAQContentById(id);
         rtnData.put("status", "success");
 //        return "admin/" + "faqManage" + " :: middle";
         ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
@@ -77,7 +80,7 @@ public class FaqManagementController {
 
         Map<String, Object> rtnData = new HashMap<String, Object>();
 //        FAQContent faq = faqContentService.findById(id);
-
+        SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ENABLE, faqContentService.findById(id), "回复了文章", "/faq/show/" + id);
         faqContentService.revertFAQContentById(id);
         rtnData.put("status", "success");
 //        return "admin/" + "faqManage" + " :: middle";

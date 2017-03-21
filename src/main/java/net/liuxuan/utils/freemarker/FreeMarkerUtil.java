@@ -17,15 +17,15 @@ import java.util.Map;
  * 源文件名:  net.liuxuan.utils.FreeMarkerUtil
  * 功能: 自动生成各个实体类
  * 版本:	@version 1.0
- * 编制日期: 2016/3/16 15:23
+ * 编制日期: 2017/2/21 15:23
  * 修改历史: (主要历史变动原因及说明)
  * YYYY-MM-DD |    Author      |	 Change Description
- * 2016/3/16  |    Moses       |     Created
+ * 2017/2/21  |    Moses       |     Created
  */
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "SecurityLog";
+    String model_name = "Role";
     String subpackage = ".security";//如果需要放到labthink下，则为".labthink"
 
     public static void main(String[] args) throws Exception {
@@ -59,7 +59,7 @@ public class FreeMarkerUtil {
         root.put("model_name", model_name);//模块名称
         char a = model_name.charAt(0);
         root.put("model_name_firstSmall", model_name.replaceFirst(a + "", Character.toLowerCase(a) + ""));//模块名称
-        root.put("table_name", "Sprki_Labthink_"+model_name);//表名称
+        root.put("table_name", "Sprki_"+model_name);//表名称
 
 
         String projectPath = "F:/SyncDisk/Dropbox/Workspaces/Maven/SpringBootTest/src/main/java/net/liuxuan/Sprki/";

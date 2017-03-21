@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
     <script th:inline="javascript">
 
 
-        function doRemove(){
+        function doRemove() {
             var id = [[${faq.Id}]];
 //            alert(id);
-            window.location.href="/faq/delete/"+id;
+            window.location.href = "/faq/delete/" + id;
         }
 
         function removetopic() {
@@ -24,28 +24,38 @@
 <div class="container" layout:fragment="content">
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div id="confirmdiv"  class="modal-dialog" role="document" >
+        <div id="confirmdiv" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">删除</h4>
                 </div>
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label >确定删除本条支持信息？</label>
+                        <label>确定删除本条支持信息？</label>
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                    <button type="button" id="delete_submit" class="btn btn-warning" onclick="doRemove()" ><span class="glyphicon glyphicon-fire" aria-hidden="true"></span>确定删除！！</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                    </button>
+                    <button type="button" id="delete_submit" class="btn btn-warning" onclick="doRemove()"><span
+                            class="glyphicon glyphicon-fire" aria-hidden="true"></span>确定删除！！
+                    </button>
                 </div>
             </div>
         </div>
     </div>
     <div>
-        <p/>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li><a th:href="@{/faq/list}">支持信息列表</a></li>
+            <li class="active">支持信息查看</li>
+        </ol>
         <!-- breadcrumbs -->
         <h1 class="blog-post-title" th:text="${faq.title}">BLOG POST TITLE HERE</h1>
         <ul class="blog-post-info list-inline">
@@ -64,7 +74,8 @@
             </a></li>
             <li><a href="#">
                 <i class="fa fa-comment-o"></i>
-                <span class="font-lato"> 热度： <span class="font-lato" th:text="${faq.clicks}" th:remove="tag">28 Comments</span> ℃ </span>
+                <span class="font-lato"> 热度： <span class="font-lato" th:text="${faq.clicks}"
+                                                   th:remove="tag">28 Comments</span> ℃ </span>
             </a></li>
             <li>
                 <i class="fa fa-folder-open-o"></i>
@@ -76,7 +87,6 @@
                     <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author.username}">John Doe</span>
                 </a>
             </li>
-
         </ul>
     </div>
     <ul class="row clearfix testimonial-dotted list-unstyled">
@@ -103,9 +113,15 @@
                             th:text="${faq.devices.devicename}">devices</span>
                     </a>
                 </li>
+
                 <li class="list-group-item">
                     <a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">
                         <i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>
+                    </a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#" th:href="@{/faq/list}+'?category='+${faq.standard}">
+                        <i class="fa fa-2x fa-balance-scale"></i>&nbsp;&nbsp;&nbsp;标准：<span th:text="${faq.standard}">ISO</span>
                     </a>
                 </li>
                 <li class="list-group-item">

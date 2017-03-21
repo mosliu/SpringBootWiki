@@ -1,6 +1,6 @@
 package net.liuxuan.SprKi.repository.user;
 
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 */
 
 public interface UserDetailInfoRepository extends JpaRepository<UserDetailInfo, Long>, JpaSpecificationExecutor<UserDetailInfo> {
-    UserDetailInfo findByUsers(Users users);
+    UserDetailInfo findByDbUser(DbUser dbUser);
 }
 
 

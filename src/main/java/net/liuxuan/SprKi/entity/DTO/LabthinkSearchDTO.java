@@ -23,4 +23,5 @@ public class LabthinkSearchDTO extends BaseSearchDTO {
     public CMSCategory category;
     public Devices devices;
     public Department department;
+    public String standard;
 }

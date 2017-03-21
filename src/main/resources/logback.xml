@@ -80,7 +80,7 @@
     <logger name="ch.qos.logback.classic.joran" level="WARN"/>
     <!-- For loggers in the these namespaces, log at separated levels. -->
     <logger name="net.liuxuan" level="TRACE"/>
-    <logger name="net.liuxuan.spring" level="DEBUG"/>
+    <logger name="net.liuxuan.spring" level="TRACE"/>
 
     <!--<logger name="org.springframework.security" level="TRACE"/>-->
     <logger name="org.hibernate.tool.hbm2ddl.TableMetadata" level="WARN"/>
@@ -192,15 +192,15 @@
             level="INFO"/>
     <logger name="org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory" level="INFO"/>
     <!--Mapping filter   set to INFO if you want to show-->
-    <logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="WARN"/>
+    <!--<logger name="org.springframework.boot.context.embedded.FilterRegistrationBean" level="WARN"/>-->
     <!--Mapping servlet   set to INFO if you want to show-->
-    <logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>
+    <!--<logger name="org.springframework.boot.context.embedded.ServletRegistrationBean" level="INFO"/>-->
     <!--Added existing Filter initializer bean 'hiddenFilterRegistrationBean'; order=2147483647, resource=class path resource [net/liuxuan/spring/mvc/GlobalWebConfiguration.class]-->
     <logger name="org.springframework.boot.context.embedded.ServletContextInitializerBeans" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedRequestContextFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedHttpPutFormContentFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter" level="INFO"/>
-    <logger name="org.springframework.boot.context.web.OrderedCharacterEncodingFilter" level="INFO"/>
+    <!--<logger name="org.springframework.boot.context.web.OrderedRequestContextFilter" level="INFO"/>-->
+    <!--<logger name="org.springframework.boot.context.web.OrderedHttpPutFormContentFilter" level="INFO"/>-->
+    <!--<logger name="org.springframework.boot.context.web.OrderedHiddenHttpMethodFilter" level="INFO"/>-->
+    <!--<logger name="org.springframework.boot.context.web.OrderedCharacterEncodingFilter" level="INFO"/>-->
 
     <logger name="org.springframework.beans.factory.support.DefaultListableBeanFactory" level="INFO"/>
     <logger name="org.springframework.beans.factory.support.DisposableBeanAdapter" level="INFO"/>
@@ -338,7 +338,7 @@
    additivity属性为false，表示此loger的打印信息不再向上级传递，
    指定了名字为“STDOUT”的appender。-->
 
-    <logger name="logback" level="INFO" additivity="false">
+    <logger name="logback" level="WARN" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 </configuration>

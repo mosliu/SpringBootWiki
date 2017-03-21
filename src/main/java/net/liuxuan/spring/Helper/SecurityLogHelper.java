@@ -91,6 +91,7 @@ public class SecurityLogHelper {
 //        slog.setLogInfo(gson.toJson(entity).toString());
         try {
             slog.setLogInfo(mapper.writeValueAsString(entity));
+            slog.setLogInfoType(entity.getClass().getName());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

@@ -1,9 +1,13 @@
 package net.liuxuan.SprKi.controller;
 
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.SecurityLog;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.stereotype.Controller;
@@ -48,7 +52,7 @@ public class ErrorHandleController {
                                     HttpServletResponse response, Object handler, Exception ex) {
 //        error.hasErrors();
         log.error("ERROR Happend! handleError() invoked!");
-        ModelAndView model = new ModelAndView("common/temp");
+        ModelAndView model = new ModelAndView("common/invalid");
         model.getModel().put("status", response.getStatus());
         model.getModel().put("error", ex.getMessage());
         model.getModel().put("message", ex.getMessage());
@@ -106,7 +110,7 @@ public class ErrorHandleController {
         }
         log.error("Error caught by handleAllException!", ex);
 
-        ModelAndView model = new ModelAndView("common/temp");
+        ModelAndView model = new ModelAndView("common/invalid");
         model.getModel().put("error", ex.getMessage());
         model.getModel().put("title", "Error Happened");
         model.getModel().put("message", "Error Happened");
@@ -138,34 +142,38 @@ public class ErrorHandleController {
     /**
      * 处理访问受限
      *
-     * @param request
-     * @param response
-     * @param ex
-     * @return
+     * @param request request
+     * @param response response
+     * @param ex exception
+     * @return model
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedException(HttpServletRequest request, HttpServletResponse response, Exception ex) throws ServletException, IOException {
-//        log.debug("-ErrorHandleController.handleAccessDeniedException() invoked");
-//        if (request.getRemoteUser() == null) {
 
+        //记录活动日志
+        SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN,"","AccessDenied","");
 
         if (!request.authenticate(response)) {
             RequestCache requestCache = new HttpSessionRequestCache();
             requestCache.saveRequest(request, response);
             //尚未登录，转到登录页面
             return null;
-//            return new ModelAndView("redirect:/login");
-//            request.getRequestDispatcher("/login").forward(request, response);
-
         }
-        ModelAndView model = new ModelAndView("common/accessdenied");
+        ModelAndView model = new ModelAndView("error");
+
+        // 401 Access Denied , 403 Forbidden
+        model.getModel().put("status", 403);
+        model.getModel().put("path", request.getRequestURL());
+        model.getModel().put("path", request.getRequestURL());
         model.getModel().put("error", ex.getMessage());
-        model.getModel().put("title", "Access Denied!");
-        model.getModel().put("message", "Access Denied");
-        model.getModel().put("date", new Date());
+        model.getModel().put("message", "您访问了需要更高权限的内容，请检查您登陆的账号");
+        model.getModel().put("timestamp", new Date());
 
         return model;
     }
+
+
+
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ModelAndView handleMethodNotSupportedException(Exception ex) {

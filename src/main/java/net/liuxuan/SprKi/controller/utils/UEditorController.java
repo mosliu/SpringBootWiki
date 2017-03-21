@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.controller.utils;
 import com.baidu.ueditor.ActionEnter;
 import net.liuxuan.spring.Helper.SystemHelper;
 import org.apache.commons.lang3.StringEscapeUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,8 +73,15 @@ public class UEditorController {
 //        log.info("===rootPath:{} , action:{}", rootPath, action);
         //修改了ActionEnter
         ActionEnter actionEnter = new ActionEnter(request, rootPath);
-        String back = actionEnter.exec();
-        JSONObject jsonConfig = new JSONObject(back);
+        String back = null;
+        try {
+            back = actionEnter.exec();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+//        JSONObject jsonConfig = new JSONObject(back);
+
+
 //        Gson g = new Gson();
 //        back = StringEscapeUtils.unescapeJava(back);
 //        log.trace("===Action is {} , Return message is:{}", action, StringEscapeUtils.unescapeJava(back));

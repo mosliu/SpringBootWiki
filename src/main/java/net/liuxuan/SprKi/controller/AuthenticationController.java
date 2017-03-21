@@ -112,7 +112,7 @@ public class AuthenticationController {
      * @return the model and view
      */
 //not work
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public ModelAndView login(
             @RequestParam(defaultValue = "") String username,
@@ -158,7 +158,7 @@ public class AuthenticationController {
 
     /**
      * Logout model and view.
-     *
+     * 未启用
      * @param model the model
      * @return the model and view
      */

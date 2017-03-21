@@ -18,25 +18,25 @@
         <div class="modal-body">
             <div class="login-box">
 
-                <header><i class="fa fa-users"></i> 修改账户 <b><span th:text="*{users.username}">zhangsan</span></b>
+                <header><i class="fa fa-users"></i> 修改账户 <b><span th:text="*{dbUser.username}">zhangsan</span></b>
                     <small class="note bold">请谨慎操作</small>
                 </header>
 
                 <fieldset>
 
-                    <input type="hidden" th:field="*{users.username}"/>
-                    <input type="hidden" th:field="*{users.enabled}"/>
+                    <input type="hidden" th:field="*{dbUser.username}"/>
+                    <input type="hidden" th:field="*{dbUser.enabled}"/>
                     <label>修改密码</label>
                     <label class="input">
                         <i class="icon-append fa fa-lock"></i>
-                        <input type="password" th:field="*{users.password}" name="password"
+                        <input type="password" th:field="*{dbUser.password}" name="password"
                                placeholder="密码"/>
                         <b class="tooltip tooltip-bottom-right">修改密码</b>
                     </label>
                     <label>账户别名</label>
                     <label class="input">
                         <i class="icon-append fa fa-lock"></i>
-                        <input type="text" th:field="*{users.usernameAlias}" name="usernameAlias"
+                        <input type="text" th:field="*{dbUser.usernameAlias}" name="usernameAlias"
                                placeholder="账户别名"/>
                         <b class="tooltip tooltip-bottom-right">账户别名</b>
                     </label>
@@ -92,18 +92,20 @@
 
         <!-- Modal Footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="alert('kk')">Close</button>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal" onclick="alert('kk')">Close</button>-->
+            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
             <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
         </div>
     </form>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         var callback = function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+//            alert("Data: " + data + "\nStatus: " + status);
+            alert("\nStatus: " + status);
         }
 
         $("#updateform").on("submit", function (e) {
-            alert($(this).serialize());
+//            alert($(this).serialize());
 //            e.preventDefault();
             $.post(this.action, $(this).serialize(), callback);
             return false;
@@ -130,7 +132,7 @@
                 <header><i class="fa fa-users"></i> 修改权限
                     <small class="note bold"> --请谨慎操作 </small>
                 </header>
-                <input type="hidden" th:field="*{users.username}"/>
+                <input type="hidden" th:field="*{dbUser.username}"/>
                 <fieldset>
                     <label>权限列表</label>
                     <select id="authArray" multiple="multiple" name="authArray">

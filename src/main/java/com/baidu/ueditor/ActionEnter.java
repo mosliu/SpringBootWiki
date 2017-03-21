@@ -11,6 +11,7 @@ import com.baidu.ueditor.define.State;
 import com.baidu.ueditor.hunter.FileManager;
 import com.baidu.ueditor.hunter.ImageHunter;
 import com.baidu.ueditor.upload.Uploader;
+import org.json.JSONException;
 
 public class ActionEnter {
 	
@@ -37,7 +38,7 @@ public class ActionEnter {
 
 	}
 	
-	public String exec () {
+	public String exec () throws JSONException {
 		
 		String callbackName = this.request.getParameter("callback");
 		
@@ -55,7 +56,7 @@ public class ActionEnter {
 
 	}
 	
-	public String invoke() {
+	public String invoke() throws JSONException {
 		
 		if ( actionType == null || !ActionMap.mapping.containsKey( actionType ) ) {
 			return new BaseState( false, AppInfo.INVALID_ACTION ).toJSONString();

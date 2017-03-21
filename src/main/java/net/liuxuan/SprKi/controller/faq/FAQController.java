@@ -6,12 +6,14 @@ import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.repository.CMSCategoryRepository;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import net.liuxuan.spring.Helper.ResponseHelper;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import net.liuxuan.spring.constants.JPAConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,8 +107,8 @@ public class FAQController {
     public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
         FAQContent faq = faqContentService.findById(id);
-        if(faq==null){
-            throw new ContentNotFoundException("",id);
+        if (faq == null) {
+            throw new ContentNotFoundException("", id);
         }
         model.put("faq", faq);
 //        devicesRepository.findAll();
@@ -122,7 +124,9 @@ public class FAQController {
     public String deleteFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
 //        FAQContent faq = faqContentService.findById(id);
-        faqContentService.deleteFAQContentById(id);
+        SecurityLogHelper.LogActivity(request, LogActionType.DISABLE, faqContentService.findById(id), "禁用了文章", "/faq/show/" + id);
+
+        faqContentService.disableFAQContentById(id);
         return "redirect:/faq/list";
     }
 
@@ -149,6 +153,8 @@ public class FAQController {
     @RequestMapping(value = "/faq/post", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String postFAQ(FAQContent faq, HttpServletRequest request, Map<String, Object> model) {
+
+
 //        log.debug("request type is",request.getClass().getCanonicalName());
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (String s : parameterMap.keySet()) {
@@ -158,11 +164,17 @@ public class FAQController {
             }
         }
 
+        String toLog = "新建了文章";
+        if (faq.getId() != null) {
+            toLog = "更新了文章";
+        }
 
         faqContentService.saveFAQContent(faq);
+        //记录活动日志
 
+        SecurityLogHelper.LogActivity(request, LogActionType.CREATE_OR_UPDATE, faq, toLog, "/faq/show/" + faq.getId());
 
-        faq.setDescription("cccccc");
+        faq.setDescription("FAQ Commit Finished");
         model.put("faq", faq);
         model.put("title", "FAQ 编辑界面--FAQ提交完成，可继续编辑以更新");
         return "faq/faq_show";
@@ -213,15 +225,15 @@ public class FAQController {
             int date = (int) objs[1];
             String author = (String) objs[2];
             Map<String, Integer> map = AuthorDateCounttempMap.get(date);
-            if(map==null){
+            if (map == null) {
                 map = new LinkedHashMap<>();
-                map.put("总数",nums);
-                map.put(author,nums);
-                AuthorDateCounttempMap.put(date,map);
+                map.put("总数", nums);
+                map.put(author, nums);
+                AuthorDateCounttempMap.put(date, map);
                 //不存在
-            }else{
-                map.replace("总数",map.get("总数")+nums);
-                map.put(author,nums);
+            } else {
+                map.replace("总数", map.get("总数") + nums);
+                map.put(author, nums);
                 //已存在
             }
 

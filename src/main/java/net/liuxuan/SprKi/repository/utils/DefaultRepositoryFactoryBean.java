@@ -20,6 +20,10 @@ import java.io.Serializable;
  */
 public class DefaultRepositoryFactoryBean <T extends JpaRepository<S, ID>, S, ID extends Serializable>
         extends JpaRepositoryFactoryBean<T, S, ID> {
+    public DefaultRepositoryFactoryBean(Class<? extends T> repositoryInterface) {
+        super(repositoryInterface);
+    }
+
     /**
      * Returns a {@link RepositoryFactorySupport}.
      *

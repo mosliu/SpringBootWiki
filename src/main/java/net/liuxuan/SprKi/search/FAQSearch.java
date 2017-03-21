@@ -48,7 +48,7 @@ public class FAQSearch {
         Query query ;
         TermTermination matching = queryBuilder
                 .keyword()
-                .onFields("question", "answer","categoryBy_name","departmentBy_departmentName")
+                .onFields("question", "answer","categoryBy_name","departmentBy_departmentName","standard","fullTitle","subtitle","title")
                 .matching(text);
         query = matching.createQuery();
 

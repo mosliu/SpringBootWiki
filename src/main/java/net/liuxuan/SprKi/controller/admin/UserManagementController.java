@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.RequestHelper;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +54,9 @@ public class UserManagementController {
     public String getPages( Map<String, Object> model) {
 ////
         UserDetailInfo userDetailInfo = new UserDetailInfo();
-        List<Users> users = userDetailInfoService.listAllUsers();
+        List<DbUser> dbUsers = userDetailInfoService.listAllUsers();
         model.put("user", userDetailInfo);
-        model.put("users", users);
+        model.put("dbUsers", dbUsers);
         return "admin/" + "userManage" + " :: middle";
 //        return "admin/profile :: middle";
     }
@@ -68,7 +71,7 @@ public class UserManagementController {
 //        log.info("===userManage logged ,the value is : {}",userDetailInfo.getUsers().toString());
 
 
-        Users u = new Users();
+        DbUser u = new DbUser();
         u.setUsername(dto.sid);
 
         switch (dto.action) {
@@ -94,7 +97,7 @@ public class UserManagementController {
                 redirectAttributesModelMap.put("authslist", authslist);
                 model.put("user", userDetailInfo);
                 model.put("authslist", authslist);
-                Set<Authorities> authoritiesSet = userDetailInfo.getUsers().getAuths();
+                Set<Authorities> authoritiesSet = userDetailInfo.getDbUser().getAuths();
                 Set<String> userauth = new HashSet<String>();
                 authoritiesSet.forEach(auths -> userauth.add(auths.getAuthority()));
                 model.put("userauth", userauth);
@@ -136,6 +139,7 @@ public class UserManagementController {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加用户");
                     userDetailInfoService.saveUserDetailInfo(userDetailInfo);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_NEW,userDetailInfo,"新建用户"+userDetailInfo.getDbUser().getUsername(),"");
                 }
                 break;
             case "delete":
@@ -143,6 +147,8 @@ public class UserManagementController {
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除用户");
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_DELETE,userDetailInfo,"成功删除用户"+userDetailInfo.getDbUser().getUsername(),"");
+
                 } else {
                     rtnData.put("error", "ERROR_UserNotExists");
                     rtnData.put("status", "fail");
@@ -151,10 +157,11 @@ public class UserManagementController {
                 break;
             case "update":
                 userDetailInfoService.saveUserDetailInfo(userDetailInfo);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_UPDATE,userDetailInfo,"更新用户"+userDetailInfo.getDbUser().getUsername(),"");
                 rtnData.put("success1", "success!");
                 break;
             case "list":
-                List<Users> users = userDetailInfoService.listAllUsers();
+                List<DbUser> users = userDetailInfoService.listAllUsers();
 
 //                return users;
 //                    return mapper.writeValueAsString(users);
@@ -165,6 +172,7 @@ public class UserManagementController {
                 String[] authArrays = request.getParameterValues("authArray");
                 String newauth = request.getParameter("newAuth");
                 Map<String, Object> map = userDetailInfoService.updateAuths(userDetailInfo, authArrays, newauth);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_AUTH,newauth,"更新用户权限："+userDetailInfo.getDbUser().getUsername(),"");
                 rtnData.putAll(map);
 
 //                return users;

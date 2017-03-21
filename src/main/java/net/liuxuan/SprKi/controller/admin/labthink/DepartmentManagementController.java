@@ -2,8 +2,10 @@ package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.service.labthink.DepartmentService;
 import net.liuxuan.spring.Helper.ResponseHelper;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,10 +97,12 @@ public class DepartmentManagementController {
                     Department department = new Department();
                     department.setDepartmentName(department_name);
                     department.setDepartmentNameCN(department_name);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, department, "添加部门", "");
                     departmentService.saveDepartment(department);
                 }
                 break;
             case "delete":
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除部门", "");
                 boolean b = departmentService.deleteDepartmentById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
@@ -111,6 +115,7 @@ public class DepartmentManagementController {
                 break;
             case "update":
                 departmentService.saveDepartment(_department);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _department, "更新部门", "");
                 rtnData.put("success1", "success!");
                 break;
             default:

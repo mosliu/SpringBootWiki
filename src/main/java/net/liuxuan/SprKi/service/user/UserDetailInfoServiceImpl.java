@@ -2,9 +2,11 @@ package net.liuxuan.SprKi.service.user;
 
 
 import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.security.AuthoritiesRepository;
+import net.liuxuan.SprKi.repository.security.RoleRepository;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -47,6 +50,13 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      */
     @Autowired
     UsersRepository usersRepository;
+
+    /**
+     * The Users repository.
+     */
+    @Autowired
+    RoleRepository roleRepository;
+
     /**
      * The Authorities repository.
      */
@@ -59,10 +69,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      *
      * @param user the user
      */
-    public void saveOrUpdateUsers(Users user) {
+    public void saveOrUpdateUsers(DbUser user) {
         assertUsersNotNull(user);
         String uname = user.getUsername();
-        Users u_saved;
+        DbUser u_saved;
         if (usersRepository.exists(uname)) {
             u_saved = usersRepository.findOne(uname);
             if (StringUtils.isNotBlank(user.getPassword())) {
@@ -95,32 +105,32 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      *
      * @param user the user
      */
-    public void assertUsersNotNull(Users user) {
+    public void assertUsersNotNull(DbUser user) {
         Assert.notNull(user, "传入的user不应该为空");
         String uname = user.getUsername();
         Assert.notNull(uname, "希望更新的user，用户名不应该为空");
         Assert.hasText(uname, "希望更新的user，用户名不应该为空");
     }
 
-    public boolean checkUsersExists(Users u) {
+    public boolean checkUsersExists(DbUser u) {
         assertUsersNotNull(u);
         return usersRepository.exists(u.getUsername());
     }
 
     public boolean checkUsersExists(UserDetailInfo userDetailInfo) {
         Assert.notNull(userDetailInfo);
-        return checkUsersExists(userDetailInfo.getUsers());
+        return checkUsersExists(userDetailInfo.getDbUser());
     }
 
 
     @Override
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
-        Users u = userDetailInfo.getUsers();
+        DbUser u = userDetailInfo.getDbUser();
         Assert.notNull(u, "传入的user不应该为空");
         saveOrUpdateUsers(u);
         //重新取持久化的对象（该对象的auth为有内容的）
         u = usersRepository.findOne(u.getUsername());
-        userDetailInfo.setUsers(u);
+        userDetailInfo.setDbUser(u);
 //        usersRepository.save(u);
 
         Set<Authorities> auths = u.getAuths();
@@ -135,7 +145,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             //new
             Authorities auth = new Authorities();
             auth.setUsername(u);
-            auth.setAuthority("ROLE_USER");
+            Role userrole = roleRepository.findOne("ROLE_USER");
+
+            auth.setRolename(userrole);
+            auth.setAuthority("");
             authoritiesRepository.save(auth);
             auths.add(auth);
             log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]", auths.size(), u.getUsername());
@@ -149,7 +162,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 ////        Set<Authorities> auths = new HashSet<Authorities>();
 //        auths.add(auth);
 //        u.setAuths(auths);
-        UserDetailInfo saved_UserDetailInfo = userDetailInfoRepository.findByUsers(u);
+        UserDetailInfo saved_UserDetailInfo = userDetailInfoRepository.findByDbUser(u);
         if (saved_UserDetailInfo == null) {
             userDetailInfoRepository.save(userDetailInfo);
 //            saved_UserDetailInfo = userDetailInfo;
@@ -169,20 +182,20 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    public UserDetailInfo findUserDetailInfoByUsers(Users users) {
-        Assert.notNull(users, "传入的users不能为空");
-        Assert.notNull(users.getUsername(), "传入的users的用户名不能为空");
-        Users u1 = usersRepository.findOne(users.getUsername());
+    public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser) {
+        Assert.notNull(dbUser, "传入的users不能为空");
+        Assert.notNull(dbUser.getUsername(), "传入的users的用户名不能为空");
+        DbUser u1 = usersRepository.findOne(dbUser.getUsername());
         if (u1 == null) {
 //            不存在用户！
-            log.trace("请求用户 : {}不存在", users.getUsername());
+            log.trace("请求用户 : {}不存在", dbUser.getUsername());
             return null;
         }
-        UserDetailInfo detailInfo = userDetailInfoRepository.findByUsers(u1);
+        UserDetailInfo detailInfo = userDetailInfoRepository.findByDbUser(u1);
         if (detailInfo == null) {
             log.trace("无user对应的UserInfo对象，建立");
             detailInfo = new UserDetailInfo();
-            detailInfo.setUsers(u1);
+            detailInfo.setDbUser(u1);
             userDetailInfoRepository.save(detailInfo);
         }
         return detailInfo;
@@ -216,7 +229,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    public List<Users> listAllUsers() {
+    public List<DbUser> listAllUsers() {
 //        return usersRepository.findAll();
         return usersRepository.findByEnabled(true);
     }
@@ -233,26 +246,56 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     public Map<String, Object> updateAuths(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
         Map<String, Object> map = new HashMap<String, Object>();
 
-        Users users = usersRepository.findOne(userDetailInfo.getUsers().getUsername());
-        Set<Authorities> old_auths = users.getAuths();
-        Set<Authorities> new_auths = new HashSet<Authorities>();
+        DbUser dbUser = usersRepository.findOne(userDetailInfo.getDbUser().getUsername());
+        Set<Authorities> old_auths = dbUser.getAuths();
+//        Set<Authorities> new_auths = new HashSet<Authorities>();
+        Set<Authorities> toremove = new HashSet<Authorities>();
 
+        //先比较新旧auths
 
         if (ArrayUtils.isEmpty(authArrays)) {
             //提交错误了啊。。
             map.put("error", "提交出错！请检查");
             return map;
         }
+
+
+        for (Authorities old_auth : old_auths) {
+            boolean remain = false;
+            for (int i = 0; i < authArrays.length; i++) {
+                String s_newauth = authArrays[i].toUpperCase();
+                if (old_auth.getAuthority().toUpperCase().equals(s_newauth)) {
+                    remain = true;
+                    log.info("===用户【{}】 保持 权限【{}】 不变", dbUser.getUsername(), s_newauth);
+                    break;
+                }
+            }
+
+            if(!remain){
+                toremove.add(old_auth);
+                log.info("===用户【{}】 移除了 权限【{}】", dbUser.getUsername(), old_auth.getAuthority());
+            }
+        }
+        for (Authorities old_auth : toremove) {
+            //必须去掉对auth的引用后，才能删除auth!!!
+            //TODO 将改成沉到user的service中？
+            dbUser.removeAuth(old_auth);
+            authoritiesRepository.delete(old_auth);
+        }
+
+
+
+//
         for (int i = 0; i < authArrays.length; i++) {
             String s_newauth = authArrays[i];
 
             boolean inold = false;
             for (Authorities old_auth : old_auths) {
                 if (old_auth.getAuthority().toUpperCase().equals(s_newauth)) {
-                    new_auths.add(old_auth);
-                    old_auths.remove(old_auth);
+//                    new_auths.add(old_auth);
+//                    old_auths.remove(old_auth);
                     inold = true;
-                    log.info("===用户【{}】 保持 权限【{}】 不变", users.getUsername(), s_newauth);
+//                    log.info("===用户【{}】 保持 权限【{}】 不变", dbUser.getUsername(), s_newauth);
                     break;
                 }
             }
@@ -261,17 +304,22 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
                 inold = false;
             } else {
                 Authorities new_authorities = new Authorities();
-                new_authorities.setUsername(users);
+                new_authorities.setUsername(dbUser);
                 new_authorities.setAuthority(s_newauth);
-                authoritiesRepository.save(new_authorities);
-                new_auths.add(new_authorities);
+                Role role = roleRepository.getOne(s_newauth);
+                new_authorities.setRolename(role);
+
+                //authoritiesRepository.save(new_authorities);
+                dbUser.addAuth(new_authorities);
+//                new_auths.add(new_authorities);
                 log.info("===用户【{}】 增加了 权限【{}】", new_authorities.getUsername().getUsername(), new_authorities.getAuthority());
             }
         }
-        for (Authorities old_auth : old_auths) {
-            authoritiesRepository.delete(old_auth);
-            log.info("===用户【{}】 移除了 权限【{}】", users.getUsername(), old_auth.getAuthority());
-        }
+//        for (Authorities old_auth : old_auths) {
+////            authoritiesRepository.delete(old_auth);
+//            dbUser.removeAuth(old_auth);
+//            log.info("===用户【{}】 移除了 权限【{}】", dbUser.getUsername(), old_auth.getAuthority());
+//        }
 
 
         if (StringUtils.isNotBlank(newauth)) {
@@ -280,26 +328,52 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             }
             boolean parseflag = true;
             for (Authorities auth : old_auths) {
+                // if the role in the user's old auth,then keep it.
                 if (auth.getAuthority().equals(newauth)) {
                     parseflag = false;
                 }
             }
-            for (Authorities auth : new_auths) {
-                if (auth.getAuthority().equals(newauth)) {
-                    parseflag = false;
-                }
-            }
+//            for (Authorities auth : new_auths) {
+//                // if the role in the user's new selected auth,then keep it.
+//                if (auth.getAuthority().equals(newauth)) {
+//                    parseflag = false;
+//                }
+//            }
 
             if (parseflag) {
-                Authorities new_authorities = new Authorities();
-                new_authorities.setUsername(users);
-                new_authorities.setAuthority(newauth);
-                authoritiesRepository.save(new_authorities);
-                log.info("===用户【{}】 增加了 权限【{}】", new_authorities.getUsername().getUsername(), new_authorities.getAuthority());
+                //Confirm newauth is a new auth that not in system before.
+                Authorities new_authority = new Authorities();
+                new_authority.setUsername(dbUser);
+                Role role = makeANewRole(newauth);
+                new_authority.setAuthority(newauth);
+                new_authority.setRolename(role);
+                dbUser.addAuth(new_authority);
+                usersRepository.save(dbUser);
+//                authoritiesRepository.save(new_authority);
+                log.info("===用户【{}】 增加了 权限【{}】", new_authority.getUsername().getUsername(), new_authority.getAuthority());
             }
         }
+
+
+
+
+//        dbUser.setAuths(new_auths);
+        usersRepository.saveAndFlush(dbUser);
+
+
+
         map.put("success", "权限处理成功");
         return map;
+    }
+
+    public Role makeANewRole(String newauth) {
+        Role role= new Role();
+        role.setRolename(newauth);
+        role.setRoleDescribe(newauth);
+        role.setDisabled(false);
+        role.setComment(newauth);
+        roleRepository.save(role);
+        return role;
     }
 
 

@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -59,6 +56,10 @@ public class FAQContent extends CMSContent{
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date questionDate; // 问题的时间
+
+    @Column(length = 200, nullable = true)
+    @Field(name = "standard")
+    protected String standard; // 标准
 
 
 }

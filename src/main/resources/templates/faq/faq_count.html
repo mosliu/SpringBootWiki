@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
 
 </head>
 <body>
 <div class="container" layout:fragment="content">
-
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li><a th:href="@{/faq/list}">支持信息列表</a></li>
+        <li class="active">支持信息统计</li>
+    </ol>
     <div>
         <p/>
         <a href="#" class="size-25 text-muted">
@@ -45,16 +50,22 @@
     <ul class="timeline_center list-unstyled">
         <li th:each="element : ${allAuthor}">
             <h3>
-                <span style="font-size: 20px;">
-                    <span th:text="|${#strings.substring(element.key,0,4)}年${#strings.substring(element.key,4,6)}月|" th:remove="tag">2017.01</span>
+                <a th:href="@{/faq/list}+'?fromDate='+${#strings.substring(element.key,0,4)}+'-'+
+                    ${#strings.substring(element.key,4,6)}+'-1&toDate='+${#strings.substring(element.key,0,4)}+'-'+
+                    ${#strings.substring(element.key,4,6)}+'-31'">
+                <span style="font-size: 30px;color:#8ab933">
+                    <span th:text="|${#strings.substring(element.key,0,4)}年${#strings.substring(element.key,4,6)}月|"
+                          th:remove="tag">2017.01</span>
                 </span>
-                总数：<span th:text="${element.value.remove('总数')}" th:remove="tag"></span>
+                    总数：<span th:text="${element.value.remove('总数')}" th:remove="tag"></span>
+                </a>
             </h3>
             <div class="timeline-desc timeline-desc-line">
                 <div class="list-group">
-                    <div th:each="everyone : ${element.value}" th:remove="tag">
-                        <a href="#" class="list-group-item">
-                            <strong th:text="${everyone.key}">a</strong> 共提交了 <strong th:text="${everyone.value}">a</strong> 条信息
+                    <div th:each="person : ${element.value}" th:remove="tag">
+                        <a href="#" class="list-group-item" th:href="@{/faq/list}+'?user='+${person.key}">
+                            <strong th:text="${person.key}">a</strong> 共提交了 <strong th:text="${person.value}">a</strong>
+                            条信息
                         </a>
                     </div>
                 </div>

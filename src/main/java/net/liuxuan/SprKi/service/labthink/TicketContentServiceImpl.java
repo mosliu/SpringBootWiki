@@ -2,11 +2,11 @@ package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.labthink.TicketContentRepository;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class TicketContentServiceImpl implements TicketContentService {
 
         TicketContent load = null;
 
-        Users u = ServiceHelper.getCurrentUsers();
+        DbUser u = ServiceHelper.getCurrentUsers();
         ticket.setLastUpdateUser(u);
         Date now = new Date();
 
@@ -57,14 +57,13 @@ public class TicketContentServiceImpl implements TicketContentService {
             //新的
             log.trace("===saveTicketContent logged ,ticket is null", ticket);
             ticket.setAuthor(u);
-
             ticket.setLastUpdateDate(now);
             ticket.setPublishDate(now);
         } else {
             load = ticketContentRepository.getOne(ticket.getId());
             try {
                 log.trace("===saveTicketContent logged ,the value Before COPY is : {}", ticket);
-                BeanHelper.copyWhenDestFiledNull(ticket, load);
+                BeanHelper.copyWhenDestFieldNull(ticket, load);
                 log.trace("===saveTicketContent logged ,the value After  COPY is : {}", ticket);
             } catch (InvocationTargetException e) {
                 log.error("Copy ticket error!",e);

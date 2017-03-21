@@ -69,14 +69,14 @@
                             <fieldset>
                                 <label class="input">
                                     <i class="icon-append fa fa-user"></i>
-                                    <input type="text" th:field="*{users.username}" name="username"
+                                    <input type="text" th:field="*{dbUser.username}" name="username"
                                            placeholder="用户名" minlength="4" required="true" class="form-control "/>
                                     <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
                                 </label>
 
                                 <label class="input">
                                     <i class="icon-append fa fa-lock"></i>
-                                    <input type="password" th:field="*{users.password}" name="password"
+                                    <input type="password" th:field="*{dbUser.password}" name="password"
                                            placeholder="密码" minlength="4" required="true" class="form-control"/>
                                     <b class="tooltip tooltip-bottom-right">Only latin characters and numbers</b>
                                 </label>
@@ -147,7 +147,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="u : ${users}">
+                        <tr th:each="u : ${dbUsers}">
                             <td th:text="${u?.username}">Doe</td>
                             <!--<td th:text="${u?.password}">John</td>-->
                             <td th:text="${u?.enabled}">John</td>

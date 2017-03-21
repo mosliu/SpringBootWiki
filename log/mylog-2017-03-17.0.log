@@ -1,0 +1,10 @@
+2017-03-17 01:00:00.094  INFO 6364 --- [schedulerFactoryBean_Worker-8] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                数据库备份指令：  mysqldump  -uroot -p123456 spring > d:\backup\spring_2017-03-17_01-00-00.sql
+2017-03-17 01:00:00.792  INFO 6364 --- [schedulerFactoryBean_Worker-8] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                Success Backup to  d:\backup/spring_2017-03-17_01-00-00.sql  ,Finished at:2017-03-17_01-00-00
+2017-03-17 01:00:00.835  INFO 6364 --- [schedulerFactoryBean_Worker-8] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                文件备份指令：  robocopy  /XO /E  F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\target\classes\.\static\uploaded d:\backup\attachments >> d:\backup\attachments\backup.log
+2017-03-17 01:00:01.222  INFO 6364 --- [schedulerFactoryBean_Worker-8] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                Success Backup to  d:\backup\attachments\backup.log  ,Finished at:2017-03-17_01-00-01
+2017-03-17 01:00:01.547  INFO 6364 --- [schedulerFactoryBean_Worker-8] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                压缩了sql文件

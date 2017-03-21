@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
 
 <head>
 </head>
 <body class="smoothscroll enable-animation">
 
 <div layout:fragment="content">
-
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li class="active">提交问题查看</li>
+    </ol>
     <div class="container">
         <div class="row-fluid row-intro">
             <div class="span12">
@@ -22,7 +27,7 @@
                 <label th:unless="${dtoNull}">查询条件(生效)</label>
                 <div class="toggle-content">
                     <div class="alert alert-bordered-dotted" style="margin: 10px">
-                        <form th:action="@{/ticketlist}" action="/ticketlist" id="queryform" name="queryform"
+                        <form th:action="@{/ticket/list}" action="/ticket/list" id="queryform" name="queryform"
                               method="POST"
                               class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
                               th:object="${dto}">
@@ -237,7 +242,7 @@
                     {"data": "category.name"},
                     {"data": "title",
                         "render": function (data, type, full, meta) {
-                            return '<a href="/faq/show/' + full.id + '"> '+ data +' </a>';
+                            return '<a href="/ticket/show/' + full.id + '"> '+ data +' </a>';
                         }},
                     {"data": "department.departmentName"},
                     {"data": "devices.devicename"},

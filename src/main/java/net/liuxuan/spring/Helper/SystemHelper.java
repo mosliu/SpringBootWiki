@@ -4,15 +4,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,11 +18,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
-import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 /**
@@ -148,6 +144,8 @@ public final class SystemHelper {
     }
 
 
+
+
     /**
      * 得到当前用户IP
      */
@@ -162,8 +160,8 @@ public final class SystemHelper {
 
     public static UserDetailInfo getCurrentUserDetailInfo(){
         UserDetails userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        Users u = usersRepository.findOne(userDetails.getUsername());
-        UserDetailInfo udi =userDetailInfoRepository.findByUsers(u);
+        DbUser u = usersRepository.findOne(userDetails.getUsername());
+        UserDetailInfo udi =userDetailInfoRepository.findByDbUser(u);
         return udi;
     }
 

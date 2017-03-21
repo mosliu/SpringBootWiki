@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base">
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="layouts/base">
 
 <head>
     <meta name="keywords" content="HTML5,CSS3,Template"/>
     <meta name="description" content=""/>
-    <link href="/ui/smarty/plugins/slider.nivo/nivo-slider.css" rel="stylesheet" type="text/css"/>
-    <script type="text/javascript" src="/ui/smarty/plugins/slider.nivo/jquery.nivo.slider.pack.js"></script>
-    <script type="text/javascript" src="/ui/smarty/js/view/demo.nivo_slider.js"></script>
+    <!--<link href="/ui/smarty/plugins/slider.nivo/nivo-slider.css" rel="stylesheet" type="text/css"/>-->
+    <!--<script type="text/javascript" src="/ui/smarty/plugins/slider.nivo/jquery.nivo.slider.pack.js"></script>-->
+    <!--<script type="text/javascript" src="/ui/smarty/js/view/demo.nivo_slider.js"></script>-->
 </head>
 <body class="smoothscroll enable-animation">
 
@@ -17,37 +19,84 @@
         <div class="container">
 
             <div class="row">
-
+                <header class="margin-bottom-30">
+                    <h1 class="weight-300"><strong>欢迎使用支持系统</strong></h1>
+                    <h2 class="weight-300 letter-spacing-1 size-13"><span>及时、准确、专业的提供所需的支持信息</span>
+                    </h2>
+                </header>
                 <div class="col-sm-5">
-                    <header class="margin-bottom-40">
-                        <h1 class="weight-300"><strong>欢迎使用支持系统</strong></h1>
-                        <h2 class="weight-300 letter-spacing-1 size-13"><span>及时提供所需的各种支持信息</span>
-                        </h2>
-                    </header>
 
-                    <p>基于SpringBoot架构的支持系统，采用了多种前沿技术，提供良好的使用体验</p>
 
-                    <p>整合实际工作中经常碰到的问题，实现自助式问题解决</p>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-6 margin-bottom-10">
+                            <div class="text-center">
+                                <i class="ico-light ico-lg ico-rounded ico-hover et-circle-compass"></i>
+                                <h4>方便</h4>
+                                <p>整合实际工作中经常碰到的问题，实现自助式问题解决.</p>
+                            </div>
+                        </div>
 
-                    <p>完善的权限管理功能</p>
-                    <hr/>
-                    <p><strong>最新上线<a href="/tools/OCR" th:href="@{/tools/OCR}">在线OCR 系统</a></strong>，
-                        快速转换图片中的文字，极大方便日常工作</p>
+                        <div class="col-md-4 col-xs-6 margin-bottom-10">
+                            <div class="text-center">
+                                <i class="ico-light ico-lg ico-rounded ico-hover et-piechart"></i>
+                                <h4>专业</h4>
+                                <p>提供问题的专业、准确的解答释疑.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6 margin-bottom-10">
+                            <div class="text-center">
+                                <i class="ico-light ico-lg ico-rounded ico-hover et-trophy"></i>
+                                <h4>功能强大</h4>
+                                <p>基于SpringBoot架构的支持系统，多种前沿技术、良好的使用体验、完善的权限管理.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6 margin-bottom-5">
+                            <div class="text-center">
+                                <i class="ico-light ico-lg ico-rounded ico-hover et-streetsign"></i>
+                                <h4>分享</h4>
+                                <p>我们愿意在保密框架内，尽我们最大的努力分享我们的知识，理念. </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xs-6 margin-bottom-5">
+                            <div class="text-center">
+                                <i class="ico-light ico-lg ico-rounded ico-hover et-heart"></i>
+                                <h4>文化</h4>
+                                <p>独具特色团队文化. </p>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="col-sm-7">
-                    <div class="nivoSlider" data-controlNav="false" data-pauseOnHover="false">
-                        <!-- Slide 1 -->
-                        <!--<img src="/images/demo/indexSlide1.jpg" alt="Slide 2"/>-->
-                        <!-- Slide 2 -->
-                        <!--<img src="/images/demo/indexSlide2.png" alt="Slide 2"/>-->
-                        <a href="#">
-                            <img src="/images/demo/slide-0.png" alt="Slide 1" title="#htmlcaption"/>
-                        </a>
-                        <img src="/images/demo/slide-4.jpg" alt="Slide 3"/>
-                        <img src="/images/demo/slide-5.jpg" alt="Slide 3"/>
-                    </div>
-                    <div id="htmlcaption" class="nivo-html-caption">
-                        国内技术支持组恭祝您<strong>鸡年大吉</strong>.
+                    <!--<div class="nivoSlider" data-controlNav="false" data-pauseOnHover="false">-->
+                    <!--<a href="#">-->
+                    <!--<img src="/images/demo/slide-0.png" alt="Slide 1" title="#htmlcaption"/>-->
+                    <!--</a>-->
+                    <!--<img src="/images/demo/slide-4.jpg" alt="Slide 3"/>-->
+                    <!--<img src="/images/demo/slide-5.jpg" alt="Slide 3"/>-->
+                    <!--</div>-->
+                    <!--<div id="htmlcaption" class="nivo-html-caption">-->
+                    <!--国内技术支持组恭祝您<strong>鸡年大吉</strong>.-->
+                    <!--</div>-->
+                    <div class="owl-carousel buttons-autohide controlls-over nomargin"
+                         data-plugin-options='{"items": 1, "singleItem": true, "autoPlay": 100000, "navigation": true, "pagination": true, "transitionStyle":"fade", "progressBar":"true"}'>
+                        <div class="owl-slide">
+                            <img class="img-responsive" src="/images/demo/slide-0.png" alt="">
+                            <div class="owl--text">
+                                国内技术支持组恭祝您<strong>鸡年大吉！</strong></div>
+                        </div>
+                        <div class="owl-slide">
+                            <img class="img-responsive" src="images/demo/slide-4.jpg" alt="">
+                            <div class="owl--text"><strong>展会展示区！</strong></div>
+                        </div>
+                        <div class="owl-slide">
+                            <img class="img-responsive" src="/images/demo/slide-5.jpg" alt="">
+                            <div class="owl--text"><strong>美国分公司</strong></div>
+                        </div>
                     </div>
                 </div>
 
@@ -66,80 +115,64 @@
 
                 <!-- toggle -->
                 <div class="col-md-4 col-sm-4">
-                    <div class="toggle toggle-accordion toggle-transparent toggle-bordered-full">
-
-                        <div class="toggle active">
-                            <label>专业</label>
-                            <div class="toggle-content">
-                                <p>提供问题的专业、准确的解答释疑</p>
-                            </div>
-                        </div>
-
-                        <div class="toggle">
-                            <label>分享</label>
-                            <div class="toggle-content">
-                                <p>我们愿意在保密框架内，尽我们最大的努力分享我们的知识，理念</p>
-                            </div>
-                        </div>
-
-                        <div class="toggle">
-                            <label>文化</label>
-                            <div class="toggle-content">
-                                <p>特色团队文化</p>
-                            </div>
-                        </div>
+                    <h4>最新活动详情</h4>
+                    <div id="NewActivity">
 
                     </div>
+
+                    <script language="JavaScript">
+                        $("#NewActivity").load("/activity/last10", function (response, status) {
+                            if (status == "success") {
+                                $("#NewActivity").html("<ul class='list-unstyled'></ul>");
+                                var jsonarray = $.parseJSON(response);
+//                                alert(jsonarray.length);
+//                                alert(jsonarray[2]);
+                                $.each(jsonarray, function (index, value) {
+                                    var item_text = "<i class='fa fa-check text-success'></i>";
+                                    item_text += value.username;
+                                    item_text += " " + value.operation + " ";
+                                    item_text += "<a href='" + value.url + "'>" + value.title + "</a> ";
+                                    $('<li></li>').html(item_text).appendTo("#NewActivity ul");
+                                });
+//                                $(response).each(function(){
+//                                    var item_text = $(this).text();
+//                                    $('<li></li>').html(item_text).appendTo('ol');
+//                                });
+                            }
+                        });
+                    </script>
                 </div>
                 <!-- /toggle -->
 
                 <!-- skills -->
                 <div class="col-md-4 col-sm-4">
                     <h4>项目进展</h4>
-
-                    <label>
-                        <span class="pull-right">98%</span>
-                        支持系统
-                    </label>
-                    <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 60%; min-width: 2em;"></div>
+                    <div class="progress progress-lg">
+                        <div class="progress-bar progress-bar-warning progress-bar-striped active text-left"
+                             role="progressbar" aria-valuenow="98"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 98%; min-width: 2em;">
+                            <span>支持系统 / 98%</span>
+                        </div>
                     </div>
 
-                    <label>
-                        <span class="pull-right">100%</span>
-                        培训设计
-                    </label>
-                    <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 88%; min-width: 2em;"></div>
+                    <div class="progress progress-lg">
+                        <div class="progress-bar progress-bar-danger  progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 100%; min-width: 2em;">
+                            <span>培训设计 / 100%</span>
+                        </div>
                     </div>
 
-                    <label>
-                        <span class="pull-right">98%</span>
-                        支持满意
-                    </label>
-                    <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 98%; min-width: 2em;"></div>
+                    <div class="progress progress-lg">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 98%; min-width: 2em;">
+                            <span>培训设计 / 100%</span>
+                        </div>
                     </div>
-
-                    <!--<label>
-                        <span class="pull-right">0%</span>
-                        技术开发
-                    </label>
-                    <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 77%; min-width: 2em;"></div>
-                    </div>-->
-
-                    <label>
-                        <span class="pull-right">99%</span>
-                        OTHER
-                    </label>
-                    <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 99%; min-width: 2em;"></div>
+                    <div class="progress progress-lg">
+                        <div class="progress-bar progress-bar-primary progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 99%; min-width: 2em;">
+                            <span>其他 / 99%</span>
+                        </div>
                     </div>
 
                 </div>
@@ -156,8 +189,8 @@
                             </a>
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-9">
-                            <a href="blog-sidebar-left.html" class="tab-post-link">支持系统正式上线!!</a>
-                            <small>2016 12 16</small>
+                            <a href="blog-sidebar-left.html" class="tab-post-link">项目添加Breadcum</a>
+                            <small>2017 03 06</small>
                         </div>
                     </div><!-- /post -->
 
@@ -168,8 +201,9 @@
                             </a>
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-9">
-                            <a href="blog-sidebar-left.html" class="tab-post-link">支持系统正式立项</a>
-                            <small>2016 11 15</small>
+                            <strong><a href="/tools/OCR" th:href="@{/tools/OCR}">在线OCR 系统最新上线</a></strong>
+                            <small>快速转换图片中的文字，极大方便日常工作</small>
+                            <small>2016 12 15</small>
                         </div>
                     </div><!-- /post -->
                     <div class="row tab-post"><!-- post -->
@@ -214,6 +248,8 @@
 					支持系统是否能满足您的需求？
 					<strong>不满足 &raquo;</strong>
 				</span>
+        <div sec:authorize-url='/other1.jsp' href="/other1.jsp">权限test1</div>
+        <div sec:authorize-url='/other2.jsp' href="/other2.jsp">权限test2</div>
     </a>
     <!-- /BUTTON CALLOUT -->
 </div>

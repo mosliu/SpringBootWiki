@@ -2,8 +2,14 @@ package net.liuxuan.SprKi.entity.security;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.search.annotations.Field;
+
+import java.util.Date;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -26,18 +32,71 @@ public class SecurityLog {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @Column(nullable = false,length = 1000)
-    String info;
+    /**
+     * 访问者
+     */
+    @Column(length = 30)
+    private String username;
+//    @JsonIgnore
+//    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.LAZY)
+//    @JoinColumn(name="username")
+//    private Users username;
 
-    @Column(nullable = false,length = 40)
-    String logip;
 
-    @Column(nullable = false,length = 40)
-    String loguser;
+    /**
+     * 访问的IP
+     */
+    @Column(length = 40)
+    String logIp;
 
-    @Column(nullable = false,length = 40)
+    /**
+     * 访问的地址
+     */
+    @Column(length = 100)
+    String logUrl;
+
+    /**
+     * 操作时间
+     */
+    @Column(columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    Date logTime; // 问题的时间
+
+    /**
+     * 动作
+     */
+    @Column(length = 40)
+    String action;
+
+    /**
+     * 日志信息
+     */
+    @Lob
+    @Field
+    @Column(columnDefinition = "longtext", nullable = true)
+//    @Basic(fetch = FetchType.LAZY)
+    String logInfo;
+
+    /**
+     * 日志信息
+     */
+    @Column(length = 80)
+    String logInfoType;
+
+
+    /**
+     * 日志等级
+     */
+    @Column(length = 20)
+    String logLevel;
+
+    @Column(length = 40)
     String operation;
 
-    @Column(name = "disabled", nullable = false)
-    boolean disabled=true;
+    /**
+     * 访问的地址 提供给可能能访问的日志展示用
+     */
+    @Column(length = 100)
+    String url;
+
 }

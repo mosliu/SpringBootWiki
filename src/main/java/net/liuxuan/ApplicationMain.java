@@ -5,21 +5,31 @@
 
 package net.liuxuan;
 
+import net.liuxuan.SprKi.entity.Banner;
+import net.liuxuan.SprKi.repository.BannerRepository;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManagerFactory;
+
+
 
 /**
  * Created by Moses on 2016/2/3.
@@ -49,11 +59,15 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@EnableAutoConfiguration()
 //@ImportResource({ "classpath:config/webSecurityConfig.xml" })
 //@EnableConfigurationProperties({DBSettings.class})
-@EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository")
+@EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository",
+        entityManagerFactoryRef ="entityManagerFactory",
+        transactionManagerRef = "transactionManager"
+)
 @EntityScan({"net.liuxuan.SprKi.entity","net.liuxuan.springboottest.message"})
 //@EnableWebMvc
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
+@Transactional
 //@EnableScheduling
 public class ApplicationMain extends SpringBootServletInitializer {
 
@@ -86,6 +100,7 @@ public class ApplicationMain extends SpringBootServletInitializer {
     }
 
     private static void mainTest() {
+
 
         log.trace("======trace");
         log.debug("======debug");
@@ -132,6 +147,40 @@ public class ApplicationMain extends SpringBootServletInitializer {
 //        JpaTransactionManager txManager = new JpaTransactionManager();
 //        txManager.setEntityManagerFactory(entityManagerFactory());
 //        return txManager;
+//    }
+
+
+
+//    @Bean
+//    public CommandLineRunner demo(SecurityLogRepository repository){
+//
+//        return (args) -> {
+//            SecurityLog slog = new SecurityLog();
+//            slog.setUsername("");
+//            slog.setLogIp("0.0.0.0");
+//            slog.setLogUrl("/");
+//            slog.setLogTime(new Date());
+////        slog.setAction(LogActionType.CREATE_OR_UPDATE);
+//            slog.setAction(LogActionType.STARTUP);
+//            slog.setLogInfo("");
+//            slog.setLogLevel(LogLevel.SYSTEMACTIVITY);
+//            slog.setOperation("System staru up");
+//            slog.setUrl("/");
+//            repository.saveAndFlush(slog);
+////            securityLogService.saveSecurityLog(slog);
+//
+//        };
+//    }
+//    @Bean
+//    @Transactional(propagation = Propagation.NEVER)
+//    public String  demo1(BannerRepository repository,SessionFactory sessionFactory ){
+////        entityManager.getTransaction().begin();
+//        sessionFactory.openSession();
+//        Banner b = new Banner();
+//        b.setName("11");
+//        b.setId(11L);
+//        repository.saveAndFlush(b);
+//        return "";
 //    }
 
 }

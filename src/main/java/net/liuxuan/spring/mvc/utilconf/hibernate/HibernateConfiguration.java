@@ -11,8 +11,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate5.support.OpenSessionInViewInterceptor;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -37,7 +39,8 @@ public class HibernateConfiguration {
 
     @Bean
     public OpenSessionInViewInterceptor openSessionInViewInterceptor(){
-        return new OpenSessionInViewInterceptor();
+        OpenSessionInViewInterceptor openSessionInViewInterceptor = new OpenSessionInViewInterceptor();
+        return openSessionInViewInterceptor;
     }
 
     @Autowired
@@ -77,13 +80,14 @@ public class HibernateConfiguration {
         return properties;
     }
 
-    @Bean
-    @Autowired
+//    @Bean
+//    @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory s) {
-        HibernateTransactionManager txManager = new HibernateTransactionManager();
-        txManager.setSessionFactory(s);
+        HibernateTransactionManager txManager = new HibernateTransactionManager(s);
+
         return txManager;
     }
+
 
 
 //    @Bean

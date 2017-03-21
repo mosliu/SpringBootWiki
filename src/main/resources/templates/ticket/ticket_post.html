@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
     <script type="text/javascript">
         function doSubmit1() {
@@ -21,6 +21,14 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li><a th:href="@{/ticket/list}">问题提交</a></li>
+        <li class="active">新问题提交</li>
+    </ol>
+
     <h1 th:text="${title}">问题提交界面</h1>
     <div class="faqs-form">
         <div class="col-md-9">

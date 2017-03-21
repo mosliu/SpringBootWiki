@@ -2,7 +2,7 @@ package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
@@ -47,38 +47,44 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
-    public void saveFAQContent(FAQContent faq) {
+    public FAQContent saveFAQContent(FAQContent faq) {
 
         FAQContent load = null;
 
-        Users u = ServiceHelper.getCurrentUsers();
+        DbUser u = ServiceHelper.getCurrentUsers();
         faq.setLastUpdateUser(u);
         Date now = new Date();
 
-        if (faq.getId() == null) {
+        if (faq.getId() == null ) {
             //新的
-            log.trace("===saveFAQContent logged ,faq is null", faq);
+            log.trace("===saveFAQContent:new", faq);
             faq.setAuthor(u);
 
-            faq.setLastUpdateDate(now);
+            faq.setPublishDate(now);
+        } else if(!faqContentRepository.exists(faq.getId())){
+            //新的
+            log.trace("===saveFAQContent:new", faq);
+            faq.setAuthor(u);
+
             faq.setPublishDate(now);
         } else {
             load = faqContentRepository.getOne(faq.getId());
             try {
                 log.trace("===saveFAQContent logged ,the value Before COPY is : {}", faq);
-                BeanHelper.copyWhenDestFiledNull(faq, load);
+                BeanHelper.copyWhenDestFieldNull(faq, load);
                 log.trace("===saveFAQContent logged ,the value After  COPY is : {}", faq);
             } catch (InvocationTargetException e) {
-                log.error("Copy faq error!",e);
+                log.error("Copy faq error!", e);
 //                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                log.error("Copy faq error!",e);
+                log.error("Copy faq error!", e);
 //                e.printStackTrace();
             }
+
         }
 
         faq.setLastUpdateDate(now);
-        faqContentRepository.save(faq);
+        return faqContentRepository.save(faq);
 
     }
 
@@ -118,9 +124,13 @@ public class FAQContentServiceImpl implements FAQContentService {
                 List<Predicate> pl_usercompare = buildUserEqualsPredicates(root, cb, sl_or, dto.user);
                 pl.addAll(pl_usercompare);
 
-                String[] likepaths = {"title", "question", "answer"};
+                String[] likepaths = {"title", "question", "answer","standard"};
                 String keyword = dto.keyword;
                 pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, keyword), cb));
+
+                String[] standardlikepaths = {"standard"};
+                String standard = dto.standard;
+                pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, standardlikepaths, standard), cb));
 
 //                log.debug("pl size is:{}", pl.size());
                 query
@@ -137,17 +147,19 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
-    public void deleteFAQContentById(Long id) {
+    public void disableFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(true);
         //faqContentRepository.delete(id);
     }
+
     @Override
     public void revertFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(false);
         //faqContentRepository.delete(id);
     }
+
     @Override
-    public void deleteForEverFAQContentById(Long id) {
+    public void deleteFAQContentById(Long id) {
 //        faqContentRepository.findOne(id).setDisabled(true);
         faqContentRepository.delete(id);
     }
@@ -155,7 +167,7 @@ public class FAQContentServiceImpl implements FAQContentService {
     @Override
     public FAQContent findById(Long id) {
         FAQContent faq = faqContentRepository.findOne(id);
-        if(faq!=null){
+        if (faq != null) {
             faq.setClicks(faq.getClicks() + 1);
         }
 //        faqContentRepository.save(faq);

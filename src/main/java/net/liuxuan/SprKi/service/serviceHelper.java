@@ -1,6 +1,6 @@
 package net.liuxuan.SprKi.service;
 
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,17 +24,17 @@ public class ServiceHelper {
     @Autowired
     private UsersRepository usersRepository;
 
-    public static Users getCurrentUsers() {
+    public static DbUser getCurrentUsers() {
         User ui = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        Users u = new Users();
+        DbUser u = new DbUser();
         u.setUsername(ui.getUsername());
         return u;
     }
-    public Users getCurrentUsersFromDb() {
+    public DbUser getCurrentUsersFromDb() {
         User ui = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        Users u = usersRepository.getOne(ui.getUsername());
+        DbUser u = usersRepository.getOne(ui.getUsername());
         return u;
     }
 }

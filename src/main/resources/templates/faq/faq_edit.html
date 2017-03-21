@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
     <!-- 配置文件 -->
     <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
@@ -28,6 +28,12 @@
 </head>
 <body>
 <div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li><a th:href="@{/faq/list}">支持信息列表</a></li>
+        <li class="active">支持信息编辑</li>
+    </ol>
     <h1 th:text="${title}">FAQ 编辑界面</h1>
     <div class="faqs-form">
         <form th:action="@{/faq/post}" action="/login" id="faqform" name="faqform" method="POST"
@@ -97,6 +103,10 @@
                             <input type="text" th:field="*{questionDate}"
                                    class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
                                    data-RTL="false" readonly="true"/>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label>标准</label>
+                            <input type="text" th:field="*{standard}"  class="form-control required"/>
                         </div>
                     </div>
                 </div>

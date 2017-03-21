@@ -1,7 +1,7 @@
 package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -44,7 +44,7 @@ public class CMSComment {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="author")
-    private Users author;
+    private DbUser author;
 
     @Column(length = 40, nullable = true)
     private String commentIP;

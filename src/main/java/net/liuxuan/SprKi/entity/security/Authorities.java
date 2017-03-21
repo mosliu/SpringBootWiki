@@ -1,6 +1,5 @@
 package net.liuxuan.SprKi.entity.security;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,7 +30,15 @@ public class Authorities implements GrantedAuthority {
 //    @JsonBackReference
     @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.LAZY)
     @JoinColumn(name="username")
-    private Users username;
+    private DbUser username;
+
+
+
+    @JsonIgnore
+    @ManyToOne(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, optional = true,fetch = FetchType.LAZY)
+    @JoinColumn(name="rolename")
+    private Role rolename;
+
 
     @Column(length = 30,nullable = false)
     private String authority;
@@ -44,20 +51,36 @@ public class Authorities implements GrantedAuthority {
         this.id = id;
     }
 
-    public Users getUsername() {
+    public DbUser getUsername() {
         return username;
     }
 
-    public void setUsername(Users username) {
+    public void setUsername(DbUser username) {
         this.username = username;
     }
 
     @Override
     public String getAuthority() {
-        return authority;
+        return rolename.getRolename();
     }
 
+    /**
+     * @deprecated
+     *
+     * 无用的方法，升级遗留
+     * @param authority
+     */
     public void setAuthority(String authority) {
-        this.authority = authority;
+        this.authority=authority;
+        //this.rolename.setRolename(authority);
+    }
+
+    public Role getRolename() {
+        return rolename;
+    }
+
+    public void setRolename(Role rolename) {
+//        this.authority = rolename.getRolename();
+        this.rolename = rolename;
     }
 }

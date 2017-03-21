@@ -1,7 +1,8 @@
 package net.liuxuan.SprKi.entity;
 
 import lombok.Data;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
@@ -81,23 +82,25 @@ public class CMSContent {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="author")
-    protected Users author; // 作者
+    protected DbUser author; // 作者
 
     /**
      * The Last update user.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="last_update_user")
-    protected Users lastUpdateUser;
+    protected DbUser lastUpdateUser;
 
     /**
      * 主标题
      */
+    @Field(store = Store.NO)
     @Column(length = 200,nullable = false)
     protected String title; // 主标题
     /**
      * 副标题
      */
+    @Field(store = Store.NO)
     @Column(length = 200)
     protected String subtitle; // 副标题
     /**

@@ -23,7 +23,7 @@ public interface FAQContentService {
      *
      * @param faq the faq
      */
-    void saveFAQContent(FAQContent faq);
+    FAQContent saveFAQContent(FAQContent faq);
 
     /**
      * Find all faq contents by dto list.
@@ -38,7 +38,7 @@ public interface FAQContentService {
      *
      * @param id the id
      */
-    void deleteFAQContentById(Long id);
+    void disableFAQContentById(Long id);
     /**
      * Revert faq content by id.
      *
@@ -51,7 +51,7 @@ public interface FAQContentService {
      *
      * @param id the id
      */
-    void deleteForEverFAQContentById(Long id);
+    void deleteFAQContentById(Long id);
 
     /**
      * Find by id faq content.

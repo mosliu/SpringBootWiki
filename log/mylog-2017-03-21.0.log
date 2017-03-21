@@ -1,0 +1,214 @@
+2017-03-21 01:00:00.039  INFO 22508 --- [schedulerFactoryBean_Worker-4] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                数据库备份指令：  mysqldump  -uroot -p123456 spring > d:\backup\spring_2017-03-21_01-00-00.sql
+2017-03-21 01:00:00.085  INFO 22508 --- [schedulerFactoryBean_Worker-4] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                Success Backup to  d:\backup/spring_2017-03-21_01-00-00.sql  ,Finished at:2017-03-21_01-00-00
+2017-03-21 01:00:00.085  INFO 22508 --- [schedulerFactoryBean_Worker-4] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                文件备份指令：  robocopy  /XO /E  F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\target\classes\.\static\uploaded d:\backup\attachments >> d:\backup\attachments\backup.log
+2017-03-21 01:00:00.089  INFO 22508 --- [schedulerFactoryBean_Worker-4] net.liuxuan.spring.mvc.utilconf.QuartzJobs.DataBackupJob     :
+                Success Backup to  d:\backup\attachments\backup.log  ,Finished at:2017-03-21_01-00-00
+2017-03-21 09:16:07.690  INFO 22508 --- [http-nio-0.0.0.0-80-exec-6] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/userManage? 
+2017-03-21 09:16:15.209  INFO 22508 --- [http-nio-0.0.0.0-80-exec-8] net.liuxuan.SprKi.controller.admin.UserManagementController  :
+                ===userManage logged ,the dto value is : BaseDTO(action=authedit, sid=heaf)
+2017-03-21 09:16:15.209  INFO 22508 --- [http-nio-0.0.0.0-80-exec-8] net.liuxuan.SprKi.controller.admin.UserManagementController  :
+                ===userManage logged ,the value is : UserDetailInfo(id=null, dbUser=null, disabled=false, firstName=null, lastName=null, gender=null, email=null, department=null)
+2017-03-21 09:16:15.236  INFO 22508 --- [http-nio-0.0.0.0-80-exec-8] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/user?action=authedit&sid=heaf 
+2017-03-21 09:16:22.849  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.SprKi.controller.admin.UserManagementController  :
+                ===userManageAjax logged ,the value is : BaseDTO(action=updateauth, sid=null)
+2017-03-21 09:16:22.849  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.SprKi.controller.admin.UserManagementController  :
+                ===userManageAjax logged ,the value is : UserDetailInfo(id=null, dbUser=DbUser(username=heaf, password=null, enabled=true, usernameAlias=null, regdate=null, auths=[]), disabled=false, firstName=null, lastName=null, gender=null, email=null, department=null)
+2017-03-21 09:16:22.850  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.Helper.RequestHelper                      :
+                Parameter key:action ,values0:updateauth
+2017-03-21 09:16:22.850  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.Helper.RequestHelper                      :
+                Parameter key:dbUser.username ,values0:heaf
+2017-03-21 09:16:22.850  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.Helper.RequestHelper                      :
+                Parameter key:authArray ,values0:ROLE_ADMIN
+2017-03-21 09:16:22.850  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.Helper.RequestHelper                      :
+                Parameter key:authArray ,values1:ROLE_USER
+2017-03-21 09:16:22.850  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.Helper.RequestHelper                      :
+                Parameter key:newAuth ,values0:PPP
+2017-03-21 09:16:22.856  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.SprKi.service.user.UserDetailInfoServiceImpl     :
+                ===用户【heaf】 保持 权限【ROLE_ADMIN】 不变
+2017-03-21 09:16:22.858  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.SprKi.service.user.UserDetailInfoServiceImpl     :
+                ===用户【heaf】 保持 权限【ROLE_USER】 不变
+2017-03-21 09:16:22.868  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.SprKi.service.user.UserDetailInfoServiceImpl     :
+                ===用户【heaf】 增加了 权限【ROLE_PPP】
+2017-03-21 09:16:23.116  INFO 22508 --- [http-nio-0.0.0.0-80-exec-9] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:POST http://127.0.0.1/admin/user_ajax?action=updateauth 
+2017-03-21 09:16:28.381  INFO 22508 --- [http-nio-0.0.0.0-80-exec-10] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/userManage? 
+2017-03-21 09:16:45.586  INFO 22508 --- [http-nio-0.0.0.0-80-exec-2] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/userManage? 
+2017-03-21 09:16:46.582  INFO 22508 --- [http-nio-0.0.0.0-80-exec-4] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/departmentManage? 
+2017-03-21 09:16:48.283  INFO 22508 --- [http-nio-0.0.0.0-80-exec-6] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/departmentManage? 
+2017-03-21 09:18:35.333  INFO 22508 --- [Thread-33] o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext      :
+                Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2e37567a: startup date [Mon Mar 20 17:00:48 CST 2017]; root of context hierarchy
+2017-03-21 09:18:35.335  INFO 22508 --- [Thread-33] o.springframework.context.support.DefaultLifecycleProcessor  :
+                Stopping beans in phase 2147483647
+2017-03-21 09:18:35.336  INFO 22508 --- [Thread-33] org.quartz.core.QuartzScheduler                              :
+                Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+2017-03-21 09:18:35.337  INFO 22508 --- [Thread-33] o.springframework.context.support.DefaultLifecycleProcessor  :
+                Stopping beans in phase 0
+2017-03-21 09:18:35.337  INFO 22508 --- [Thread-33] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Unregistering JMX-exposed beans on shutdown
+2017-03-21 09:18:35.338  INFO 22508 --- [Thread-33] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Unregistering JMX-exposed beans
+2017-03-21 09:18:35.343  INFO 22508 --- [Thread-33] org.quartz.core.QuartzScheduler                              :
+                Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+2017-03-21 09:18:35.343  INFO 22508 --- [Thread-33] org.quartz.core.QuartzScheduler                              :
+                Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+2017-03-21 09:18:35.343  INFO 22508 --- [Thread-33] org.quartz.core.QuartzScheduler                              :
+                Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
+2017-03-21 09:18:39.807  INFO 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                Starting ApplicationMain on DESKTOP-64JVGQ5 with PID 22508 (F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\target\classes started by Moses in F:\SyncDisk\Dropbox\Workspaces\Maven\SpringBootTest\target\classes)
+2017-03-21 09:18:39.807  INFO 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                No active profile set, falling back to default profiles: default
+2017-03-21 09:18:39.823  INFO 22508 --- [restartedMain] o.s.b.c.e.AnnotationConfigEmbeddedWebApplicationContext      :
+                Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2b263790: startup date [Tue Mar 21 09:18:39 CST 2017]; root of context hierarchy
+2017-03-21 09:18:42.300  INFO 22508 --- [restartedMain] o.s.beans.factory.support.DefaultListableBeanFactory         :
+                Overriding bean definition for bean 'messageRepository' with a different definition: replacing [Root bean: class [null]; scope=; abstract=false; lazyInit=false; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=sampleWebUiApplication; factoryMethodName=messageRepository; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [net/liuxuan/springboottest/message/SampleWebUiApplication.class]] with [Root bean: class [org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean]; scope=; abstract=false; lazyInit=false; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null]
+2017-03-21 09:18:43.028  INFO 22508 --- [localhost-startStop-1] o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/]     :
+                Initializing Spring embedded WebApplicationContext
+2017-03-21 09:18:43.028  INFO 22508 --- [localhost-startStop-1] org.springframework.web.context.ContextLoader                :
+                Root WebApplicationContext: initialization completed in 3205 ms
+2017-03-21 09:18:43.363  INFO 22508 --- [localhost-startStop-1] net.liuxuan.spring.mvc.DruidConfiguration                    :
+                init Druid Servlet Configuration 
+2017-03-21 09:18:43.366  INFO 22508 --- [localhost-startStop-1] net.liuxuan.spring.mvc.DruidConfiguration                    :
+                Registering WebStatFilter!
+2017-03-21 09:18:43.899  INFO 22508 --- [localhost-startStop-1] org.hibernate.jpa.internal.util.LogHelper                    :
+                HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2017-03-21 09:18:44.159  INFO 22508 --- [localhost-startStop-1] org.hibernate.dialect.Dialect                                :
+                HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2017-03-21 09:18:44.423  INFO 22508 --- [localhost-startStop-1] org.hibernate.tool.hbm2ddl.SchemaUpdate                      :
+                HHH000228: Running hbm2ddl schema update
+2017-03-21 09:18:46.554  INFO 22508 --- [localhost-startStop-1] n.l.s.s.d.CustomInvocationSecurityMetadataSourceImpl         :
+                security info load success!!
+2017-03-21 09:18:46.613  WARN 22508 --- [localhost-startStop-1] net.liuxuan.spring.security.dynamical.CustomSecurityFilter   :
+                Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+2017-03-21 09:18:46.746  WARN 22508 --- [localhost-startStop-1] o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/]     :
+                Cannot deserialize session attribute SPRING_SECURITY_CONTEXT for session BD6A9DC7506BF3659CDA6711087523A6
+2017-03-21 09:18:46.781  INFO 22508 --- [restartedMain] org.springframework.aop.framework.CglibAopProxy              :
+                Unable to proxy method [protected final void org.springframework.boot.web.support.SpringBootServletInitializer.setRegisterErrorPageFilter(boolean)] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2017-03-21 09:18:47.716  INFO 22508 --- [restartedMain] org.hibernate.hql.internal.QueryTranslatorFactoryInitiator   :
+                HHH000397: Using ASTQueryTranslatorFactory
+2017-03-21 09:18:48.583  INFO 22508 --- [restartedMain] org.hibernate.dialect.Dialect                                :
+                HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2017-03-21 09:18:48.595  WARN 22508 --- [restartedMain] org.hibernate.search.engine.impl.ConfigContext               :
+                HSEARCH000075: Configuration setting hibernate.search.lucene_version was not specified: using LUCENE_CURRENT.
+2017-03-21 09:18:48.630  INFO 22508 --- [restartedMain] org.quartz.impl.StdSchedulerFactory                          :
+                Using default implementation for ThreadExecutor
+2017-03-21 09:18:48.636  INFO 22508 --- [restartedMain] org.quartz.core.SchedulerSignalerImpl                        :
+                Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2017-03-21 09:18:48.636  INFO 22508 --- [restartedMain] org.quartz.core.QuartzScheduler                              :
+                Quartz Scheduler v.2.2.2 created.
+2017-03-21 09:18:48.636  INFO 22508 --- [restartedMain] org.quartz.simpl.RAMJobStore                                 :
+                RAMJobStore initialized.
+2017-03-21 09:18:48.636  INFO 22508 --- [restartedMain] org.quartz.core.QuartzScheduler                              :
+                Scheduler meta-data: Quartz Scheduler (v2.2.2) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2017-03-21 09:18:48.636  INFO 22508 --- [restartedMain] org.quartz.impl.StdSchedulerFactory                          :
+                Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+2017-03-21 09:18:48.637  INFO 22508 --- [restartedMain] org.quartz.impl.StdSchedulerFactory                          :
+                Quartz scheduler version: 2.2.2
+2017-03-21 09:18:48.637  INFO 22508 --- [restartedMain] org.quartz.core.QuartzScheduler                              :
+                JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@798dac01
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/ui/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/uploaded/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/commons/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/images/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/tinymce/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/ueditor/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/css/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/fonts/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/js/**'], []
+2017-03-21 09:18:48.914  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/favicon.ico'], []
+2017-03-21 09:18:48.938  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: Ant [pattern='/admins/**'], [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7cbbbada, org.springframework.security.web.context.SecurityContextPersistenceFilter@446359ee, org.springframework.security.web.header.HeaderWriterFilter@1ce3f43e, org.springframework.security.web.authentication.logout.LogoutFilter@42118c9a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2bd5fd57, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2fe1b967, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ca0eaa1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51b81ac8, org.springframework.security.web.session.SessionManagementFilter@37fb3483, org.springframework.security.web.access.ExceptionTranslationFilter@6661b114, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4603d0a]
+2017-03-21 09:18:48.953  INFO 22508 --- [restartedMain] org.springframework.security.web.DefaultSecurityFilterChain  :
+                Creating filter chain: org.springframework.security.web.util.matcher.AnyRequestMatcher@1, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@21c4388, org.springframework.security.web.context.SecurityContextPersistenceFilter@46a79db2, org.springframework.security.web.header.HeaderWriterFilter@34b6a4e7, org.springframework.security.web.authentication.logout.LogoutFilter@57623bfe, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1b7b1ab9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d617e23, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6c716ef4, org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter@6c4c8eee, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@147cdc52, org.springframework.security.web.session.SessionManagementFilter@612b5074, org.springframework.security.web.access.ExceptionTranslationFilter@579f8e53, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@59b9e9f0]
+2017-03-21 09:18:49.245  INFO 22508 --- [restartedMain] o.s.web.servlet.handler.SimpleUrlHandlerMapping              :
+                Mapped URL path [/static/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-21 09:18:49.245  INFO 22508 --- [restartedMain] o.s.web.servlet.handler.SimpleUrlHandlerMapping              :
+                Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-21 09:18:49.245  INFO 22508 --- [restartedMain] o.s.web.servlet.handler.SimpleUrlHandlerMapping              :
+                Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-21 09:18:49.262  INFO 22508 --- [restartedMain] o.s.web.servlet.handler.SimpleUrlHandlerMapping              :
+                Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler]
+2017-03-21 09:18:49.272  INFO 22508 --- [restartedMain] o.s.w.s.m.m.annotation.ExceptionHandlerExceptionResolver     :
+                Detected @ExceptionHandler methods in errorHandleController
+2017-03-21 09:18:49.299  INFO 22508 --- [restartedMain] o.s.web.servlet.handler.SimpleUrlHandlerMapping              :
+                Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2017-03-21 09:18:50.460  INFO 22508 --- [restartedMain] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Registering beans for JMX exposure on startup
+2017-03-21 09:18:50.460  INFO 22508 --- [restartedMain] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Bean with name 'WallFilterBean' has been autodetected for JMX exposure
+2017-03-21 09:18:50.460  INFO 22508 --- [restartedMain] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Bean with name 'dataSource' has been autodetected for JMX exposure
+2017-03-21 09:18:50.464  INFO 22508 --- [restartedMain] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Located MBean 'WallFilterBean': registering with JMX server as MBean [com.alibaba.druid.wall:name=WallFilterBean,type=WallFilter]
+2017-03-21 09:18:50.466  INFO 22508 --- [restartedMain] o.s.jmx.export.annotation.AnnotationMBeanExporter            :
+                Located MBean 'dataSource': registering with JMX server as MBean [com.alibaba.druid.pool:name=dataSource,type=DruidDataSource]
+2017-03-21 09:18:50.468  INFO 22508 --- [restartedMain] o.springframework.context.support.DefaultLifecycleProcessor  :
+                Starting beans in phase 0
+2017-03-21 09:18:50.491  INFO 22508 --- [restartedMain] o.springframework.context.support.DefaultLifecycleProcessor  :
+                Starting beans in phase 2147483647
+2017-03-21 09:18:50.492  INFO 22508 --- [restartedMain] org.quartz.core.QuartzScheduler                              :
+                Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+2017-03-21 09:18:50.498  INFO 22508 --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol                   :
+                Initializing ProtocolHandler ["http-nio-0.0.0.0-80"]
+2017-03-21 09:18:50.498  INFO 22508 --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol                   :
+                Starting ProtocolHandler [http-nio-0.0.0.0-80]
+2017-03-21 09:18:50.506  INFO 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                Started ApplicationMain in 11.798 seconds (JVM running for 60756.942)
+2017-03-21 09:18:50.506  INFO 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                
+==============
+Application Started
+==============
+2017-03-21 09:18:50.506  INFO 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                ======info
+2017-03-21 09:18:50.506  WARN 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                ======warn
+2017-03-21 09:18:50.506 ERROR 22508 --- [restartedMain] net.liuxuan.ApplicationMain                                  :
+                ======error
+2017-03-21 09:47:51.613  INFO 22508 --- [http-nio-0.0.0.0-80-exec-1] o.a.catalina.core.ContainerBase.[Tomcat].[localhost].[/]     :
+                Initializing Spring FrameworkServlet 'dispatcherServlet'
+2017-03-21 09:47:51.613  INFO 22508 --- [http-nio-0.0.0.0-80-exec-1] org.springframework.web.servlet.DispatcherServlet            :
+                FrameworkServlet 'dispatcherServlet': initialization started
+2017-03-21 09:47:51.622  INFO 22508 --- [http-nio-0.0.0.0-80-exec-1] org.springframework.web.servlet.DispatcherServlet            :
+                FrameworkServlet 'dispatcherServlet': initialization completed in 9 ms
+2017-03-21 09:47:51.817  INFO 22508 --- [http-nio-0.0.0.0-80-exec-1] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin? 
+2017-03-21 09:47:52.174  WARN 22508 --- [http-nio-0.0.0.0-80-exec-1] nz.net.ultraq.thymeleaf.expressions.ExpressionProcessor      :
+                Fragment expression "admin/layouts/base" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+2017-03-21 09:47:56.014  INFO 22508 --- [http-nio-0.0.0.0-80-exec-4] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/error? 
+2017-03-21 09:47:56.024  WARN 22508 --- [http-nio-0.0.0.0-80-exec-4] nz.net.ultraq.thymeleaf.expressions.ExpressionProcessor      :
+                Fragment expression "layouts/base" is being wrapped as a Thymeleaf 3 fragment expression (~{...}) for backwards compatibility purposes.  This wrapping will be dropped in the next major version of the expression processor, so please rewrite as a Thymeleaf 3 fragment expression to future-proof your code.  See https://github.com/thymeleaf/thymeleaf/issues/451 for more information.
+2017-03-21 09:48:11.197  INFO 22508 --- [http-nio-0.0.0.0-80-exec-6] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin/userManage? 
+2017-03-21 09:48:13.329  INFO 22508 --- [http-nio-0.0.0.0-80-exec-5] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/error? 
+2017-03-21 09:48:21.086  INFO 22508 --- [http-nio-0.0.0.0-80-exec-10] net.liuxuan.spring.mvc.TestUrlInterceptor                    :
+                Access Log, User:liuxuan ,url:GET http://127.0.0.1/admin? 

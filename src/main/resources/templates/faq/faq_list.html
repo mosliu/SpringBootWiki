@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout" layout:decorator="layouts/base"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base"
       xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -8,13 +9,18 @@
 <body class="smoothscroll enable-animation">
 
 <div layout:fragment="content">
-
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li><a th:href="@{/faq/list}">支持信息列表</a></li>
+        <li class="active">支持信息查询</li>
+    </ol>
     <div class="container">
-        <div class="row-fluid row-intro">
-            <div class="span12">
-                <h3>支持信息查询</h3>
-            </div>
-        </div>
+        <!--<div class="row-fluid row-intro">-->
+            <!--<div class="span12">-->
+                <!--<h3>支持信息查询</h3>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="toggle toggle-transparent-body">
 
@@ -30,17 +36,21 @@
 
                             <div class="row">
                                 <div class="form-group">
-                                    <div class="col-md-6 col-sm-6">
+                                    <div class="col-md-5 col-sm-5">
                                         <label>标题</label>
                                         <input type="text" th:field="*{keyword}" class="form-control"/>
                                     </div>
                                     <div class="col-md-3 col-sm-3">
+                                        <label>作者</label>
+                                        <input type="text" th:field="*{user}" class="form-control"/>
+                                    </div>
+                                    <div class="col-md-2 col-sm-2">
                                         <label>起始时间</label>
                                         <input type="text" th:field="*{fromDate}"
                                                class="form-control datepicker date" data-format="yyyy-mm-dd" data-lang="en"
                                                data-RTL="false" readonly="true"/>
                                     </div>
-                                    <div class="col-md-3 col-sm-3">
+                                    <div class="col-md-2 col-sm-2">
                                         <label>终止时间</label>
                                         <input type="text" th:field="*{toDate}"
                                                class="form-control datepicker date" data-format="yyyy-mm-dd" data-lang="en"
@@ -52,9 +62,9 @@
 
                             <div class="row">
                                 <div class="form-group">
-                                    <div class="col-md-3 col-sm-3">
-                                        <label>作者</label>
-                                        <input type="text" th:field="*{user}" class="form-control"/>
+                                    <div class="col-md-2 col-sm-2">
+                                        <label>标准</label>
+                                        <input type="text" th:field="*{standard}" class="form-control"/>
                                     </div>
                                     <div class="col-md-3 col-sm-3">
                                         <label>分类</label>

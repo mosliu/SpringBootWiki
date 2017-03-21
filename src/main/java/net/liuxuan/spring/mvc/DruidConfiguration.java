@@ -9,8 +9,9 @@ import com.alibaba.druid.wall.WallFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,10 +32,15 @@ import java.util.Map;
  * 2016/12/15  |    Moses       |     Created
  */
 @Configuration
+@ConfigurationProperties("SprKi.druid")
 public class DruidConfiguration {
     private static final Logger log = LoggerFactory.getLogger(DruidConfiguration.class);
     @Autowired
     DataSource dataSource;
+
+    String username;
+    String password;
+
     @Bean
     public ServletRegistrationBean druidServlet() {
         log.info("init Druid Servlet Configuration ");
@@ -42,8 +48,10 @@ public class DruidConfiguration {
         servletRegistrationBean.setServlet(new StatViewServlet());
         servletRegistrationBean.addUrlMappings("/druid/*");
         Map<String, String> initParameters = new HashMap<String, String>();
-        initParameters.put("loginUsername", "admin");// 用户名
-        initParameters.put("loginPassword", "Moses0319");// 密码
+//        initParameters.put("loginUsername", "admin");// 用户名
+//        initParameters.put("loginPassword", "Moses0319");// 密码
+        initParameters.put("loginUsername", username);// 用户名
+        initParameters.put("loginPassword", password);// 密码
         initParameters.put("resetEnable", "false");// 禁用HTML页面上的“Reset All”功能
         initParameters.put("allow", ""); // IP白名单 (没有配置或者为空，则允许所有访问)
         //initParameters.put("deny", "192.168.20.38");// IP黑名单 (存在共同时，deny优先于allow)
@@ -53,8 +61,10 @@ public class DruidConfiguration {
 
     @Bean
     public FilterRegistrationBean filterRegistrationBean() {
+        log.info("Registering WebStatFilter!");
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new WebStatFilter());
+
         filterRegistrationBean.addUrlPatterns("/*");
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/ui/smarty/*");
         return filterRegistrationBean;
@@ -83,5 +93,22 @@ public class DruidConfiguration {
             }
         }
         return filter;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

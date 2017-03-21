@@ -4,14 +4,19 @@ package net.liuxuan.SprKi.service.security;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.LogLevel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import net.liuxuan.SprKi.repository.security.SecurityLogRepository;
 import net.liuxuan.SprKi.entity.security.SecurityLog;
+
+import java.util.List;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -25,7 +30,7 @@ import net.liuxuan.SprKi.entity.security.SecurityLog;
 * 2016-04-20  |    Moses        |     Created
 */
 @Service
-@Transactional
+@Transactional(propagation= Propagation.REQUIRED,readOnly = false)
 public class SecurityLogServiceImpl implements SecurityLogService{
 
     private static Logger log = LoggerFactory.getLogger(SecurityLogServiceImpl.class);
@@ -34,8 +39,10 @@ public class SecurityLogServiceImpl implements SecurityLogService{
     SecurityLogRepository securityLogRepository;
 
 
+    @Transactional(propagation= Propagation.REQUIRED,readOnly = false)
     public void saveSecurityLog(SecurityLog securityLog){
         securityLogRepository.save(securityLog);
+//        securityLogRepository.saveAndFlush(securityLog);
     }
 
     public SecurityLog findSecurityLogById(Long id){
@@ -44,6 +51,12 @@ public class SecurityLogServiceImpl implements SecurityLogService{
     }
 
     public void deleteSecurityLogById(Long id){
-        securityLogRepository.findOne(id).setDisabled(true);
+        securityLogRepository.delete(id);
+//        securityLogRepository.findOne(id).setDisabled(true);
+    }
+
+    public List<SecurityLog> getLastestTenActivities(int num) {
+        List<SecurityLog> securityLogs = securityLogRepository.findTop10ByLogLevelOrderByLogTimeDesc(LogLevel.ACTIVITYS);
+        return securityLogs;
     }
 }

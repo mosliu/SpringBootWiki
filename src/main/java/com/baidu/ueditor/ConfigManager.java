@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.baidu.ueditor.define.ActionMap;
@@ -31,6 +32,7 @@ public final class ConfigManager {
 	private static final String configFileName = "config.json";
 	private String parentPath = null;
 	private JSONObject jsonConfig = null;
+
 	// 涂鸦上传filename定义
 	private final static String SCRAWL_FILE_NAME = "scrawl";
 	// 远程图片抓取filename定义
@@ -85,7 +87,7 @@ public final class ConfigManager {
 		
 	}
 	
-	public Map<String, Object> getConfig ( int type ) {
+	public Map<String, Object> getConfig ( int type ) throws JSONException {
 		
 		Map<String, Object> conf = new HashMap<String, Object>();
 		String savePath = null;
@@ -181,7 +183,7 @@ public final class ConfigManager {
 		return this.parentPath + File.separator + ConfigManager.configFileName;
 	}
 
-	private String[] getArray ( String key ) {
+	private String[] getArray ( String key ) throws JSONException {
 		
 		JSONArray jsonArray = this.jsonConfig.getJSONArray( key );
 		String[] result = new String[ jsonArray.length() ];

@@ -5,7 +5,8 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 
 import java.util.List;
@@ -43,10 +44,10 @@ public interface UserDetailInfoService {
     /**
      * Find user detail info by users user detail info.
      *
-     * @param users the users
+     * @param dbUser the users
      * @return the user detail info
      */
-    public UserDetailInfo findUserDetailInfoByUsers(Users users);
+    public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser);
 
     /**
      * Delete user detail info by id.
@@ -69,7 +70,7 @@ public interface UserDetailInfoService {
      *
      * @return the list
      */
-    public List<Users> listAllUsers();
+    public List<DbUser> listAllUsers();
 
 
     /**
@@ -78,7 +79,7 @@ public interface UserDetailInfoService {
      * @param u the u
      * @return the boolean
      */
-    public boolean checkUsersExists(Users u);
+    public boolean checkUsersExists(DbUser u);
 
     /**
      * Check users exists boolean.

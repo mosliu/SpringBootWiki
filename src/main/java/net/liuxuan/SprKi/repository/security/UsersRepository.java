@@ -1,6 +1,6 @@
 package net.liuxuan.SprKi.repository.security;
 
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,14 +18,14 @@ import java.util.List;
  * 2016/2/17 |    Moses       |     Created
  */
 @Transactional
-public interface UsersRepository extends JpaRepository<Users, String> {
+public interface UsersRepository extends JpaRepository<DbUser, String> {
 //    @Modifying
 //    @Query("update Users m set m.name=?1 where m.id=?2")
 //    public void update(String bannerName, Long id);
 
 //    @Query("select DISTINCT(u.username) from ActiveWebSocketUser u where u.username != ?#{principal?.username}")
 //    List<String> findAllActiveUsers();
-    List<Users> findByEnabled(boolean enable);
+    List<DbUser> findByEnabled(boolean enable);
 
 
 

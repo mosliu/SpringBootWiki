@@ -63,6 +63,7 @@
     "fileUrlPrefix": "", /* 文件访问路径前缀 */
     "fileMaxSize": 51200000, /* 上传大小限制，单位B，默认50MB */
     "fileAllowFiles": [
+        ".hex", ".bin",
         ".png", ".jpg", ".jpeg", ".gif", ".bmp",
         ".flv", ".swf", ".mkv", ".avi", ".rm", ".rmvb", ".mpeg", ".mpg",
         ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",

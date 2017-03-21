@@ -5,7 +5,7 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.liuxuan.SprKi.entity.labthink.Department;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -29,8 +29,8 @@ public class UserDetailInfo {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="users")
-    Users users;
+    @JoinColumn(name="dbUser")
+    DbUser dbUser;
 
     @Column(name = "disabled", nullable = false)
     boolean disabled=false;

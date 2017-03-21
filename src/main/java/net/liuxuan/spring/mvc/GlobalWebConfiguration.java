@@ -380,21 +380,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //    }
 
 
-    @Bean(name = "mailSender")
-    public JavaMailSender mailSender(){
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.qiye.163.com");
-        mailSender.setUsername("liuxuan@labthink.com");
-        mailSender.setPassword("Moses0319");
-        mailSender.setPort(25);
-        return mailSender ;
-    }
 
-    @Bean(name = "templateMessage")
-    public SimpleMailMessage templateMessage(){
-        SimpleMailMessage templateMessage = new SimpleMailMessage();
-        templateMessage.setFrom("liuxuan@labthink.com");
-        templateMessage.setSubject("AAA");
-        return templateMessage ;
-    }
+
+
 }

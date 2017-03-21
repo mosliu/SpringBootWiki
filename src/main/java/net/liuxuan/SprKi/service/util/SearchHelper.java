@@ -1,6 +1,6 @@
 package net.liuxuan.SprKi.service.util;
 
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -150,10 +150,10 @@ public class SearchHelper {
 
         Map<String, Object> orMap = new LinkedHashMap<String, Object>();
         if (StringUtils.isNotBlank(username)) {
-            Users users = new Users();
-            users.setUsername(username);
+            DbUser dbUser = new DbUser();
+            dbUser.setUsername(username);
             for (int i=0;i<sl_or.length;i++){
-                orMap.put(sl_or[i], users);
+                orMap.put(sl_or[i], dbUser);
             }
 //            orMap.put("author", users);
 //            orMap.put("lastUpdateUser", users);

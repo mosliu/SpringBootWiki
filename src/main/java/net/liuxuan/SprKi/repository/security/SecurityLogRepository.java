@@ -3,6 +3,10 @@ package net.liuxuan.SprKi.repository.security;
 import net.liuxuan.SprKi.entity.security.SecurityLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
+
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
 * ***************************************************************************
@@ -16,6 +20,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 */
 
 public interface SecurityLogRepository extends JpaRepository<SecurityLog, Long>, JpaSpecificationExecutor<SecurityLog> {
+
+//    @Query(value = "select count(v) as cnt, v.devices from SecurityLog v group by v.devices")
+    List<SecurityLog> findTop10ByLogLevelOrderByLogTimeDesc(String logLevel);
 }
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
     <title>登录</title>
     <!-- custom input -->
@@ -71,7 +71,7 @@
                                     </label>
 
                                     <label class="checkbox margin-top-20">
-                                        <input id="remember-me" name="remember-me" type="checkbox" value="true"/>
+                                        <input id="remember-me" name="remember-me" type="checkbox" value="true" checked/>
                                         <i></i> Keep me logged in
                                     </label>
                                 </fieldset>

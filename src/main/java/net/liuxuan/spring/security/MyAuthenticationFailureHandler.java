@@ -1,7 +1,10 @@
 package net.liuxuan.spring.security;
 
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -26,6 +29,7 @@ import java.io.IOException;
 public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private static Logger log = LoggerFactory.getLogger(MyAuthenticationFailureHandler.class);
     private static String FailureUrl = "/login?error&q1";
+
 
     public MyAuthenticationFailureHandler() {
         super(FailureUrl);
@@ -53,10 +57,14 @@ public class MyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
 //        super.onAuthenticationFailure(request, response, exception);
         saveException(request, exception);
+
+        SecurityLogHelper.LogLogStatus(request, LogActionType.LOGIN,request.getParameterMap(),"登陆失败","");
+
         request.getSession().setAttribute("errorDetail","Login Error,Please Check!");
 //        request.getSession().setAttribute("errorMessage",exception.getMessage());
         request.getSession().setAttribute("errorMessage","登录失败！");
 
+//        SecurityLogHelper.LogActivity(request, LogActionType.LOGIN,auth,"登录失败","");
 //        logger.trace("===Redirecting to " + FailureUrl);
 
         this.getRedirectStrategy().sendRedirect(request, response, FailureUrl);

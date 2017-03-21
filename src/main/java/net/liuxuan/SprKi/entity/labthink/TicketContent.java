@@ -58,7 +58,10 @@ public class TicketContent extends CMSContent{
     @Temporal(TemporalType.TIMESTAMP)
     protected Date submitDate; // 问题的时间
 
-    protected boolean Resolved=true;
+    protected boolean Resolved=false;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = true)
+    protected FAQContent faq;//来源部门
 
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)

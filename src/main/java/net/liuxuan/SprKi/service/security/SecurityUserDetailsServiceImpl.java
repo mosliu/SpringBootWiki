@@ -1,9 +1,10 @@
 package net.liuxuan.SprKi.service.security;
 
 import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.spring.security.CaptchaAuthenticationDetails;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -61,16 +62,28 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 //        System.out.println("username is " + username);
         log.debug("username to login is {}", username);
 
-        Users users = usersRepository.findOne(username);
-        if (users == null) {
+        DbUser one = getOneUser(username);
+        if (one == null) {
             log.debug("User not found: {}", username);
             throw new UsernameNotFoundException(messages.getMessage(
                     "JdbcDaoImpl.notFound", new Object[]{username},
                     "Username {0} not found"));
         }
 //        List<GrantedAuthority> authorities = buildUserAuthority(oneuser.getAuths());
-        return buildUserDetailsForAuthentication(users);
+        return buildUserDetailsForAuthentication(one);
 //        return new UserInfo(users);
+    }
+
+    /**
+     * Get One user from database
+     * @param username
+     * @return
+     */
+    public DbUser getOneUser(String username) {
+        if (StringUtils.isEmpty(username)) {
+            return null;
+        }
+        return usersRepository.findOne(username);
     }
 
     /**
@@ -94,7 +107,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
      * @param oneuser
      * @return
      */
-    private UserDetails buildUserDetailsForAuthentication(Users oneuser) {
+    private UserDetails buildUserDetailsForAuthentication(DbUser oneuser) {
 //        return null;
 
         User ui = new User(

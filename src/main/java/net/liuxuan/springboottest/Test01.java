@@ -12,7 +12,7 @@ package net.liuxuan.springboottest;
 
 
 import net.liuxuan.SprKi.entity.Banner;
-import net.liuxuan.SprKi.entity.security.Users;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.wiki.db.DBSettings;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

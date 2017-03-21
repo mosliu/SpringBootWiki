@@ -11,7 +11,7 @@
     <select id="getUserCount" resultType="java.lang.Long">
         select count(1) from SprKi_userinfo
     </select>
-    <select id="getUser" resultType="net.liuxuan.SprKi.entity.security.Users" parameterType="java.lang.Long">
+    <select id="getUser" resultType="net.liuxuan.SprKi.entity.security.DbUser" parameterType="java.lang.Long">
         select id, userName
         from SprKi_userinfo
         where id = #{id}
@@ -22,7 +22,7 @@
         from SprKi_userinfo
     </select>
 
-    <insert id="saveUser" parameterType="net.liuxuan.SprKi.entity.security.Users" useGeneratedKeys="true"
+    <insert id="saveUser" parameterType="net.liuxuan.SprKi.entity.security.DbUser" useGeneratedKeys="true"
             keyProperty="id">
         insert into SprKi_userinfo (userName) values(#{userName})
     </insert>

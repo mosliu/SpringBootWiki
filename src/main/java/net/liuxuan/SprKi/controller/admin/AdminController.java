@@ -1,12 +1,16 @@
 package net.liuxuan.SprKi.controller.admin;
 
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -25,11 +29,12 @@ import java.util.Map;
 public class AdminController {
     private static Logger log = LoggerFactory.getLogger(AdminController.class);
 
-
     @RequestMapping("")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String home(Map<String, Object> model) {
+    public String home(HttpServletRequest request, Map<String, Object> model) {
         log.trace("-Access AdminController.home() Method");
+
+        SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN,"","ACCESSADMIN","");
 //
 //        model.put("message", "Hello World");
 //        model.put("title", "Hello Home");

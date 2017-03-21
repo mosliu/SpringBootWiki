@@ -1,5 +1,7 @@
 package net.liuxuan.spring.security;
 
+import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -61,6 +63,9 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
             throws IOException, ServletException {
 
 //        log.debug("===onAuthenticationSuccess()");
+
+        //最后应为URL，当做用户名使用。
+        SecurityLogHelper.LogLogStatus(request, LogActionType.LOGIN,request.getParameterMap(),"成功登陆","");
 
         SavedRequest savedRequest = requestCache.getRequest(request, response);
 //        log.debug("======savedRequest is: {}",savedRequest);

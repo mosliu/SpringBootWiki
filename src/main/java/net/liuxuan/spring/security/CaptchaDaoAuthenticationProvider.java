@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -25,6 +26,12 @@ public class CaptchaDaoAuthenticationProvider extends DaoAuthenticationProvider 
             throws AuthenticationException {
         Object obj = token.getDetails();
         if (!(obj instanceof CaptchaAuthenticationDetails)) {
+            //HACK method,用于后台登录验证
+            if(obj instanceof WebAuthenticationDetails){
+                super.additionalAuthenticationChecks(userDetails, token);
+                return;
+            }
+
             throw new InsufficientAuthenticationException(
                     "Captcha details not found.");
         }
@@ -37,7 +44,7 @@ public class CaptchaDaoAuthenticationProvider extends DaoAuthenticationProvider 
             if (!expected.equals(actual)) {
 //                token=null;
                 token.eraseCredentials();
-                throw new BadCredentialsException("Captcha does not match.");
+                throw new BadCaptchaException("Captcha does not match.");
             }
         }
         super.additionalAuthenticationChecks(userDetails, token);

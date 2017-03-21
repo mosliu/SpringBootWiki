@@ -3,14 +3,14 @@
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
-          <file>file://$MODULE_DIR$/src/main/resources/config/webSecurityConfig.xml</file>
-        </fileset>
-        <fileset id="fileset2" name="Spring Application Context (2)" removed="false">
+        <fileset id="fileset3" name="Spring Application Context (3)" removed="false">
           <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/ApplicationMain.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/hibernate/HibernateConfiguration.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/LuceneConfiguration.java</file>
-          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilsinit/QuartzConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/DruidConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/DruidDBConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/GlobalWebConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/hibernate/HibernateConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/LuceneConfiguration.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/utilconf/QuartzConfiguration.java</file>
           <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/springboottest/message/SampleWebUiApplication.java</file>
           <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/security/SecurityConfigration.java</file>
           <file>file://$MODULE_DIR$/src/main/java/net/liuxuan/spring/mvc/views/ThymeleafConfiguration.java</file>

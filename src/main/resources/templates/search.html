@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
-      layout:decorator="layouts/base">
+      layout:decorate="layouts/base">
 <head>
     <title>Messages : View</title>
 </head>
@@ -9,6 +9,7 @@
 <div layout:fragment="content" class="container">
     <br/>
 <ol>
+    <br/>
     <span th:if="${searchResults.isEmpty()}"><strong>未查询到相关信息</strong></span>
     <li th:each="faq:${searchResults}">
         <b><span th:utext="${faq.title}"></span></b> -

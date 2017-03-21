@@ -6,7 +6,9 @@ import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.labthink.DeviceKind;
 import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.service.labthink.DevicesService;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,15 +142,17 @@ public class DeviceManagementController {
                     rtnData.put("msg", "添加设备已存在");
                 } else {
                     rtnData.put("status", "success");
-                    rtnData.put("msg", "成功添加设备种类");
+                    rtnData.put("msg", "成功添加设备");
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _devices, "添加设备", "");
                     DevicesService.saveDevices(_devices);
                 }
                 break;
             case "delete":
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备", "");
                 boolean b = DevicesService.deleteDevicesById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
-                    rtnData.put("msg", "成功删除设备种类");
+                    rtnData.put("msg", "成功删除设备");
                 } else {
                     rtnData.put("error", "ERROR_UserNotExists");
                     rtnData.put("status", "fail");
@@ -164,6 +168,7 @@ public class DeviceManagementController {
 ////                    Devices.setId(id);
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _devices, "更新了设备", "");
                 DevicesService.saveDevices(_devices);
                 rtnData.put("success1", "success!");
                 break;
@@ -207,18 +212,20 @@ public class DeviceManagementController {
                     obj.setDeviceTypeName(name);
                     obj.setDeviceTypeNameEN(name_en);
                     obj.setDeviceTypeNameCN(name_cn);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, obj, "添加设备种类", "");
                     DevicesService.saveDeviceType(obj);
                 }
                 break;
             case "delete":
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备种类", "");
                 boolean b = DevicesService.deleteDeviceTypeById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
-                    rtnData.put("msg", "成功删除设备");
+                    rtnData.put("msg", "成功删除设备种类");
                 } else {
                     rtnData.put("error", "ERROR_UserNotExists");
                     rtnData.put("status", "fail");
-                    rtnData.put("msg", "设备不存在，删除失败");
+                    rtnData.put("msg", "设备种类不存在，删除失败");
                 }
                 break;
             case "update":
@@ -230,6 +237,7 @@ public class DeviceManagementController {
 ////                    Devices.setId(id);
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _obj, "更新了设备种类", "");
                 DevicesService.saveDeviceType(_obj);
                 rtnData.put("success1", "success!");
                 break;
@@ -271,10 +279,12 @@ public class DeviceManagementController {
                     obj.setDeviceKindName(name);
                     obj.setDeviceKindNameEN(name_en);
                     obj.setDeviceKindNameCN(name_cn);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, obj, "添加设备性质", "");
                     DevicesService.saveDeviceKind(obj);
                 }
                 break;
             case "delete":
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备性质", "");
                 boolean b = DevicesService.deleteDeviceKindById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
@@ -294,6 +304,7 @@ public class DeviceManagementController {
 ////                    Devices.setId(id);
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _obj, "更新了设备性质", "");
                 DevicesService.saveDeviceKind(_obj);
                 rtnData.put("success1", "success!");
                 break;

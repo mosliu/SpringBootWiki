@@ -16,12 +16,12 @@ import java.lang.reflect.InvocationTargetException;
 public class BeanHelper  {
 
     /**
-     * Copy from bean to bean,which origin
+     * Copy from bean to bean,which origin89
      *
      * @param dest the valueObject,the Persist
      * @param origin the postObject,the origin
      */
-    public static void copyWhenDestFiledNull(Object dest, Object origin) throws InvocationTargetException, IllegalAccessException {
+    public static void copyWhenDestFieldNull(Object dest, Object origin) throws InvocationTargetException, IllegalAccessException {
         CopyWhenDestFieldNullBeanUtilsBean s = new CopyWhenDestFieldNullBeanUtilsBean();
         s.copyProperties(dest, origin);
     }
