@@ -12,11 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>部门管理</h1>
+        <h1>角色管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
             <li>支持属性管理</li>
-            <li class="active">部门管理</li>
+            <li class="active">角色管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -28,11 +28,11 @@
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
                 <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建部门 <span
-                            class="label label-danger">label</span></a>
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建角色
+                        <span class="label label-danger">label</span></a>
                 </li>
                 <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 部门列表 <span class="caret"></span></a>
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 角色列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -58,19 +58,30 @@
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form action="/admin/department_ajax?action=add" method="post"
-                              class="validate-plugin sky-form boxed"
-                        >
-                            <header><i class="fa fa-users"></i> 新建部门
-                                <small class="note bold">对应公司实际部门</small>
+                        <form id="createRoleForm" action="/admin/role_ajax?action=add" method="post"
+                              class="validate-plugin sky-form boxed">
+                            <header><i class="fa fa-users"></i> 新建角色
+                                <small class="note bold">慎重</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
-                                    <i class="icon-append fa fa-user"></i>
-                                    <input type="text" id="department_name" name="department_name"
-                                           placeholder="部门名称" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                                    <i class="icon-append fa fa-key"></i>
+                                    <input type="text" id="role_name" name="role_name"
+                                           placeholder="角色名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入角色名称，以ROLE_开头</b>
+                                </label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-tv"></i>
+                                    <input type="text" id="describe" name="describe"
+                                           placeholder="角色描述" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入角色中文解释</b>
+                                </label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-commenting-o"></i>
+                                    <input type="text" id="comment" name="comment"
+                                           placeholder="备注信息" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入角色备注信息</b>
                                 </label>
                             </fieldset>
 
@@ -88,18 +99,18 @@
                     <table id="myTableId" class="table table-striped table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>部门名称</th>
-                            <th>部门别名</th>
+                            <th>角色名称</th>
+                            <th>角色说明</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="d : ${Department_list}">
-                            <td th:text="${d.id}">Doe</td>
-                            <td th:text="${d?.departmentName}">技术</td>
-                            <td th:text="${d?.departmentNameCN}">吉言</td>
-                            <td th:text="${d?.id}">操作</td>
+                        <tr th:each="d : ${Role_list}">
+                            <td th:text="${d.rolename}">ROLE_USER</td>
+                            <td th:text="${d?.roleDescribe}">用户角色</td>
+                            <td th:text="${d?.comment}">备注</td>
+                            <td th:text="${d?.rolename}">操作</td>
                         </tr>
                         </tbody>
                     </table>
@@ -160,13 +171,39 @@
                 $(this).removeData('bs.modal');
 //                $(this).empty();
             })
+
+//            $('form#createRoleForm').submit(
+//                function (e) {
+//                    //prevent Default functionality
+//                    e.preventDefault();
+//
+//                    //get the action-url of the form
+//                    var actionurl = e.currentTarget.action;
+//
+//                    //do your own request an handle the results
+//                    $.ajax({
+//                        url: actionurl,
+//                        type: 'post',
+//                        dataType: 'json',
+//                        data: $("#createRoleForm").serialize(),
+//                        success: function(data) {
+//                            console.log(data);
+//                            if(typeof(data.error) === "undefined"){
+//                                _toastr(data.msg, "top-center", "success", "#");
+//                            }else{
+//                                _toastr(data.msg, "top-center", "warning", "#");
+//                            }
+//                        }
+//                    });
+//                }
+//            );
 //            console.log("hello!");
         });
 
         function deleteDepartment(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
-            var tourl = "/admin/department_ajax?action=delete&sid=" + sid;
+            var tourl = "/admin/role_ajax?action=delete&sid=" + sid;
             jQuery.ajax({
                 url: tourl,
                 context: btn,
@@ -191,16 +228,16 @@
                         table.dataTable({
 
                             "columns": [
-                                {"data": "departmentid"},
-                                {"orderable": true, "data": "departmentName"},
-                                {"orderable": true, "data": "departmentNameCN"},
+                                {"orderable": true, "data": "rolename"},
+                                {"orderable": true, "data": "roleDescribe"},
+                                {"orderable": true, "data": "comment"},
                                 {
                                     "orderable": true,
-                                    "data": "departmentid",
-                                    "type" :"display",
+                                    "data": "rolename",
+                                    "type": "display",
                                     "render": function (data, type, full, meta) {
 //                                        console.log(full);
-                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/department?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/role?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
                                 }
                             ],
@@ -284,13 +321,14 @@
 
 //                                var data = data.trim();
 //                                    console.log(textStatus);
-                                    if (data.status == "success") {
-                                        _toastr(data.msg, _Tposition, "success", _Turl);
+
+
+                                    if (typeof(data.error) === "undefined"&&data.status === "success") {
+                                        _toastr(data.msg, "top-center", "success", "#");
                                         // Clear the form
                                         jQuery(form).find('input.form-control').val('');
                                     } else {
                                         _toastr(data.msg, _Tposition, "error", false);
-
                                     }
 
                                 }

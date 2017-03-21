@@ -33,17 +33,39 @@ public class ${model_name}ServiceImpl implements ${model_name}Service{
     @Autowired
     ${model_name}Repository ${model_name_firstSmall}Repository;
 
-
+    @Override
     public void save${model_name}(${model_name} ${model_name_firstSmall}){
         ${model_name_firstSmall}Repository.save(${model_name_firstSmall});
     }
 
+    @Override
     public ${model_name} find${model_name}ById(Long id){
         ${model_name} ${model_name_firstSmall} = ${model_name_firstSmall}Repository.findOne(id);
         return ${model_name_firstSmall};
     }
 
-    public void delete${model_name}ById(Long id){
-        ${model_name_firstSmall}Repository.findOne(id).setDisabled(true);
+    @Override
+    public boolean delete${model_name}ById(Long id){
+        ${model_name} ${model_name_firstSmall} = ${model_name_firstSmall}Repository.getOne(id);
+        if (${model_name_firstSmall} != null) {
+            ${model_name_firstSmall}.setDisabled(true);
+            return true;
+        }
+        return false;
     }
+
+    @Override
+    public boolean check${model_name}Exists(String ${model_name_firstSmall}name){
+        List<${model_name}> list = ${model_name_firstSmall}Repository.findBy${model_name_firstSmall}name(${model_name_firstSmall}name);
+        if (list.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    @Override
+    public List<${model_name}> getAll${model_name}() {
+        return ${model_name_firstSmall}Repository.findByDisabledFalse();
+    }
+
 }

@@ -93,7 +93,7 @@
         <!-- Modal Footer -->
         <div class="modal-footer">
             <!--<button type="button" class="btn btn-default" data-dismiss="modal" onclick="alert('kk')">Close</button>-->
-            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
         </div>
     </form>
@@ -127,27 +127,40 @@
           novalidate="novalidate" th:object="${user}">
         <!-- body modal -->
         <div class="modal-body">
-            <div class="login-box">
+            <div class="row form-group">
 
                 <header><i class="fa fa-users"></i> 修改权限
-                    <small class="note bold"> --请谨慎操作 </small>
+                    <small class="note bold"> --请谨慎操作</small>
                 </header>
-                <input type="hidden" th:field="*{dbUser.username}"/>
                 <fieldset>
-                    <label>权限列表</label>
-                    <select id="authArray" multiple="multiple" name="authArray">
-                        <option th:each="auth : ${authslist}" th:value="${auth}" th:text="${auth}"
-                                th:selected="${userauth.contains(auth)}"/>
-                    </select>
+                    <input type="hidden" th:field="*{dbUser.username}"/>
+                    <div class="col-md-2 col-sm-3">
+                        <label>权限列表</label>
+                    </div>
+                    <div class="col-md-10 col-sm-9">
+                        <select id="authArray" multiple="multiple" name="authArray"
+                                style="width: 600px; height: 400px;">
+                            <option th:each="auth : ${authslist}" th:value="${auth}" th:text="${auth}"
+                                    th:selected="${userauth.contains(auth)}"/>
+                        </select>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <br/>
+                    </div>
+                    <div class="col-md-2 col-sm-3">
+                        <label>新增权限</label>
+                    </div>
+                    <div class="col-md-10 col-sm-9">
+                        <span>
+                            <i class="icon-append fa fa-lock"></i>
+                            <input type="text" name="newAuth"
+                                   placeholder="ROLE_HELLO"/>
+                            <b class="tooltip tooltip-bottom-right">新权限</b>
+                        </span>
+                    </div>
+
                 </fieldset>
 
-                <label>新权限</label>
-                <label class="input">
-                    <i class="icon-append fa fa-lock"></i>
-                    <input type="text" name="newAuth"
-                           placeholder="ROLE_HELLO"/>
-                    <b class="tooltip tooltip-bottom-right">新权限</b>
-                </label>
 
             </div>
         </div>
@@ -155,14 +168,14 @@
 
         <!-- Modal Footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
         </div>
     </form>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
         var callback = function (data, status) {
-            if(status==="success"){
+            if (status === "success") {
                 alert('修改成功！');
             }
             console.dir("Data: " + data + "\nStatus: " + status);

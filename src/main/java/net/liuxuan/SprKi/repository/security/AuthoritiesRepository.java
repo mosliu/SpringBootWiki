@@ -19,9 +19,9 @@ import java.util.List;
  * 2016/3/22  |    Moses       |     Created <br/>
  */
 public interface AuthoritiesRepository extends JpaRepository<Authorities, Long> {
-    List<Authorities> findByAuthority(String authority);
+//    List<Authorities> findByAuthority(String authority);
     List<Authorities> findByUsername(DbUser username);
-    Authorities findByUsernameAndAuthority(DbUser username, String authority);
+//    Authorities findByUsernameAndAuthority(DbUser username, String authority);
     @Query("SELECT DISTINCT c.rolename.rolename FROM Authorities c")
     List<String> findAllAuthorities();
 

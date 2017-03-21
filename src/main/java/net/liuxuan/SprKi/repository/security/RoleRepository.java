@@ -1,9 +1,11 @@
 package net.liuxuan.SprKi.repository.security;
 
+import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.test.model.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -20,6 +22,16 @@ import java.util.List;
 */
 
 public interface RoleRepository extends JpaRepository<Role, String>, JpaSpecificationExecutor<Role> {
+    List<Role> findByRolename(String  rolename);
+
+    List<Role> findByRolenameNot(String  roleNotName);
+    List<Role> findByDisabledFalse();
+
+    List<Role> findByRolenameNotOrderByRolename(String roleNotName);
+
+    @Query("SELECT DISTINCT rolename FROM Role")
+    List<String> findAllRoles();
+
 }
 
 

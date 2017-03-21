@@ -19,9 +19,14 @@ import net.liuxuan.SprKi.entity${subpackage}.${model_name};
 * ${date?string("yyyy-MM-dd")}  |    ${author}        |     Created
 */
 public interface ${model_name}Service {
-    public void save${model_name}(${model_name} ${model_name_firstSmall});
+    void save${model_name}(${model_name} ${model_name_firstSmall});
 
-    public ${model_name} find${model_name}ById(Long id);
+    ${model_name} find${model_name}ById(Long id);
 
-    public void delete${model_name}ById(Long id);
+    boolean delete${model_name}ById(Long id);
+
+    boolean check${model_name}Exists(String ${model_name_firstSmall}name);
+
+    List<${model_name}> getAll${model_name}();
+
 }

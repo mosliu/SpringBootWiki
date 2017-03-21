@@ -40,8 +40,8 @@ public class Authorities implements GrantedAuthority {
     private Role rolename;
 
 
-    @Column(length = 30,nullable = false)
-    private String authority;
+//    @Column(length = 30,nullable = false)
+//    private String authority;
 
     public Long getId() {
         return id;
@@ -64,16 +64,16 @@ public class Authorities implements GrantedAuthority {
         return rolename.getRolename();
     }
 
-    /**
-     * @deprecated
-     *
-     * 无用的方法，升级遗留
-     * @param authority
-     */
-    public void setAuthority(String authority) {
-        this.authority=authority;
-        //this.rolename.setRolename(authority);
-    }
+//    /**
+//     * @deprecated
+//     *
+//     * 无用的方法，升级遗留
+//     * @param authority
+//     */
+//    public void setAuthority(String authority) {
+//        this.authority=authority;
+//        //this.rolename.setRolename(authority);
+//    }
 
     public Role getRolename() {
         return rolename;

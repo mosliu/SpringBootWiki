@@ -34,7 +34,7 @@
                     <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 用户列表 <span class="caret"></span></a>
                 </li>
                 <!--<li class="">&lt;!&ndash; TAB 2 &ndash;&gt;-->
-                    <!--<a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>-->
+                <!--<a href="#ttab3l_nobg" data-toggle="tab" aria-expanded="false"> 修改密码 <span class="caret"></span></a>-->
                 <!--</li>-->
             </ul>
             <!-- /tabs nav -->
@@ -60,7 +60,8 @@
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form id="createUserForm" action="/admin/user_ajax?action=add" method="post" class="validate-plugin sky-form boxed"
+                        <form id="createUserForm" action="/admin/user_ajax?action=add" method="post"
+                              class="validate-plugin sky-form boxed"
                               th:object="${user}">
                             <header><i class="fa fa-users"></i> 新建用户
                                 <small class="note bold">注意</small>
@@ -123,7 +124,8 @@
                             </fieldset>
 
                             <footer>
-                                <button id="createUserBtn" type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
+                                <button id="createUserBtn" type="submit" class="btn btn-primary pull-right"><i
+                                        class="fa fa-check"></i>
                                     Create Account
                                 </button>
                             </footer>
@@ -216,7 +218,7 @@
                     <!-- Modal Footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary">Save chan;ges</button>
                     </div>
 
                 </div>
@@ -237,33 +239,33 @@
 //                $(this).empty();
             });
 
-            $('form#createUserForm').submit(
-                    function (e) {
-                        //prevent Default functionality
-                        e.preventDefault();
-
-                        //get the action-url of the form
-                        var actionurl = e.currentTarget.action;
-
-                        //do your own request an handle the results
-                        $.ajax({
-                            url: actionurl,
-                            type: 'post',
-                            dataType: 'json',
-                            data: $("#createUserForm").serialize(),
-                            success: function(data) {
-
-
-                                console.log(data);
-                                if(typeof(data.error) === "undefined"){
-                                    _toastr(data.msg, "top-center", "success", "#");
-                                }else{
-                                    _toastr(data.msg, "top-center", "warning", "#");
-                                }
-                            }
-                        });
-                    }
-            );
+//            $('form#createUserForm').submit(
+//                function (e) {
+//                    //prevent Default functionality
+//                    e.preventDefault();
+//
+//                    //get the action-url of the form
+//                    var actionurl = e.currentTarget.action;
+//
+//                    //do your own request an handle the results
+//                    $.ajax({
+//                        url: actionurl,
+//                        type: 'post',
+//                        dataType: 'json',
+//                        data: $("#createUserForm").serialize(),
+//                        success: function (data) {
+//
+//
+//                            console.log(data);
+//                            if (typeof(data.error) === "undefined") {
+//                                _toastr(data.msg, "top-center", "success", "#");
+//                            } else {
+//                                _toastr(data.msg, "top-center", "warning", "#");
+//                            }
+//                        }
+//                    });
+//                }
+//            );
 
 
 //            $('#createUserBtn').click( function() {
@@ -279,8 +281,6 @@
 //            });
 
         });
-
-
 
 
         function deleteUsers(btn, sid) {
@@ -326,11 +326,11 @@
                                 },
                             ],
                             "lengthMenu": [
-                                [5, 15, 50, -1],
-                                [5, 15, 50, "All"] // change per page values here
+                                [10, 25, 50, -1],
+                                [10, 25, 50, "All"] // change per page values here
                             ],
                             // set the initial value
-                            "pageLength": 5,
+                            "pageLength": 10,
                             "pagingType": "bootstrap_full_number",
                             "order": [
                                 [1, "asc"],
@@ -406,15 +406,22 @@
                                 success: function (data, textStatus) {
 
 //                                var data = data.trim();
-                                    alert(textStatus);
-                                    if (data.status == "success") {
-                                        _toastr(data.msg, _Tposition, "success", _Turl);
-                                        // Clear the form
+                                    if (typeof(data.error) === "undefined") {
+                                        _toastr(data.msg, "top-center", "success", "#");
                                         jQuery(form).find('input.form-control').val('');
                                     } else {
-                                        _toastr(data.msg, _Tposition, "error", false);
-
+                                        _toastr(data.msg, "top-center", "warning", "#");
                                     }
+
+//                                    alert(textStatus);
+//                                    if (data.status == "success") {
+//                                        _toastr(data.msg, _Tposition, "success", _Turl);
+//                                        // Clear the form
+//                                        jQuery(form).find('input.form-control').val('');
+//                                    } else {
+//                                        _toastr(data.msg, _Tposition, "error", false);
+//
+//                                    }
 
                                 }
                             });

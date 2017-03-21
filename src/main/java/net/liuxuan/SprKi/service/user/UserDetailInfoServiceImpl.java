@@ -148,7 +148,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             Role userrole = roleRepository.findOne("ROLE_USER");
 
             auth.setRolename(userrole);
-            auth.setAuthority("");
+//            auth.setAuthority("");
             authoritiesRepository.save(auth);
             auths.add(auth);
             log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]", auths.size(), u.getUsername());
@@ -236,9 +236,11 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     @Override
     public List<String> listAuths() {
-        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
-
-        return distinctAuthority;
+//        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
+//        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
+//        return distinctAuthority;
+        List<String> rtnl = roleRepository.findAllRoles();
+        return rtnl;
 //        return usersRepository.findAll();
     }
 
@@ -305,7 +307,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             } else {
                 Authorities new_authorities = new Authorities();
                 new_authorities.setUsername(dbUser);
-                new_authorities.setAuthority(s_newauth);
+//                new_authorities.setAuthority(s_newauth);
                 Role role = roleRepository.getOne(s_newauth);
                 new_authorities.setRolename(role);
 
@@ -345,7 +347,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
                 Authorities new_authority = new Authorities();
                 new_authority.setUsername(dbUser);
                 Role role = makeANewRole(newauth);
-                new_authority.setAuthority(newauth);
+//                new_authority.setAuthority(newauth);
                 new_authority.setRolename(role);
                 dbUser.addAuth(new_authority);
                 usersRepository.save(dbUser);
