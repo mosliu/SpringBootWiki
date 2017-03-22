@@ -1,5 +1,6 @@
 package net.liuxuan.SprKi.repository${subpackage};
 
+import java.util.List;
 import net.liuxuan.SprKi.entity${subpackage}.${model_name};
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -16,6 +17,13 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 */
 
 public interface ${model_name}Repository extends JpaRepository<${model_name}, Long>, JpaSpecificationExecutor<${model_name}> {
+    List<${model_name}> findBy${model_name}Name(String  name);
+
+    List<${model_name}> findBy${model_name}NameNot(String  NotName);
+    List<${model_name}> findByDisabledFalse();
+
+    List<${model_name}> findBy${model_name}NameNotOrderBy${model_name}Name(String roleNotName);
+
 }
 
 

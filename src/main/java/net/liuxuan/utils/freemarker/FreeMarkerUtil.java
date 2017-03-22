@@ -27,9 +27,14 @@ public class FreeMarkerUtil {
 
     String model_name = "UrlAuth";
     String subpackage = ".security";//如果需要放到labthink下，则为".labthink"
+    boolean createEntity,createRepository,createService,createManagementController;
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();
+        hf.createEntity = false;
+        hf.createRepository = false;
+        hf.createService = false;
+        hf.createManagementController = true;
         hf.init();
         hf.process(hf);
     }
@@ -64,25 +69,42 @@ public class FreeMarkerUtil {
 
         String projectPath = "F:/SyncDisk/Dropbox/Workspaces/Maven/SpringBootTest/src/main/java/net/liuxuan/Sprki/";
 
-        String savePath = getPathString("/entity/");
-        String fileName = model_name + ".java";
-        Template template = cfg.getTemplate("entity.ftl");
-        util.buildTemplate(root, projectPath, savePath, fileName, template);
+        String savePath;
+        String fileName;
+        Template template;
+        if(createEntity) {
+            savePath = getPathString("/entity/");
+            fileName = model_name + ".java";
+            template = cfg.getTemplate("entity.ftl");
+            util.buildTemplate(root, projectPath, savePath, fileName, template);
+        }
 
-        fileName = model_name + "Repository.java";
-        savePath = getPathString("/repository/");
-        template = cfg.getTemplate("repository.ftl");
-        util.buildTemplate(root, projectPath, savePath, fileName, template);
+        if(createRepository) {
+            fileName = model_name + "Repository.java";
+            savePath = getPathString("/repository/");
+            template = cfg.getTemplate("repository.ftl");
+            util.buildTemplate(root, projectPath, savePath, fileName, template);
+        }
 
-        fileName = model_name + "Service.java";
-        savePath = getPathString("/service/");
-        template = cfg.getTemplate("service.ftl");
-        util.buildTemplate(root, projectPath, savePath, fileName, template);
+        if(createService) {
+            fileName = model_name + "Service.java";
+            savePath = getPathString("/service/");
+            template = cfg.getTemplate("service.ftl");
+            util.buildTemplate(root, projectPath, savePath, fileName, template);
 //
-        fileName = model_name + "ServiceImpl.java";
-        savePath = getPathString("/service/");
-        template = cfg.getTemplate("serviceimpl.ftl");
-        util.buildTemplate(root, projectPath, savePath, fileName, template);
+            fileName = model_name + "ServiceImpl.java";
+            savePath = getPathString("/service/");
+            template = cfg.getTemplate("serviceimpl.ftl");
+            util.buildTemplate(root, projectPath, savePath, fileName, template);
+        }
+
+        if(createManagementController) {
+            fileName = model_name + "ManagementController.java";
+            savePath = getPathString("/controller/admin/labthink/");
+            template = cfg.getTemplate("managementcontroller.ftl");
+            util.buildTemplate(root, projectPath, savePath, fileName, template);
+        }
+
 
     }
 

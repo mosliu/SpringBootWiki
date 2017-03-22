@@ -2,8 +2,8 @@ package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.security.LogActionType;
-import net.liuxuan.SprKi.entity.security.Role;
-import net.liuxuan.SprKi.service.security.RoleService;
+import net.liuxuan.SprKi.entity.security.UrlAuth;
+import net.liuxuan.SprKi.service.security.UrlAuthService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
@@ -34,92 +34,93 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin")
-public class RoleManagementController {
-    private static Logger log = LoggerFactory.getLogger(RoleManagementController.class);
+public class UrlAuthManagementController {
+    private static Logger log = LoggerFactory.getLogger(UrlAuthManagementController.class);
 
     @Autowired
-    RoleService roleService;
+    UrlAuthService urlAuthService;
 
-    @RequestMapping("roleManage")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @RequestMapping("urlAuthManage")
+    @PreAuthorize("hasUrlAuth('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
 
-        return "admin/" + "roleManage" + " :: middle";
+        return "admin/" + "urlAuthManage" + " :: middle";
 
     }
 
-    @RequestMapping("role")
-    public String roleManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
+    @RequestMapping("urlAuth")
+    public String urlAuthManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
                                    HttpServletResponse response, Map<String, Object> model) throws IOException {
-        log.info("===roleManage logged ,the _dto value is : {}", dto.toString());
+        log.info("===urlAuthManage logged ,the _dto value is : {}", dto.toString());
 
         switch (dto.action) {
             case "edit":
-                Role role;
-                String id = dto.getSid();
+                UrlAuth urlAuth;
+                Long id = dto.getStr2LongID();
                 
-                role = roleService.findRoleById(id);
-                if (role != null) {
+                urlAuth = urlAuthService.findUrlAuthById(id);
+                if (urlAuth != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
                 }
-                model.put("role", role);
-                return "admin/snipplets/div_role :: roleedit";
+                model.put("urlAuth", urlAuth);
+                return "admin/snipplets/div_urlAuth :: urlAuthedit";
             default:
-                return "redirect:/admin/role_ajax";
+                return "redirect:/admin/urlAuth_ajax";
 //                break;
         }
     }
 
 
-    @RequestMapping("role_ajax")
+    @RequestMapping("urlAuth_ajax")
 //    @ResponseBody
-    public void roleManageAjax(@ModelAttribute("dto") BaseDTO _dto, Role _role, HttpServletRequest request,
+    public void urlAuthManageAjax(@ModelAttribute("dto") BaseDTO _dto, UrlAuth _urlAuth, HttpServletRequest request,
                                      HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
-        log.info("===roleManageAjax logged ,the value is : {}", _dto.toString());
+        log.info("===urlAuthManageAjax logged ,the value is : {}", _dto.toString());
+        Long id = _dto.getStr2LongID();
 
 //        response.setContentType("application/json");
 //        ObjectMapper mapper = new ObjectMapper();
 //        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
-                String role_name = request.getParameter("role_name");
-                String describe = request.getParameter("describe");
+                String urlAuthName = request.getParameter("urlAuthName");
+                String urlAuthNameCN = request.getParameter("urlAuthNameCN");
                 String comment = request.getParameter("comment");
-                boolean roleExists = roleService.checkRoleExists(role_name);
-                if (roleExists) {
-                    log.info("===roleManageAjax logged ,添加角色已存在 : {}");
-                    rtnData.put("error", "ERROR_RoleExists");
+                boolean urlAuthExists = urlAuthService.checkUrlAuthExists(urlAuthName);
+                if (urlAuthExists) {
+                    log.info("===urlAuthManageAjax logged ,添加UrlAuth已存在 : {}");
+                    rtnData.put("error", "ERROR_UrlAuthExists");
                     rtnData.put("status", "fail");
-                    rtnData.put("msg", "添加角色已存在");
+                    rtnData.put("msg", "添加UrlAuth已存在");
                 } else {
                     rtnData.put("status", "success");
-                    rtnData.put("msg", "成功添加角色");
-                    Role role = new Role();
-                    role.setRolename(role_name);
-                    role.setComment(comment);
-                    role.setRoleDescribe(describe);
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, role, "添加角色", "");
-                    roleService.saveRole(role);
+                    rtnData.put("msg", "成功添加UrlAuth");
+                    UrlAuth urlAuth = new UrlAuth();
+                    urlAuth.setUrlAuthName(urlAuthName);
+                    urlAuth.setComment(comment);
+                    urlAuth.setUrlAuthNameCN(urlAuthNameCN);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, urlAuth, "添加角色", "");
+                    urlAuthService.saveUrlAuth(urlAuth);
                 }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");
-                boolean b = roleService.deleteRoleById(_dto.sid);
+                boolean b = urlAuthService.deleteUrlAuthById(id);
                 if (b) {
                     rtnData.put("status", "success");
-                    rtnData.put("msg", "成功删除角色");
+                    rtnData.put("msg", "成功删除UrlAuth");
                 } else {
-                    rtnData.put("error", "ERROR_RoleNotExists");
+                    rtnData.put("error", "ERROR_UrlAuthNotExists");
                     rtnData.put("status", "fail");
-                    rtnData.put("msg", "角色不存在，删除失败");
+                    rtnData.put("msg", "UrlAuth不存在，删除失败");
                 }
                 break;
             case "update":
-                roleService.saveRole(_role);
-                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _role, "更新角色", "");
+                urlAuthService.saveUrlAuth(_urlAuth);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _urlAuth, "更新角色", "");
                 rtnData.put("success1", "success!");
                 break;
             default:
@@ -132,8 +133,8 @@ public class RoleManagementController {
     }
 
 
-    @ModelAttribute("Role_list")
-    public List<Role> Rolelist() {
-        return roleService.getAllRole();
+    @ModelAttribute("UrlAuth_list")
+    public List<UrlAuth> UrlAuthlist() {
+        return urlAuthService.getAllUrlAuth();
     }
 }
