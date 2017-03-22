@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f244a0bd-925e-4d61-96e3-c360fd887d54" name="默认的" comment="添加ignore">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/static/images/demo/1-min.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path=".idea/" />
@@ -77,11 +76,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FreeMarkerUtil.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FreeMarkerUtil.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/net/liuxuan/utils/freemarker/FreeMarkerUtil.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
               <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1173,7 +1182,7 @@
       <workItem from="1488184694241" duration="68580000" />
       <workItem from="1488613775556" duration="93531000" />
       <workItem from="1490061955995" duration="19415000" />
-      <workItem from="1490168046659" duration="311000" />
+      <workItem from="1490168046659" duration="342000" />
     </task>
     <task id="LOCAL-00001" summary="before change theme">
       <created>1457751173953</created>
@@ -1392,11 +1401,18 @@
       <option name="project" value="LOCAL" />
       <updated>1490168381395</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="添加ignore">
+      <created>1490168392243</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1490168392243</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1427138000" />
+    <option name="totallyTimeSpent" value="1427169000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1416,7 +1432,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.781362" sideWeight="0.5121359" order="2" side_tool="true" content_ui="tabs" x="1294" y="314" width="1252" height="333" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37540454" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48984468" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48984468" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="WINDOWED" visible="false" show_stripe_button="true" weight="1.0" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="1272" y="-20" width="1296" height="1000" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32696897" sideWeight="0.49029127" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1640,13 +1656,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_31/src.zip!/java/net/URLClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="371" column="0" selection-start-line="371" selection-start-column="0" selection-end-line="371" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/4.3.6.RELEASE/spring-beans-4.3.6.RELEASE-sources.jar!/org/springframework/beans/AbstractNestablePropertyAccessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -1992,6 +2001,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="69" column="36" selection-start-line="69" selection-start-column="36" selection-end-line="69" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
