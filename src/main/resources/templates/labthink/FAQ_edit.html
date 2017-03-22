@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="layouts/mainlayout">
+<head>
+    <script type="text/javascript" src="/tinymce/tinymce.min.js"></script>
+    <title th:text="${title}">Title</title>
+
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "#mytextarea",
+            language: "zh_CN",
+            theme: "modern",
+//			width: 300,
+            height: 500,
+            //toolbar: "undo redo | styleselect | bold italic | link image",
+            toolbar1: "save undo redo cut copy paste pastetext outdent indent blockquote preview fullscreen | table image media emoticons charmap ",
+            toolbar2: "formatselect fontselect fontsizeselect | styleselect  bold italic underline forecolor backcolor | hr link anchor  insertdatetime",
+//			plugins: 'advlist autolink link image lists charmap print preview'
+            plugins: [
+                "advlist anchor autolink autosave charmap code contextmenu emoticons fullscreen hr image ",
+                "insertdatetime link lists media nonbreaking  paste preview save searchreplace table ",
+//                "pagebreak ",
+                "template textcolor textpattern wordcount visualblocks visualchars "
+            ],
+            insertdatetime_formats: ["%Y.%m.%d", "%H:%M","%Y.%m.%d %H:%M"],
+            nonbreaking_force_tab: true,
+            image_list: [
+                {title: 'My image 1', value: 'http://www.tinymce.com/my1.gif'},
+                {title: 'My image 2', value: 'http://www.moxiecode.com/my2.gif'}
+            ],
+            toolbar_items_size: 'small',
+            pagebreak_separator: "<!-- my page break -->",
+            save_enablewhendirty: false,
+            save_onsavecallback: function() {console.log("Save");},
+            textpattern_patterns: [
+                {start: '*', end: '*', format: 'italic'},
+                {start: '**', end: '**', format: 'bold'},
+                {start: '#', format: 'h1'},
+                {start: '##', format: 'h2'},
+                {start: '###', format: 'h3'},
+                {start: '####', format: 'h4'},
+                {start: '#####', format: 'h5'},
+                {start: '######', format: 'h6'},
+                {start: '1. ', cmd: 'InsertOrderedList'},
+                {start: '* ', cmd: 'InsertUnorderedList'},
+                {start: '- ', cmd: 'InsertUnorderedList'}
+            ],
+            style_formats: [
+                {title: 'Bold text', inline: 'b'},
+                {title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+                {title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+                {title: 'Example 1', inline: 'span', classes: 'example1'},
+                {title: 'Example 2', inline: 'span', classes: 'example2'},
+                {title: 'Table styles'},
+                {title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+            ],
+            // ===========================================
+            // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
+            // ===========================================
+
+            relative_urls: false,
+//            file_browser_callback: function(field_name, url, type, win) {
+//                if(type=='image') $('#my_form input[name=image]').click();
+//            },
+            file_picker_callback: function(callback, value, meta) {
+                // Provide file and text for the link dialog
+                if (meta.filetype == 'file') {
+                    $('#my_form input[name=image]').click();
+                    callback('mypage.html', {text: 'My text'});
+                }
+
+                // Provide image and alt text for the image dialog
+                if (meta.filetype == 'image') {
+                    imageFilePicker(callback, value, meta);
+                    callback('myimage.jpg', {alt: 'My alt text'});
+                }
+
+                // Provide alternative source and posted for the media dialog
+                if (meta.filetype == 'media') {
+                    callback('movie.mp4', {source2: 'alt.ogg', poster: 'image.jpg'});
+                }
+            },
+        });
+        var imageFilePicker = function (callback, value, meta) {
+
+            tinymce.activeEditor.windowManager.open({
+                title: 'Image Picker',
+                url: '/upload/image',
+                width: 650,
+                height: 550,
+                buttons: [{
+                    text: 'Insert',
+                    onclick: function () {
+                        //.. do some work
+
+                        console.log("Insert");
+                        tinymce.activeEditor.windowManager.close();
+                    }
+                }, {
+                    text: 'Close',
+                    onclick: 'close'
+                }],
+            }, {
+                oninsert: function (url) {
+                    callback(url);
+                    console.log("derp");
+                },
+            });
+        };
+    </script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <div class="navbar">
+        <div class="navbar-inner">
+            <a class="brand" href="http://www.thymeleaf.org"> Thymeleaf -
+                Plain </a>
+            <ul class="nav">
+                <li><a th:href="@{/}" href="home.html"> Home </a></li>
+            </ul>
+        </div>
+    </div>
+    <h1 th:text="${title}">Title</h1>
+    <div th:text="${message}">Fake content</div>
+    <div id="created" th:text="${#dates.format(date)}">July 11,
+        2012 2:17:16 PM CDT
+    </div>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+
+    <iframe id="form_target" name="form_target" style="display:none"></iframe>
+    <form id="my_form" th:action="@{/upload/image}" action="/upload/image" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+        <input name="image" type="file" onchange="$('#my_form').submit();this.value='';" id="inputfile"/>
+    </form>
+
+    <form method="post" th:action="@{/editor}">
+        <textarea id="mytextarea"  name="mytextarea"></textarea>
+        <button name="submitbtn">submit</button>
+    </form>
+
+
+
+
+    <div th:if="${#httpServletRequest.remoteUser != null}">
+        remoteuser:
+        <p th:text="${#httpServletRequest.remoteUser}">
+            sample_user
+        </p>
+    </div>
+    <div th:if="${#httpServletRequest.authType != null}">
+        getAuthType:
+        <p th:text="${#httpServletRequest.authType}">
+            sample_user
+        </p>
+    </div>
+
+
+</div>
+</body>
+</html>
