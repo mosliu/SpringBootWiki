@@ -1,10 +1,8 @@
 package net.liuxuan.SprKi.service${subpackage};
 
 
-import javax.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import net.liuxuan.SprKi.entity${subpackage}.${model_name};
+import java.util.List;
 
 
 /**
