@@ -144,7 +144,7 @@
                             <th>启用</th>
                             <th>别名</th>
                             <th>注册日期</th>
-                            <th>权限</th>
+                            <th>角色</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -160,7 +160,7 @@
                                 <ul>
                                     <li th:each="auth : ${u?.auths}">
                                         <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
-                                           th:href="'/admin/user?action=authedit&amp;sid='+${u?.username}"
+                                           th:href="'/admin/user?action=roleEdit&amp;sid='+${u?.username}"
                                            th:text="${auth?.authority}">
                                         </a>
                                     </li>
