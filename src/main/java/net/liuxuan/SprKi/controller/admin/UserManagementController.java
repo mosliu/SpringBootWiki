@@ -86,7 +86,7 @@ public class UserManagementController {
                 model.put("user", userDetailInfo);
                 return "admin/snipplets/div_user :: useredit";
 //                break;
-            case "authedit":
+            case "roleEdit":
                 userDetailInfo = userDetailInfoService.findUserDetailInfoByUsers(u);
                 if (userDetailInfo == null) {
                     redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
@@ -102,7 +102,7 @@ public class UserManagementController {
                 authoritiesSet.forEach(auths -> userauth.add(auths.getAuthority()));
                 model.put("userauth", userauth);
 
-                return "admin/snipplets/div_user :: authedit";
+                return "admin/snipplets/div_user :: roleEdit";
 //                break;
             default:
                 redirectAttributesModelMap.addFlashAttribute("dto", dto);
@@ -172,6 +172,7 @@ public class UserManagementController {
                 String[] authArrays = request.getParameterValues("authArray");
                 String newauth = request.getParameter("newAuth");
                 Map<String, Object> map = userDetailInfoService.updateAuths(userDetailInfo, authArrays, newauth);
+
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_AUTH,newauth,"更新用户权限："+userDetailInfo.getDbUser().getUsername(),"");
                 rtnData.putAll(map);
 
