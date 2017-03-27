@@ -43,7 +43,8 @@ public class UrlAuthServiceImpl implements UrlAuthService{
     public boolean deleteUrlAuthById(Long id){
         UrlAuth urlAuth = urlAuthRepository.getOne(id);
         if (urlAuth != null) {
-            urlAuth.setDisabled(true);
+            urlAuthRepository.delete(urlAuth);
+//            urlAuth.setDisabled(true);
             return true;
         }
         return false;

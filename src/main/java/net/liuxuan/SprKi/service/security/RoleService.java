@@ -4,6 +4,7 @@ package net.liuxuan.SprKi.service.security;
 import net.liuxuan.SprKi.entity.security.Role;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -28,4 +29,6 @@ public interface RoleService {
     boolean deleteRoleById(String id);
 
     boolean checkRoleExists(String rolename);
+
+    Map<String,Object> updateAuths(String rolename, String[] authArrays);
 }

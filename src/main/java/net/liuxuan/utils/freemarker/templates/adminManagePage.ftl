@@ -12,11 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>UrlAuth管理</h1>
+        <h1>${model_name}管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
             <li>支持属性管理</li>
-            <li class="active">UrlAuth管理</li>
+            <li class="active">${model_name}管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -28,11 +28,11 @@
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
                 <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建UrlAuth
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建${model_name}
                         <span class="label label-danger">label</span></a>
                 </li>
                 <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> UrlAuth列表 <span class="caret"></span></a>
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> ${model_name}列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -58,30 +58,30 @@
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form id="createUrlAuthForm" action="/admin/urlAuth_ajax?action=add" method="post"
+                        <form id="create${model_name}Form" action="/admin/${model_name_firstSmall}_ajax?action=add" method="post"
                               class="validate-plugin sky-form boxed">
-                            <header><i class="fa fa-users"></i> 新建UrlAuth
+                            <header><i class="fa fa-users"></i> 新建${model_name}
                                 <small class="note bold">慎重</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
                                     <i class="icon-append fa fa-key"></i>
-                                    <input type="text" id="urlAuthName" name="urlAuthName"
-                                           placeholder="UrlAuth名称" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入Url，小写，以/开头</b>
+                                    <input type="text" id="${model_name_firstSmall}Name" name="${model_name_firstSmall}Name"
+                                           placeholder="${model_name}名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入${model_name}名称，以ROLE_开头</b>
                                 </label>
                                 <label class="input">
                                     <i class="icon-append fa fa-tv"></i>
-                                    <input type="text" id="urlAuthNameCN" name="urlAuthNameCN"
-                                           placeholder="UrlAuth描述" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入UrlAuth中文解释</b>
+                                    <input type="text" id="${model_name_firstSmall}NameCN" name="${model_name_firstSmall}NameCN"
+                                           placeholder="${model_name}描述" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入${model_name}中文解释</b>
                                 </label>
                                 <label class="input">
                                     <i class="icon-append fa fa-commenting-o"></i>
                                     <input type="text" id="comment" name="comment"
                                            placeholder="备注信息" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入UrlAuth备注信息</b>
+                                    <b class="tooltip tooltip-bottom-right">输入${model_name}备注信息</b>
                                 </label>
                             </fieldset>
 
@@ -100,19 +100,19 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>UrlAuth名称</th>
-                            <th>UrlAuth说明</th>
+                            <th>${model_name}名称</th>
+                            <th>${model_name}说明</th>
                             <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="d : ${UrlAuth_list}">
-                            <td th:text="${d.id}">20</td>
-                            <td th:text="${d.urlAuthName}">Name</td>
-                            <td th:text="${d?.urlAuthNameCN}">用户UrlAuth</td>
-                            <td th:text="${d?.comment}">备注</td>
-                            <td th:text="${d?.id}">操作</td>
+                        <tr th:each="d : ${'$'}{${model_name}_list}">
+                            <td th:text="${'$'}{d.id}">20</td>
+                            <td th:text="${'$'}{d.${model_name_firstSmall}Name}">Name</td>
+                            <td th:text="${'$'}{d?.${model_name_firstSmall}NameCN}">用户${model_name}</td>
+                            <td th:text="${'$'}{d?.comment}">备注</td>
+                            <td th:text="${'$'}{d?.id}">操作</td>
                         </tr>
                         </tbody>
                     </table>
@@ -169,23 +169,23 @@
             initCreate();
 
             //不注册则不重新加载
-            $('.modal').on('hidden.bs.modal', function () {
-                $(this).removeData('bs.modal');
-//                $(this).empty();
+            ${'$'}('.modal').on('hidden.bs.modal', function () {
+                ${'$'}(this).removeData('bs.modal');
+//                ${'$'}(this).empty();
             })
         });
 
         function deleteDepartment(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
-            var tourl = "/admin/urlAuth_ajax?action=delete&sid=" + sid;
+            var tourl = "/admin/${model_name_firstSmall}_ajax?action=delete&sid=" + sid;
             jQuery.ajax({
                 url: tourl,
                 context: btn,
                 success: function (data) {
                     console.log(data);
-                    $(this).parents("tr").addClass("disable_done");
-                    var table = $('#myTableId').DataTable();
+                    ${'$'}(this).parents("tr").addClass("disable_done");
+                    var table = ${'$'}('#myTableId').DataTable();
                     table.row('.disable_done').remove().draw(false);
 
                 }
@@ -204,8 +204,8 @@
 
                             "columns": [
                                 {"data": "did"},
-                                {"orderable": true, "data": "urlAuthname"},
-                                {"orderable": true, "data": "urlAuthNameCN"},
+                                {"orderable": true, "data": "${model_name_firstSmall}name"},
+                                {"orderable": true, "data": "${model_name_firstSmall}NameCN"},
                                 {"orderable": true, "data": "comment"},
                                 {
                                     "orderable": true,
@@ -213,7 +213,7 @@
                                     "type": "display",
                                     "render": function (data, type, full, meta) {
 //                                        console.log(full);
-                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/urlAuth?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/${model_name_firstSmall}?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
                                 }
                             ],

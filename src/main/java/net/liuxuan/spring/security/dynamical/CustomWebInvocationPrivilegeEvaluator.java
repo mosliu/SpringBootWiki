@@ -3,7 +3,6 @@ package net.liuxuan.spring.security.dynamical;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.intercept.AbstractSecurityInterceptor;
@@ -114,8 +113,10 @@ public class CustomWebInvocationPrivilegeEvaluator implements
                     attrs);
         } catch (AccessDeniedException unauthorized) {
             if (logger.isDebugEnabled()) {
-                logger.debug(fi.toString() + " denied for " + authentication.toString(),
-                        unauthorized);
+                logger.debug(fi.toString() + " is denied for " + authentication.toString());
+            }
+            if (logger.isTraceEnabled()) {
+                logger.trace(unauthorized);
             }
 
             return false;

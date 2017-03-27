@@ -1,16 +1,23 @@
 package net.liuxuan.SprKi.service.security;
 
 
+import net.liuxuan.SprKi.entity.security.Authorities;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.Role;
+import net.liuxuan.SprKi.entity.security.UrlAuth;
 import net.liuxuan.SprKi.repository.security.RoleRepository;
-import net.liuxuan.spring.constants.JPAConstants;
+import net.liuxuan.SprKi.repository.security.UrlAuthRepository;
+import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSource;
+import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSourceImpl;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -32,6 +39,8 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    UrlAuthRepository urlAuthRepository;
 
     @Override
     public List<Role> getAllRole() {
@@ -43,6 +52,13 @@ public class RoleServiceImpl implements RoleService {
 //        roleRepository.flush();
     }
 
+
+    /**
+     * Retrieves an entity by its id.
+     *
+     * @param id must not be {@literal null}.
+     * @return the entity with the given id or {@literal null} if none found
+     */
     public Role findRoleById(String id) {
         Role role = roleRepository.findOne(id);
         return role;
@@ -67,6 +83,33 @@ public class RoleServiceImpl implements RoleService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Map<String, Object> updateAuths(String rolename, String[] authArrays) {
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        Role role = roleRepository.findOne(rolename);
+        Set<UrlAuth> old_auths= role.getUrlAuths();
+
+        if(authArrays == null){
+            //提交错误了啊。。
+            map.put("error", "提交出错！请检查");
+            return map;
+        }
+        old_auths.clear();
+        for (int i = 0; i < authArrays.length; i++) {
+
+            Long id = Long.parseLong(authArrays[i]);
+            old_auths.add(urlAuthRepository.findOne(id));
+        }
+
+        roleRepository.save(role);
+
+        CustomInvocationSecurityMetadataSourceImpl.reload();
+
+        map.put("success", "权限处理成功");
+        return map;
     }
 
 }

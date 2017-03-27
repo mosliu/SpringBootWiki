@@ -25,16 +25,16 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "UrlAuth";
-    String subpackage = ".security";//如果需要放到labthink下，则为".labthink"
-    boolean createEntity,createRepository,createService,createManagementController;
+    String model_name = "SliderPics";
+    String subpackage = "";//如果需要放到labthink下，则为".labthink"
+    boolean createEntity,createRepository,createService,createAdminManagement;
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();
-        hf.createEntity = false;
-        hf.createRepository = false;
-        hf.createService = false;
-        hf.createManagementController = true;
+        hf.createEntity = true;
+        hf.createRepository = true;
+        hf.createService = true;
+        hf.createAdminManagement = true;
         hf.init();
         hf.process(hf);
     }
@@ -68,6 +68,7 @@ public class FreeMarkerUtil {
 
 
         String projectPath = "F:/SyncDisk/Dropbox/Workspaces/Maven/SpringBootTest/src/main/java/net/liuxuan/Sprki/";
+        String templatePath = "F:/SyncDisk/Dropbox/Workspaces/Maven/SpringBootTest/src/main/resources/templates/admin/";
 
         String savePath;
         String fileName;
@@ -98,11 +99,21 @@ public class FreeMarkerUtil {
             util.buildTemplate(root, projectPath, savePath, fileName, template);
         }
 
-        if(createManagementController) {
+        if(createAdminManagement) {
             fileName = model_name + "ManagementController.java";
-            savePath = getPathString("/controller/admin/labthink/");
+            savePath = ("/controller/admin/labthink/");
             template = cfg.getTemplate("managementcontroller.ftl");
             util.buildTemplate(root, projectPath, savePath, fileName, template);
+
+            fileName = model_name + "Manage.html";
+            savePath = ("/");
+            template = cfg.getTemplate("adminManagePage.ftl");
+            util.buildTemplate(root, templatePath, savePath, fileName, template);
+
+            fileName = "div_"+model_name + ".html";
+            savePath = ("/snipplets/");
+            template = cfg.getTemplate("adminManageDivPage.ftl");
+            util.buildTemplate(root, templatePath, savePath, fileName, template);
         }
 
 

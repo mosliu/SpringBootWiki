@@ -17,4 +17,5 @@ import java.util.Collection;
  * 2017/3/15  |    Moses       |     Created
  */
 public interface CustomInvocationSecurityMetadataSource extends FilterInvocationSecurityMetadataSource {
+    //reload auth from database;
 }

@@ -2,8 +2,10 @@ package net.liuxuan.SprKi.entity.security;
 
 
 import javax.persistence.*;
-import lombok.Data;
+//import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +21,8 @@ import java.util.Set;
 * YYYY-MM-DD |    Author      |	 Change Description
 * 2017-03-22  |    Moses        |     Created
 */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_UrlAuth")
@@ -45,5 +48,5 @@ public class UrlAuth {
     private Set<Role> roles = new HashSet<Role>();
 
     @Column(name = "disabled", nullable = false)
-    boolean disabled=true;
+    boolean disabled=false;
 }

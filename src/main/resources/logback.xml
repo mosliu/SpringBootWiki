@@ -79,6 +79,7 @@
 
     <logger name="ch.qos.logback.classic.joran" level="WARN"/>
     <!-- For loggers in the these namespaces, log at separated levels. -->
+    <logger name="net.liuxuan.spring.security.dynamical" level="INFO"/>
     <logger name="net.liuxuan" level="TRACE"/>
     <logger name="net.liuxuan.spring" level="TRACE"/>
 

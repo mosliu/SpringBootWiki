@@ -1,9 +1,13 @@
 package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
+import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.security.Role;
+import net.liuxuan.SprKi.entity.security.UrlAuth;
 import net.liuxuan.SprKi.service.security.RoleService;
+import net.liuxuan.SprKi.service.security.UrlAuthService;
+import net.liuxuan.spring.Helper.RequestHelper;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
@@ -17,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Copyright (c) 2010-2017.  by Liuxuan   All rights reserved. <br/>
@@ -40,6 +42,9 @@ public class RoleManagementController {
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    UrlAuthService urlAuthService;
+
     @RequestMapping("roleManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
@@ -50,14 +55,15 @@ public class RoleManagementController {
 
     @RequestMapping("role")
     public String roleManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
-                                   HttpServletResponse response, Map<String, Object> model) throws IOException {
+                             HttpServletResponse response, Map<String, Object> model) throws IOException {
         log.info("===roleManage logged ,the _dto value is : {}", dto.toString());
+
+        String id = dto.getSid();
+        Role role;
+
 
         switch (dto.action) {
             case "edit":
-                Role role;
-                String id = dto.getSid();
-                
                 role = roleService.findRoleById(id);
                 if (role != null) {
                 } else {
@@ -65,6 +71,19 @@ public class RoleManagementController {
                 }
                 model.put("role", role);
                 return "admin/snipplets/div_role :: roleedit";
+            case "authedit":
+
+                role = roleService.findRoleById(id);
+                if(role==null){
+                    model.put("error","无用户，请检查进入入口!!!!!!!!!!");
+                }
+                model.put("role", role);
+
+                List<UrlAuth> urlAuths= urlAuthService.getAllUrlAuth();
+                model.put("urlAuthsList", urlAuths);
+
+                return "admin/snipplets/div_role :: urlAuthEdit";
+//                break;
             default:
                 return "redirect:/admin/role_ajax";
 //                break;
@@ -75,7 +94,7 @@ public class RoleManagementController {
     @RequestMapping("role_ajax")
 //    @ResponseBody
     public void roleManageAjax(@ModelAttribute("dto") BaseDTO _dto, Role _role, HttpServletRequest request,
-                                     HttpServletResponse response) throws IOException {
+                               HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("===roleManageAjax logged ,the value is : {}", _dto.toString());
@@ -121,6 +140,23 @@ public class RoleManagementController {
                 roleService.saveRole(_role);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _role, "更新角色", "");
                 rtnData.put("success1", "success!");
+                break;
+            case "updateUrlAuth":
+
+                RequestHelper.showParameters(request.getParameterMap());
+                String[] authArrays = request.getParameterValues("authArray");
+//                String newauth = request.getParameter("newAuth");
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, authArrays, "更新用户权限", "");
+
+                String rolename = request.getParameter("rolename");
+
+                Map<String, Object> map = roleService.updateAuths(rolename, authArrays);
+
+                rtnData.putAll(map);
+//
+//                return users;
+//                    return mapper.writeValueAsString(users);
+//                return EntityGsonHelper.goEntityWithCollection2Gson(Users.class);
                 break;
             default:
 

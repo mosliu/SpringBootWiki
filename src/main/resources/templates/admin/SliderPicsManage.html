@@ -12,11 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>UrlAuth管理</h1>
+        <h1>SliderPics管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
             <li>支持属性管理</li>
-            <li class="active">UrlAuth管理</li>
+            <li class="active">SliderPics管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -28,11 +28,11 @@
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
                 <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建UrlAuth
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建SliderPics
                         <span class="label label-danger">label</span></a>
                 </li>
                 <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> UrlAuth列表 <span class="caret"></span></a>
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> SliderPics列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -58,30 +58,36 @@
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
                     <div class="login-box">
-                        <form id="createUrlAuthForm" action="/admin/urlAuth_ajax?action=add" method="post"
+                        <form id="createSliderPicsForm" action="/admin/sliderPics_ajax?action=add" method="post"
                               class="validate-plugin sky-form boxed">
-                            <header><i class="fa fa-users"></i> 新建UrlAuth
+                            <header><i class="fa fa-users"></i> 新建SliderPics
                                 <small class="note bold">慎重</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
-                                    <i class="icon-append fa fa-key"></i>
-                                    <input type="text" id="urlAuthName" name="urlAuthName"
-                                           placeholder="UrlAuth名称" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入Url，小写，以/开头</b>
+                                    <i class="icon-append fa fa-image"></i>
+                                    <input type="text" id="sliderPicsName" name="sliderPicsName"
+                                           placeholder="轮播图片名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入轮播图片名称</b>
                                 </label>
                                 <label class="input">
-                                    <i class="icon-append fa fa-tv"></i>
-                                    <input type="text" id="urlAuthNameCN" name="urlAuthNameCN"
-                                           placeholder="UrlAuth描述" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入UrlAuth中文解释</b>
+                                    <i class="icon-append fa fa-comment"></i>
+                                    <input type="text" id="sliderPicsNameCN" name="sliderPicsNameCN"
+                                           placeholder="SliderPics描述" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入轮播图片中文解释</b>
                                 </label>
                                 <label class="input">
                                     <i class="icon-append fa fa-commenting-o"></i>
                                     <input type="text" id="comment" name="comment"
-                                           placeholder="备注信息" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入UrlAuth备注信息</b>
+                                           placeholder="labthink郑重推出新产品" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入轮播图片上显示的备注信息</b>
+                                </label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-commenting-o"></i>
+                                    <input type="text" id="url" name="url"
+                                           placeholder="/images/demo/slide-0.png" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入轮播图片上的地址</b>
                                 </label>
                             </fieldset>
 
@@ -100,17 +106,17 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>UrlAuth名称</th>
-                            <th>UrlAuth说明</th>
+                            <th>SliderPics名称</th>
+                            <th>SliderPics说明</th>
                             <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="d : ${UrlAuth_list}">
+                        <tr th:each="d : ${SliderPics_list}">
                             <td th:text="${d.id}">20</td>
-                            <td th:text="${d.urlAuthName}">Name</td>
-                            <td th:text="${d?.urlAuthNameCN}">用户UrlAuth</td>
+                            <td th:text="${d.sliderPicsName}">Name</td>
+                            <td th:text="${d?.sliderPicsNameCN}">用户SliderPics</td>
                             <td th:text="${d?.comment}">备注</td>
                             <td th:text="${d?.id}">操作</td>
                         </tr>
@@ -178,7 +184,7 @@
         function deleteDepartment(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
-            var tourl = "/admin/urlAuth_ajax?action=delete&sid=" + sid;
+            var tourl = "/admin/sliderPics_ajax?action=delete&sid=" + sid;
             jQuery.ajax({
                 url: tourl,
                 context: btn,
@@ -204,8 +210,8 @@
 
                             "columns": [
                                 {"data": "did"},
-                                {"orderable": true, "data": "urlAuthname"},
-                                {"orderable": true, "data": "urlAuthNameCN"},
+                                {"orderable": true, "data": "sliderPicsname"},
+                                {"orderable": true, "data": "sliderPicsNameCN"},
                                 {"orderable": true, "data": "comment"},
                                 {
                                     "orderable": true,
@@ -213,7 +219,7 @@
                                     "type": "display",
                                     "render": function (data, type, full, meta) {
 //                                        console.log(full);
-                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/urlAuth?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/sliderPics?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
                                 }
                             ],

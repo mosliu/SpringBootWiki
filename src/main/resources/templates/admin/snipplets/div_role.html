@@ -3,7 +3,7 @@
 <head></head>
 <body>
 
-<!--用户修改Div-->
+<!--角色修改Div-->
 <div th:fragment="roleedit">
 
     <!-- header modal -->
@@ -75,5 +75,82 @@
     </script>
 </div>
 
+
+<!--权限修改Div-->
+<div th:fragment="urlAuthEdit">
+
+    <!-- header modal -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myLargeModalLabel">修改URL</h4>
+    </div>
+    <form id="updateform" action="/admin/role_ajax?action=updateUrlAuth" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${role}">
+        <!-- body modal -->
+        <div class="modal-body">
+            <div class="row form-group">
+
+                <header><i class="fa fa-users"></i> 修改权限
+                    <small class="note bold"> --请谨慎操作</small>
+                </header>
+                <fieldset>
+                    <input type="hidden" th:field="*{rolename}"/>
+                    <div class="col-md-2 col-sm-3">
+                        <label>权限列表</label>
+                    </div>
+                    <div class="col-md-10 col-sm-9">
+                        <select id="authArray" multiple="multiple" name="authArray"
+                                style="width: 600px; height: 400px;">
+                            <option th:each="url : ${urlAuthsList}" th:value="${url.id}" th:text="${url.urlAuthName}"
+                                    th:selected="${role.urlAuths.contains(url)}"/>
+                        </select>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <br/>
+                    </div>
+                    <!--<div class="col-md-2 col-sm-3">-->
+                        <!--<label>新增权限</label>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-10 col-sm-9">-->
+                        <!--<span>-->
+                            <!--<i class="icon-append fa fa-lock"></i>-->
+                            <!--<input type="text" name="newAuth"-->
+                                   <!--placeholder="ROLE_HELLO"/>-->
+                            <!--<b class="tooltip tooltip-bottom-right">新权限</b>-->
+                        <!--</span>-->
+                    <!--</div>-->
+
+                </fieldset>
+
+
+            </div>
+        </div>
+
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+    </form>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var callback = function (data, status) {
+            if (status === "success") {
+                alert('修改成功！');
+            }
+            console.dir("Data: " + data + "\nStatus: " + status);
+        }
+
+        $("#updateform").on("submit", function (e) {
+            //alert($(this).serialize());
+//            e.preventDefault();
+            $.post(this.action, $(this).serialize(), callback);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
 </body>
 </html>

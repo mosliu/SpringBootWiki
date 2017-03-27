@@ -6,6 +6,7 @@ import net.liuxuan.SprKi.entity.security.UrlAuth;
 import net.liuxuan.SprKi.service.security.UrlAuthService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,7 @@ public class UrlAuthManagementController {
     UrlAuthService urlAuthService;
 
     @RequestMapping("urlAuthManage")
-    @PreAuthorize("hasUrlAuth('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
 
         return "admin/" + "urlAuthManage" + " :: middle";
@@ -50,14 +51,14 @@ public class UrlAuthManagementController {
 
     @RequestMapping("urlAuth")
     public String urlAuthManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
-                                   HttpServletResponse response, Map<String, Object> model) throws IOException {
+                                HttpServletResponse response, Map<String, Object> model) throws IOException {
         log.info("===urlAuthManage logged ,the _dto value is : {}", dto.toString());
 
         switch (dto.action) {
             case "edit":
                 UrlAuth urlAuth;
                 Long id = dto.getStr2LongID();
-                
+
                 urlAuth = urlAuthService.findUrlAuthById(id);
                 if (urlAuth != null) {
                 } else {
@@ -75,7 +76,7 @@ public class UrlAuthManagementController {
     @RequestMapping("urlAuth_ajax")
 //    @ResponseBody
     public void urlAuthManageAjax(@ModelAttribute("dto") BaseDTO _dto, UrlAuth _urlAuth, HttpServletRequest request,
-                                     HttpServletResponse response) throws IOException {
+                                  HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("===urlAuthManageAjax logged ,the value is : {}", _dto.toString());
@@ -87,11 +88,27 @@ public class UrlAuthManagementController {
         switch (_dto.action) {
             case "add":
                 String urlAuthName = request.getParameter("urlAuthName");
+
+                if(StringUtils.isBlank(urlAuthName)){
+                    log.info("===传入参数错误！！！");
+                    rtnData.put("error", "ERROR_ParamsInputError");
+                    rtnData.put("status", "fail");
+                    rtnData.put("msg", "传入参数错误");
+                    break;
+                }
+                urlAuthName = urlAuthName.toLowerCase();
+                if (!urlAuthName.startsWith("/")) {
+                    urlAuthName = "/" + urlAuthName;
+                }
+
                 String urlAuthNameCN = request.getParameter("urlAuthNameCN");
                 String comment = request.getParameter("comment");
+                urlAuthName = urlAuthName==null?"":urlAuthName;
+                comment = comment==null?"":comment;
+
                 boolean urlAuthExists = urlAuthService.checkUrlAuthExists(urlAuthName);
                 if (urlAuthExists) {
-                    log.info("===urlAuthManageAjax logged ,添加UrlAuth已存在 : {}");
+                    log.info("===urlAuthManageAjax logged ,添加Url权限已存在 : {}");
                     rtnData.put("error", "ERROR_UrlAuthExists");
                     rtnData.put("status", "fail");
                     rtnData.put("msg", "添加UrlAuth已存在");

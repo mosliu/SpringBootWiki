@@ -102,6 +102,7 @@
                             <th>角色名称</th>
                             <th>角色说明</th>
                             <th>备注</th>
+                            <th>权限</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -110,6 +111,23 @@
                             <td th:text="${d.rolename}">ROLE_USER</td>
                             <td th:text="${d?.roleDescribe}">用户角色</td>
                             <td th:text="${d?.comment}">备注</td>
+                            <td>
+
+                                <ul>
+                                    <li th:each="auth : ${d?.urlAuths}">
+                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
+                                           th:href="'/admin/role?action=authedit&amp;sid='+${d?.rolename}"
+                                           th:text="${auth?.urlAuthName}">/admin
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a class="btn btn-xs btn-default" data-target="#ajax" data-toggle="modal"
+                                           th:href="'/admin/role?action=authedit&amp;sid='+${d?.rolename}">新增
+                                        </a>
+                                    </li>
+                                </ul>
+
+                            </td>
                             <td th:text="${d?.rolename}">操作</td>
                         </tr>
                         </tbody>
@@ -231,6 +249,7 @@
                                 {"orderable": true, "data": "rolename"},
                                 {"orderable": true, "data": "roleDescribe"},
                                 {"orderable": true, "data": "comment"},
+                                {"orderable": true, "data": "auths"},
                                 {
                                     "orderable": true,
                                     "data": "rolename",
@@ -323,7 +342,7 @@
 //                                    console.log(textStatus);
 
 
-                                    if (typeof(data.error) === "undefined"&&data.status === "success") {
+                                    if (typeof(data.error) === "undefined" && data.status === "success") {
                                         _toastr(data.msg, "top-center", "success", "#");
                                         // Clear the form
                                         jQuery(form).find('input.form-control').val('');

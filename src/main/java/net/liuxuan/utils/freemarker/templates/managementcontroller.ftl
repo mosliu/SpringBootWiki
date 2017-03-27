@@ -2,8 +2,8 @@ package net.liuxuan.SprKi.controller.admin.labthink${subpackage};
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
 import net.liuxuan.SprKi.entity.security.LogActionType;
-import net.liuxuan.SprKi.entity.security.${model_name};
-import net.liuxuan.SprKi.service.security.${model_name}Service;
+import net.liuxuan.SprKi.entity${subpackage}.${model_name};
+import net.liuxuan.SprKi.service${subpackage}.${model_name}Service;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ public class ${model_name}ManagementController {
     ${model_name}Service ${model_name_firstSmall}Service;
 
     @RequestMapping("${model_name_firstSmall}Manage")
-    @PreAuthorize("has${model_name}('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
 
         return "admin/" + "${model_name_firstSmall}Manage" + " :: middle";
