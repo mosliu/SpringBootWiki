@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.entity.labthink;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSContent;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.*;
@@ -40,6 +41,16 @@ public class FAQContent extends CMSContent{
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="devices")
     protected Devices devices;//设备
+
+    /**
+     * The Category.
+     */
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @IndexedEmbedded(depth = 1, prefix = "deviceTypeBy_")
+    @JoinColumn(name="devicetype")
+    protected DeviceType deviceType; // 栏目
+
+
 
     @Lob
     @Field

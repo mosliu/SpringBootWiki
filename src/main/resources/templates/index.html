@@ -84,22 +84,22 @@
                     <!--</div>-->
 
                     <div id="slidePics">
-                    <div class="owl-carousel buttons-autohide controlls-over nomargin"
-                         data-plugin-options='{"items": 1, "singleItem": true, "autoPlay": 100000, "navigation": true, "pagination": true, "transitionStyle":"fade", "progressBar":"true"}'>
-                        <div class="owl-slide">
-                            <img class="img-responsive" src="/images/demo/slide-0.png" alt="">
-                            <div class="owl--text">
-                                国内技术支持组恭祝您<strong>鸡年大吉！</strong></div>
+                        <div class="owl-carousel buttons-autohide controlls-over nomargin"
+                             data-plugin-options='{"items": 1, "singleItem": true, "autoPlay": 100000, "navigation": true, "pagination": true, "transitionStyle":"fade", "progressBar":"true"}'>
+                            <div class="owl-slide">
+                                <img class="img-responsive" src="/images/demo/slide-0.png" alt="">
+                                <div class="owl--text">
+                                    国内技术支持组恭祝您<strong>鸡年大吉！</strong></div>
+                            </div>
+                            <div class="owl-slide">
+                                <img class="img-responsive" src="images/demo/slide-4.jpg" alt="">
+                                <div class="owl--text"><strong>展会展示区！</strong></div>
+                            </div>
+                            <div class="owl-slide">
+                                <img class="img-responsive" src="/images/demo/slide-5.jpg" alt="">
+                                <div class="owl--text"><strong>美国分公司</strong></div>
+                            </div>
                         </div>
-                        <div class="owl-slide">
-                            <img class="img-responsive" src="images/demo/slide-4.jpg" alt="">
-                            <div class="owl--text"><strong>展会展示区！</strong></div>
-                        </div>
-                        <div class="owl-slide">
-                            <img class="img-responsive" src="/images/demo/slide-5.jpg" alt="">
-                            <div class="owl--text"><strong>美国分公司</strong></div>
-                        </div>
-                    </div>
                     </div>
                     <script language="JavaScript">
                         $("#slidePics").load("/admin/sliderPicsList", function (response, status) {
@@ -116,8 +116,8 @@
                                     item_text += "<div class=\"owl--text\">";
                                     item_text += value.comment;
                                     item_text += "</div>"
-                                    console.dir(value);
-                                    console.dir(item_text);
+//                                    console.dir(value);
+//                                    console.dir(item_text);
                                     $('<div class=\"owl-slide\"></div>').html(item_text).appendTo("#slidePics div#ssssssss");
                                 });
 //                                $(response).each(function(){8/
@@ -175,34 +175,47 @@
 
                 <!-- skills -->
                 <div class="col-md-4 col-sm-4">
-                    <h4>项目进展</h4>
-                    <div class="progress progress-lg">
-                        <div class="progress-bar progress-bar-warning progress-bar-striped active text-left"
-                             role="progressbar" aria-valuenow="98"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 98%; min-width: 2em;">
-                            <span>支持系统 / 98%</span>
+                    <div th:each="project,iter:${progressList}" th:remove="tag">
+                        <h4 th:if="${iter.first}">项目进展</h4>
+                        <div th:switch="${iter.index%4}" th:remove="tag">
+                            <div th:case="0" class="progress progress-lg">
+                                <div class="progress-bar progress-bar-warning progress-bar-striped active text-left"
+                                     role="progressbar" style="width: 98%; min-width: 2em;"
+                                     th:styleappend="${'width:'+project.projectProgress+'%'}">
+                                    <span th:inline="text">[[${project.projectProgressName}]] / [[${project.projectProgress}]]%</span>
+                                </div>
+                            </div>
+                            <div th:case="1" class="progress progress-lg">
+                                <div class="progress-bar progress-bar-danger progress-bar-striped active text-left"
+                                     role="progressbar" style="width: 98%; min-width: 2em;"
+                                     th:styleappend="${'width:'+project.projectProgress+'%'}">
+                                    <span th:inline="text">[[${project.projectProgressName}]] / [[${project.projectProgress}]]%</span>
+                                </div>
+                            </div>
+                            <div th:case="2" class="progress progress-lg">
+                                <div class="progress-bar progress-bar-primary progress-bar-striped active text-left"
+                                     role="progressbar" style="width: 98%; min-width: 2em;"
+                                     th:styleappend="${'width:'+project.projectProgress+'%'}">
+                                    <span th:inline="text">[[${project.projectProgressName}]] / [[${project.projectProgress}]]%</span>
+                                </div>
+                            </div>
+                            <div th:case="3" class="progress progress-lg">
+                                <div class="progress-bar progress-bar-success progress-bar-striped active text-left"
+                                     role="progressbar" style="width: 98%; min-width: 2em;"
+                                     th:styleappend="${'width:'+project.projectProgress+'%'}">
+                                    <span th:inline="text">[[${project.projectProgressName}]] / [[${project.projectProgress}]]%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="progress progress-lg">
-                        <div class="progress-bar progress-bar-danger  progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 100%; min-width: 2em;">
-                            <span>培训设计 / 100%</span>
-                        </div>
-                    </div>
-
-                    <div class="progress progress-lg">
-                        <div class="progress-bar progress-bar-success progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 98%; min-width: 2em;">
-                            <span>培训设计 / 100%</span>
-                        </div>
-                    </div>
-                    <div class="progress progress-lg">
-                        <div class="progress-bar progress-bar-primary progress-bar-striped active text-left" role="progressbar" aria-valuenow="60"
-                             aria-valuemin="0" aria-valuemax="100" style="width: 99%; min-width: 2em;">
-                            <span>其他 / 99%</span>
-                        </div>
-                    </div>
+                    <!--<div class="progress progress-lg">-->
+                        <!--<div class="progress-bar progress-bar-primary progress-bar-striped active text-left"-->
+                             <!--role="progressbar" aria-valuenow="60"-->
+                             <!--aria-valuemin="0" aria-valuemax="100" style="width: 99%; min-width: 2em;">-->
+                            <!--<span>其他 / 99%</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                 </div>
                 <!-- /skills -->

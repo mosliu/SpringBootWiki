@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
  * Malayalam/(Indian>>Kerala) initialisation for the jQuery countdown extension
  * Written by Harilal.B (harilal1234@gmail.com) Feb 2013. */
 (function($) {

@@ -68,23 +68,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="#">
-                    <i class="fa fa-menu-arrow pull-right"></i>
-                    <i class="main-icon fa fa-bar-chart-o"></i> <span>后台管理</span>
-                </a>
 
-                <ul><!-- submenus -->
-                    <li><a href="/druid" target="_blank">数据库后台</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/env',function(result){$('#content').jsonViewer(result) });">运行环境变量</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/beans',function(result){$('#content').jsonViewer(result) });">Java Bean变量</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/trace',function(result){$('#content').jsonViewer(result) });">TRACE</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/metrics',function(result){$('#content').jsonViewer(result) });">Metrics</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/mappings',function(result){$('#content').jsonViewer(result) });">映射情况</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/configprops',function(result){$('#content').jsonViewer(result) });">配置文件属性</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/health',function(result){$('#content').jsonViewer(result) });">服务器监控</a></li>
-                </ul>
-            </li>
 
             <li>
                 <a href="#">
@@ -102,7 +86,16 @@
                             <i class="fa fa-image"></i> 首页轮播图片管理
                         </a>
                     </li>
-                    <li><a href="tables-bootstrap.html">规划功能，待以后添加</a></li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/projectProgressManage')">
+                            <i class="fa fa-hourglass"></i> 项目进度设置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/newsPageManage')">
+                            <i class="fa fa-hourglass"></i> 新闻公告设置
+                        </a>
+                    </li>
                     <li><a href="tables-jqgrid.html">规划功能，待以后添加</a></li>
                     <li><a href="tables-footable.html">规划功能，待以后添加</a></li>
                     <li>
@@ -118,6 +111,25 @@
                     </li>
                 </ul>
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-menu-arrow pull-right"></i>
+                    <i class="main-icon fa fa-bar-chart-o"></i> <span>支持系统后台信息</span>
+                </a>
+
+                <ul><!-- submenus -->
+                    <li><a href="/druid" target="_blank">数据库后台</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/env',function(result){$('#content').jsonViewer(result) });">运行环境变量</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/beans',function(result){$('#content').jsonViewer(result) });">Java Bean变量</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/trace',function(result){$('#content').jsonViewer(result) });">TRACE</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/metrics',function(result){$('#content').jsonViewer(result) });">Metrics</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/mappings',function(result){$('#content').jsonViewer(result) });">映射情况</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/configprops',function(result){$('#content').jsonViewer(result) });">配置文件属性</a></li>
+                    <li><a href="#" onclick="$.getJSON('/admins/health',function(result){$('#content').jsonViewer(result) });">服务器监控</a></li>
+                </ul>
+            </li>
+
             <li>
                 <a href="#">
                     <i class="fa fa-menu-arrow pull-right"></i>

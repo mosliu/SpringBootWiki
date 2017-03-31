@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
  * Ukrainian initialisation for the jQuery countdown extension
  * Written by Goloborodko M misha.gm@gmail.com (2009), corrections by Iгор Kоновал */
 (function($) {

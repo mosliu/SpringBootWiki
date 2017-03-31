@@ -18,7 +18,7 @@
         <div class="modal-body">
             <div class="login-box">
 
-                <header><i class="fa fa-users"></i> 修改SliderPics <b><span th:text="*{sliderPicsname}">zhangsan</span></b>
+                <header><i class="fa fa-users"></i> 修改SliderPics <b><span th:text="*{sliderPicsName}">zhangsan</span></b>
                     <small class="note bold">请谨慎操作</small>
                 </header>
 
@@ -26,7 +26,7 @@
                     <input type="hidden" th:field="*{id}"/>
                     <label>修改SliderPics名称</label>
                     <label class="input">
-                        <i class="icon-append fa fa-key"></i>
+                        <i class="icon-append fa fa-image"></i>
                         <input type="text" th:field="*{sliderPicsName}"
                                placeholder="修改SliderPics名称" minlength="2" required="true" class="form-control "/>
                         <b class="tooltip tooltip-bottom-right">输入SliderPics名称，以ROLE_开头</b>
@@ -34,7 +34,7 @@
 
                     <label>修改SliderPics别名</label>
                     <label class="input">
-                        <i class="icon-append fa fa-tv"></i>
+                        <i class="icon-append fa fa-comment"></i>
                         <input type="text" th:field="*{sliderPicsNameCN}" placeholder="SliderPics描述" minlength="2" required="true"
                                class="form-control "/>
                         <b class="tooltip tooltip-bottom-right">输入SliderPics中文解释</b>
@@ -47,6 +47,14 @@
                                class="form-control "/>
                         <b class="tooltip tooltip-bottom-right">输入SliderPics备注信息</b>
                     </label>
+                    <label>修改SliderPics的地址</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-link"></i>
+                        <input type="text" th:field="*{url}"
+                               placeholder="/images/demo/slide-0.png" minlength="2" required="true" class="form-control "/>
+                        <b class="tooltip tooltip-bottom-right">输入轮播图片上的地址</b>
+                    </label>
+
 
                 </fieldset>
 

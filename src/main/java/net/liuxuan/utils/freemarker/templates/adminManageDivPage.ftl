@@ -18,7 +18,7 @@
         <div class="modal-body">
             <div class="login-box">
 
-                <header><i class="fa fa-users"></i> 修改${model_name} <b><span th:text="*{${model_name_firstSmall}name}">zhangsan</span></b>
+                <header><i class="fa fa-users"></i> 修改${model_name} <b><span th:text="*{${model_name_firstSmall}Name}">zhangsan</span></b>
                     <small class="note bold">请谨慎操作</small>
                 </header>
 

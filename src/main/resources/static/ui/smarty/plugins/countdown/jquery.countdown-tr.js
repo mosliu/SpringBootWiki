@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
 * Turkish initialisation for the jQuery countdown extension
 * Written by Bekir Ahmetoğlu (bekir@cerek.com) Aug 2008. */
 (function($) {

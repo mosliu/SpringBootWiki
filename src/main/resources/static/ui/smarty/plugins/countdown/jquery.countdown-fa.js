@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
    Persian (فارسی) initialisation for the jQuery countdown extension
    Written by Alireza Ziaie (ziai@magfa.com) Oct 2008.
    Digits corrected by Hamed Ramezanian Feb 2013. */

@@ -25,7 +25,7 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "SliderPics";
+    String model_name = "NewsPage";
     String subpackage = "";//如果需要放到labthink下，则为".labthink"
     boolean createEntity,createRepository,createService,createAdminManagement;
 

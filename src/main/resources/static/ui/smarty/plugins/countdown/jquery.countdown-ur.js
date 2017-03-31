@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
    Urdu (اردو) initialisation for the jQuery countdown extension
    Translated by Azhar Rasheed (azhar.rasheed19@gmail.com), November 2013. */
 (function($) {

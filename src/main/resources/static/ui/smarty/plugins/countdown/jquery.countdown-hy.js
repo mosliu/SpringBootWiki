@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
  * Armenian initialisation for the jQuery countdown extension
  * Written by Artur Martirosyan. (artur{at}zoom.am) October 2011. */
 (function($) {

@@ -5,32 +5,21 @@
 
 package net.liuxuan.SprKi.controller;
 
-import com.baidu.ueditor.ActionEnter;
-import com.google.gson.Gson;
-import net.liuxuan.spring.Helper.SystemHelper;
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.json.JSONObject;
+import net.liuxuan.SprKi.entity.ProjectProgress;
+import net.liuxuan.SprKi.service.IndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,7 +29,10 @@ import java.util.Map;
 @Controller
 public class IndexController {
 
-    private static Logger log =  LoggerFactory.getLogger(IndexController.class);
+    private static Logger log = LoggerFactory.getLogger(IndexController.class);
+
+    @Autowired
+    IndexService indexService;
 
     @RequestMapping("/")
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
@@ -48,21 +40,25 @@ public class IndexController {
         log.debug("-Access IndexController.home() Method");
 //        System.out.println(new File(".").getAbsolutePath());
 
+        //insert project services
+        List<ProjectProgress> progressList = indexService.getProjectProgressList();
+
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
+        model.put("progressList", progressList);
         return "index";
     }
+
     @RequestMapping("/ex")
     public String homeex(Map<String, Object> model) throws MissingServletRequestPartException {
         log.debug("-Access IndexController.homeex() Method");
 
 
-
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        if(true) {
+        if (true) {
             throw new MissingServletRequestPartException("400");
         }
         return "index";
@@ -94,7 +90,7 @@ public class IndexController {
         for (String s : parameterMap.keySet()) {
             String[] strings = parameterMap.get(s);
             for (int i = 0; i < strings.length; i++) {
-                log.info("Parameter key:{} ,values{}:{}",s,i,strings[i]);
+                log.info("Parameter key:{} ,values{}:{}", s, i, strings[i]);
             }
         }
 
@@ -108,7 +104,7 @@ public class IndexController {
     }
 
     @RequestMapping("/jsp")
-    public String jsp(){
+    public String jsp() {
         return "jsp/aaajsp";
     }
 

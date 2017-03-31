@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
  * Spanish initialisation for the jQuery countdown extension
  * Written by Sergio Carracedo Martinez webmaster@neodisenoweb.com (2008) */
 (function($) {

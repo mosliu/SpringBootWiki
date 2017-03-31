@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
    Finnish initialisation for the jQuery countdown extension
    Written by Kalle Vänskä and Juha Suni (juhis.suni@gmail.com). Corrected by Olli. */
 (function($) {

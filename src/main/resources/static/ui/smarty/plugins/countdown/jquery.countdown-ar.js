@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
    Arabic (عربي) initialisation for the jQuery countdown extension
    Translated by Talal Al Asmari (talal@psdgroups.com), April 2009. */
 (function($) {

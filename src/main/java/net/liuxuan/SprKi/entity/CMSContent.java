@@ -41,7 +41,7 @@ public class CMSContent {
     /**
      * The Category.
      */
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "categoryBy_")
     @JoinColumn(name="category")
     protected CMSCategory category; // 栏目

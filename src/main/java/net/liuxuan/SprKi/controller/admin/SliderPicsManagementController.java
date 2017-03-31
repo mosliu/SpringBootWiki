@@ -148,12 +148,12 @@ public class SliderPicsManagementController {
 //                    sliderPics.setSliderPicsName(sliderPicsName);
 //                    sliderPics.setComment(comment);
 //                    sliderPics.setSliderPicsNameCN(sliderPicsNameCN);
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _sliderPics, "添加角色", "");
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _sliderPics, "添加轮展图片", "");
                     sliderPicsService.saveSliderPics(_sliderPics);
                 }
                 break;
             case "delete":
-                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除轮展图片", "");
                 boolean b = sliderPicsService.deleteSliderPicsById(id);
                 if (b) {
                     rtnData.put("status", "success");

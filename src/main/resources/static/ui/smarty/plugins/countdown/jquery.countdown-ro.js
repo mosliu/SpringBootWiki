@@ -1,4 +1,4 @@
-﻿/* http://keith-wood.name/countdown.html
+/* http://keith-wood.name/countdown.html
  * Romanian initialisation for the jQuery countdown extension
  * Written by Edmond L. (webmond@gmail.com). */
 (function($) {

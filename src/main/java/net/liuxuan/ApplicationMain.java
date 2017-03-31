@@ -5,9 +5,6 @@
 
 package net.liuxuan;
 
-import net.liuxuan.SprKi.entity.Banner;
-import net.liuxuan.SprKi.repository.BannerRepository;
-import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -17,18 +14,10 @@ import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.jpa.provider.HibernateUtils;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManagerFactory;
-
 
 
 /**
@@ -49,21 +38,21 @@ import javax.persistence.EntityManagerFactory;
 // 那么Spring Boot会判断这是一个Web应用，并启动一个内嵌的Servlet容器（默认是Tomcat）用于处理HTTP请求。
 
 
-
 //“@EnableAutoConfiguration”注解的作用在于
 // 让 spring boot 根据应用所声明的依赖来对 spring 框架进行自动配置，这就减少了开发人员的工作量。
 
-@SpringBootApplication(exclude = {GsonAutoConfiguration.class}) //等同于 @Configuration @EnableAutoConfiguration @ComponentScan
+@SpringBootApplication(exclude = {GsonAutoConfiguration.class})
+//等同于 @Configuration @EnableAutoConfiguration @ComponentScan
 //@Configuration
 //@ComponentScan(basePackages = "net.liuxuan.spring.security , net.liuxuan.spring.mvc.** , ")
 //@EnableAutoConfiguration()
 //@ImportResource({ "classpath:config/webSecurityConfig.xml" })
 //@EnableConfigurationProperties({DBSettings.class})
 @EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository",
-        entityManagerFactoryRef ="entityManagerFactory",
+        entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager"
 )
-@EntityScan({"net.liuxuan.SprKi.entity","net.liuxuan.springboottest.message"})
+@EntityScan({"net.liuxuan.SprKi.entity", "net.liuxuan.springboottest.message"})
 //@EnableWebMvc
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
@@ -71,7 +60,7 @@ import javax.persistence.EntityManagerFactory;
 //@EnableScheduling
 public class ApplicationMain extends SpringBootServletInitializer {
 
-    private static Logger log  = LoggerFactory.getLogger(ApplicationMain.class);
+    private static Logger log = LoggerFactory.getLogger(ApplicationMain.class);
 
 
     public static void main(String[] args) throws Exception {
@@ -92,9 +81,6 @@ public class ApplicationMain extends SpringBootServletInitializer {
 
         mainTest();
 //
-
-
-
 
 
     }
@@ -148,7 +134,6 @@ public class ApplicationMain extends SpringBootServletInitializer {
 //        txManager.setEntityManagerFactory(entityManagerFactory());
 //        return txManager;
 //    }
-
 
 
 //    @Bean
