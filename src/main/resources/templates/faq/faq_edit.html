@@ -62,13 +62,23 @@
 
                 <div class="row">
                     <div class="form-group">
-                        <div class="col-md-4 col-sm-4">
-                            <label>分类 *</label>
+                        <!--<div class="col-md-4 col-sm-4">-->
+                            <!--<label>分类 *</label>-->
 
-                            <select th:field="*{category}" class="form-control pointer required">
-                                <option th:each="type : ${Category_list}"
+                            <!--<select th:field="*{category}" class="form-control pointer required">-->
+                                <!--<option th:each="type : ${Category_list}"-->
+                                        <!--th:value="${type.id}"-->
+                                        <!--th:text="${type.name}">FAQ</option>-->
+                            <!--</select>-->
+
+                        <!--</div>-->
+                        <div class="col-md-4 col-sm-4">
+                            <label>设备类型 *</label>
+
+                            <select th:field="*{deviceType}" class="form-control pointer required">
+                                <option th:each="type : ${DevicesType_list}"
                                         th:value="${type.id}"
-                                        th:text="${type.name}">FAQ</option>
+                                        th:text="${type.deviceTypeName}">力值设备</option>
                             </select>
 
                         </div>
@@ -98,15 +108,16 @@
                 <div class="row">
                     <div class="form-group">
 
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-4 col-sm-4">
                             <label>提问时间 *</label>
+                            <!--th:value="${#dates.createNow()}"-->
                             <input type="text" th:field="*{questionDate}"
                                    class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
                                    data-RTL="false" readonly="true"/>
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <label>标准</label>
-                            <input type="text" th:field="*{standard}"  class="form-control required"/>
+                            <input type="text" th:field="*{standard}"  class="form-control"/>
                         </div>
                     </div>
                 </div>

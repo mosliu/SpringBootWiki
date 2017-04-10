@@ -29,7 +29,7 @@ public interface RoleRepository extends JpaRepository<Role, String>, JpaSpecific
 
     List<Role> findByRolenameNotOrderByRolename(String roleNotName);
 
-    @Query("SELECT DISTINCT rolename FROM Role")
+    @Query("SELECT DISTINCT rolename FROM Role WHERE disabled = false ")
     List<String> findAllRoles();
 
 }

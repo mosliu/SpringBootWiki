@@ -42,5 +42,5 @@ public class CMSCategory {
     private int pageSize;//每页数据
 
     @Column(name = "disabled", nullable = false)
-    private boolean disabled=true;
+    private boolean disabled=false;
 }

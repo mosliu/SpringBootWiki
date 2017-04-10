@@ -94,7 +94,7 @@ public interface UserDetailInfoService {
      *
      * @return the list
      */
-    List<String> listAuths();
+    List<String> listRoles();
 
     /**
      * Update auths boolean.
@@ -104,5 +104,5 @@ public interface UserDetailInfoService {
      * @param newauth        the newauth
      * @return the Map<String, Object>
      */
-    Map<String, Object> updateAuths(UserDetailInfo userDetailInfo, String[] authArrays, String newauth);
+    Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth);
 }

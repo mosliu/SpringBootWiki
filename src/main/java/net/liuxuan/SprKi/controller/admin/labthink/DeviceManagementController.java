@@ -7,6 +7,8 @@ import net.liuxuan.SprKi.entity.labthink.DeviceKind;
 import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.service.labthink.DeviceKindService;
+import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
 import net.liuxuan.SprKi.service.labthink.DevicesService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
@@ -41,7 +43,13 @@ public class DeviceManagementController {
     private static Logger log = LoggerFactory.getLogger(DeviceManagementController.class);
 
     @Autowired
-    DevicesService DevicesService;
+    DevicesService devicesService;
+
+    @Autowired
+    DeviceTypeService deviceTypeService;
+
+    @Autowired
+    DeviceKindService deviceKindService;
 
 
     @RequestMapping("deviceManage")
@@ -49,11 +57,11 @@ public class DeviceManagementController {
     public String getDevicePages(Map<String, Object> model) {
         Devices device = new Devices();
         model.put("device", device);
-        List<DeviceType> allDeviceType = DevicesService.getAllDeviceType();
+        List<DeviceType> allDeviceType = deviceTypeService.getAllDeviceType();
         model.put("allDeviceType",allDeviceType);
-        List<DeviceKind> allDeviceKind = DevicesService.getAllDeviceKind();
+        List<DeviceKind> allDeviceKind = deviceKindService.getAllDeviceKind();
         model.put("allDeviceKind",allDeviceKind);
-        List<Devices> allDevices  = DevicesService.getAllDevices();
+        List<Devices> allDevices  = devicesService.getAllDevices();
         model.put("alllist",allDevices);
         return "admin/" + "deviceManage" + " :: middle";
     }
@@ -61,7 +69,7 @@ public class DeviceManagementController {
     @RequestMapping("deviceTypeManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getDeviceTypeManagePages(Map<String, Object> model) {
-        List<DeviceType> alllist = DevicesService.getAllDeviceType();
+        List<DeviceType> alllist = deviceTypeService.getAllDeviceType();
         model.put("alllist",alllist);
         return "admin/" + "deviceTypeManage" + " :: middle";
     }
@@ -69,7 +77,7 @@ public class DeviceManagementController {
     @RequestMapping("deviceKindManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getDevicekindManagePages(Map<String, Object> model) {
-        List<DeviceKind> alllist = DevicesService.getAllDeviceKind();
+        List<DeviceKind> alllist = deviceKindService.getAllDeviceKind();
         model.put("alllist",alllist);
         return "admin/" + "deviceKindManage" + " :: middle";
     }
@@ -84,20 +92,20 @@ public class DeviceManagementController {
             case "edit":
                 Devices obj;
                 Long id = dto.getStr2LongID();
-                obj = DevicesService.getDevicesById(id);
+                obj = devicesService.getDevicesById(id);
                 if (obj != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
                 }
                 model.put("Devices", obj);
-                List<DeviceType> allDeviceType = DevicesService.getAllDeviceType();
+                List<DeviceType> allDeviceType = deviceTypeService.getAllDeviceType();
                 model.put("allDeviceType",allDeviceType);
-                List<DeviceKind> allDeviceKind = DevicesService.getAllDeviceKind();
+                List<DeviceKind> allDeviceKind = deviceKindService.getAllDeviceKind();
                 model.put("allDeviceKind",allDeviceKind);
                 return "admin/snipplets/div_device :: deviceedit";
             case "edit_DeviceType":
                 DeviceType dt;
-                dt = DevicesService.getDeviceTypeById(dto.getStr2LongID());
+                dt = deviceTypeService.getDeviceTypeById(dto.getStr2LongID());
                 if (dt != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
@@ -106,7 +114,7 @@ public class DeviceManagementController {
                 return "admin/snipplets/div_devicetype :: devicetypeedit";
             case "edit_DeviceKind":
                 DeviceKind dk;
-                dk = DevicesService.getDeviceKindById(dto.getStr2LongID());
+                dk = deviceKindService.getDeviceKindById(dto.getStr2LongID());
                 if (dk != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
@@ -131,9 +139,9 @@ public class DeviceManagementController {
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
-                boolean ObjExists = DevicesService.checkDevicesExists(_devices.getDevicename())
-//                        ||DevicesService.checkDevicesExists(_devices.getDevicenameCN())
-//                        ||DevicesService.checkDevicesExists(_devices.getDevicenameEN())
+                boolean ObjExists = devicesService.checkDevicesExists(_devices.getDevicename())
+//                        ||devicesService.checkDevicesExists(_devices.getDevicenameCN())
+//                        ||devicesService.checkDevicesExists(_devices.getDevicenameEN())
                         ;
                 if (ObjExists) {
                     log.info("===deviceManageAjax logged ,添加设备已存在 : {}");
@@ -144,12 +152,12 @@ public class DeviceManagementController {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加设备");
                     SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _devices, "添加设备", "");
-                    DevicesService.saveDevices(_devices);
+                    devicesService.saveDevices(_devices);
                 }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备", "");
-                boolean b = DevicesService.deleteDevicesById(_dto.sid);
+                boolean b = devicesService.deleteDevicesById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除设备");
@@ -169,7 +177,7 @@ public class DeviceManagementController {
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _devices, "更新了设备", "");
-                DevicesService.saveDevices(_devices);
+                devicesService.saveDevices(_devices);
                 rtnData.put("success1", "success!");
                 break;
             default:
@@ -197,9 +205,9 @@ public class DeviceManagementController {
                 String name = request.getParameter("device_type_name");
                 String name_cn = request.getParameter("device_type_name_cn");
                 String name_en = request.getParameter("device_type_name_en");
-                boolean ObjExists = DevicesService.checkDeviceTypeExists(name)
-                        ||DevicesService.checkDeviceTypeExists(name_cn)
-                        ||DevicesService.checkDeviceTypeExists(name_en);
+                boolean ObjExists = deviceTypeService.checkDeviceTypeExists(name)
+                        ||deviceTypeService.checkDeviceTypeExists(name_cn)
+                        ||deviceTypeService.checkDeviceTypeExists(name_en);
                 if (ObjExists) {
                     log.info("===deviceTypeManageAjax logged ,添加设备种类已存在 : {}");
                     rtnData.put("error", "ERROR_DevicesExists");
@@ -213,12 +221,12 @@ public class DeviceManagementController {
                     obj.setDeviceTypeNameEN(name_en);
                     obj.setDeviceTypeNameCN(name_cn);
                     SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, obj, "添加设备种类", "");
-                    DevicesService.saveDeviceType(obj);
+                    deviceTypeService.saveDeviceType(obj);
                 }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备种类", "");
-                boolean b = DevicesService.deleteDeviceTypeById(_dto.sid);
+                boolean b = deviceTypeService.deleteDeviceTypeById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除设备种类");
@@ -238,7 +246,7 @@ public class DeviceManagementController {
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _obj, "更新了设备种类", "");
-                DevicesService.saveDeviceType(_obj);
+                deviceTypeService.saveDeviceType(_obj);
                 rtnData.put("success1", "success!");
                 break;
             default:
@@ -264,9 +272,9 @@ public class DeviceManagementController {
                 String name = request.getParameter("device_kind_name");
                 String name_cn = request.getParameter("device_kind_name_cn");
                 String name_en = request.getParameter("device_kind_name_en");
-                boolean ObjExists = DevicesService.checkDeviceKindExists(name)
-                        ||DevicesService.checkDeviceKindExists(name_cn)
-                        ||DevicesService.checkDeviceKindExists(name_en);
+                boolean ObjExists = deviceKindService.checkDeviceKindExists(name)
+                        || deviceKindService.checkDeviceKindExists(name_cn)
+                        || deviceKindService.checkDeviceKindExists(name_en);
                 if (ObjExists) {
                     log.info("===deviceKindManageAjax logged ,添加设备性质已存在 : {}");
                     rtnData.put("error", "ERROR_DevicesExists");
@@ -280,12 +288,12 @@ public class DeviceManagementController {
                     obj.setDeviceKindNameEN(name_en);
                     obj.setDeviceKindNameCN(name_cn);
                     SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, obj, "添加设备性质", "");
-                    DevicesService.saveDeviceKind(obj);
+                    deviceKindService.saveDeviceKind(obj);
                 }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除了设备性质", "");
-                boolean b = DevicesService.deleteDeviceKindById(_dto.sid);
+                boolean b = deviceKindService.deleteDeviceKindById(_dto.sid);
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除设备性质");
@@ -305,7 +313,7 @@ public class DeviceManagementController {
 ////                    Devices.setDevicesName(Devices_name);
 ////                    Devices.setDevicesNameCN(Devices_name_cn);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _obj, "更新了设备性质", "");
-                DevicesService.saveDeviceKind(_obj);
+                deviceKindService.saveDeviceKind(_obj);
                 rtnData.put("success1", "success!");
                 break;
             default:

@@ -1,9 +1,11 @@
 package net.liuxuan.SprKi.service.labthink;
 
+import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
+import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
@@ -41,9 +43,13 @@ import static net.liuxuan.SprKi.service.util.SearchHelper.*;
 public class FAQContentServiceImpl implements FAQContentService {
 
     private static Logger log = LoggerFactory.getLogger(FAQContentServiceImpl.class);
+    public  static final  String FAQCATEGORY = FAQContent.class.getSimpleName();
 
     @Autowired
     FAQContentRepository faqContentRepository;
+
+    @Autowired
+    CMSCategoryService cmsCategoryService;
 
 
     @Override
@@ -60,12 +66,13 @@ public class FAQContentServiceImpl implements FAQContentService {
             log.trace("===saveFAQContent:new", faq);
             faq.setAuthor(u);
 
+            faq.setCategory(cmsCategoryService.getOrCreateOneByName(FAQCATEGORY));
             faq.setPublishDate(now);
         } else if(!faqContentRepository.exists(faq.getId())){
             //新的
             log.trace("===saveFAQContent:new", faq);
             faq.setAuthor(u);
-
+            faq.setCategory(cmsCategoryService.getOrCreateOneByName(FAQCATEGORY));
             faq.setPublishDate(now);
         } else {
             load = faqContentRepository.getOne(faq.getId());
@@ -112,7 +119,7 @@ public class FAQContentServiceImpl implements FAQContentService {
                 pl.addAll(pl_datecompare);
 
 
-                String[] sl_and = {"category", "devices", "department", "disabled"};
+                String[] sl_and = {"deviceType","category", "devices", "department", "disabled"};
 
                 //先将Object 转为Map，这样好向内添加属性
                 Map<String, Object> objectMap = object2Map(dto);

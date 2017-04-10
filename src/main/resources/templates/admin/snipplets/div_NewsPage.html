@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head></head>
+<head>
+    <link href="/ui/smarty/admin/css/layout.css" rel="stylesheet" type="text/css"/>
+</head>
 <body>
 
 <!--用户修改Div-->
@@ -16,37 +18,29 @@
           novalidate="novalidate" th:object="${newsPage}">
         <!-- body modal -->
         <div class="modal-body">
-            <div class="login-box">
+            <div class="row form-group">
 
-                <header><i class="fa fa-users"></i> 修改NewsPage <b><span th:text="*{newsPageName}">zhangsan</span></b>
+                <header><i class="fa fa-users"></i> 修改NewsPage <b><span th:text="*{fullTitle}">zhangsan</span></b>
                     <small class="note bold">请谨慎操作</small>
                 </header>
 
                 <fieldset>
                     <input type="hidden" th:field="*{id}"/>
-                    <label>修改NewsPage名称</label>
+                    <label>修改新闻公告标题</label>
                     <label class="input">
                         <i class="icon-append fa fa-key"></i>
-                        <input type="text" th:field="*{newsPageName}"
+                        <input type="text" th:field="*{fullTitle}"
                                placeholder="修改NewsPage名称" minlength="2" required="true" class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入NewsPage名称，以ROLE_开头</b>
+                        <b class="tooltip tooltip-bottom-right">输入新闻公告标题</b>
                     </label>
 
-                    <label>修改NewsPage别名</label>
                     <label class="input">
-                        <i class="icon-append fa fa-tv"></i>
-                        <input type="text" th:field="*{newsPageNameCN}" placeholder="NewsPage描述" minlength="2" required="true"
-                               class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入NewsPage中文解释</b>
+                        <i class="icon-append fa fa-key"></i>
+                        <textarea id="infoText" th:field="*{infoText}" class="summernote form-control required"
+                                  data-height="400" data-lang="en-US">新闻公告内容</textarea>
+                        <b class="tooltip tooltip-bottom-right">输入新闻公告内容</b>
                     </label>
 
-                    <label>修改NewsPage备注</label>
-                    <label class="input">
-                        <i class="icon-append fa fa-commenting-o"></i>
-                        <input type="text" th:field="*{comment}" placeholder="备注信息" minlength="2" required="true"
-                               class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入NewsPage备注信息</b>
-                    </label>
 
                 </fieldset>
 
@@ -60,6 +54,17 @@
         </div>
     </form>
     <script type="text/javascript" th:inline="javascript">
+        jQuery(window).ready(function () {
+            Init(true);
+            //initCreate();
+
+            //不注册则不重新加载
+            $('.modal').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+//                $(this).empty();
+            })
+        });
+
         /*<![CDATA[*/
         var callback = function (data, status) {
             alert("Data: " + data + "\nStatus: " + status);

@@ -1,5 +1,6 @@
 package net.liuxuan.SprKi.service;
 
+import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.ProjectProgress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,16 @@ public class IndexServiceImpl implements IndexService {
     @Autowired
     ProjectProgressService projectProgressService;
 
+    @Autowired
+    NewsPageService newsPageService;
+
+    @Override
     public List<ProjectProgress> getProjectProgressList() {
         return projectProgressService.getAllProjectProgress();
+    }
+
+    @Override
+    public List<NewsPage> getNewsPageList() {
+        return newsPageService.getAllNewsPage();
     }
 }

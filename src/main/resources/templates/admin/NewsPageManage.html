@@ -73,7 +73,7 @@
                                 </label>
                                 <label class="input">
                                     <i class="icon-append fa fa-key"></i>
-                                    <textarea id="infoText" name="infoText" class="summernote form-control required" data-height="200" data-lang="en-US">新闻公告内容</textarea>
+                                    <textarea id="infoText" name="infoText" class="summernote form-control required" data-height="400" data-lang="en-US">新闻公告内容</textarea>
                                     <b class="tooltip tooltip-bottom-right">输入新闻公告内容</b>
                                 </label>
 
@@ -94,19 +94,19 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>NewsPage名称</th>
-                            <th>NewsPage说明</th>
-                            <th>备注</th>
+                            <th>标题</th>
+                            <th>作者</th>
+                            <th>正文</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="d : ${NewsPage_list}">
                             <td th:text="${d.id}">20</td>
-                            <td th:text="${d.newsPageName}">Name</td>
-                            <td th:text="${d?.newsPageNameCN}">用户NewsPage</td>
-                            <td th:text="${d?.comment}">备注</td>
-                            <td th:text="${d?.id}">操作</td>
+                            <td th:text="${d.fullTitle}">Name</td>
+                            <td th:text="${d.author.username}">用户NewsPage</td>
+                            <td th:text="${d.infoText}">备注</td>
+                            <td th:text="${d.id}">操作</td>
                         </tr>
                         </tbody>
                     </table>
@@ -169,7 +169,7 @@
             })
         });
 
-        function deleteDepartment(btn, sid) {
+        function deleteIt(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
             var tourl = "/admin/newsPage_ajax?action=delete&sid=" + sid;
@@ -185,6 +185,17 @@
                 }
             });
         }
+
+        function modifyIt(btn, sid) {
+//            console.log(btn);
+//            console.log(sid);
+
+            var url = "/admin/newsPage?action=edit&sid="+sid;
+            console.log(url);
+            $('#replaceContainer').load(url);
+
+        }
+
 
         function initTable2() {
 
@@ -207,6 +218,7 @@
                                     "type": "display",
                                     "render": function (data, type, full, meta) {
 //                                        console.log(full);
+                                        //return '<a class="btn btn-info"onclick="modifyIt(this,\'' + data + '\')"> 修改 </a> <a class="btn btn-danger" onclick="deleteIt(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                         return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/newsPage?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
                                 }

@@ -23,4 +23,6 @@ public interface CMSCategoryRepository extends JpaRepository<CMSCategory, Long>,
     List<CMSCategory> findByNameNot(String  NotName);
 
     List<CMSCategory> findByNameNotOrderByName(String  NotName);
+
+
 }

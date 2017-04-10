@@ -67,12 +67,12 @@
                                         <input type="text" th:field="*{standard}" class="form-control"/>
                                     </div>
                                     <div class="col-md-3 col-sm-3">
-                                        <label>分类</label>
-                                        <select th:field="*{category}" class="form-control pointer">
+                                        <label>设备类型</label>
+                                        <select th:field="*{deviceType}" class="form-control pointer">
                                             <option value="-1">ALL</option>
-                                            <option th:each="type : ${Category_list}"
+                                            <option th:each="type : ${DevicesType_list}"
                                                     th:value="${type.id}"
-                                                    th:text="${'category:' + type.name}">FAQ
+                                                    th:text="${'类型:' + type.deviceTypeName}">库伦
                                             </option>
                                         </select>
                                     </div>

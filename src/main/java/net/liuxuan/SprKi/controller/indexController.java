@@ -5,6 +5,7 @@
 
 package net.liuxuan.SprKi.controller;
 
+import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.ProjectProgress;
 import net.liuxuan.SprKi.service.IndexService;
 import org.slf4j.Logger;
@@ -43,10 +44,14 @@ public class IndexController {
         //insert project services
         List<ProjectProgress> progressList = indexService.getProjectProgressList();
 
+        //TODO 需要注意的是新闻现在查询是全部列出，要改！！
+        List<NewsPage> newsPageList = indexService.getNewsPageList();
+
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
         model.put("progressList", progressList);
+        model.put("newsPageList", newsPageList);
         return "index";
     }
 

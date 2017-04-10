@@ -29,9 +29,13 @@ import net.liuxuan.SprKi.entity.NewsPage;
 public class NewsPageServiceImpl implements NewsPageService{
 
     private static Logger log = LoggerFactory.getLogger(NewsPageServiceImpl.class);
+    public  static final  String NEWSPAGECATEGORY = NewsPage.class.getSimpleName();
 
     @Autowired
     NewsPageRepository newsPageRepository;
+    @Autowired
+    CMSCategoryService cmsCategoryService;
+
 
     @Override
     public void saveNewsPage(NewsPage newsPage){
@@ -40,16 +44,13 @@ public class NewsPageServiceImpl implements NewsPageService{
         Date now = new Date();
         newsPage.setLastUpdateDate(now);
         NewsPage load;
-        if(newsPage.getId()==null){
+        if(newsPage.getId()==null||!newsPageRepository.exists(newsPage.getId())){
             //新的
             log.trace("===saveNewsPage:new", newsPage);
             newsPage.setAuthor(u);
             newsPage.setPublishDate(now);
-        }else if(!newsPageRepository.exists(newsPage.getId())){
-            //新的
-            log.trace("===saveNewsPage:new", newsPage);
-            newsPage.setAuthor(u);
-            newsPage.setPublishDate(now);
+            newsPage.setTitle(newsPage.getFullTitle());
+            newsPage.setCategory(cmsCategoryService.getOrCreateOneByName(NEWSPAGECATEGORY));
         }else{
             load = newsPageRepository.getOne(newsPage.getId());
             try {
@@ -69,7 +70,7 @@ public class NewsPageServiceImpl implements NewsPageService{
     }
 
     @Override
-    public NewsPage findNewsPageById(Long id){
+    public NewsPage findById(Long id){
         NewsPage newsPage = newsPageRepository.findOne(id);
         return newsPage;
     }

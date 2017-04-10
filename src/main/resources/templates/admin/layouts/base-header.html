@@ -29,7 +29,7 @@
             <li>
                 <a href="#">
                     <i class="fa fa-menu-arrow pull-right"></i>
-                    <i class="main-icon fa fa-gears"></i> <span>系统管理</span>
+                    <i class="main-icon fa fa-user-secret"></i> <span>用户权限管理</span>
                 </a>
                 <ul><!-- submenus -->
                     <li>
@@ -48,39 +48,44 @@
                             <i class="fa fa-key"></i> 权限配置
                         </a>
                     </li>
-
-                    <li>
-                        <a href="#" onclick="$('#replaceContainer').load('/admin/departmentManage')">
-                            <i class="fa fa-university"></i> 部门配置
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-menu-arrow pull-right"></i>
-                            设备配置
-                        </a>
-                        <ul>
-                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceManage')">设备配置</a></li>
-                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceTypeManage')">设备类型配置</a></li>
-                            <li><a href="#" onclick="$('#replaceContainer').load('/admin/deviceKindManage')">设备性质配置</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </li>
-
 
             <li>
                 <a href="#">
                     <i class="fa fa-menu-arrow pull-right"></i>
-                    <i class="main-icon fa fa-table"></i> <span>信息管理</span>
+                    <i class="main-icon fa fa-university"></i> <span>公司属性管理</span>
                 </a>
                 <ul><!-- submenus -->
                     <li>
-                        <a href="#" onclick="$('#replaceContainer').load('/admin/faqManage')">
-                            <i class="fa fa-university"></i> 删除信息管理
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/departmentManage')">
+                            <i class="fa fa-sitemap"></i> 部门配置
                         </a>
                     </li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/deviceManage')">
+                            <i class="fa fa-ship"></i> 设备配置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/deviceTypeManage')">
+                            <i class="fa fa-cubes"></i> 设备类型配置
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/deviceKindManage')">
+                            <i class="fa  fa-globe"></i> 设备性质配置
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-menu-arrow pull-right"></i>
+                    <i class="main-icon fa fa-newspaper-o"></i> <span>信息发布管理</span>
+                </a>
+                <ul><!-- submenus -->
                     <li>
                         <a href="#" onclick="$('#replaceContainer').load('/admin/sliderPicsManage')">
                             <i class="fa fa-image"></i> 首页轮播图片管理
@@ -88,16 +93,36 @@
                     </li>
                     <li>
                         <a href="#" onclick="$('#replaceContainer').load('/admin/projectProgressManage')">
-                            <i class="fa fa-hourglass"></i> 项目进度设置
+                            <i class="fa fa-tasks"></i> 项目进度设置
                         </a>
                     </li>
                     <li>
                         <a href="#" onclick="$('#replaceContainer').load('/admin/newsPageManage')">
-                            <i class="fa fa-hourglass"></i> 新闻公告设置
+                            <i class="fa fa-twitter"></i> 新闻公告设置
                         </a>
                     </li>
-                    <li><a href="tables-jqgrid.html">规划功能，待以后添加</a></li>
-                    <li><a href="tables-footable.html">规划功能，待以后添加</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa fa-menu-arrow pull-right"></i>
+                    <i class="main-icon fa fa-table"></i> <span>内容属性管理</span>
+                </a>
+                <ul><!-- submenus -->
+
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/faqManage')">
+                            <i class="fa fa-recycle"></i> 删除信息管理
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" onclick="$('#replaceContainer').load('/admin/cmsCategoryManage')">
+                            <i class="fa fa-list-ol"></i> 内容分类管理
+                        </a>
+                    </li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-menu-arrow pull-right"></i>
@@ -120,13 +145,27 @@
 
                 <ul><!-- submenus -->
                     <li><a href="/druid" target="_blank">数据库后台</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/env',function(result){$('#content').jsonViewer(result) });">运行环境变量</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/beans',function(result){$('#content').jsonViewer(result) });">Java Bean变量</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/trace',function(result){$('#content').jsonViewer(result) });">TRACE</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/metrics',function(result){$('#content').jsonViewer(result) });">Metrics</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/mappings',function(result){$('#content').jsonViewer(result) });">映射情况</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/configprops',function(result){$('#content').jsonViewer(result) });">配置文件属性</a></li>
-                    <li><a href="#" onclick="$.getJSON('/admins/health',function(result){$('#content').jsonViewer(result) });">服务器监控</a></li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/env',function(result){$('#content').jsonViewer(result) });">运行环境变量</a>
+                    </li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/beans',function(result){$('#content').jsonViewer(result) });">Java
+                        Bean变量</a></li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/trace',function(result){$('#content').jsonViewer(result) });">TRACE</a>
+                    </li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/metrics',function(result){$('#content').jsonViewer(result) });">Metrics</a>
+                    </li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/mappings',function(result){$('#content').jsonViewer(result) });">映射情况</a>
+                    </li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/configprops',function(result){$('#content').jsonViewer(result) });">配置文件属性</a>
+                    </li>
+                    <li><a href="#"
+                           onclick="$.getJSON('/admins/health',function(result){$('#content').jsonViewer(result) });">服务器监控</a>
+                    </li>
                 </ul>
             </li>
 

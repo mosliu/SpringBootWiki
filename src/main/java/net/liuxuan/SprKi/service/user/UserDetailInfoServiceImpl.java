@@ -235,7 +235,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    public List<String> listAuths() {
+    public List<String> listRoles() {
 //        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
 //        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
 //        return distinctAuthority;
@@ -245,7 +245,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    public Map<String, Object> updateAuths(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
+    public Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
         Map<String, Object> map = new HashMap<String, Object>();
 
         DbUser dbUser = usersRepository.findOne(userDetailInfo.getDbUser().getUsername());
@@ -280,7 +280,6 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         }
         for (Authorities old_auth : toremove) {
             //必须去掉对auth的引用后，才能删除auth!!!
-            //TODO 将改成沉到user的service中？
             dbUser.removeAuth(old_auth);
             authoritiesRepository.delete(old_auth);
         }

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.ToString;
 import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 
 /**
@@ -23,5 +24,6 @@ public class LabthinkSearchDTO extends BaseSearchDTO {
     public CMSCategory category;
     public Devices devices;
     public Department department;
+    public DeviceType deviceType;
     public String standard;
 }

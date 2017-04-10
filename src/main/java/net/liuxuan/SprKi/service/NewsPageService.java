@@ -19,7 +19,7 @@ import java.util.List;
 public interface NewsPageService {
     void saveNewsPage(NewsPage newsPage);
 
-    NewsPage findNewsPageById(Long id);
+    NewsPage findById(Long id);
 
     boolean deleteNewsPageById(Long id);
 

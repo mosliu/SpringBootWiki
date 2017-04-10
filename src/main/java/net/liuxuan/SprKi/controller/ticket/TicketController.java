@@ -2,10 +2,7 @@ package net.liuxuan.SprKi.controller.ticket;
 
 import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
-import net.liuxuan.SprKi.entity.labthink.Department;
-import net.liuxuan.SprKi.entity.labthink.Devices;
-import net.liuxuan.SprKi.entity.labthink.FAQContent;
-import net.liuxuan.SprKi.entity.labthink.TicketContent;
+import net.liuxuan.SprKi.entity.labthink.*;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
@@ -14,6 +11,7 @@ import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
+import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import net.liuxuan.SprKi.service.labthink.TicketContentService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
@@ -58,6 +56,8 @@ public class TicketController {
 
     @Resource
     DevicesRepository devicesRepository;
+    @Autowired
+    DeviceTypeService deviceTypeService;
     @Resource
     DepartmentRepository departmentRepository;
     @Resource
@@ -241,7 +241,9 @@ public class TicketController {
         BeanUtils.copyProperties(content, faq);
 //        faq.setId(null); //删除复制的id 防止出错
         faq.setQuestionDate(content.getSubmitDate());
+        ;
         model.put("faq", faq);
+        model.put("DevicesType_list", deviceTypeService.getAllDeviceType());
         model.put("ticketId", id);
 //        model.addAttribute("faq", faq);
 //        model.addAttribute("ticketId", id);
@@ -391,6 +393,11 @@ public class TicketController {
         return cmsCategoryRepository.findAll();
     }
 
+//    @ModelAttribute("DevicesType_list")
+//    public List<DeviceType> DevicesTypelist() {
+//        return deviceTypeService.getAllDeviceType();
+////        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
+//    }
     @InitBinder
     protected void initBinder(
             WebDataBinder binder) throws ServletException {

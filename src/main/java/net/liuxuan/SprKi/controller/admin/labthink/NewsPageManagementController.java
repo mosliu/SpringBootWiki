@@ -59,7 +59,7 @@ public class NewsPageManagementController {
                 NewsPage newsPage;
                 Long id = dto.getStr2LongID();
                 
-                newsPage = newsPageService.findNewsPageById(id);
+                newsPage = newsPageService.findById(id);
                 if (newsPage != null) {
                 } else {
                     throw new IOException("Got Wrong ID");

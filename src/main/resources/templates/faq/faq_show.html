@@ -115,10 +115,15 @@
                 </li>
 
                 <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">
-                        <i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>
+                    <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
+                        <i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;设备类型：<span th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
                     </a>
                 </li>
+                <!--<li class="list-group-item">-->
+                    <!--<a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">-->
+                        <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>-->
+                    <!--</a>-->
+                <!--</li>-->
                 <li class="list-group-item">
                     <a href="#" th:href="@{/faq/list}+'?standard='+${faq.standard}">
                         <i class="fa fa-2x fa-balance-scale"></i>&nbsp;&nbsp;&nbsp;标准：<span th:text="${faq.standard}">ISO</span>

@@ -1,6 +1,8 @@
 package net.liuxuan.SprKi.service.security;
 
 import java.util.List;
+
+import net.liuxuan.SprKi.repository.security.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,9 @@ public class UrlAuthServiceImpl implements UrlAuthService{
     @Override
     public boolean deleteUrlAuthById(Long id){
         UrlAuth urlAuth = urlAuthRepository.getOne(id);
+        urlAuth.getRoles().forEach(role -> {
+            role.getUrlAuths().remove(urlAuth);
+        });
         if (urlAuth != null) {
             urlAuthRepository.delete(urlAuth);
 //            urlAuth.setDisabled(true);

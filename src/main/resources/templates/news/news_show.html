@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div id="confirmdiv" class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">删除</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label>确定删除本条新闻公告？</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭
+                    </button>
+                    <button type="button" id="delete_submit" class="btn btn-warning" onclick="doRemove()"><span
+                            class="glyphicon glyphicon-fire" aria-hidden="true"></span>确定删除！！
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li class="active">新闻公告</li>
+        </ol>
+        <!-- breadcrumbs -->
+        <h1 class="blog-post-title" th:text="${news.title}">BLOG POST TITLE HERE</h1>
+        <ul class="blog-post-info list-inline">
+            <li><a href="#">
+                <i class="fa fa-clock-o"></i> 创建：
+                <span class="font-lato" th:text="${news.publishDate}">June 29, 2015</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fa fa-clock-o"></i> 更新：
+                <span class="font-lato" th:text="${news.lastUpdateDate}">June 29, 2015</span>
+            </a></li>
+            <li>
+                <a href="#">
+                    <i class="fa fa-user"></i> 发布者：
+                    <span class="font-lato" th:text="${news.author.username}">John Doe</span>
+                </a>
+            </li>
+            <li><a href="#">
+                <i class="fa fa-comment-o"></i>
+                <span class="font-lato" th:text="${news.commentsCount}">28 Comments</span>
+                <span class="font-lato"> 评论</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fa fa-comment-o"></i>
+                <span class="font-lato"> 热度： <span class="font-lato" th:text="${news.clicks}"
+                                                   th:remove="tag">28 Comments</span> ℃ </span>
+            </a></li>
+            <!--<li>-->
+            <!--<i class="fa fa-folder-open-o"></i>-->
+            <!--<a class="category" href="#"> <span class="font-lato">news</span> </a>-->
+            <!--<a class="category" href="#"> <span class="font-lato">xxxx</span> </a>-->
+            <!--</li>-->
+
+        </ul>
+    </div>
+    <ul class="row clearfix testimonial-dotted list-unstyled">
+        <li class="col-md-9">
+            <h2> 公告全文: </h2>
+            <h3>
+                <div th:utext="${news.infoText}">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                </div>
+            </h3>
+            <cite th:text="'最后修订时间 @'+${#calendars.format(news.lastUpdateDate,' yyyy MMM dd')}"></cite>
+        </li>
+        <li class="col-md-3">
+            <ul class="side-nav list-group margin-bottom-80">
+
+                <!--<li class="list-group-item">-->
+                <!--<a href="#" th:href="@{/news/list}+'?category='+${news?.category.id}">-->
+                <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${news.category.name}">category</span>-->
+                <!--</a>-->
+                <!--</li>-->
+            </ul>
+        </li>
+    </ul>
+
+
+    <div>
+        <div class="divider divider-dotted"><!-- divider --></div>
+
+
+        <!-- TAGS -->
+        <a class="tag" href="#">
+
+            <span class="txt"><i class="fa fa-tag"></i>RESPONSIVE</span>
+            <span class="num">12</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>CSS</span>
+            <span class="num">3</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>HTML</span>
+            <span class="num">1</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>JAVASCRIPT</span>
+            <span class="num">28</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DESIGN</span>
+            <span class="num">6</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DEVELOPMENT</span>
+            <span class="num">3</span>
+        </a>
+        <!-- /TAGS -->
+    </div>
+
+</div>
+
+</body>
+</html>

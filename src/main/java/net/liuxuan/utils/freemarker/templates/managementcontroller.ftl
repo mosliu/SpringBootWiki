@@ -99,12 +99,12 @@ public class ${model_name}ManagementController {
                 } else {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加${model_name}");
-                    ${model_name} ${model_name_firstSmall} = new ${model_name}();
-                    ${model_name_firstSmall}.set${model_name}Name(${model_name_firstSmall}Name);
-                    ${model_name_firstSmall}.setComment(comment);
-                    ${model_name_firstSmall}.set${model_name}NameCN(${model_name_firstSmall}NameCN);
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, ${model_name_firstSmall}, "添加角色", "");
-                    ${model_name_firstSmall}Service.save${model_name}(${model_name_firstSmall});
+                    <#--${model_name} ${model_name_firstSmall} = new ${model_name}();-->
+                    <#--${model_name_firstSmall}.set${model_name}Name(${model_name_firstSmall}Name);-->
+                    <#--${model_name_firstSmall}.setComment(comment);-->
+                    <#--${model_name_firstSmall}.set${model_name}NameCN(${model_name_firstSmall}NameCN);-->
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _${model_name_firstSmall}, "添加角色", "");
+                    ${model_name_firstSmall}Service.save${model_name}(_${model_name_firstSmall});
                 }
                 break;
             case "delete":

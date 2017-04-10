@@ -1,5 +1,6 @@
 package net.liuxuan.SprKi.service;
 
+import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.ProjectProgress;
 
 import java.util.List;
@@ -17,4 +18,6 @@ import java.util.List;
  */
 public interface IndexService {
     List<ProjectProgress> getProjectProgressList();
+
+    List<NewsPage> getNewsPageList();
 }

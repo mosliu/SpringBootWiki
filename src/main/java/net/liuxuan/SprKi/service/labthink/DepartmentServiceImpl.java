@@ -31,7 +31,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getAllDepartment() {
-        return departmentRepository.findBydepartmentNameNot(JPAConstants.DELETEDOBJECTSTR);
+
+        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
+//        return departmentRepository.findBydepartmentNameNot(JPAConstants.DELETEDOBJECTSTR);
 //        return departmentRepository.findAll();
     }
 

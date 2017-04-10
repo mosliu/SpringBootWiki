@@ -1,10 +1,12 @@
 package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
+import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.labthink.TicketContentRepository;
+import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
@@ -40,6 +42,10 @@ public class TicketContentServiceImpl implements TicketContentService {
 
     private static Logger log = LoggerFactory.getLogger(TicketContentServiceImpl.class);
 
+    public  static final  String TICKETCATEGORY = TicketContent.class.getSimpleName();
+    @Autowired
+    CMSCategoryService cmsCategoryService;
+
     @Autowired
     TicketContentRepository ticketContentRepository;
 
@@ -58,6 +64,7 @@ public class TicketContentServiceImpl implements TicketContentService {
             log.trace("===saveTicketContent logged ,ticket is null", ticket);
             ticket.setAuthor(u);
             ticket.setLastUpdateDate(now);
+            ticket.setCategory(cmsCategoryService.getOrCreateOneByName(TICKETCATEGORY));
             ticket.setPublishDate(now);
         } else {
             load = ticketContentRepository.getOne(ticket.getId());

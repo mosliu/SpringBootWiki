@@ -43,14 +43,12 @@ public class FAQContent extends CMSContent{
     protected Devices devices;//设备
 
     /**
-     * The Category.
+     * 设备类型.
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "deviceTypeBy_")
     @JoinColumn(name="devicetype")
-    protected DeviceType deviceType; // 栏目
-
-
+    protected DeviceType deviceType; // 设备类型
 
     @Lob
     @Field

@@ -60,16 +60,16 @@
                                         <label>作者</label>
                                         <input type="text" th:field="*{user}" class="form-control"/>
                                     </div>
-                                    <div class="col-md-3 col-sm-3">
-                                        <label>分类</label>
-                                        <select th:field="*{category}" class="form-control pointer">
-                                            <option value="-1">ALL</option>
-                                            <option th:each="type : ${Category_list}"
-                                                    th:value="${type.id}"
-                                                    th:text="${'category:' + type.name}">FAQ
-                                            </option>
-                                        </select>
-                                    </div>
+                                    <!--<div class="col-md-3 col-sm-3">-->
+                                        <!--<label>分类</label>-->
+                                        <!--<select th:field="*{category}" class="form-control pointer">-->
+                                            <!--<option value="-1">ALL</option>-->
+                                            <!--<option th:each="type : ${Category_list}"-->
+                                                    <!--th:value="${type.id}"-->
+                                                    <!--th:text="${'category:' + type.name}">FAQ-->
+                                            <!--</option>-->
+                                        <!--</select>-->
+                                    <!--</div>-->
                                     <div class="col-md-3 col-sm-3">
                                         <label>来源部门</label>
                                         <select th:field="*{department}" class="form-control pointer">
@@ -112,7 +112,7 @@
                     <thead>
                     <tr>
                         <th class="table-checkbox"></th>
-                        <th>category</th>
+                        <!--<th>category</th>-->
                         <th>title</th>
                         <th>department</th>
                         <th>devices</th>
@@ -126,7 +126,7 @@
                     <tbody>
                     <tr th:each="item : ${alllist}">
                         <td><span class="row-details row-details-close"></span></td>
-                        <td th:text="${item?.category?.name}">Doe</td>
+                        <!--<td th:text="${item?.category?.name}">Doe</td>-->
                         <td th:text="${item?.title}">John</td>
                         <td th:text="${item?.department?.departmentName}">Nobody knows!</td>
                         <td th:text="${item?.devices?.devicename}">pc</td>
@@ -239,7 +239,7 @@
 //                },
                 "columns": [
                     {},
-                    {"data": "category.name"},
+//                    {"data": "category.name"},
                     {"data": "title",
                         "render": function (data, type, full, meta) {
                             return '<a href="/ticket/show/' + full.id + '"> '+ data +' </a>';

@@ -4,17 +4,18 @@ import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
-import net.liuxuan.SprKi.repository.CMSCategoryRepository;
-import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
-import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
+import net.liuxuan.SprKi.service.CMSCategoryService;
+import net.liuxuan.SprKi.service.labthink.DepartmentService;
+import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
+import net.liuxuan.SprKi.service.labthink.DevicesService;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
-import net.liuxuan.spring.constants.JPAConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,14 +52,28 @@ import java.util.*;
 public class FAQController {
     private static Logger log = LoggerFactory.getLogger(FAQController.class);
 
-    @Resource
-    DevicesRepository devicesRepository;
+//    @Resource
+//    DevicesRepository devicesRepository;
 
-    @Resource
-    DepartmentRepository departmentRepository;
+    @Autowired
+    DevicesService devicesService;
 
-    @Resource
-    CMSCategoryRepository cmsCategoryRepository;
+//    @Resource
+//    DepartmentRepository departmentRepository;
+
+    @Autowired
+    DepartmentService departmentService;
+
+//    @Resource
+//    CMSCategoryRepository cmsCategoryRepository;
+
+    @Autowired
+    CMSCategoryService cmsCategoryService;
+
+
+    @Autowired
+    DeviceTypeService deviceTypeService;
+
 
     @Autowired
     FAQContentService faqContentService;
@@ -73,6 +87,7 @@ public class FAQController {
 //        model.put("message", "Editor");
         model.put("title", "FAQ 编辑界面");
         FAQContent faq = new FAQContent();
+        faq.setQuestionDate(new Date());
         faq.setDescription("dddddddddddddddd");
         model.put("faq", faq);
 //        devicesRepository.findAll();
@@ -252,18 +267,28 @@ public class FAQController {
 
     @ModelAttribute("Devices_list")
     public List<Devices> Deviceslist() {
-        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
+        return devicesService.getAllDevices();
+//        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
+    }
+
+    @ModelAttribute("DevicesType_list")
+    public List<DeviceType> DevicesTypelist() {
+        return deviceTypeService.getAllDeviceType();
+//        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
     }
 
     @ModelAttribute("Department_list")
     public List<Department> Departmentlist() {
-        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
+        return departmentService.getAllDepartment();
+//        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
     }
 
-    @ModelAttribute("Category_list")
-    public List<CMSCategory> Categorylist() {
-        return cmsCategoryRepository.findByNameNotOrderByName(JPAConstants.DELETEDOBJECTSTR);
-    }
+//    @ModelAttribute("Category_list")
+//    public List<CMSCategory> Categorylist() {
+//        return cmsCategoryService.getAllCMSCategory();
+////        return cmsCategoryRepository.findByNameNotOrderByName(JPAConstants.DELETEDOBJECTSTR);
+//    }
+
 
 //    @Autowired
 //    CMSCategoryEditor cmsCategoryEditor;

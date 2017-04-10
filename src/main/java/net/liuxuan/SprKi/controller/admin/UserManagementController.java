@@ -7,7 +7,6 @@ import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
-import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
@@ -92,7 +90,7 @@ public class UserManagementController {
                     redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
 //                    model.put("error","无用户，请检查进入入口");
                 }
-                List<String> authslist = userDetailInfoService.listAuths();
+                List<String> authslist = userDetailInfoService.listRoles();
                 redirectAttributesModelMap.put("user", userDetailInfo);
                 redirectAttributesModelMap.put("authslist", authslist);
                 model.put("user", userDetailInfo);
@@ -171,7 +169,7 @@ public class UserManagementController {
                 RequestHelper.showParameters(request.getParameterMap());
                 String[] authArrays = request.getParameterValues("authArray");
                 String newauth = request.getParameter("newAuth");
-                Map<String, Object> map = userDetailInfoService.updateAuths(userDetailInfo, authArrays, newauth);
+                Map<String, Object> map = userDetailInfoService.updateRoles(userDetailInfo, authArrays, newauth);
 
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_AUTH,newauth,"更新用户权限："+userDetailInfo.getDbUser().getUsername(),"");
                 rtnData.putAll(map);
