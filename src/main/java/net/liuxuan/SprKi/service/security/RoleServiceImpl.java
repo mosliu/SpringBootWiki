@@ -14,6 +14,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,7 @@ import java.util.*;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "roles")
 public class RoleServiceImpl implements RoleService {
 
     private static Logger log = LoggerFactory.getLogger(RoleServiceImpl.class);
@@ -43,6 +46,7 @@ public class RoleServiceImpl implements RoleService {
     UrlAuthRepository urlAuthRepository;
 
     @Override
+    @Cacheable
     public List<Role> getAllRole() {
         return roleRepository.findByDisabledFalse();
     }
@@ -59,9 +63,15 @@ public class RoleServiceImpl implements RoleService {
      * @param id must not be {@literal null}.
      * @return the entity with the given id or {@literal null} if none found
      */
+    @Cacheable
     public Role findRoleById(String id) {
         Role role = roleRepository.findOne(id);
         return role;
+    }
+
+    @Cacheable
+    public List<String> findAllRoleNames(){
+        return roleRepository.findAllRoleNames();
     }
 
     public boolean deleteRoleById(String id) {

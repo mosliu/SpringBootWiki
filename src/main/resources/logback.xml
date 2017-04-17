@@ -4,7 +4,7 @@
   -->
 
 <!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
-<configuration debug="false" scan="true" scanPeriod="10 seconds">
+<configuration debug="false" scan="false" scanPeriod="10 seconds">
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
     <conversionRule conversionWord="wex"
                     converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>

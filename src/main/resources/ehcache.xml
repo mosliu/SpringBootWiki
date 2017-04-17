@@ -1,0 +1,68 @@
+<config
+        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+        xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+
+    <cache-template name="heap-cache">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <listeners>
+            <listener>
+                <class>net.liuxuan.spring.cache.ehcache.EventLogger</class>
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                <event-ordering-mode>UNORDERED</event-ordering-mode>
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>UPDATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>REMOVED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+            </listener>
+        </listeners>
+        <resources>
+            <heap unit="entries">500</heap>
+            <offheap unit="MB">100</offheap> <!-- unit of measure is case sensitive! -->
+        </resources>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache-template>
+
+    <cache alias="NewsPage">
+        <expiry>
+            <ttl unit="seconds">600</ttl>
+        </expiry>
+        <heap unit="entries">200</heap>
+        <jsr107:mbeans enable-statistics="true"/>
+    </cache>
+
+    <cache alias="roles" uses-template="heap-cache">
+    </cache>
+    <cache alias="dbUsers" uses-template="heap-cache">
+    </cache>
+    <cache alias="users" uses-template="heap-cache">
+    </cache>
+    <cache alias="devices" uses-template="heap-cache">
+    </cache>
+    <cache alias="deviceKind" uses-template="heap-cache">
+    </cache>
+    <cache alias="deviceType" uses-template="heap-cache">
+    </cache>
+    <cache alias="category" uses-template="heap-cache">
+    </cache>
+    <cache alias="comment" uses-template="heap-cache">
+    </cache>
+    <cache alias="tag" uses-template="heap-cache">
+    </cache>
+    <cache alias="projectProgress" uses-template="heap-cache">
+    </cache>
+    <cache alias="sliderPics" uses-template="heap-cache">
+    </cache>
+    <cache alias="department" uses-template="heap-cache">
+    </cache>
+    <cache alias="faqContent" uses-template="heap-cache">
+    </cache>
+    <cache alias="ticketContent" uses-template="heap-cache">
+    </cache>
+
+
+</config>

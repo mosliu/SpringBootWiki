@@ -26,6 +26,8 @@ public interface RoleService {
 
     Role findRoleById(String id);
 
+    List<String> findAllRoleNames();
+
     boolean deleteRoleById(String id);
 
     boolean checkRoleExists(String rolename);

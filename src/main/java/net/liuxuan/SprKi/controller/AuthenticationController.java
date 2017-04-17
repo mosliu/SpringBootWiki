@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.controller;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
+import com.google.code.kaptcha.impl.DefaultKaptcha;
 import net.liuxuan.SprKi.service.security.SecurityUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -200,6 +201,10 @@ public class AuthenticationController {
         // return a jpeg
         response.setContentType("image/jpeg");
 
+
+        //((DefaultKaptcha)captchaProducer).getConfig().
+
+
         // create the text for the image
         String capText = captchaProducer.createText();
         // store the text in the session
@@ -208,6 +213,8 @@ public class AuthenticationController {
         // against to make sure someone hasn't taken too long to enter
         // their kaptcha
         session.setAttribute(Constants.KAPTCHA_SESSION_CONFIG_DATE, new Date());
+
+
 
         BufferedImage bi = captchaProducer.createImage(capText);
 

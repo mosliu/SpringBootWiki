@@ -97,6 +97,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login","/ui/**","/uploaded/**","/commons/**", "/images/**", "/tinymce/**", "/ueditor/**", "/css/**", "/fonts/**", "/js/**", "/favicon.ico").permitAll()
                 .antMatchers("/msg/**").hasRole("USER")
+                .antMatchers("/admins/**").hasAnyRole("ADMIN")
                 .antMatchers("/editor/**").authenticated();
 //                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
 //                .anyRequest().authenticated().and()
@@ -151,6 +152,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.eraseCredentials(false);
 //        auth.jdbcAuthentication()
 //                .dataSource(this.dataSource);
 //        auth.userDetailsService(securityUserDetailsService);

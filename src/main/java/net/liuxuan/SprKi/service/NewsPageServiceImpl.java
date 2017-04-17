@@ -9,6 +9,8 @@ import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import net.liuxuan.SprKi.repository.NewsPageRepository;
@@ -26,6 +28,7 @@ import net.liuxuan.SprKi.entity.NewsPage;
 */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "NewsPage")
 public class NewsPageServiceImpl implements NewsPageService{
 
     private static Logger log = LoggerFactory.getLogger(NewsPageServiceImpl.class);
@@ -70,6 +73,7 @@ public class NewsPageServiceImpl implements NewsPageService{
     }
 
     @Override
+    @Cacheable
     public NewsPage findById(Long id){
         NewsPage newsPage = newsPageRepository.findOne(id);
         return newsPage;
@@ -95,6 +99,7 @@ public class NewsPageServiceImpl implements NewsPageService{
 //        }
 //    }
     @Override
+    @Cacheable
     public List<NewsPage> getAllNewsPage() {
         return newsPageRepository.findByDisabledFalse();
     }

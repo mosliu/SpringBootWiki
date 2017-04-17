@@ -39,6 +39,7 @@ public class NewsController {
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
+        //TODO 全部返回，有所不对。应做分页展示。
         NewsPage obj = newsPageService.findById(id);
         if (obj == null) {
             throw new ContentNotFoundException("", id);

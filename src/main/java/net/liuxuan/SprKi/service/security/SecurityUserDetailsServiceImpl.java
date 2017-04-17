@@ -7,6 +7,8 @@ import net.liuxuan.spring.security.CaptchaAuthenticationDetails;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityMessageSource;
@@ -40,8 +42,8 @@ import java.util.Set;
  */
 
 @Service(value = "securityUserDetailsService")
+//@CacheConfig(cacheNames = "users")
 public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsService {
-
 
     private static Logger log = LoggerFactory.getLogger(SecurityUserDetailsServiceImpl.class);
 
@@ -56,6 +58,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
     //    @Autowired
     @Override
+    @Cacheable(cacheNames = "users",key="#username")
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
@@ -79,6 +82,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
      * @param username
      * @return
      */
+    @Cacheable(cacheNames = "users",key="#username")
     public DbUser getOneUser(String username) {
         if (StringUtils.isEmpty(username)) {
             return null;

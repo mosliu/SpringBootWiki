@@ -22,31 +22,61 @@ import org.springframework.security.web.authentication.WebAuthenticationDetails;
 public class CaptchaDaoAuthenticationProvider extends DaoAuthenticationProvider {
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
-                                                  UsernamePasswordAuthenticationToken token)
+                                                  UsernamePasswordAuthenticationToken authentication)
             throws AuthenticationException {
-        Object obj = token.getDetails();
+        Object obj = authentication.getDetails();
         if (!(obj instanceof CaptchaAuthenticationDetails)) {
             //HACK method,用于后台登录验证
-            if(obj instanceof WebAuthenticationDetails){
-                super.additionalAuthenticationChecks(userDetails, token);
+            if (obj instanceof WebAuthenticationDetails) {
+//                super.additionalAuthenticationChecks(userDetails, authentication);
                 return;
+            } else {
+                throw new InsufficientAuthenticationException(
+                        "Captcha details not found.");
             }
-
-            throw new InsufficientAuthenticationException(
-                    "Captcha details not found.");
-        }
-
-        CaptchaAuthenticationDetails captchaDetails = (CaptchaAuthenticationDetails) obj;
-        String captcha = captchaDetails.getCaptcha();
-        if (captcha != null) {
-            String expected = captcha;
-            String actual = captchaDetails.getAnswer();
-            if (!expected.equals(actual)) {
+        } else {
+            CaptchaAuthenticationDetails captchaDetails = (CaptchaAuthenticationDetails) obj;
+            String captcha = captchaDetails.getCaptcha();
+            if (captcha != null) {
+                String expected = captcha;
+                String actual = captchaDetails.getAnswer();
+                if (!expected.equals(actual)) {
 //                token=null;
-                token.eraseCredentials();
-                throw new BadCaptchaException("Captcha does not match.");
+                    authentication.eraseCredentials();
+                    throw new BadCaptchaException("Captcha does not match.");
+                }
             }
+//            super.additionalAuthenticationChecks(userDetails, authentication);
         }
-        super.additionalAuthenticationChecks(userDetails, token);
+
+        //no longer use super.additionalAuthenticationChecks(userDetails, token);
+
+        Object salt = null;
+
+        if (super.getSaltSource() != null) {
+            salt = super.getSaltSource().getSalt(userDetails);
+        }
+        if (authentication.getCredentials() == null) {
+            logger.debug("Authentication failed: no credentials provided");
+
+            throw new BadCredentialsException(messages.getMessage(
+                    "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                    "Bad credentials"));
+        }
+
+        String presentedPassword = authentication.getCredentials().toString();
+
+        if (!super.getPasswordEncoder().isPasswordValid(userDetails.getPassword(),
+                presentedPassword, salt)) {
+            logger.debug("Authentication failed: password does not match stored value");
+
+            throw new BadCredentialsException(messages.getMessage(
+                    "AbstractUserDetailsAuthenticationProvider.badCredentials",
+                    "Bad credentials"));
+        }
+
+
     }
+
+
 }

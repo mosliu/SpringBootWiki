@@ -8,6 +8,9 @@ package net.liuxuan.SprKi.controller;
 import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.ProjectProgress;
 import net.liuxuan.SprKi.service.IndexService;
+import net.liuxuan.spring.Helper.SpringContextHelper;
+import net.liuxuan.spring.Helper.pdf.Html2Pdf;
+import org.apache.catalina.connector.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +40,16 @@ public class IndexController {
 
     @RequestMapping("/")
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
-    public String home(Map<String, Object> model) {
+    public String home(HttpServletRequest request,Map<String, Object> model) {
         log.debug("-Access IndexController.home() Method");
 //        System.out.println(new File(".").getAbsolutePath());
+//        log.debug(SpringContextHelper.getApplicationContext().getApplicationName());
+
+//        try {
+//            Html2Pdf.createPdf(request);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         //insert project services
         List<ProjectProgress> progressList = indexService.getProjectProgressList();
@@ -54,6 +64,9 @@ public class IndexController {
         model.put("newsPageList", newsPageList);
         return "index";
     }
+
+
+
 
     @RequestMapping("/ex")
     public String homeex(Map<String, Object> model) throws MissingServletRequestPartException {

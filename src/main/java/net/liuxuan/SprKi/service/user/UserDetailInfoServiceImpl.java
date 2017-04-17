@@ -9,12 +9,15 @@ import net.liuxuan.SprKi.repository.security.AuthoritiesRepository;
 import net.liuxuan.SprKi.repository.security.RoleRepository;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
+import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -36,6 +39,7 @@ import java.util.*;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "dbUsers")
 public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     private static Logger log = LoggerFactory.getLogger(UserDetailInfoServiceImpl.class);
@@ -54,8 +58,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     /**
      * The Users repository.
      */
+//    @Autowired
+//    RoleRepository roleRepository;
     @Autowired
-    RoleRepository roleRepository;
+    RoleService roleService;
 
     /**
      * The Authorities repository.
@@ -145,7 +151,9 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             //new
             Authorities auth = new Authorities();
             auth.setUsername(u);
-            Role userrole = roleRepository.findOne("ROLE_USER");
+
+//            Role userrole = roleRepository.findOne("ROLE_USER");
+            Role userrole = roleService.findRoleById("ROLE_USER");
 
             auth.setRolename(userrole);
 //            auth.setAuthority("");
@@ -182,6 +190,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
+    @Cacheable
     public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser) {
         Assert.notNull(dbUser, "传入的users不能为空");
         Assert.notNull(dbUser.getUsername(), "传入的users的用户名不能为空");
@@ -201,6 +210,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         return detailInfo;
     }
 
+    @Cacheable
     @Override
     public UserDetailInfo findUserDetailInfoById(Long id) {
         UserDetailInfo userDetailInfo = userDetailInfoRepository.findOne(id);
@@ -229,17 +239,20 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
+    @Cacheable
     public List<DbUser> listAllUsers() {
 //        return usersRepository.findAll();
         return usersRepository.findByEnabled(true);
     }
 
     @Override
+    @Cacheable
     public List<String> listRoles() {
 //        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
 //        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
 //        return distinctAuthority;
-        List<String> rtnl = roleRepository.findAllRoles();
+//        List<String> rtnl = roleRepository.findAllRoleNames();
+        List<String> rtnl = roleService.findAllRoleNames();
         return rtnl;
 //        return usersRepository.findAll();
     }
@@ -307,7 +320,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
                 Authorities new_authorities = new Authorities();
                 new_authorities.setUsername(dbUser);
 //                new_authorities.setAuthority(s_newauth);
-                Role role = roleRepository.getOne(s_newauth);
+//                Role role = roleRepository.getOne(s_newauth);
+                Role role = roleService.findRoleById(s_newauth);
                 new_authorities.setRolename(role);
 
                 //authoritiesRepository.save(new_authorities);
@@ -373,7 +387,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         role.setRoleDescribe(newauth);
         role.setDisabled(false);
         role.setComment(newauth);
-        roleRepository.save(role);
+        roleService.saveRole(role);
+//        roleRepository.save(role);
         return role;
     }
 
