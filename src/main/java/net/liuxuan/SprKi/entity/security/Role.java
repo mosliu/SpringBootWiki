@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.entity.security;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_Role")
+@IgnoreSizeOf
 public class Role {
 
     @Id

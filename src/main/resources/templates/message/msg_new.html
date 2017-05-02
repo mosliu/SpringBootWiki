@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('editor');
+        function doSubmit1() {
+//            document.faqform.answer.value = 111
+//            $('input[name=answer]:first').val(ue.getContent());
+            return jQuery('form.validate-plugin').validate({
+                        submitHandler: function (form) {
+                            $("#submitBtn").attr("disabled", true);
+                            //alert("submitted");
+                            form.submit();
+                        }
+                    }
+
+            );
+        }
+    </script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li><a th:href="@{/faq/list}">支持信息列表</a></li>
+        <li class="active">支持信息编辑</li>
+    </ol>
+    <h1 th:text="${title}">FAQ 编辑界面</h1>
+    <div class="faqs-form">
+        <form th:action="@{/faq/post}" action="/login" id="faqform" name="faqform" method="POST"
+              class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
+              th:object="${faq}">
+
+            <fieldset>
+                <!--title-->
+                <input type="hidden" th:field="*{Id}" />
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>名称</label>
+                            <div class="fancy-form">
+                                <i class="fa fa-list-alt"></i>
+                                <input type="text" th:field="*{title}"  class="form-control required"/>
+                                <!-- tooltip - optional, bootstrap tooltip can be used instead -->
+                                <span class="fancy-tooltip top-left">
+                                <!-- positions: .top-left | .top-right -->
+                                    <em>定义一个名称</em>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <!--<div class="col-md-4 col-sm-4">-->
+                            <!--<label>分类 *</label>-->
+
+                            <!--<select th:field="*{category}" class="form-control pointer required">-->
+                                <!--<option th:each="type : ${Category_list}"-->
+                                        <!--th:value="${type.id}"-->
+                                        <!--th:text="${type.name}">FAQ</option>-->
+                            <!--</select>-->
+
+                        <!--</div>-->
+                        <div class="col-md-4 col-sm-4">
+                            <label>设备类型 *</label>
+
+                            <select th:field="*{deviceType}" class="form-control pointer required">
+                                <option th:each="type : ${DevicesType_list}"
+                                        th:value="${type.id}"
+                                        th:text="${type.deviceTypeName}">力值设备</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <label>来源部门 *</label>
+
+                            <select th:field="*{department}" class="form-control pointer required">
+                                <option th:each="type : ${Department_list}"
+                                        th:value="${type.id}"
+                                        th:text="${type.departmentName}">售后</option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <label>设备 *</label>
+
+                            <select th:field="*{devices}" class="form-control pointer required">
+                                <option th:each="type : ${Devices_list}"
+                                        th:value="${type.id}"
+                                        th:text="${type.devicename+':'+ type.deviceType.deviceTypeName}">W3/230</option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+
+                        <div class="col-md-4 col-sm-4">
+                            <label>提问时间 *</label>
+                            <!--th:value="${#dates.createNow()}"-->
+                            <input type="text" th:field="*{questionDate}"
+                                   class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
+                                   data-RTL="false" readonly="true"/>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label>标准</label>
+                            <input type="text" th:field="*{standard}"  class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>问题 *</label>
+                            <textarea th:field="*{question}"  class="summernote form-control required" data-height="200" data-lang="en-US"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>答复 *</label>
+                            <textarea id="editor" type="text/plain" style="height:500px;" th:field="*{answer}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" id="submitBtn" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
+                        提交内容
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div></div>
+
+</div>
+
+</body>
+</html>

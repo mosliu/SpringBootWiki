@@ -3,11 +3,10 @@ package net.liuxuan.SprKi.service.security;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
-import net.liuxuan.spring.security.CaptchaAuthenticationDetails;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.core.GrantedAuthority;
@@ -58,7 +57,7 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
     //    @Autowired
     @Override
-    @Cacheable(cacheNames = "users",key="#username")
+    @Cacheable(cacheNames = "userDetails", key = "#username")
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
 
@@ -79,10 +78,11 @@ public class SecurityUserDetailsServiceImpl implements SecurityUserDetailsServic
 
     /**
      * Get One user from database
+     *
      * @param username
      * @return
      */
-    @Cacheable(cacheNames = "users",key="#username")
+    @Cacheable(cacheNames = "dbUsers", key = "#username")
     public DbUser getOneUser(String username) {
         if (StringUtils.isEmpty(username)) {
             return null;

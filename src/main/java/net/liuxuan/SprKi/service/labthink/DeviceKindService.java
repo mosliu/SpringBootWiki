@@ -32,6 +32,8 @@ public interface DeviceKindService {
      */
     boolean checkDeviceKindExists(String deviceKindName);
 
+    List<DeviceKind> getDeviceKindsByName(String deviceKindName);
+
     /**
      * Save device kind.
      *

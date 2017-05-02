@@ -5,6 +5,7 @@ import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Indexed;
@@ -29,6 +30,7 @@ import org.hibernate.search.annotations.Indexed;
 //@Analyzer: 告诉Hibernate Search来标记它的域以及更新Lucene索引的时候使用哪个Lucene分析器。
 @Analyzer(impl = ChineseWordAnalyzer.class)
 @Table(name = "Sprki_CMS_NewsPage")
+@IgnoreSizeOf
 public class NewsPage extends CMSContent{
 
 }

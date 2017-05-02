@@ -35,6 +35,7 @@ public interface DevicesService {
      */
     boolean checkDevicesExists(String devicename);
 
+    List<Devices> getDevicesbyName(String devicename);
     /**
      * Save devices.
      *
@@ -49,7 +50,7 @@ public interface DevicesService {
      * @return the boolean
      */
     boolean deleteDevicesById(String sid);
-
+    boolean deleteDevicesById(Long id);
     /**
      * Gets devices by id.
      *

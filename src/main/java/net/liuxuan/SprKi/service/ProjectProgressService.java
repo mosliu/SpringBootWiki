@@ -27,4 +27,5 @@ public interface ProjectProgressService {
 
     List<ProjectProgress> getAllProjectProgress();
 
+    List<ProjectProgress> getProjectProgressesByName(String projectProgressname);
 }

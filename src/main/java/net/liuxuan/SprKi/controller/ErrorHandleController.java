@@ -36,10 +36,9 @@ import java.util.Map;
  * YYYY-MM月DD |    Author      |	 Change Description
  * 2016/2/15 |    Moses       |     Created
  */
-
 //注意使用注解@ControllerAdvice作用域是全局Controller范围
 //可应用到所有@RequestMapping类或方法上的@ExceptionHandler、@InitBinder、@ModelAttribute，在这里是@ExceptionHandler
-@Controller
+//@Controller
 @ControllerAdvice
 public class ErrorHandleController {
 //public class ErrorHandleController implements ErrorController {
@@ -47,6 +46,15 @@ public class ErrorHandleController {
     private static final String ERROR_PATH = "/error";
     private static Logger log = LoggerFactory.getLogger(ErrorHandleController.class);
 
+    /**
+     * Handle error model and view.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param handler  the handler
+     * @param ex       the ex
+     * @return the model and view
+     */
 //    @RequestMapping(value = ERROR_PATH)
     public ModelAndView handleError(HttpServletRequest request,
                                     HttpServletResponse response, Object handler, Exception ex) {
@@ -65,8 +73,8 @@ public class ErrorHandleController {
     /**
      * 处理碰到的找不到的页面，提示404错误
      *
-     * @param model
-     * @return
+     * @param model the model
+     * @return string
      */
 //    @RequestMapping("*")
 //    public String handle404(Map<String, Object> model) {
@@ -96,6 +104,14 @@ public class ErrorHandleController {
         return ERROR_PATH;
     }
 
+    /**
+     * Handle all exception model and view.
+     *
+     * @param req the req
+     * @param ex  the ex
+     * @return the model and view
+     * @throws Exception the exception
+     */
     @ExceptionHandler(Exception.class)
     public ModelAndView handleAllException(HttpServletRequest req, Exception ex) throws Exception {
         log.error("-ErrorHandleController.handleAllException() invoked");
@@ -124,7 +140,15 @@ public class ErrorHandleController {
     }
 
 
-    //    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
+    /**
+     * Handle 404 exception model and view.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param ex       the ex
+     * @return the model and view
+     */
+//    @ExceptionHandler({NoHandlerFoundException.class,NoSuchRequestHandlingMethodException.class})
     public ModelAndView handle404Exception(HttpServletRequest request, HttpServletResponse response, Exception ex) {
 
         log.error("-ErrorHandleController.handle404Exception() invoked");
@@ -142,10 +166,12 @@ public class ErrorHandleController {
     /**
      * 处理访问受限
      *
-     * @param request request
+     * @param request  request
      * @param response response
-     * @param ex exception
-     * @return model
+     * @param ex       exception
+     * @return model model and view
+     * @throws ServletException the servlet exception
+     * @throws IOException      the io exception
      */
     @ExceptionHandler(AccessDeniedException.class)
     public ModelAndView handleAccessDeniedException(HttpServletRequest request, HttpServletResponse response, Exception ex) throws ServletException, IOException {
@@ -173,8 +199,12 @@ public class ErrorHandleController {
     }
 
 
-
-
+    /**
+     * Handle method not supported exception model and view.
+     *
+     * @param ex the ex
+     * @return the model and view
+     */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ModelAndView handleMethodNotSupportedException(Exception ex) {
         log.error("handleMethodNotSupportedException() invoked");

@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.entity;
 import lombok.Data;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.DbUser;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Content")
 @Inheritance(strategy = InheritanceType.JOINED)
+@IgnoreSizeOf
 public class CMSContent {
     /**
      * The Id.

@@ -1,15 +1,16 @@
 package net.liuxuan.SprKi.service.labthink;
 
-import net.liuxuan.SprKi.entity.labthink.Department;
-import net.liuxuan.SprKi.entity.labthink.DeviceKind;
-import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.repository.labthink.DeviceKindRepository;
 import net.liuxuan.SprKi.repository.labthink.DeviceTypeRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
 import net.liuxuan.spring.constants.JPAConstants;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +55,7 @@ public class DevicesServiceImpl implements DevicesService {
      * @return the all devices
      */
     @Override
+    @Cacheable(cacheNames = "devices", key = "'devices_list'")
     public List<Devices> getAllDevices() {
 //        return devicesRepository.findByDevicenameNot(JPAConstants.DELETEDOBJECTSTR);
         return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
@@ -68,12 +70,18 @@ public class DevicesServiceImpl implements DevicesService {
     @Override
     public boolean checkDevicesExists(String devicename) {
 //        List<Devices> list = devicesRepository.findByDevicename(devicename);
-        List<Devices> list = devicesRepository.findByDevicenameOrDevicenameENOrDevicenameCN(devicename,devicename,devicename);
+        List<Devices> list = getDevicesbyName(devicename);
         if (list.size() > 0) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    @Cacheable(cacheNames = "devices", key = "#devicename")
+    public List<Devices> getDevicesbyName(String devicename) {
+        return devicesRepository.findByDevicenameOrDevicenameENOrDevicenameCN(devicename, devicename, devicename);
     }
 
     /**
@@ -82,6 +90,7 @@ public class DevicesServiceImpl implements DevicesService {
      * @param obj the devices
      */
     @Override
+    @CachePut(cacheNames = "devices", key = "#obj.id")
     public void saveDevices(Devices obj) {
         devicesRepository.save(obj);
     }
@@ -96,15 +105,22 @@ public class DevicesServiceImpl implements DevicesService {
     public boolean deleteDevicesById(String sid) {
         if (NumberUtils.isNumber(sid)) {
             Long id = Long.parseLong(sid);
-            Devices obj = devicesRepository.getOne(id);
-            if (obj != null) {
-                obj.setDevicename(JPAConstants.DELETEDOBJECTSTR);
-                obj.setDevicenameCN(JPAConstants.DELETEDOBJECTSTR);
-                obj.setDevicenameEN(JPAConstants.DELETEDOBJECTSTR);
+            return deleteDevicesById(id);
+        }
+        return false;
+    }
+
+    @Override
+    @CacheEvict(cacheNames = "devices", key = "#id")
+    public boolean deleteDevicesById(Long id) {
+        Devices obj = devicesRepository.getOne(id);
+        if (obj != null) {
+            obj.setDevicename(JPAConstants.DELETEDOBJECTSTR);
+            obj.setDevicenameCN(JPAConstants.DELETEDOBJECTSTR);
+            obj.setDevicenameEN(JPAConstants.DELETEDOBJECTSTR);
 //                obj.setDepartmentName(JPAConstants.DELETEDOBJECTSTR);
 //                obj.setDepartmentNameCN(JPAConstants.DELETEDOBJECTSTR);
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -116,12 +132,11 @@ public class DevicesServiceImpl implements DevicesService {
      * @return the devices by id
      */
     @Override
+    @Cacheable(cacheNames = "devices", key = "#id")
     public Devices getDevicesById(Long id) {
         Devices obj = devicesRepository.getOne(id);
         return obj;
     }
-
-
 
 
 }

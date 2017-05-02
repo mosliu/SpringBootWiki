@@ -9,9 +9,13 @@ import net.liuxuan.SprKi.repository.labthink.TicketContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,6 +55,7 @@ public class TicketContentServiceImpl implements TicketContentService {
 
 
     @Override
+    @CachePut(cacheNames = "ticketContent", key = "#faq.id", condition = "#{faq.id != null}")
     public void saveTicketContent(TicketContent ticket) {
 
         TicketContent load = null;
@@ -87,6 +92,7 @@ public class TicketContentServiceImpl implements TicketContentService {
     }
 
     @Override
+    @Cacheable(cacheNames = "ticketContent", key="#dto")
     public List<TicketContent> findAllTicketContentsByDto(TicketSearchDTO dto) {
 
         if (dto.isAllNull()) {
@@ -138,12 +144,14 @@ public class TicketContentServiceImpl implements TicketContentService {
 
 
     @Override
+    @CacheEvict(cacheNames = "ticketContent",key="#id")
     public void deleteTicketContentById(Long id) {
         ticketContentRepository.findOne(id).setDisabled(true);
         //ticketContentRepository.delete(id);
     }
 
     @Override
+    @Cacheable(cacheNames = "ticketContent", key="#id")
     public TicketContent findById(Long id) {
         TicketContent ticket = ticketContentRepository.findOne(id);
         ticket.setClicks(ticket.getClicks() + 1);

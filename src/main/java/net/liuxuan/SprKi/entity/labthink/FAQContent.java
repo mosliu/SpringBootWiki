@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSContent;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.*;
 
@@ -31,6 +32,7 @@ import java.util.Date;
 @Analyzer(impl = ChineseWordAnalyzer.class)
 @Table(name = "Sprki_CMS_ContentFAQ")
 @PrimaryKeyJoinColumn(name = "FAQ_ID")
+@IgnoreSizeOf
 public class FAQContent extends CMSContent{
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)

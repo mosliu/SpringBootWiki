@@ -19,10 +19,16 @@ public interface DepartmentService {
     /**
      * Gets all department.
      *
-     * @return the all department
+     * @return the all departments
      */
     List<Department> getAllDepartment();
 
+    /**
+     * Gets departments by name
+     *
+     * @return the all department
+     */
+    List<Department> getDepartmentsByName(String departmentname);
     /**
      * Check department exists boolean.
      *
@@ -44,6 +50,11 @@ public interface DepartmentService {
      * @param sid the sid
      */
     boolean deleteDepartmentById(String sid);
-
+    /**
+     * Delete department by id.
+     *
+     * @param id the id
+     */
+    boolean deleteDepartmentById(Long id);
     Department getDepartmentById(Long id);
 }

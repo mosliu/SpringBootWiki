@@ -1,39 +1,40 @@
 package net.liuxuan.SprKi.service;
 
+import net.liuxuan.SprKi.entity.NewsPage;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.repository.NewsPageRepository;
+import net.liuxuan.spring.Helper.bean.BeanHelper;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
 
-import net.liuxuan.SprKi.entity.security.DbUser;
-import net.liuxuan.spring.Helper.bean.BeanHelper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import net.liuxuan.SprKi.repository.NewsPageRepository;
-import net.liuxuan.SprKi.entity.NewsPage;
 /**
-* Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
-* ***************************************************************************
-* 源文件名:  net.liuxuan.SprKi.service.NewsPageServiceImpl
-* 功能:
-* 版本:	@version 1.0
-* 编制日期: 2017/03/29 13:17
-* 修改历史: (主要历史变动原因及说明)
-* YYYY-MM-DD |    Author      |	 Change Description
-* 2017-03-29  |    Moses        |     Created
-*/
+ * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
+ * ***************************************************************************
+ * 源文件名:  net.liuxuan.SprKi.service.NewsPageServiceImpl
+ * 功能:
+ * 版本:	@version 1.0
+ * 编制日期: 2017/03/29 13:17
+ * 修改历史: (主要历史变动原因及说明)
+ * YYYY-MM-DD |    Author      |	 Change Description
+ * 2017-03-29  |    Moses        |     Created
+ */
 @Service
 @Transactional
-@CacheConfig(cacheNames = "NewsPage")
-public class NewsPageServiceImpl implements NewsPageService{
+public class NewsPageServiceImpl implements NewsPageService {
 
+    public static final String NEWSPAGECATEGORY = NewsPage.class.getSimpleName();
     private static Logger log = LoggerFactory.getLogger(NewsPageServiceImpl.class);
-    public  static final  String NEWSPAGECATEGORY = NewsPage.class.getSimpleName();
-
     @Autowired
     NewsPageRepository newsPageRepository;
     @Autowired
@@ -41,20 +42,21 @@ public class NewsPageServiceImpl implements NewsPageService{
 
 
     @Override
-    public void saveNewsPage(NewsPage newsPage){
+    @CachePut(cacheNames = "NewsPage", key = "#newsPage.id", condition = "#newsPage.id != null")
+    public NewsPage saveNewsPage(NewsPage newsPage) {
         DbUser u = ServiceHelper.getCurrentUsers();
         newsPage.setLastUpdateUser(u);
         Date now = new Date();
         newsPage.setLastUpdateDate(now);
         NewsPage load;
-        if(newsPage.getId()==null||!newsPageRepository.exists(newsPage.getId())){
+        if (newsPage.getId() == null || !newsPageRepository.exists(newsPage.getId())) {
             //新的
             log.trace("===saveNewsPage:new", newsPage);
             newsPage.setAuthor(u);
             newsPage.setPublishDate(now);
             newsPage.setTitle(newsPage.getFullTitle());
             newsPage.setCategory(cmsCategoryService.getOrCreateOneByName(NEWSPAGECATEGORY));
-        }else{
+        } else {
             load = newsPageRepository.getOne(newsPage.getId());
             try {
                 log.trace("===saveNewsPage logged ,the value Before COPY is : {}", newsPage);
@@ -69,18 +71,20 @@ public class NewsPageServiceImpl implements NewsPageService{
             }
         }
 
-        newsPageRepository.save(newsPage);
+        return newsPageRepository.save(newsPage);
+
     }
 
     @Override
-    @Cacheable
-    public NewsPage findById(Long id){
+    @Cacheable(cacheNames = "NewsPage", key = "#p0")
+    public NewsPage findById(Long id) {
         NewsPage newsPage = newsPageRepository.findOne(id);
         return newsPage;
     }
 
     @Override
-    public boolean deleteNewsPageById(Long id){
+    @CacheEvict(cacheNames = "NewsPage", allEntries = true)
+    public boolean deleteNewsPageById(Long id) {
         NewsPage newsPage = newsPageRepository.getOne(id);
         if (newsPage != null) {
             newsPage.setDisabled(true);
@@ -89,7 +93,7 @@ public class NewsPageServiceImpl implements NewsPageService{
         return false;
     }
 
-//    @Override
+    //    @Override
 //    public boolean checkNewsPageExists(String newsPagename){
 //        List<NewsPage> list = newsPageRepository.findByNewsPageName(newsPagename);
 //        if (list.size() > 0) {
@@ -99,7 +103,7 @@ public class NewsPageServiceImpl implements NewsPageService{
 //        }
 //    }
     @Override
-    @Cacheable
+    @Cacheable(cacheNames = "NewsPage", key = "'list'")
     public List<NewsPage> getAllNewsPage() {
         return newsPageRepository.findByDisabledFalse();
     }

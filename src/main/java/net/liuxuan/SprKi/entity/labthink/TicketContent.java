@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.entity.labthink;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
@@ -31,6 +32,7 @@ import java.util.Date;
 @Analyzer(impl = ChineseWordAnalyzer.class)
 @Table(name = "Sprki_CMS_ContentTicket")
 @PrimaryKeyJoinColumn(name = "Ticket_ID")
+@IgnoreSizeOf
 public class TicketContent extends CMSContent{
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)

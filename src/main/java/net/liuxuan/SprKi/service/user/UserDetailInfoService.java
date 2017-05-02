@@ -94,7 +94,7 @@ public interface UserDetailInfoService {
      *
      * @return the list
      */
-    List<String> listRoles();
+//    List<String> listRoles();
 
     /**
      * Update auths boolean.

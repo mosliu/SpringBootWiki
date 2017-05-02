@@ -1,9 +1,14 @@
 package net.liuxuan.SprKi.service;
 
 import java.util.List;
+
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import net.liuxuan.SprKi.repository.ProjectProgressRepository;
@@ -29,17 +34,20 @@ public class ProjectProgressServiceImpl implements ProjectProgressService{
     ProjectProgressRepository projectProgressRepository;
 
     @Override
+    @CachePut(cacheNames = "projectProgress",key = "#projectProgress.id")
     public void saveProjectProgress(ProjectProgress projectProgress){
         projectProgressRepository.save(projectProgress);
     }
 
     @Override
+    @Cacheable(cacheNames = "projectProgress",key = "#id")
     public ProjectProgress findProjectProgressById(Long id){
         ProjectProgress projectProgress = projectProgressRepository.findOne(id);
         return projectProgress;
     }
 
     @Override
+    @CacheEvict(cacheNames = "projectProgress",key = "#id")
     public boolean deleteProjectProgressById(Long id){
         ProjectProgress projectProgress = projectProgressRepository.getOne(id);
         if (projectProgress != null) {
@@ -52,14 +60,22 @@ public class ProjectProgressServiceImpl implements ProjectProgressService{
 
     @Override
     public boolean checkProjectProgressExists(String projectProgressname){
-        List<ProjectProgress> list = projectProgressRepository.findByProjectProgressName(projectProgressname);
+        List<ProjectProgress> list = getProjectProgressesByName(projectProgressname);
         if (list.size() > 0) {
             return true;
         } else {
             return false;
         }
     }
+
     @Override
+    @Cacheable(cacheNames = "projectProgress",key = "#projectProgressname")
+    public List<ProjectProgress> getProjectProgressesByName(String projectProgressname) {
+        return projectProgressRepository.findByProjectProgressName(projectProgressname);
+    }
+
+    @Override
+    @Cacheable(cacheNames = "projectProgress", key = "'projectProgress_list'")
     public List<ProjectProgress> getAllProjectProgress() {
         return projectProgressRepository.findByDisabledFalse();
     }

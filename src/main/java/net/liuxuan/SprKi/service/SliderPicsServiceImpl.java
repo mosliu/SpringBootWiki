@@ -1,9 +1,14 @@
 package net.liuxuan.SprKi.service;
 
 import java.util.List;
+
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import net.liuxuan.SprKi.repository.SliderPicsRepository;
@@ -29,17 +34,20 @@ public class SliderPicsServiceImpl implements SliderPicsService{
     SliderPicsRepository sliderPicsRepository;
 
     @Override
+    @CachePut(cacheNames = "sliderPics",key = "#sliderPics.id")
     public void saveSliderPics(SliderPics sliderPics){
         sliderPicsRepository.save(sliderPics);
     }
 
     @Override
+    @Cacheable(cacheNames = "sliderPics",key = "#id")
     public SliderPics findSliderPicsById(Long id){
         SliderPics sliderPics = sliderPicsRepository.findOne(id);
         return sliderPics;
     }
 
     @Override
+    @CacheEvict(cacheNames = "sliderPics",key = "#id")
     public boolean deleteSliderPicsById(Long id){
 //        SliderPics sliderPics = sliderPicsRepository.getOne(id);
 //        if (sliderPics != null) {
@@ -52,7 +60,7 @@ public class SliderPicsServiceImpl implements SliderPicsService{
 
     @Override
     public boolean checkSliderPicsExists(String sliderPicsname){
-        List<SliderPics> list = sliderPicsRepository.findBySliderPicsName(sliderPicsname);
+        List<SliderPics> list = getSliderPicsByName(sliderPicsname);
         if (list.size() > 0) {
             return true;
         } else {
@@ -60,6 +68,13 @@ public class SliderPicsServiceImpl implements SliderPicsService{
         }
     }
     @Override
+    @Cacheable(cacheNames = "sliderPics",key = "#projectProgressname")
+    public List<SliderPics> getSliderPicsByName(String sliderPicsname) {
+        return sliderPicsRepository.findBySliderPicsName(sliderPicsname);
+    }
+
+    @Override
+    @Cacheable(cacheNames = "sliderPics",key = "'sliderPics_list'")
     public List<SliderPics> getAllSliderPics() {
         return sliderPicsRepository.findByDisabledFalse();
     }

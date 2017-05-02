@@ -9,6 +9,7 @@ package net.liuxuan.SprKi.entity.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
 
@@ -24,6 +25,7 @@ import java.util.Set;
 @ToString
 @Entity  //实体类
 @Table(name = "Sprki_User")
+@IgnoreSizeOf
 public class DbUser {
 
     @Id

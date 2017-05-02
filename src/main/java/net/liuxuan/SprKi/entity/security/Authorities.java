@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.entity.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ import javax.persistence.*;
 @Entity  //实体类
 //@Data
 @Table(name = "Sprki_Authorities")
+@IgnoreSizeOf
 public class Authorities implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

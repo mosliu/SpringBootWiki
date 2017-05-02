@@ -6,23 +6,21 @@ import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.security.AuthoritiesRepository;
-import net.liuxuan.SprKi.repository.security.RoleRepository;
 import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -39,7 +37,6 @@ import java.util.*;
  */
 @Service
 @Transactional
-@CacheConfig(cacheNames = "dbUsers")
 public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     private static Logger log = LoggerFactory.getLogger(UserDetailInfoServiceImpl.class);
@@ -58,8 +55,6 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     /**
      * The Users repository.
      */
-//    @Autowired
-//    RoleRepository roleRepository;
     @Autowired
     RoleService roleService;
 
@@ -75,7 +70,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      *
      * @param user the user
      */
-    public void saveOrUpdateUsers(DbUser user) {
+    @CachePut(cacheNames = "dbUsers", key = "#user.username")
+    public DbUser saveOrUpdateUsers(DbUser user) {
         assertUsersNotNull(user);
         String uname = user.getUsername();
         DbUser u_saved;
@@ -88,7 +84,6 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             u_saved.setUsernameAlias(user.getUsernameAlias());
             //先把传入的bean的空项填上
             //然后赋值给持久化对象
-            //TODO 误赋值了SET属性
 //            try {
 //                BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(u_saved, user);
 //            } catch (InvocationTargetException e) {
@@ -102,8 +97,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", uname);
             usersRepository.save(u_saved);
         }
-//        return u_saved;
-
+        return u_saved;
     }
 
     /**
@@ -130,6 +124,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
 
     @Override
+    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
         DbUser u = userDetailInfo.getDbUser();
         Assert.notNull(u, "传入的user不应该为空");
@@ -178,10 +173,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             try {
                 BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(saved_UserDetailInfo, userDetailInfo);
             } catch (InvocationTargetException e) {
-                log.error("Copy UserDetailInfo error!",e);
+                log.error("Copy UserDetailInfo error!", e);
 //                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                log.error("Copy UserDetailInfo error!",e);
+                log.error("Copy UserDetailInfo error!", e);
 //                e.printStackTrace();
             }
         }
@@ -190,7 +185,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(cacheNames = "userDetailInfo", key = "#dbUser.username")
     public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser) {
         Assert.notNull(dbUser, "传入的users不能为空");
         Assert.notNull(dbUser.getUsername(), "传入的users的用户名不能为空");
@@ -210,14 +205,15 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         return detailInfo;
     }
 
-    @Cacheable
     @Override
+    @Cacheable(cacheNames = "userDetailInfo", key = "#id")
     public UserDetailInfo findUserDetailInfoById(Long id) {
         UserDetailInfo userDetailInfo = userDetailInfoRepository.findOne(id);
         return userDetailInfo;
     }
 
     @Override
+    @CacheEvict(cacheNames = "userDetailInfo", key = "#id")
     public void deleteUserDetailInfoById(Long id) {
         userDetailInfoRepository.findOne(id).setDisabled(true);
     }
@@ -225,13 +221,14 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     /**
      * Delete users by username boolean.
      *
-     * @param sid the sid
+     * @param username the username
      * @return the boolean
      */
     @Override
-    public boolean deleteUsersByUsername(String sid) {
-        if (usersRepository.exists(sid)) {
-            usersRepository.findOne(sid).setEnabled(false);
+    @CacheEvict(cacheNames = "dbUsers", key = "#username")
+    public boolean deleteUsersByUsername(String username) {
+        if (usersRepository.exists(username)) {
+            usersRepository.findOne(username).setEnabled(false);
             return true;
         } else {
             return false;
@@ -239,25 +236,30 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    @Cacheable
+    @Cacheable(cacheNames = "dbUsers", key = "'user_list'")
     public List<DbUser> listAllUsers() {
 //        return usersRepository.findAll();
         return usersRepository.findByEnabled(true);
     }
 
-    @Override
-    @Cacheable
-    public List<String> listRoles() {
-//        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
-//        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
-//        return distinctAuthority;
-//        List<String> rtnl = roleRepository.findAllRoleNames();
-        List<String> rtnl = roleService.findAllRoleNames();
-        return rtnl;
-//        return usersRepository.findAll();
-    }
+//    @Override
+//    @Cacheable(cacheNames = "role", key = "'list_allRoleNames'")
+//    public List<String> listRoles() {
+////        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
+////        List<String> distinctAuthority = authoritiesRepository.findAllAuthorities();
+////        return distinctAuthority;
+////        List<String> rtnl = roleRepository.findAllRoleNames();
+//        List<String> rtnl = roleService.findAllRoleNames();
+//        return rtnl;
+////        return usersRepository.findAll();
+//    }
 
     @Override
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "dbUsers",key = "#userDetailInfo.dbUser.username"),
+                    @CacheEvict(cacheNames = "roles",allEntries = true)
+            })
     public Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -286,7 +288,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
                 }
             }
 
-            if(!remain){
+            if (!remain) {
                 toremove.add(old_auth);
                 log.info("===用户【{}】 移除了 权限【{}】", dbUser.getUsername(), old_auth.getAuthority());
             }
@@ -296,7 +298,6 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             dbUser.removeAuth(old_auth);
             authoritiesRepository.delete(old_auth);
         }
-
 
 
 //
@@ -370,11 +371,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         }
 
 
-
-
 //        dbUser.setAuths(new_auths);
         usersRepository.saveAndFlush(dbUser);
-
 
 
         map.put("success", "权限处理成功");
@@ -382,7 +380,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     public Role makeANewRole(String newauth) {
-        Role role= new Role();
+        Role role = new Role();
         role.setRolename(newauth);
         role.setRoleDescribe(newauth);
         role.setDisabled(false);

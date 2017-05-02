@@ -1,24 +1,29 @@
-/*
- * Copyright 2012-2015 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- */
-
 package net.liuxuan.SprKi.repository;
 
-import net.liuxuan.springboottest.message.Message;
+import java.util.List;
+import net.liuxuan.SprKi.entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
- * @author Rob Winch
- */
-public interface MessageRepository extends JpaRepository<Message, Long> {
+* Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
+* ***************************************************************************
+* 源文件名:  net.liuxuan.SprKi.repository.MessageRepository
+* 功能:
+* 版本:	@version 1.0
+* 编制日期: 2017/04/22 09:48
+* 修改历史: (主要历史变动原因及说明)
+* YYYY-MM-DD |    Author      |	 Change Description
+* 2017-04-22  |    Moses        |     Created
+*/
+
+public interface MessageRepository extends JpaRepository<Message, Long>, JpaSpecificationExecutor<Message> {
+    List<Message> findByMessageName(String  name);
+
+    List<Message> findByMessageNameNot(String  NotName);
+    List<Message> findByDisabledFalse();
+
+    List<Message> findByMessageNameNotOrderByMessageName(String roleNotName);
 
 }
+
+

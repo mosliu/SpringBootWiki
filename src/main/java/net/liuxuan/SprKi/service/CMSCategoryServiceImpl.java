@@ -3,9 +3,13 @@ package net.liuxuan.SprKi.service;
 import java.util.List;
 
 import net.liuxuan.spring.constants.JPAConstants;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cglib.transform.impl.InterceptFieldCallback;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,12 +41,14 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
     }
 
     @Override
+    @Cacheable(cacheNames = "category",key="#id")
     public CMSCategory findCMSCategoryById(Long id){
         CMSCategory cmsCategory = cmsCategoryRepository.findOne(id);
         return cmsCategory;
     }
 
     @Override
+    @Cacheable(cacheNames = "category",key="#name")
     public CMSCategory findCMSCategoryByName(String name){
         List<CMSCategory> cmsCategoryList = cmsCategoryRepository.findByName(name);
         if(cmsCategoryList==null||cmsCategoryList.size()==0){
@@ -60,6 +66,7 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
      * @return
      */
     @Override
+    @CachePut(cacheNames = "category",key="#name")
     public CMSCategory getOrCreateOneByName(String name){
         CMSCategory category = findCMSCategoryByName(name);
         if (category==null) {
@@ -73,6 +80,7 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
     }
 
     @Override
+    @CacheEvict(cacheNames = "category",key="#id")
     public boolean deleteCMSCategoryById(Long id){
         CMSCategory cmsCategory = cmsCategoryRepository.getOne(id);
         if (cmsCategory != null) {
@@ -84,14 +92,11 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
 
     @Override
     public boolean checkCMSCategoryExists(String cmsCategoryname){
-        List<CMSCategory> list = cmsCategoryRepository.findByName(cmsCategoryname);
-        if (list.size() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return findCMSCategoryByName(cmsCategoryname)!=null;
     }
+
     @Override
+    @Cacheable(cacheNames = "category", key = "'category_list'")
     public List<CMSCategory> getAllCMSCategory() {
         return cmsCategoryRepository.findByNameNotOrderByName(JPAConstants.DELETEDOBJECTSTR);
 //        return cmsCategoryRepository.findByDisabledFalse();

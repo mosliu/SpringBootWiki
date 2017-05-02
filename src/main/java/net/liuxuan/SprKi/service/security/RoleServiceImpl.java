@@ -1,25 +1,25 @@
 package net.liuxuan.SprKi.service.security;
 
 
-import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.security.UrlAuth;
 import net.liuxuan.SprKi.repository.security.RoleRepository;
 import net.liuxuan.SprKi.repository.security.UrlAuthRepository;
-import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSource;
 import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSourceImpl;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -34,7 +34,6 @@ import java.util.*;
  */
 @Service
 @Transactional
-@CacheConfig(cacheNames = "roles")
 public class RoleServiceImpl implements RoleService {
 
     private static Logger log = LoggerFactory.getLogger(RoleServiceImpl.class);
@@ -46,11 +45,12 @@ public class RoleServiceImpl implements RoleService {
     UrlAuthRepository urlAuthRepository;
 
     @Override
-    @Cacheable
+    @Cacheable(cacheNames = "role", key = "'list_disablefalse'")
     public List<Role> getAllRole() {
         return roleRepository.findByDisabledFalse();
     }
 
+    @CachePut(cacheNames = "role", key = "#role.rolename")
     public void saveRole(Role role) {
         roleRepository.save(role);
 //        roleRepository.flush();
@@ -63,17 +63,18 @@ public class RoleServiceImpl implements RoleService {
      * @param id must not be {@literal null}.
      * @return the entity with the given id or {@literal null} if none found
      */
-    @Cacheable
+    @Cacheable(cacheNames = "role", key = "#id")
     public Role findRoleById(String id) {
         Role role = roleRepository.findOne(id);
         return role;
     }
 
-    @Cacheable
-    public List<String> findAllRoleNames(){
+    @Cacheable(cacheNames = "role", key = "'list_allRoleNames'")
+    public List<String> findAllRoleNames() {
         return roleRepository.findAllRoleNames();
     }
 
+    @CacheEvict(cacheNames = "role", allEntries = true)
     public boolean deleteRoleById(String id) {
         Role role = roleRepository.getOne(id);
         if (role != null) {
@@ -100,9 +101,9 @@ public class RoleServiceImpl implements RoleService {
         Map<String, Object> map = new HashMap<String, Object>();
 
         Role role = roleRepository.findOne(rolename);
-        Set<UrlAuth> old_auths= role.getUrlAuths();
+        Set<UrlAuth> old_auths = role.getUrlAuths();
 
-        if(authArrays == null){
+        if (authArrays == null) {
             //提交错误了啊。。
             map.put("error", "提交出错！请检查");
             return map;

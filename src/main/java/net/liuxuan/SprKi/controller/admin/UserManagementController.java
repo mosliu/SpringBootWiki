@@ -9,6 +9,7 @@ import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
+import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.RequestHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
@@ -44,6 +45,8 @@ public class UserManagementController {
     private static Logger log =  LoggerFactory.getLogger(UserManagementController.class);
     @Autowired
     UserDetailInfoService userDetailInfoService;
+    @Autowired
+    RoleService roleService;
     @Resource
     DepartmentRepository departmentRepository;
 
@@ -90,7 +93,8 @@ public class UserManagementController {
                     redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
 //                    model.put("error","无用户，请检查进入入口");
                 }
-                List<String> authslist = userDetailInfoService.listRoles();
+//                List<String> authslist = userDetailInfoService.listRoles();
+                List<String> authslist = roleService.findAllRoleNames();
                 redirectAttributesModelMap.put("user", userDetailInfo);
                 redirectAttributesModelMap.put("authslist", authslist);
                 model.put("user", userDetailInfo);

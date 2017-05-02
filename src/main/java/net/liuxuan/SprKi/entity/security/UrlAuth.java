@@ -6,6 +6,7 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +27,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_UrlAuth")
+@IgnoreSizeOf
 public class UrlAuth {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -31,13 +31,14 @@ public interface DeviceTypeService {
      * @return the boolean
      */
     boolean checkDeviceTypeExists(String DeviceTypeName);
+    List<DeviceType> getDeviceTypesByName(String DeviceTypeName);
 
     /**
      * Save device type.
      *
      * @param obj the obj
      */
-    void saveDeviceType(DeviceType obj);
+    DeviceType saveDeviceType(DeviceType obj);
 
     /**
      * Delete device type by id boolean.
@@ -46,7 +47,7 @@ public interface DeviceTypeService {
      * @return the boolean
      */
     boolean deleteDeviceTypeById(String sid);
-
+    boolean deleteDeviceTypeById(Long id);
     /**
      * Gets device type by id.
      *

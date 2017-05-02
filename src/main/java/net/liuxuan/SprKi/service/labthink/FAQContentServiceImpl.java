@@ -1,6 +1,5 @@
 package net.liuxuan.SprKi.service.labthink;
 
-import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
@@ -8,9 +7,13 @@ import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,9 +45,8 @@ import static net.liuxuan.SprKi.service.util.SearchHelper.*;
 @Transactional
 public class FAQContentServiceImpl implements FAQContentService {
 
+    public static final String FAQCATEGORY = FAQContent.class.getSimpleName();
     private static Logger log = LoggerFactory.getLogger(FAQContentServiceImpl.class);
-    public  static final  String FAQCATEGORY = FAQContent.class.getSimpleName();
-
     @Autowired
     FAQContentRepository faqContentRepository;
 
@@ -53,6 +55,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
+    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
     public FAQContent saveFAQContent(FAQContent faq) {
 
         FAQContent load = null;
@@ -61,14 +64,14 @@ public class FAQContentServiceImpl implements FAQContentService {
         faq.setLastUpdateUser(u);
         Date now = new Date();
 
-        if (faq.getId() == null ) {
+        if (faq.getId() == null) {
             //新的
             log.trace("===saveFAQContent:new", faq);
             faq.setAuthor(u);
 
             faq.setCategory(cmsCategoryService.getOrCreateOneByName(FAQCATEGORY));
             faq.setPublishDate(now);
-        } else if(!faqContentRepository.exists(faq.getId())){
+        } else if (!faqContentRepository.exists(faq.getId())) {
             //新的
             log.trace("===saveFAQContent:new", faq);
             faq.setAuthor(u);
@@ -97,6 +100,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
+    @Cacheable(cacheNames = "faqContent", key="#dto")
     public List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto) {
 
         if (dto.isAllNull()) {
@@ -119,7 +123,7 @@ public class FAQContentServiceImpl implements FAQContentService {
                 pl.addAll(pl_datecompare);
 
 
-                String[] sl_and = {"deviceType","category", "devices", "department", "disabled"};
+                String[] sl_and = {"deviceType", "category", "devices", "department", "disabled"};
 
                 //先将Object 转为Map，这样好向内添加属性
                 Map<String, Object> objectMap = object2Map(dto);
@@ -131,7 +135,7 @@ public class FAQContentServiceImpl implements FAQContentService {
                 List<Predicate> pl_usercompare = buildUserEqualsPredicates(root, cb, sl_or, dto.user);
                 pl.addAll(pl_usercompare);
 
-                String[] likepaths = {"title", "question", "answer","standard"};
+                String[] likepaths = {"title", "question", "answer", "standard"};
                 String keyword = dto.keyword;
                 pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, keyword), cb));
 
@@ -154,24 +158,28 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
+    @CacheEvict(cacheNames = "faqContent",key="#id")
     public void disableFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(true);
         //faqContentRepository.delete(id);
     }
 
     @Override
+    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
     public void revertFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(false);
         //faqContentRepository.delete(id);
     }
 
     @Override
+    @CacheEvict(cacheNames = "faqContent",key="#id")
     public void deleteFAQContentById(Long id) {
 //        faqContentRepository.findOne(id).setDisabled(true);
         faqContentRepository.delete(id);
     }
 
     @Override
+    @Cacheable(cacheNames = "faqContent", key="#id")
     public FAQContent findById(Long id) {
         FAQContent faq = faqContentRepository.findOne(id);
         if (faq != null) {

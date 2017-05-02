@@ -17,7 +17,7 @@ import java.util.List;
 * 2017-03-29  |    Moses        |     Created
 */
 public interface NewsPageService {
-    void saveNewsPage(NewsPage newsPage);
+    NewsPage saveNewsPage(NewsPage newsPage);
 
     NewsPage findById(Long id);
 

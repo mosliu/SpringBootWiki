@@ -1,3 +1,6 @@
+/**
+ * Created by Moses on 2017/4/20.
+ */
 
 var _click_count=0;
 $("body").bind("click",function(e){
@@ -19,6 +22,3 @@ $("body").bind("click",function(e){
     );
     e.stopPropagation();
 });
-/**
- * Created by Moses on 2017/4/20.
- */

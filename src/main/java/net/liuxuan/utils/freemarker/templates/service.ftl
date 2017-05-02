@@ -25,6 +25,8 @@ public interface ${model_name}Service {
 
     boolean check${model_name}Exists(String ${model_name_firstSmall}name);
 
+    List<${model_name}> get${model_name}ByName(String ${model_name_firstSmall}name);
+
     List<${model_name}> getAll${model_name}();
 
 }

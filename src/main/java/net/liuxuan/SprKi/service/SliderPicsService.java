@@ -24,7 +24,7 @@ public interface SliderPicsService {
     boolean deleteSliderPicsById(Long id);
 
     boolean checkSliderPicsExists(String sliderPicsname);
-
+    List<SliderPics> getSliderPicsByName(String sliderPicsname);
     List<SliderPics> getAllSliderPics();
 
 }

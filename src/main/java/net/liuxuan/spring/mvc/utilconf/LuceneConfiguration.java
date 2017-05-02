@@ -6,7 +6,6 @@ import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
-import org.apache.lucene.util.Version;
 import org.apdplat.word.dictionary.DictionaryFactory;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.apdplat.word.util.WordConfTools;

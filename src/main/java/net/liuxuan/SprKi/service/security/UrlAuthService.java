@@ -27,4 +27,6 @@ public interface UrlAuthService {
 
     List<UrlAuth> getAllUrlAuth();
 
+    List<UrlAuth> findByUrlAuthName(String urlAuthname);
+
 }

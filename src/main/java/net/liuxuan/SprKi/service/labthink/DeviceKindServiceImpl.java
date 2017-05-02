@@ -3,10 +3,13 @@ package net.liuxuan.SprKi.service.labthink;
 import net.liuxuan.SprKi.entity.labthink.DeviceKind;
 import net.liuxuan.SprKi.repository.labthink.DeviceKindRepository;
 import net.liuxuan.spring.constants.JPAConstants;
+import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,6 +41,7 @@ public class DeviceKindServiceImpl implements DeviceKindService {
      * @return the all device kind
      */
     @Override
+    @Cacheable(cacheNames = "deviceKind", key = "'deviceKind_list'")
     public List<DeviceKind> getAllDeviceKind() {
         return deviceKindRepository.findByDeviceKindNameNot(JPAConstants.DELETEDOBJECTSTR);
     }
@@ -50,7 +54,7 @@ public class DeviceKindServiceImpl implements DeviceKindService {
      */
     @Override
     public boolean checkDeviceKindExists(String deviceKindName) {
-        List<DeviceKind> list = deviceKindRepository.findByDeviceKindNameOrDeviceKindNameENOrDeviceKindNameCN(deviceKindName, deviceKindName, deviceKindName);
+        List<DeviceKind> list = getDeviceKindsByName(deviceKindName);
 //        List<DeviceKind> list = deviceKindRepository.findByDeviceKindName(deviceKindName);
         if (list.size() > 0) {
             return true;
@@ -59,12 +63,18 @@ public class DeviceKindServiceImpl implements DeviceKindService {
         }
     }
 
+    @Cacheable(cacheNames = "deviceKind", key = "#deviceKindName")
+    public List<DeviceKind> getDeviceKindsByName(String deviceKindName) {
+        return deviceKindRepository.findByDeviceKindNameOrDeviceKindNameENOrDeviceKindNameCN(deviceKindName, deviceKindName, deviceKindName);
+    }
+
     /**
      * Save device kind.
      *
      * @param obj the devices
      */
     @Override
+    @Cacheable(cacheNames = "deviceKind", key = "#obj.id")
     public void saveDeviceKind(DeviceKind obj) {
         deviceKindRepository.save(obj);
     }
@@ -79,15 +89,21 @@ public class DeviceKindServiceImpl implements DeviceKindService {
     public boolean deleteDeviceKindById(String sid) {
         if (NumberUtils.isNumber(sid)) {
             Long id = Long.parseLong(sid);
-            DeviceKind obj = deviceKindRepository.getOne(id);
-            if (obj != null) {
-                obj.setDeviceKindName(JPAConstants.DELETEDOBJECTSTR);
-                obj.setDeviceKindNameCN(JPAConstants.DELETEDOBJECTSTR);
-                obj.setDeviceKindNameEN(JPAConstants.DELETEDOBJECTSTR);
+            return  deleteDeviceKindById(id);
+        }
+        return false;
+    }
+
+    @CacheEvict(cacheNames = "deviceKind", key = "#id")
+    public boolean deleteDeviceKindById(Long id) {
+        DeviceKind obj = deviceKindRepository.getOne(id);
+        if (obj != null) {
+            obj.setDeviceKindName(JPAConstants.DELETEDOBJECTSTR);
+            obj.setDeviceKindNameCN(JPAConstants.DELETEDOBJECTSTR);
+            obj.setDeviceKindNameEN(JPAConstants.DELETEDOBJECTSTR);
 //                obj.setDepartmentName(JPAConstants.DELETEDOBJECTSTR);
 //                obj.setDepartmentNameCN(JPAConstants.DELETEDOBJECTSTR);
-                return true;
-            }
+            return true;
         }
         return false;
     }
@@ -99,6 +115,7 @@ public class DeviceKindServiceImpl implements DeviceKindService {
      * @return the device kind by id
      */
     @Override
+    @Cacheable(cacheNames = "deviceKind", key = "#id")
     public DeviceKind getDeviceKindById(Long id) {
         DeviceKind obj = deviceKindRepository.getOne(id);
         return obj;
