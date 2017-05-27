@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li class="active">短消息发送</li>
+    </ol>
+    <h1 th:text="${title}">回复短消息</h1>
+    <div class="col-md-2"></div>
+    <div class="faqs-form col-md-8">
+        <form th:action="@{/msg/post}" action="/msg/post" id="msgform" name="msgform" method="POST"
+              class="validate-plugin" data-success="Sent! Thank you!" data-toastr-position="top-right"
+              th:object="${msg}">
+
+            <fieldset>
+                <!--title-->
+                <!--<input type="hidden" th:field="*{Id}"/>-->
+                <div class="row">
+                    <h1 class="heading-title heading-border-bottom heading-color" th:text="${msg?.title}"> 有个事情啊 </h1>
+                    <ul class="blog-post-info list-inline">
+                        <li><a href="#">
+                            <i class="fa fa-clock-o"></i> 发送时间：
+                            <span class="font-lato" th:text="${msg.sendTime}">June 29, 2015</span>
+                        </a></li>
+                        <li><a href="#">
+                            <i class="fa fa-user"></i> 发送人：
+                            <img th:src="${msg.fromUser.avatar}" height='24' width='24' />
+                            <span class="font-lato" th:text="${msg?.fromUser?.lastName+msg?.fromUser?.firstName}">June 29, 2015</span>
+                        </a></li>
+                        <li><a href="#">
+                            <i class="fa fa-comment-o"></i>消息类型:
+                            <span class="font-lato" th:text="${msg.messageType}">28 Comments</span>
+                        </a></li>
+                    </ul>
+                </div>
+                <input type="hidden" th:name="toUser" th:id="toUser" th:value="${msg?.fromUser?.id}"/>
+                <input type="hidden" th:name="ref" th:id="ref" th:value="${msg?.id}"/>
+                <input type="hidden" th:name="title" th:id="title" th:value="${'RE:'+msg?.title}"/>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12  alert alert-bordered-dotted">
+                            <h3>
+                                <label >
+                                    <img th:src="${msg.fromUser.avatar}" height='48' width='48' />
+                                    <span th:text="${(msg?.fromUser?.lastName?:'')+(msg?.fromUser?.firstName?:'')+' 说：'}"></span>
+                                </label>
+                            </h3>
+                            <h4>
+                                <div th:utext="${msg.content}">
+                                    内容 *
+                                </div>
+                            </h4>
+                            <div th:unless="${msg.ref==null}">
+                                <blockquote>
+                                    <img th:src="${msg.ref.fromUser.avatar}" height='48' width='48' />
+                                    <span th:text="${(msg.ref?.fromUser?.lastName?:'')+(msg.ref?.fromUser?.firstName?:'')+' 说：'}"></span>
+                                    <h4 th:utext="${msg.ref.content?:''}"></h4>
+                                </blockquote>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:unless="${msg.title==null}" class="row">
+                    <div class="form-group">
+                        <div class="col-md-12 col-sm-12">
+                            <label>回复消息：</label>
+                            <textarea th:name="content" th:id="content" class="summernote form-control required"
+                                      data-height="200"
+                                      data-lang="en-US"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div th:unless="${msg.title==null}" class="row">
+                <div class="col-md-12">
+                    <button type="submit" id="submitBtn" onClick="return doSubmit1();"
+                            class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
+                        发送
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div></div>
+
+</div>
+
+</body>
+</html>

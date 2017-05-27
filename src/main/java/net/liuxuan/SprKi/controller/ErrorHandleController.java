@@ -208,7 +208,8 @@ public class ErrorHandleController {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ModelAndView handleMethodNotSupportedException(Exception ex) {
         log.error("handleMethodNotSupportedException() invoked");
-        ModelAndView model = new ModelAndView("common/temp");
+//        ModelAndView model = new ModelAndView("common/temp");
+        ModelAndView model = new ModelAndView("error");
         model.getModel().put("error", ex.getMessage());
         model.getModel().put("title", "MethodNotSupported");
         model.getModel().put("message", "MethodNotSupported");

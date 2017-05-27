@@ -14,7 +14,7 @@ server:
     maxThreads: 10
     minSpareThreads: 3
     accesslog:
-      directory: /home/jcala/blog/log/server_log
+      directory: /home/log/server_log
       pattern: combined
       enabled: true
 # DATASOURCE
@@ -40,6 +40,7 @@ spring:
   cache:
     jcache:
       config: ehcache.xml
+#      config: hibernate-ehcache.xml
 #    cache-names: ehcache
 #      ehcache:
 #        config: ehcache.xml
@@ -150,9 +151,15 @@ spring:
       hibernate.search.generate_statistics: true
       hibernate.search.lucene_version: LUCENE_5_3_1
 
+#      hibernate.cache.use_second_level_cache: true
+#      hibernate.cache.use_query_cache: true
+#      hibernate.cache.provider_class: org.hibernate.cache.EhCacheProvider
+#      hibernate.cache.provider_configuration_file_resource_path: hibernate-ehcache.xml
+#      hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
 
 
-# MyBatis 
+
+# MyBatis
 #mybatis:
 #  typeAliasesPackage: com.modou.**.domain
 #  mapperLocations: classpath:/com/modou/**/mapper/*.xml

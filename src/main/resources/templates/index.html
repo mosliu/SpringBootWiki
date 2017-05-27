@@ -11,7 +11,7 @@
     <!--<script type="text/javascript" src="/ui/smarty/plugins/slider.nivo/jquery.nivo.slider.pack.js"></script>-->
     <!--<script type="text/javascript" src="/ui/smarty/js/view/demo.nivo_slider.js"></script>-->
 </head>
-<body class="smoothscroll enable-animation">
+<body class="smoothscroll enable-animation indexbg">
 
 <div layout:fragment="content">
     <!-- WELCOME -->
@@ -149,27 +149,7 @@
 
                     </div>
 
-                    <script language="JavaScript">
-                        $("#NewActivity").load("/activity/last10", function (response, status) {
-                            if (status == "success") {
-                                $("#NewActivity").html("<ul class='list-unstyled'></ul>");
-                                var jsonarray = $.parseJSON(response);
-//                                alert(jsonarray.length);
-//                                alert(jsonarray[2]);
-                                $.each(jsonarray, function (index, value) {
-                                    var item_text = "<i class='fa fa-check text-success'></i>";
-                                    item_text += value.username;
-                                    item_text += " " + value.operation + " ";
-                                    item_text += "<a href='" + value.url + "'>" + value.title + "</a> ";
-                                    $('<li></li>').html(item_text).appendTo("#NewActivity ul");
-                                });
-//                                $(response).each(function(){
-//                                    var item_text = $(this).text();
-//                                    $('<li></li>').html(item_text).appendTo('ol');
-//                                });
-                            }
-                        });
-                    </script>
+
                 </div>
                 <!-- /toggle -->
 
@@ -227,8 +207,9 @@
                     <div th:each="news,iter:${newsPageList}" th:remove="tag">
                         <div class="row tab-post"><!-- post -->
                             <div class="col-md-10 col-sm-10 col-xs-9">
-                                <a th:href="@{/news/show/{id}(id=${news.id})}" th:utext="${news.fullTitle}" class="tab-post-link"></a>
-                                <small   th:text="${#dates.format(news.publishDate, 'yyyy-MM-dd')}">2017 03 06</small>
+                                <a th:href="@{/news/show/{id}(id=${news.id})}" th:utext="${news.fullTitle}"
+                                   class="tab-post-link"></a>
+                                <small th:text="${#dates.format(news.publishDate, 'yyyy-MM-dd')}">2017 03 06</small>
                             </div>
                         </div><!-- /post -->
                     </div>
@@ -293,16 +274,65 @@
 
 
     <!-- BUTTON CALLOUT -->
-    <a href="#" rel="nofollow" target="_blank"
-       class="btn btn-xlg btn-default size-20 fullwidth nomargin noradius padding-40 noborder-left noborder-right noborder-bottom">
+    <div>
+        <div>
+            <span class="size-20" style="font-weight: bold;padding-bottom: 20px">当前在线：</span>
+
+            <span id="OnlineUsers" class="row">
+
+            </span>
+        </div>
+        <a href="#" rel="nofollow" target="_blank"
+           class="btn btn-xlg btn-default size-20 fullwidth nomargin noradius padding-40 noborder-left noborder-right noborder-bottom">
 				<span class="font-lato size-30">
 					支持系统是否能满足您的需求？
 					<strong>不满足 &raquo;</strong>
 				</span>
-        <div sec:authorize-url='/other1.jsp' href="/other1.jsp">权限test1</div>
-        <div sec:authorize-url='/other2.jsp' href="/other2.jsp">权限test2</div>
-    </a>
+            <div sec:authorize-url='/other1.jsp' href="/other1.jsp">权限test1</div>
+            <div sec:authorize-url='/other2.jsp' href="/other2.jsp">权限test2</div>
+        </a>
+    </div>
+
     <!-- /BUTTON CALLOUT -->
+    <script language="JavaScript">
+        //活动情况
+        $("#NewActivity").load("/activity/last10", function (response, status) {
+            if (status == "success") {
+                $("#NewActivity").html("<ul class='list-unstyled'></ul>");
+                var jsonarray = $.parseJSON(response);
+//                                alert(jsonarray.length);
+//                                alert(jsonarray[2]);
+                $.each(jsonarray, function (index, value) {
+                    var item_text = "<i class='fa fa-check text-success'></i>";
+                    item_text += value.username;
+                    item_text += " " + value.operation + " ";
+                    item_text += "<a href='" + value.url + "'>" + value.title + "</a> ";
+                    $('<li></li>').html(item_text).appendTo("#NewActivity ul");
+                });
+//                                $(response).each(function(){
+//                                    var item_text = $(this).text();
+//                                    $('<li></li>').html(item_text).appendTo('ol');
+//                                });
+            }
+        });
+
+        $("#OnlineUsers").load("/online", function (response, status) {
+
+            if (status == "success") {
+                var jsonarray = $.parseJSON(response);
+                $("#OnlineUsers").html("<ul class='list-inline'></ul>");
+                $.each(jsonarray, function (index, value) {
+                    var item_text = "<img src='" + value.avatar + "' height='24' width='24' />";
+                    item_text = item_text + "<a href='/msg/new?username=" + value.username + "'>";
+                    item_text += (value.usernameCN == '' ? value.username : value.usernameCN);
+                    $('<li class="col-md-2 col-sm-2 col-xs-4"></li>').html(item_text).appendTo("#OnlineUsers ul");
+                });
+            }
+        });
+
+
+    </script>
+
 </div>
 
 

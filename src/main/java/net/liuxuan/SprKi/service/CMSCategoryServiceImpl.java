@@ -66,7 +66,7 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
      * @return
      */
     @Override
-    @CachePut(cacheNames = "category",key="#name")
+//    @CachePut(cacheNames = "category",key="#name")
     public CMSCategory getOrCreateOneByName(String name){
         CMSCategory category = findCMSCategoryByName(name);
         if (category==null) {

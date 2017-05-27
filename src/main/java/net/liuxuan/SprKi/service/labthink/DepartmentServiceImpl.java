@@ -58,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    @CachePut(cacheNames = "department", key = "#department.id")
+//    @CachePut(cacheNames = "department", key = "#department.id")
     public void saveDepartment(Department department) {
         departmentRepository.save(department);
     }

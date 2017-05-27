@@ -55,9 +55,10 @@ html, body {
 body {
 	color:#666;
 	background-color:#fff;
-	/*background-image:url('/ui/smarty/images/backgrounds/wall2.jpg');*/
-	/*background-repeat:no-repeat;*/
+	/*background-image:url('/images/backgrounds/20070504081311756.jpg');*/
+	/*background-size: 100%;*/
 	/*background-attachment:fixed;*/
+	/*background-repeat:no-repeat;*/
 	/*background-position:center;*/
 	/*-moz-background-size:cover;*/
 	/*-webkit-background-size:cover;*/

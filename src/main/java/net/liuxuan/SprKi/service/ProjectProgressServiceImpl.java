@@ -34,7 +34,7 @@ public class ProjectProgressServiceImpl implements ProjectProgressService{
     ProjectProgressRepository projectProgressRepository;
 
     @Override
-    @CachePut(cacheNames = "projectProgress",key = "#projectProgress.id")
+//    @CachePut(cacheNames = "projectProgress",key = "#projectProgress.id")
     public void saveProjectProgress(ProjectProgress projectProgress){
         projectProgressRepository.save(projectProgress);
     }

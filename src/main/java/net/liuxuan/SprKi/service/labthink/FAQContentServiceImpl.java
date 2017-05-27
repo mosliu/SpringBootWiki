@@ -7,12 +7,10 @@ import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.ServiceHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
-import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -55,12 +53,12 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
-    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
+//    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
     public FAQContent saveFAQContent(FAQContent faq) {
 
         FAQContent load = null;
 
-        DbUser u = ServiceHelper.getCurrentUsers();
+        DbUser u = ServiceHelper.getCurrentUser();
         faq.setLastUpdateUser(u);
         Date now = new Date();
 
@@ -165,7 +163,7 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
-    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
+//    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
     public void revertFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(false);
         //faqContentRepository.delete(id);

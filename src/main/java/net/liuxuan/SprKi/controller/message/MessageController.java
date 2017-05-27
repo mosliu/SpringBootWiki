@@ -1,25 +1,21 @@
 package net.liuxuan.SprKi.controller.message;
 
-import net.liuxuan.SprKi.entity.CMSCategoryEditor;
-import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
-import net.liuxuan.SprKi.entity.labthink.Department;
-import net.liuxuan.SprKi.entity.labthink.DeviceType;
-import net.liuxuan.SprKi.entity.labthink.Devices;
-import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import com.google.gson.Gson;
+import net.liuxuan.SprKi.entity.Message;
+import net.liuxuan.SprKi.entity.MessageConst;
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
-import net.liuxuan.SprKi.service.CMSCategoryService;
-import net.liuxuan.SprKi.service.labthink.DepartmentService;
-import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
-import net.liuxuan.SprKi.service.labthink.DevicesService;
-import net.liuxuan.SprKi.service.labthink.FAQContentService;
-import net.liuxuan.spring.Helper.ResponseHelper;
+import net.liuxuan.SprKi.service.MessageService;
+import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
+import net.liuxuan.spring.Helper.SystemHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -29,10 +25,9 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -51,250 +46,161 @@ import java.util.*;
 public class MessageController {
     private static Logger log = LoggerFactory.getLogger(MessageController.class);
 
-//    @Resource
-//    DevicesRepository devicesRepository;
+    @Autowired
+    MessageService messageService;
 
     @Autowired
-    DevicesService devicesService;
+    UserDetailInfoService userDetailInfoService;
 
-//    @Resource
-//    DepartmentRepository departmentRepository;
+    public static String limitContent2WordCount(String content, int count) {
+        if (content == null) {
+            content = "";
+        }
+        return content.substring(0, Math.min(900, content.length()));
+    }
 
-    @Autowired
-    DepartmentService departmentService;
+    @RequestMapping(value = "/msg/new", method = RequestMethod.GET)
+    public String getMsg(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
-//    @Resource
-//    CMSCategoryRepository cmsCategoryRepository;
-
-    @Autowired
-    CMSCategoryService cmsCategoryService;
-
-
-    @Autowired
-    DeviceTypeService deviceTypeService;
+        log.info("-MessageController.getMsg() Method");
+        Message msg = new Message();
 
 
-    @Autowired
-    FAQContentService faqContentService;
-
-
-    @RequestMapping(value = "/faq", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQ(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-        log.info("-FAQController.getFAQ() Method");
 //        model.put("message", "Editor");
-        model.put("title", "FAQ 编辑界面");
-        FAQContent faq = new FAQContent();
-        faq.setQuestionDate(new Date());
-        faq.setDescription("dddddddddddddddd");
-        model.put("faq", faq);
-//        devicesRepository.findAll();
-//        List<Devices> devicesAll = devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
-//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
-//        model.put("devicesAll",devicesAll);
-//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        return "faq/faq_edit";
-    }
-
-    @RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-        FAQContent faq = faqContentService.findById(id);
+        model.put("title", "发送短消息");
 
 
-        log.trace("faq to show publish_date is:{}", faq.getPublishDate());
-        log.trace("faq to show lastUpdate_date is:{}", faq.getLastUpdateDate());
-
-        model.put("faq", faq);
-//        devicesRepository.findAll();
-//        List<Devices> devicesAll = devicesRepository.findAll();
-//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
-//        model.put("devicesAll",devicesAll);
-//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        return "faq/faq_edit";
-    }
-
-    @RequestMapping(value = "/faq/show/{id}", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-        FAQContent faq = faqContentService.findById(id);
-        if (faq == null) {
-            throw new ContentNotFoundException("", id);
+        model.put("msg", msg);
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        List<UserDetailInfo> infoList = userDetailInfoList();
+        for (String s : parameterMap.keySet()) {
+            if (s.equalsIgnoreCase("username")) {
+                UserDetailInfo toUser = userDetailInfoService.findUserDetailInfoByUsername(parameterMap.get(s)[0]);
+                msg.setToUser(toUser);
+//                infoList.clear();
+//                infoList.add(toUser);
+                break;
+            }
         }
-        model.put("faq", faq);
-//        devicesRepository.findAll();
-//        List<Devices> devicesAll = devicesRepository.findAll();
-//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
-//        model.put("devicesAll",devicesAll);
-//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        return "faq/faq_show";
+        model.put("userDetailInfoList", infoList);
+        return "message/msg_new";
     }
 
-    @RequestMapping(value = "/faq/delete/{id}", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String deleteFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-//        FAQContent faq = faqContentService.findById(id);
-        SecurityLogHelper.LogActivity(request, LogActionType.DISABLE, faqContentService.findById(id), "禁用了文章", "/faq/show/" + id);
-
-        faqContentService.disableFAQContentById(id);
-        return "redirect:/faq/list";
-    }
-
-
-    @RequestMapping(value = "/faq/list")
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQList(FAQSearchDTO dto, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-        log.debug("===getFAQList logged ,the DTO value is : {}", dto);
-//        log.debug("===getFAQList logged ,the isnull is : {}",dto.isAllNull());
-        boolean dtoAllNull = dto.isAllNull();
-        model.put("dtoNull", dtoAllNull);
-        if (dtoAllNull) {
-            //参数全为空
-        }
-
-        List<FAQContent> allFAQContents = faqContentService.findAllFAQContentsByDto(dto);
-        log.debug("faq list size is {}", allFAQContents.size());
-        model.put("allfaqlist", allFAQContents);
-        model.put("dto", dto);
-        return "faq/faq_list";
-    }
-
-
-    @RequestMapping(value = "/faq/post", method = RequestMethod.POST)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String postFAQ(FAQContent faq, HttpServletRequest request, Map<String, Object> model) {
-
+    @RequestMapping(value = "/msg/post", method = RequestMethod.POST)
+    public String postMsg(Message message, HttpServletRequest request, Map<String, Object> model) {
 
 //        log.debug("request type is",request.getClass().getCanonicalName());
         Map<String, String[]> parameterMap = request.getParameterMap();
         for (String s : parameterMap.keySet()) {
             String[] strings = parameterMap.get(s);
             for (int i = 0; i < strings.length; i++) {
-                log.info("===Parameter key:{} ,values{}:{}", s, i, strings[i]);
+                log.info("===Parameter key:{} ,values[{}]:{}", s, i, strings[i]);
             }
         }
-
-        String toLog = "新建了文章";
-        if (faq.getId() != null) {
-            toLog = "更新了文章";
+        if (message == null) {
+        } else {
+            message.setTitle(limitContent2WordCount(message.getTitle(), 180));
+            message.setContent(limitContent2WordCount(message.getContent(), 900));
+            message.setComment(limitContent2WordCount(message.getComment(), 180));
+            message.setFromUser(SystemHelper.getCurrentUserDetailInfo());
+            message.setSendIP(SystemHelper.getCurrentUserIp());
+            message.setStatus(MessageConst.MSG_STATUS_SENT);
+            message.setMessageType(MessageConst.MSG_TYPE_PRIVATE);
+            messageService.sentMessage(message);
+            //记录活动日志
+            //TODO 不应该记录为Activity
+            SecurityLogHelper.LogActivity(request, LogActionType.SEND_MSG, message, "创建了新消息", "/msg/show/" + message.getId());
+            model.put("msg", message);
         }
-
-        faqContentService.saveFAQContent(faq);
-        //记录活动日志
-
-        SecurityLogHelper.LogActivity(request, LogActionType.CREATE_OR_UPDATE, faq, toLog, "/faq/show/" + faq.getId());
-
-        faq.setDescription("FAQ Commit Finished");
-        model.put("faq", faq);
-        model.put("title", "FAQ 编辑界面--FAQ提交完成，可继续编辑以更新");
-        return "faq/faq_show";
-
+        return "redirect:/msg/list";
     }
 
-
-    @RequestMapping(value = "/faq/count_ajax", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public void getFAQCount_ajax(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-
-        Map<String, Object> rtnDate = new HashMap<String, Object>();
-        log.info("-FAQController.getFAQCount() Method");
-//        model.put("message", "Editor");
-        rtnDate.put("title", "FAQ count");
-
-        List l = faqContentService.getFaqGroupByCount();
-
-        l.forEach(item -> {
-            Object[] objects = (Object[]) item;
-            rtnDate.put(((Devices) objects[1]).getDevicename(), objects[0]);
-        });
-//        for (int i = 0; i < l.size(); i++) {
-//
-//        }
-        rtnDate.put("data", l);
-
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnDate);
-    }
-
-    @RequestMapping(value = "/faq/count", method = RequestMethod.GET)
-//    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQCount(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-
-        log.info("-FAQController.getFAQCount() Method");
-        List faqGroupByCountList = faqContentService.getFaqGroupByCount();
-        long total = faqContentService.getFAQContentsCount();
-        List<Object[]> faqGroupByAuthorAndDateList = faqContentService.getFaqGroupByAuthorAndDate();
-        faqGroupByAuthorAndDateList.sort(
-                (p1, p2) -> ((int) ((Object[]) p2)[1]) - ((int) ((Object[]) p1)[1])
-        );
-        Map<Integer, Map<String, Integer>> AuthorDateCounttempMap = new LinkedHashMap<>();
-
-//        List<LinkedHashMap<String, String>> AuthorCountList = new ArrayList<>();
-        for (int i = 0; i < faqGroupByAuthorAndDateList.size(); i++) {
-            Object[] objs = (Object[]) faqGroupByAuthorAndDateList.get(i);
-            int nums = ((BigInteger) objs[0]).intValue();
-            int date = (int) objs[1];
-            String author = (String) objs[2];
-            Map<String, Integer> map = AuthorDateCounttempMap.get(date);
-            if (map == null) {
-                map = new LinkedHashMap<>();
-                map.put("总数", nums);
-                map.put(author, nums);
-                AuthorDateCounttempMap.put(date, map);
-                //不存在
-            } else {
-                map.replace("总数", map.get("总数") + nums);
-                map.put(author, nums);
-                //已存在
-            }
-
-
-            LinkedHashMap<String, String> infos = new LinkedHashMap<>();
-
+    @RequestMapping(value = "/msg/show/{id}", method = RequestMethod.GET)
+    public String showMsgID(
+            @PathVariable Long id,
+            HttpServletRequest request,
+            HttpServletResponse response, Map<String, Object> model) {
+        Message msg = messageService.findMessageById(id);
+        if (msg == null) {
+            throw new ContentNotFoundException("Msg Not Found", id);
         }
-
-
-        model.put("allCount", faqGroupByCountList);
-        model.put("allAuthor", AuthorDateCounttempMap);
-        model.put("total", total);
-        return "faq/faq_count";
+        UserDetailInfo currentUserDetailInfo = SystemHelper.getCurrentUserDetailInfo();
+        if (msg.getStatus().equals(MessageConst.MSG_STATUS_SENT)) {
+            messageService.markReadMessage(msg);
+        }
+        if (currentUserDetailInfo.getId() == msg.getToUser().getId() || currentUserDetailInfo.getId() == msg.getFromUser().getId()) {
+            model.put("msg", msg);
+            return "message/msg_show";
+        } else {
+            model.put("msg", new Message());
+            model.put("title", "不能查看其它人的短消息");
+            return "message/msg_show";
+        }
     }
 
+    @RequestMapping(value = "/msg/delete/{id}", method = RequestMethod.GET)
+    public String deleteMsgID(            @PathVariable Long id,
+            HttpServletRequest request,
+            HttpServletResponse response, Map<String, Object> model) {
+        boolean deleteSuccess = messageService.deleteMessageById(id);
+        return "redirect:/msg/list";
+    }
 
-    @ModelAttribute("Devices_list")
-    public List<Devices> Deviceslist() {
-        return devicesService.getAllDevices();
+    @RequestMapping(value = "/msg/list2", method = RequestMethod.GET)
+    public String getMsgList(
+            HttpServletRequest request,
+            @RequestParam(value = "offset", defaultValue = "0") int offset,
+            @RequestParam(value = "limit", defaultValue = "20") int limit,
+            HttpServletResponse response, Map<String, Object> model) {
+
+        log.info("-MessageController.getMsgList() Method");
+        model.put("title", "站内信列表");
+        List<Message> messageList = messageService.findMessageToUser(SystemHelper.getCurrentUserDetailInfo());
+        model.put("messageList", messageList);
+        return "message/msg_list";
+    }
+
+    @RequestMapping(value = "/msg/list", method = RequestMethod.GET)
+    public String getMsgListPageable(
+            HttpServletRequest request,
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "20") Integer size,
+            HttpServletResponse response, Map<String, Object> model) {
+
+        log.info("-MessageController.getMsgList() Method");
+        model.put("title", "站内信列表");
+        Page<Message> messageList = messageService.findMessageToUserPageable(page,size,SystemHelper.getCurrentUserDetailInfo());
+//        model.put("messageList", messageList);
+        model.put("datas", messageList);
+        return "message/msg_list";
+    }
+
+    @RequestMapping(value ="/msg/delete",method = RequestMethod.POST)
+    @ResponseBody
+    public  String deleteMsgs(HttpServletRequest request,HttpServletResponse response, Map<String, Object> model){
+        String ids = request.getParameter("ids");
+        if(StringUtils.isBlank(ids)){
+            return "error!";
+        }else{
+            System.out.println(ids);
+        }
+        String[] split = ids.split(",");
+        Set<Long> collect = Arrays.stream(split).map(s -> Long.parseLong(s)).collect(Collectors.toSet());
+        messageService.deleteMessageByIds(collect);
+        Gson g =new Gson();
+        return g.toJson("ok");
+//        return "redirect:/msg/list";
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    public List<UserDetailInfo> userDetailInfoList() {
+
+        return userDetailInfoService.listAllUserDetailInfos();
 //        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
-    }
-
-    @ModelAttribute("DevicesType_list")
-    public List<DeviceType> DevicesTypelist() {
-        return deviceTypeService.getAllDeviceType();
-//        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
-    }
-
-    @ModelAttribute("Department_list")
-    public List<Department> Departmentlist() {
-        return departmentService.getAllDepartment();
-//        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
-    }
-
-//    @ModelAttribute("Category_list")
-//    public List<CMSCategory> Categorylist() {
-//        return cmsCategoryService.getAllCMSCategory();
-////        return cmsCategoryRepository.findByNameNotOrderByName(JPAConstants.DELETEDOBJECTSTR);
-//    }
-
-
-//    @Autowired
-//    CMSCategoryEditor cmsCategoryEditor;
-
-    @Bean
-    private CMSCategoryEditor cmsCategoryEditor() {
-        return new CMSCategoryEditor();
     }
 
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+
+    <!-- Uploadifive FILES -->
+    <link href="/ui/mosesadd/upload/uploadifive.css" rel="stylesheet" type="text/css"/>
+
+    <script type="text/javascript" src="/ui/mosesadd/upload/jquery.uploadifive.min.js"></script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <div>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li class="active">自定义上传</li>
+        </ol>
+        <!-- breadcrumbs -->
+        <h1 class="blog-post-title" th:text="${news?.title}">BLOG POST TITLE HERE</h1>
+
+    </div>
+
+
+    <div>
+
+        <input type="file" id="sureLogo" value=""/>
+        <a href="javascript:$('#sureLogo').uploadifive('upload')">上传</a>
+        <a href="javascript:$('#sureLogo').uploadifive('cancel')">取消上传</a>
+
+
+        <div class="divider divider-dotted"><!-- divider --></div>
+
+
+        <!-- TAGS -->
+        <a class="tag" href="#">
+
+            <span class="txt"><i class="fa fa-tag"></i>RESPONSIVE</span>
+            <span class="num">12</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>CSS</span>
+            <span class="num">3</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>HTML</span>
+            <span class="num">1</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>JAVASCRIPT</span>
+            <span class="num">28</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DESIGN</span>
+            <span class="num">6</span>
+        </a>
+        <a class="tag" href="#">
+            <span class="txt"><i class="fa fa-tag"></i>DEVELOPMENT</span>
+            <span class="num">3</span>
+        </a>
+        <!-- /TAGS -->
+        <div id ="YoYo"> </div>
+        <script src ="https://yoyo.minghe.me/dist/v0.1/index.js"></script>
+    </div>
+    <script>
+        $("#sureLogo").uploadifive({
+            'height':30,
+            'width': 80,
+            'fileObjName':'uploadfile',//后台获取使用的名字
+            'method':'post',
+            'auto':false,
+//            'buttonClass': 'btn btn-primary',
+            'buttonText': '选择图片',
+            'fileType'  : 'image/*',//只允许图片格式的文件
+            'queueID'          : 'uploadqueue',
+            'queueSizeLimit' : 1,//这里我只允许单个图片上传
+            'removeCompleted' : true,//文件上传完成之后去除进度条
+            'uploadScript':'/upload/picUpload',//处理上传文件的后台url
+            'onFallback': function () {
+                alert("请使用支持HTML5的浏览器");
+            },
+            //上传到服务器，服务器返回相应信息到data里
+            'onUploadComplete': function (file, data) {//上传文件完成file即文件名,data为后台返回的数据
+                console.log(data);
+            }
+        });
+    </script>
+
+</div>
+
+</body>
+</html>

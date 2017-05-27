@@ -90,7 +90,7 @@ public class DevicesServiceImpl implements DevicesService {
      * @param obj the devices
      */
     @Override
-    @CachePut(cacheNames = "devices", key = "#obj.id")
+//    @CachePut(cacheNames = "devices", key = "#obj.id")
     public void saveDevices(Devices obj) {
         devicesRepository.save(obj);
     }

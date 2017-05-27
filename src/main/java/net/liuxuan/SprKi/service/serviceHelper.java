@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -18,23 +21,36 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
  * YYYY-MM-DD |    Author      |	 Change Description
  * 2016/3/24  |    Moses       |     Created
  */
+@Component
 public class ServiceHelper {
 
+
+    public static UsersRepository usersRepo;
 
     @Autowired
     private UsersRepository usersRepository;
 
-    public static DbUser getCurrentUsers() {
-        User ui = (User) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
-        DbUser u = new DbUser();
-        u.setUsername(ui.getUsername());
-        return u;
+
+    @PostConstruct
+    void init(){
+        usersRepo = usersRepository;
     }
-    public DbUser getCurrentUsersFromDb() {
+
+    public static DbUser getCurrentUser() {
+//        User ui = (User) SecurityContextHolder.getContext()
+//                .getAuthentication().getPrincipal();
+//
+//        DbUser u = new DbUser();
+//        u.setUsername(ui.getUsername());
+
+//        return u;
+        return getCurrentUsersFromDb();
+    }
+
+    public static DbUser getCurrentUsersFromDb() {
         User ui = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        DbUser u = usersRepository.getOne(ui.getUsername());
+        DbUser u = usersRepo.getOne(ui.getUsername());
         return u;
     }
 }

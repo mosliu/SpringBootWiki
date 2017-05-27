@@ -34,7 +34,7 @@ public class SliderPicsServiceImpl implements SliderPicsService{
     SliderPicsRepository sliderPicsRepository;
 
     @Override
-    @CachePut(cacheNames = "sliderPics",key = "#sliderPics.id")
+//    @CachePut(cacheNames = "sliderPics",key = "#sliderPics.id")
     public void saveSliderPics(SliderPics sliderPics){
         sliderPicsRepository.save(sliderPics);
     }

@@ -4,6 +4,10 @@ package net.liuxuan.SprKi.entity;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
+
+import java.util.Date;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -26,15 +30,40 @@ public class Message {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @Column(nullable = false,length = 200)
-    String messageName;
 
     @Column(nullable = false,length = 200)
-    String messageNameCN;
+    String title;
 
-    @Column(nullable = false,length = 200)
+    @Column(nullable = false,length = 1000)
+    String content;
+
+    @Column(nullable = true,length = 200)
     String comment;
 
-    @Column(name = "disabled", nullable = false)
-    boolean disabled=false;
+    @Column(name = "deleted", nullable = false)
+    boolean deleted=false;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="fromUser")
+    UserDetailInfo fromUser;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="toUser")
+    UserDetailInfo toUser;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
+    Date sendTime; // 发布日期
+
+    @Column(name="sendIP")
+    String sendIP;
+    @Column(name="status")
+    String status ; //状态，已发送？未读？已读？
+    @Column(name="messageType")
+    String messageType ;		// 消息类型，  发出的私信 ， 收到的私信， 系统消息
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="ref")
+    Message ref;
 }

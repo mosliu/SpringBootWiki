@@ -2,6 +2,10 @@ package net.liuxuan.SprKi.service;
 
 
 import net.liuxuan.SprKi.entity.Message;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
+import org.springframework.data.domain.Page;
+
+import java.util.Collection;
 import java.util.List;
 
 
@@ -17,16 +21,28 @@ import java.util.List;
 * 2017-04-22  |    Moses        |     Created
 */
 public interface MessageService {
-    void saveMessage(Message message);
+    Message saveMessage(Message message);
+    void sentMessage(Message message);
+
+    void announceMessage(String title, String content);
+
+    void markReadMessage(Message message);
 
     Message findMessageById(Long id);
 
     boolean deleteMessageById(Long id);
 
-    boolean checkMessageExists(String messagename);
-
-    List<Message> getMessageByName(String messagename);
-
     List<Message> getAllMessage();
 
+    List<Message> findMessageToUser(UserDetailInfo currentUserDetailInfo);
+
+
+    Page<Message> findMessageToUserPageable(Integer page, Integer size, UserDetailInfo currentUserDetailInfo);
+
+    List<Message> findMessageFromUser(UserDetailInfo currentUserDetailInfo);
+
+    List<Message> deleteMessageByIds(Collection<Long> ids);
+
+    Long getUnreadMessageCount(UserDetailInfo currentUserDetailInfo);
+    Long getUnreadMessageCount();
 }

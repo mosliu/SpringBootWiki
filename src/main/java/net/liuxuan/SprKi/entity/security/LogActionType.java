@@ -36,6 +36,11 @@ public class LogActionType {
     public static final String CREATE_OR_UPDATE = "CREATE_OR_UPDATE";
 
     /**
+     * 创建更新实例使用
+     */
+    public static final String SEND_MSG = "SEND_MSG";
+
+    /**
      * 删除实例使用
      */
     public static final String DELETE = "DELETE";

@@ -5,6 +5,7 @@
 
 package net.liuxuan.spring.mvc;
 
+import net.liuxuan.SprKi.controller.message.MessageInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -221,7 +222,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
 //        log.info("\r\n==============\r\n{}\n==============",datasourceUrl);
         registry.addInterceptor(new TestUrlInterceptor());
-//        registry.addInterceptor(testUrlInterceptor());
+        registry.addInterceptor(new MessageInterceptor());
 //        registry.addInterceptor(localeChangeInterceptor());
 //        registry.addInterceptor(new LocaleInterceptor());
 //        registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");

@@ -7,13 +7,18 @@ package net.liuxuan.spring.mvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 /**
@@ -24,6 +29,11 @@ public class TestUrlInterceptor implements HandlerInterceptor {
     private static Logger log = LoggerFactory.getLogger(TestUrlInterceptor.class);
     private NamedThreadLocal<Long> startTimeThreadLocal =
             new NamedThreadLocal<Long>("StopWatch-StartTime");
+
+    private HashSet onlineUsers = new LinkedHashSet();
+
+
+
 
     public TestUrlInterceptor() {
         log.debug("--------------- TestUrlInterceptor initialize -------------");
@@ -141,7 +151,6 @@ public class TestUrlInterceptor implements HandlerInterceptor {
             HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView)
             throws Exception {
 
-
         String viewname = modelAndView == null ? "NULL" : modelAndView.getViewName();
         String user = request.getRemoteUser();
         user = user == null ? "NULL" : user;
@@ -205,10 +214,21 @@ public class TestUrlInterceptor implements HandlerInterceptor {
     public void afterCompletion(
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
+
+        //处理完信息后，更新在线状态
+        HashMap hm = new HashMap();
+
         if (ex != null) {
 //            ex.printStackTrace();
             log.warn("--ErrorFound:{} Happened@ {}", ex.getMessage(), handler.toString());
-//            System.out.println("--ErrorFount" + ex.getMessage());
         }
+    }
+
+    public HashSet getOnlineUsers() {
+        return onlineUsers;
+    }
+
+    public void setOnlineUsers(HashSet onlineUsers) {
+        this.onlineUsers = onlineUsers;
     }
 }

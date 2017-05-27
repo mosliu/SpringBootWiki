@@ -8,6 +8,7 @@ import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
+import org.springframework.cache.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,9 @@ public interface UserDetailInfoService {
      * @param userDetailInfo the user detail info
      * @return the int 0 means success
      */
-    public int saveUserDetailInfo(UserDetailInfo userDetailInfo);
+     int saveUserDetailInfo(UserDetailInfo userDetailInfo);
+
+
 
     /**
      * Find user detail info by id user detail info.
@@ -39,7 +42,7 @@ public interface UserDetailInfoService {
      * @param id the id
      * @return the user detail info
      */
-    public UserDetailInfo findUserDetailInfoById(Long id);
+     UserDetailInfo findUserDetailInfoById(Long id);
 
     /**
      * Find user detail info by users user detail info.
@@ -47,14 +50,16 @@ public interface UserDetailInfoService {
      * @param dbUser the users
      * @return the user detail info
      */
-    public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser);
+     UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser);
+
+     UserDetailInfo findUserDetailInfoByUsername(String username);
 
     /**
      * Delete user detail info by id.
      *
      * @param id the id
      */
-    public void deleteUserDetailInfoById(Long id);
+     void deleteUserDetailInfoById(Long id);
 
 
     /**
@@ -63,15 +68,17 @@ public interface UserDetailInfoService {
      * @param sid the sid
      * @return the boolean true for success
      */
-    public boolean deleteUsersByUsername(String sid);
+     boolean deleteUsersByUsername(String sid);
 
     /**
      * List all users list.
      *
      * @return the list
      */
-    public List<DbUser> listAllUsers();
+     List<DbUser> listAllUsers();
 
+
+     List<UserDetailInfo> listAllUserDetailInfos();
 
     /**
      * Check users exists boolean.
@@ -79,7 +86,7 @@ public interface UserDetailInfoService {
      * @param u the u
      * @return the boolean
      */
-    public boolean checkUsersExists(DbUser u);
+     boolean checkUsersExists(DbUser u);
 
     /**
      * Check users exists boolean.
@@ -87,7 +94,7 @@ public interface UserDetailInfoService {
      * @param userDetailInfo the user detail info
      * @return the boolean
      */
-    public boolean checkUsersExists(UserDetailInfo userDetailInfo);
+     boolean checkUsersExists(UserDetailInfo userDetailInfo);
 
     /**
      * List auths list.
@@ -105,4 +112,10 @@ public interface UserDetailInfoService {
      * @return the Map<String, Object>
      */
     Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth);
+
+    /**
+     * Check avatar for all users
+     * @return
+     */
+    List<UserDetailInfo> checkAllUserDetailInfoAvatar();
 }

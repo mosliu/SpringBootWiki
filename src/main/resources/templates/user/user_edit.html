@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li class="active">用户信息维护</li>
+    </ol>
+    <h1 th:unless="${title==null}" th:text="${title}">发送短消息</h1>
+    <div class="col-md-2"></div>
+    <div class="faqs-form col-md-8">
+        <!-- header modal -->
+        <div class="modal-header">
+            <h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>
+        </div>
+        <form id="updateform" action="/admin/user_ajax?action=update" method="post"
+              class="validate-plugin sky-form boxed"
+              novalidate="novalidate" th:object="${user}">
+            <!-- body modal -->
+            <div class="">
+                <div class="login-box">
+
+                    <header><i class="fa fa-users"></i> 修改账户 <b><span th:text="*{dbUser.username}">zhangsan</span></b>
+                        <small class="note bold">请谨慎操作</small>
+                    </header>
+
+                    <fieldset>
+                        <h4>密码操作，不需要修改请留空</h4>
+                        <input type="hidden" th:field="*{dbUser.username}"/>
+                        <input type="hidden" th:field="*{dbUser.enabled}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>修改密码</label>
+                                <label class="input">
+                                    <input type="password" name="password" id="password"
+                                           placeholder="密码" minlength="4"/>
+                                    <b class="tooltip tooltip-bottom-right">修改密码</b>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>重复密码</label>
+                                <label class="input">
+                                    <input type="password" name="repassword" id="repassword"
+                                           placeholder="密码" minlength="4"/>
+                                    <b class="tooltip tooltip-bottom-right">重复密码</b>
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>姓</label>
+                                <div class="input">
+                                    <input type="text" th:field="*{lastName}" placeholder="姓"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>名</label>
+                                <div class="input">
+                                    <input type="text" th:field="*{firstName}" placeholder="名"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>昵称</label>
+                                <label class="input">
+                                    <input type="text" th:field="*{dbUser.usernameAlias}" name="usernameAlias"
+                                           placeholder="昵称"/>
+                                    <b class="tooltip tooltip-bottom-right">昵称</b>
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>性别</label>
+                                <div class="select">
+                                    <select th:field="*{gender}">
+                                        <option value="0" selected="" disabled="">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>邮件地址</label>
+                                <div class="input">
+                                    <input type="email" th:field="*{email}" name="usernameAlias"
+                                           placeholder="邮件地址" required="true"/>
+                                    <b class="tooltip tooltip-bottom-right">邮件地址</b>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <label>个人备注</label>
+                        <div>
+                            <textarea th:field="*{selfDescribe}" class="summernote form-control required"
+                                      data-height="200"
+                                      data-lang="en-US"></textarea>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <!--<button type="submit" onclick="$('#updateform').validate().form()" class="btn btn-primary" >Save changes</button>-->
+                <button type="submit" class="btn btn-primary"
+                        onclick="$('#updateform').validate({
+                            rules:{
+                                email:{
+                                    required:true,
+                                    email:true
+                                },
+                                password:{
+                                    minlength:4
+                                },
+                                repassword:{
+                                    equalTo: '#password'
+                                }
+                            }
+                        }).form()"
+                >Save changes
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="col-md-2"></div>
+
+
+    <div></div>
+
+</div>
+
+</body>
+</html>

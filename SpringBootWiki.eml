@@ -24,6 +24,7 @@
 	<lib name="Maven: org.hamcrest:hamcrest-library:1.3" scope="TEST"/>
 	<lib name="Maven: org.skyscreamer:jsonassert:1.4.0" scope="TEST"/>
 	<lib name="Maven: org.springframework:spring-test:4.3.6.RELEASE" scope="TEST"/>
+	<lib name="Maven: org.jetbrains.kotlin:kotlin-test:1.1.2-4" scope="TEST"/>
 	<levels>
 		<level name="Maven: org.apache.solr:solr-solrj:5.5.0" value="project"/>
 		<level name="Maven: xml-apis:xml-apis:1.3.02" value="project"/>
@@ -207,5 +208,10 @@
 		<level name="Maven: org.apache.httpcomponents:httpclient:4.5.1" value="project"/>
 		<level name="Maven: org.apache.httpcomponents:httpcore:4.4.6" value="project"/>
 		<level name="Maven: com.google.guava:guava:19.0" value="project"/>
+		<level name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jre8:1.1.2-4" value="project"/>
+		<level name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.2-4" value="project"/>
+		<level name="Maven: org.jetbrains.kotlin:kotlin-test:1.1.2-4" value="project"/>
+		<level name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.1.2-4" value="project"/>
+		<level name="Maven: org.jetbrains:annotations:13.0" value="project"/>
 	</levels>
 </component>

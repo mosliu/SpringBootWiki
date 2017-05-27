@@ -4,6 +4,9 @@ import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
+
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
 * ***************************************************************************
@@ -18,6 +21,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface UserDetailInfoRepository extends JpaRepository<UserDetailInfo, Long>, JpaSpecificationExecutor<UserDetailInfo> {
     UserDetailInfo findByDbUser(DbUser dbUser);
+    List<UserDetailInfo> getAllByDisabledOrderByDepartment(boolean disabled);
 }
 
 

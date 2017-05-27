@@ -4,12 +4,10 @@ import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.NewsPageRepository;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
-import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,9 +40,9 @@ public class NewsPageServiceImpl implements NewsPageService {
 
 
     @Override
-    @CachePut(cacheNames = "NewsPage", key = "#newsPage.id", condition = "#newsPage.id != null")
+//    @CachePut(cacheNames = "NewsPage", key = "#newsPage.id", condition = "#newsPage.id != null")
     public NewsPage saveNewsPage(NewsPage newsPage) {
-        DbUser u = ServiceHelper.getCurrentUsers();
+        DbUser u = ServiceHelper.getCurrentUser();
         newsPage.setLastUpdateUser(u);
         Date now = new Date();
         newsPage.setLastUpdateDate(now);

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li class="active">用户在线情况</li>
+    </ol>
+    <h1 th:unless="${title==null}" th:text="${title}">用户在线</h1>
+
+    <div class="">
+
+
+        <div class="box-light"><!-- .box-light OR .box-dark -->
+
+            <div class="row">
+
+                <!-- POPULAR POSTS -->
+                <div class="col-md-4 col-sm-4 margin-bottom-20" >
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            POPULAR POSTS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/b-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/d-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/a-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 156.25px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search Post..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /POPULAR POSTS -->
+                <!-- POPULAR POSTS -->
+                <div class="col-md-4 col-sm-4  margin-bottom-20">
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            POPULAR POSTS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/b-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/d-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/a-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 156.25px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search Post..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /POPULAR POSTS --><!-- POPULAR POSTS -->
+                <div class="col-md-4 col-sm-4  margin-bottom-20">
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            POPULAR POSTS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/b-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/d-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/a-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- post item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                <span class="size-11 text-muted">June 29, 2015</span>
+                            </div><!-- /post item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 156.25px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search Post..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /POPULAR POSTS -->
+                <!-- FRIENDS -->
+                <div class="col-md-4 col-sm-4">
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            FRIENDS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/1-min.jpg" width="40" height="40" alt="">
+                                <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Joana Doe</a></h4>
+                                <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                            </div><!-- /squared item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- rounded item -->
+                                <img class="thumbnail pull-left rounded" src="assets/images/demo/people/300x300/2-min.jpg" width="40" height="40" alt="">
+                                <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Melissa Doe</a></h4>
+                                <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                            </div><!-- /rounded item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/3-min.jpg" width="40" height="40" alt="">
+                                <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Felicia Doe</a></h4>
+                                <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                            </div><!-- /squared item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- rounded item -->
+                                <img class="thumbnail pull-left rounded" src="assets/images/demo/people/300x300/4-min.jpg" width="40" height="40" alt="">
+                                <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Suzana Doe</a></h4>
+                                <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                            </div><!-- /rounded item -->
+
+                            <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="40" height="40" alt="">
+                                <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Jolie Doe</a></h4>
+                                <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                            </div><!-- /squared item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 208.333px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search Friend..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /FRIENDS -->
+
+            </div>
+
+
+            <div class="row margin-top-30">
+
+                <!-- DISCUSSIONS -->
+                <div class="col-md-3 col-sm-3">
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            DISCUSSIONS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/3-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Joana Doe</a></h4>
+                                <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">12 min. ago</span>
+												</span>
+                            </div><!-- /discussion item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/4-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Melissa Doe</a></h4>
+                                <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">54 min. ago</span>
+												</span>
+                            </div><!-- /discussion item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">juliet Doe</a></h4>
+                                <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">8 days ago</span>
+												</span>
+                            </div><!-- /discussion item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Suanna Doe</a></h4>
+                                <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">12 day ago</span>
+												</span>
+                            </div><!-- /discussion item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/7-min.jpg" width="60" height="60" alt="">
+                                <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Felicia Doe</a></h4>
+                                <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">1 month ago</span>
+												</span>
+                            </div><!-- /discussion item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 138.889px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search Discussion..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /DISCUSSIONS -->
+
+                <!-- NOTIFICATIONS -->
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="box-inner">
+                        <h3>
+                            <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                            NOTIFICATIONS
+                        </h3>
+                        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true" style="overflow: hidden; width: auto; height: 250px;">
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-success label-square pull-left">
+													<i class="fa fa-comment"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>New Comment</b>: <a href="blog-single-default.html">Lorem ipsum Dolor</a></span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-danger label-square pull-left">
+													<i class="glyphicon glyphicon-remove"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Rejected</b>: <a href="#">Joana Doe</a> rejected friendship</span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-warning label-square pull-left">
+													<i class="fa fa-warning"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Warning</b>: Lorem ipsum Dolor</span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-info label-square pull-left">
+													<i class="fa fa-info-circle"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Info</b>: Lorem ipsum Dolor</span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-primary label-square pull-left">
+													<i class="fa fa-check"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Primary</b>: Lorem ipsum Dolor</span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-default label-square pull-left">
+													<i class="fa fa-heart-o"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Default</b>: Lorem ipsum Dolor</span>
+                            </div><!-- /notification item -->
+
+                            <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                <span class="label label-purple label-square pull-left">
+													<i class="fa fa-clock-o"></i>
+												</span>
+                                <span class="size-14 text-muted"><b>Various</b>: Lorem ipsum Dolor</span>
+                            </div><!-- /notification item -->
+
+                        </div><div class="slimScrollBar" style="background: rgb(51, 51, 51); width: 5px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px; height: 198.413px;"></div><div class="slimScrollRail" style="width: 5px; height: 100%; position: absolute; top: 0px; display: block; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.05; z-index: 90; right: 1px;"></div></div>
+                    </div>
+
+                    <div class="box-footer">
+                        <!-- INLINE SEARCH -->
+                        <div class="inline-search clearfix">
+                            <form action="#" method="get" class="widget_search nomargin">
+                                <input type="search" placeholder="Search notification..." name="s" class="serch-input">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <div class="clear"></div>
+                            </form>
+                        </div>
+                        <!-- /INLINE SEARCH -->
+
+                    </div>
+
+                </div>
+                <!-- /NOTIFICATIONS -->
+
+            </div>
+
+
+        </div>
+
+
+        <form method="post" action="#" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
+            <div class="box-inner">
+                <h4 class="uppercase">LEAVE A MESSAGE TO <strong>FELICIA DOE</strong></h4>
+
+                <textarea required="" class="form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
+                <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
+                    <span>0/100</span> Words
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
+            </div>
+        </form>
+
+    </div>
+    <div class="col-md-2"></div>
+    <div class="faqs-form col-md-8">
+        <!-- header modal -->
+        <div class="modal-header">
+            <h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>
+        </div>
+
+
+    </div>
+    <div class="col-md-2"></div>
+
+
+    <div></div>
+
+</div>
+
+</body>
+</html>

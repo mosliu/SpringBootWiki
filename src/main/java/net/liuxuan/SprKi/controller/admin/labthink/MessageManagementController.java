@@ -1,8 +1,8 @@
 package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
-import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.Message;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.service.MessageService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
@@ -22,16 +22,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
-* Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
-* ***************************************************************************
-* 源文件名:  net.liuxuan.SprKi.controller.admin.labthink.MessageRepository
-* 功能:
-* 版本:	@version 1.0
-* 编制日期: 2017/04/22 09:48
-* 修改历史: (主要历史变动原因及说明)
-* YYYY-MM-DD |    Author      |	 Change Description
-* 2017-04-22  |    Moses        |     Created
-*/
+ * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
+ * ***************************************************************************
+ * 源文件名:  net.liuxuan.SprKi.controller.admin.labthink.MessageRepository
+ * 功能:
+ * 版本:	@version 1.0
+ * 编制日期: 2017/04/22 09:48
+ * 修改历史: (主要历史变动原因及说明)
+ * YYYY-MM-DD |    Author      |	 Change Description
+ * 2017-04-22  |    Moses        |     Created
+ */
 
 @Controller
 @RequestMapping("/admin")
@@ -44,6 +44,8 @@ public class MessageManagementController {
     @RequestMapping("messageManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
+        Message msg = new Message();
+        model.put("msg",msg);
 
         return "admin/" + "messageManage" + " :: middle";
 
@@ -51,14 +53,14 @@ public class MessageManagementController {
 
     @RequestMapping("message")
     public String messageManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
-                                   HttpServletResponse response, Map<String, Object> model) throws IOException {
+                                HttpServletResponse response, Map<String, Object> model) throws IOException {
         log.info("===messageManage logged ,the _dto value is : {}", dto.toString());
 
         switch (dto.action) {
             case "edit":
                 Message message;
                 Long id = dto.getStr2LongID();
-                
+
                 message = messageService.findMessageById(id);
                 if (message != null) {
                 } else {
@@ -76,7 +78,7 @@ public class MessageManagementController {
     @RequestMapping("message_ajax")
 //    @ResponseBody
     public void messageManageAjax(@ModelAttribute("dto") BaseDTO _dto, Message _message, HttpServletRequest request,
-                                     HttpServletResponse response) throws IOException {
+                                  HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("===messageManageAjax logged ,the value is : {}", _dto.toString());
@@ -87,39 +89,31 @@ public class MessageManagementController {
 //        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
-                String messageName = request.getParameter("messageName");
-                String messageNameCN = request.getParameter("messageNameCN");
-                String comment = request.getParameter("comment");
-                boolean messageExists = messageService.checkMessageExists(messageName);
-                if (messageExists) {
-                    log.info("===messageManageAjax logged ,添加Message已存在 : {}");
-                    rtnData.put("error", "ERROR_MessageExists");
-                    rtnData.put("status", "fail");
-                    rtnData.put("msg", "添加Message已存在");
-                } else {
-                    rtnData.put("status", "success");
-                    rtnData.put("msg", "成功添加Message");
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _message, "添加角色", "");
-                    messageService.saveMessage(_message);
-                }
+                String title = _message.getTitle();
+                String content = _message.getContent();
+                messageService.announceMessage(title,content);
+                rtnData.put("status", "success");
+                rtnData.put("msg", "成功发布公告");
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _message, "发布公告", "");
+//                messageService.saveMessage(_message);
                 break;
-            case "delete":
-                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");
-                boolean b = messageService.deleteMessageById(id);
-                if (b) {
-                    rtnData.put("status", "success");
-                    rtnData.put("msg", "成功删除Message");
-                } else {
-                    rtnData.put("error", "ERROR_MessageNotExists");
-                    rtnData.put("status", "fail");
-                    rtnData.put("msg", "Message不存在，删除失败");
-                }
-                break;
-            case "update":
-                messageService.saveMessage(_message);
-                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _message, "更新Message", "");
-                rtnData.put("success1", "success!");
-                break;
+//            case "delete":
+//                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");
+//                boolean b = messageService.deleteMessageById(id);
+//                if (b) {
+//                    rtnData.put("status", "success");
+//                    rtnData.put("msg", "成功删除Message");
+//                } else {
+//                    rtnData.put("error", "ERROR_MessageNotExists");
+//                    rtnData.put("status", "fail");
+//                    rtnData.put("msg", "Message不存在，删除失败");
+//                }
+//                break;
+//            case "update":
+//                messageService.saveMessage(_message);
+//                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _message, "更新Message", "");
+//                rtnData.put("success1", "success!");
+//                break;
             default:
 
                 break;

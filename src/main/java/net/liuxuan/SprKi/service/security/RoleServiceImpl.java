@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findByDisabledFalse();
     }
 
-    @CachePut(cacheNames = "role", key = "#role.rolename")
+//    @CachePut(cacheNames = "role", key = "#role.rolename")
     public void saveRole(Role role) {
         roleRepository.save(role);
 //        roleRepository.flush();

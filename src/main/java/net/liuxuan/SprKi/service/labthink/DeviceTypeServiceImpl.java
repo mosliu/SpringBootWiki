@@ -43,7 +43,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService{
      * @param obj the devices
      */
     @Override
-    @CachePut(cacheNames = "deviceType", key = "#obj.id")
+//    @CachePut(cacheNames = "deviceType", key = "#obj.id")
     public DeviceType saveDeviceType(DeviceType obj) {
         return deviceTypeRepository.save(obj);
     }

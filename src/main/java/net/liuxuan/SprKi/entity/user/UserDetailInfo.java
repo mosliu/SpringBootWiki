@@ -46,9 +46,18 @@ public class UserDetailInfo {
 
     @Column(nullable = true ,length = 50)
     String email;
+
+    @Column(nullable = true ,length = 300)
+    String avatar;
+
+    @Column(nullable = true ,length = 500)
+    String selfDescribe;
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="department")
     Department department;
+
+    @Transient
+    boolean onlinestatus;
 
 
 }

@@ -12606,6 +12606,7 @@ section.dark .sky-form .toggle input:focus+i {
 .note-editor {
     position: relative;
     border: rgba(0,0,0,0.1) 1px solid;
+	background-color: white;
 }
 .note-editor .row-fluid p {
 	display:none;

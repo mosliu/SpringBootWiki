@@ -16,6 +16,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +27,7 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +42,9 @@ public class IndexController {
 
     @Autowired
     IndexService indexService;
+
+
+
 
     @RequestMapping("/")
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")
@@ -57,11 +65,16 @@ public class IndexController {
         //TODO 需要注意的是新闻现在查询是全部列出，要改！！
         List<NewsPage> newsPageList = indexService.getNewsPageList();
 
+
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
         model.put("progressList", progressList);
         model.put("newsPageList", newsPageList);
+
+
+
+
         return "index";
     }
 

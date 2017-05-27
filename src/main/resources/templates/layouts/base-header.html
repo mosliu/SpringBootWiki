@@ -29,12 +29,25 @@
         <ul class="pull-right nav nav-pills nav-second-main">
             <li sec:authorize="hasRole('ROLE_USER')">
                 <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
+                    <i class="fa fa-envelope hidden-xs"></i>
+                    <span class="badge badge-aqua btn-xs badge-corner" th:if="${session.msgCount>0}" th:text="${session.msgCount}">0</span>
+                    <strong >短消息</strong>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/ticket" th:href="@{/msg/new}">新消息</a></li>
+                    <li><a href="/ticketlist" th:href="@{/msg/list}">收件箱</a></li>
+                </ul>
+            </li>
+
+            <li sec:authorize="hasRole('ROLE_USER')">
+                <a class="dropdown-toggle no-text-underline" data-toggle="dropdown" href="#">
                     <i class="fa fa-user hidden-xs"></i>
-                    <span class="badge badge-aqua btn-xs badge-corner">0</span>
+                    <!--<span class="badge badge-aqua btn-xs badge-corner">0</span>-->
                     <strong sec:authentication="name">John Doe</strong>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a tabindex="-1" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
+                    <li><a tabindex="-1" href="#" th:href="@{/user/detail}"><i class="fa fa-user"></i>个人信息</a></li>
+                    <li><a tabindex="" href="#" th:href="@{/admin}"><i class="fa fa-gears"></i> 管理配置</a></li>
                     <li class="divider"></li>
                     <!--                    <li><a tabindex="-1" href="#"><i class="fa fa-bookmark"></i> test-1</a></li>
                                         <li><a tabindex="-1" href="#"><i class="fa fa-edit"></i> test-2</a></li>

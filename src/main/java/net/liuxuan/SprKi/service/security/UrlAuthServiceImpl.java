@@ -35,7 +35,7 @@ public class UrlAuthServiceImpl implements UrlAuthService {
     UrlAuthRepository urlAuthRepository;
 
     @Override
-    @CachePut(cacheNames = "role", key = "#role.rolename")
+//    @CachePut(cacheNames = "role", key = "#role.rolename")
     public void saveUrlAuth(UrlAuth urlAuth) {
         urlAuthRepository.save(urlAuth);
     }

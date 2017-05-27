@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -21,11 +22,14 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator;
 import org.springframework.security.web.access.WebInvocationPrivilegeEvaluator;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 import javax.annotation.Resource;
 import javax.servlet.Filter;
@@ -133,7 +137,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(86400);
 //                .rememberMe().rememberMeParameter("_spring_security_remember_me").userDetailsService(securityUserDetailsService).and()
         http.requestCache();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
+        http.sessionManagement()
+                .maximumSessions(1).maxSessionsPreventsLogin(false).expiredUrl("/login").sessionRegistry(sessionRegistry())
+                .and()
+                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                ;
         http.userDetailsService(securityUserDetailsService);
         http.csrf().disable();
         http.authenticationProvider(insertCaptchaDaoAuthenticationProvider());
@@ -168,6 +176,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     @Bean
+    public SessionRegistry sessionRegistry(){
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    public static ServletListenerRegistrationBean httpSessionEventPublisher() {
+        return new ServletListenerRegistrationBean(new HttpSessionEventPublisher());
+    }
+
+    @Bean
     public CaptchaDaoAuthenticationProvider insertCaptchaDaoAuthenticationProvider() {
         CaptchaDaoAuthenticationProvider provider = new CaptchaDaoAuthenticationProvider();
         provider.setUserDetailsService(securityUserDetailsService);
@@ -180,6 +198,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         CaptchaAuthenticationDetailsSource captchaAuthenticationDetailsSource = new CaptchaAuthenticationDetailsSource();
         return captchaAuthenticationDetailsSource;
     }
+
 
 
 //    @Autowired

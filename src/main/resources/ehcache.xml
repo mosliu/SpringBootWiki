@@ -75,5 +75,9 @@
     </cache>
     <cache name="tag" >
     </cache>
+    <cache name="message" >
+    </cache>
+    <cache name="userMessage" >
+    </cache>
 </ehcache>
 

@@ -1,42 +1,50 @@
 package net.liuxuan.spring.Helper;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
-import net.liuxuan.SprKi.repository.security.UsersRepository;
-import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
+import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 系统帮助工具类
  */
+@Component
 public final class SystemHelper {
 
-    private SystemHelper() {
-        throw new Error("工具类不能实例化！");
-    }
+//    private SystemHelper() {
+//        throw new Error("工具类不能实例化！");
+//    }
+//
+//    @Resource
+//    UserDetailInfoRepository userDetailInfoRepository1;
+//
+//    static UserDetailInfoRepository userDetailInfoRepository;
 
+    static UserDetailInfoService userDetailInfoService;
     @Resource
-    static UserDetailInfoRepository userDetailInfoRepository;
+    UserDetailInfoService userDetailInfoService1;
 
-    @Resource
-    static UsersRepository usersRepository;
+//    @Resource
+//    UsersRepository usersRepository1;
+//
+//    static UsersRepository usersRepository;
 
     /**
      * 退出系统并清空session
@@ -129,22 +137,19 @@ public final class SystemHelper {
         }
     }
 
-
-
     /**
      * 获得认证信息
      */
     public static Authentication getAuthentication() {
-        Authentication authentication = null;
-        SecurityContextImpl securityContextImpl = (SecurityContextImpl) getSessionAttibute("SPRING_SECURITY_CONTEXT");
-        if (securityContextImpl != null) {
-            authentication = securityContextImpl.getAuthentication();
-        }
-        return authentication;
+
+//        Authentication authentication = null;
+//        SecurityContextImpl securityContextImpl = (SecurityContextImpl) getSessionAttibute("SPRING_SECURITY_CONTEXT");
+//        if (securityContextImpl != null) {
+//            authentication = securityContextImpl.getAuthentication();
+//        }
+//        return authentication;
+        return SecurityContextHolder.getContext().getAuthentication();
     }
-
-
-
 
     /**
      * 得到当前用户IP
@@ -158,13 +163,27 @@ public final class SystemHelper {
         return currentUserIp;
     }
 
-    public static UserDetailInfo getCurrentUserDetailInfo(){
-        UserDetails userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        DbUser u = usersRepository.findOne(userDetails.getUsername());
-        UserDetailInfo udi =userDetailInfoRepository.findByDbUser(u);
+    public static UserDetailInfo getCurrentUserDetailInfo() {
+
+        Object principal = SystemHelper.getAuthentication().getPrincipal();
+        UserDetails userDetails = null;
+        UserDetailInfo udi =null;
+//        Class<?>[] interfaces = principal.getClass().getInterfaces();
+//        for (int i = 0; i < interfaces.length; i++) {
+//
+//
+//        }
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+            udi= userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
+        }
+
+//        DbUser u = usersRepository.findOne(userDetails.getUsername());
+//        UserDetailInfo udi =userDetailInfoRepository.findByDbUser(u);
+
+
         return udi;
     }
-
 
     /**
      * 得到当前SessionId
@@ -202,11 +221,12 @@ public final class SystemHelper {
 
     /**
      * 得到运行目录
+     *
      * @return
      */
-    public static String getRootPath(){
+    public static String getRootPath() {
         File root = new File(SystemHelper.class.getProtectionDomain().getCodeSource().getLocation().getFile());
-        if(root.isFile()){
+        if (root.isFile()) {
             root = new File(root.getParent());
         }
 //        System.out.println("root is file?:"+root.isFile());
@@ -228,6 +248,13 @@ public final class SystemHelper {
             System.out.println(i + "--" + ste.getFileName());
             System.out.println(i + "--" + ste.getLineNumber());
         }
+    }
+
+    @PostConstruct
+    public void init() {
+//        userDetailInfoRepository=userDetailInfoRepository1;
+//        usersRepository=usersRepository1;
+        userDetailInfoService = userDetailInfoService1;
     }
 
 }

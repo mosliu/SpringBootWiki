@@ -10,17 +10,24 @@ import net.liuxuan.SprKi.repository.security.UsersRepository;
 import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
-import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
+import net.liuxuan.utils.identicon.DrawUtils;
+import net.liuxuan.utils.identicon.Identicon;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.*;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -64,13 +71,23 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     @Autowired
     AuthoritiesRepository authoritiesRepository;
 
+    /**
+     * 输入的字符是否是汉字
+     *
+     * @param a char
+     * @return boolean
+     */
+    public static boolean isChinese(char a) {
+        int v = (int) a;
+        return (v >= 19968 && v <= 171941);
+    }
 
     /**
      * Save or update users.
      *
      * @param user the user
      */
-    @CachePut(cacheNames = "dbUsers", key = "#user.username")
+//    @CachePut(cacheNames = "dbUsers", key = "#user.username")
     public DbUser saveOrUpdateUsers(DbUser user) {
         assertUsersNotNull(user);
         String uname = user.getUsername();
@@ -122,9 +139,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         return checkUsersExists(userDetailInfo.getDbUser());
     }
 
-
     @Override
-    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
+//    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
         DbUser u = userDetailInfo.getDbUser();
         Assert.notNull(u, "传入的user不应该为空");
@@ -185,14 +201,22 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    @Cacheable(cacheNames = "userDetailInfo", key = "#dbUser.username")
+//    @Cacheable(cacheNames = "userDetailInfo", key = "#dbUser.username")
     public UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser) {
         Assert.notNull(dbUser, "传入的users不能为空");
-        Assert.notNull(dbUser.getUsername(), "传入的users的用户名不能为空");
-        DbUser u1 = usersRepository.findOne(dbUser.getUsername());
+
+        return findUserDetailInfoByUsername(dbUser.getUsername());
+    }
+
+    @Override
+    @Cacheable(cacheNames = "userDetailInfo", key = "#username")
+    public UserDetailInfo findUserDetailInfoByUsername(String username) {
+        Assert.notNull(username, "传入的用户名不能为空");
+
+        DbUser u1 = usersRepository.findOne(username);
         if (u1 == null) {
 //            不存在用户！
-            log.trace("请求用户 : {}不存在", dbUser.getUsername());
+            log.trace("请求用户 : {}不存在", username);
             return null;
         }
         UserDetailInfo detailInfo = userDetailInfoRepository.findByDbUser(u1);
@@ -228,7 +252,13 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     @CacheEvict(cacheNames = "dbUsers", key = "#username")
     public boolean deleteUsersByUsername(String username) {
         if (usersRepository.exists(username)) {
-            usersRepository.findOne(username).setEnabled(false);
+            DbUser one = usersRepository.findOne(username);
+            one.setEnabled(false);
+            UserDetailInfo byDbUser = userDetailInfoRepository.findByDbUser(one);
+            if (byDbUser != null) {
+                byDbUser.setDisabled(true);
+            }
+
             return true;
         } else {
             return false;
@@ -255,10 +285,17 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 //    }
 
     @Override
+    @Cacheable(cacheNames = "userDetailInfo", key = "'userdetailinfo_list'")
+    public List<UserDetailInfo> listAllUserDetailInfos() {
+//        return userDetailInfoRepository.findAll();
+        return userDetailInfoRepository.getAllByDisabledOrderByDepartment(false);
+    }
+
+    @Override
     @Caching(
             evict = {
-                    @CacheEvict(cacheNames = "dbUsers",key = "#userDetailInfo.dbUser.username"),
-                    @CacheEvict(cacheNames = "roles",allEntries = true)
+                    @CacheEvict(cacheNames = "dbUsers", key = "#userDetailInfo.dbUser.username"),
+                    @CacheEvict(cacheNames = "roles", allEntries = true)
             })
     public Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -378,6 +415,41 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         map.put("success", "权限处理成功");
         return map;
     }
+
+    @Override
+    public List<UserDetailInfo> checkAllUserDetailInfoAvatar() {
+        List<UserDetailInfo> userDetailInfos = userDetailInfoRepository.findAll();
+        userDetailInfos.forEach(u -> {
+            if (StringUtils.isBlank(u.getEmail())) {
+                u.setEmail(u.getDbUser().getUsername() + "@labthink.com");
+            }
+
+            if (StringUtils.isBlank(u.getFirstName())) {
+                u.setFirstName(u.getDbUser().getUsername());
+            }
+            if (StringUtils.isBlank(u.getLastName())) {
+                u.setLastName(u.getDbUser().getUsername());
+            }
+            if (StringUtils.isBlank(u.getAvatar())) {
+
+                String storePath = "./static/uploaded/avatar/";
+                String accessUrlPrefix = "/uploaded/avatar/";
+                String toMd5EncodeStr = u.getEmail();
+                //生成
+
+                String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
+                //写入
+                u.setAvatar(accessUrlPrefix+filename);
+            }
+            userDetailInfoRepository.save(u);
+        });
+
+
+        System.out.println();
+        return null;
+    }
+
+
 
     public Role makeANewRole(String newauth) {
         Role role = new Role();

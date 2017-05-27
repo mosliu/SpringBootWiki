@@ -89,6 +89,9 @@ public class SecurityLogHelper {
         slog.setAction(action);
 
 //        slog.setLogInfo(gson.toJson(entity).toString());
+        if(entity==null){
+            entity = "NULL ENTITY";
+        }
         try {
             slog.setLogInfo(mapper.writeValueAsString(entity));
             slog.setLogInfoType(entity.getClass().getName());

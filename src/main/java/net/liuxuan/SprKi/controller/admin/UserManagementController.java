@@ -149,7 +149,7 @@ public class UserManagementController {
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除用户");
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_DELETE,userDetailInfo,"成功删除用户"+userDetailInfo.getDbUser().getUsername(),"");
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_DELETE,dto.sid,"成功删除用户"+dto.sid,"");
 
                 } else {
                     rtnData.put("error", "ERROR_UserNotExists");
