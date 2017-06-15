@@ -22,5 +22,5 @@ import org.springframework.context.annotation.Configuration;
 @Setter
 public class ConfigHelper {
     @Value("${SprKi.upload.domain}")
-    public static String domain;
+    public String domain;
 }

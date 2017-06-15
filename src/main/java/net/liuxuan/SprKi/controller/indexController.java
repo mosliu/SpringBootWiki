@@ -7,7 +7,9 @@ package net.liuxuan.SprKi.controller;
 
 import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.ProjectProgress;
+import net.liuxuan.SprKi.entity.SliderPics;
 import net.liuxuan.SprKi.service.IndexService;
+import net.liuxuan.SprKi.service.SliderPicsService;
 import net.liuxuan.spring.Helper.SpringContextHelper;
 import net.liuxuan.spring.Helper.pdf.Html2Pdf;
 import org.apache.catalina.connector.Request;
@@ -43,7 +45,10 @@ public class IndexController {
     @Autowired
     IndexService indexService;
 
+    @Autowired
+    SliderPicsService sliderPicsService;
 
+// TODO 随机背景
 
 
     @RequestMapping("/")
@@ -65,12 +70,15 @@ public class IndexController {
         //TODO 需要注意的是新闻现在查询是全部列出，要改！！
         List<NewsPage> newsPageList = indexService.getNewsPageList();
 
+        List<SliderPics> sliderPicsList = sliderPicsService.getAllSliderPics();
+
 
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
         model.put("progressList", progressList);
         model.put("newsPageList", newsPageList);
+        model.put("sliderPicsList", sliderPicsList);
 
 
 

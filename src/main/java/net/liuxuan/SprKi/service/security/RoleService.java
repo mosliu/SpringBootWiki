@@ -20,17 +20,57 @@ import java.util.Map;
  */
 public interface RoleService {
 
+    /**
+     * Gets all role.
+     *
+     * @return the all role
+     */
     List<Role> getAllRole();
 
+    /**
+     * Save role.
+     *
+     * @param role the role
+     */
     void saveRole(Role role);
 
+    /**
+     * Find role by id role.
+     *
+     * @param id the id
+     * @return the role
+     */
     Role findRoleById(String id);
 
+    /**
+     * Find all role names list.
+     *
+     * @return the list
+     */
     List<String> findAllRoleNames();
 
+    /**
+     * Delete role by id boolean.
+     *
+     * @param id the id
+     * @return the boolean
+     */
     boolean deleteRoleById(String id);
 
+    /**
+     * Check role exists boolean.
+     *
+     * @param rolename the rolename
+     * @return the boolean
+     */
     boolean checkRoleExists(String rolename);
 
+    /**
+     * Update auths map.
+     *
+     * @param rolename   the rolename
+     * @param authArrays the auth arrays
+     * @return the map
+     */
     Map<String,Object> updateAuths(String rolename, String[] authArrays);
 }

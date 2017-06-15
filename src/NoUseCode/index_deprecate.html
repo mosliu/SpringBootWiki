@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<div class="nivoSlider" data-controlNav="false" data-pauseOnHover="false">-->
+    <!--<a href="#">-->
+        <!--<img src="/images/demo/slide-0.png" alt="Slide 1" title="#htmlcaption"/>-->
+    <!--</a>-->
+    <!--<img src="/images/demo/slide-4.jpg" alt="Slide 3"/>-->
+    <!--<img src="/images/demo/slide-5.jpg" alt="Slide 3"/>-->
+<!--</div>-->
+<!--<div id="htmlcaption" class="nivo-html-caption">-->
+    <!--国内技术支持组恭祝您<strong>鸡年大吉</strong>.-->
+<!--</div>-->
+
+<div id="slidePics">
+    <div class="owl-carousel buttons-autohide controlls-over nomargin"
+         data-plugin-options='{"items": 1, "singleItem": true, "autoPlay": 100000, "navigation": true, "pagination": true, "transitionStyle":"fade", "progressBar":"true"}'>
+        <div class="owl-slide">
+            <img class="img-responsive" src="/images/demo/slide-0.png" alt="">
+            <div class="owl--text">
+                国内技术支持组恭祝您<strong>鸡年大吉！</strong></div>
+        </div>
+        <div class="owl-slide">
+            <img class="img-responsive" src="images/demo/slide-4.jpg" alt="">
+            <div class="owl--text"><strong>展会展示区！</strong></div>
+        </div>
+        <div class="owl-slide">
+            <img class="img-responsive" src="/images/demo/slide-5.jpg" alt="">
+            <div class="owl--text"><strong>美国分公司</strong></div>
+        </div>
+    </div>
+</div>
+<script language="JavaScript">
+    $("#slidePics").load("/admin/sliderPicsList", function (response, status) {
+        if (status == "success") {
+            $("#slidePics").html("<div id='ssssssss' class='owl-carousel buttons-autohide controlls-over nomargin' data-plugin-options='{\"items\": 1, \"singleItem\": true, \"autoPlay\": 100000, \"navigation\": true, \"pagination\": true, \"transitionStyle\":\"fade\", \"progressBar\":\"true\"}'> ");
+            var jsonarray = $.parseJSON(response);
+            //                                alert(jsonarray.length);
+            //                                alert(jsonarray[2]);
+            $.each(jsonarray, function (index, value) {
+                var item_text = "";
+                item_text += "<img class=\"img-responsive\"  src=\"";
+                item_text += value.url;
+                item_text += "\" alt=\"\">";
+                item_text += "<div class=\"owl--text\">";
+                item_text += value.comment;
+                item_text += "</div>"
+                //                                    console.dir(value);
+                //                                    console.dir(item_text);
+                $('<div class=\"owl-slide\"></div>').html(item_text).appendTo("#slidePics div#ssssssss");
+            });
+            //                                $(response).each(function(){8/
+            //                                    var item_text = $(this).text();
+            //                                    $('<li></li>').html(item_text).appendTo('ol');
+            //                                });
+        }
+    });
+</script>
+
+</body>
+</html>

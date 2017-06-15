@@ -3,7 +3,7 @@
 }
 
 .indexbg{
-    background-image:url('/images/backgrounds/1.jpg');
+    /*background-image:url('/images/backgrounds/1.jpg');*/
     background-size: 100%;
     background-attachment:fixed;
     background-repeat:no-repeat;

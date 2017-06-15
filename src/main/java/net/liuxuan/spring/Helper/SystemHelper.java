@@ -1,11 +1,16 @@
 package net.liuxuan.spring.Helper;
 
+import net.liuxuan.SprKi.entity.security.Authorities;
+import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
+import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
@@ -21,6 +26,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * 系统帮助工具类
@@ -38,8 +45,11 @@ public final class SystemHelper {
 //    static UserDetailInfoRepository userDetailInfoRepository;
 
     static UserDetailInfoService userDetailInfoService;
+    static RoleService roleService;
     @Resource
     UserDetailInfoService userDetailInfoService1;
+    @Resource
+    RoleService roleService1;
 
 //    @Resource
 //    UsersRepository usersRepository1;
@@ -167,7 +177,7 @@ public final class SystemHelper {
 
         Object principal = SystemHelper.getAuthentication().getPrincipal();
         UserDetails userDetails = null;
-        UserDetailInfo udi =null;
+        UserDetailInfo udi = null;
 //        Class<?>[] interfaces = principal.getClass().getInterfaces();
 //        for (int i = 0; i < interfaces.length; i++) {
 //
@@ -175,7 +185,7 @@ public final class SystemHelper {
 //        }
         if (principal instanceof UserDetails) {
             userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-            udi= userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
+            udi = userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
         }
 
 //        DbUser u = usersRepository.findOne(userDetails.getUsername());
@@ -198,6 +208,17 @@ public final class SystemHelper {
         return currentSessionId;
     }
 
+    public static DbUser getCurrentUser() {
+        return getCurrentUsersFromDb();
+    }
+
+    public static DbUser getCurrentUsersFromDb() {
+        User ui = (User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        DbUser u = userDetailInfoService.findDbUserByUsername(ui.getUsername());
+        return u;
+    }
+
     /**
      * 得到当前获得当前用户所拥有的权限
      */
@@ -209,6 +230,30 @@ public final class SystemHelper {
             authorities = (List<GrantedAuthority>) authentication.getAuthorities();
         }
         return authorities;
+    }
+
+    /**
+     * 获得角色信息
+     */
+    public static List<Role> getCurrentUserRoles() {
+        List<Role> roleList = new ArrayList<>();
+        Authentication authentication = getAuthentication();
+
+        if (authentication != null) {
+//            List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+            Set<Authorities> authorities = getCurrentUser().getAuths();
+
+//            roleList = authorities.stream().map(e -> roleService.findRoleById(e.getAuthority())).collect(Collectors.toList());
+            roleList = authorities.stream().map(e -> e.getRolename()).collect(Collectors.toList());
+        }
+
+//        Authentication authentication = null;
+//        SecurityContextImpl securityContextImpl = (SecurityContextImpl) getSessionAttibute("SPRING_SECURITY_CONTEXT");
+//        if (securityContextImpl != null) {
+//            authentication = securityContextImpl.getAuthentication();
+//        }
+//        return authentication;
+        return roleList;
     }
 
     public static WebApplicationContext getWebAppContext(HttpServletRequest request) {
@@ -255,6 +300,8 @@ public final class SystemHelper {
 //        userDetailInfoRepository=userDetailInfoRepository1;
 //        usersRepository=usersRepository1;
         userDetailInfoService = userDetailInfoService1;
+        roleService = roleService1;
     }
+
 
 }

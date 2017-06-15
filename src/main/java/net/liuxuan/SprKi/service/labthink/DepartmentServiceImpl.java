@@ -1,11 +1,13 @@
 package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
+import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.spring.constants.JPAConstants;
-import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -33,12 +35,63 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     DepartmentRepository departmentRepository;
 
+    @Autowired
+    RoleService roleService;
+
+    @Value("${SprKi.department.role.prefix}")
+    String role_prefix;
+
+    @Value("${SprKi.department.role.autocreate}")
+    boolean role_autocreate;
+
+
     @Override
     @Cacheable(cacheNames = "department", key = "'department_list'")
     public List<Department> getAllDepartment() {
         return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
 //        return departmentRepository.findBydepartmentNameNot(JPAConstants.DELETEDOBJECTSTR);
 //        return departmentRepository.findAll();
+    }
+
+
+    @Override
+    public void checkDeparmentRole(){
+        List<Department> allDepartment = getAllDepartment();
+        allDepartment.forEach(e->{
+            Long id = e.getId();
+            String roleName = getDeparmentRoleName(e);
+            boolean match = isDeparmentRoleExists(roleName);
+            if(!match){
+                Role role =new Role();
+                role.setRolename(roleName);
+                role.setComment(e.getDepartmentName()+"部门权限");
+                role.setRoleDescribe(e.getDepartmentName()+"部门权限");
+                role.setDisabled(false);
+                roleService.saveRole(role);
+            }
+        });
+    }
+
+
+    @Override
+    public String getDeparmentRoleName(Department department){
+        String roleName = role_prefix+'_'+department.getId();
+        return roleName;
+    }
+
+
+    @Override
+    public boolean isDeparmentRoleExists(String deparmentRoleName){
+        List<Role> allRole = roleService.getAllRole();
+        boolean match = allRole.stream().anyMatch(r -> r.getRolename().equals(deparmentRoleName.toUpperCase()));
+        return match;
+    }
+
+
+    @Override
+    public boolean isDeparmentRoleExists(Department department){
+        String roleName = getDeparmentRoleName(department);
+        return isDeparmentRoleExists(roleName);
     }
 
     @Override
@@ -58,9 +111,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-//    @CachePut(cacheNames = "department", key = "#department.id")
-    public void saveDepartment(Department department) {
-        departmentRepository.save(department);
+    @CachePut(cacheNames = "department", key = "#department.id")
+    public Department saveDepartment(Department department) {
+        Department save = departmentRepository.save(department);
+        if(role_autocreate){
+            checkDeparmentRole();
+        }
+        return save;
     }
 
     @Override

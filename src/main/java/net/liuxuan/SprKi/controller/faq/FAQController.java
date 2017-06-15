@@ -1,13 +1,14 @@
 package net.liuxuan.SprKi.controller.faq;
 
-import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.SprKi.service.labthink.DepartmentService;
@@ -16,6 +17,8 @@ import net.liuxuan.SprKi.service.labthink.DevicesService;
 import net.liuxuan.SprKi.service.labthink.FAQContentService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
+import net.liuxuan.spring.Helper.SystemHelper;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -46,7 +50,6 @@ import java.util.*;
  * YYYY-MM-DD |    Author      |	 Change Description
  * 2016/3/8  |    Moses       |     Created
  */
-
 @Controller
 @PreAuthorize("hasRole('ROLE_USER')")
 public class FAQController {
@@ -55,30 +58,53 @@ public class FAQController {
 //    @Resource
 //    DevicesRepository devicesRepository;
 
+    /**
+     * The Devices service.
+     */
     @Autowired
     DevicesService devicesService;
 
 //    @Resource
 //    DepartmentRepository departmentRepository;
 
+    /**
+     * The Department service.
+     */
     @Autowired
     DepartmentService departmentService;
 
 //    @Resource
 //    CMSCategoryRepository cmsCategoryRepository;
 
+    /**
+     * The Cms category service.
+     */
     @Autowired
     CMSCategoryService cmsCategoryService;
 
 
+    /**
+     * The Device type service.
+     */
     @Autowired
     DeviceTypeService deviceTypeService;
 
 
+    /**
+     * The Faq content service.
+     */
     @Autowired
     FAQContentService faqContentService;
 
 
+    /**
+     * Gets faq.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the faq
+     */
     @RequestMapping(value = "/faq", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQ(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
@@ -98,11 +124,29 @@ public class FAQController {
         return "faq/faq_edit";
     }
 
+    /**
+     * Gets faq contents.
+     *
+     * @param id       the id
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the faqid
+     */
     @RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
+
         FAQContent faq = faqContentService.findById(id);
+
+        //TODO 无权限时 显示内容
+        if (!hasAccessRight(faq)) {
+            faq = createNoAccessRightFaqContent("您无权编辑该条信息");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
+        }
 
 
         log.trace("faq to show publish_date is:{}", faq.getPublishDate());
@@ -117,6 +161,15 @@ public class FAQController {
         return "faq/faq_edit";
     }
 
+    /**
+     * Show faqid string.
+     *
+     * @param id       the id
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the string
+     */
     @RequestMapping(value = "/faq/show/{id}", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String showFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
@@ -124,6 +177,12 @@ public class FAQController {
         FAQContent faq = faqContentService.findById(id);
         if (faq == null) {
             throw new ContentNotFoundException("", id);
+        }
+        if (!hasAccessRight(faq)) {
+            faq = createNoAccessRightFaqContent("您无权查看该条信息");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
         }
         model.put("faq", faq);
 //        devicesRepository.findAll();
@@ -134,9 +193,29 @@ public class FAQController {
         return "faq/faq_show";
     }
 
+    /**
+     * Delete faqid string.
+     *
+     * @param id       the id
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the string
+     */
     @RequestMapping(value = "/faq/delete/{id}", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String deleteFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+
+        FAQContent faq = faqContentService.findById(id);
+        if (faq == null) {
+            return "redirect:/faq/list";
+        }
+        if (!hasAccessRight(faq)) {
+            faq = createNoAccessRightFaqContent("您无权删除该条信息");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
+        }
 
 //        FAQContent faq = faqContentService.findById(id);
         SecurityLogHelper.LogActivity(request, LogActionType.DISABLE, faqContentService.findById(id), "禁用了文章", "/faq/show/" + id);
@@ -145,7 +224,129 @@ public class FAQController {
         return "redirect:/faq/list";
     }
 
+    @NotNull
+    public FAQContent createNoAccessRightFaqContent(String accessErrorText) {
+        FAQContent faq;
+        faq = new FAQContent();
+        faq.setAnswer(accessErrorText);
+        faq.setTitle(accessErrorText);
+        faq.setQuestion(accessErrorText);
+        faq.setStandard(accessErrorText);
+        return faq;
+    }
 
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param rolenames the rolenames
+     * @param dept      the faq
+     * @return the boolean
+     */
+    public boolean hasRole(Set<String> rolenames, Department dept) {
+        String deparmentRoleName = departmentService.getDeparmentRoleName(dept);
+        if (rolenames.contains(deparmentRoleName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param rolenames the rolenames
+     * @param faq       the faq
+     * @return the boolean
+     */
+    public boolean hasRole(Set<String> rolenames, FAQContent faq) {
+        return hasRole(rolenames, faq.getDepartment());
+    }
+
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    public boolean hasRole(FAQContent faq) {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return hasRole(rolenames, faq);
+    }
+
+    /**
+     * Is admin boolean.
+     *
+     * @param rolenames the rolenames
+     * @return the boolean
+     */
+    public boolean isAdmin(Set<String> rolenames) {
+//        if (rolenames.contains("ROLE_ADMIN")) {
+//            return true;
+//        }
+//        return false;
+        return rolenames.contains("ROLE_ADMIN");
+    }
+
+    /**
+     * Is admin boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isAdmin() {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return isAdmin(rolenames);
+    }
+
+    /**
+     * Is author boolean.
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    public boolean isAuthor(FAQContent faq) {
+        DbUser currentUser = SystemHelper.getCurrentUser();
+        if (faq.getAuthor().getUsername().equals(currentUser.getUsername())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Has access right boolean.
+     *
+     * @param rolenames the rolenames
+     * @param faq       the faq
+     * @return the boolean
+     */
+    public boolean hasAccessRight(Set<String> rolenames, FAQContent faq) {
+        boolean rtn = isAdmin(rolenames) || isAuthor(faq) || hasRole(rolenames, faq);
+        return rtn;
+    }
+
+    /**
+     * Has access right boolean.
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    public boolean hasAccessRight(FAQContent faq) {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return hasAccessRight(rolenames, faq);
+    }
+
+    /**
+     * Gets faq list.
+     *
+     * @param dto      the dto
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the faq list
+     */
     @RequestMapping(value = "/faq/list")
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQList(FAQSearchDTO dto, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
@@ -157,14 +358,35 @@ public class FAQController {
             //参数全为空
         }
 
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+
+
         List<FAQContent> allFAQContents = faqContentService.findAllFAQContentsByDto(dto);
-        log.debug("faq list size is {}", allFAQContents.size());
-        model.put("allfaqlist", allFAQContents);
+
+
+        /*
+            处理按照权限查询
+         */
+        List<FAQContent> filteredFAQContents = allFAQContents
+                .stream()
+                .filter(faq -> hasAccessRight(rolenames, faq))
+                .collect(Collectors.toList());
+        log.debug("faq list size is {}", filteredFAQContents.size());
+        model.put("allfaqlist", filteredFAQContents);
         model.put("dto", dto);
         return "faq/faq_list";
     }
 
 
+    /**
+     * Post faq string.
+     *
+     * @param faq     the faq
+     * @param request the request
+     * @param model   the model
+     * @return the string
+     */
     @RequestMapping(value = "/faq/post", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String postFAQ(FAQContent faq, HttpServletRequest request, Map<String, Object> model) {
@@ -197,6 +419,14 @@ public class FAQController {
     }
 
 
+    /**
+     * Gets faq count ajax.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @throws IOException the io exception
+     */
     @RequestMapping(value = "/faq/count_ajax", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public void getFAQCount_ajax(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
@@ -220,6 +450,15 @@ public class FAQController {
         ResponseHelper.writeMAPtoResponseAsJson(response, rtnDate);
     }
 
+    /**
+     * Gets faq count.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the faq count
+     * @throws IOException the io exception
+     */
     @RequestMapping(value = "/faq/count", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public String getFAQCount(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
@@ -228,17 +467,31 @@ public class FAQController {
         List faqGroupByCountList = faqContentService.getFaqGroupByCount();
         long total = faqContentService.getFAQContentsCount();
         List<Object[]> faqGroupByAuthorAndDateList = faqContentService.getFaqGroupByAuthorAndDate();
-        faqGroupByAuthorAndDateList.sort(
-                (p1, p2) -> ((int) ((Object[]) p2)[1]) - ((int) ((Object[]) p1)[1])
+
+        faqGroupByAuthorAndDateList.stream().forEach(
+                e->{
+                    String s = (String) (((Object[]) e)[1]);
+                    String s1 = s.substring(4);
+                    s1 = s1.length()==1?'0'+s1:s1;
+                    ((Object[]) e)[1] = s.substring(0, 4) + s1;
+                }
         );
-        Map<Integer, Map<String, Integer>> AuthorDateCounttempMap = new LinkedHashMap<>();
+
+        faqGroupByAuthorAndDateList.sort(
+                (p1, p2) -> (
+
+                        Integer.parseInt ((String) (((Object[]) p2)[1])) - Integer.parseInt ((String)(((Object[]) p1)[1]))
+                )
+        );
+        Map<String, Map<String, Integer>> AuthorDateCounttempMap = new LinkedHashMap<>();
 
 //        List<LinkedHashMap<String, String>> AuthorCountList = new ArrayList<>();
         for (int i = 0; i < faqGroupByAuthorAndDateList.size(); i++) {
             Object[] objs = (Object[]) faqGroupByAuthorAndDateList.get(i);
-            int nums = ((BigInteger) objs[0]).intValue();
-            int date = (int) objs[1];
-            String author = (String) objs[2];
+//            int nums = ((BigInteger) objs[0]).intValue();
+            int nums =  ((Number)objs[0]).intValue();
+            String date = (String) objs[1];
+            String author = ((DbUser) objs[2]).getUsername();
             Map<String, Integer> map = AuthorDateCounttempMap.get(date);
             if (map == null) {
                 map = new LinkedHashMap<>();
@@ -265,18 +518,33 @@ public class FAQController {
     }
 
 
+    /**
+     * Deviceslist list.
+     *
+     * @return the list
+     */
     @ModelAttribute("Devices_list")
     public List<Devices> Deviceslist() {
         return devicesService.getAllDevices();
 //        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
     }
 
+    /**
+     * Devices typelist list.
+     *
+     * @return the list
+     */
     @ModelAttribute("DevicesType_list")
     public List<DeviceType> DevicesTypelist() {
         return deviceTypeService.getAllDeviceType();
 //        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
     }
 
+    /**
+     * Departmentlist list.
+     *
+     * @return the list
+     */
     @ModelAttribute("Department_list")
     public List<Department> Departmentlist() {
         return departmentService.getAllDepartment();
@@ -299,6 +567,12 @@ public class FAQController {
     }
 
 
+    /**
+     * Init binder.
+     *
+     * @param binder the binder
+     * @throws ServletException the servlet exception
+     */
     @InitBinder
     protected void initBinder(
             WebDataBinder binder) throws ServletException {

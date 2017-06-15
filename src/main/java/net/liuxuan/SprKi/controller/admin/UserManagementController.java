@@ -7,6 +7,7 @@ import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
 import net.liuxuan.SprKi.service.security.RoleService;
@@ -41,6 +42,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class UserManagementController {
     private static Logger log =  LoggerFactory.getLogger(UserManagementController.class);
     @Autowired
@@ -64,6 +66,7 @@ public class UserManagementController {
 
     @RequestMapping("user")
 //    @ResponseBody
+
     public String userManage(@ModelAttribute("dto") BaseDTO dto, UserDetailInfo userDetailInfo, HttpServletRequest request,
                              HttpServletResponse response, Map<String, Object> model, RedirectAttributesModelMap redirectAttributesModelMap) {
 //
@@ -95,10 +98,13 @@ public class UserManagementController {
                 }
 //                List<String> authslist = userDetailInfoService.listRoles();
                 List<String> authslist = roleService.findAllRoleNames();
+                List<Role> allRole = roleService.getAllRole();
                 redirectAttributesModelMap.put("user", userDetailInfo);
                 redirectAttributesModelMap.put("authslist", authslist);
+                redirectAttributesModelMap.put("allRole", allRole);
                 model.put("user", userDetailInfo);
                 model.put("authslist", authslist);
+                model.put("allRole", allRole);
                 Set<Authorities> authoritiesSet = userDetailInfo.getDbUser().getAuths();
                 Set<String> userauth = new HashSet<String>();
                 authoritiesSet.forEach(auths -> userauth.add(auths.getAuthority()));

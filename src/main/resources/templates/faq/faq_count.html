@@ -51,10 +51,10 @@
         <li th:each="element : ${allAuthor}">
             <h3>
                 <a th:href="@{/faq/list}+'?fromDate='+${#strings.substring(element.key,0,4)}+'-'+
-                    ${#strings.substring(element.key,4,6)}+'-1&toDate='+${#strings.substring(element.key,0,4)}+'-'+
-                    ${#strings.substring(element.key,4,6)}+'-31'">
+                    ${#strings.substring(element.key,4,element.key.length())}+'-1&toDate='+${#strings.substring(element.key,0,4)}+'-'+
+                    ${#strings.substring(element.key,4,element.key.length())}+'-31'">
                 <span style="font-size: 30px;color:#8ab933">
-                    <span th:text="|${#strings.substring(element.key,0,4)}年${#strings.substring(element.key,4,6)}月|"
+                    <span th:text="|${#strings.substring(element.key,0,4)}年${#strings.substring(element.key,4,element.key.length())}月|"
                           th:remove="tag">2017.01</span>
                 </span>
                     总数：<span th:text="${element.value.remove('总数')}" th:remove="tag"></span>

@@ -5,7 +5,7 @@ import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
-import net.liuxuan.SprKi.service.ServiceHelper;
+import net.liuxuan.spring.Helper.SystemHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,7 +58,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
         FAQContent load = null;
 
-        DbUser u = ServiceHelper.getCurrentUser();
+        DbUser u = SystemHelper.getCurrentUser();
         faq.setLastUpdateUser(u);
         Date now = new Date();
 
@@ -98,7 +98,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
-    @Cacheable(cacheNames = "faqContent", key="#dto")
+//    @Cacheable(cacheNames = "faqContent", key="#dto",condition="#dto.isAllNull()")
     public List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto) {
 
         if (dto.isAllNull()) {
@@ -199,7 +199,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
     @Override
     public List<Object[]> getFaqGroupByAuthorAndDate() {
-        return faqContentRepository.findGroupByAuthorAndDate();
+        return faqContentRepository.findGroupByAuthorAndDate1();
     }
 
 

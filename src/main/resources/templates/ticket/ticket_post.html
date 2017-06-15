@@ -39,6 +39,7 @@
             <fieldset>
                 <!--title-->
                 <input type="hidden" th:field="*{Id}" />
+
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-11 col-sm-11">
@@ -50,7 +51,7 @@
                                 <span class="fancy-tooltip top-left">
                                 <!-- positions: .top-left | .top-right -->
                                     <!--<em>简要概括您的问题</em>-->
-                                    简要概括您的问题
+                                    请简要概括您的问题
                                 </span>
                             </div>
                         </div>
@@ -87,23 +88,32 @@
                                         th:value="${type.id}"
                                         th:text="${'devices:' + type.devicename}">W3/230</option>
                             </select>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <label>接收人</label>
+
+                            <select th:field="*{assignToUser}" class="form-control pointer required">
+                                <option th:each="type : ${userDetailInfoList}"
+                                        th:value="${type.id}"
+                                        th:text="${type.department?.departmentName+':'+type.lastName+type.firstName+'('+type.dbUser.username+')'}">售后</option>
+                            </select>
 
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group">
+                <!--<div class="row">-->
+                    <!--<div class="form-group">-->
 
-                        <div class="col-md-6 col-sm-6">
-                            <label>提问时间 *</label>
-                            <input type="text" th:field="*{submitDate}"
-                                   class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
-                                   data-RTL="false" readonly="true"/>
-                        </div>
-                    </div>
-                </div>
-
+                        <!--<div class="col-md-6 col-sm-6">-->
+                            <!--<label>提问时间 *</label>-->
+                            <!--<input type="text" th:field="*{submitDate}"-->
+                                   <!--class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"-->
+                                   <!--data-RTL="false" readonly="true"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <input type="hidden" th:field="*{submitDate}" />
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">

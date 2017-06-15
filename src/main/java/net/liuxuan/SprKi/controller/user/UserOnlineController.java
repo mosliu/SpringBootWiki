@@ -8,6 +8,7 @@ import net.liuxuan.utils.identicon.DrawUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.session.SessionInformation;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
@@ -47,6 +48,11 @@ public class UserOnlineController {
 
     @Autowired
     UserDetailInfoService userDetailInfoService;
+
+    @Value("${SprKi.avatar.storePath}")
+    String storePath;
+    @Value("${SprKi.avatar.accessUrlPath}")
+    String accessUrlPath;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -144,8 +150,10 @@ public class UserOnlineController {
         if(info!=null){
             path = info.getAvatar();
         }else{
-            String storePath = "./static/uploaded/avatar/";
-            String accessUrlPrefix = "/uploaded/avatar/";
+//            String storePath = "./static/uploaded/avatar/";
+//            String accessUrlPrefix = "/uploaded/avatar/";
+            String storePath = this.storePath;
+            String accessUrlPrefix = this.accessUrlPath;
             String toMd5EncodeStr = username;
             //生成
             String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
@@ -154,4 +162,6 @@ public class UserOnlineController {
         }
         return "redirect:"+path;
     }
+
+
 }

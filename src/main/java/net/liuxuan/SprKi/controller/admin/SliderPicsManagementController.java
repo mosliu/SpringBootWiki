@@ -42,6 +42,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class SliderPicsManagementController {
     private static Logger log = LoggerFactory.getLogger(SliderPicsManagementController.class);
 

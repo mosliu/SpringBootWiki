@@ -84,7 +84,7 @@
             </li>
             <li>
                 <a href="#">
-                    <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author.username}">John Doe</span>
+                    <i class="fa fa-user"></i> <span class="font-lato" th:text="${faq.author?.username}">John Doe</span>
                 </a>
             </li>
         </ul>
@@ -102,15 +102,15 @@
         <li class="col-md-3">
             <ul class="side-nav list-group margin-bottom-80">
                 <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department.id}">
+                    <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department?.id}">
                         <i class="fa fa-2x fa-eye"></i> &nbsp;&nbsp;&nbsp;部门：<span
-                            th:text="${faq.department.departmentName}">department</span>
+                            th:text="${faq.department?.departmentName}">department</span>
                     </a>
                 </li>
                 <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices.id}">
+                    <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices?.id}">
                         <i class="fa fa-2x fa-comments-o"></i>&nbsp;&nbsp;&nbsp;设备： <span
-                            th:text="${faq.devices.devicename}">devices</span>
+                            th:text="${faq.devices?.devicename}">devices</span>
                     </a>
                 </li>
 

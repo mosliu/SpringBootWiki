@@ -35,6 +35,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class ProjectProgressManagementController {
     private static Logger log = LoggerFactory.getLogger(ProjectProgressManagementController.class);
 

@@ -45,4 +45,8 @@ public interface MessageService {
 
     Long getUnreadMessageCount(UserDetailInfo currentUserDetailInfo);
     Long getUnreadMessageCount();
+
+    Long getUnreadMessageAndUnResolvedTicketCount(UserDetailInfo currentUserDetailInfo);
+
+    Long getUnreadMessageAndUnResolvedTicketCount();
 }

@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller;
 
 import net.liuxuan.SprKi.controller.utils.FileUploadUtil;
+import net.liuxuan.SprKi.service.labthink.DepartmentService;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SpringContextHelper;
 import org.json.JSONArray;
@@ -36,12 +37,18 @@ import java.util.stream.Collectors;
 public class CommonController {
 
 
+    /**
+     * The Request mapping handler mapping.
+     */
     @Autowired
     RequestMappingHandlerMapping requestMappingHandlerMapping;
 
 
     private Set<String> UrlMappingList;
 
+    /**
+     * Init.
+     */
     @PostConstruct
     public void init(){
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
@@ -54,12 +61,19 @@ public class CommonController {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Gets msg.
+     *
+     * @param path     the path
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the msg
+     */
     @RequestMapping(value = "/goget/{path}", method = RequestMethod.GET)
     public String getMsg(
             @PathVariable String path,
             HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-
 
         System.out.println("PATH IS:"+path);
         path = path.replaceAll("-","/");
@@ -75,19 +89,34 @@ public class CommonController {
 
     /**
      * 为所有的用户加上头像
-     * @param request
-     * @param response
-     * @param model
-     * @return
+     *
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return string
      */
     @RequestMapping(value = "/func/add_avatar", method = RequestMethod.GET)
     @ResponseBody
-    public String getMsg(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+    public String addAvatar(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
         UserDetailInfoService userDetailInfoService = (UserDetailInfoService) SpringContextHelper.getBean("userDetailInfoServiceImpl");
         userDetailInfoService.checkAllUserDetailInfoAvatar();
         return "OK";
     }
 
-
+    /**
+     * Add department role string.
+     *
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @return the string
+     */
+    @RequestMapping(value = "/func/addDepartmentRole", method = RequestMethod.GET)
+    @ResponseBody
+    public String addDepartmentRole(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+        DepartmentService departmentServiceImpl = (DepartmentService) SpringContextHelper.getBean("departmentServiceImpl");
+        departmentServiceImpl.checkDeparmentRole();
+        return "OK";
+    }
 
 }

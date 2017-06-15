@@ -51,6 +51,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
 //    @CachePut(cacheNames = "role", key = "#role.rolename")
+    @CacheEvict(cacheNames = "role", key = "'list_disablefalse'")
     public void saveRole(Role role) {
         roleRepository.save(role);
 //        roleRepository.flush();
@@ -97,6 +98,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "role", key = "'list_allRoleNames'")
     public Map<String, Object> updateAuths(String rolename, String[] authArrays) {
         Map<String, Object> map = new HashMap<String, Object>();
 

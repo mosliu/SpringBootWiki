@@ -4,6 +4,7 @@ import net.liuxuan.SprKi.entity.Message;
 import net.liuxuan.SprKi.entity.MessageConst;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.MessageRepository;
+import net.liuxuan.SprKi.service.labthink.TicketContentService;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SystemHelper;
 import org.slf4j.Logger;
@@ -46,6 +47,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     UserDetailInfoService userDetailInfoService;
+
+    @Autowired
+    TicketContentService ticketContentService;
 
     @Override
 //    @Cacheable(cacheNames = "message", key = "#message.id")
@@ -161,14 +165,29 @@ public class MessageServiceImpl implements MessageService {
 //    @Cacheable(cacheNames = "userMessage", key = "'COUNT'+#currentUserDetailInfo.dbUser.username")
     @Cacheable(cacheNames = "message", key = "'COUNT'+#currentUserDetailInfo.dbUser.username")
     public Long getUnreadMessageCount(UserDetailInfo currentUserDetailInfo) {
-        Long countByStatusAAndToUser = messageRepository.countByStatusAndToUserIs(MessageConst.MSG_STATUS_SENT, currentUserDetailInfo);
-        return countByStatusAAndToUser;
+        Long countByStatusAndToUser = messageRepository.countByStatusAndToUserIs(MessageConst.MSG_STATUS_SENT, currentUserDetailInfo);
+        return countByStatusAndToUser;
     }
 
     @Override
     public Long getUnreadMessageCount() {
-        Long countByStatusAAndToUser = getUnreadMessageCount(SystemHelper.getCurrentUserDetailInfo());
-        return countByStatusAAndToUser;
+        Long countByStatusAndToUser = getUnreadMessageCount(SystemHelper.getCurrentUserDetailInfo());
+        return countByStatusAndToUser;
 //        return 0L;
     }
+
+    @Override
+    public Long getUnreadMessageAndUnResolvedTicketCount(UserDetailInfo currentUserDetailInfo) {
+        Long count = ticketContentService.getCountByAssignAndResolved(currentUserDetailInfo,false);
+        count +=getUnreadMessageCount(currentUserDetailInfo);
+        return count;
+    }
+    @Override
+    public Long getUnreadMessageAndUnResolvedTicketCount() {
+        Long count = getUnreadMessageAndUnResolvedTicketCount(SystemHelper.getCurrentUserDetailInfo());
+
+        return count;
+//        return 0L;
+    }
+
 }

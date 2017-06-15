@@ -1,19 +1,17 @@
 package net.liuxuan.SprKi.controller.ticket;
 
-import net.liuxuan.SprKi.entity.CMSCategory;
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
-import net.liuxuan.SprKi.entity.labthink.*;
+import net.liuxuan.SprKi.entity.labthink.Department;
+import net.liuxuan.SprKi.entity.labthink.Devices;
+import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
-import net.liuxuan.SprKi.repository.CMSCategoryRepository;
-import net.liuxuan.SprKi.repository.labthink.DepartmentRepository;
-import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
-import net.liuxuan.SprKi.repository.security.UsersRepository;
-import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
-import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
-import net.liuxuan.SprKi.service.labthink.FAQContentService;
-import net.liuxuan.SprKi.service.labthink.TicketContentService;
+import net.liuxuan.SprKi.service.CMSCategoryService;
+import net.liuxuan.SprKi.service.labthink.*;
+import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import net.liuxuan.spring.Helper.SystemHelper;
 import net.liuxuan.spring.Helper.mail.MailHelper;
@@ -51,21 +49,26 @@ import java.util.*;
  */
 @Controller
 @PreAuthorize("hasRole('ROLE_USER')")
-public class TicketController {
+public class
+TicketController {
     private static Logger log = LoggerFactory.getLogger(TicketController.class);
 
-    @Resource
-    DevicesRepository devicesRepository;
+
+    @Autowired
+    DevicesService devicesService;
+
+    @Autowired
+    DepartmentService departmentService;
+
+    @Autowired
+    CMSCategoryService cmsCategoryService;
+
+
     @Autowired
     DeviceTypeService deviceTypeService;
     @Resource
-    DepartmentRepository departmentRepository;
-    @Resource
-    CMSCategoryRepository cmsCategoryRepository;
-    @Resource
-    UsersRepository usersRepository;
-    @Resource
-    UserDetailInfoRepository userDetailInfoRepository;
+    @Autowired
+    UserDetailInfoService userDetailInfoService;
     @Autowired
     TicketContentService ticketContentService;
 
@@ -74,6 +77,9 @@ public class TicketController {
 
     @Value("${SprKi.ticket.enablemail}")
     boolean enablemail;
+
+    @Value("${SprKi.ticket.editRole}")
+    String editRole;
 
     //    @Autowired
 //    private MailSender mailSender;
@@ -91,9 +97,10 @@ public class TicketController {
         model.put("title", "咨询问题提交界面");
         TicketContent ticket = new TicketContent();
         ticket.setDescription("Tickets");
+        ticket.setSubmitDate(new Date());
         model.put("ticket", ticket);
 //        devicesRepository.findAll();
-        List<Devices> devicesAll = devicesRepository.findAll();
+//        List<Devices> devicesAll = devicesService.getAllDevices();
 
 
 //
@@ -125,7 +132,19 @@ public class TicketController {
 //        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
 //        model.put("devicesAll",devicesAll);
 //        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        return "ticket/ticket_post";
+
+        DbUser u = SystemHelper.getCurrentUser();
+        if (u.getUsername().equals(content.getAuthor().getUsername()) || u.getUsername().equals(content.getLastUpdateUser().getUsername())) {
+            return "ticket/ticket_post";
+        }
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+//        boolean anyMatchFAQ = currentUserRoles.stream().anyMatch(e -> e.getRolename().equals("ROLE_FAQ"));
+        boolean anyMatchFAQ = currentUserRoles.stream().anyMatch(e -> e.getRolename().equals(editRole));
+        if(anyMatchFAQ){
+            return "ticket/ticket_post";
+        }
+
+        return "redirect:/ticket/show/" + id;
     }
 
     @RequestMapping(value = "/ticket/show/{id}", method = RequestMethod.GET)
@@ -137,7 +156,7 @@ public class TicketController {
 
         model.put("ticket", content);
 //        devicesRepository.findAll();
-        List<Devices> devicesAll = devicesRepository.findAll();
+//        List<Devices> devicesAll = devicesRepository.findAll();
 //        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
 //        model.put("devicesAll",devicesAll);
 //        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
@@ -170,8 +189,9 @@ public class TicketController {
 
 
         UserDetails userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
-        DbUser u = usersRepository.findOne(userDetails.getUsername());
-        UserDetailInfo udi = userDetailInfoRepository.findByDbUser(u);
+//        DbUser u = usersRepository.findOne(userDetails.getUsername());
+//        UserDetailInfo udi = userDetailInfoRepository.findByDbUser(u);
+        UserDetailInfo udi = userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
 
 
         model.put("title", "问题提交完成，我们将尽快对问题跟进整理！");
@@ -179,7 +199,7 @@ public class TicketController {
         if (enablemail) {
             Map<String, Object> variables = new HashMap<String, Object>();
 
-            variables.put("name", u.getUsername());
+            variables.put("name", userDetails.getUsername());
             variables.put("submitDate", new Date());
             variables.put("submitTitle", ticket.getTitle());
             variables.put("submitContent", ticket.getQuestion());
@@ -195,10 +215,14 @@ public class TicketController {
             variables.put("imageList", imageList); // so that we can reference it from HTML
 
             try {
-                MailHelper.SendMail(mailto, "subject aa", variables, "mail/mailTicketSubmit");
-                if (udi != null) {
-                    MailHelper.SendMail(udi.getEmail(), "subject aa", variables, "mail/mailTicketSubmit");
-                }
+//                MailHelper.SendMail(mailto, "New Question:"+ticket.getTitle(), variables, "mail/mailTicketSubmit");
+                String email = ticket.getAssignToUser().getEmail();
+                email= email==null?mailto:email;
+
+                MailHelper.SendMail(ticket.getAssignToUser().getEmail(), "New Question:"+ticket.getTitle(), variables, "mail/mailTicketSubmit");
+//                if (udi != null) {
+//                    MailHelper.SendMail(udi.getEmail(), "subject aa", variables, "mail/mailTicketSubmit");
+//                }
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
@@ -206,7 +230,7 @@ public class TicketController {
         ticket.setDescription("提交问题");
         model.put("ticket", ticket);
 //        devicesRepository.findAll();
-        List<Devices> devicesAll = devicesRepository.findAll();
+//        List<Devices> devicesAll = devicesRepository.findAll();
 
 
         String toLog = "新建了文章";
@@ -214,6 +238,8 @@ public class TicketController {
             toLog = "更新了文章";
         }
 
+//        //提交时间改为设置时间
+//        ticket.setSubmitDate(new Date());
         ticketContentService.saveTicketContent(ticket);
 
         SecurityLogHelper.LogActivity(request, LogActionType.CREATE_OR_UPDATE, ticket, toLog, "/ticket/show/" + ticket.getId());
@@ -265,6 +291,7 @@ public class TicketController {
     @RequestMapping(value = "ticket/answer", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public String AnswerTicket(FAQContent faq, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+        //TODO 添加回答问题的人
         long ticketid = faq.getId();
         System.out.println("ticketid:" + ticketid);
         faq.setId(null);
@@ -276,6 +303,8 @@ public class TicketController {
 
         TicketContent content = ticketContentService.findById(ticketid);
         content.setFaq(faq);
+        UserDetailInfo currentUserDetailInfo = SystemHelper.getCurrentUserDetailInfo();
+        content.setAnswerUser(currentUserDetailInfo);
         ticketContentService.saveTicketContent(content);
 
         SecurityLogHelper.LogActivity(request, LogActionType.CREATE_OR_UPDATE, faq, "解决了问题", "/ticket/show/" + ticketid);
@@ -295,6 +324,7 @@ public class TicketController {
         if (dtoAllNull) {
             //参数全为空
         }
+
 
         List<TicketContent> allContents = ticketContentService.findAllTicketContentsByDto(dto);
         log.info("list size is {}", allContents.size());
@@ -378,22 +408,29 @@ public class TicketController {
 //    }
 
 
+    @ModelAttribute("userDetailInfoList")
+    public List<UserDetailInfo> userDetailInfoList() {
+        return userDetailInfoService.listAllUserDetailInfos();
+//        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);
+    }
+
     @ModelAttribute("Devices_list")
     public List<Devices> Deviceslist() {
-        return devicesRepository.findAll();
+        return devicesService.getAllDevices();
     }
 
     @ModelAttribute("Department_list")
     public List<Department> Departmentlist() {
-        return departmentRepository.findAll();
+        return departmentService.getAllDepartment();
+//        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
     }
 
-    @ModelAttribute("Category_list")
-    public List<CMSCategory> Categorylist() {
-        return cmsCategoryRepository.findAll();
-    }
+//    @ModelAttribute("Category_list")
+//    public List<CMSCategory> Categorylist() {
+//        return cmsCategoryService.getAllCMSCategory();
+//    }
 
-//    @ModelAttribute("DevicesType_list")
+    //    @ModelAttribute("DevicesType_list")
 //    public List<DeviceType> DevicesTypelist() {
 //        return deviceTypeService.getAllDeviceType();
 ////        return devicesRepository.findByDevicenameNotOrderByDevicename(JPAConstants.DELETEDOBJECTSTR);

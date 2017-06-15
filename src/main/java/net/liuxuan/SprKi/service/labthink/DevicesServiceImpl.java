@@ -91,6 +91,7 @@ public class DevicesServiceImpl implements DevicesService {
      */
     @Override
 //    @CachePut(cacheNames = "devices", key = "#obj.id")
+    @CacheEvict(cacheNames = "devices", key = "'devices_list'")
     public void saveDevices(Devices obj) {
         devicesRepository.save(obj);
     }
@@ -102,6 +103,7 @@ public class DevicesServiceImpl implements DevicesService {
      * @return the boolean
      */
     @Override
+    @CacheEvict(cacheNames = "devices",allEntries = true)
     public boolean deleteDevicesById(String sid) {
         if (NumberUtils.isNumber(sid)) {
             Long id = Long.parseLong(sid);
@@ -111,7 +113,7 @@ public class DevicesServiceImpl implements DevicesService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "devices", key = "#id")
+    @CacheEvict(cacheNames = "devices",allEntries = true)
     public boolean deleteDevicesById(Long id) {
         Devices obj = devicesRepository.getOne(id);
         if (obj != null) {

@@ -3,10 +3,12 @@ package net.liuxuan.SprKi.controller.message;
 import com.google.gson.Gson;
 import net.liuxuan.SprKi.entity.Message;
 import net.liuxuan.SprKi.entity.MessageConst;
+import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.service.MessageService;
+import net.liuxuan.SprKi.service.labthink.TicketContentService;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import net.liuxuan.spring.Helper.SystemHelper;
@@ -48,6 +50,9 @@ public class MessageController {
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    TicketContentService ticketContentService;
 
     @Autowired
     UserDetailInfoService userDetailInfoService;
@@ -146,6 +151,7 @@ public class MessageController {
         return "redirect:/msg/list";
     }
 
+    //改造前
     @RequestMapping(value = "/msg/list2", method = RequestMethod.GET)
     public String getMsgList(
             HttpServletRequest request,
@@ -172,6 +178,10 @@ public class MessageController {
         Page<Message> messageList = messageService.findMessageToUserPageable(page,size,SystemHelper.getCurrentUserDetailInfo());
 //        model.put("messageList", messageList);
         model.put("datas", messageList);
+
+        List<TicketContent> assignedTo = ticketContentService.findAllTicketContentsAssignedTo(SystemHelper.getCurrentUserDetailInfo());
+        model.put("assignedTicket",assignedTo);
+
         return "message/msg_list";
     }
 

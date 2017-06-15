@@ -20,10 +20,10 @@
     <div class="col-md-2"></div>
     <div class="faqs-form col-md-8">
         <!-- header modal -->
-        <div class="modal-header">
-            <h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>
-        </div>
-        <form id="updateform" action="/admin/user_ajax?action=update" method="post"
+        <!--<div class="modal-header">-->
+            <!--<h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>-->
+        <!--</div>-->
+        <form id="updateform" action="/user/detail/modify" method="post"
               class="validate-plugin sky-form boxed"
               novalidate="novalidate" th:object="${user}">
             <!-- body modal -->
@@ -43,7 +43,7 @@
                                 <label>修改密码</label>
                                 <label class="input">
                                     <input type="password" name="password" id="password"
-                                           placeholder="密码" minlength="4"/>
+                                           placeholder="密码" minlength="4" th:field="*{dbUser.password}"/>
                                     <b class="tooltip tooltip-bottom-right">修改密码</b>
                                 </label>
                             </div>
@@ -51,7 +51,7 @@
                                 <label>重复密码</label>
                                 <label class="input">
                                     <input type="password" name="repassword" id="repassword"
-                                           placeholder="密码" minlength="4"/>
+                                           placeholder="密码" minlength="4"  />
                                     <b class="tooltip tooltip-bottom-right">重复密码</b>
                                 </label>
                             </div>
@@ -138,7 +138,7 @@
                                 }
                             }
                         }).form()"
-                >Save changes
+                >提交
                 </button>
             </div>
 

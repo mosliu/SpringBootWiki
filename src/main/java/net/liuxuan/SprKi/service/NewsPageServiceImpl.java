@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.service;
 import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.repository.NewsPageRepository;
+import net.liuxuan.spring.Helper.SystemHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class NewsPageServiceImpl implements NewsPageService {
     @Override
 //    @CachePut(cacheNames = "NewsPage", key = "#newsPage.id", condition = "#newsPage.id != null")
     public NewsPage saveNewsPage(NewsPage newsPage) {
-        DbUser u = ServiceHelper.getCurrentUser();
+        DbUser u = SystemHelper.getCurrentUser();
         newsPage.setLastUpdateUser(u);
         Date now = new Date();
         newsPage.setLastUpdateDate(now);

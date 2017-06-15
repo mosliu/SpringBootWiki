@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.entity.labthink;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.liuxuan.SprKi.entity.CMSContent;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.Analyzer;
@@ -60,7 +61,7 @@ public class TicketContent extends CMSContent{
     @Temporal(TemporalType.TIMESTAMP)
     protected Date submitDate; // 问题的时间
 
-    protected boolean Resolved=false;
+    protected boolean resolved=false;
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     protected FAQContent faq;//来源部门
@@ -68,5 +69,13 @@ public class TicketContent extends CMSContent{
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     protected Date resolvedDate; // 问题的时间
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="assignToUser")
+    UserDetailInfo assignToUser;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name="answerUser")
+    UserDetailInfo answerUser;
 
 }

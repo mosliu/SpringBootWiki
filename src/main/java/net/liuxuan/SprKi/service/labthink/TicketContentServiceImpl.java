@@ -3,9 +3,10 @@ package net.liuxuan.SprKi.service.labthink;
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.labthink.TicketContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
-import net.liuxuan.SprKi.service.ServiceHelper;
+import net.liuxuan.spring.Helper.SystemHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +57,7 @@ public class TicketContentServiceImpl implements TicketContentService {
 
         TicketContent load = null;
 
-        DbUser u = ServiceHelper.getCurrentUser();
+        DbUser u = SystemHelper.getCurrentUser();
         ticket.setLastUpdateUser(u);
         Date now = new Date();
 
@@ -138,6 +139,23 @@ public class TicketContentServiceImpl implements TicketContentService {
 //        return ticketContentRepository.findAll();
     }
 
+    @Override
+    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser){
+        List<TicketContent> ticketContents = ticketContentRepository.findAllByDisabledFalseAndAssignToUserOrderByLastUpdateDateDesc(assignToUser);
+        return ticketContents;
+    }
+
+    @Override
+    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser, boolean isResolved){
+        List<TicketContent> ticketContents =
+                ticketContentRepository.findAllByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser,isResolved);
+        return ticketContents;
+    }
+
+    @Override
+    public  Long getCountByAssignAndResolved(UserDetailInfo assignToUser, boolean isResolved){
+        return ticketContentRepository.countByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser,isResolved);
+    }
 
     @Override
     @CacheEvict(cacheNames = "ticketContent",key="#id")
@@ -155,10 +173,14 @@ public class TicketContentServiceImpl implements TicketContentService {
         return ticket;
     }
 
+
+
     @Override
     public long getTicketContentsCount() {
         return ticketContentRepository.count();
     }
+
+
 
 
 }

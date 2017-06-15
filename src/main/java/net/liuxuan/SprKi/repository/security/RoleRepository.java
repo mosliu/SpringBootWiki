@@ -32,6 +32,8 @@ public interface RoleRepository extends JpaRepository<Role, String>, JpaSpecific
     @Query("SELECT DISTINCT rolename FROM Role WHERE disabled = false ")
     List<String> findAllRoleNames();
 
+    List<Role> findAllByDisabledFalse();
+
 }
 
 

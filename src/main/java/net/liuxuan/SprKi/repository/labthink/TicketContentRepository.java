@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.repository.labthink;
 
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
@@ -21,6 +22,12 @@ import java.util.List;
 public interface TicketContentRepository extends JpaRepository<TicketContent, Long>, JpaSpecificationExecutor<TicketContent> {
 
     List<TicketContent> findTop100ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
+
+    List<TicketContent> findAllByDisabledFalseAndAssignToUserOrderByLastUpdateDateDesc(UserDetailInfo assignToUser);
+
+    List<TicketContent> findAllByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(UserDetailInfo assignToUser,Boolean resolved);
+
+    Long countByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(UserDetailInfo assignToUser,Boolean resolved);
 
 
 }

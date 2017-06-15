@@ -35,6 +35,7 @@ public interface UserDetailInfoService {
      int saveUserDetailInfo(UserDetailInfo userDetailInfo);
 
 
+    DbUser findDbUserByUsername(String username);
 
     /**
      * Find user detail info by id user detail info.

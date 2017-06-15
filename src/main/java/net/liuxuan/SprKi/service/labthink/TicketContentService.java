@@ -5,6 +5,7 @@ import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.DTO.TicketSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.labthink.TicketContent;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 
 import java.util.List;
 
@@ -34,6 +35,12 @@ public interface TicketContentService {
      * @return the list
      */
     List<TicketContent> findAllTicketContentsByDto(TicketSearchDTO dto);
+
+    List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser);
+
+    List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser, boolean isResolved);
+
+    Long getCountByAssignAndResolved(UserDetailInfo assignToUser, boolean isResolved);
 
     /**
      * Delete ticket content by id.

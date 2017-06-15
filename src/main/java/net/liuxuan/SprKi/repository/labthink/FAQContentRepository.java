@@ -22,10 +22,16 @@ public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, J
 
     List<FAQContent> findTop100ByDisabled(Boolean disabled);
     List<FAQContent>  findTop100ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
+    List<FAQContent>  findTop150ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
 
 
     @Query(value = "select count(v) as cnt, v.devices from FAQContent v group by v.devices")
     List<?> findGroupByCount();
-    @Query(value = "select count(*),EXTRACT(YEAR_MONTH FROM last_update_date) date,author FROM sprki_cms_content GROUP BY date,author", nativeQuery = true)
+//    @Query(value = "select count(*),EXTRACT(YEAR_MONTH FROM last_update_date) date,author FROM sprki_cms_content GROUP BY date,author", nativeQuery = true)
+    @Query(value = "select count(*),EXTRACT(YEAR_MONTH FROM last_update_date) date,author FROM sprki_cms_content ,sprki_cms_contentfaq WHERE sprki_cms_contentfaq.faq_id = sprki_cms_content.id GROUP BY date,author", nativeQuery = true)
     List<Object[]> findGroupByAuthorAndDate();
+
+//    @Query(value = "select count(author),SUBSTRING(faq.lastUpdateDate, 0, 7) ,author FROM FAQContent faq GROUP BY SUBSTRING(faq.lastUpdateDate, 0, 7) ,author")
+    @Query(value = "select count(author),CONCAT(YEAR(faq.lastUpdateDate),MONTH(faq.lastUpdateDate)) ,author FROM FAQContent faq GROUP BY CONCAT(YEAR(faq.lastUpdateDate),MONTH(faq.lastUpdateDate)) ,author")
+    List<Object[]> findGroupByAuthorAndDate1();
 }

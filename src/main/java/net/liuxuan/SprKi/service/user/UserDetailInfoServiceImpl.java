@@ -17,6 +17,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
@@ -72,10 +73,21 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     AuthoritiesRepository authoritiesRepository;
 
     /**
+     * The Store path.
+     */
+    @Value("${SprKi.avatar.storePath}")
+    String storePath;
+    /**
+     * The Access url path.
+     */
+    @Value("${SprKi.avatar.accessUrlPath}")
+    String accessUrlPath;
+
+    /**
      * 输入的字符是否是汉字
      *
      * @param a char
-     * @return boolean
+     * @return boolean boolean
      */
     public static boolean isChinese(char a) {
         int v = (int) a;
@@ -86,6 +98,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      * Save or update users.
      *
      * @param user the user
+     * @return the db user
      */
 //    @CachePut(cacheNames = "dbUsers", key = "#user.username")
     public DbUser saveOrUpdateUsers(DbUser user) {
@@ -141,6 +154,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     @Override
 //    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
+    @CacheEvict(cacheNames = "userDetailInfo", key = "'userdetailinfo_list'")
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
         DbUser u = userDetailInfo.getDbUser();
         Assert.notNull(u, "传入的user不应该为空");
@@ -183,6 +197,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 //        u.setAuths(auths);
         UserDetailInfo saved_UserDetailInfo = userDetailInfoRepository.findByDbUser(u);
         if (saved_UserDetailInfo == null) {
+            userDetailInfo.setAvatar(createAvatarFile(userDetailInfo.getEmail()));
             userDetailInfoRepository.save(userDetailInfo);
 //            saved_UserDetailInfo = userDetailInfo;
         } else {
@@ -211,9 +226,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     @Override
     @Cacheable(cacheNames = "userDetailInfo", key = "#username")
     public UserDetailInfo findUserDetailInfoByUsername(String username) {
-        Assert.notNull(username, "传入的用户名不能为空");
-
-        DbUser u1 = usersRepository.findOne(username);
+        DbUser u1 = findDbUserByUsername(username);
         if (u1 == null) {
 //            不存在用户！
             log.trace("请求用户 : {}不存在", username);
@@ -227,6 +240,13 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             userDetailInfoRepository.save(detailInfo);
         }
         return detailInfo;
+    }
+
+    @Override
+    public DbUser findDbUserByUsername(String username) {
+        Assert.notNull(username, "传入的用户名不能为空");
+        DbUser u1 = usersRepository.findOne(username);
+        return u1;
     }
 
     @Override
@@ -295,7 +315,9 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     @Caching(
             evict = {
                     @CacheEvict(cacheNames = "dbUsers", key = "#userDetailInfo.dbUser.username"),
-                    @CacheEvict(cacheNames = "roles", allEntries = true)
+                    @CacheEvict(cacheNames = "userDetailInfo", key = "'userdetailinfo_list'"),
+                    @CacheEvict(cacheNames = "userDetailInfo", key = "#userDetailInfo.dbUser.username")
+//                    @CacheEvict(cacheNames = "userDetailInfo", allEntries = true)
             })
     public Map<String, Object> updateRoles(UserDetailInfo userDetailInfo, String[] authArrays, String newauth) {
         Map<String, Object> map = new HashMap<String, Object>();
@@ -432,14 +454,15 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             }
             if (StringUtils.isBlank(u.getAvatar())) {
 
-                String storePath = "./static/uploaded/avatar/";
-                String accessUrlPrefix = "/uploaded/avatar/";
-                String toMd5EncodeStr = u.getEmail();
-                //生成
-
-                String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
-                //写入
-                u.setAvatar(accessUrlPrefix+filename);
+//                String storePath = this.storePath;
+//                String accessUrlPrefix = this.accessUrlPath;
+//                String toMd5EncodeStr = u.getEmail();
+//                //生成
+//
+//                String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
+//                //写入
+//                u.setAvatar(accessUrlPrefix+filename);
+                u.setAvatar(createAvatarFile(u.getEmail()));
             }
             userDetailInfoRepository.save(u);
         });
@@ -450,7 +473,12 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
 
-
+    /**
+     * Make a new role role.
+     *
+     * @param newauth the newauth
+     * @return the role
+     */
     public Role makeANewRole(String newauth) {
         Role role = new Role();
         role.setRolename(newauth);
@@ -460,6 +488,24 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         roleService.saveRole(role);
 //        roleRepository.save(role);
         return role;
+    }
+
+    /**
+     * Create avatar file string.
+     *
+     * @param encodestr the encodestr
+     * @return the url
+     */
+    public String createAvatarFile(String encodestr){
+        String storePath = this.storePath;
+        String accessUrlPrefix = this.accessUrlPath;
+        String toMd5EncodeStr = encodestr;
+        //生成
+
+        String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
+        //写入
+//        u.setAvatar(accessUrlPrefix+filename);
+        return accessUrlPrefix+filename;
     }
 
 

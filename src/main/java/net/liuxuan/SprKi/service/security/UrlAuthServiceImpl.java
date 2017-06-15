@@ -31,11 +31,14 @@ public class UrlAuthServiceImpl implements UrlAuthService {
 
     private static Logger log = LoggerFactory.getLogger(UrlAuthServiceImpl.class);
 
+    /**
+     * The Url auth repository.
+     */
     @Autowired
     UrlAuthRepository urlAuthRepository;
 
     @Override
-//    @CachePut(cacheNames = "role", key = "#role.rolename")
+    @CacheEvict(cacheNames = "urlAuth", key = "'list_disablefalse'")
     public void saveUrlAuth(UrlAuth urlAuth) {
         urlAuthRepository.save(urlAuth);
     }

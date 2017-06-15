@@ -39,6 +39,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class DeviceManagementController {
     private static Logger log = LoggerFactory.getLogger(DeviceManagementController.class);
 

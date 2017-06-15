@@ -36,6 +36,7 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class RoleManagementController {
     private static Logger log = LoggerFactory.getLogger(RoleManagementController.class);
 

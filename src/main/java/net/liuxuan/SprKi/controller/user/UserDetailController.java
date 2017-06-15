@@ -1,9 +1,11 @@
 package net.liuxuan.SprKi.controller.user;
 
-import net.liuxuan.SprKi.entity.Message;
+import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.service.user.UserDetailInfoService;
+import net.liuxuan.spring.Helper.SecurityLogHelper;
 import net.liuxuan.spring.Helper.SystemHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ import java.util.Map;
 @Controller
 @PreAuthorize("hasRole('ROLE_USER')")
 public class UserDetailController {
-    private static Logger log =  LoggerFactory.getLogger(UserDetailController.class);
+    private static Logger log = LoggerFactory.getLogger(UserDetailController.class);
 
     @Autowired
     UserDetailInfoService userDetailInfoService;
@@ -46,4 +48,30 @@ public class UserDetailController {
         model.put("user", currentUserDetailInfo);
         return "user/user_edit";
     }
+
+    @RequestMapping(value = "/user/detail/modify", method = RequestMethod.POST)
+    public String modifyCurrentUser(UserDetailInfo userDetailInfo, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+
+        log.info("-UserDetailController.getCurrentUser() Method");
+        UserDetailInfo currentUserDetailInfo = SystemHelper.getCurrentUserDetailInfo();
+//        model.put("message", "Editor");
+
+        if (StringUtils.equals(userDetailInfo.getDbUser().getUsername() , currentUserDetailInfo.getDbUser().getUsername())) {
+            // if(userDetailInfo.getId()==currentUserDetailInfo.getId()) {
+            userDetailInfoService.saveUserDetailInfo(userDetailInfo);
+            SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_UPDATE, userDetailInfo, "更新用户" + userDetailInfo.getDbUser().getUsername(), "");
+            model.put("user", userDetailInfo);
+            model.put("title", "保存成功");
+
+        } else {
+            model.put("user", currentUserDetailInfo);
+            model.put("title", "保存失败，请检查");
+        }
+
+//        model.put("success1", "success!");
+
+
+        return "user/user_edit";
+    }
+
 }
