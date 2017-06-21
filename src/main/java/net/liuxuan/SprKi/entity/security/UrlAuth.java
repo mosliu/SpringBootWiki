@@ -44,9 +44,9 @@ public class UrlAuth {
     String comment;
 
     @ManyToMany(mappedBy="urlAuths")
-    //只需要设置mappedBy="games"表明Game实体是关系被维护端就可以了
+    //只需要设置mappedBy="urlAuths"表明UrlAuth实体是关系被维护端就可以了
     //级联保存、级联删除等之类的属性在多对多关系中是不需要设置
-    //不能说删了游戏,把玩家也删掉,玩家还可以玩其他的游戏
+    //不能说删了权限,把角色也删掉,角色还可以具有其他权限
     private Set<Role> roles = new HashSet<Role>();
 
     @Column(name = "disabled", nullable = false)

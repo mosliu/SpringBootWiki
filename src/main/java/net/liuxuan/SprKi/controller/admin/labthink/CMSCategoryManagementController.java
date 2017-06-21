@@ -131,7 +131,7 @@ public class CMSCategoryManagementController {
         }
 //        return "";
 //        mapper.writeValue(response.getWriter(), rtnData);
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
 

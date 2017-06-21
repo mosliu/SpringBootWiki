@@ -27,10 +27,10 @@ public class CMSContentTags {
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @Column(length = 100,nullable = false)
+    @Column(unique = true,length = 100,nullable = false)
     private String name;
 
-    @Column(length = 100,nullable = true)
+    @Column(length = 30,nullable = true)
     private String tagtype;
 
 //    @ManyToMany(targetEntity=CMSContent.class)

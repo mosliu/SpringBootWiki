@@ -167,15 +167,13 @@
                 <div class="col-md-4 col-sm-4">
                     <h4>最近新闻</h4>
 
-                    <div th:each="news,iter:${newsPageList}" th:remove="tag">
-                        <div class="row tab-post"><!-- post -->
+                        <div class="row tab-post" th:each="news,iter:${newsPageList}"><!-- post -->
                             <div class="col-md-10 col-sm-10 col-xs-9">
                                 <a th:href="@{/news/show/{id}(id=${news.id})}" th:utext="${news.fullTitle}"
                                    class="tab-post-link"></a>
                                 <small th:text="${#dates.format(news.publishDate, 'yyyy-MM-dd')}">2017 03 06</small>
                             </div>
                         </div><!-- /post -->
-                    </div>
 
                     <div class="row tab-post"><!-- post -->
                         <div class="col-md-2 col-sm-2 col-xs-3">

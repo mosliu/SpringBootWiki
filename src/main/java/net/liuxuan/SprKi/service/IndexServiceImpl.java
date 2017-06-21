@@ -38,6 +38,7 @@ public class IndexServiceImpl implements IndexService {
 
     @Override
     public List<NewsPage> getNewsPageList() {
-        return newsPageService.getAllNewsPage();
+//        return newsPageService.getAllNewsPage();
+        return newsPageService.getTop20NewsPage();
     }
 }

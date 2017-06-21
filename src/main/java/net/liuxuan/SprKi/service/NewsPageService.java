@@ -2,6 +2,9 @@ package net.liuxuan.SprKi.service;
 
 
 import net.liuxuan.SprKi.entity.NewsPage;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 
@@ -27,4 +30,9 @@ public interface NewsPageService {
 
     List<NewsPage> getAllNewsPage();
 
+    @Cacheable(cacheNames = "NewsPage", key = "'listtop20'")
+    List<NewsPage> getTop20NewsPage();
+
+    @Cacheable(cacheNames = "NewsPage", key = "'pageable'+#page+':' + #size")
+    Page<NewsPage> getAllNewsPageable(Integer page, Integer size);
 }

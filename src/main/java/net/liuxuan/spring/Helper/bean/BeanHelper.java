@@ -26,6 +26,13 @@ public class BeanHelper  {
         s.copyProperties(dest, origin);
     }
 
+
+    /**
+     * Copy from bean to bean,which origin89
+     *
+     * @param dest the valueObject,the Persist
+     * @param origin the postObject,the origin
+     */
     public static void CopyWhenSrcFieldNotNullBeanUtilsBean(Object dest, Object origin) throws InvocationTargetException, IllegalAccessException {
         CopyWhenSrcFieldNotNullBeanUtilsBean s = new CopyWhenSrcFieldNotNullBeanUtilsBean();
         s.copyProperties(dest, origin);

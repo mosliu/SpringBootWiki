@@ -83,7 +83,7 @@
                         <div class="col-md-4 col-sm-4">
                             <label>设备 *</label>
 
-                            <select th:field="*{devices}" class="form-control pointer required">
+                            <select th:field="*{devices}" class="form-control pointer select2 required">
                                 <option th:each="type : ${Devices_list}"
                                         th:value="${type.id}"
                                         th:text="${'devices:' + type.devicename}">W3/230</option>
@@ -92,7 +92,7 @@
                         <div class="col-md-4 col-sm-4">
                             <label>接收人</label>
 
-                            <select th:field="*{assignToUser}" class="form-control pointer required">
+                            <select th:field="*{assignToUser}" class="form-control pointer select2 required">
                                 <option th:each="type : ${userDetailInfoList}"
                                         th:value="${type.id}"
                                         th:text="${type.department?.departmentName+':'+type.lastName+type.firstName+'('+type.dbUser.username+')'}">售后</option>

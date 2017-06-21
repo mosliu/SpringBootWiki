@@ -95,7 +95,7 @@
                         <div class="col-md-4 col-sm-4">
                             <label>设备 *</label>
 
-                            <select th:field="*{devices}" class="form-control pointer required">
+                            <select th:field="*{devices}" class="form-control pointer select2 required">
                                 <option th:each="type : ${Devices_list}"
                                         th:value="${type.id}"
                                         th:text="${type.devicename+':'+ type.deviceType.deviceTypeName}">W3/230</option>
@@ -103,6 +103,10 @@
 
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+
                 </div>
 
                 <div class="row">
@@ -119,8 +123,20 @@
                             <label>标准</label>
                             <input type="text" th:field="*{standard}"  class="form-control"/>
                         </div>
+
+                        <div class="col-md-4 col-sm-6">
+                            <label>标签 *</label>
+                            <!--th:value="${#dates.createNow()}"-->
+                            <select tabindex="-1" multiple="multiple"
+                                    id="tagStr" name="tagStr"
+                                    aria-hidden="true"
+                                    class="form-control select2 select2-hidden-accessible">
+                                <option >tag1</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
+
 
                 <div class="row">
                     <div class="form-group">
@@ -157,7 +173,49 @@
 
 
     <div></div>
+    <script type="text/javascript" th:inline="javascript">
+//        console.log('222');
+        /*<![CDATA[*/
+        $("#tagStr").data("select2Attr", {
+            tags: true,
+            ajax: {
+                url:function (params) {
+                    return '/tags/' + params.term;
+                },
+                delay: 250,
+                dataType: 'json',
+                type: "GET",
+                processResults: function (data) {
+                    return {
+                        results: $.map(data.results, function (item) {
+                            return {
+                                text: item,
+                                id: item
+                            }
+                        })
+                    };
+                }
+            },
+            minimumInputLength: 2,
+            maximumSelectionLength: 10,
 
+        });
+
+        $("#devices").change(function () {
+            $("#devices option:selected").each(function () {
+                var selectstr = $( this ).text()+"";
+                selectstr = selectstr.substr(selectstr.lastIndexOf(':')+1);
+                $("option","#deviceType ").each(function () {
+                    if($(this).text()==selectstr){
+                        $(this).attr("selected",true);
+                    }
+                })
+            });
+
+        })
+
+        /*]]>*/
+    </script>
 </div>
 
 </body>

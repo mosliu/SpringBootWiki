@@ -1,38 +1,38 @@
 /*
-UploadiFive 1.2.2
-Copyright (c) 2012 Reactive Apps, Ronnie Garcia
-Released under the UploadiFive Standard License <http://www.uploadify.com/uploadifive-standard-license>
-*/
+ UploadiFive 1.2.2
+ Copyright (c) 2012 Reactive Apps, Ronnie Garcia
+ Released under the UploadiFive Standard License <http://www.uploadify.com/uploadifive-standard-license>
+ */
 ;(function($) {
 
     var methods = {
 
         init : function(options) {
-            
+
             return this.each(function() {
 
                 // Create a reference to the jQuery DOM object
                 var $this = $(this);
-                    $this.data('uploadifive', {
-                        inputs     : {}, // The object that contains all the file inputs
-                        inputCount : 0,  // The total number of file inputs created
-                        fileID     : 0,
-                        queue      : {
-                                         count      : 0, // Total number of files in the queue
-                                         selected   : 0, // Number of files selected in the last select operation
-                                         replaced   : 0, // Number of files replaced in the last select operation
-                                         errors     : 0, // Number of files that returned an error in the last select operation
-                                         queued     : 0, // Number of files added to the queue in the last select operation
-                                         cancelled  : 0  // Total number of files that have been cancelled or removed from the queue
-                                     },
-                        uploads    : {
-                                         current    : 0, // Number of files currently being uploaded
-                                         attempts   : 0, // Number of file uploads attempted in the last upload operation
-                                         successful : 0, // Number of files successfully uploaded in the last upload operation
-                                         errors     : 0, // Number of files returning errors in the last upload operation
-                                         count      : 0  // Total number of files uploaded successfully
-                                     }
-                    });
+                $this.data('uploadifive', {
+                    inputs     : {}, // The object that contains all the file inputs
+                    inputCount : 0,  // The total number of file inputs created
+                    fileID     : 0,
+                    queue      : {
+                        count      : 0, // Total number of files in the queue
+                        selected   : 0, // Number of files selected in the last select operation
+                        replaced   : 0, // Number of files replaced in the last select operation
+                        errors     : 0, // Number of files that returned an error in the last select operation
+                        queued     : 0, // Number of files added to the queue in the last select operation
+                        cancelled  : 0  // Total number of files that have been cancelled or removed from the queue
+                    },
+                    uploads    : {
+                        current    : 0, // Number of files currently being uploaded
+                        attempts   : 0, // Number of file uploads attempted in the last upload operation
+                        successful : 0, // Number of files successfully uploaded in the last upload operation
+                        errors     : 0, // Number of files returning errors in the last upload operation
+                        count      : 0  // Total number of files uploaded successfully
+                    }
+                });
                 var $data = $this.data('uploadifive');
 
                 // Set the default options
@@ -40,7 +40,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                     'auto'            : true,               // Automatically upload a file when it's added to the queue
                     'buttonClass'     : false,              // A class to add to the UploadiFive button
                     'buttonText'      : 'Select Files',     // The text that appears on the UploadiFive button
-                    'checkScript'     : false,              // Path to the script that checks for existing file names 
+                    'checkScript'     : false,              // Path to the script that checks for existing file names
                     'dnd'             : true,               // Allow drag and drop into the queue
                     'dropTarget'      : false,              // Selector for the drop target
                     'fileObjName'     : 'Filedata',         // The name of the file object to use in your server-side script
@@ -62,23 +62,23 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                     'width'           : 100                 // The width of the button
 
                     /*
-                    // Events
-                    'onAddQueueItem'   : function(file) {},                        // Triggered for each file that is added to the queue
-                    'onCancel'         : function(file) {},                        // Triggered when a file is cancelled or removed from the queue
-                    'onCheck'          : function(file, exists) {},                // Triggered when the server is checked for an existing file
-                    'onClearQueue'     : function(queue) {},                       // Triggered during the clearQueue function
-                    'onDestroy'        : function() {}                             // Triggered during the destroy function
-                    'onDrop'           : function(files, numberOfFilesDropped) {}, // Triggered when files are dropped into the file queue
-                    'onError'          : function(file, fileType, data) {},        // Triggered when an error occurs
-                    'onFallback'       : function() {},                            // Triggered if the HTML5 File API is not supported by the browser
-                    'onInit'           : function() {},                            // Triggered when UploadiFive if initialized
-                    'onQueueComplete'  : function() {},                            // Triggered once when an upload queue is done
-                    'onProgress'       : function(file, event) {},                 // Triggered during each progress update of an upload
-                    'onSelect'         : function() {},                            // Triggered once when files are selected from a dialog box
-                    'onUpload'         : function(file) {},                        // Triggered when an upload queue is started
-                    'onUploadComplete' : function(file, data) {},                  // Triggered when a file is successfully uploaded
-                    'onUploadFile'     : function(file) {},                        // Triggered for each file being uploaded
-                    */
+                     // Events
+                     'onAddQueueItem'   : function(file) {},                        // Triggered for each file that is added to the queue
+                     'onCancel'         : function(file) {},                        // Triggered when a file is cancelled or removed from the queue
+                     'onCheck'          : function(file, exists) {},                // Triggered when the server is checked for an existing file
+                     'onClearQueue'     : function(queue) {},                       // Triggered during the clearQueue function
+                     'onDestroy'        : function() {}                             // Triggered during the destroy function
+                     'onDrop'           : function(files, numberOfFilesDropped) {}, // Triggered when files are dropped into the file queue
+                     'onError'          : function(file, fileType, data) {},        // Triggered when an error occurs
+                     'onFallback'       : function() {},                            // Triggered if the HTML5 File API is not supported by the browser
+                     'onInit'           : function() {},                            // Triggered when UploadiFive if initialized
+                     'onQueueComplete'  : function() {},                            // Triggered once when an upload queue is done
+                     'onProgress'       : function(file, event) {},                 // Triggered during each progress update of an upload
+                     'onSelect'         : function() {},                            // Triggered once when files are selected from a dialog box
+                     'onUpload'         : function(file) {},                        // Triggered when an upload queue is started
+                     'onUploadComplete' : function(file, data) {},                  // Triggered when a file is successfully uploaded
+                     'onUploadFile'     : function(file) {},                        // Triggered for each file being uploaded
+                     */
                 }, options);
 
                 // Calculate the file size limit
@@ -97,14 +97,14 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
 
                 // Create a template for a file input
                 $data.inputTemplate = $('<input type="file">')
-                .css({
-                    'font-size' : settings.height + 'px',
-                    'opacity'   : 0,
-                    'position'  : 'absolute',
-                    'right'     : '-3px',
-                    'top'       : '-3px',
-                    'z-index'   : 999 
-                });
+                    .css({
+                        'font-size' : settings.height + 'px',
+                        'opacity'   : 0,
+                        'position'  : 'absolute',
+                        'right'     : '-3px',
+                        'top'       : '-3px',
+                        'z-index'   : 999
+                    });
 
                 // Create a new input
                 $data.createInput = function() {
@@ -132,7 +132,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                         $data.queue.selected = limit;
                         if (($data.queue.count + limit) > settings.queueSizeLimit && settings.queueSizeLimit !== 0) {
                             if ($.inArray('onError', settings.overrideEvents) < 0) {
-                                alert('The maximum number of queue items has been reached (' + settings.queueSizeLimit + ').  Please select fewer files.');
+                                alert('上传列表中最多只能存放 (' + settings.queueSizeLimit + ')个文件');
                             }
                             // Trigger the error event
                             if (typeof settings.onError === 'function') {
@@ -253,7 +253,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 if (settings.itemTemplate == false) {
                     $data.queueItem = $('<div class="uploadifive-queue-item">\
                         <a class="close" href="#">X</a>\
-                        <div><span class="filename"></span><span class="fileinfo"></span></div>\
+                        <div><span class="filename"></span><span class="filesize"></span><span class="fileinfo"></span></div>\
                         <div class="progress">\
                             <div class="progress-bar"></div>\
                         </div>\
@@ -273,14 +273,32 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                         file.queueItem.attr('id', settings.id + '-file-' + $data.fileID++);
                         // Bind the close event to the close button
                         file.queueItem.find('.close').bind('click', function() {
-                           methods.cancel.call($this, file);
-                           return false;
+                            methods.cancel.call($this, file);
+                            return false;
                         });
+
                         var fileName = file.name;
                         if (fileName.length > settings.truncateLength && settings.truncateLength != 0) {
                             fileName = fileName.substring(0, settings.truncateLength) + '...';
                         }
                         file.queueItem.find('.filename').html(fileName);
+
+                        /*以下添加文件大小检测*/
+                        var fileSize = Math.round(file.size / 1024);
+                        var suffix = 'KB';
+                        if (fileSize > 1000) {
+                            fileSize = Math.round(fileSize / 1000);
+                            suffix = 'MB';
+                        }
+                        var fileSizeParts = fileSize.toString().split('.');
+                        fileSize = fileSizeParts[0];
+                        if (fileSizeParts.length > 1) {
+                            fileSize += '.' + fileSizeParts[1].substr(0, 2);
+                        }
+                        fileSize += suffix;
+                        file.queueItem.find('.filesize').html('&nbsp;&nbsp;&nbsp;('+fileSize+')');
+                        /*以上添加文件大小检测*/
+
                         // Add a reference to the file
                         file.queueItem.data('file', file);
                         $data.queueEl.append(file.queueItem);
@@ -304,12 +322,12 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                     if (!delay) delay = 0;
                     var fadeTime = instant ? 0 : 500;
                     if (file.queueItem) {
-                        if (file.queueItem.find('.fileinfo').html() != ' - Completed') {
-                            file.queueItem.find('.fileinfo').html(' - Cancelled');
+                        if (file.queueItem.find('.fileinfo').html() != ' - 上传成功') {
+                            file.queueItem.find('.fileinfo').html(' - 已取消');
                         }
                         file.queueItem.find('.progress-bar').width(0);
                         file.queueItem.delay(delay).fadeOut(fadeTime, function() {
-                           $(this).remove();
+                            $(this).remove();
                         });
                         delete file.queueItem;
                         $data.queue.count--;
@@ -429,7 +447,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                                     eol      = '\r\n',
                                     binFile  = '';
 
-                                // Build an RFC2388 String 
+                                // Build an RFC2388 String
                                 binFile += dashes + boundary + eol;
                                 // Generate the headers
                                 binFile += 'Content-Disposition: form-data; name="' + settings.fileObjName + '"';
@@ -460,11 +478,11 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                                     if (status == 404) {
                                         $data.error('404_FILE_NOT_FOUND', file, uploadAll);
                                     } else {
-                                        if (file.xhr.responseText != 'Invalid file type.') {    
+                                        if (file.xhr.responseText != 'Invalid file type.') {
                                             $data.uploadComplete(e, file, uploadAll);
                                         } else {
                                             $data.error(file.xhr.responseText, file, uploadAll);
-                                        } 
+                                        }
                                     }
                                 }, false);
 
@@ -531,8 +549,8 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                         // Add the error class to the queue item
                         file.queueItem.addClass('error')
                         // Output the error in the queue item
-                        .find('.fileinfo').html(' - ' + errorMsg);
-                        // Hide the 
+                            .find('.fileinfo').html(' - ' + errorMsg);
+                        // Hide the
                         file.queueItem.find('.progress').remove();
                     }
                     // Trigger the error event
@@ -554,7 +572,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 $data.uploadComplete = function(e, file, uploadAll) {
                     if ($.inArray('onUploadComplete', settings.overrideEvents) < 0) {
                         file.queueItem.find('.progress-bar').css('width', '100%');
-                        file.queueItem.find('.fileinfo').html(' - Completed');
+                        file.queueItem.find('.fileinfo').html(' - 上传成功');
                         file.queueItem.find('.progress').slideUp(250);
                         file.queueItem.addClass('complete');
                     }
@@ -599,19 +617,19 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                     // Style the button wrapper
                     $data.button.css({
                         'height'      : settings.height,
-                        'line-height' : settings.height + 'px', 
+                        'line-height' : settings.height + 'px',
                         'overflow'    : 'hidden',
                         'position'    : 'relative',
-                        'text-align'  : 'center', 
+                        'text-align'  : 'center',
                         'width'       : settings.width
                     });
 
                     // Insert the button above the file input
                     $this.before($data.button)
                     // Add the file input to the button
-                    .appendTo($data.button)
-                    // Modify the styles of the file input
-                    .hide();
+                        .appendTo($data.button)
+                        // Modify the styles of the file input
+                        .hide();
 
                     // Create a new input
                     $data.createInput.call($this);
@@ -749,9 +767,9 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 if (typeof settings.onCancel === 'function') {
                     settings.onCancel.call($this, file);
                 }
-                
+
             });
-            
+
         },
 
         // Upload the files in the queue
@@ -832,7 +850,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 var $this    = $(this),
                     $data    = $this.data('uploadifive'),
                     settings = $data.settings;
-            
+
                 // Clear the queue
                 methods.clearQueue.call($this);
                 // Destroy the queue if it was created
@@ -842,7 +860,7 @@ Released under the UploadiFive Standard License <http://www.uploadify.com/upload
                 // Show the original file input
                 $this.show()
                 // Move the file input out of the button
-                .insertBefore($data.button);
+                    .insertBefore($data.button);
                 // Delete the button
                 $data.button.remove();
                 // Trigger the destroy event

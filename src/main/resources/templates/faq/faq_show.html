@@ -74,13 +74,15 @@
             </a></li>
             <li><a href="#">
                 <i class="fa fa-comment-o"></i>
-                <span class="font-lato"> 热度： <span class="font-lato" th:text="${faq.clicks}"
-                                                   th:remove="tag">28 Comments</span> ℃ </span>
+                <span class="font-lato"> 热度：
+                    <span class="font-lato" th:text="${faq.clicks}" th:remove="tag">39</span>
+                    ℃ </span>
             </a></li>
             <li>
-                <i class="fa fa-folder-open-o"></i>
-                <a class="category" href="#"> <span class="font-lato">faq</span> </a>
-                <a class="category" href="#"> <span class="font-lato">xxxx</span> </a>
+                <i class="fa fa-tags"></i>
+                <a th:each="tag : ${faq.tags}" class="category" href="#">
+                    <span th:text="${tag.name}" class="font-lato">faq</span>
+                </a>
             </li>
             <li>
                 <a href="#">
@@ -94,7 +96,7 @@
             <blockquote>
                 <h2> Question: </h2>
                 <div th:utext="${faq.question}">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <p>Lorem </p>
                 </div>
                 <cite th:text="'咨询时间 @'+${#calendars.format(faq.questionDate,' yyyy MMM dd')}"></cite>
             </blockquote>
@@ -103,20 +105,20 @@
             <ul class="side-nav list-group margin-bottom-80">
                 <li class="list-group-item">
                     <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department?.id}">
-                        <i class="fa fa-2x fa-eye"></i> &nbsp;&nbsp;&nbsp;部门：<span
+                        <i class="fa fa-2x fa-university"></i> &nbsp;&nbsp;&nbsp;部门：<span
                             th:text="${faq.department?.departmentName}">department</span>
                     </a>
                 </li>
                 <li class="list-group-item">
                     <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices?.id}">
-                        <i class="fa fa-2x fa-comments-o"></i>&nbsp;&nbsp;&nbsp;设备： <span
+                        <i class="fa fa-2x fa-cube"></i>&nbsp;&nbsp;&nbsp;设备： <span
                             th:text="${faq.devices?.devicename}">devices</span>
                     </a>
                 </li>
 
                 <li class="list-group-item">
                     <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
-                        <i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;设备类型：<span th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
+                        <i class="fa fa-2x fa-object-group"></i>&nbsp;&nbsp;&nbsp;设备类型：<span th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
                     </a>
                 </li>
                 <!--<li class="list-group-item">-->

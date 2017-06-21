@@ -32,5 +32,8 @@ import org.hibernate.search.annotations.Indexed;
 @Table(name = "Sprki_CMS_NewsPage")
 @IgnoreSizeOf
 public class NewsPage extends CMSContent{
-
+    @Column(nullable = true,length=250)
+    String picStr;
+    @Column(nullable = true,length=250)
+    String picType;
 }

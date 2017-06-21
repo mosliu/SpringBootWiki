@@ -1,12 +1,15 @@
 package net.liuxuan.SprKi.controller.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.utils.upload.UploadUtil;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
@@ -54,6 +57,9 @@ public class UploadFileController {
     //  accesspath: /uploaded/
     @Value("${SprKi.upload.accesspath}")
     private String picAccessPath;
+
+    @Autowired
+    private ObjectMapper objectMapper;
     /**
      * The Context.
      */
@@ -189,9 +195,9 @@ public class UploadFileController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/uploadfiles")
+    @RequestMapping(value = "/uploadfiles",method = RequestMethod.POST)
     @ResponseBody
-    public JSONArray uploadFile(HttpServletRequest request) {
+    public void uploadFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Calendar calendar = Calendar.getInstance();
         List<String> filePathList = new ArrayList<String>();
@@ -213,8 +219,7 @@ public class UploadFileController {
         if (filePathList.size() == 0) {
             //return "系统错误";
         }
-
-        return new JSONArray(filePathList);
+        ResponseHelper.writeObjectToResponseAsJson(response,filePathList);
     }
 
 }

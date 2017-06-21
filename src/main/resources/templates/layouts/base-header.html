@@ -93,7 +93,11 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#">问题提交</a>
+                        <a href="#" th:href="@{/news}"><span class="fa fa-newspaper-o"></span>新闻公告</a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#"><span class="fa fa-phone">问题提交</a>
                         <ul class="dropdown-menu">
                             <li><a href="/ticket" th:href="@{/ticket}">新问题</a></li>
                             <li><a href="/ticketlist" th:href="@{/ticket/list}">所提问题查看</a></li>
@@ -101,7 +105,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#">支持信息库</a>
+                        <a class="dropdown-toggle" href="#"><span class="fa fa-file-text"></span>支持信息库</a>
                         <ul class="dropdown-menu">
                             <li><a href="/faq" th:href="@{/faq}">发布新信息</a></li>
                             <li><a href="/faq/list" th:href="@{/faq/list}">信息列表查看</a></li>

@@ -1,7 +1,6 @@
 package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
-import net.liuxuan.SprKi.entity.security.Authorities;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.entity.security.UrlAuth;
@@ -165,7 +164,7 @@ public class RoleManagementController {
         }
 //        return "";
 //        mapper.writeValue(response.getWriter(), rtnData);
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
 

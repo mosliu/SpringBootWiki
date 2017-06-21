@@ -107,20 +107,20 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         DbUser u_saved;
         if (usersRepository.exists(uname)) {
             u_saved = usersRepository.findOne(uname);
-            if (StringUtils.isNotBlank(user.getPassword())) {
-                u_saved.setPassword(user.getPassword());
+            if (StringUtils.isBlank(user.getPassword())||user.getPassword().length()<4) {
+                user.setPassword(null);
             }
-            u_saved.setEnabled(user.isEnabled());
-            u_saved.setUsernameAlias(user.getUsernameAlias());
+            user.setEnabled(u_saved.isEnabled());
             //先把传入的bean的空项填上
             //然后赋值给持久化对象
-//            try {
-//                BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(u_saved, user);
-//            } catch (InvocationTargetException e) {
-//                e.printStackTrace();
-//            } catch (IllegalAccessException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(u_saved, user);
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            usersRepository.save(u_saved);
         } else {
             //new
             u_saved = user;

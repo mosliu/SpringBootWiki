@@ -48,8 +48,6 @@ public class IndexController {
     @Autowired
     SliderPicsService sliderPicsService;
 
-// TODO 随机背景
-
 
     @RequestMapping("/")
     @Secured("IS_AUTHENTICATED_ANONYMOUSLY")

@@ -58,7 +58,7 @@ public class UserDetailController {
 
         if (StringUtils.equals(userDetailInfo.getDbUser().getUsername() , currentUserDetailInfo.getDbUser().getUsername())) {
             // if(userDetailInfo.getId()==currentUserDetailInfo.getId()) {
-            userDetailInfoService.saveUserDetailInfo(userDetailInfo);
+             userDetailInfoService.saveUserDetailInfo(userDetailInfo);
             SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_UPDATE, userDetailInfo, "更新用户" + userDetailInfo.getDbUser().getUsername(), "");
             model.put("user", userDetailInfo);
             model.put("title", "保存成功");

@@ -1,7 +1,9 @@
 package net.liuxuan.SprKi.service;
 
+import net.liuxuan.SprKi.entity.Message;
 import net.liuxuan.SprKi.entity.NewsPage;
 import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.liuxuan.SprKi.repository.NewsPageRepository;
 import net.liuxuan.spring.Helper.SystemHelper;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
@@ -10,6 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,6 +47,7 @@ public class NewsPageServiceImpl implements NewsPageService {
 
 
     @Override
+    @CacheEvict(cacheNames = "NewsPage", allEntries = true)
 //    @CachePut(cacheNames = "NewsPage", key = "#newsPage.id", condition = "#newsPage.id != null")
     public NewsPage saveNewsPage(NewsPage newsPage) {
         DbUser u = SystemHelper.getCurrentUser();
@@ -107,4 +114,16 @@ public class NewsPageServiceImpl implements NewsPageService {
         return newsPageRepository.findByDisabledFalse();
     }
 
+    @Override
+    @Cacheable(cacheNames = "NewsPage", key = "'listtop20'")
+    public List<NewsPage> getTop20NewsPage() {
+        return newsPageRepository.findTop20ByDisabledFalse();
+    }
+
+    @Override
+    @Cacheable(cacheNames = "NewsPage", key = "'pageable'+#page+':' + #size")
+    public Page<NewsPage> getAllNewsPageable(Integer page, Integer size) {
+        Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "LastUpdateDate");
+        return newsPageRepository.findAllByDisabledFalseOrderByLastUpdateDateDesc(pageable);
+    }
 }

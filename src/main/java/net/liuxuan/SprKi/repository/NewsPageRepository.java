@@ -2,6 +2,8 @@ package net.liuxuan.SprKi.repository;
 
 import java.util.List;
 import net.liuxuan.SprKi.entity.NewsPage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 /**
@@ -21,6 +23,10 @@ public interface NewsPageRepository extends JpaRepository<NewsPage, Long>, JpaSp
 //    List<NewsPage> findByNewsPageName(String  name);
 //    List<NewsPage> findByNewsPageNameNot(String  NotName);
     List<NewsPage> findByDisabledFalse();
+
+    List<NewsPage> findTop20ByDisabledFalse();
+
+    Page<NewsPage> findAllByDisabledFalseOrderByLastUpdateDateDesc(Pageable pageable);
 //    List<NewsPage> findByNewsPageNameNotOrderByNewsPageName(String roleNotName);
 
 }

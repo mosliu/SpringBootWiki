@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +20,14 @@ import java.util.Map;
  * 2017/1/18  |    Moses       |     Created
  */
 public class ResponseHelper {
-    public static void writeMAPtoResponseAsJson(HttpServletResponse response, Map<String, Object> rtnData) throws IOException {
+    public static void writeMapToResponseAsJson(HttpServletResponse response, Map<String, Object> rtnData) throws IOException {
+        response.setContentType("application/json");
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        mapper.writeValue(response.getWriter(), rtnData);
+    }
+
+    public static void writeObjectToResponseAsJson(HttpServletResponse response, Object rtnData) throws IOException {
         response.setContentType("application/json");
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.INDENT_OUTPUT, true);

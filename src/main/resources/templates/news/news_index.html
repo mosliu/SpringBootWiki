@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+
+<head>
+</head>
+<body class="smoothscroll enable-animation">
+
+<div layout:fragment="content">
+    <div class="container">
+
+        <div class="row">
+
+            <!-- LEFT 占位符-->
+            <div class="col-md-2 col-sm-2">
+            </div>
+
+            <!-- RIGHT -->
+            <div class="col-md-9 col-sm-9">
+
+                <!-- POST ITEM -->
+                <div class="blog-post-item" th:each="news,iter:${datas}">
+
+                    <!-- IMAGE -->
+                    <figure class=" margin-bottom-20 " th:unless="${news.picStr==null||#strings.length(news?.picStr)<10}">
+                        <img class="img-responsive" th:src="${news.picStr}" alt="">
+                    </figure>
+
+                    <h2><a th:href="${'/news/show/'+news.id}" th:text="${news.title}">BLOG IMAGE POST</a></h2>
+
+                    <ul class="blog-post-info list-inline">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-clock-o"></i>
+                                <span class="font-lato" th:text="${news.lastUpdateDate}">June 29, 2015</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-comment-o"></i>
+                                <span class="font-lato" th:text="${news.commentsCount}">28 Comments</span>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-tags"></i>
+                            <a th:each="tag : ${news.tags}" class="category" href="#">
+                                <span th:text="${tag.name}" class="font-lato">faq</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-user"></i>
+                                <span class="font-lato" th:text="${news.author?.username}">John Doe</span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p th:utext="${#strings.substring(news?.infoText,0,#strings.length(news?.infoText)>200?200:#strings.length(news?.infoText))+'...'}">
+                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered
+                        alteration in some form, by injected humour, or randomised words which don't look even slightly
+                        believable There are many variations of passages of Lorem Ipsum available, but the majority have
+                        suffered alteration in some form, by injected humour.
+                    </p>
+
+                    <a th:href="${'/news/show/'+news.id}" class="btn btn-reveal btn-default">
+                        <i class="fa fa-plus"></i>
+                        <span>Read More</span>
+                    </a>
+
+                </div>
+                <!-- /POST ITEM -->
+                <!-- PAGINATION -->
+                <div>
+                    <div th:include="layouts/page :: pager" th:remove="tag"></div>
+                    <BR/>
+                    <BR/>
+                    <BR/>
+                </div>
+                <!-- /PAGINATION -->
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+</html>

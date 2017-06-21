@@ -11,11 +11,11 @@ Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 	background-image: -webkit-linear-gradient(bottom, #505050 0%, #707070 100%);
 	background-image: -ms-linear-gradient(bottom, #505050 0%, #707070 100%);
 	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #505050),
-		color-stop(1, #707070)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #505050),
+			color-stop(1, #707070)
 	);
 	background-position: center top;
 	background-repeat: no-repeat;
@@ -38,11 +38,11 @@ Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 	background-image: -webkit-linear-gradient(top, #606060 0%, #808080 100%);
 	background-image: -ms-linear-gradient(top, #606060 0%, #808080 100%);
 	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0, #606060),
-		color-stop(1, #808080)
+			linear,
+			left bottom,
+			left top,
+			color-stop(0, #606060),
+			color-stop(1, #808080)
 	);
 	background-position: center bottom;
 }

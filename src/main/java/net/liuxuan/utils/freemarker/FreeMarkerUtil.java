@@ -25,15 +25,15 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "Message";
+    String model_name = "CMSContentTags";
 //    String subpackage = ".labthink";//如果需要放到labthink下，则为".labthink"
     String subpackage = "";//如果需要放到labthink下，则为".labthink"
     boolean createEntity,createRepository,createService,createAdminManagement;
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();
-        hf.createEntity = true;
-        hf.createRepository = true;
+        hf.createEntity = false;
+        hf.createRepository = false;
         hf.createService = true;
         hf.createAdminManagement = true;
         hf.init();

@@ -7,20 +7,23 @@ import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.service.NewsPageService;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Copyright (c) 2010-2017.  by Liuxuan   All rights reserved. <br/>
  * ***************************************************************************
- * 源文件名:  net.liuxuan.SprKi.controller.news.NewsController
+ * 源文件名:  net.liuxuan.SprKi.controller.news.NewsPageController
  * 功能:
  * 版本:	@version 1.0
  * 编制日期: 2017/4/5 9:08
@@ -34,6 +37,24 @@ public class NewsController {
 
     @Autowired
     NewsPageService newsPageService;
+
+
+    @RequestMapping("/news2")
+    public String news2(HttpServletRequest request, Map<String, Object> model) {
+        List<NewsPage> newsPageList = newsPageService.getAllNewsPage();
+        model.put("newsList",newsPageList);
+        return "news/news_index";
+    }
+    @RequestMapping("/news")
+    public String news(HttpServletRequest request,
+                       @RequestParam(value = "page", defaultValue = "0") Integer page,
+                       @RequestParam(value = "size", defaultValue = "20") Integer size,
+                       HttpServletResponse response,Map<String, Object> model) {
+        Page<NewsPage> newsPageList = newsPageService.getAllNewsPageable(page,size);
+        //分页 必须用datas 或者改页面标签
+        model.put("datas",newsPageList);
+        return "news/news_index";
+    }
 
     @RequestMapping(value = "/news/show/{id}", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")

@@ -76,6 +76,9 @@
     </div>
     <ul class="row clearfix testimonial-dotted list-unstyled">
         <li class="col-md-9">
+            <figure class=" margin-bottom-20 " th:unless="${news.picStr==null||#strings.length(news?.picStr)<10}">
+                <img class="img-responsive" th:src="${news.picStr}" alt="">
+            </figure>
             <h2> 公告全文: </h2>
             <h3>
                 <div th:utext="${news.infoText}">

@@ -1,13 +1,8 @@
 package net.liuxuan.SprKi.controller.admin;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
-import net.liuxuan.SprKi.entity.labthink.FAQContent;
-import net.liuxuan.SprKi.entity.labthink.TicketContent;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.SliderPics;
-import net.liuxuan.SprKi.entity.security.SecurityLog;
 import net.liuxuan.SprKi.service.SliderPicsService;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
@@ -23,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -176,7 +170,7 @@ public class SliderPicsManagementController {
         }
 //        return "";
 //        mapper.writeValue(response.getWriter(), rtnData);
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
 

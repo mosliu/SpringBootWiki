@@ -71,7 +71,7 @@ public class FaqManagementController {
         faqContentService.deleteFAQContentById(id);
         rtnData.put("status", "success");
 //        return "admin/" + "faqManage" + " :: middle";
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
     @RequestMapping(value = "/faq/revert/{id}", method = RequestMethod.POST)
@@ -86,7 +86,7 @@ public class FaqManagementController {
         rtnData.put("status", "success");
 //        return "admin/" + "faqManage" + " :: middle";
 
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
 

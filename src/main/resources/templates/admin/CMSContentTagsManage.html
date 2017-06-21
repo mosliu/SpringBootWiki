@@ -12,11 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>NewsPage管理</h1>
+        <h1>CMSContentTags管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
             <li>支持属性管理</li>
-            <li class="active">新闻公告管理</li>
+            <li class="active">CMSContentTags管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -28,11 +28,11 @@
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
                 <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建新闻公告
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建CMSContentTags
                         <span class="label label-danger">label</span></a>
                 </li>
                 <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 新闻公告列表 <span class="caret"></span></a>
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> CMSContentTags列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -57,26 +57,32 @@
             <div class="tab-content transparent">
 
                 <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
-                    <div class="row form-group">
-                        <form id="createNewsPageForm" action="/admin/newsPage_ajax?action=add" method="post"
+                    <div class="login-box">
+                        <form id="createCMSContentTagsForm" action="/admin/cMSContentTags_ajax?action=add" method="post"
                               class="validate-plugin sky-form boxed">
-                            <header><i class="fa fa-users"></i> 新建新闻公告
+                            <header><i class="fa fa-users"></i> 新建CMSContentTags
                                 <small class="note bold">慎重</small>
                             </header>
 
                             <fieldset>
                                 <label class="input">
                                     <i class="icon-append fa fa-key"></i>
-                                    <input type="text" id="fullTitle" name="fullTitle"
-                                           placeholder="新闻标题" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入新闻公告标题</b>
+                                    <input type="text" id="cMSContentTagsName" name="cMSContentTagsName"
+                                           placeholder="CMSContentTags名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入CMSContentTags名称，以ROLE_开头</b>
                                 </label>
                                 <label class="input">
-                                    <i class="icon-append fa fa-key"></i>
-                                    <textarea id="infoText" name="infoText" class="summernote form-control required" data-height="400" data-lang="en-US">新闻公告内容</textarea>
-                                    <b class="tooltip tooltip-bottom-right">输入新闻公告内容</b>
+                                    <i class="icon-append fa fa-tv"></i>
+                                    <input type="text" id="cMSContentTagsNameCN" name="cMSContentTagsNameCN"
+                                           placeholder="CMSContentTags描述" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入CMSContentTags中文解释</b>
                                 </label>
-
+                                <label class="input">
+                                    <i class="icon-append fa fa-commenting-o"></i>
+                                    <input type="text" id="comment" name="comment"
+                                           placeholder="备注信息" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入CMSContentTags备注信息</b>
+                                </label>
                             </fieldset>
 
                             <footer>
@@ -94,19 +100,19 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>标题</th>
-                            <th>作者</th>
-                            <th>正文</th>
+                            <th>CMSContentTags名称</th>
+                            <th>CMSContentTags说明</th>
+                            <th>备注</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="d : ${NewsPage_list}">
+                        <tr th:each="d : ${CMSContentTags_list}">
                             <td th:text="${d.id}">20</td>
-                            <td th:text="${d.fullTitle}">Name</td>
-                            <td th:text="${d.author.username}">用户NewsPage</td>
-                            <td th:text="${d.infoText}">备注</td>
-                            <td th:text="${d.id}">操作</td>
+                            <td th:text="${d.cMSContentTagsName}">Name</td>
+                            <td th:text="${d?.cMSContentTagsNameCN}">用户CMSContentTags</td>
+                            <td th:text="${d?.comment}">备注</td>
+                            <td th:text="${d?.id}">操作</td>
                         </tr>
                         </tbody>
                     </table>
@@ -158,7 +164,6 @@
         /*<![CDATA[*/
         //必须重新初始化，否则不起作用
         jQuery(window).ready(function () {
-
             Init(true);
             initTable2();
             initCreate();
@@ -170,10 +175,10 @@
             })
         });
 
-        function deleteIt(btn, sid) {
+        function deleteDepartment(btn, sid) {
 //            console.log(btn);
 //            console.log(sid);
-            var tourl = "/admin/newsPage_ajax?action=delete&sid=" + sid;
+            var tourl = "/admin/cMSContentTags_ajax?action=delete&sid=" + sid;
             jQuery.ajax({
                 url: tourl,
                 context: btn,
@@ -187,17 +192,6 @@
             });
         }
 
-        function modifyIt(btn, sid) {
-//            console.log(btn);
-//            console.log(sid);
-
-            var url = "/admin/newsPage?action=edit&sid="+sid;
-            console.log(url);
-            $('#replaceContainer').load(url);
-
-        }
-
-
         function initTable2() {
 
             loadScript(plugin_path + "datatables/js/jquery.dataTables.min.js", function () {
@@ -210,8 +204,8 @@
 
                             "columns": [
                                 {"data": "did"},
-                                {"orderable": true, "data": "newsPagename"},
-                                {"orderable": true, "data": "newsPageNameCN"},
+                                {"orderable": true, "data": "cMSContentTagsname"},
+                                {"orderable": true, "data": "cMSContentTagsNameCN"},
                                 {"orderable": true, "data": "comment"},
                                 {
                                     "orderable": true,
@@ -219,8 +213,7 @@
                                     "type": "display",
                                     "render": function (data, type, full, meta) {
 //                                        console.log(full);
-                                        //return '<a class="btn btn-info"onclick="modifyIt(this,\'' + data + '\')"> 修改 </a> <a class="btn btn-danger" onclick="deleteIt(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
-                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/newsPage?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/cMSContentTags?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
                                     }
                                 }
                             ],

@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller.faq;
 
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
+import net.liuxuan.SprKi.entity.CMSContentTags;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.DeviceType;
@@ -11,6 +12,7 @@ import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.service.CMSCategoryService;
+import net.liuxuan.SprKi.service.CMSContentTagsService;
 import net.liuxuan.SprKi.service.labthink.DepartmentService;
 import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
 import net.liuxuan.SprKi.service.labthink.DevicesService;
@@ -34,7 +36,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -95,6 +96,9 @@ public class FAQController {
      */
     @Autowired
     FAQContentService faqContentService;
+
+    @Autowired
+    CMSContentTagsService cmsContentTagsService;
 
 
     /**
@@ -401,6 +405,13 @@ public class FAQController {
             }
         }
 
+
+        String[] tagStrs = request.getParameterValues("tagStr");
+
+        Set<CMSContentTags> tagsSet = cmsContentTagsService.getTagSetFromTagStrArray(tagStrs);
+        faq.setTags(tagsSet);
+
+
         String toLog = "新建了文章";
         if (faq.getId() != null) {
             toLog = "更新了文章";
@@ -431,23 +442,23 @@ public class FAQController {
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public void getFAQCount_ajax(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
 
-        Map<String, Object> rtnDate = new HashMap<String, Object>();
+        Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("-FAQController.getFAQCount() Method");
 //        model.put("message", "Editor");
-        rtnDate.put("title", "FAQ count");
+        rtnData.put("title", "FAQ count");
 
         List l = faqContentService.getFaqGroupByCount();
 
         l.forEach(item -> {
             Object[] objects = (Object[]) item;
-            rtnDate.put(((Devices) objects[1]).getDevicename(), objects[0]);
+            rtnData.put(((Devices) objects[1]).getDevicename(), objects[0]);
         });
 //        for (int i = 0; i < l.size(); i++) {
 //
 //        }
-        rtnDate.put("data", l);
+        rtnData.put("data", l);
 
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnDate);
+        ResponseHelper.writeMapToResponseAsJson(response, rtnData);
     }
 
     /**
@@ -469,10 +480,10 @@ public class FAQController {
         List<Object[]> faqGroupByAuthorAndDateList = faqContentService.getFaqGroupByAuthorAndDate();
 
         faqGroupByAuthorAndDateList.stream().forEach(
-                e->{
+                e -> {
                     String s = (String) (((Object[]) e)[1]);
                     String s1 = s.substring(4);
-                    s1 = s1.length()==1?'0'+s1:s1;
+                    s1 = s1.length() == 1 ? '0' + s1 : s1;
                     ((Object[]) e)[1] = s.substring(0, 4) + s1;
                 }
         );
@@ -480,7 +491,7 @@ public class FAQController {
         faqGroupByAuthorAndDateList.sort(
                 (p1, p2) -> (
 
-                        Integer.parseInt ((String) (((Object[]) p2)[1])) - Integer.parseInt ((String)(((Object[]) p1)[1]))
+                        Integer.parseInt((String) (((Object[]) p2)[1])) - Integer.parseInt((String) (((Object[]) p1)[1]))
                 )
         );
         Map<String, Map<String, Integer>> AuthorDateCounttempMap = new LinkedHashMap<>();
@@ -489,7 +500,7 @@ public class FAQController {
         for (int i = 0; i < faqGroupByAuthorAndDateList.size(); i++) {
             Object[] objs = (Object[]) faqGroupByAuthorAndDateList.get(i);
 //            int nums = ((BigInteger) objs[0]).intValue();
-            int nums =  ((Number)objs[0]).intValue();
+            int nums = ((Number) objs[0]).intValue();
             String date = (String) objs[1];
             String author = ((DbUser) objs[2]).getUsername();
             Map<String, Integer> map = AuthorDateCounttempMap.get(date);
@@ -519,10 +530,29 @@ public class FAQController {
 
 
     /**
-     * Deviceslist list.
+     * Gets faq count ajax.
      *
-     * @return the list
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     * @throws IOException the io exception
      */
+    @RequestMapping(value = "/tags/{keyword}", method = RequestMethod.GET)
+    public void getTags_ajax(@PathVariable String keyword,HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+        Map<String, Object> rtnDate = new HashMap<String, Object>();
+        log.trace("-FAQController.getTags_ajax() Method");
+
+        List tagl = cmsContentTagsService.getTagByNameLike(keyword);
+        rtnDate.put("results",tagl);
+        ResponseHelper.writeObjectToResponseAsJson(response, rtnDate);
+    }
+
+
+        /**
+         * Deviceslist list.
+         *
+         * @return the list
+         */
     @ModelAttribute("Devices_list")
     public List<Devices> Deviceslist() {
         return devicesService.getAllDevices();
@@ -550,6 +580,11 @@ public class FAQController {
         return departmentService.getAllDepartment();
 //        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
     }
+//    @ModelAttribute("tags_list")
+//    public List<CMSContentTags> TagsList() {
+//        return cmsContentTagsService.getAllCMSContentTags();
+////        return departmentRepository.findBydepartmentNameNotOrderByDepartmentName(JPAConstants.DELETEDOBJECTSTR);
+//    }
 
 //    @ModelAttribute("Category_list")
 //    public List<CMSCategory> Categorylist() {
@@ -585,4 +620,7 @@ public class FAQController {
 //        binder.registerCustomEditor(CMSCategory.class,cmsCategoryEditor());
 //        binder.registerCustomEditor(Department.class,new DepartmentEditor());
     }
+
+
+
 }

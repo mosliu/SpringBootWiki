@@ -2337,7 +2337,16 @@
 			loadScript(plugin_path + 'select2/js/select2.full.min.js', function() {
 
 				if(jQuery().select2) {
-					jQuery('select.select2').select2();
+                    jQuery('select.select2').each((index,ele)=>{
+                        if($(ele).data("select2Attr") ===undefined){
+                            $(ele).select2();
+                        }else{
+                            $(ele).select2($(ele).data("select2Attr"));
+                        }
+                    });
+					// jQuery('select.select2').select2({tags:true});
+					// jQuery('select.select2').select2();
+					// console.log('111');
 				}
 
 			});

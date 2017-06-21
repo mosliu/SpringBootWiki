@@ -47,7 +47,6 @@ public class Role {
     //@JoinTable注解的name属性指定关联表的名字，joinColumns指定外键的名字，关联到关系维护端(Player)
     //inverseJoinColumns指定外键的名字，要关联的关系被维护端(UrlAuth)
     //其实可以不使用@JoinTable注解，默认生成的关联表名称为主表表名+下划线+从表表名，
-    //即表名为player_game
     //关联到主表的外键名：主表名+下划线+主表中的主键列名,即player_id
     //关联到从表的外键名：主表中用于关联的属性名+下划线+从表的主键列名,即game_id
     //主表就是关系维护端对应的表，从表就是关系被维护端对应的表
