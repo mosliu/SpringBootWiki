@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
@@ -50,15 +51,15 @@ public class UserDetailController {
     }
 
     @RequestMapping(value = "/user/detail/modify", method = RequestMethod.POST)
-    public String modifyCurrentUser(UserDetailInfo userDetailInfo, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+    public String modifyCurrentUser(UserDetailInfo userDetailInfo, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws InvocationTargetException, IllegalAccessException {
 
         log.info("-UserDetailController.getCurrentUser() Method");
         UserDetailInfo currentUserDetailInfo = SystemHelper.getCurrentUserDetailInfo();
 //        model.put("message", "Editor");
 
-        if (StringUtils.equals(userDetailInfo.getDbUser().getUsername() , currentUserDetailInfo.getDbUser().getUsername())) {
+        if (StringUtils.equals(userDetailInfo.getDbUser().getUsername(), currentUserDetailInfo.getDbUser().getUsername())) {
             // if(userDetailInfo.getId()==currentUserDetailInfo.getId()) {
-             userDetailInfoService.saveUserDetailInfo(userDetailInfo);
+            userDetailInfoService.saveUserDetailInfo(userDetailInfo);
             SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_UPDATE, userDetailInfo, "更新用户" + userDetailInfo.getDbUser().getUsername(), "");
             model.put("user", userDetailInfo);
             model.put("title", "保存成功");

@@ -1,10 +1,14 @@
 package net.liuxuan.SprKi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -20,6 +24,7 @@ import java.util.Date;
 @Data
 @Entity  //实体类
 @Table(name = "Sprki_CMS_Comment")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class CMSComment {
     /**
      * The Id.
@@ -44,17 +49,20 @@ public class CMSComment {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="author")
-    private DbUser author;
+    @JsonIgnore
+    private UserDetailInfo author;
 
     @Column(length = 40, nullable = true)
     private String commentIP;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name="parent")
+    @JsonIgnore
     private CMSComment parent;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="content")
+    @JoinColumn(name="cmsContent_id")
+    @JsonIgnore
     private CMSContent content;
     /**
      * 评论类型
@@ -69,6 +77,8 @@ public class CMSComment {
     @Column(columnDefinition = "text", nullable = false)
     private String commentContent;
 
+
+
     /**
      * Publish time.
      */
@@ -76,4 +86,6 @@ public class CMSComment {
     void publishTime() {
         this.publishDate = new Date();
     }
+
+
 }

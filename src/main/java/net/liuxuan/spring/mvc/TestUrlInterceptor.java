@@ -215,8 +215,8 @@ public class TestUrlInterceptor implements HandlerInterceptor {
             HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
             throws Exception {
 
-        //处理完信息后，更新在线状态
-        HashMap hm = new HashMap();
+//        //处理完信息后，更新在线状态
+//        HashMap hm = new HashMap();
 
         if (ex != null) {
 //            ex.printStackTrace();

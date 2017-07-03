@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller.faq;
 
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
+import net.liuxuan.SprKi.entity.CMSComment;
 import net.liuxuan.SprKi.entity.CMSContentTags;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
@@ -12,6 +13,7 @@ import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.exceptions.ContentNotFoundException;
 import net.liuxuan.SprKi.service.CMSCategoryService;
+import net.liuxuan.SprKi.service.CMSCommentService;
 import net.liuxuan.SprKi.service.CMSContentTagsService;
 import net.liuxuan.SprKi.service.labthink.DepartmentService;
 import net.liuxuan.SprKi.service.labthink.DeviceTypeService;
@@ -97,8 +99,14 @@ public class FAQController {
     @Autowired
     FAQContentService faqContentService;
 
+    /**
+     * The Cms content tags service.
+     */
     @Autowired
     CMSContentTagsService cmsContentTagsService;
+
+    @Autowired
+    CMSCommentService cmsCommentService;
 
 
     /**
@@ -228,6 +236,12 @@ public class FAQController {
         return "redirect:/faq/list";
     }
 
+    /**
+     * Create no access right faq content faq content.
+     *
+     * @param accessErrorText the access error text
+     * @return the faq content
+     */
     @NotNull
     public FAQContent createNoAccessRightFaqContent(String accessErrorText) {
         FAQContent faq;
@@ -429,6 +443,26 @@ public class FAQController {
 
     }
 
+    /**
+     * Post comment.
+     *
+     * @param comment  the comment
+     * @param request  the request
+     * @param response the response
+     * @param model    the model
+     */
+    @RequestMapping(value = "/faq/comment", method = RequestMethod.POST)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public void postComment(CMSComment comment, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+        System.out.println(comment.getId());
+        FAQContent faq = faqContentService.findById(comment.getId());
+        comment.setContent(faq);
+        comment.setId(null);
+        comment = cmsCommentService.saveCMSComment(comment);
+        ResponseHelper.writeObjectToResponseAsJson(response,comment);
+
+
+    }
 
     /**
      * Gets faq count ajax.
@@ -532,27 +566,28 @@ public class FAQController {
     /**
      * Gets faq count ajax.
      *
+     * @param keyword  the keyword
      * @param request  the request
      * @param response the response
      * @param model    the model
      * @throws IOException the io exception
      */
     @RequestMapping(value = "/tags/{keyword}", method = RequestMethod.GET)
-    public void getTags_ajax(@PathVariable String keyword,HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+    public void getTags_ajax(@PathVariable String keyword, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
         Map<String, Object> rtnDate = new HashMap<String, Object>();
         log.trace("-FAQController.getTags_ajax() Method");
 
         List tagl = cmsContentTagsService.getTagByNameLike(keyword);
-        rtnDate.put("results",tagl);
+        rtnDate.put("results", tagl);
         ResponseHelper.writeObjectToResponseAsJson(response, rtnDate);
     }
 
 
-        /**
-         * Deviceslist list.
-         *
-         * @return the list
-         */
+    /**
+     * Deviceslist list.
+     *
+     * @return the list
+     */
     @ModelAttribute("Devices_list")
     public List<Devices> Deviceslist() {
         return devicesService.getAllDevices();
@@ -620,7 +655,6 @@ public class FAQController {
 //        binder.registerCustomEditor(CMSCategory.class,cmsCategoryEditor());
 //        binder.registerCustomEditor(Department.class,new DepartmentEditor());
     }
-
 
 
 }

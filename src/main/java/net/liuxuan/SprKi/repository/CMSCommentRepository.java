@@ -4,6 +4,8 @@ import net.liuxuan.SprKi.entity.CMSComment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
  * ***************************************************************************
@@ -16,4 +18,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * 2016/3/15  |    Moses       |     Created
  */
 public interface CMSCommentRepository extends JpaRepository<CMSComment, Long>, JpaSpecificationExecutor<CMSComment> {
+    List<CMSComment> findByDisabledFalse();
 }

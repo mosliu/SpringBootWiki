@@ -4,48 +4,48 @@
 <body>
 
 <!--用户修改Div-->
-<div th:fragment="projectProgressedit">
+<div th:fragment="cMSCommentedit">
 
     <!-- header modal -->
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                 aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myLargeModalLabel">修改ProjectProgress</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">修改CMSComment</h4>
     </div>
-    <form id="updateform" action="/admin/projectProgress_ajax?action=update" method="post" class="sky-form boxed"
-          novalidate="novalidate" th:object="${projectProgress}">
+    <form id="updateform" action="/admin/cMSComment_ajax?action=update" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${cMSComment}">
         <!-- body modal -->
         <div class="modal-body">
             <div class="login-box">
 
-                <header><i class="fa fa-users"></i> 修改ProjectProgress <b><span th:text="*{projectProgressName}">zhangsan</span></b>
+                <header><i class="fa fa-users"></i> 修改CMSComment <b><span th:text="*{cMSCommentName}">zhangsan</span></b>
                     <small class="note bold">请谨慎操作</small>
                 </header>
 
                 <fieldset>
                     <input type="hidden" th:field="*{id}"/>
-                    <label>修改ProjectProgress名称</label>
+                    <label>修改CMSComment名称</label>
                     <label class="input">
                         <i class="icon-append fa fa-key"></i>
-                        <input type="text" th:field="*{projectProgressName}"
-                               placeholder="修改ProjectProgress名称" minlength="2" required="true" class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入ProjectProgress名称，以ROLE_开头</b>
+                        <input type="text" th:field="*{cMSCommentName}"
+                               placeholder="修改CMSComment名称" minlength="2" required="true" class="form-control "/>
+                        <b class="tooltip tooltip-bottom-right">输入CMSComment名称，以ROLE_开头</b>
                     </label>
 
-                    <label>修改项目进度</label>
+                    <label>修改CMSComment别名</label>
                     <label class="input">
                         <i class="icon-append fa fa-tv"></i>
-                        <input type="text" th:field="*{projectProgress}" placeholder="项目进度" minlength="2" required="true"
+                        <input type="text" th:field="*{cMSCommentNameCN}" placeholder="CMSComment描述" minlength="2" required="true"
                                class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入项目进度</b>
+                        <b class="tooltip tooltip-bottom-right">输入CMSComment中文解释</b>
                     </label>
 
-                    <label>修改ProjectProgress备注</label>
+                    <label>修改CMSComment备注</label>
                     <label class="input">
                         <i class="icon-append fa fa-commenting-o"></i>
                         <input type="text" th:field="*{comment}" placeholder="备注信息" minlength="2" required="true"
                                class="form-control "/>
-                        <b class="tooltip tooltip-bottom-right">输入ProjectProgress备注信息</b>
+                        <b class="tooltip tooltip-bottom-right">输入CMSComment备注信息</b>
                     </label>
 
                 </fieldset>

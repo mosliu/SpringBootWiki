@@ -4,6 +4,7 @@ import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -20,8 +21,11 @@ import java.util.List;
 */
 
 public interface UserDetailInfoRepository extends JpaRepository<UserDetailInfo, Long>, JpaSpecificationExecutor<UserDetailInfo> {
-    UserDetailInfo findByDbUser(DbUser dbUser);
+//    UserDetailInfo findByDbUser(DbUser dbUser);
     List<UserDetailInfo> getAllByDisabledOrderByDepartment(boolean disabled);
+
+    @Query ("select max(udi.id) from UserDetailInfo udi")
+    Long maxIndex();
 }
 
 

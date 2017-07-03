@@ -1,5 +1,6 @@
 package net.liuxuan.SprKi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.DbUser;
@@ -8,6 +9,7 @@ import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 //import org.hibernate.search.annotations.Field;
@@ -178,6 +180,17 @@ public class CMSContent {
     )
     protected Set<CMSContentTags> tags;
 
+
+    /**
+     * The Comments.
+     */
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "content"
+
+    )
+    protected List<CMSComment> comments;
     /**
      * The Meta keywords.
      */

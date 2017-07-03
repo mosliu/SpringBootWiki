@@ -130,7 +130,7 @@ public class ${model_name}ManagementController {
         }
 //        return "";
 //        mapper.writeValue(response.getWriter(), rtnData);
-        ResponseHelper.writeMAPtoResponseAsJson(response, rtnData);
+        ResponseHelper.writeMaptoResponseAsJson(response, rtnData);
     }
 
 

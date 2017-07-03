@@ -9,6 +9,7 @@ package net.liuxuan.SprKi.entity.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -22,7 +23,7 @@ import java.util.Set;
 /**
  * Created by Moses on 2016/2/3.
  */
-@ToString
+//@ToString
 @Entity  //实体类
 @Table(name = "Sprki_User")
 @IgnoreSizeOf
@@ -49,6 +50,20 @@ public class DbUser {
     @Column(columnDefinition="TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date regdate;
+
+
+
+
+    // 添加该项目，使用sql 更新数据库
+    /*
+    update sprki_user u left join sprki_labthink_user_detail_info d on u.username = d.db_user
+    set u.user_detail_info = d.id
+    */
+//    @OneToOne(mappedBy="dbUser")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "user_detail_info")
+    @JsonIgnore
+    protected UserDetailInfo userDetailInfo;//设备
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "username")
 //@JsonIgnore
@@ -123,6 +138,14 @@ public class DbUser {
 //    @JsonIgnore
     public void setAuths(Set<Authorities> auths) {
         this.auths = auths;
+    }
+
+    public UserDetailInfo getUserDetailInfo() {
+        return userDetailInfo;
+    }
+
+    public void setUserDetailInfo(UserDetailInfo userDetailInfo) {
+        this.userDetailInfo = userDetailInfo;
     }
 
     @PrePersist

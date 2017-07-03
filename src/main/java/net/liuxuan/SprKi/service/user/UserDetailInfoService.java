@@ -10,6 +10,7 @@ import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
 import org.springframework.cache.annotation.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ public interface UserDetailInfoService {
      * @param userDetailInfo the user detail info
      * @return the int 0 means success
      */
-     int saveUserDetailInfo(UserDetailInfo userDetailInfo);
+     int saveUserDetailInfo(UserDetailInfo userDetailInfo) throws InvocationTargetException, IllegalAccessException;
 
 
     DbUser findDbUserByUsername(String username);

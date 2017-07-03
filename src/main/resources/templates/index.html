@@ -243,16 +243,23 @@
 
             </span>
         </div>
+        <!-- Circle Countdown -->
+        <hr>
+        <span>今年结束前还有</span>
+        <div class="countdown bordered-squared theme-style" data-from="December 31, 2017 23:59:59"><!-- Example Date From: December 31, 2018 15:03:26 --></div>
+
+
         <a href="#" rel="nofollow" target="_blank"
-           class="btn btn-xlg btn-default size-20 fullwidth nomargin noradius padding-40 noborder-left noborder-right noborder-bottom">
-				<span class="font-lato size-30">
+           class="">
+				<span class="font-lato size-15">
 					支持系统是否能满足您的需求？
-					<strong>不满足 &raquo;</strong>
+					<strong>请您提出您宝贵的意见，谢谢 &raquo;</strong>
+                    <span th:text="${T(java.lang.Math).random() * 100.0 }"></span>
 				</span>
-            <div sec:authorize-url='/other1.jsp' href="/other1.jsp">权限test1</div>
-            <div sec:authorize-url='/other2.jsp' href="/other2.jsp">权限test2</div>
         </a>
+        <br/>
     </div>
+
 
     <!-- /BUTTON CALLOUT -->
     <script language="JavaScript">
@@ -287,8 +294,9 @@
                 $("#OnlineUsers").html("<ul class='list-inline'></ul>");
                 $.each(jsonarray, function (index, value) {
                     var item_text = "<img src='" + value.avatar + "' height='24' width='24' />";
-                    item_text = item_text + "<a href='/msg/new?username=" + value.username + "'>";
+                    item_text = item_text + "<a class='font-lato size-20 weight-600' href='/msg/new?username=" + value.username + "'>";
                     item_text += (value.usernameCN == '' ? value.username : value.usernameCN);
+                    item_text += "</a>";
                     $('<li class="col-md-2 col-sm-2 col-xs-4"></li>').html(item_text).appendTo("#OnlineUsers ul");
                 });
             }

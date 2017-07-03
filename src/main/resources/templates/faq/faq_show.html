@@ -91,63 +91,66 @@
             </li>
         </ul>
     </div>
-    <ul class="row clearfix testimonial-dotted list-unstyled">
-        <li class="col-md-9">
-            <blockquote>
-                <h2> Question: </h2>
-                <div th:utext="${faq.question}">
-                    <p>Lorem </p>
-                </div>
-                <cite th:text="'咨询时间 @'+${#calendars.format(faq.questionDate,' yyyy MMM dd')}"></cite>
-            </blockquote>
-        </li>
-        <li class="col-md-3">
-            <ul class="side-nav list-group margin-bottom-80">
-                <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department?.id}">
-                        <i class="fa fa-2x fa-university"></i> &nbsp;&nbsp;&nbsp;部门：<span
-                            th:text="${faq.department?.departmentName}">department</span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices?.id}">
-                        <i class="fa fa-2x fa-cube"></i>&nbsp;&nbsp;&nbsp;设备： <span
-                            th:text="${faq.devices?.devicename}">devices</span>
-                    </a>
-                </li>
-
-                <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
-                        <i class="fa fa-2x fa-object-group"></i>&nbsp;&nbsp;&nbsp;设备类型：<span th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
-                    </a>
-                </li>
-                <!--<li class="list-group-item">-->
-                    <!--<a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">-->
-                        <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>-->
-                    <!--</a>-->
-                <!--</li>-->
-                <li class="list-group-item">
-                    <a href="#" th:href="@{/faq/list}+'?standard='+${faq.standard}">
-                        <i class="fa fa-2x fa-balance-scale"></i>&nbsp;&nbsp;&nbsp;标准：<span th:text="${faq.standard}">ISO</span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a th:href="'/faq/'+${faq.Id}" style="background-color:#9ACD32">
-                        <i class="fa fa-2x fa-edit"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;编辑</span>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a th:onclick="'removetopic()'" style="background-color:#1E8BC3">
-                        <i class="fa fa-2x fa-recycle"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;删除</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-    <div class="divider divider-center divider-color"><!-- divider -->
-        <i class="fa fa-chevron-down"></i>
+    <!--<ul class="row clearfix testimonial-dotted list-unstyled">-->
+    <div class="col-md-9">
+        <blockquote>
+            <h2> Question: </h2>
+            <div th:utext="${faq.question}">
+                <p>Lorem </p>
+            </div>
+            <cite th:text="'咨询时间 @'+${#calendars.format(faq.questionDate,' yyyy MMM dd')}"></cite>
+        </blockquote>
+        <div class="divider divider-center divider-color"><!-- divider -->
+            <i class="fa fa-chevron-down"></i>
+        </div>
     </div>
-    <div>
+    <!-- OPERATIONSS -->
+    <div class="col-md-3">
+        <ul class="side-nav list-group margin-bottom-80">
+            <li class="list-group-item">
+                <a href="#" th:href="@{/faq/list}+'?department='+${faq?.department?.id}">
+                    <i class="fa fa-2x fa-university"></i> &nbsp;&nbsp;&nbsp;部门：<span
+                        th:text="${faq.department?.departmentName}">department</span>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" th:href="@{/faq/list}+'?devices='+${faq?.devices?.id}">
+                    <i class="fa fa-2x fa-cube"></i>&nbsp;&nbsp;&nbsp;设备： <span
+                        th:text="${faq.devices?.devicename}">devices</span>
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
+                    <i class="fa fa-2x fa-object-group"></i>&nbsp;&nbsp;&nbsp;设备类型：<span
+                        th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
+                </a>
+            </li>
+            <!--<li class="list-group-item">-->
+            <!--<a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">-->
+            <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>-->
+            <!--</a>-->
+            <!--</li>-->
+            <li class="list-group-item">
+                <a href="#" th:href="@{/faq/list}+'?standard='+${faq.standard}">
+                    <i class="fa fa-2x fa-balance-scale"></i>&nbsp;&nbsp;&nbsp;标准：<span
+                        th:text="${faq.standard}">ISO</span>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a th:href="'/faq/'+${faq.Id}" style="background-color:#9ACD32">
+                    <i class="fa fa-2x fa-edit"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;编辑</span>
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a th:onclick="'removetopic()'" style="background-color:#1E8BC3">
+                    <i class="fa fa-2x fa-recycle"></i> <span class="font-lato">&nbsp;&nbsp;&nbsp;删除</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- /OPERATIONSS -->
+    <div class="col-md-9">
         <blockquote>
             <h2>Answer: </h2>
             <div th:utext="${faq.answer}">
@@ -155,39 +158,166 @@
             </div>
         </blockquote>
     </div>
-
+    <!--</ul>-->
+    <div class="col-md-12">
+        <hr size="10"
+            style="filter:progid:DXImageTransform.Microsoft.Gradient(gradientType='0',startColorstr='#004040',endColorstr='#C0FFFF')"/>
+    </div>
 
     <div>
-        <div class="divider divider-dotted"><!-- divider --></div>
+        <!-- COMMENTS -->
+        <div class="row col-md-10">
+            <div id="comments" class="comments">
 
+                <h4 class="page-header margin-bottom-60 size-20">
+                    <span th:text="${faq.comments?.size()}">3</span> COMMENTS
+                </h4>
 
-        <!-- TAGS -->
-        <a class="tag" href="#">
+                <div class="comment-list">
 
-            <span class="txt"><i class="fa fa-tag"></i>RESPONSIVE</span>
-            <span class="num">12</span>
-        </a>
-        <a class="tag" href="#">
-            <span class="txt"><i class="fa fa-tag"></i>CSS</span>
-            <span class="num">3</span>
-        </a>
-        <a class="tag" href="#">
-            <span class="txt"><i class="fa fa-tag"></i>HTML</span>
-            <span class="num">1</span>
-        </a>
-        <a class="tag" href="#">
-            <span class="txt"><i class="fa fa-tag"></i>JAVASCRIPT</span>
-            <span class="num">28</span>
-        </a>
-        <a class="tag" href="#">
-            <span class="txt"><i class="fa fa-tag"></i>DESIGN</span>
-            <span class="num">6</span>
-        </a>
-        <a class="tag" href="#">
-            <span class="txt"><i class="fa fa-tag"></i>DEVELOPMENT</span>
-            <span class="num">3</span>
-        </a>
-        <!-- /TAGS -->
+                    <!-- First Comment -->
+                    <div class="row" th:each="comment:${faq.comments}">
+                        <div class="col-md-2 col-sm-2 hidden-xs">
+                            <figure class="thumbnail">
+                                <img class="img-responsive" th:src="${comment?.author?.avatar}"/>
+                                <figcaption class="text-center">
+                                    <i class="fa fa-user"></i>
+                                    <strong th:text="${comment?.author.getFullNameCN()}">Felica Doe</strong>
+                                </figcaption>
+                                <small class="block" th:text="${comment?.author?.selfDescribe}">admin</small>
+                                <span class="comment-date">
+                                    <i class="fa fa-clock-o"></i>
+                                    <span th:remove="tags"
+                                          th:text="${#dates.format(comment?.publishDate, 'yy.MM.dd HH:mm')}">Dec 16, 2014</span>
+                                </span>
+                            </figure>
+
+                        </div>
+                        <div class="col-md-10 col-sm-10">
+                            <div class="panel panel-default arrow left">
+                                <div class="panel-body">
+                                    <div class="comment-post">
+                                        <div th:unless="${comment.parent==null}">
+                                            <blockquote>
+                                                <span th:text="${comment?.parent?.author?.getFullNameCN()+' 于 ' +#dates.format(comment?.parent?.publishDate, 'yy.MM.dd HH:mm') +' 说：'}">
+                                                </span>
+                                                <p th:utext="${comment?.parent?.commentContent?:''}"></p>
+
+                                            </blockquote>
+                                        </div>
+                                        <h4>
+                                            <p th:utext="${comment?.commentContent}">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicin
+                                            </p>
+                                        </h4>
+                                    </div>
+                                    <p class="text-right">
+                                        <a href="#" class="btn btn-default btn-sm"
+                                           th:onclick="'javascript:reply(\''+${comment?.id}+'\')'">
+                                            <i class="fa fa-reply"></i>
+                                            reply
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Form -->
+                <form th:action="@{/faq/comment}" id="commentform" name="commentform" method="POST"
+                      th:object="${faq}">
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label class="col-md-4">COMMENT</label>
+                                <span class="pull-right" id="comment-reply"></span>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="hidden" th:field="*{id}"/>
+                                <input type="hidden" id="parent" name="parent"/>
+                                <textarea id="commentContent" name="commentContent"
+                                          class="summernote form-control required"
+                                          data-height="200" data-lang="en-US">
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <button id="submitBtn" onClick="return doSubmitComments();"
+                                    class="btn btn-3d btn-aqua btn-lg btn-reveal btn-black">
+                                <i class="fa fa-check"></i>
+                                <span>提交评论</span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                </form>
+                <!-- /Form -->
+
+            </div>
+            <div id="commentShow" name="commentShow">
+
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+        <script type="text/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+
+            function reply(id) {
+                $("#parent").val(id);
+                $("#commentContent").summernote('focus');
+                $("#comment-reply").text('reply to no.' + id + ' comment         ');
+                $("#comment-reply").append("<a onclick='removeReply()'><i class='fa fa-close text-danger'></i></a>")
+
+                $('html, body').animate({
+                    scrollTop: $("#submitBtn").offset().top
+                }, 1000);
+
+            }
+            function removeReply() {
+                $("#parent").val('');
+                $("#comment-reply").text('');
+            }
+
+            function doSubmitComments() {
+                console.log("doSubmitComments");
+                const text = $("#commentContent").code();
+                if (text.length < 6) {
+                    alert("提交内容请多余6个字");
+                    return false;
+                }
+                $("#commentContent").val($("#commentContent").code());
+                $.ajax({
+                    type: 'post',
+                    url: "/faq/comment",
+                    data: $("#commentform").serialize(),
+                    success: function (data) {
+                        alert("success");
+                        console.dir(data);
+//                        $('#comment-list').append("<br/>" + data);
+                        window.location.reload()
+                    }
+                });
+                return false;
+            }
+
+            /*]]>*/
+        </script>
+        <div class="row">
+            <p></p>
+            <p></p>
+        </div>
+        <!-- /COMMENTS -->
     </div>
 
 </div>

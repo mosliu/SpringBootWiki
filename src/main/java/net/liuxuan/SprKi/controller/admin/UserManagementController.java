@@ -27,6 +27,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
 /**
@@ -99,9 +100,9 @@ public class UserManagementController {
 //                List<String> authslist = userDetailInfoService.listRoles();
                 List<String> authslist = roleService.findAllRoleNames();
                 List<Role> allRole = roleService.getAllRole();
-                redirectAttributesModelMap.put("user", userDetailInfo);
-                redirectAttributesModelMap.put("authslist", authslist);
-                redirectAttributesModelMap.put("allRole", allRole);
+//                redirectAttributesModelMap.put("user", userDetailInfo);
+//                redirectAttributesModelMap.put("authslist", authslist);
+//                redirectAttributesModelMap.put("allRole", allRole);
                 model.put("user", userDetailInfo);
                 model.put("authslist", authslist);
                 model.put("allRole", allRole);
@@ -124,7 +125,7 @@ public class UserManagementController {
     @RequestMapping("user_ajax")
 //    @ResponseBody
     public void userManageAjax(@ModelAttribute("dto") BaseDTO dto, UserDetailInfo userDetailInfo, HttpServletRequest request,
-                               HttpServletResponse response) throws IOException {
+                               HttpServletResponse response) throws IOException, InvocationTargetException, IllegalAccessException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
 
@@ -166,7 +167,7 @@ public class UserManagementController {
             case "update":
                 userDetailInfoService.saveUserDetailInfo(userDetailInfo);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.USER_UPDATE,userDetailInfo,"更新用户"+userDetailInfo.getDbUser().getUsername(),"");
-                rtnData.put("success1", "success!");
+                rtnData.put("success", "success!");
                 break;
             case "list":
                 List<DbUser> users = userDetailInfoService.listAllUsers();

@@ -24,6 +24,7 @@
 
                 <fieldset>
 
+                    <input type="hidden" th:field="*{id}"/>
                     <input type="hidden" th:field="*{dbUser.username}"/>
                     <input type="hidden" th:field="*{dbUser.enabled}"/>
                     <label>修改密码</label>
@@ -99,9 +100,11 @@
     </form>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
+
         var callback = function (data, status) {
 //            alert("Data: " + data + "\nStatus: " + status);
-            alert("\nStatus: " + status);
+            alert(data.success)
+            console.dir("Status: " + data.status + "\nMsg:" + data.msg);
         }
 
         $("#updateform").on("submit", function (e) {
@@ -141,7 +144,8 @@
                         <select id="authArray" multiple="multiple" name="authArray"
                                 style="width: 600px; height: 400px;">
 
-                            <option th:each="role : ${allRole}" th:value="${role.rolename}" th:text="${role.rolename+':'+role.roleDescribe}"
+                            <option th:each="role : ${allRole}" th:value="${role.rolename}"
+                                    th:text="${role.rolename+':'+role.roleDescribe}"
                                     th:selected="${userauth.contains(role.rolename)}"/>
                         </select>
                     </div>

@@ -3,6 +3,7 @@ package net.liuxuan.SprKi.controller.supporttools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,14 +24,21 @@ import java.util.Map;
 @Controller
 @RequestMapping("/tools")
 public class FormulaComputeController {
-    @RequestMapping("/formula/vacuum")
-    public String getConverter(HttpServletRequest request,
-                               HttpServletResponse response, Map<String, Object> model){
-
-//        model.put("title", "MethodNotSupported");
-//        model.put("message", "MethodNotSupported");
-//        model.put("date", new Date());
-//        model.put("status", "405");
-        return "tools/vacuum";
+//    @RequestMapping("/formula/vacuum")
+//    public String getVacuum(HttpServletRequest request,
+//                               HttpServletResponse response, Map<String, Object> model){
+//        return "tools/vacuum";
+//    }
+//    @RequestMapping("/formula/weight")
+//    public String getWeight(HttpServletRequest request,
+//                            HttpServletResponse response, Map<String, Object> model){
+//        return "tools/weight";
+//    }
+    // formula/vacuum
+    // formula/weight
+    @RequestMapping("/formula/{address}")
+    public String getXXX(@PathVariable("address") String address, HttpServletRequest request,
+                         HttpServletResponse response, Map<String, Object> model){
+        return "tools/"+address;
     }
 }

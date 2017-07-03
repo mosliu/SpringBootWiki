@@ -8,6 +8,8 @@
     <!-- 编辑器源码文件 -->
     <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <link href="/ui/mosesadd/upload/uploadifive.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/ui/mosesadd/upload/jquery.uploadifive.js"></script>
 </head>
 <body>
 <div class="container" layout:fragment="content">
@@ -17,11 +19,10 @@
         <li class="active">用户信息维护</li>
     </ol>
     <h1 th:unless="${title==null}" th:text="${title}">发送短消息</h1>
-    <div class="col-md-2"></div>
-    <div class="faqs-form col-md-8">
+    <div class="faqs-form col-md-push-1 col-md-10">
         <!-- header modal -->
         <!--<div class="modal-header">-->
-            <!--<h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>-->
+        <!--<h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>-->
         <!--</div>-->
         <form id="updateform" action="/user/detail/modify" method="post"
               class="validate-plugin sky-form boxed"
@@ -35,29 +36,69 @@
                     </header>
 
                     <fieldset>
-                        <h4>密码操作，不需要修改请留空</h4>
+
+                        <input type="hidden" th:field="*{id}"/>
                         <input type="hidden" th:field="*{dbUser.username}"/>
                         <input type="hidden" th:field="*{dbUser.enabled}"/>
                         <div class="row">
                             <div class="col-md-6">
+                                <h4>密码操作，不需要修改请留空</h4>
                                 <label>修改密码</label>
                                 <label class="input">
                                     <input type="password" name="password" id="password"
                                            placeholder="密码" minlength="4" th:field="*{dbUser.password}"/>
                                     <b class="tooltip tooltip-bottom-right">修改密码</b>
                                 </label>
-                            </div>
-                            <div class="col-md-6">
                                 <label>重复密码</label>
                                 <label class="input">
                                     <input type="password" name="repassword" id="repassword"
-                                           placeholder="密码" minlength="4"  />
+                                           placeholder="密码" minlength="4"/>
                                     <b class="tooltip tooltip-bottom-right">重复密码</b>
                                 </label>
                             </div>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label class="input">
+                                        <img id="showAvatar" class="img-responsive" th:src="*{avatar}"/>
+                                        <input type="file" id="sureLogo" value="上传头像"/>
+                                    </label>
+                                    <div id="uploadqueue"></div>
+                                    <script>
+                                        $("#sureLogo").uploadifive({
+                                            'height': 30,
+                                            'width': 80,
+                                            'fileObjName': 'uploadfile',//后台获取使用的名字
+                                            'method': 'post',
+                                            'auto': true,
+//            'buttonClass': 'btn btn-primary',
+                                            'buttonText': '选择图片',
+                                            'fileType': 'image/*',//只允许图片格式的文件
+                                            'queueID': 'uploadqueue',
+                                            'queueSizeLimit': 2,//这里我只允许单个图片上传
+                                            'removeCompleted': true,//文件上传完成之后去除进度条
+                                            'uploadScript': '/uploadfiles',//处理上传文件的后台url
+                                            'onFallback': function () {
+                                                alert("请使用支持HTML5的浏览器");
+                                            },
+                                            //上传到服务器，服务器返回相应信息到data里
+                                            'onUploadComplete': function (file, data) {//上传文件完成file即文件名,data为后台返回的数据
+                                                var jsondata = JSON.parse(data);
+                                                var image=$("<image src='"+jsondata[0]+"'/>");
+                                                $("#showAvatar").attr('src',jsondata[0]);
+                                                $("#avatar").val(jsondata[0]);
+                                                console.log(data);
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>头像地址</label>
+                                    <label class="input">
+                                        <input type="text" th:field="*{avatar}" placeholder="url"/>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-
-
                     </fieldset>
 
                     <fieldset>

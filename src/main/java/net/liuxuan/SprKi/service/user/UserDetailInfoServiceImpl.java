@@ -11,7 +11,6 @@ import net.liuxuan.SprKi.repository.user.UserDetailInfoRepository;
 import net.liuxuan.SprKi.service.security.RoleService;
 import net.liuxuan.spring.Helper.bean.BeanHelper;
 import net.liuxuan.utils.identicon.DrawUtils;
-import net.liuxuan.utils.identicon.Identicon;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -25,10 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.imageio.ImageIO;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
@@ -101,31 +96,23 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      * @return the db user
      */
 //    @CachePut(cacheNames = "dbUsers", key = "#user.username")
-    public DbUser saveOrUpdateUsers(DbUser user) {
-        assertUsersNotNull(user);
+    public DbUser saveOrUpdateUsers(DbUser user) throws InvocationTargetException, IllegalAccessException {
         String uname = user.getUsername();
         DbUser u_saved;
         if (usersRepository.exists(uname)) {
             u_saved = usersRepository.findOne(uname);
-            if (StringUtils.isBlank(user.getPassword())||user.getPassword().length()<4) {
+            if (StringUtils.isBlank(user.getPassword()) || user.getPassword().length() < 4) {
                 user.setPassword(null);
             }
             user.setEnabled(u_saved.isEnabled());
             //先把传入的bean的空项填上
             //然后赋值给持久化对象
-            try {
-                BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(u_saved, user);
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(u_saved, user);
             usersRepository.save(u_saved);
         } else {
             //new
-            u_saved = user;
             log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", uname);
-            usersRepository.save(u_saved);
+            u_saved  = usersRepository.save(user);
         }
         return u_saved;
     }
@@ -154,24 +141,46 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     @Override
 //    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
-    @CacheEvict(cacheNames = "userDetailInfo", key = "'userdetailinfo_list'")
-    public int saveUserDetailInfo(UserDetailInfo userDetailInfo) {
+    @CacheEvict(cacheNames = "userDetailInfo",allEntries = true)
+    public int saveUserDetailInfo(UserDetailInfo userDetailInfo) throws InvocationTargetException, IllegalAccessException {
         DbUser u = userDetailInfo.getDbUser();
-        Assert.notNull(u, "传入的user不应该为空");
-        saveOrUpdateUsers(u);
-        //重新取持久化的对象（该对象的auth为有内容的）
-        u = usersRepository.findOne(u.getUsername());
-        userDetailInfo.setDbUser(u);
-//        usersRepository.save(u);
 
+
+        if (userDetailInfo.getId() == null) {
+            //新的
+            u.setUserDetailInfo(userDetailInfo);
+            userDetailInfo.setAvatar(createAvatarFile(userDetailInfo.getEmail()));
+            log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", u.getUsername());
+            usersRepository.save(u);
+            addBasicUserRole(u);
+        } else {
+            //更新现存
+            UserDetailInfo saved_UserDetailInfo = userDetailInfoRepository.findOne(userDetailInfo.getId());
+            DbUser user = userDetailInfo.getDbUser();
+            //检查密码
+            if (StringUtils.isBlank(user.getPassword()) || user.getPassword().length() < 4) {
+                user.setPassword(null);
+            }
+            //检查设置enable属性
+            user.setEnabled(saved_UserDetailInfo.getDbUser().isEnabled());
+
+
+            BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(saved_UserDetailInfo.getDbUser(), user);
+            BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(saved_UserDetailInfo, userDetailInfo);
+        }
+
+//        saveOrUpdateUsers(u);
+
+        return 0;
+    }
+
+    private void addBasicUserRole(DbUser u) {
         Set<Authorities> auths = u.getAuths();
         log.info("===saveUserDetailInfo logged ,the auths.size is : {}", auths.size());
-//        for (Authorities auth : auths) {
-//            if(auth.getAuthority().equals("ROLE_USER")){
-//
-//            }
-//        }
-
+        if(auths == null){
+            auths = new HashSet<Authorities>();
+            u.setAuths(auths);
+        }
         if (auths.isEmpty()) {
             //new
             Authorities auth = new Authorities();
@@ -181,38 +190,10 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             Role userrole = roleService.findRoleById("ROLE_USER");
 
             auth.setRolename(userrole);
-//            auth.setAuthority("");
             authoritiesRepository.save(auth);
             auths.add(auth);
             log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]", auths.size(), u.getUsername());
         }
-
-
-//        Authorities auth = new Authorities();
-//        auth.setUsername(u);
-//        auth.setAuthority("ROLE_USER");
-//        authoritiesRepository.save(auth);
-////        Set<Authorities> auths = new HashSet<Authorities>();
-//        auths.add(auth);
-//        u.setAuths(auths);
-        UserDetailInfo saved_UserDetailInfo = userDetailInfoRepository.findByDbUser(u);
-        if (saved_UserDetailInfo == null) {
-            userDetailInfo.setAvatar(createAvatarFile(userDetailInfo.getEmail()));
-            userDetailInfoRepository.save(userDetailInfo);
-//            saved_UserDetailInfo = userDetailInfo;
-        } else {
-            try {
-                BeanHelper.CopyWhenSrcFieldNotNullBeanUtilsBean(saved_UserDetailInfo, userDetailInfo);
-            } catch (InvocationTargetException e) {
-                log.error("Copy UserDetailInfo error!", e);
-//                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                log.error("Copy UserDetailInfo error!", e);
-//                e.printStackTrace();
-            }
-        }
-
-        return 0;
     }
 
     @Override
@@ -232,7 +213,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             log.trace("请求用户 : {}不存在", username);
             return null;
         }
-        UserDetailInfo detailInfo = userDetailInfoRepository.findByDbUser(u1);
+//        UserDetailInfo detailInfo = userDetailInfoRepository.findByDbUser(u1);
+        UserDetailInfo detailInfo = u1.getUserDetailInfo();
         if (detailInfo == null) {
             log.trace("无user对应的UserInfo对象，建立");
             detailInfo = new UserDetailInfo();
@@ -274,7 +256,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         if (usersRepository.exists(username)) {
             DbUser one = usersRepository.findOne(username);
             one.setEnabled(false);
-            UserDetailInfo byDbUser = userDetailInfoRepository.findByDbUser(one);
+//            UserDetailInfo byDbUser = userDetailInfoRepository.findByDbUser(one);
+            UserDetailInfo byDbUser = one.getUserDetailInfo();
             if (byDbUser != null) {
                 byDbUser.setDisabled(true);
             }
@@ -496,7 +479,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      * @param encodestr the encodestr
      * @return the url
      */
-    public String createAvatarFile(String encodestr){
+    public String createAvatarFile(String encodestr) {
         String storePath = this.storePath;
         String accessUrlPrefix = this.accessUrlPath;
         String toMd5EncodeStr = encodestr;
@@ -505,7 +488,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
         //写入
 //        u.setAvatar(accessUrlPrefix+filename);
-        return accessUrlPrefix+filename;
+        return accessUrlPrefix + filename;
     }
 
 
