@@ -62,4 +62,10 @@ public class ThStringUtils {
 
     }
 
+    public static String removeTagAndlimitStringLen(String str,int len){
+        return limitStringLen(removeHtmlTag(str),len);
+
+    }
+
+
 }

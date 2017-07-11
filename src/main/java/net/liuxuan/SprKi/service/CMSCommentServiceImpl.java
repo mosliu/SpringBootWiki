@@ -63,12 +63,14 @@ public class CMSCommentServiceImpl implements CMSCommentService{
     @Override
     @CacheEvict(cacheNames = "comment", key = "#id")
     public boolean deleteCMSCommentById(Long id){
-        CMSComment cmsComment = cmsCommentRepository.getOne(id);
-        if (cmsComment != null) {
-            cmsComment.setDisabled(true);
-            return true;
-        }
-        return false;
+        cmsCommentRepository.delete(id);
+//        CMSComment cmsComment = cmsCommentRepository.getOne(id);
+//        if (cmsComment != null) {
+//            cmsComment.setDisabled(true);
+//            return true;
+//        }
+//        return false;
+        return true;
     }
 
 //    @Override

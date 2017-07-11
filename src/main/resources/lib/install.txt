@@ -1,0 +1,1 @@
+"D:\Program Files (x86)\JetBrains\IntelliJ IDEA 2017.1\plugins\maven\lib\maven3\bin\mvn" install:install-file -Dfile=./ocr_sdk-1.3.6.jar -DgroupId=com.baidu.aip -DartifactId=java-sdk -Dversion=1.3.5 -Dpackaging=jar -DgeneratePom=true

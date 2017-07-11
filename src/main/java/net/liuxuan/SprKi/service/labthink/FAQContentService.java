@@ -3,8 +3,10 @@ package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -25,6 +27,9 @@ public interface FAQContentService {
      */
     FAQContent saveFAQContent(FAQContent faq);
 
+    @CacheEvict(cacheNames = "faqContent",key="#id")
+    void refreshCache(Long id);
+
     /**
      * Find all faq contents by dto list.
      *
@@ -32,6 +37,8 @@ public interface FAQContentService {
      * @return the list
      */
     List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto);
+
+    List<FAQContent> filterListByAccessRight(List<FAQContent> allFAQContents, Set<String> rolenames);
 
     /**
      * Disable faq content by id.
@@ -72,4 +79,6 @@ public interface FAQContentService {
     List<?> getFaqGroupByCount();
 
     List<Object[]> getFaqGroupByAuthorAndDate();
+
+    boolean hasAccessRight(FAQContent faq);
 }

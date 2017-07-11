@@ -213,6 +213,12 @@
                                     </div>
                                     <p class="text-right">
                                         <a href="#" class="btn btn-default btn-sm"
+                                           th:if="${comment.canEdit}"
+                                           th:onclick="'javascript:del(\''+${comment?.id}+'\')'">
+                                            <i class="fa fa-recycle"></i>
+                                            delete
+                                        </a>
+                                        <a href="#" class="btn btn-default btn-sm"
                                            th:onclick="'javascript:reply(\''+${comment?.id}+'\')'">
                                             <i class="fa fa-reply"></i>
                                             reply
@@ -273,6 +279,24 @@
         <script type="text/javascript" th:inline="javascript">
             /*<![CDATA[*/
 
+            function del(id) {
+                var r = confirm("确定删除么");
+                if (r === true) {
+                    $.ajax({
+                        type: 'post',
+                        url: "/faq/comment/delete",
+                        data: {id:id},
+                        success: function (data) {
+                            alert("成功删除了一条");
+                            console.dir(data);
+//                        $('#comment-list').append("<br/>" + data);
+                            window.location.reload();
+                        }
+                    });
+                }
+
+            }
+
             function reply(id) {
                 $("#parent").val(id);
                 $("#commentContent").summernote('focus');
@@ -290,7 +314,7 @@
             }
 
             function doSubmitComments() {
-                console.log("doSubmitComments");
+//                console.log("doSubmitComments");
                 const text = $("#commentContent").code();
                 if (text.length < 6) {
                     alert("提交内容请多余6个字");
@@ -302,7 +326,7 @@
                     url: "/faq/comment",
                     data: $("#commentform").serialize(),
                     success: function (data) {
-                        alert("success");
+//                        alert("success");
                         console.dir(data);
 //                        $('#comment-list').append("<br/>" + data);
                         window.location.reload()

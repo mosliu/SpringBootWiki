@@ -117,7 +117,7 @@ public class NewsPageServiceImpl implements NewsPageService {
     @Override
     @Cacheable(cacheNames = "NewsPage", key = "'listtop20'")
     public List<NewsPage> getTop20NewsPage() {
-        return newsPageRepository.findTop20ByDisabledFalse();
+        return newsPageRepository.findTop20ByDisabledFalseOrderByLastUpdateDateDesc();
     }
 
     @Override

@@ -144,10 +144,9 @@
                             var data = JSON.parse(xhr.responseText);
 //                            var ocrtext = document.getElementById('ocrtext');
 //                            var picbox = document.getElementById('picbox');
-                            var wordlines = data.words_result_num;
                             var v_ocrtext = '';
-                            for (var index1 = 0; index1 < wordlines; index1++) {
-                                v_ocrtext += data.words_result[index1].words + '<br/>';
+                            for (var index1 = 0; index1 < data.results.length; index1++) {
+                                v_ocrtext += data.results[index1].word + '<br/>';
                             }
                             ocrtext.innerText = v_ocrtext;
                             ocrtext.html(v_ocrtext);

@@ -2,6 +2,7 @@ package net.liuxuan.SprKi.controller.faq;
 
 import net.liuxuan.SprKi.entity.CMSCategoryEditor;
 import net.liuxuan.SprKi.entity.CMSComment;
+import net.liuxuan.SprKi.entity.CMSContent;
 import net.liuxuan.SprKi.entity.CMSContentTags;
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
 import net.liuxuan.SprKi.entity.labthink.Department;
@@ -153,8 +154,14 @@ public class FAQController {
         FAQContent faq = faqContentService.findById(id);
 
         //TODO 无权限时 显示内容
-        if (!hasAccessRight(faq)) {
+        if (!faqContentService.hasAccessRight(faq)) {
             faq = createNoAccessRightFaqContent("您无权编辑该条信息");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
+        }
+        if(faq.isDisabled()==true){
+            faq = createNoAccessRightFaqContent("该条信息已删除");
             faq.setId(id);
             model.put("faq", faq);
             return "faq/faq_show";
@@ -190,12 +197,22 @@ public class FAQController {
         if (faq == null) {
             throw new ContentNotFoundException("", id);
         }
-        if (!hasAccessRight(faq)) {
+        if (!faqContentService.hasAccessRight(faq)) {
             faq = createNoAccessRightFaqContent("您无权查看该条信息");
             faq.setId(id);
             model.put("faq", faq);
             return "faq/faq_show";
         }
+        if(faq.isDisabled()==true){
+            faq = createNoAccessRightFaqContent("该条信息已删除");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
+        }
+        boolean isAdmin = SystemHelper.isCurrentUserAdmin();
+        //将是否可修改comment设定到每个comment的 canedit属性中（临时属性，不计入数据库的）
+        faq.getComments().stream().forEach(e->e.judgeCanEdit(isAdmin));
+
         model.put("faq", faq);
 //        devicesRepository.findAll();
 //        List<Devices> devicesAll = devicesRepository.findAll();
@@ -222,7 +239,7 @@ public class FAQController {
         if (faq == null) {
             return "redirect:/faq/list";
         }
-        if (!hasAccessRight(faq)) {
+        if (!faqContentService.hasAccessRight(faq)) {
             faq = createNoAccessRightFaqContent("您无权删除该条信息");
             faq.setId(id);
             model.put("faq", faq);
@@ -251,109 +268,6 @@ public class FAQController {
         faq.setQuestion(accessErrorText);
         faq.setStandard(accessErrorText);
         return faq;
-    }
-
-    /**
-     * Judge if the User has role to access the FAQContent.
-     *
-     * @param rolenames the rolenames
-     * @param dept      the faq
-     * @return the boolean
-     */
-    public boolean hasRole(Set<String> rolenames, Department dept) {
-        String deparmentRoleName = departmentService.getDeparmentRoleName(dept);
-        if (rolenames.contains(deparmentRoleName)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Judge if the User has role to access the FAQContent.
-     *
-     * @param rolenames the rolenames
-     * @param faq       the faq
-     * @return the boolean
-     */
-    public boolean hasRole(Set<String> rolenames, FAQContent faq) {
-        return hasRole(rolenames, faq.getDepartment());
-    }
-
-    /**
-     * Judge if the User has role to access the FAQContent.
-     *
-     * @param faq the faq
-     * @return the boolean
-     */
-    public boolean hasRole(FAQContent faq) {
-        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
-        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
-        return hasRole(rolenames, faq);
-    }
-
-    /**
-     * Is admin boolean.
-     *
-     * @param rolenames the rolenames
-     * @return the boolean
-     */
-    public boolean isAdmin(Set<String> rolenames) {
-//        if (rolenames.contains("ROLE_ADMIN")) {
-//            return true;
-//        }
-//        return false;
-        return rolenames.contains("ROLE_ADMIN");
-    }
-
-    /**
-     * Is admin boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isAdmin() {
-        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
-        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
-        return isAdmin(rolenames);
-    }
-
-    /**
-     * Is author boolean.
-     *
-     * @param faq the faq
-     * @return the boolean
-     */
-    public boolean isAuthor(FAQContent faq) {
-        DbUser currentUser = SystemHelper.getCurrentUser();
-        if (faq.getAuthor().getUsername().equals(currentUser.getUsername())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Has access right boolean.
-     *
-     * @param rolenames the rolenames
-     * @param faq       the faq
-     * @return the boolean
-     */
-    public boolean hasAccessRight(Set<String> rolenames, FAQContent faq) {
-        boolean rtn = isAdmin(rolenames) || isAuthor(faq) || hasRole(rolenames, faq);
-        return rtn;
-    }
-
-    /**
-     * Has access right boolean.
-     *
-     * @param faq the faq
-     * @return the boolean
-     */
-    public boolean hasAccessRight(FAQContent faq) {
-        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
-        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
-        return hasAccessRight(rolenames, faq);
     }
 
     /**
@@ -386,10 +300,11 @@ public class FAQController {
         /*
             处理按照权限查询
          */
-        List<FAQContent> filteredFAQContents = allFAQContents
-                .stream()
-                .filter(faq -> hasAccessRight(rolenames, faq))
-                .collect(Collectors.toList());
+        List<FAQContent> filteredFAQContents = faqContentService.filterListByAccessRight(allFAQContents,rolenames);
+//        List<FAQContent> filteredFAQContents = allFAQContents
+//                .stream()
+//                .filter(faq -> hasAccessRight(rolenames, faq))
+//                .collect(Collectors.toList());
         log.debug("faq list size is {}", filteredFAQContents.size());
         model.put("allfaqlist", filteredFAQContents);
         model.put("dto", dto);
@@ -454,14 +369,20 @@ public class FAQController {
     @RequestMapping(value = "/faq/comment", method = RequestMethod.POST)
 //    @PreAuthorize("hasRole('ROLE_USER')")
     public void postComment(CMSComment comment, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
-        System.out.println(comment.getId());
+//        System.out.println(comment.getId());
         FAQContent faq = faqContentService.findById(comment.getId());
         comment.setContent(faq);
         comment.setId(null);
         comment = cmsCommentService.saveCMSComment(comment);
         ResponseHelper.writeObjectToResponseAsJson(response,comment);
-
-
+    }
+    @RequestMapping(value = "/faq/comment/delete", method = RequestMethod.POST)
+    public void deleteComment(CMSComment comment, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+        System.out.println(comment.getId());
+        comment = cmsCommentService.findCMSCommentById(comment.getId());
+        faqContentService.refreshCache(comment.getContent().getId());
+        boolean b = cmsCommentService.deleteCMSCommentById(comment.getId());
+        ResponseHelper.writeObjectToResponseAsJson(response,b);
     }
 
     /**

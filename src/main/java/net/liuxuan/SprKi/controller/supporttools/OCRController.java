@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller.supporttools;
 
 import net.liuxuan.utils.OCRUtils;
+import net.liuxuan.utils.OCRUtils2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,7 @@ public class OCRController {
         if(index>0){
             file =file.substring(index+7);
         }
-        String res = OCRUtils.getOcrByBase64(file);
+        String res = OCRUtils2.getOcrByBase64(file);
         try {
             response.getWriter().write(res);
         } catch (IOException e) {

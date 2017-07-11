@@ -256,6 +256,10 @@ public final class SystemHelper {
         return roleList;
     }
 
+    public static boolean isCurrentUserAdmin(){
+        return  getCurrentUser().getAuths().stream().anyMatch(e-> e.getRolename().getRolename().equalsIgnoreCase("ROLE_ADMIN"));
+    }
+
     public static WebApplicationContext getWebAppContext(HttpServletRequest request) {
         WebApplicationContext wac = RequestContextUtils.findWebApplicationContext(request);
 //        WebApplicationContextUtils.

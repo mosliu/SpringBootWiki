@@ -50,8 +50,10 @@ public class OCRUtils {
     private static final Joiner headerJoiner = Joiner.on('\n');
     private static BitSet URI_UNRESERVED_CHARACTERS = new BitSet();
     private static String[] PERCENT_ENCODED_STRINGS = new String[256];
-    private static String ACCESS_KEY_ID = "b7d11214c8fc452db3de12028cf46daa";                   // 用户的Access Key ID
-    private static String SECRET_ACCESS_KEY = "64631fe987f4423bb0a117101bf90a45";           // 用户的Secret Access Key
+//    private static String ACCESS_KEY_ID = "b7d11214c8fc452db3de12028cf46daa";                   // 用户的Access Key ID
+//    private static String SECRET_ACCESS_KEY = "64631fe987f4423bb0a117101bf90a45";           // 用户的Secret Access Key
+    private static String ACCESS_KEY_ID = "2cdc425267b8483c867bb6e716401f53";                   // 用户的Access Key ID
+    private static String SECRET_ACCESS_KEY = "aaa331aaae8648bd9d352a70d4ca5f96";           // 用户的Secret Access Key
     private static String OCRUrl = "http://ocr.bj.baidubce.com/v1/recognize/text";
     private static String OCRPath = "/v1/recognize/text";
 
@@ -86,6 +88,7 @@ public class OCRUtils {
     private static Logger log =  LoggerFactory.getLogger(OCRUtils.class);
 
     public static String getOcrByBase64(String base64){
+
         JsonObject json = new JsonObject();
         //获取UTC 时间
         Date now = new Date();

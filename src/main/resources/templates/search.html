@@ -3,20 +3,81 @@
       layout:decorate="layouts/base">
 <head>
     <title>Messages : View</title>
+
 </head>
 <body>
 <h1 layout:fragment="header">Messages : Create</h1>
 <div layout:fragment="content" class="container">
     <br/>
-<ol>
-    <br/>
-    <span th:if="${searchResults.isEmpty()}"><strong>未查询到相关信息</strong></span>
-    <li th:each="faq:${searchResults}">
-        <b><span th:utext="${faq.title}"></span></b> -
-        <span th:utext="${faq.question}"></span> -
-        <span th:utext="${faq.answer}"></span>
-    </li>
-</ol>
+    <ol>
+        <br/>
+        <span th:if="${errorText!=null}"><strong th:text="${errorText}">未查询到相关信息</strong></span>
+        <span th:if="${faqResultList.isEmpty()}"><strong>未查询到相关信息</strong></span>
+        <div class="box-light"><!-- .box-light OR .box-dark -->
+
+            <div class="box-inner">
+                <div class="timeline" style="height: 300px;margin-top:20px;margin-bottom: 20px"
+                     th:each="faq:${faqResultList}">
+                    <!-- .timeline-inverse = right position [left on RTL] -->
+
+                    <!-- ITEM -->
+                    <div class="timeline-item timeline-item-bordered">
+                        <!-- timeline entry -->
+                        <div class="timeline-entry rounded">
+                            <!-- .rounded = entry -->
+                            <i th:text="${#dates.format(faq?.lastUpdateDate, 'yy年')}" th:remove="tag">2017年</i>
+                            <span th:text="${#dates.format(faq?.lastUpdateDate, 'MM.dd')}">06.15</span>
+                            <div class="timeline-vline"><!-- vertical line --></div>
+                        </div>
+                        <!-- /timeline entry -->
+                        <div style="height: 300px; overflow: auto; overflow-x:hidden;">
+                            <strong><a th:href="'/faq/show/'+${faq.Id}" th:utext="${faq.title}" target="_blank">
+                                EPONA - RESPONSIVE TEMPLATE RELEASED
+                            </a></strong>
+
+                            <h2></h2><!--此处增加横线，不要删-->
+                            <div>
+                                <strong>问题：</strong><br/>
+                                <span th:utext="${faq.question}"></span>
+                            </div>
+                            <hr/>
+                            <div>
+                                <strong>回复：</strong>
+                                <span th:utext="${faq.answer}"></span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline" style="height:330px;margin-top:20px;margin-bottom: 20px"
+                     th:each="obj:${newsResultList}">
+                    <!-- .timeline-inverse = right position [left on RTL] -->
+
+                    <!-- ITEM -->
+                    <div class="timeline-item timeline-item-bordered">
+                        <!-- timeline entry -->
+                        <div class="timeline-entry rounded">
+                            <!-- .rounded = entry -->
+                            <i th:text="${#dates.format(obj?.lastUpdateDate, 'yy年')}" th:remove="tag">2017年</i>
+                            <span th:text="${#dates.format(obj?.lastUpdateDate, 'MM.dd')}">06.15</span>
+                            <div class="timeline-vline"><!-- vertical line --></div>
+                        </div>
+                        <!-- /timeline entry -->
+                        <div style="height: 300px; overflow: auto; overflow-x:hidden;">
+                            <strong><a th:href="'/news/show/'+${obj.Id}" th:utext="${obj.title}" target="_blank">
+                                EPONA - RESPONSIVE TEMPLATE RELEASED
+                            </a></strong>
+                            <h2></h2><!--此处增加横线，不要删-->
+                            <p>
+                                <strong>新闻内容：</strong><br/>
+                                <span th:utext="${obj.infoText}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </ol>
 </div>
 </body>
 </html>

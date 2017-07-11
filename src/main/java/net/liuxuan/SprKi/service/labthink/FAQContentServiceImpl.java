@@ -1,8 +1,10 @@
 package net.liuxuan.SprKi.service.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.FAQSearchDTO;
+import net.liuxuan.SprKi.entity.labthink.Department;
 import net.liuxuan.SprKi.entity.labthink.FAQContent;
 import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.SprKi.entity.security.Role;
 import net.liuxuan.SprKi.repository.labthink.FAQContentRepository;
 import net.liuxuan.SprKi.service.CMSCategoryService;
 import net.liuxuan.spring.Helper.SystemHelper;
@@ -11,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -21,10 +24,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static net.liuxuan.SprKi.service.util.SearchHelper.*;
 
@@ -50,6 +51,9 @@ public class FAQContentServiceImpl implements FAQContentService {
 
     @Autowired
     CMSCategoryService cmsCategoryService;
+
+    @Autowired
+    DepartmentService departmentService;
 
 
     @Override
@@ -93,6 +97,12 @@ public class FAQContentServiceImpl implements FAQContentService {
 
         faq.setLastUpdateDate(now);
         return faqContentRepository.save(faq);
+
+    }
+
+    @Override
+    @CacheEvict(cacheNames = "faqContent",key="#id")
+    public void refreshCache(Long id){
 
     }
 
@@ -154,6 +164,15 @@ public class FAQContentServiceImpl implements FAQContentService {
 //        return faqContentRepository.findAll();
     }
 
+    @Override
+    public List<FAQContent> filterListByAccessRight(List<FAQContent> allFAQContents, Set<String> rolenames){
+         List<FAQContent> filteredFAQContents = allFAQContents
+                .stream()
+                .filter(faq -> hasAccessRight(rolenames, faq))
+                .collect(Collectors.toList());
+        return filteredFAQContents;
+    }
+
 
     @Override
     @CacheEvict(cacheNames = "faqContent",key="#id")
@@ -202,5 +221,114 @@ public class FAQContentServiceImpl implements FAQContentService {
         return faqContentRepository.findGroupByAuthorAndDate1();
     }
 
+
+
+
+
+
+
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param rolenames the rolenames
+     * @param dept      the faq
+     * @return the boolean
+     */
+    public boolean hasDepartmentRole(Set<String> rolenames, Department dept) {
+        String deparmentRoleName = departmentService.getDeparmentRoleName(dept);
+        if (rolenames.contains(deparmentRoleName)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param rolenames the rolenames
+     * @param faq       the faq
+     * @return the boolean
+     */
+    public boolean hasDepartmentRole(Set<String> rolenames, FAQContent faq) {
+        return hasDepartmentRole(rolenames, faq.getDepartment());
+    }
+
+    /**
+     * Judge if the User has role to access the FAQContent.
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    public boolean hasDepartmentRole(FAQContent faq) {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return hasDepartmentRole(rolenames, faq);
+    }
+
+    /**
+     * Is admin boolean.
+     *
+     * @param rolenames the rolenames
+     * @return the boolean
+     */
+    public boolean isAdmin(Set<String> rolenames) {
+//        if (rolenames.contains("ROLE_ADMIN")) {
+//            return true;
+//        }
+//        return false;
+        return rolenames.contains("ROLE_ADMIN");
+    }
+
+    /**
+     * Is admin boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isAdmin() {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return isAdmin(rolenames);
+    }
+
+    /**
+     * Is the faq's author
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    public boolean isFaqAuthor(FAQContent faq) {
+        DbUser currentUser = SystemHelper.getCurrentUser();
+        if (faq.getAuthor().getUsername().equals(currentUser.getUsername())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Has access right boolean.
+     *
+     * @param rolenames the rolenames
+     * @param faq       the faq
+     * @return the boolean
+     */
+    public boolean hasAccessRight(Set<String> rolenames, FAQContent faq) {
+        boolean rtn = isAdmin(rolenames) || isFaqAuthor(faq) || hasDepartmentRole(rolenames, faq);
+        return rtn;
+    }
+
+    /**
+     * Has access right boolean.
+     *
+     * @param faq the faq
+     * @return the boolean
+     */
+    @Override
+    public boolean hasAccessRight(FAQContent faq) {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return hasAccessRight(rolenames, faq);
+    }
 
 }

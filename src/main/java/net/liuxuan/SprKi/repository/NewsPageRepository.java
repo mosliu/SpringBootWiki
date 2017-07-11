@@ -24,7 +24,7 @@ public interface NewsPageRepository extends JpaRepository<NewsPage, Long>, JpaSp
 //    List<NewsPage> findByNewsPageNameNot(String  NotName);
     List<NewsPage> findByDisabledFalse();
 
-    List<NewsPage> findTop20ByDisabledFalse();
+    List<NewsPage> findTop20ByDisabledFalseOrderByLastUpdateDateDesc();
 
     Page<NewsPage> findAllByDisabledFalseOrderByLastUpdateDateDesc(Pageable pageable);
 //    List<NewsPage> findByNewsPageNameNotOrderByNewsPageName(String roleNotName);

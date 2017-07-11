@@ -35,7 +35,7 @@ spring:
 
   devtools:
     restart:
-      enabled: true
+      enabled: false
 
   cache:
     jcache:
