@@ -95,7 +95,7 @@
                             <select th:field="*{assignToUser}" class="form-control pointer select2 required">
                                 <option th:each="type : ${userDetailInfoList}"
                                         th:value="${type.id}"
-                                        th:text="${type.department?.departmentName+':'+type.lastName+type.firstName+'('+type.dbUser.username+')'}">售后</option>
+                                        th:text="${type.department?.departmentName+':'+type.lastName+type.firstName+'('+type.dbUser?.username+')'}">售后</option>
                             </select>
 
                         </div>

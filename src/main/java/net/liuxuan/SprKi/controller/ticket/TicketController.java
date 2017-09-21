@@ -267,7 +267,6 @@ TicketController {
         BeanUtils.copyProperties(content, faq);
 //        faq.setId(null); //删除复制的id 防止出错
         faq.setQuestionDate(content.getSubmitDate());
-        ;
         model.put("faq", faq);
         model.put("DevicesType_list", deviceTypeService.getAllDeviceType());
         model.put("ticketId", id);
@@ -291,7 +290,6 @@ TicketController {
     @RequestMapping(value = "ticket/answer", method = RequestMethod.POST)
     @PreAuthorize("hasRole('ROLE_USER')")
     public String AnswerTicket(FAQContent faq, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-        //TODO 添加回答问题的人
         long ticketid = faq.getId();
         System.out.println("ticketid:" + ticketid);
         faq.setId(null);
@@ -303,6 +301,8 @@ TicketController {
 
         TicketContent content = ticketContentService.findById(ticketid);
         content.setFaq(faq);
+        content.setResolved(true);
+        content.setResolvedDate(new Date());
         UserDetailInfo currentUserDetailInfo = SystemHelper.getCurrentUserDetailInfo();
         content.setAnswerUser(currentUserDetailInfo);
         ticketContentService.saveTicketContent(content);

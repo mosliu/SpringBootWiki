@@ -36,4 +36,15 @@ public class UnitConverterController {
 //        model.put("status", "405");
         return "tools/unitconv";
     }
+
+    @RequestMapping("/unitconv2")
+    public String getConverter2(HttpServletRequest request,
+                               HttpServletResponse response, Map<String, Object> model){
+
+//        model.put("title", "MethodNotSupported");
+//        model.put("message", "MethodNotSupported");
+//        model.put("date", new Date());
+//        model.put("status", "405");
+        return "tools/unitconvert";
+    }
 }

@@ -1,6 +1,6 @@
 # Server settings 
 server:
-  port: 80
+  port: 8080
   address: 0.0.0.0
   max-http-header-size: 8192
 # 24 hours
@@ -242,6 +242,8 @@ SprKi:
     accesspath: /uploaded/
     #备份位置
     backupattachpath: d:/backup/attachments/
+    #受限文件存储位置
+    restrictedpath: d:/restrictedFiles
   editor:
     acl: ROLE_USER
   ticket:

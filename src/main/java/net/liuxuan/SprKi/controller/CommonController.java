@@ -6,18 +6,24 @@ import net.liuxuan.SprKi.service.user.UserDetailInfoService;
 import net.liuxuan.spring.Helper.SpringContextHelper;
 import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -36,7 +42,8 @@ import java.util.stream.Collectors;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class CommonController {
 
-
+    @Value("${SprKi.upload.restrictedpath}")
+    private String restrictedFilePath;
     /**
      * The Request mapping handler mapping.
      */
@@ -85,6 +92,72 @@ public class CommonController {
         System.out.println("PATH TRANSLATE TO:"+path);
 
         return path;
+    }
+
+    @RequestMapping(value = "/moses", method = RequestMethod.GET)
+    public String mosesParse(){
+        return "tools/parse";
+    }
+
+
+    @RequestMapping(value = "/func/get", method = RequestMethod.GET)
+    @ResponseBody
+    public String getFile(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+        String path = request.getParameter("file");
+        path = restrictedFilePath +'/'+path;
+        File f = new File(path);
+        String rtn;
+        if(f.exists()&&(!f.isDirectory())){
+            rtn = path;
+        }else{
+            rtn = path+ "  :   Not Existed!!!";
+        }
+
+        return rtn;
+    }
+    @RequestMapping(value = "/func/get2", method = RequestMethod.GET)
+//    @ResponseBody
+    public void getFile2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+        String path = request.getParameter("file");
+        path = restrictedFilePath +'/'+path;
+        File f = new File(path);
+        String rtn;
+        if(f.exists()&&(!f.isDirectory())){
+            rtn = path;
+        }else{
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            System.out.println(errorMessage);
+            ServletOutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+
+        String mimeType= URLConnection.guessContentTypeFromName(f.getName());
+        if(mimeType==null){
+            System.out.println("mimetype is not detectable, will take default");
+            mimeType = "application/octet-stream";
+        }
+
+        System.out.println("mimetype : "+mimeType);
+//        mimeType = "application/force-download";
+        response.setContentType(mimeType);
+        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+//        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + f.getName() +"\""));
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + f.getName() +"\""));
+
+
+        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+        //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+
+        response.setContentLength((int)f.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(f));
+
+        //Copy bytes from source to destination(outputstream in this example), closes both streams.
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
+
     }
 
     /**

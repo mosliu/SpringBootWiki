@@ -29,9 +29,9 @@
     </ol>
     <div class="nrd">
         <!--<div class="container">-->
-            <!--<p align="center">-->
-            <!--<h1>OCR工具</h1>-->
-            <!--</p>-->
+        <!--<p align="center">-->
+        <!--<h1>OCR工具</h1>-->
+        <!--</p>-->
         <!--</div>-->
         <script type="text/javascript">
             $('#header').toggleClass('shadow-after-3');
@@ -89,7 +89,7 @@
                         //如果粘贴纯文本+HTML，len=2, items[0].type = 'text/plain', items[1].type = 'text/html'
                         //阻止默认行为即不让剪贴板内容在div中显示出来
                         event.preventDefault();
-//在items里找粘贴的image,据上面分析,需要循环
+//在items里找粘           贴的image,据上面分析,需要循环
                         for (let i = 0; i < len; i++) {
                             if (items[i].type.indexOf("image") !== -1) {
                                 //getAsFile()  此方法只是living standard  firefox ie11 并不支持
@@ -117,9 +117,9 @@
                     //for ie11
                     setTimeout(function () {
                         var imgList = $('#picbox img'),
-                                len = imgList.length,
-                                src_str = '',
-                                i;
+                            len = imgList.length,
+                            src_str = '',
+                            i;
                         for (i = 0; i < len; i++) {
                             if (imgList[i].className !== 'my_img') {
                                 src_str = imgList[i].src;
@@ -158,8 +158,8 @@
 //                                picbox.appendChild(img);
                             } else {
                                 var imgList = document.querySelectorAll('#picbox img'),
-                                        len = imgList.length,
-                                        index2;
+                                    len = imgList.length,
+                                    index2;
                                 for (index2 = 0; index2 < len; index2++) {
                                     if (imgList[index2].className !== 'my_img') {
                                         imgList[index2].className = 'my_img';

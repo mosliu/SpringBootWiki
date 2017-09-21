@@ -34,6 +34,12 @@
                         <b class="tooltip tooltip-bottom-right">输入新闻公告标题</b>
                     </label>
 
+                    <label>公告发布时间 *</label>
+                    <i class="icon-append fa fa-clock-o"></i>
+                    <input type="text" th:field="*{showDate}"
+                           class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
+                           data-RTL="false" readonly="true"/>
+
                     <label class="input">
                         <i class="icon-append fa fa-key"></i>
                         <textarea id="infoText" th:field="*{infoText}" class="summernote form-control required"

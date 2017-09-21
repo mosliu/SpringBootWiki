@@ -38,7 +38,7 @@ public class UrlAuthServiceImpl implements UrlAuthService {
     UrlAuthRepository urlAuthRepository;
 
     @Override
-    @CacheEvict(cacheNames = "urlAuth", key = "'list_disablefalse'")
+    @CacheEvict(cacheNames = "urlAuth", key = "'list_disablefalse'",allEntries = true)
     public void saveUrlAuth(UrlAuth urlAuth) {
         urlAuthRepository.save(urlAuth);
     }

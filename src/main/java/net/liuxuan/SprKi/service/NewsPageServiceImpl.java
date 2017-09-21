@@ -111,19 +111,21 @@ public class NewsPageServiceImpl implements NewsPageService {
     @Override
     @Cacheable(cacheNames = "NewsPage", key = "'list'")
     public List<NewsPage> getAllNewsPage() {
-        return newsPageRepository.findByDisabledFalse();
+//        return newsPageRepository.findByDisabledFalse();
+        return newsPageRepository.findByDisabledFalseOrderByShowDateDesc();
     }
 
     @Override
     @Cacheable(cacheNames = "NewsPage", key = "'listtop20'")
     public List<NewsPage> getTop20NewsPage() {
-        return newsPageRepository.findTop20ByDisabledFalseOrderByLastUpdateDateDesc();
+//        return newsPageRepository.findTop20ByDisabledFalseOrderByLastUpdateDateDesc();
+        return newsPageRepository.findTop20ByDisabledFalseOrderByShowDateDescLastUpdateDateDesc();
     }
 
     @Override
     @Cacheable(cacheNames = "NewsPage", key = "'pageable'+#page+':' + #size")
     public Page<NewsPage> getAllNewsPageable(Integer page, Integer size) {
         Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "LastUpdateDate");
-        return newsPageRepository.findAllByDisabledFalseOrderByLastUpdateDateDesc(pageable);
+        return newsPageRepository.findAllByDisabledFalseOrderByShowDateDesc(pageable);
     }
 }

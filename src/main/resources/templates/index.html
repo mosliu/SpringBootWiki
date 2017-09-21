@@ -171,7 +171,7 @@
                             <div class="col-md-10 col-sm-10 col-xs-9">
                                 <a th:href="@{/news/show/{id}(id=${news.id})}" th:utext="${news.fullTitle}"
                                    class="tab-post-link"></a>
-                                <small th:text="${#dates.format(news.publishDate, 'yyyy-MM-dd')}">2017 03 06</small>
+                                <small th:text="${#dates.format(news.showDate, 'yyyy-MM-dd')}">2017 03 06</small>
                             </div>
                         </div><!-- /post -->
 

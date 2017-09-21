@@ -112,7 +112,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
         } else {
             //new
             log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", uname);
-            u_saved  = usersRepository.save(user);
+            u_saved = usersRepository.save(user);
         }
         return u_saved;
     }
@@ -141,7 +141,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 
     @Override
 //    @CachePut(cacheNames = "userDetailInfo", key = "#userDetailInfo.id")
-    @CacheEvict(cacheNames = "userDetailInfo",allEntries = true)
+    @CacheEvict(cacheNames = "userDetailInfo", allEntries = true)
     public int saveUserDetailInfo(UserDetailInfo userDetailInfo) throws InvocationTargetException, IllegalAccessException {
         DbUser u = userDetailInfo.getDbUser();
 
@@ -152,6 +152,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             userDetailInfo.setAvatar(createAvatarFile(userDetailInfo.getEmail()));
             log.info("===saveOrUpdateUsers logged ,Saved a new User: {}", u.getUsername());
             usersRepository.save(u);
+
+//            userDetailInfoRepository.save(userDetailInfo);
             addBasicUserRole(u);
         } else {
             //更新现存
@@ -177,7 +179,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     private void addBasicUserRole(DbUser u) {
         Set<Authorities> auths = u.getAuths();
         log.info("===saveUserDetailInfo logged ,the auths.size is : {}", auths.size());
-        if(auths == null){
+        if (auths == null) {
             auths = new HashSet<Authorities>();
             u.setAuths(auths);
         }
@@ -194,6 +196,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             auths.add(auth);
             log.info("===saveUserDetailInfo logged ,Add auth [{}] to [{}]", auths.size(), u.getUsername());
         }
+        evictAllCache();
     }
 
     @Override
@@ -251,7 +254,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      * @return the boolean
      */
     @Override
-    @CacheEvict(cacheNames = "dbUsers", key = "#username")
+    @CacheEvict(cacheNames = "userDetailInfo", key = "#username")
     public boolean deleteUsersByUsername(String username) {
         if (usersRepository.exists(username)) {
             DbUser one = usersRepository.findOne(username);
@@ -269,7 +272,7 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
     }
 
     @Override
-    @Cacheable(cacheNames = "dbUsers", key = "'user_list'")
+//    @Cacheable(cacheNames = "dbUsers", key = "'user_list'")
     public List<DbUser> listAllUsers() {
 //        return usersRepository.findAll();
         return usersRepository.findByEnabled(true);
@@ -416,10 +419,20 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
 //        dbUser.setAuths(new_auths);
         usersRepository.saveAndFlush(dbUser);
 
-
+        evictAllCache();
         map.put("success", "权限处理成功");
         return map;
     }
+
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "dbUsers", allEntries = true),
+                    @CacheEvict(cacheNames = "userDetailInfo", allEntries = true)
+            })
+    public void evictAllCache() {
+        log.info("evict All User Cache");
+    }
+
 
     @Override
     public List<UserDetailInfo> checkAllUserDetailInfoAvatar() {

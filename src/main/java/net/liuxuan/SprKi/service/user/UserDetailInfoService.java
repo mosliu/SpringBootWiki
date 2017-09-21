@@ -1,14 +1,8 @@
 package net.liuxuan.SprKi.service.user;
 
 
-import javax.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.security.DbUser;
 import net.liuxuan.SprKi.entity.user.UserDetailInfo;
-import org.springframework.cache.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -33,7 +27,7 @@ public interface UserDetailInfoService {
      * @param userDetailInfo the user detail info
      * @return the int 0 means success
      */
-     int saveUserDetailInfo(UserDetailInfo userDetailInfo) throws InvocationTargetException, IllegalAccessException;
+    int saveUserDetailInfo(UserDetailInfo userDetailInfo) throws InvocationTargetException, IllegalAccessException;
 
 
     DbUser findDbUserByUsername(String username);
@@ -44,7 +38,7 @@ public interface UserDetailInfoService {
      * @param id the id
      * @return the user detail info
      */
-     UserDetailInfo findUserDetailInfoById(Long id);
+    UserDetailInfo findUserDetailInfoById(Long id);
 
     /**
      * Find user detail info by users user detail info.
@@ -52,16 +46,16 @@ public interface UserDetailInfoService {
      * @param dbUser the users
      * @return the user detail info
      */
-     UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser);
+    UserDetailInfo findUserDetailInfoByUsers(DbUser dbUser);
 
-     UserDetailInfo findUserDetailInfoByUsername(String username);
+    UserDetailInfo findUserDetailInfoByUsername(String username);
 
     /**
      * Delete user detail info by id.
      *
      * @param id the id
      */
-     void deleteUserDetailInfoById(Long id);
+    void deleteUserDetailInfoById(Long id);
 
 
     /**
@@ -70,17 +64,17 @@ public interface UserDetailInfoService {
      * @param sid the sid
      * @return the boolean true for success
      */
-     boolean deleteUsersByUsername(String sid);
+    boolean deleteUsersByUsername(String sid);
 
     /**
      * List all users list.
      *
      * @return the list
      */
-     List<DbUser> listAllUsers();
+    List<DbUser> listAllUsers();
 
 
-     List<UserDetailInfo> listAllUserDetailInfos();
+    List<UserDetailInfo> listAllUserDetailInfos();
 
     /**
      * Check users exists boolean.
@@ -88,7 +82,7 @@ public interface UserDetailInfoService {
      * @param u the u
      * @return the boolean
      */
-     boolean checkUsersExists(DbUser u);
+    boolean checkUsersExists(DbUser u);
 
     /**
      * Check users exists boolean.
@@ -96,7 +90,7 @@ public interface UserDetailInfoService {
      * @param userDetailInfo the user detail info
      * @return the boolean
      */
-     boolean checkUsersExists(UserDetailInfo userDetailInfo);
+    boolean checkUsersExists(UserDetailInfo userDetailInfo);
 
     /**
      * List auths list.
@@ -117,6 +111,7 @@ public interface UserDetailInfoService {
 
     /**
      * Check avatar for all users
+     *
      * @return
      */
     List<UserDetailInfo> checkAllUserDetailInfoAvatar();

@@ -9,14 +9,21 @@ import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -135,5 +142,24 @@ public class NewsPageManagementController {
     @ModelAttribute("NewsPage_list")
     public List<NewsPage> NewsPagelist() {
         return newsPageService.getAllNewsPage();
+    }
+
+    /**
+     * Init binder.
+     *
+     * @param binder the binder
+     * @throws ServletException the servlet exception
+     */
+    @InitBinder
+    protected void initBinder(
+            WebDataBinder binder) throws ServletException {
+        binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        dateFormat.setLenient(false);
+        dateFormat.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+//        binder.registerCustomEditor(CMSCategory.class,cmsCategoryEditor());
+//        binder.registerCustomEditor(Department.class,new DepartmentEditor());
     }
 }

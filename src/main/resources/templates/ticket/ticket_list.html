@@ -95,7 +95,6 @@
 
                             <input type="submit" id="submit" value="SUBMIT "/>
                         </form>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                     </div>
 
                 </div>
@@ -113,12 +112,13 @@
                     <tr>
                         <th class="table-checkbox"></th>
                         <!--<th>category</th>-->
-                        <th>title</th>
-                        <th>department</th>
-                        <th>devices</th>
-                        <th>author</th>
-                        <th>lastUpdateDate</th>
-                        <th>Operate</th>
+                        <th>标题</th>
+                        <th>部门</th>
+                        <th>设备</th>
+                        <th>作者</th>
+                        <th>修改日期</th>
+                        <th>已回复</th>
+                        <th>操作</th>
                         <th class="hidden">question</th>
                         <!--<th class="hidden">answer</th>-->
                     </tr>
@@ -132,6 +132,7 @@
                         <td th:text="${item?.devices?.devicename}">pc</td>
                         <td th:text="${item?.author?.username}">&euro;1000</td>
                         <td th:text="${#dates.format(item?.lastUpdateDate, 'dd-MM-yyyy')}">23-10-1980</td>
+                        <td th:text="${item?.resolved==true?'是':'否'}">dddd</td>
                         <td th:text="${item?.id}">dddd</td>
                         <td class="hidden" th:text="${item?.question}">1</td>
                         <!--<td class="hidden" th:text="${item?.answer}">1</td>-->
@@ -248,6 +249,7 @@
                     {"data": "devices.devicename"},
                     {"data": "author.username"},
                     {"data": "faq.lastUpdateDate"},
+                    {"data": "faq.resolved"},
                     {
                         "data": "id",
                         "render": function (data, type, full, meta) {
@@ -313,8 +315,8 @@
 
 
                 var sOut = '<div class="row">'
-                        + '<div class="col-md-5 col-sm-5 alert alert-bordered-dotted" style="margin: 10px"><label class="text-info "><b>问题</b></label><hr /><span>' + unescape_html(aData.question) + '</span></div>'
-                        + '<div class="col-md-6 col-sm-6 alert alert-bordered-dotted" style="margin: 10px"><label class="text-info "><b>回复</b></label><hr /><span>' + unescape_html(aData.answer) + '</span></div>'
+                        + '<div class="col-md-10 col-sm-10 alert alert-bordered-dotted" style="margin: 10px"><label class="text-info "><b>问题</b></label><hr /><span>' + unescape_html(aData.question) + '</span></div>'
+//                        + '<div class="col-md-6 col-sm-6 alert alert-bordered-dotted" style="margin: 10px"><label class="text-info "><b>回复</b></label><hr /><span>' + unescape_html(aData.answer) + '</span></div>'
                         + '</div>';
 
                 return sOut;

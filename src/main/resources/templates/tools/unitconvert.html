@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!--<script type="text/x-mathjax-config">-->
+    <!--/*<![CDATA[*/-->
+
+    <!--MathJax.Hub.Config({-->
+    <!--tex2jax: {inlineMath: [['$','$'], ['\\(','\\)'],]}-->
+    <!--});-->
+
+    <!--/*]]>*/-->
+    <!--</script>-->
+    <style>
+        .inputtext {
+            border: #ddd 2px solid;
+            width: 45%;
+        }
+
+        #resultBox {
+            border: #333 2px dashed;
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+
+        .factor {
+            ime-mode: Disabled;
+        }
+    </style>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <!--http://127.0.0.1/goget/test-upload-->
+    <div>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li class="active">单位换算</li>
+        </ol>
+        <!-- breadcrumbs -->
+        <h1 class="blog-post-title" th:text="${news?.title}">BLOG POST TITLE HERE</h1>
+
+    </div>
+
+
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <h3>分子区(numerator)</h3>
+
+            <div id="numeratorDiv">
+                <div class="row">
+                    <label class="col-md-4 col-sm-4">从（单位）转换到（单位）</label>
+                    <label class="col-md-4 col-sm-4">比值</label>
+                    <label class="col-md-4 col-sm-4">即</label>
+                </div>
+                <div class="row origin">
+                    <div class="col-md-4 col-sm-4">
+                        <input type="text" class="inputtext unit numerator from"/>
+                        <a onclick="switchFromTo(this)"><i class="fa fa-exchange"></i></a>
+                        <input type="text" class="inputtext unit numerator to"/>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <input type="text" class="inputtext numerator factor fromFactor"/>:
+                        <input type="text" class="inputtext numerator factor toFactor"/>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="numerator show"> </span>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="addNumerator" class="btn btn-primary">新增一行分子</button>
+            <button type="button" id="delNumerator" class="btn btn-primary">删除一行分子</button>
+        </div>
+
+
+        <hr/>
+        <div>
+            <div class="row">
+                <h3>分母区(denominator)</h3>
+
+                <div id="denominatorDiv">
+                    <div class="row">
+                        <label class="col-md-4 col-sm-4">从（单位）转换到（单位）</label>
+                        <label class="col-md-4 col-sm-4">比值</label>
+                        <label class="col-md-4 col-sm-4">即</label>
+                    </div>
+                    <div class="row origin2">
+                        <div class="col-md-4 col-sm-4">
+                            <input type="text" class="inputtext unit denominator from"/>
+                            <a onclick="switchFromTo(this)"><i class="fa fa-exchange"></i></a>
+                            <input type="text" class="inputtext unit denominator to"/>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <input type="text" class="inputtext denominator factor fromFactor"/>:
+                            <input type="text" class="inputtext denominator factor toFactor"/>
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <span class="denominator show"> </span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="addDenominator" class="btn btn-primary">新增一行分母</button>
+                <button type="button" id="delDenominator" class="btn btn-primary">删除一行分母</button>
+            </div>
+        </div>
+        <div>
+            <p></p>
+            <h4>说明:</h4>
+            <ol>
+                <li>
+                    分子区，填写单位中分子部分，分母区填写单位中分母部分<br/>
+                    如g/m2.24h转换为g/ft2.h,则分子区填写g,分母区新增一行，一行填写m2，一行填写24h
+                </li>
+                <li>
+                    每行前两个文本框填写单位名称，如 m，mm，后两个文本框填写两个单位的比值，<br/>
+                    一般常用单位，在填写完单位后，自动识别填写内容并增加比值<br/>
+                    如上例,分子区填写 g,g，自动识别出比值。<br/>
+                    分母区新增一行，第一行填写m2，ft2，自动识别出比值。<br/>
+                    第二行填写24h，h，比值填写1,24
+                </li>
+                <li>
+                    填写完成后，自动在右侧出现结果。
+                </li>
+                <li>
+                    每行单位文本框中间的<i class="fa fa-exchange"></i>符号，用于切换两个单位位置。
+                </li>
+
+            </ol>
+        </div>
+
+    </div>
+    <div class="col-md-4 col-sm-4" id="resultBox">
+        <h4>结果为：</h4>
+        <div id="resultShow"></div>
+        <p></p>
+        <p></p>
+        <!--<button type="button" id="test01" class="btn btn-primary">test01</button>-->
+    </div>
+    <script>
+
+        const distance = {
+            mm: 1,
+            cm: 10,
+            dm: 100,
+            m: 1000,
+            km: 1.0e6,
+            um: 1.0e-3,
+            nm: 1.0e-6,
+            mi: 1609344,
+            mile: 1609344,
+            yard: 914.4,
+            yd: 914.4,
+            foot: 304.8,
+            ft: 304.8,
+            inch: 25.4,
+            'in': 25.4,
+        };
+        const weight = {
+            g: 1,
+            kg: 1000,
+            mg: 1.0e-6,
+            ug: 1.0e-6,
+            t: 1.0e6,
+            lb: 453.59237,
+            ounce: 28.3485231,
+            oz: 28.3485231,
+        };
+        const force = {
+            n: 1,
+            dyne: 1.0e-5,
+            kgf: 9.80665,
+            kg: 9.80665,
+            lbf: 4.44822162,
+        };
+        const area = {
+            mm2: 1,
+            km2: 1.0e12,
+            m2: 1.0e6,
+            cm2: 100,
+            dm2: 1.0e4,
+            yd2: 836127.36,
+            in2: 645.16,
+            ft2: 92903.04,
+            mi2: 2589988110336,
+        };
+        const volume = {
+            l: 1,
+            km3: 1.0e12,
+            m3: 1000,
+            dm3: 1,
+            dl: 0.1,
+            cl: 0.01,
+            cm3: 1.0e-3,
+            ml: 1.0e-3,
+            mm3: 1.0e-6,
+            ul: 1.0e-6,
+            gal: 3.78540967, //美制
+            yd3: 764.55463546,
+            ft3: 28.31683594,
+            qt: 0.94635313,
+            pt: 0.47317657,
+            in3: 0.01638706,
+            oz: 0.02957353,
+        };
+        const time = {
+            s: 1,
+            sec: 1,
+            second: 1,
+            m: 60,
+            min: 60,
+            minute: 60,
+            h: 3600,
+            hr: 3600,
+            hour: 3600,
+            d: 86400,
+            day: 86400,
+            '24h': 86400,
+            ms: 0.001,
+        };
+        const pressure = {
+            pa: 1,
+            kpa: 1000,
+            atm: 101325,
+            mmhg: 133.322368,
+            bar: 100000,
+            mb: 100,
+            inhg: 3386.38866667,
+            fthg: 40636.664,
+            psi: 6894.75728,
+            torr: 133.322368,
+            at: 98066.5,
+            mpa: 1.0e6,
+            '0.1mpa': 1.0e5,
+
+
+        };
+        const dataSource = {
+            distance, weight, force, area, volume, time, pressure
+        };
+
+
+        $("#addNumerator").click(e => {
+            let numerator = $("#numeratorDiv");
+            var line = $(".origin");
+            numerator.append(line.clone().removeClass("origin").addClass("copy"));
+        });
+        $("#delNumerator").click(e => {
+            if ($(".copy").length > 0) {
+                $("#numeratorDiv").children().last().remove();
+                calculate();
+            }
+        });
+        $("#addDenominator").click(e => {
+            let numerator = $("#denominatorDiv");
+            var line = $(".origin2");
+            numerator.append(line.clone().removeClass("origin2").addClass("copy2"));
+        });
+        $("#delDenominator").click(e => {
+            if ($(".copy2").length > 0) {
+                $("#denominatorDiv").children().last().remove();
+                calculate();
+            }
+        });
+        //        $("#test01").click(e => {
+        //            $("#resultShow").append("When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$");
+        //        });
+
+        $(document).delegate(".inputtext", "change blur", (e) => {
+            calculate();
+        });
+        $(document).delegate(".unit", "change blur", (event) => {
+            autoFactor(event.target);
+        });
+
+        $(document).delegate(".factor", "change blur keypress", (e) => {
+            let values = $(".factor");
+            values.each((i, e) => {
+                let value = $(e).val();
+                value = value.replace(/[^\d.e\+\-]+/g, '');
+                value = value.replace(/(\d*\.\d+)(\..*)/gm, '$1')
+                $(e).val(value);
+            })
+        });
+
+        function autoFactor(target) {
+            var target = $(target);
+            let from = target.parent().parent().find(".from");
+            let to = target.parent().parent().find(".to");
+            // 将 "  cm^3  "转换成"cm3"
+            let fromV = from.val().toLowerCase().replace(/[\^\s]/g, '');
+            let toV = to.val().toLowerCase().replace(/[\^\s]/g, '');
+            if (fromV === '' || toV === '') {
+//                console.log("两框未满");
+                return;
+            }
+            Object.values(dataSource).forEach((e) => {
+                if (e[fromV] !== undefined && e[toV] !== undefined) {
+//                    console.log("found pair!");
+                    let fromF = target.parent().parent().find(".fromFactor");
+                    let toF = target.parent().parent().find(".toFactor");
+                    fromF.val('1');
+                    toF.val((e[fromV] / e[toV]).toExponential(6));
+                }
+//                console.log('not found!');
+            })
+        }
+
+        /**
+         * 判断该条是否有数据
+         * @param obj
+         */
+        function isReady(obj) {
+            return (!(obj.from === "" || obj.to === "" || obj.fromF === 0 || obj.toF === 0 || obj.factor === NaN));
+        }
+
+        function switchFromTo(obj) {
+            let from = $(obj).parent().parent().find(".from");
+            let to = $(obj).parent().parent().find(".to");
+            let fromF = $(obj).parent().parent().find(".fromFactor");
+            let toF = $(obj).parent().parent().find(".toFactor");
+            let mvalue = from.val();
+            from.val(to.val());
+            to.val(mvalue);
+            mvalue = fromF.val();
+            fromF.val(toF.val());
+            toF.val(mvalue);
+            calculate();
+        }
+
+        function calculate() {
+            var numeratorFrom = $(".numerator.from");
+            var numeratorTo = $(".numerator.to");
+            var numeratorFromFactor = $(".numerator.fromFactor");
+            var numeratorToFactor = $(".numerator.toFactor");
+            var numeratorShow = $(".numerator.show");
+
+            var denominatorFrom = $(".denominator.from");
+            var denominatorTo = $(".denominator.to");
+            var denominatorFromFactor = $(".denominator.fromFactor");
+            var denominatorToFactor = $(".denominator.toFactor");
+            var denominatorShow = $(".denominator.show");
+
+            var numeratorLength = numeratorFrom.length;
+            var denominatorLength = denominatorFrom.length;
+            var dataholder = [];
+            var dataholder2 = [];
+            for (let i = 0; i < numeratorLength; i++) {
+                let obj = {
+                    from: numeratorFrom.eq(i).val(),
+                    to: numeratorTo.eq(i).val(),
+                    fromF: Number(numeratorFromFactor.eq(i).val()),
+                    toF: Number(numeratorToFactor.eq(i).val()),
+                    show: '',
+                    factor: 1,
+                };
+                obj.factor = obj.toF / obj.fromF;
+                obj.show = '1 ' + obj.from + ' = ' + obj.factor + ' ' + obj.to;
+                numeratorShow.eq(i).text(obj.show);
+                if (isReady(obj)) {
+                    dataholder.push(obj);
+                }
+            }
+            for (let i = 0; i < denominatorLength; i++) {
+                let obj = {
+                    from: denominatorFrom.eq(i).val(),
+                    to: denominatorTo.eq(i).val(),
+                    fromF: Number(denominatorFromFactor.eq(i).val()),
+                    toF: Number(denominatorToFactor.eq(i).val()),
+                    show: '',
+                    factor: 1,
+                };
+                obj.factor = obj.toF / obj.fromF;
+                obj.show = '1 ' + obj.from + ' = ' + obj.factor + ' ' + obj.to;
+                denominatorShow.eq(i).text(obj.show);
+                if (isReady(obj)) {
+                    dataholder2.push(obj);
+                }
+            }
+            var res = generateUnit(dataholder, dataholder2);
+            if (res === null) {
+                return;
+            }
+            var node = $("<pre></pre>").append(`1 ${res.from} = ${res.factor.toExponential(6)} ${res.to} `);
+            var node2 = $("<pre></pre>").append(`1 ${res.to} = ${(1 / res.factor).toExponential(6)} ${res.from} `);
+            $('#resultShow').empty().append(node);
+            $('#resultShow').append(node2);
+        }
+        function generateUnit(dataholder, dataholder2) {
+            if (dataholder.length > 0) {
+                let UnitFrom = '';
+                let UnitTo = '';
+                let factor = 1;
+                for (let i = 0; i < dataholder.length; i++) {
+                    UnitFrom = UnitFrom + dataholder[i].from + '.';
+                    UnitTo = UnitTo + dataholder[i].to + '.';
+                    factor = factor * dataholder[i].factor;
+                }
+                UnitFrom = UnitFrom.substr(0, UnitFrom.length - 1);
+                UnitTo = UnitTo.substr(0, UnitTo.length - 1);
+                if (dataholder2.length > 0) {
+                    UnitFrom = UnitFrom + ' / ';
+                    UnitTo = UnitTo + ' / ';
+                    for (let i = 0; i < dataholder2.length; i++) {
+                        UnitFrom = UnitFrom + dataholder2[i].from + '.';
+                        UnitTo = UnitTo + dataholder2[i].to + '.';
+                        factor = factor / dataholder2[i].factor;
+                    }
+                    UnitFrom = UnitFrom.substr(0, UnitFrom.length - 1);
+                    UnitTo = UnitTo.substr(0, UnitTo.length - 1);
+                }
+                return {
+                    from: UnitFrom,
+                    to: UnitTo,
+                    factor: factor,
+                }
+
+            } else {
+                return null;
+            }
+        }
+
+
+    </script>
+
+</div>
+
+</body>
+</html>

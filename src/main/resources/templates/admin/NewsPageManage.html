@@ -12,10 +12,10 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>NewsPage管理</h1>
+        <h1>新闻公告管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
-            <li>支持属性管理</li>
+            <li>信息发布管理</li>
             <li class="active">新闻公告管理</li>
         </ol>
     </header>
@@ -71,8 +71,15 @@
                                            placeholder="新闻标题" minlength="2" required="true" class="form-control "/>
                                     <b class="tooltip tooltip-bottom-right">输入新闻公告标题</b>
                                 </label>
+
                                 <label class="input">
-                                    <i class="icon-append fa fa-key"></i>
+                                    <i class="icon-append fa fa-clock-o"></i>
+                                    <input type="text" id="showDate" name="showDate"
+                                           class="form-control datepicker required date" data-format="yyyy-mm-dd" data-lang="en"
+                                           data-RTL="false" readonly="true" />
+                                    <b class="tooltip tooltip-bottom-right">输入公告发布时间</b>
+                                </label>
+                                <label class="input">
                                     <textarea id="infoText" name="infoText" class="summernote form-control required" data-height="400" data-lang="en-US">新闻公告内容</textarea>
                                     <b class="tooltip tooltip-bottom-right">输入新闻公告内容</b>
                                 </label>

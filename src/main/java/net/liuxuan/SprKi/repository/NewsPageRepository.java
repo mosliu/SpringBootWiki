@@ -23,10 +23,14 @@ public interface NewsPageRepository extends JpaRepository<NewsPage, Long>, JpaSp
 //    List<NewsPage> findByNewsPageName(String  name);
 //    List<NewsPage> findByNewsPageNameNot(String  NotName);
     List<NewsPage> findByDisabledFalse();
+    List<NewsPage> findByDisabledFalseOrderByShowDateDesc();
 
     List<NewsPage> findTop20ByDisabledFalseOrderByLastUpdateDateDesc();
+    List<NewsPage> findTop20ByDisabledFalseOrderByShowDateDesc();
+    List<NewsPage> findTop20ByDisabledFalseOrderByShowDateDescLastUpdateDateDesc();
 
     Page<NewsPage> findAllByDisabledFalseOrderByLastUpdateDateDesc(Pageable pageable);
+    Page<NewsPage> findAllByDisabledFalseOrderByShowDateDesc(Pageable pageable);
 //    List<NewsPage> findByNewsPageNameNotOrderByNewsPageName(String roleNotName);
 
 }

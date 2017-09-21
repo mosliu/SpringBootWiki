@@ -1,6 +1,7 @@
 package net.liuxuan.SprKi.controller.admin;
 
 import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -62,5 +66,13 @@ public class AdminController {
 //        return "admin/profile :: middle";
     }
 
-
+    @RequestMapping("userisadmin")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public void getPages(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
+        Map<String,Object> map = new HashMap<>();
+        map.put("admin",true);
+        map.put("authtype",request.getAuthType());
+        ResponseHelper.writeMapToResponseAsJson(response,map);
+////
+    }
 }

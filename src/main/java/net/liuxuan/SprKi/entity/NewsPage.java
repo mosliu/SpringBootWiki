@@ -4,11 +4,14 @@ package net.liuxuan.SprKi.entity;
 import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Indexed;
+
+import java.util.Date;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -36,4 +39,15 @@ public class NewsPage extends CMSContent{
     String picStr;
     @Column(nullable = true,length=250)
     String picType;
+
+    @Column(columnDefinition = "TIMESTAMP",nullable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    Date showDate;
+
+    public Date getShowDate(){
+        if(showDate==null){
+            return publishDate;
+        }
+        return showDate;
+    }
 }

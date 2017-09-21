@@ -64,6 +64,7 @@ public class MessageController {
         return content.substring(0, Math.min(900, content.length()));
     }
 
+    //获取发送短消息界面
     @RequestMapping(value = "/msg/new", method = RequestMethod.GET)
     public String getMsg(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
@@ -179,7 +180,7 @@ public class MessageController {
 //        model.put("messageList", messageList);
         model.put("datas", messageList);
 
-        List<TicketContent> assignedTo = ticketContentService.findAllTicketContentsAssignedTo(SystemHelper.getCurrentUserDetailInfo());
+        List<TicketContent> assignedTo = ticketContentService.findAllTicketContentsAssignedTo(SystemHelper.getCurrentUserDetailInfo(),false);
         model.put("assignedTicket",assignedTo);
 
         return "message/msg_list";
