@@ -58,6 +58,9 @@ public class UploadFileController {
     @Value("${SprKi.upload.accesspath}")
     private String picAccessPath;
 
+    @Value("${SprKi.upload.videoPath}")
+    private String videoPath;
+
     @Autowired
     private ObjectMapper objectMapper;
     /**
@@ -217,6 +220,35 @@ public class UploadFileController {
         }
 
         if (filePathList.size() == 0) {
+            //return "系统错误";
+        }
+        ResponseHelper.writeObjectToResponseAsJson(response,filePathList);
+    }
+
+    /**
+     * Uploadifive 对应的
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/uploadVideos",method = RequestMethod.POST)
+    @ResponseBody
+    public void uploadVideos(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        Calendar calendar = Calendar.getInstance();
+        List<String> filePathList =null;
+        String filePath = videoPath + "/";
+        String filePathUrl = picAccessPath  + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH);
+        filePath = filePath + File.separatorChar + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH);
+        try {
+            filePathList = FileUploadUtil.uploadRestricedFile(request, filePath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        if (filePathList==null||filePathList.size() == 0) {
             //return "系统错误";
         }
         ResponseHelper.writeObjectToResponseAsJson(response,filePathList);

@@ -208,6 +208,8 @@
 		<level name="Maven: javax.transaction:jta:1.1" value="project"/>
 		<level name="Maven: org.quartz-scheduler:quartz:2.2.2" value="project"/>
 		<level name="Maven: c3p0:c3p0:0.9.1.1" value="project"/>
+		<level name="Maven: org.dom4j:dom4j:2.1.0" value="project"/>
+		<level name="Maven: jaxen:jaxen:1.1.6" value="project"/>
 		<level name="Maven: com.sun.mail:javax.mail:1.5.6" value="project"/>
 		<level name="Maven: javax.activation:activation:1.1" value="project"/>
 		<level name="Maven: com.itextpdf.tool:xmlworker:5.5.11" value="project"/>

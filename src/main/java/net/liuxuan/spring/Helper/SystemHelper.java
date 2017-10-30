@@ -212,6 +212,11 @@ public final class SystemHelper {
         return getCurrentUsersFromDb();
     }
 
+    public static String GetCurrentUserName(){
+        return ((User) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal()).getUsername();
+    }
+
     public static DbUser getCurrentUsersFromDb() {
         User ui = (User) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();

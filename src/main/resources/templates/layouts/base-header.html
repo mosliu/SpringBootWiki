@@ -114,12 +114,21 @@
                     </li>
 
                     <li class="dropdown">
+                        <a class="dropdown-toggle" href="#"><span class="fa fa-video-camera"></span>支持</a>
+                        <ul class="dropdown-menu">
+                            <!--<li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>-->
+                            <li><a href="#" th:href="@{/video/list}"><span class="fa fa-video-camera"></span>视频</a></li>
+                            <li><a href="/info" th:href="@{/info}" target="_blank">行业信息搜集系统</a></li>
+                            <li><a href="http://192.168.7.202:5000" target="_blank">在线文件管理</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
                         <a class="dropdown-toggle" href="#"><span class="fa fa-wrench"></span>工具</a>
                         <ul class="dropdown-menu">
                             <!--<li><a  href="/tools" th:href="@{/tools}">工具汇总</a></li>-->
-                            <li><a href="/info" th:href="@{/info}" target="_blank">行业信息搜集系统</a></li>
                             <li><a href="/tools/unitconv" th:href="@{/tools/unitconv}">单位转换工具</a></li>
-                            <li><a href="/tools/unitconv2" th:href="@{/tools/unitconv2}">单位变换</a></li>
+                            <li><a href="/tools/unitconv2" th:href="@{/tools/unitconv2}">组合单位变换</a></li>
                             <li><a href="/tools/formula/vacuum" th:href="@{/tools/formula/vacuum}">压差法数据计算工具</a></li>
                             <li><a href="/tools/formula/weight" th:href="@{/tools/formula/weight}">重量法数据计算工具</a></li>
                             <li><a href="/tools/OCR" th:href="@{/tools/OCR}">OCR工具</a></li>

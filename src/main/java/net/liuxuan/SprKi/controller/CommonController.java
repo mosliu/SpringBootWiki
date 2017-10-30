@@ -160,6 +160,8 @@ public class CommonController {
 
     }
 
+
+
     /**
      * 为所有的用户加上头像
      *

@@ -28,6 +28,14 @@ import java.util.Map;
 public class FileUploadUtil {
     private static Logger log =  LoggerFactory.getLogger(FileUploadUtil.class);
 
+    /**
+     * 上传文件处理
+     * @param request request 对象
+     * @param filePath 文件路径
+     * @param filePathUrl 文件URL访问地址
+     * @return 列表 内容为URL访问地址
+     * @throws FileNotFoundException
+     */
     public static List<String> uploadFile(HttpServletRequest request, String filePath, String filePathUrl) throws FileNotFoundException {
         List<String> filePathList = new ArrayList<String>();
 
@@ -42,8 +50,6 @@ public class FileUploadUtil {
             String newfilepath;
             newfilepath = filePath + File.separatorChar + fileName;
 
-
-            System.out.println("newfilepath=" + newfilepath);
             File dest = new File(filePath);
             if (!dest.exists()) {
                 dest.mkdirs();
@@ -57,9 +63,8 @@ public class FileUploadUtil {
                 log.info("start upload file: " + fileName);
                 FileCopyUtils.copy(mf.getBytes(), uploadFile);
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 // e.printStackTrace();
-                log.info("upload failed. filename: " + fileName + e.getMessage());
+                log.error("upload failed. filename: " + fileName + e.getMessage());
                 return null;
             }
             filePathList.add(filePathUrl+"/"+fileName);
@@ -67,4 +72,49 @@ public class FileUploadUtil {
 
         return filePathList;
     }
+
+    /**
+     * 上传非URL直接访问的文件处理
+     * @param request request 对象
+     * @param filePath 文件路径
+     * @return 列表 内容为URL访问地址
+     * @throws FileNotFoundException
+     */
+    public static List<String> uploadRestricedFile(HttpServletRequest request, String filePath) throws FileNotFoundException {
+        List<String> filePathList = new ArrayList<String>();
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        String fileName = null;
+        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
+
+            MultipartFile mf = entity.getValue();
+            fileName = mf.getOriginalFilename();
+            String newfilepath;
+            newfilepath = filePath + File.separatorChar + fileName;
+
+            //check directory exists
+            File dest = new File(filePath);
+            if (!dest.exists()) {
+                dest.mkdirs();
+            }
+            //overwrite dest file
+            File uploadFile = new File(newfilepath);
+            if (uploadFile.exists()) {
+                uploadFile.delete();
+            }
+            try {
+                log.info("start upload file: " + fileName);
+                FileCopyUtils.copy(mf.getBytes(), uploadFile);
+            } catch (IOException e) {
+                log.error("upload failed. filename: " + fileName + e.getMessage());
+                return null;
+            }
+            filePathList.add(newfilepath);
+        }
+
+        return filePathList;
+    }
+
 }

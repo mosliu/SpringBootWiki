@@ -59,8 +59,8 @@ spring:
     converters:
       preferred-json-mapper: gson
     multipart:
-      max-file-size: 80Mb
-      max-request-size: 100Mb
+      max-file-size: 200Mb
+      max-request-size: 400Mb
 
   thymeleaf:
     cache: false
@@ -244,6 +244,8 @@ SprKi:
     backupattachpath: d:/backup/attachments/
     #受限文件存储位置
     restrictedpath: d:/restrictedFiles
+    #视频上传位置
+    videoPath: d:/restrictedFiles
   editor:
     acl: ROLE_USER
   ticket:
