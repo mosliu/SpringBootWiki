@@ -88,8 +88,8 @@ public class CMSContentTagsManagementController {
         switch (_dto.action) {
             case "add":
                 String cMSContentTagsName = request.getParameter("cMSContentTagsName");
-                String cMSContentTagsNameCN = request.getParameter("cMSContentTagsNameCN");
-                String comment = request.getParameter("comment");
+//                String cMSContentTagsNameCN = request.getParameter("cMSContentTagsNameCN");
+//                String comment = request.getParameter("comment");
                 boolean cMSContentTagsExists = cMSContentTagsService.checkCMSContentTagsExists(cMSContentTagsName);
                 if (cMSContentTagsExists) {
                     log.info("===cMSContentTagsManageAjax logged ,添加CMSContentTags已存在 : {}");

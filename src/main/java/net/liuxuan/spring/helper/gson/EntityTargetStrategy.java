@@ -40,7 +40,7 @@ public class EntityTargetStrategy implements ExclusionStrategy {
 //        log.debug("filtered field:{}.isInstance(int.class)  :{}",f, c.isInstance(int.class));
 //        log.debug("filtered field:{}.isInstance(String.class)  :{}",f, c.isInstance(String.class));
 
-        if(c.equals(List.class)||c.equals(Set.class)){
+        if (c.equals(List.class) || c.equals(Set.class)) {
 //            log.debug("return true");
             return true;
         }

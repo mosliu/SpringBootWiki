@@ -88,8 +88,8 @@ public class CMSVideoManagementController {
         switch (_dto.action) {
             case "add":
                 String cmsVideoName = request.getParameter("cmsVideoName");
-                String cmsVideoFilepath = request.getParameter("cmsVideoFilepath");
-                String comment = request.getParameter("comment");
+//                String cmsVideoFilepath = request.getParameter("cmsVideoFilepath");
+//                String comment = request.getParameter("comment");
                 boolean cMSVideoExists = cMSVideoService.checkCMSVideoExists(cmsVideoName);
                 if (cMSVideoExists) {
                     log.info("===cMSVideoManageAjax logged ,添加CMSVideo已存在 : {}");

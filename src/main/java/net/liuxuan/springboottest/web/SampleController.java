@@ -140,12 +140,11 @@ public class SampleController {
     @RequestMapping(value = "dp4", produces = "application/json")
     public void ajaxIndex(HttpServletRequest request, HttpServletResponse response, ModelAndView modelAndView) throws IOException {
         //获取请求次数
-        String draw = "0";
-        draw = request.getParameter("draw");
+        String draw = request.getParameter("draw");
         //数据起始位置
-        String start = request.getParameter("start");
+//        String start = request.getParameter("start");
         //数据长度
-        String length = request.getParameter("length");
+//        String length = request.getParameter("length");
 
         //总记录数
         String recordsTotal = "500";
@@ -153,14 +152,14 @@ public class SampleController {
         //过滤后记录数
         String recordsFiltered = "";
         //定义列名
-        String[] cols = {"id", "LastName", "FirstName", "City", "Mail", "salary", "BirthDate", "Company"};
+//        String[] cols = {"id", "LastName", "FirstName", "City", "Mail", "salary", "BirthDate", "Company"};
         //获取客户端需要那一列排序
-        String orderColumn = "0";
+//        String orderColumn = "0";
 //		orderColumn = request.getParameter("order[0][column]");
 //		orderColumn = cols[Integer.parseInt(orderColumn)];
         //获取排序方式 默认为asc
-        String orderDir = "asc";
-        orderDir = request.getParameter("order[0][dir]");
+//        String orderDir = "asc";
+//        orderDir = request.getParameter("order[0][dir]");
 
         //获取用户过滤框里的字符
         String searchValue = request.getParameter("search[value]");
@@ -177,15 +176,15 @@ public class SampleController {
         List rtnlist = new ArrayList();
 //        Map<String,Object> data = new LinkedHashMap<String, Object>();
         for (Person person : personList) {
-            Map<String,Object> data1 = new LinkedHashMap<String, Object>();
-            data1.put("Id",person.getId());
-            data1.put("LastName",person.getLastName());
-            data1.put("FirstName",person.getFirstName());
-            data1.put("City",person.getAddress().getTown().getName());
-            data1.put("Mail",person.getMail());
-            data1.put("Salary",person.getSalary());
-            data1.put("BirthDate",person.getBirthDate());
-            data1.put("Company",person.getCompany().getName());
+            Map<String, Object> data1 = new LinkedHashMap<String, Object>();
+            data1.put("Id", person.getId());
+            data1.put("LastName", person.getLastName());
+            data1.put("FirstName", person.getFirstName());
+            data1.put("City", person.getAddress().getTown().getName());
+            data1.put("Mail", person.getMail());
+            data1.put("Salary", person.getSalary());
+            data1.put("BirthDate", person.getBirthDate());
+            data1.put("Company", person.getCompany().getName());
             rtnlist.add(data1);
         }
 //        for (Person person : personList) {
@@ -201,7 +200,7 @@ public class SampleController {
 //            rtnlist.add(list);
 //        }
 
-		Map<Object, Object> modelMap = new HashMap<Object, Object>();
+        Map<Object, Object> modelMap = new HashMap<>();
 //        ModelMap modelMap = modelAndView.getModelMap();
         modelMap.put("data", rtnlist);
         modelMap.put("recordsTotal", recordsTotal);
@@ -213,7 +212,7 @@ public class SampleController {
         String json = gson.toJson(modelMap);
 
 
-		response.getWriter().write(json);
+        response.getWriter().write(json);
         modelAndView.setViewName("test/test");
 
 //		log.info("draw:{},start:{},length:{},search:{}",draw,start,length,search);

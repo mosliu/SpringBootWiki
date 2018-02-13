@@ -79,7 +79,7 @@ public class CMSCategoryManagementController {
     public void cmsCategoryManageAjax(@ModelAttribute("dto") BaseDTO _dto, CMSCategory _cmsCategory, HttpServletRequest request,
                                       HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
-        Map<String, Object> rtnData = new HashMap<String, Object>();
+        Map<String, Object> rtnData = new HashMap<>();
         log.info("===cmsCategoryManageAjax logged ,the value is : {}", _dto.toString());
         Long id = _dto.getStr2LongID();
 
@@ -89,8 +89,8 @@ public class CMSCategoryManagementController {
         switch (_dto.action) {
             case "add":
                 String cmsCategoryName = request.getParameter("cmsCategoryName");
-                String cmsCategoryNameCN = request.getParameter("cmsCategoryNameCN");
-                String comment = request.getParameter("comment");
+//                String cmsCategoryNameCN = request.getParameter("cmsCategoryNameCN");
+//                String comment = request.getParameter("comment");
                 boolean cmsCategoryExists = cmsCategoryService.checkCMSCategoryExists(cmsCategoryName);
                 if (cmsCategoryExists) {
                     log.info("===cmsCategoryManageAjax logged ,添加CMSCategory已存在 : {}");

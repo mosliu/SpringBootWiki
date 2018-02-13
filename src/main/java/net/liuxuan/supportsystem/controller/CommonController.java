@@ -121,7 +121,7 @@ public class CommonController {
         String path = request.getParameter("file");
         path = restrictedFilePath +'/'+path;
         File f = new File(path);
-        String rtn;
+        String rtn =null;
         if(f.exists()&&(!f.isDirectory())){
             rtn = path;
         }else{

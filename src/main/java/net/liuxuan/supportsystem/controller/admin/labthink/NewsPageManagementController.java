@@ -95,9 +95,9 @@ public class NewsPageManagementController {
 //        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
-                String newsPageName = request.getParameter("newsPageName");
-                String newsPageNameCN = request.getParameter("newsPageNameCN");
-                String comment = request.getParameter("comment");
+//                String newsPageName = request.getParameter("newsPageName");
+//                String newsPageNameCN = request.getParameter("newsPageNameCN");
+//                String comment = request.getParameter("comment");
 //                boolean newsPageExists = newsPageService.checkNewsPageExists(newsPageName);
                 boolean newsPageExists = false;
                 if (newsPageExists) {

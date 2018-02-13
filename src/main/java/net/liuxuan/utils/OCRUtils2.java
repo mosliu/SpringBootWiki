@@ -46,7 +46,7 @@ public class OCRUtils2 {
         JSONObject genRes = client.basicGeneral(genFilePath, new HashMap<String, String>());
         System.out.println(genRes.toString(2));
 
-        String genFilePath2 = "d:/bbbbb.jpg";
+//        String genFilePath2 = "d:/bbbbb.jpg";
 //        JSONObject genRes2 = client.tableRecognitionAsync(genFilePath2);
         // res为使用tableRecognitionAsync接口的json返回值
 //        String reqId = genRes2.getJSONArray("result").getJSONObject(0).getString("request_id");

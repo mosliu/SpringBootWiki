@@ -89,8 +89,8 @@ public class ProjectProgressManagementController {
         switch (_dto.action) {
             case "add":
                 String projectProgressName = request.getParameter("projectProgressName");
-                String projectProgressNameCN = request.getParameter("projectProgressNameCN");
-                String comment = request.getParameter("comment");
+//                String projectProgressNameCN = request.getParameter("projectProgressNameCN");
+//                String comment = request.getParameter("comment");
                 boolean projectProgressExists = projectProgressService.checkProjectProgressExists(projectProgressName);
                 if (projectProgressExists) {
                     log.info("===projectProgressManageAjax logged ,添加ProjectProgress已存在 : {}");

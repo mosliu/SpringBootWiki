@@ -190,7 +190,7 @@ TicketController {
         UserDetails userDetails = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
 //        DbUser u = usersRepository.findOne(userDetails.getUsername());
 //        UserDetailInfo udi = userDetailInfoRepository.findByDbUser(u);
-        UserDetailInfo udi = userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
+//        UserDetailInfo udi = userDetailInfoService.findUserDetailInfoByUsername(userDetails.getUsername());
 
 
         model.put("title", "问题提交完成，我们将尽快对问题跟进整理！");

@@ -87,9 +87,9 @@ public class CMSCommentManagementController {
 //        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
         switch (_dto.action) {
             case "add":
-                String cMSCommentName = request.getParameter("cMSCommentName");
-                String cMSCommentNameCN = request.getParameter("cMSCommentNameCN");
-                String comment = request.getParameter("comment");
+//                String cMSCommentName = request.getParameter("cMSCommentName");
+//                String cMSCommentNameCN = request.getParameter("cMSCommentNameCN");
+//                String comment = request.getParameter("comment");
 //                boolean cMSCommentExists = cMSCommentService.checkCMSCommentExists(cMSCommentName);
 //                if (cMSCommentExists) {
 //                    log.info("===cMSCommentManageAjax logged ,添加CMSComment已存在 : {}");

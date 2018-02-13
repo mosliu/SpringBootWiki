@@ -232,7 +232,7 @@ public class UploadFileController {
         Calendar calendar = Calendar.getInstance();
         List<String> filePathList =null;
         String filePath = videoPath + "/";
-        String filePathUrl = picAccessPath  + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH);
+//        String filePathUrl = picAccessPath  + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH);
         filePath = filePath + File.separatorChar + calendar.get(Calendar.YEAR) + calendar.get(Calendar.MONTH);
         try {
             filePathList = FileUploadUtil.uploadRestricedFile(request, filePath);

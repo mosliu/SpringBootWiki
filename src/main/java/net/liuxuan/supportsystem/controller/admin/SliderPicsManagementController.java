@@ -127,8 +127,8 @@ public class SliderPicsManagementController {
         switch (_dto.action) {
             case "add":
                 String sliderPicsName = request.getParameter("sliderPicsName");
-                String sliderPicsNameCN = request.getParameter("sliderPicsNameCN");
-                String comment = request.getParameter("comment");
+//                String sliderPicsNameCN = request.getParameter("sliderPicsNameCN");
+//                String comment = request.getParameter("comment");
                 boolean sliderPicsExists = sliderPicsService.checkSliderPicsExists(sliderPicsName);
                 if (sliderPicsExists) {
                     log.info("===sliderPicsManageAjax logged ,添加SliderPics已存在 : {}");

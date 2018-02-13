@@ -81,7 +81,7 @@ public class ApplicationMain extends SpringBootServletInitializer {
 
 //        SpringApplication.run(ApplicationMain.class, args);
 
-        log.info("\r\n==============\r\nApplication Started\n==============");
+        log.info("\r\n==============\r\nApplication"+ctx.getApplicationName()+" Started\n==============");
 
         mainTest();
 //

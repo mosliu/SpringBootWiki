@@ -93,8 +93,8 @@ public class DeviceController {
 
         TargetStrategy ts_devicekind = new TargetStrategy(DeviceKind.class);
         //这里表示仅转换DeviceKind中的id和DeviceKindname属性
-        ts_devicetype.setFields(new String[] {"id", "deviceKindName"});
-        ts_devicetype.setReverse(true);
+        ts_devicekind.setFields(new String[] {"id", "deviceKindName"});
+        ts_devicekind.setReverse(true);
 
 
 //        Gson j = EntityGsonHelper.goGsonBuilder(Devices.class).setExclusionStrategies(ts_devicetype,ts_devicekind).create();
