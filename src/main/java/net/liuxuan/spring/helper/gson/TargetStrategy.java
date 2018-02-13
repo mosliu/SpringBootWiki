@@ -42,7 +42,8 @@ public class TargetStrategy implements ExclusionStrategy {
         Class<?> c = fieldattributes.getDeclaredClass();
         String f = fieldattributes.getName();
         boolean isSkip = false;
-        if (owner == target) {
+//        if (owner == target) {
+        if (owner.equals(target)) {
             if (ArrayUtils.contains(fields, f)) {
                 log.debug("fitler field:{} for class:{}", f, owner);
                 isSkip = true;
