@@ -87,7 +87,7 @@ public class DruidConfiguration {
         //遍历所有的Filter，找到WallFilter，设置setConditionAndAlwayTrueAllow 选项
         for (int i = 0;i<proxyFilters.size();i++){
 
-            if(proxyFilters.get(i).getClass().getName().equals(com.alibaba.druid.wall.WallFilter.class.getName())){
+            if(proxyFilters.get(i).getClass().getName().equals(WallFilter.class.getName())){
 
                 ((WallFilter)proxyFilters.get(i)).getConfig().setConditionAndAlwayTrueAllow(true);
             }
