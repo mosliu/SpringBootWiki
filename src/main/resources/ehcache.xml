@@ -50,6 +50,8 @@
     </cache>
     <cache name="deviceKind" >
     </cache>
+    <cache name="deviceSubInfo" >
+    </cache>
     <cache name="devices" >
     </cache>
     <cache name="deviceType" >

@@ -45,6 +45,9 @@ public class ${model_name}ManagementController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getPages(Map<String, Object> model) {
 
+        ${model_name} ${model_name_firstSmall} = new ${model_name}();
+        model.put("${model_name_firstSmall}", ${model_name_firstSmall});
+
         return "admin/" + "${model_name_firstSmall}Manage" + " :: middle";
 
     }

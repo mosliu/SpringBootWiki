@@ -31,7 +31,7 @@ public class ${model_name}ServiceImpl implements ${model_name}Service{
     ${model_name}Repository ${model_name_firstSmall}Repository;
 
     @Override
-    @Cacheable(cacheNames = "${model_name_firstSmall}", key = "#${model_name_firstSmall}.id")
+    @CacheEvict(cacheNames = "${model_name_firstSmall}", key = "'${model_name_firstSmall}_list'")
     public void save${model_name}(${model_name} ${model_name_firstSmall}){
         ${model_name_firstSmall}Repository.save(${model_name_firstSmall});
     }
@@ -44,7 +44,7 @@ public class ${model_name}ServiceImpl implements ${model_name}Service{
     }
 
     @Override
-    @CacheEvict(cacheNames = "${model_name_firstSmall}", key = "#id")
+    @CacheEvict(cacheNames = "${model_name_firstSmall}", allEntries = true)
     public boolean delete${model_name}ById(Long id){
         ${model_name} ${model_name_firstSmall} = ${model_name_firstSmall}Repository.getOne(id);
         if (${model_name_firstSmall} != null) {
