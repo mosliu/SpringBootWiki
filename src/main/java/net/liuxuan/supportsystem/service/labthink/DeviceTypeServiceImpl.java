@@ -33,7 +33,7 @@ public class DeviceTypeServiceImpl implements DeviceTypeService{
     private static Logger log = LoggerFactory.getLogger(DeviceTypeServiceImpl.class);
 
     @Autowired
-    DeviceTypeRepository deviceTypeRepository;
+    private DeviceTypeRepository deviceTypeRepository;
 
     /**
      * Save device type.

@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.service.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.TicketSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.TicketContent;
 import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
@@ -45,10 +45,10 @@ public class TicketContentServiceImpl implements TicketContentService {
 
     public  static final  String TICKETCATEGORY = TicketContent.class.getSimpleName();
     @Autowired
-    CMSCategoryService cmsCategoryService;
+    private CMSCategoryService cmsCategoryService;
 
     @Autowired
-    TicketContentRepository ticketContentRepository;
+    private TicketContentRepository ticketContentRepository;
 
 
     @Override

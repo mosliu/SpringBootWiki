@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.service.labthink.DepartmentService;
@@ -39,7 +39,7 @@ public class DepartmentManagementController {
     private static Logger log = LoggerFactory.getLogger(DepartmentManagementController.class);
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     @RequestMapping("departmentManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

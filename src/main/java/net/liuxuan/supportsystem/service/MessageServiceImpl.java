@@ -43,13 +43,13 @@ public class MessageServiceImpl implements MessageService {
     private static Logger log = LoggerFactory.getLogger(MessageServiceImpl.class);
 
     @Autowired
-    MessageRepository messageRepository;
+    private MessageRepository messageRepository;
 
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
 
     @Autowired
-    TicketContentService ticketContentService;
+    private TicketContentService ticketContentService;
 
     @Override
 //    @Cacheable(cacheNames = "message", key = "#message.id")

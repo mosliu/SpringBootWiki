@@ -1,4 +1,4 @@
-package net.liuxuan.supportsystem.entity.DTO;
+package net.liuxuan.supportsystem.entity.dto;
 
 import lombok.Data;
 import lombok.ToString;

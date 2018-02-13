@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.service.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.FAQSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.FAQSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.labthink.FAQContent;
 import net.liuxuan.supportsystem.entity.security.DbUser;

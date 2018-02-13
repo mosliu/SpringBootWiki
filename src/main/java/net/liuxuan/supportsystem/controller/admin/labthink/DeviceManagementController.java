@@ -2,7 +2,7 @@ package net.liuxuan.supportsystem.controller.admin.labthink;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.DeviceKind;
 import net.liuxuan.supportsystem.entity.labthink.DeviceType;
 import net.liuxuan.supportsystem.entity.labthink.Devices;

@@ -2,7 +2,7 @@ package net.liuxuan.supportsystem.controller.admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.security.Authorities;
 import net.liuxuan.supportsystem.entity.security.DbUser;

@@ -30,7 +30,7 @@ public class CMSCategoryServiceImpl implements CMSCategoryService{
     private static Logger log = LoggerFactory.getLogger(CMSCategoryServiceImpl.class);
 
     @Autowired
-    CMSCategoryRepository cmsCategoryRepository;
+    private CMSCategoryRepository cmsCategoryRepository;
 
     @Override
     public void saveCMSCategory(CMSCategory cmsCategory){

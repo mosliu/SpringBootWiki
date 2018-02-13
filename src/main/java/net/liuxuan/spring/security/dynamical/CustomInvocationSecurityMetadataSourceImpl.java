@@ -37,10 +37,10 @@ public class CustomInvocationSecurityMetadataSourceImpl implements CustomInvocat
     private static boolean loaded = false;
 
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     @Autowired
-    UrlAuthService urlAuthService;
+    private UrlAuthService urlAuthService;
 
     public CustomInvocationSecurityMetadataSourceImpl() {
         //loadResourceDefine();

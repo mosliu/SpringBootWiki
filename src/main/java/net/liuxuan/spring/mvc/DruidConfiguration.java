@@ -36,7 +36,7 @@ import java.util.Map;
 public class DruidConfiguration {
     private static final Logger log = LoggerFactory.getLogger(DruidConfiguration.class);
     @Autowired
-    DataSource dataSource;
+    private DataSource dataSource;
 
     String username;
     String password;

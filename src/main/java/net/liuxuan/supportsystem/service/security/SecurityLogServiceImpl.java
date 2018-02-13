@@ -31,7 +31,7 @@ public class SecurityLogServiceImpl implements SecurityLogService{
     private static Logger log = LoggerFactory.getLogger(SecurityLogServiceImpl.class);
 
     @Autowired
-    SecurityLogRepository securityLogRepository;
+    private SecurityLogRepository securityLogRepository;
 
 
     @Transactional(propagation= Propagation.REQUIRED,readOnly = false)

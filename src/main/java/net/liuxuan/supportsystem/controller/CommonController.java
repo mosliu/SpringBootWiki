@@ -44,7 +44,7 @@ public class CommonController {
      * The Request mapping handler mapping.
      */
     @Autowired
-    RequestMappingHandlerMapping requestMappingHandlerMapping;
+    private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
 
     private Set<String> UrlMappingList;

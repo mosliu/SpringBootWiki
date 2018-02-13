@@ -48,35 +48,35 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
      * The User detail info repository.
      */
     @Autowired
-    UserDetailInfoRepository userDetailInfoRepository;
+    private UserDetailInfoRepository userDetailInfoRepository;
     /**
      * The Users repository.
      */
     @Autowired
-    UsersRepository usersRepository;
+    private UsersRepository usersRepository;
 
     /**
      * The Users repository.
      */
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     /**
      * The Authorities repository.
      */
     @Autowired
-    AuthoritiesRepository authoritiesRepository;
+    private AuthoritiesRepository authoritiesRepository;
 
     /**
      * The Store path.
      */
     @Value("${SprKi.avatar.storePath}")
-    String storePath;
+    private String storePath;
     /**
      * The Access url path.
      */
     @Value("${SprKi.avatar.accessUrlPath}")
-    String accessUrlPath;
+    private String accessUrlPath;
 
     /**
      * 输入的字符是否是汉字

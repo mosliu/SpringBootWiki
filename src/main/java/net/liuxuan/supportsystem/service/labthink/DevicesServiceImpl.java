@@ -33,19 +33,19 @@ public class DevicesServiceImpl implements DevicesService {
      * The Devices repository.
      */
     @Autowired
-    DevicesRepository devicesRepository;
+    private DevicesRepository devicesRepository;
 
     /**
      * The Device kind repository.
      */
     @Autowired
-    DeviceKindRepository deviceKindRepository;
+    private DeviceKindRepository deviceKindRepository;
 
     /**
      * The Device type repository.
      */
     @Autowired
-    DeviceTypeRepository deviceTypeRepository;
+    private DeviceTypeRepository deviceTypeRepository;
 
     /**
      * Gets all devices.

@@ -55,7 +55,7 @@ public class FileManagerController {
     public static String ROOT = "F:/SSS";
 
     @Value("${SprKi.filemanage.basepath}")
-    String basePath;
+    private String basePath;
 
     //获取发送短消息界面
     private static Logger log = LoggerFactory.getLogger(FileManagerController.class);

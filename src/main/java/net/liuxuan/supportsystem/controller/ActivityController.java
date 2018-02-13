@@ -35,7 +35,7 @@ public class ActivityController {
     private static Logger log = LoggerFactory.getLogger(ActivityController.class);
 
     @Autowired
-    SecurityLogService securityLogService;
+    private SecurityLogService securityLogService;
 
     @RequestMapping(value = "/last10")
     @ResponseBody

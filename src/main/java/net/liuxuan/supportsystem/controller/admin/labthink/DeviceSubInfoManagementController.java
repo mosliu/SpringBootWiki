@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.Devices;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.labthink.DeviceSubInfo;
@@ -41,9 +41,9 @@ public class DeviceSubInfoManagementController {
     private static Logger log = LoggerFactory.getLogger(DeviceSubInfoManagementController.class);
 
     @Autowired
-    DeviceSubInfoService deviceSubInfoService;
+    private DeviceSubInfoService deviceSubInfoService;
     @Autowired
-    DevicesService devicesService;
+    private DevicesService devicesService;
 
     @RequestMapping("deviceSubInfoManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

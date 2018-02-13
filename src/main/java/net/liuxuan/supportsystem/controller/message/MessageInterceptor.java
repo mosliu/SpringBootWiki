@@ -35,7 +35,7 @@ public class MessageInterceptor implements HandlerInterceptor {
      * The Message service.
      */
     @Autowired
-    MessageService messageService;
+    private MessageService messageService;
 
     /**
      * Intercept the execution of a handler. Called after HandlerMapping determined

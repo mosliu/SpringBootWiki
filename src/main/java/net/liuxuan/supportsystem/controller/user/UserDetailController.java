@@ -36,7 +36,7 @@ public class UserDetailController {
     private static Logger log = LoggerFactory.getLogger(UserDetailController.class);
 
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
 
 
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)

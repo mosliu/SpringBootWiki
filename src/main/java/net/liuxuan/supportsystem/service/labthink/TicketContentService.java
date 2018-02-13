@@ -1,7 +1,7 @@
 package net.liuxuan.supportsystem.service.labthink;
 
 
-import net.liuxuan.supportsystem.entity.DTO.TicketSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.TicketContent;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 

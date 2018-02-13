@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.FAQSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.FAQSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.FAQContent;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.service.labthink.FAQContentService;
@@ -39,7 +39,7 @@ import java.util.Map;
 public class FaqManagementController {
     private static Logger log = LoggerFactory.getLogger(FaqManagementController.class);
     @Autowired
-    FAQContentService faqContentService;
+    private FAQContentService faqContentService;
 
     @RequestMapping("faqManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

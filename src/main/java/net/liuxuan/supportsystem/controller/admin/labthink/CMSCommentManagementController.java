@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.CMSComment;
 import net.liuxuan.supportsystem.service.CMSCommentService;
@@ -39,7 +39,7 @@ public class CMSCommentManagementController {
     private static Logger log = LoggerFactory.getLogger(CMSCommentManagementController.class);
 
     @Autowired
-    CMSCommentService cMSCommentService;
+    private CMSCommentService cMSCommentService;
 
     @RequestMapping("cMSCommentManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

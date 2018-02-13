@@ -30,7 +30,7 @@ public class DeviceSubInfoServiceImpl implements DeviceSubInfoService{
     private static Logger log = LoggerFactory.getLogger(DeviceSubInfoServiceImpl.class);
 
     @Autowired
-    DeviceSubInfoRepository deviceSubInfoRepository;
+    private DeviceSubInfoRepository deviceSubInfoRepository;
 
     @Override
     @CacheEvict(cacheNames = "deviceSubInfo", key = "'deviceSubInfo_list'")

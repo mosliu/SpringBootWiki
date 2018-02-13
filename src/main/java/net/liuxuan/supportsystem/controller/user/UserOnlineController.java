@@ -40,15 +40,15 @@ import java.util.stream.Collectors;
 public class UserOnlineController {
     private static Logger log = LoggerFactory.getLogger(UserOnlineController.class);
     @Autowired
-    SessionRegistry sessionRegistry;
+    private SessionRegistry sessionRegistry;
 
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
 
     @Value("${SprKi.avatar.storePath}")
-    String storePath;
+    private String storePath;
     @Value("${SprKi.avatar.accessUrlPath}")
-    String accessUrlPath;
+    private String accessUrlPath;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -155,6 +155,7 @@ public class UserOnlineController {
             String filename = DrawUtils.generateAvatar(storePath, toMd5EncodeStr);
             //写入
             path = accessUrlPrefix+filename;
+            log.info("make a nre avatar with "+ username);
         }
         return "redirect:"+path;
     }

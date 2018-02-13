@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.CMSContentTags;
 import net.liuxuan.supportsystem.service.CMSContentTagsService;

@@ -37,7 +37,7 @@ public class UEditorController {
      * The Context.
      */
     @Autowired
-    ServletContext context;
+    private ServletContext context;
 
 
     @Value("${SprKi.upload.savepathroot}")

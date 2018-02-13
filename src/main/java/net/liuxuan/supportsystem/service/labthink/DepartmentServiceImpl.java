@@ -33,16 +33,16 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 
     @Autowired
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
 
     @Value("${SprKi.department.role.prefix}")
-    String role_prefix;
+    private String role_prefix;
 
     @Value("${SprKi.department.role.autocreate}")
-    boolean role_autocreate;
+    private boolean role_autocreate;
 
 
     @Override

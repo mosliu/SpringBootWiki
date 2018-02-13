@@ -31,7 +31,7 @@ import java.io.IOException;
 public class Test01 {
 
     @Autowired
-    DBSettings db;
+    private DBSettings db;
     //    @Value("name")
     @Value("${name:CCCC}")
     private String name;

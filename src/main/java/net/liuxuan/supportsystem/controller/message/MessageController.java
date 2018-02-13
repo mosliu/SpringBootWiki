@@ -49,13 +49,13 @@ public class MessageController {
     private static Logger log = LoggerFactory.getLogger(MessageController.class);
 
     @Autowired
-    MessageService messageService;
+    private MessageService messageService;
 
     @Autowired
-    TicketContentService ticketContentService;
+    private TicketContentService ticketContentService;
 
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
 
     public static String limitContent2WordCount(String content, int count) {
         if (content == null) {

@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin.labthink;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
 import net.liuxuan.supportsystem.service.security.UrlAuthService;
@@ -40,7 +40,7 @@ public class UrlAuthManagementController {
     private static Logger log = LoggerFactory.getLogger(UrlAuthManagementController.class);
 
     @Autowired
-    UrlAuthService urlAuthService;
+    private UrlAuthService urlAuthService;
 
     @RequestMapping("urlAuthManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

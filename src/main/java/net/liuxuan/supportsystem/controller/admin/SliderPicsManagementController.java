@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.admin;
 
-import net.liuxuan.supportsystem.entity.DTO.BaseDTO;
+import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.SliderPics;
 import net.liuxuan.supportsystem.service.SliderPicsService;
@@ -41,7 +41,7 @@ public class SliderPicsManagementController {
     private static Logger log = LoggerFactory.getLogger(SliderPicsManagementController.class);
 
     @Autowired
-    SliderPicsService sliderPicsService;
+    private SliderPicsService sliderPicsService;
 
     @RequestMapping("sliderPicsManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

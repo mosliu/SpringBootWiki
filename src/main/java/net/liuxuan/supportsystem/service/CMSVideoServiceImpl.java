@@ -26,7 +26,7 @@ public class CMSVideoServiceImpl implements CMSVideoService{
     private static Logger log = LoggerFactory.getLogger(CMSVideoServiceImpl.class);
 
     @Autowired
-    CMSVideoRepository cmsVideoRepository;
+    private CMSVideoRepository cmsVideoRepository;
 
     @Override
     public void saveCMSVideo(CMSVideo cMSVideo){

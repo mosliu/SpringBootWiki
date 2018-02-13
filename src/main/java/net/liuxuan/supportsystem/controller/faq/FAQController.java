@@ -3,7 +3,7 @@ package net.liuxuan.supportsystem.controller.faq;
 import net.liuxuan.supportsystem.entity.CMSCategoryEditor;
 import net.liuxuan.supportsystem.entity.CMSComment;
 import net.liuxuan.supportsystem.entity.CMSContentTags;
-import net.liuxuan.supportsystem.entity.DTO.FAQSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.FAQSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.labthink.DeviceType;
 import net.liuxuan.supportsystem.entity.labthink.Devices;
@@ -65,7 +65,7 @@ public class FAQController {
      * The Devices service.
      */
     @Autowired
-    DevicesService devicesService;
+    private DevicesService devicesService;
 
 //    @Resource
 //    DepartmentRepository departmentRepository;
@@ -74,7 +74,7 @@ public class FAQController {
      * The Department service.
      */
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
 //    @Resource
 //    CMSCategoryRepository cmsCategoryRepository;
@@ -83,30 +83,30 @@ public class FAQController {
      * The Cms category service.
      */
     @Autowired
-    CMSCategoryService cmsCategoryService;
+    private CMSCategoryService cmsCategoryService;
 
 
     /**
      * The Device type service.
      */
     @Autowired
-    DeviceTypeService deviceTypeService;
+    private DeviceTypeService deviceTypeService;
 
 
     /**
      * The Faq content service.
      */
     @Autowired
-    FAQContentService faqContentService;
+    private FAQContentService faqContentService;
 
     /**
      * The Cms content tags service.
      */
     @Autowired
-    CMSContentTagsService cmsContentTagsService;
+    private CMSContentTagsService cmsContentTagsService;
 
     @Autowired
-    CMSCommentService cmsCommentService;
+    private CMSCommentService cmsCommentService;
 
 
     /**

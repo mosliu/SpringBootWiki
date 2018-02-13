@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.ticket;
 
-import net.liuxuan.supportsystem.entity.DTO.TicketSearchDTO;
+import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.labthink.Devices;
 import net.liuxuan.supportsystem.entity.labthink.FAQContent;
@@ -55,31 +55,31 @@ TicketController {
 
 
     @Autowired
-    DevicesService devicesService;
+    private DevicesService devicesService;
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
     @Autowired
-    CMSCategoryService cmsCategoryService;
+    private CMSCategoryService cmsCategoryService;
 
 
     @Autowired
-    DeviceTypeService deviceTypeService;
+    private DeviceTypeService deviceTypeService;
     @Resource
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
     @Autowired
-    TicketContentService ticketContentService;
+    private TicketContentService ticketContentService;
 
     @Value("${SprKi.ticket.mailto}")
-    String mailto;
+    private String mailto;
 
     @Value("${SprKi.ticket.enablemail}")
-    boolean enablemail;
+    private boolean enablemail;
 
     @Value("${SprKi.ticket.editRole}")
-    String editRole;
+    private String editRole;
 
     //    @Autowired
 //    private MailSender mailSender;

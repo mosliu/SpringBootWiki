@@ -19,7 +19,7 @@ import java.beans.PropertyEditorSupport;
 public class DepartmentEditor extends PropertyEditorSupport {
 
     @Autowired
-    DepartmentRepository repository;
+    private DepartmentRepository repository;
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {

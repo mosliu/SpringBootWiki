@@ -43,9 +43,9 @@ public class LuceneController {
     private static final String ENDTAG = "</font>";
     private static Logger log = LoggerFactory.getLogger(LuceneController.class);
     @Autowired(required = false)
-    IndexWriter indexWriter;
+    private IndexWriter indexWriter;
     @Autowired(required = false)
-    Analyzer analyzer;
+    private Analyzer analyzer;
 
     //    @ResponseBody
     @RequestMapping
