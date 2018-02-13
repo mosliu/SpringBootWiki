@@ -3,11 +3,9 @@ package net.liuxuan.spring.Helper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import com.google.gson.Gson;
-import net.liuxuan.SprKi.entity.security.LogLevel;
-import net.liuxuan.SprKi.entity.security.SecurityLog;
-import net.liuxuan.SprKi.service.security.SecurityLogService;
-import net.liuxuan.spring.Helper.gson.EntityGsonHelper;
+import net.liuxuan.supportsystem.entity.security.LogLevel;
+import net.liuxuan.supportsystem.entity.security.SecurityLog;
+import net.liuxuan.supportsystem.service.security.SecurityLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

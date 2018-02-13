@@ -50,11 +50,12 @@ import org.springframework.transaction.annotation.Transactional;
 //@EnableAutoConfiguration()
 //@ImportResource({ "classpath:config/webSecurityConfig.xml" })
 //@EnableConfigurationProperties({DBSettings.class})
-@EnableJpaRepositories(basePackages = "net.liuxuan.SprKi.repository",
+@EnableJpaRepositories(basePackages = "net.liuxuan.supportsystem.repository",
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager"
 )
-@EntityScan({"net.liuxuan.SprKi.entity", "net.liuxuan.springboottest.message"})
+//@EntityScan({"net.liuxuan.SprKi.entity", "net.liuxuan.springboottest.message"})
+@EntityScan({"net.liuxuan.supportsystem.entity", "net.liuxuan.springboottest.message"})
 //@EnableWebMvc
 @EnableTransactionManagement
 @EnableAspectJAutoProxy

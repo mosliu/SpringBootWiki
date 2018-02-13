@@ -1,9 +1,9 @@
 package net.liuxuan.spring.security.dynamical;
 
-import net.liuxuan.SprKi.entity.security.Role;
-import net.liuxuan.SprKi.entity.security.UrlAuth;
-import net.liuxuan.SprKi.service.security.RoleService;
-import net.liuxuan.SprKi.service.security.UrlAuthService;
+import net.liuxuan.supportsystem.entity.security.Role;
+import net.liuxuan.supportsystem.entity.security.UrlAuth;
+import net.liuxuan.supportsystem.service.security.RoleService;
+import net.liuxuan.supportsystem.service.security.UrlAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

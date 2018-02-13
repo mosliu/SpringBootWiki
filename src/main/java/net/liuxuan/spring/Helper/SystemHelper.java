@@ -1,11 +1,11 @@
 package net.liuxuan.spring.Helper;
 
-import net.liuxuan.SprKi.entity.security.Authorities;
-import net.liuxuan.SprKi.entity.security.DbUser;
-import net.liuxuan.SprKi.entity.security.Role;
-import net.liuxuan.SprKi.entity.user.UserDetailInfo;
-import net.liuxuan.SprKi.service.security.RoleService;
-import net.liuxuan.SprKi.service.user.UserDetailInfoService;
+import net.liuxuan.supportsystem.entity.security.Authorities;
+import net.liuxuan.supportsystem.entity.security.DbUser;
+import net.liuxuan.supportsystem.entity.security.Role;
+import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
+import net.liuxuan.supportsystem.service.security.RoleService;
+import net.liuxuan.supportsystem.service.user.UserDetailInfoService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

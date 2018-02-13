@@ -1,15 +1,11 @@
 package net.liuxuan.spring.mvc;
 
-import net.liuxuan.SprKi.entity.security.LogActionType;
-import net.liuxuan.SprKi.entity.security.LogLevel;
-import net.liuxuan.SprKi.entity.security.SecurityLog;
-import net.liuxuan.SprKi.service.security.SecurityLogService;
+import net.liuxuan.supportsystem.service.security.SecurityLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
-import java.util.Date;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.

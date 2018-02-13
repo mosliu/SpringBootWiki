@@ -11,24 +11,15 @@
 package net.liuxuan.springboottest;
 
 
-import net.liuxuan.SprKi.entity.Banner;
-import net.liuxuan.SprKi.entity.security.DbUser;
+import net.liuxuan.supportsystem.entity.Banner;
 import net.liuxuan.wiki.db.DBSettings;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * @author Moses

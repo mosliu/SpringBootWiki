@@ -6,12 +6,12 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="net.liuxuan.SprKi">
+<mapper namespace="net.liuxuan.supportsystem">
 
     <select id="getUserCount" resultType="java.lang.Long">
         select count(1) from SprKi_userinfo
     </select>
-    <select id="getUser" resultType="net.liuxuan.SprKi.entity.security.DbUser" parameterType="java.lang.Long">
+    <select id="getUser" resultType="net.liuxuan.supportsystem.entity.security.DbUser" parameterType="java.lang.Long">
         select id, userName
         from SprKi_userinfo
         where id = #{id}
@@ -22,7 +22,7 @@
         from SprKi_userinfo
     </select>
 
-    <insert id="saveUser" parameterType="net.liuxuan.SprKi.entity.security.DbUser" useGeneratedKeys="true"
+    <insert id="saveUser" parameterType="net.liuxuan.supportsystem.entity.security.DbUser" useGeneratedKeys="true"
             keyProperty="id">
         insert into SprKi_userinfo (userName) values(#{userName})
     </insert>

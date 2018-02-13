@@ -1,10 +1,9 @@
 package net.liuxuan.spring.security;
 
-import net.liuxuan.SprKi.entity.security.LogActionType;
+import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
