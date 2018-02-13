@@ -6,6 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -53,6 +54,9 @@ public class FileManagerController {
 //    public static String ROOT = "F:\\SSS\\";
     public static String ROOT = "F:/SSS";
 
+    @Value("${SprKi.filemanage.basepath}")
+    String basePath;
+
     //获取发送短消息界面
     private static Logger log = LoggerFactory.getLogger(FileManagerController.class);
 
@@ -80,7 +84,7 @@ public class FileManagerController {
 
             // 返回的结果集
             JsonArray fileItems = new JsonArray();
-            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(ROOT, path));
+            DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(basePath, path));
             String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
             SimpleDateFormat dt = new SimpleDateFormat(DATE_FORMAT);
             for (Path pathObj : directoryStream) {
@@ -125,7 +129,7 @@ public class FileManagerController {
 
             for (Part part : parts) {
                 if (part.getContentType() != null) {  // 忽略路径字段,只处理文件类型
-                    String path = ROOT + destination;
+                    String path = basePath + destination;
 
                     File f = new File(path, FMFileUtils.getFileName(part.getHeader("content-disposition")));
                     if (!FMFileUtils.write(part.getInputStream(), f)) {
@@ -145,7 +149,7 @@ public class FileManagerController {
     @RequestMapping("preview")
     public void preview(HttpServletResponse response, String path) throws IOException {
 
-        File file = new File(ROOT, path);
+        File file = new File(basePath, path);
         if (!file.exists()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Resource Not Found");
             return;
@@ -176,7 +180,7 @@ public class FileManagerController {
     public JsonObject createFolder(@RequestBody JsonObject json) {
         try {
             String newPath = json.get("newPath") == null ? "" : json.get("newPath").getAsString();
-            File newDir = new File(ROOT + newPath);
+            File newDir = new File(basePath + newPath);
             if (!newDir.mkdir()) {
                 throw new Exception("不能创建目录: " + newPath);
             }
@@ -201,7 +205,7 @@ public class FileManagerController {
             //for (int i = 0; i < items.length(); i++) {
             for (int i = 0; i < items.size(); i++) {
                 String path = items.get(i).getAsString();
-                File f = new File(ROOT, path);
+                File f = new File(basePath, path);
                 FMFileUtils.setPermissions(f, perms, recursive); // 设置权限
             }
             return success();
@@ -223,8 +227,8 @@ public class FileManagerController {
             for (int i = 0; i < items.size(); i++) {
                 String path = items.get(i).getAsString();
 
-                File srcFile = new File(ROOT, path);
-                File destFile = new File(ROOT + newpath, srcFile.getName());
+                File srcFile = new File(basePath, path);
+                File destFile = new File(basePath + newpath, srcFile.getName());
 
                 FileCopyUtils.copy(srcFile, destFile);
             }
@@ -247,8 +251,8 @@ public class FileManagerController {
             for (int i = 0; i < items.size(); i++) {
                 String path = items.get(i).getAsString();
 
-                File srcFile = new File(ROOT, path);
-                File destFile = new File(ROOT + newpath, srcFile.getName());
+                File srcFile = new File(basePath, path);
+                File destFile = new File(basePath + newpath, srcFile.getName());
 
                 if (srcFile.isFile()) {
                     FileUtils.moveFile(srcFile, destFile);
@@ -272,7 +276,7 @@ public class FileManagerController {
             JsonArray items = json.getAsJsonArray("items");
             for (int i = 0; i < items.size(); i++) {
                 String path = items.get(i).getAsString();
-                File srcFile = new File(ROOT, path);
+                File srcFile = new File(basePath, path);
                 if (!FileUtils.deleteQuietly(srcFile)) {
                     throw new Exception("删除失败: " + srcFile.getAbsolutePath());
                 }
@@ -293,8 +297,8 @@ public class FileManagerController {
             String path = json.get("item") == null ? "" : json.get("item").getAsString();
             String newPath = json.get("newItemPath") == null ? "" : json.get("newItemPath").getAsString();
 
-            File srcFile = new File(ROOT, path);
-            File destFile = new File(ROOT, newPath);
+            File srcFile = new File(basePath, path);
+            File destFile = new File(basePath, newPath);
             if (srcFile.isFile()) {
                 FileUtils.moveFile(srcFile, destFile);
             } else {
@@ -314,7 +318,7 @@ public class FileManagerController {
     public JsonObject getContent(@RequestBody JsonObject json) {
         try {
             String path = json.get("item") == null ? "" : json.get("item").getAsString();
-            File srcFile = new File(ROOT, path);
+            File srcFile = new File(basePath, path);
 
             String content = FileUtils.readFileToString(srcFile);
 
@@ -336,7 +340,7 @@ public class FileManagerController {
             String path = json.get("item") == null ? "" : json.get("item").getAsString();
             String content = json.get("content") == null ? "" : json.get("content").getAsString();
 
-            File srcFile = new File(ROOT, path);
+            File srcFile = new File(basePath, path);
             FileUtils.writeStringToFile(srcFile, content);
 
             return success();
@@ -357,11 +361,11 @@ public class FileManagerController {
             JsonArray items = json.getAsJsonArray("items");
             List<File> files = new ArrayList<>();
             for (int i = 0; i < items.size(); i++) {
-                File f = new File(ROOT, items.get(i).getAsString());
+                File f = new File(basePath, items.get(i).getAsString());
                 files.add(f);
             }
 
-            File zip = new File(ROOT + destination, compressedFilename);
+            File zip = new File(basePath + destination, compressedFilename);
 
             try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zip))) {
                 ZipUtils.zipFiles(out, "", files.toArray(new File[files.size()]));
@@ -382,18 +386,18 @@ public class FileManagerController {
             String destination = json.get("destination") == null ? "" : json.get("destination").getAsString();
             String zipName = json.get("item") == null ? "" : json.get("item").getAsString();
             String folderName = json.get("folderName") == null ? "" : json.get("folderName").getAsString();
-            File file = new File(ROOT, zipName);
+            File file = new File(basePath, zipName);
 
             String extension = FMFileUtils.getExtension(zipName);
             switch (extension) {
                 case ".zip":
-                    ZipUtils.unZipFiles(file, ROOT + destination);
+                    ZipUtils.unZipFiles(file, basePath + destination);
                     break;
                 case ".gz":
-                    TargzUtils.unTargzFile(file, ROOT + destination);
+                    TargzUtils.unTargzFile(file, basePath + destination);
                     break;
                 case ".rar":
-                    RarUtils.unRarFile(file, ROOT + destination);
+                    RarUtils.unRarFile(file, basePath + destination);
             }
             return success();
         } catch (Exception e) {

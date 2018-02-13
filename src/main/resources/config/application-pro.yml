@@ -226,7 +226,7 @@ SprKi:
   avatar:
     storePath: ./static/uploaded/avatar/
     accessUrlPath: /uploaded/avatar/
-  domain: 127.0.0.1
+  domain: 192.168.7.202
   druid:
     username: root
     password: Moses12345
