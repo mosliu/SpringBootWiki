@@ -326,7 +326,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
             boolean remain = false;
             for (int i = 0; i < authArrays.length; i++) {
                 String s_newauth = authArrays[i].toUpperCase();
-                if (old_auth.getAuthority().toUpperCase().equals(s_newauth)) {
+//                if (old_auth.getAuthority().toUpperCase().equals(s_newauth)) {
+                if (old_auth.getAuthority().equalsIgnoreCase(s_newauth)) {
                     remain = true;
                     log.info("===用户【{}】 保持 权限【{}】 不变", dbUser.getUsername(), s_newauth);
                     break;
