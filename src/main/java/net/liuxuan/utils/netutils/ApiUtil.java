@@ -252,10 +252,8 @@ public class ApiUtil {
                 param = param.trim();
                 if (param.startsWith("charset")) {
                     String[] pair = param.split("=", 2);
-                    if (pair.length == 2) {
-                        if (isNotEmpty(pair[1])) {
-                            charset = pair[1].trim();
-                        }
+                    if (pair.length == 2 && isNotEmpty(pair[1])) {
+                        charset = pair[1].trim();
                     }
                     break;
                 }

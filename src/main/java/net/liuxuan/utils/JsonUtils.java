@@ -19,9 +19,9 @@ import java.util.Iterator;
 
 
 public class JsonUtils {
-    public static JsonArray stringArr2JSON(String[] s){
+    public static JsonArray stringArr2JSON(String[] s) {
         JsonArray jarr = new JsonArray();
-        for(int i=0;i<s.length;i++){
+        for (int i = 0; i < s.length; i++) {
             JsonObject obj = new JsonObject();
             obj.addProperty(String.valueOf(i), s[0]);
             jarr.add(obj);
@@ -30,35 +30,34 @@ public class JsonUtils {
         return jarr;
     }
 
-    public static JsonObject stringHash2JSON(HashMap<String,String> hm){
+    public static JsonObject stringHash2JSON(HashMap<String, String> hm) {
         JsonObject jobj = new JsonObject();
-        for(String key : hm.keySet()){
-            jobj.addProperty(key, (String)hm.get(key));
+        for (String key : hm.keySet()) {
+            jobj.addProperty(key, (String) hm.get(key));
         }
         return jobj;
     }
 
     /**
      * converts a hashmap to JSON
+     *
      * @param hm
      * @param truncate - in some cases, doubles can be truncated to int if they are something like 127.0 truncate == true casts them as integer values truncate == false leaves them as double
      * @return
      */
-    public static String computeJSON(HashMap hm, boolean truncate){
+    public static String computeJSON(HashMap hm, boolean truncate) {
         JsonObject f = new JsonObject();
-        for (Iterator it = hm.keySet().iterator(); it.hasNext();) {
+        for (Iterator it = hm.keySet().iterator(); it.hasNext(); ) {
             String key = (String) it.next();
             Object value = hm.get(key);
-            if(truncate){
-                if(value.toString().endsWith(".0") && isDouble(value.toString()) ){
-                    value = value.toString().replace(".0", "");
-                }
+            if (truncate && value.toString().endsWith(".0") && isDouble(value.toString())) {
+                value = value.toString().replace(".0", "");
             }
-            if(isInt(value.toString())){
+            if (isInt(value.toString())) {
                 f.addProperty(key, toInt(value.toString()));
-            }else if(isDouble(value.toString())){
+            } else if (isDouble(value.toString())) {
                 f.addProperty(key, toDouble(value.toString()));
-            }else {
+            } else {
                 f.addProperty(key, value.toString());
             }
         }
@@ -66,30 +65,30 @@ public class JsonUtils {
     }
 
 
-    public static boolean isInt(String s){
-        try{
+    public static boolean isInt(String s) {
+        try {
             Integer.parseInt(s);
             return true;
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public static int toInt(String s){
+    public static int toInt(String s) {
         int p = Integer.parseInt(s);
         return p;
     }
 
-    public static boolean isDouble(String s){
-        try{
+    public static boolean isDouble(String s) {
+        try {
             Double.parseDouble(s);
             return true;
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
     }
 
-    public static double toDouble(String s){
+    public static double toDouble(String s) {
         double p = Double.parseDouble(s);
         return p;
     }
