@@ -31,8 +31,8 @@ public class HttpClientHelper {
     }
 
     public static String get(String path, Map<String, String> params, Map<String, String> headers, int timeout) throws Exception {
-        path = gethPath(path, params);
-        HttpGet method = new HttpGet(path);
+        String path1 = gethPath(path, params);
+        HttpGet method = new HttpGet(path1);
         RequestConfig requestConfig =
                 RequestConfig
                         .custom()
@@ -45,8 +45,8 @@ public class HttpClientHelper {
     }
 
     public static String delete(String path, Map<String, String> params, Map<String, String> headers) throws Exception {
-        path = gethPath(path, params);
-        HttpDelete method = new HttpDelete(path);
+        String path1 = gethPath(path, params);
+        HttpDelete method = new HttpDelete(path1);
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000).setStaleConnectionCheckEnabled(true).build();
         method.setConfig(requestConfig);
@@ -54,8 +54,8 @@ public class HttpClientHelper {
     }
 
     public static String options(String path, Map<String, String> params, Map<String, String> headers) throws Exception {
-        path = gethPath(path, params);
-        HttpOptions method = new HttpOptions(path);
+        String path1 = gethPath(path, params);
+        HttpOptions method = new HttpOptions(path1);
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000).setStaleConnectionCheckEnabled(true).build();
         method.setConfig(requestConfig);
@@ -63,8 +63,8 @@ public class HttpClientHelper {
     }
 
     public static String trace(String path, Map<String, String> params, Map<String, String> headers) throws Exception {
-        path = gethPath(path, params);
-        HttpTrace method = new HttpTrace(path);
+        String path1 = gethPath(path, params);
+        HttpTrace method = new HttpTrace(path1);
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000).setStaleConnectionCheckEnabled(true).build();
         method.setConfig(requestConfig);
@@ -72,8 +72,8 @@ public class HttpClientHelper {
     }
 
     public static String head(String path, Map<String, String> params, Map<String, String> headers) throws Exception {
-        path = gethPath(path, params);
-        HttpHead method = new HttpHead(path);
+        String path1 = gethPath(path, params);
+        HttpHead method = new HttpHead(path1);
         RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(5000).setConnectTimeout(5000)
                 .setConnectionRequestTimeout(5000).setStaleConnectionCheckEnabled(true).build();
         method.setConfig(requestConfig);

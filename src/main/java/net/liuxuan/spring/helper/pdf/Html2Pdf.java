@@ -40,9 +40,9 @@ public class Html2Pdf {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            if (pdfText == null) {
+//            if (pdfText == null) {
 //				pdfText = HttpClientHelper.getInputStream("http://api.crap.cn/result.do?result="+URLEncoder.encode("地址有误，生成pdf失败，请确认配置文件config.properties中的网站域名配置是否正确！","utf-8"));
-            }
+//            }
 
             XMLWorkerHelper.getInstance().parseXHtml(writer, document, pdfText,
                     Charset.forName("UTF-8"), new ChinaFont());
