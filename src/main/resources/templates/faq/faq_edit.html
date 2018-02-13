@@ -15,13 +15,12 @@
 //            document.faqform.answer.value = 111
 //            $('input[name=answer]:first').val(ue.getContent());
             return jQuery('form.validate-plugin').validate({
-                        submitHandler: function (form) {
-                            $("#submitBtn").attr("disabled", true);
-                            //alert("submitted");
-                            form.submit();
-                        }
+                    submitHandler: function (form) {
+                        $("#submitBtn").attr("disabled", true);
+                        //alert("submitted");
+                        form.submit();
                     }
-
+                }
             );
         }
     </script>
@@ -42,14 +41,14 @@
 
             <fieldset>
                 <!--title-->
-                <input type="hidden" th:field="*{Id}" />
+                <input type="hidden" th:field="*{Id}"/>
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">
                             <label>名称</label>
                             <div class="fancy-form">
                                 <i class="fa fa-list-alt"></i>
-                                <input type="text" th:field="*{title}"  class="form-control required"/>
+                                <input type="text" th:field="*{title}" class="form-control required"/>
                                 <!-- tooltip - optional, bootstrap tooltip can be used instead -->
                                 <span class="fancy-tooltip top-left">
                                 <!-- positions: .top-left | .top-right -->
@@ -63,42 +62,53 @@
                 <div class="row">
                     <div class="form-group">
                         <!--<div class="col-md-4 col-sm-4">-->
-                            <!--<label>分类 *</label>-->
+                        <!--<label>分类 *</label>-->
 
-                            <!--<select th:field="*{category}" class="form-control pointer required">-->
-                                <!--<option th:each="type : ${Category_list}"-->
-                                        <!--th:value="${type.id}"-->
-                                        <!--th:text="${type.name}">FAQ</option>-->
-                            <!--</select>-->
+                        <!--<select th:field="*{category}" class="form-control pointer required">-->
+                        <!--<option th:each="type : ${Category_list}"-->
+                        <!--th:value="${type.id}"-->
+                        <!--th:text="${type.name}">FAQ</option>-->
+                        <!--</select>-->
 
                         <!--</div>-->
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <label>设备类型 *</label>
 
                             <select th:field="*{deviceType}" class="form-control pointer required">
                                 <option th:each="type : ${DevicesType_list}"
                                         th:value="${type.id}"
-                                        th:text="${type.deviceTypeName}">力值设备</option>
+                                        th:text="${type.deviceTypeName}">力值设备
+                                </option>
                             </select>
 
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <label>来源部门 *</label>
 
                             <select th:field="*{department}" class="form-control pointer required">
                                 <option th:each="type : ${Department_list}"
                                         th:value="${type.id}"
-                                        th:text="${type.departmentName}">售后</option>
+                                        th:text="${type.departmentName}">售后
+                                </option>
                             </select>
 
                         </div>
-                        <div class="col-md-4 col-sm-4">
+                        <div class="col-md-3 col-sm-3">
                             <label>设备 *</label>
 
                             <select th:field="*{devices}" class="form-control pointer select2 required">
                                 <option th:each="type : ${Devices_list}"
                                         th:value="${type.id}"
-                                        th:text="${type.devicename+':'+ type.deviceType.deviceTypeName}">W3/230</option>
+                                        th:text="${type.devicename+':'+ type.deviceType.deviceTypeName}">W3/230
+                                </option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <label>子型号 *</label>
+
+                            <select th:field="*{deviceSubInfo}" class="form-control pointer required">
+
                             </select>
 
                         </div>
@@ -121,7 +131,7 @@
                         </div>
                         <div class="col-md-4 col-sm-6">
                             <label>标准</label>
-                            <input type="text" th:field="*{standard}"  class="form-control"/>
+                            <input type="text" th:field="*{standard}" class="form-control"/>
                         </div>
 
                         <div class="col-md-4 col-sm-6">
@@ -131,7 +141,7 @@
                                     id="tagStr" name="tagStr"
                                     aria-hidden="true"
                                     class="form-control select2 select2-hidden-accessible">
-                                <option >tag1</option>
+                                <option>tag1</option>
                             </select>
                         </div>
                     </div>
@@ -142,7 +152,8 @@
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">
                             <label>问题 *</label>
-                            <textarea th:field="*{question}"  class="summernote form-control required" data-height="200" data-lang="en-US"></textarea>
+                            <textarea th:field="*{question}" class="summernote form-control required" data-height="200"
+                                      data-lang="en-US"></textarea>
                         </div>
                     </div>
                 </div>
@@ -151,7 +162,8 @@
                     <div class="form-group">
                         <div class="col-md-12 col-sm-12">
                             <label>答复 *</label>
-                            <textarea id="editor" type="text/plain" style="height:500px;" th:field="*{answer}"></textarea>
+                            <textarea id="editor" type="text/plain" style="height:500px;"
+                                      th:field="*{answer}"></textarea>
                         </div>
                     </div>
                 </div>
@@ -161,7 +173,8 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" id="submitBtn" onClick="return doSubmit1();" class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
+                    <button type="submit" id="submitBtn" onClick="return doSubmit1();"
+                            class="btn btn-3d btn-aqua btn-lg btn-block margin-top-30">
                         提交内容
                     </button>
                 </div>
@@ -174,12 +187,12 @@
 
     <div></div>
     <script type="text/javascript" th:inline="javascript">
-//        console.log('222');
+        //        console.log('222');
         /*<![CDATA[*/
         $("#tagStr").data("select2Attr", {
             tags: true,
             ajax: {
-                url:function (params) {
+                url: function (params) {
                     return '/tags/' + params.term;
                 },
                 delay: 250,
@@ -203,17 +216,30 @@
 
         $("#devices").change(function () {
             $("#devices option:selected").each(function () {
-                var selectstr = $( this ).text()+"";
-                selectstr = selectstr.substr(selectstr.lastIndexOf(':')+1);
-                $("option","#deviceType ").each(function () {
-                    if($(this).text()==selectstr){
-                        $(this).attr("selected",true);
+                var selectstr = $(this).text() + "";
+                var value = $(this).attr('value');
+                selectstr = selectstr.substr(selectstr.lastIndexOf(':') + 1);
+                $("option", "#deviceType ").each(function () {
+                    if ($(this).text() == selectstr) {
+                        $(this).attr("selected", true);
                     }
                 })
+                $.post("/api/deviceSubInfo", {id:value}, subinfoCallback)
             });
 
         })
-
+        function subinfoCallback(result) {
+//            $("#deviceSubInfo").children('option:not(:first)').remove();
+            $("#deviceSubInfo").children().remove();
+            let dsis = JSON.parse(result);
+            for (let i=0;i<dsis.length;i++){
+                $("#deviceSubInfo")
+                    .append($("<option></option>")
+                    .attr("value",dsis[i].id)
+                    .text(dsis[i].deviceSubInfoName));
+            }
+            console.log(result)
+        }
         /*]]>*/
     </script>
 </div>

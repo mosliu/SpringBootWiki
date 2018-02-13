@@ -2,11 +2,13 @@ package net.liuxuan.SprKi.controller.labthink;
 
 import com.google.gson.Gson;
 import net.liuxuan.SprKi.entity.labthink.DeviceKind;
+import net.liuxuan.SprKi.entity.labthink.DeviceSubInfo;
 import net.liuxuan.SprKi.entity.labthink.DeviceType;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.repository.labthink.DeviceKindRepository;
 import net.liuxuan.SprKi.repository.labthink.DeviceTypeRepository;
 import net.liuxuan.SprKi.repository.labthink.DevicesRepository;
+import net.liuxuan.SprKi.service.labthink.DeviceSubInfoService;
 import net.liuxuan.spring.Helper.gson.EntityGsonHelper;
 import net.liuxuan.spring.Helper.gson.TargetStrategy;
 import org.slf4j.Logger;
@@ -41,6 +43,42 @@ public class DeviceController {
     private DeviceKindRepository deviceKindRepository;
     @Autowired
     private DeviceTypeRepository deviceTypeRepository;
+
+    @Autowired
+    private  DeviceSubInfoService deviceSubInfoService;
+
+    @ResponseBody
+    @RequestMapping("/api/deviceSubInfo")
+    public String getDeviceSubInfo(HttpServletRequest request,
+                                   HttpServletResponse response, long id, Exception ex) {
+        Devices device = devicesRepository.findOne(id);
+        if(device!=null){
+            List<DeviceSubInfo> deviceSubInfoByRelativeDevice = deviceSubInfoService.getDeviceSubInfoByRelativeDevice(device);
+            Gson j = EntityGsonHelper.goEntityWithCollection2Gson(DeviceSubInfo.class);
+            String rtn = j.toJson(deviceSubInfoByRelativeDevice);
+            return rtn;
+        }else{
+            return "[]";
+        }
+//        List<Devices> l = devicesRepository.findAll();
+//
+//        TargetStrategy ts_devicetype = new TargetStrategy(DeviceType.class);
+//        //这里表示仅转换DeviceType中的id和devicetypename属性
+//        ts_devicetype.setFields(new String[] {"id", "deviceTypeName"});
+//        ts_devicetype.setReverse(true);
+//
+//        TargetStrategy ts_devicekind = new TargetStrategy(DeviceKind.class);
+//        //这里表示仅转换DeviceKind中的id和DeviceKindname属性
+//        ts_devicetype.setFields(new String[] {"id", "deviceKindName"});
+//        ts_devicetype.setReverse(true);
+
+
+//        Gson j = EntityGsonHelper.goGsonBuilder(Devices.class).setExclusionStrategies(ts_devicetype,ts_devicekind).create();
+
+//        return "common/temp";
+//        System.out.println(rtn);
+//        return rtn;
+    }
 
     @ResponseBody
     @RequestMapping("/api/devices")

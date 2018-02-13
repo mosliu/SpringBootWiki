@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<!--用户修改Div-->
+<div th:fragment="deviceSubInfoedit">
+
+    <!-- header modal -->
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myLargeModalLabel">修改设备信息</h4>
+    </div>
+    <form id="updateform" action="/admin/deviceSubInfo_ajax?action=update" method="post" class="sky-form boxed"
+          novalidate="novalidate" th:object="${deviceSubInfo}">
+        <!-- body modal -->
+        <div class="modal-body">
+            <div class="login-box">
+
+                <header><i class="fa fa-users"></i> 修改设备信息 <b><span th:text="*{deviceSubInfoName}">zhangsan</span></b>
+                    <small class="note bold">请谨慎操作</small>
+                </header>
+
+                <fieldset>
+                    <input type="hidden" th:field="*{id}"/>
+                    <label>修改设备信息名称</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-key"></i>
+                        <input type="text" th:field="*{deviceSubInfoName}"
+                               placeholder="修改设备信息名称" minlength="2" required="true" class="form-control "/>
+                        <b class="tooltip tooltip-bottom-right">输入设备信息名称，以ROLE_开头</b>
+                    </label>
+
+                    <label>修改设备</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-university"></i>
+                        <select th:field="*{relativeDevice}" class="form-control pointer required">
+                            <option th:each="type : ${allDevices}"
+                                    th:value="${type.id}"
+                                    th:text="${'设备:' + type.devicename}">W3/230</option>
+                        </select>
+                        <b class="tooltip tooltip-bottom-right">设备</b>
+                    </label>
+
+                    <label>修改设备信息备注</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-commenting-o"></i>
+                        <input type="text" th:field="*{comment}" placeholder="备注信息" minlength="2" required="true"
+                               class="form-control "/>
+                        <b class="tooltip tooltip-bottom-right">输入设备信息备注信息</b>
+                    </label>
+
+                </fieldset>
+
+            </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" onclick="">Save changes</button>
+        </div>
+    </form>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        var callback = function (data, status) {
+            alert("Data: " + data + "\nStatus: " + status);
+        }
+
+        $("#updateform").on("submit", function (e) {
+//            alert($(this).serialize());
+//            e.preventDefault();
+            $.post(this.action, $(this).serialize(), callback);
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
+
+</body>
+</html>
