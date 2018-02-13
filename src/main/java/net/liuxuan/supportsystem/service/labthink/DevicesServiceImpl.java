@@ -1,10 +1,8 @@
 package net.liuxuan.supportsystem.service.labthink;
 
-import net.liuxuan.supportsystem.entity.labthink.Devices;
-import net.liuxuan.supportsystem.repository.labthink.DeviceKindRepository;
-import net.liuxuan.supportsystem.repository.labthink.DeviceTypeRepository;
-import net.liuxuan.supportsystem.repository.labthink.DevicesRepository;
 import net.liuxuan.spring.constants.JPAConstants;
+import net.liuxuan.supportsystem.entity.labthink.Devices;
+import net.liuxuan.supportsystem.repository.labthink.DevicesRepository;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -38,14 +36,14 @@ public class DevicesServiceImpl implements DevicesService {
     /**
      * The Device kind repository.
      */
-    @Autowired
-    private DeviceKindRepository deviceKindRepository;
+//    @Autowired
+//    private DeviceKindRepository deviceKindRepository;
 
     /**
      * The Device type repository.
      */
-    @Autowired
-    private DeviceTypeRepository deviceTypeRepository;
+//    @Autowired
+//    private DeviceTypeRepository deviceTypeRepository;
 
     /**
      * Gets all devices.

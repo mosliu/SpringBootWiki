@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper.bean;
+package net.liuxuan.spring.helper.bean;
 
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;

@@ -7,16 +7,13 @@ package net.liuxuan.spring.mvc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.NamedThreadLocal;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -31,8 +28,6 @@ public class TestUrlInterceptor implements HandlerInterceptor {
             new NamedThreadLocal<Long>("StopWatch-StartTime");
 
     private HashSet onlineUsers = new LinkedHashSet();
-
-
 
 
     public TestUrlInterceptor() {
@@ -161,7 +156,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         query = (query == null) ? "" : query;
         log.debug("--Handler:{}", handler.toString());
         log.debug("--Viewname: {} & User: {}--", viewname, user);
-        log.info("Access Log, User:{} ,url:{} {}?{} ", user,request.getMethod(), request.getRequestURL().toString(), query);
+        log.info("Access Log, User:{} ,url:{} {}?{} ", user, request.getMethod(), request.getRequestURL().toString(), query);
 
         log.trace("********************Model************************");
         if (modelAndView == null) {
@@ -177,7 +172,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         long endTime = System.currentTimeMillis();//2、结束时间
         long beginTime = startTimeThreadLocal.get();//得到线程绑定的局部变量（开始时间）
         long consumeTime = endTime - beginTime;//3、消耗的时间
-        log.trace("Consume Time {} ms",consumeTime);
+        log.trace("Consume Time {} ms", consumeTime);
 
         log.trace("********************Model************************");
 //        log.trace("*************************************************");

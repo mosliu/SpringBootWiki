@@ -2,14 +2,10 @@ package net.liuxuan.spring.mvc;
 
 //import com.github.dandelion.core.web.DandelionFilter;
 //import com.github.dandelion.core.web.DandelionServlet;
+
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate4.support.OpenSessionInViewFilter;
-import org.springframework.web.servlet.DispatcherServlet;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
-
-import javax.annotation.Resource;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved.

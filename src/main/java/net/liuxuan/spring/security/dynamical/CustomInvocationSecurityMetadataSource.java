@@ -1,9 +1,6 @@
 package net.liuxuan.spring.security.dynamical;
 
-import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
-
-import java.util.Collection;
 
 /**
  * Copyright (c) 2010-2017.  by Liuxuan   All rights reserved. <br/>

@@ -1,10 +1,10 @@
 package net.liuxuan.supportsystem.service.labthink;
 
+import net.liuxuan.spring.constants.JPAConstants;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.repository.labthink.DepartmentRepository;
 import net.liuxuan.supportsystem.service.security.RoleService;
-import net.liuxuan.spring.constants.JPAConstants;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper;
+package net.liuxuan.spring.helper;
 
 import net.liuxuan.supportsystem.entity.security.Authorities;
 import net.liuxuan.supportsystem.entity.security.DbUser;

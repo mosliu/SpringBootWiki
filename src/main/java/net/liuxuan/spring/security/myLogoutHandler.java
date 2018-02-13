@@ -1,6 +1,5 @@
 package net.liuxuan.spring.security;
 
-import groovy.util.logging.Commons;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;

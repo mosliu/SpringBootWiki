@@ -2,14 +2,14 @@ package net.liuxuan.supportsystem.service.security;
 
 
 import net.liuxuan.supportsystem.entity.security.LogLevel;
+import net.liuxuan.supportsystem.entity.security.SecurityLog;
+import net.liuxuan.supportsystem.repository.security.SecurityLogRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import net.liuxuan.supportsystem.repository.security.SecurityLogRepository;
-import net.liuxuan.supportsystem.entity.security.SecurityLog;
 
 import java.util.List;
 

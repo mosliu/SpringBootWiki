@@ -1,13 +1,13 @@
 package net.liuxuan.supportsystem.service.labthink;
 
+import net.liuxuan.spring.helper.SystemHelper;
+import net.liuxuan.spring.helper.bean.BeanHelper;
 import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.TicketContent;
 import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 import net.liuxuan.supportsystem.repository.labthink.TicketContentRepository;
 import net.liuxuan.supportsystem.service.CMSCategoryService;
-import net.liuxuan.spring.Helper.SystemHelper;
-import net.liuxuan.spring.Helper.bean.BeanHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static net.liuxuan.supportsystem.service.util.SearchHelper.*;
 

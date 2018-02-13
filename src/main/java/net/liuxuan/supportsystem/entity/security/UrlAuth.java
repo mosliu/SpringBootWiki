@@ -1,15 +1,16 @@
 package net.liuxuan.supportsystem.entity.security;
 
 
-import javax.persistence.*;
-//import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
+
+//import lombok.Data;
 
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>

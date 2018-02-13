@@ -2,6 +2,7 @@ package net.liuxuan.supportsystem.entity.test.model;
 
 
 import lombok.Data;
+
 import javax.persistence.*;
 
 /**

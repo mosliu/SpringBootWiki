@@ -72,7 +72,7 @@ public class BaseSearchDTO extends BaseDTO{
                 String fieldtype = fields[i].getAnnotatedType().getType().getTypeName();
                 if(fieldtype.equalsIgnoreCase("boolean")){
                     tempbo =  ((fields[i].get(this)== null)
-                            ||((Boolean)fields[i].get(this))== false);
+                            || !((Boolean) fields[i].get(this)));
                 }else{
                     tempbo =  fields[i].get(this)== null;
                 }

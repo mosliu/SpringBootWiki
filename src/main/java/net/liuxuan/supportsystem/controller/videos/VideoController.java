@@ -1,8 +1,8 @@
 package net.liuxuan.supportsystem.controller.videos;
 
+import net.liuxuan.spring.helper.SystemHelper;
 import net.liuxuan.supportsystem.entity.CMSVideo;
 import net.liuxuan.supportsystem.service.CMSVideoService;
-import net.liuxuan.spring.Helper.SystemHelper;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;

@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper;
+package net.liuxuan.spring.helper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

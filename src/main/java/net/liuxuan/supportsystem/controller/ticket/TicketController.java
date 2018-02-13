@@ -1,5 +1,8 @@
 package net.liuxuan.supportsystem.controller.ticket;
 
+import net.liuxuan.spring.helper.SecurityLogHelper;
+import net.liuxuan.spring.helper.SystemHelper;
+import net.liuxuan.spring.helper.mail.MailHelper;
 import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.labthink.Devices;
@@ -9,12 +12,8 @@ import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
-import net.liuxuan.supportsystem.service.CMSCategoryService;
 import net.liuxuan.supportsystem.service.labthink.*;
 import net.liuxuan.supportsystem.service.user.UserDetailInfoService;
-import net.liuxuan.spring.Helper.SecurityLogHelper;
-import net.liuxuan.spring.Helper.SystemHelper;
-import net.liuxuan.spring.Helper.mail.MailHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -60,8 +59,8 @@ TicketController {
     @Autowired
     private DepartmentService departmentService;
 
-    @Autowired
-    private CMSCategoryService cmsCategoryService;
+//    @Autowired
+//    private CMSCategoryService cmsCategoryService;
 
 
     @Autowired

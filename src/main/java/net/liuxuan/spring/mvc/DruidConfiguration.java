@@ -38,8 +38,8 @@ public class DruidConfiguration {
     @Autowired
     private DataSource dataSource;
 
-    String username;
-    String password;
+    private String username;
+    private String password;
 
     @Bean
     public ServletRegistrationBean druidServlet() {

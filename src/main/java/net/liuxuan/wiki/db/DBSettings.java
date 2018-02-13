@@ -5,10 +5,6 @@
 
 package net.liuxuan.wiki.db;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 /**
  * Created by Moses on 2016/2/3.
  */

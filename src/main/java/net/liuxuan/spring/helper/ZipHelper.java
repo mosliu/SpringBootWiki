@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper;
+package net.liuxuan.spring.helper;
 
 import java.io.*;
 import java.util.zip.ZipEntry;

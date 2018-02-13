@@ -1,8 +1,8 @@
 package net.liuxuan.spring.security;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.security.authentication.AuthenticationDetailsSource;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class CaptchaAuthenticationDetailsSource implements
 		AuthenticationDetailsSource<HttpServletRequest, CaptchaAuthenticationDetails> {

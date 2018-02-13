@@ -1,12 +1,11 @@
 package net.liuxuan.supportsystem.entity.security;
 
 
-import javax.persistence.*;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.search.annotations.Field;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**

@@ -1,11 +1,14 @@
 package net.liuxuan.springboottest.web;
 
 import com.google.gson.Gson;
+import net.liuxuan.spring.helper.gson.EntityGsonHelper;
 import net.liuxuan.supportsystem.entity.test.model.Company;
 import net.liuxuan.supportsystem.entity.test.model.Person;
-import net.liuxuan.supportsystem.repository.test.*;
+import net.liuxuan.supportsystem.repository.test.AddressRepository;
+import net.liuxuan.supportsystem.repository.test.CompanyRepository;
+import net.liuxuan.supportsystem.repository.test.PersonRepository;
+import net.liuxuan.supportsystem.repository.test.TownRepository;
 import net.liuxuan.supportsystem.repository.test.memory.PersonMemoryRepository;
-import net.liuxuan.spring.Helper.gson.EntityGsonHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

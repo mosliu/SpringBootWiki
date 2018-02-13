@@ -1,6 +1,8 @@
 package net.liuxuan.supportsystem.controller.message;
 
 import com.google.gson.Gson;
+import net.liuxuan.spring.helper.SecurityLogHelper;
+import net.liuxuan.spring.helper.SystemHelper;
 import net.liuxuan.supportsystem.entity.Message;
 import net.liuxuan.supportsystem.entity.MessageConst;
 import net.liuxuan.supportsystem.entity.labthink.TicketContent;
@@ -10,8 +12,6 @@ import net.liuxuan.supportsystem.exceptions.ContentNotFoundException;
 import net.liuxuan.supportsystem.service.MessageService;
 import net.liuxuan.supportsystem.service.labthink.TicketContentService;
 import net.liuxuan.supportsystem.service.user.UserDetailInfoService;
-import net.liuxuan.spring.Helper.SecurityLogHelper;
-import net.liuxuan.spring.Helper.SystemHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

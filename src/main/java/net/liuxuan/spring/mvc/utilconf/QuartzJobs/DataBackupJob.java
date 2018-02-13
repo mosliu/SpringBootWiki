@@ -1,9 +1,7 @@
 package net.liuxuan.spring.mvc.utilconf.QuartzJobs;
 
-import net.liuxuan.spring.Helper.SystemHelper;
-import net.liuxuan.spring.Helper.ZipHelper;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import net.liuxuan.spring.helper.SystemHelper;
+import net.liuxuan.spring.helper.ZipHelper;
 import org.quartz.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

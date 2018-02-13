@@ -1,7 +1,7 @@
 package net.liuxuan.springboottest;
 
 import net.liuxuan.spring.constants.DateFormatConstants;
-import net.liuxuan.spring.Helper.SystemHelper;
+import net.liuxuan.spring.helper.SystemHelper;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.http.HttpHeaders;

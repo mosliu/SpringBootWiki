@@ -1,5 +1,8 @@
 package net.liuxuan.supportsystem.controller.faq;
 
+import net.liuxuan.spring.helper.ResponseHelper;
+import net.liuxuan.spring.helper.SecurityLogHelper;
+import net.liuxuan.spring.helper.SystemHelper;
 import net.liuxuan.supportsystem.entity.CMSCategoryEditor;
 import net.liuxuan.supportsystem.entity.CMSComment;
 import net.liuxuan.supportsystem.entity.CMSContentTags;
@@ -12,16 +15,12 @@ import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.exceptions.ContentNotFoundException;
-import net.liuxuan.supportsystem.service.CMSCategoryService;
 import net.liuxuan.supportsystem.service.CMSCommentService;
 import net.liuxuan.supportsystem.service.CMSContentTagsService;
 import net.liuxuan.supportsystem.service.labthink.DepartmentService;
 import net.liuxuan.supportsystem.service.labthink.DeviceTypeService;
 import net.liuxuan.supportsystem.service.labthink.DevicesService;
 import net.liuxuan.supportsystem.service.labthink.FAQContentService;
-import net.liuxuan.spring.Helper.ResponseHelper;
-import net.liuxuan.spring.Helper.SecurityLogHelper;
-import net.liuxuan.spring.Helper.SystemHelper;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,8 +81,8 @@ public class FAQController {
     /**
      * The Cms category service.
      */
-    @Autowired
-    private CMSCategoryService cmsCategoryService;
+//    @Autowired
+//    private CMSCategoryService cmsCategoryService;
 
 
     /**

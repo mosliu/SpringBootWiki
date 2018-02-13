@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper;
+package net.liuxuan.spring.helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

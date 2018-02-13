@@ -2,7 +2,6 @@ package net.liuxuan.spring.security.dynamical;
 
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
-import net.liuxuan.supportsystem.service.security.RoleService;
 import net.liuxuan.supportsystem.service.security.UrlAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,8 +35,8 @@ public class CustomInvocationSecurityMetadataSourceImpl implements CustomInvocat
 
     private static boolean loaded = false;
 
-    @Autowired
-    private RoleService roleService;
+//    @Autowired
+//    private RoleService roleService;
 
     @Autowired
     private UrlAuthService urlAuthService;

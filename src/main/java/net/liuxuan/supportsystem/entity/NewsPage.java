@@ -1,7 +1,6 @@
 package net.liuxuan.supportsystem.entity;
 
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf;
@@ -9,6 +8,7 @@ import org.apdplat.word.lucene.ChineseWordAnalyzer;
 import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Indexed;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**

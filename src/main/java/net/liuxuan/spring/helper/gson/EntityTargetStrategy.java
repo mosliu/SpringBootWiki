@@ -1,8 +1,7 @@
-package net.liuxuan.spring.Helper.gson;
+package net.liuxuan.spring.helper.gson;
 
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
-import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,11 +30,11 @@ public class EntityTargetStrategy implements ExclusionStrategy {
 
     @Override
     public boolean shouldSkipField(FieldAttributes fieldattributes) {
-        Class<?> owner = fieldattributes.getDeclaringClass();
+//        Class<?> owner = fieldattributes.getDeclaringClass();
         Class<?> c = fieldattributes.getDeclaredClass();
-        String f = fieldattributes.getName();
-        String typename = fieldattributes.getDeclaredType().getTypeName();
-        boolean isSkip = false;
+//        String f = fieldattributes.getName();
+//        String typename = fieldattributes.getDeclaredType().getTypeName();
+//        boolean isSkip = false;
 
 //        log.debug("filtered field:{} filedClass:{} typename:{}", f, c.getName(),typename);
 //        log.debug("filtered field:{}.isInstance(int.class)  :{}",f, c.isInstance(int.class));

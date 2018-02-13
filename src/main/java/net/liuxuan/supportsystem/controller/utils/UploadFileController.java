@@ -1,6 +1,6 @@
 package net.liuxuan.supportsystem.controller.utils;
 
-import net.liuxuan.spring.Helper.ResponseHelper;
+import net.liuxuan.spring.helper.ResponseHelper;
 import net.liuxuan.utils.upload.UploadUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

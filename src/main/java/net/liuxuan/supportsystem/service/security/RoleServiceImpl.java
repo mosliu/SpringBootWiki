@@ -1,11 +1,11 @@
 package net.liuxuan.supportsystem.service.security;
 
 
+import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSourceImpl;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
 import net.liuxuan.supportsystem.repository.security.RoleRepository;
 import net.liuxuan.supportsystem.repository.security.UrlAuthRepository;
-import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSourceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

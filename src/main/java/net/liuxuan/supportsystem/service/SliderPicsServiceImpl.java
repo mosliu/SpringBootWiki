@@ -1,7 +1,7 @@
 package net.liuxuan.supportsystem.service;
 
-import java.util.List;
-
+import net.liuxuan.supportsystem.entity.SliderPics;
+import net.liuxuan.supportsystem.repository.SliderPicsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import net.liuxuan.supportsystem.repository.SliderPicsRepository;
-import net.liuxuan.supportsystem.entity.SliderPics;
+
+import java.util.List;
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
 * ***************************************************************************

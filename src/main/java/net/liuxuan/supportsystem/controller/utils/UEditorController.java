@@ -1,18 +1,16 @@
 package net.liuxuan.supportsystem.controller.utils;
 
 import com.baidu.ueditor.ActionEnter;
-import net.liuxuan.spring.Helper.SystemHelper;
+import net.liuxuan.spring.helper.SystemHelper;
 import org.json.JSONException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -36,8 +34,8 @@ public class UEditorController {
     /**
      * The Context.
      */
-    @Autowired
-    private ServletContext context;
+//    @Autowired
+//    private ServletContext context;
 
 
     @Value("${SprKi.upload.savepathroot}")

@@ -2,6 +2,8 @@ package net.liuxuan.supportsystem.controller.admin;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import net.liuxuan.spring.helper.RequestHelper;
+import net.liuxuan.spring.helper.SecurityLogHelper;
 import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.security.Authorities;
@@ -12,8 +14,6 @@ import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 import net.liuxuan.supportsystem.repository.labthink.DepartmentRepository;
 import net.liuxuan.supportsystem.service.security.RoleService;
 import net.liuxuan.supportsystem.service.user.UserDetailInfoService;
-import net.liuxuan.spring.Helper.RequestHelper;
-import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

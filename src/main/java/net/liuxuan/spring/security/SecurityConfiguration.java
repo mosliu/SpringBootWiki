@@ -2,8 +2,8 @@ package net.liuxuan.spring.security;
 
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.util.Config;
-import net.liuxuan.supportsystem.service.security.SecurityUserDetailsServiceImpl;
 import net.liuxuan.spring.security.dynamical.CustomSecurityFilter;
+import net.liuxuan.supportsystem.service.security.SecurityUserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

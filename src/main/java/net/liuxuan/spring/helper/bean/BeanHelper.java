@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper.bean;
+package net.liuxuan.spring.helper.bean;
 
 import java.lang.reflect.InvocationTargetException;
 

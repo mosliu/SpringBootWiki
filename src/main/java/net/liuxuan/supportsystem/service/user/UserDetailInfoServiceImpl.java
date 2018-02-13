@@ -1,6 +1,7 @@
 package net.liuxuan.supportsystem.service.user;
 
 
+import net.liuxuan.spring.helper.bean.BeanHelper;
 import net.liuxuan.supportsystem.entity.security.Authorities;
 import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.security.Role;
@@ -9,7 +10,6 @@ import net.liuxuan.supportsystem.repository.security.AuthoritiesRepository;
 import net.liuxuan.supportsystem.repository.security.UsersRepository;
 import net.liuxuan.supportsystem.repository.user.UserDetailInfoRepository;
 import net.liuxuan.supportsystem.service.security.RoleService;
-import net.liuxuan.spring.Helper.bean.BeanHelper;
 import net.liuxuan.utils.identicon.DrawUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;

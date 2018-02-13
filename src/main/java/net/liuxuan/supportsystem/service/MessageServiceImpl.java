@@ -1,12 +1,12 @@
 package net.liuxuan.supportsystem.service;
 
+import net.liuxuan.spring.helper.SystemHelper;
 import net.liuxuan.supportsystem.entity.Message;
 import net.liuxuan.supportsystem.entity.MessageConst;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 import net.liuxuan.supportsystem.repository.MessageRepository;
 import net.liuxuan.supportsystem.service.labthink.TicketContentService;
 import net.liuxuan.supportsystem.service.user.UserDetailInfoService;
-import net.liuxuan.spring.Helper.SystemHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,6 +2,7 @@ package net.liuxuan.supportsystem.controller.admin.labthink;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import net.liuxuan.spring.helper.SecurityLogHelper;
 import net.liuxuan.supportsystem.entity.dto.BaseDTO;
 import net.liuxuan.supportsystem.entity.labthink.DeviceKind;
 import net.liuxuan.supportsystem.entity.labthink.DeviceType;
@@ -10,7 +11,6 @@ import net.liuxuan.supportsystem.entity.security.LogActionType;
 import net.liuxuan.supportsystem.service.labthink.DeviceKindService;
 import net.liuxuan.supportsystem.service.labthink.DeviceTypeService;
 import net.liuxuan.supportsystem.service.labthink.DevicesService;
-import net.liuxuan.spring.Helper.SecurityLogHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

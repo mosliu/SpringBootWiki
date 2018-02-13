@@ -1,11 +1,11 @@
 package net.liuxuan.supportsystem.entity;
 
 
-import javax.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**

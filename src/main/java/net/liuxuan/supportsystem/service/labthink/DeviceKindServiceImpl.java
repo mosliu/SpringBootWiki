@@ -1,8 +1,8 @@
 package net.liuxuan.supportsystem.service.labthink;
 
+import net.liuxuan.spring.constants.JPAConstants;
 import net.liuxuan.supportsystem.entity.labthink.DeviceKind;
 import net.liuxuan.supportsystem.repository.labthink.DeviceKindRepository;
-import net.liuxuan.spring.constants.JPAConstants;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

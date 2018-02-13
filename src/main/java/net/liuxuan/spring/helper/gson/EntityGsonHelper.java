@@ -1,4 +1,4 @@
-package net.liuxuan.spring.Helper.gson;
+package net.liuxuan.spring.helper.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

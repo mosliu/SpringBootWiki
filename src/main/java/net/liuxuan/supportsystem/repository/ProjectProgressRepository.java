@@ -1,9 +1,10 @@
 package net.liuxuan.supportsystem.repository;
 
-import java.util.List;
 import net.liuxuan.supportsystem.entity.ProjectProgress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.List;
 /**
 * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
 * ***************************************************************************
