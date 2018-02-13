@@ -12,11 +12,11 @@
 
     <!-- page title -->
     <header id="page-header">
-        <h1>DeviceSubInfo管理</h1>
+        <h1>设备子信息管理</h1>
         <ol class="breadcrumb">
             <li><a href="#">系统管理</a></li>
             <li>支持属性管理</li>
-            <li class="active">DeviceSubInfo管理</li>
+            <li class="active">设备子信息管理</li>
         </ol>
     </header>
     <!-- /page title -->
@@ -28,11 +28,11 @@
             <!-- tabs nav -->
             <ul class="nav nav-tabs pull-left">
                 <li class="active"><!-- TAB 1 -->
-                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建DeviceSubInfo
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建设备子信息
                         <span class="label label-danger">label</span></a>
                 </li>
                 <li class=""><!-- TAB 2 -->
-                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> DeviceSubInfo列表 <span class="caret"></span></a>
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> 设备子信息列表 <span class="caret"></span></a>
                 </li>
             </ul>
             <!-- /tabs nav -->
@@ -60,7 +60,7 @@
                     <div class="login-box">
                         <form id="createDeviceSubInfoForm" action="/admin/deviceSubInfo_ajax?action=add" method="post"
                               class="validate-plugin sky-form boxed" th:object="${deviceSubInfo}">
-                            <header><i class="fa fa-users"></i> 新建DeviceSubInfo
+                            <header><i class="fa fa-users"></i> 新建设备子信息
                                 <small class="note bold">慎重</small>
                             </header>
 
@@ -69,7 +69,7 @@
                                     <i class="icon-append fa fa-key"></i>
                                     <input type="text" id="deviceSubInfoName" name="deviceSubInfoName"
                                            placeholder="DeviceSubInfo名称" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入DeviceSubInfo名称，以ROLE_开头</b>
+                                    <b class="tooltip tooltip-bottom-right">输入设备子信息名称，如C390M2018</b>
                                 </label>
 
                                 <label class="input">
@@ -86,7 +86,7 @@
                                     <i class="icon-append fa fa-commenting-o"></i>
                                     <input type="text" id="comment" name="comment"
                                            placeholder="备注信息" minlength="2" required="true" class="form-control "/>
-                                    <b class="tooltip tooltip-bottom-right">输入DeviceSubInfo备注信息</b>
+                                    <b class="tooltip tooltip-bottom-right">输入设备子信息的备注信息</b>
                                 </label>
                             </fieldset>
 

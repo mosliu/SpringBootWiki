@@ -122,10 +122,18 @@
 
             <li class="list-group-item">
                 <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
+                    <i class="fa fa-2x fa-cube"></i>&nbsp;&nbsp;&nbsp;设备子型号：<span
+                        th:text="${faq.deviceSubInfo?.deviceSubInfoName}">C390M2018</span>
+                </a>
+            </li>
+
+            <li class="list-group-item">
+                <a href="#" th:href="@{/faq/list}+'?deviceType='+${faq?.deviceType?.id}">
                     <i class="fa fa-2x fa-object-group"></i>&nbsp;&nbsp;&nbsp;设备类型：<span
                         th:text="${faq.deviceType?.deviceTypeName}">库伦</span>
                 </a>
             </li>
+
             <!--<li class="list-group-item">-->
             <!--<a href="#" th:href="@{/faq/list}+'?category='+${faq?.category.id}">-->
             <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${faq.category.name}">category</span>-->

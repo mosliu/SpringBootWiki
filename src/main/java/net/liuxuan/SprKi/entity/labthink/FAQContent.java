@@ -52,6 +52,15 @@ public class FAQContent extends CMSContent{
     @JoinColumn(name="devicetype")
     protected DeviceType deviceType; // 设备类型
 
+
+    /**
+     * 设备子类型.
+     */
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @IndexedEmbedded(depth = 1, prefix = "deviceSubInfoBy_")
+    @JoinColumn(name="deviceSubInfo")
+    protected DeviceSubInfo deviceSubInfo; // 设备子类型
+
     @Lob
     @Field
     @Column(columnDefinition = "longtext", nullable = false)

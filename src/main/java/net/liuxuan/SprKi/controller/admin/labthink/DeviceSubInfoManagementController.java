@@ -1,7 +1,6 @@
 package net.liuxuan.SprKi.controller.admin.labthink;
 
 import net.liuxuan.SprKi.entity.DTO.BaseDTO;
-import net.liuxuan.SprKi.entity.labthink.DeviceKind;
 import net.liuxuan.SprKi.entity.labthink.Devices;
 import net.liuxuan.SprKi.entity.security.LogActionType;
 import net.liuxuan.SprKi.entity.labthink.DeviceSubInfo;
