@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="/ui/smarty/admin/css/layout.css" rel="stylesheet" type="text/css"/>
+</head>
+<body><!--
+				MIDDLE
+			-->
+<section id="middle" th:fragment="middle">
+
+    <link href="/ui/mosesadd/upload/uploadifive.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/ui/mosesadd/upload/jquery.uploadifive.js"></script>
+    <!-- page title -->
+    <header id="page-header">
+        <h1>CMSVideo管理</h1>
+        <ol class="breadcrumb">
+            <li><a href="#">系统管理</a></li>
+            <li>支持属性管理</li>
+            <li class="active">CMSVideo管理</li>
+        </ol>
+    </header>
+    <!-- /page title -->
+
+    <div id="panel-misc-portlet-r2" class="panel panel-default">
+
+        <div class="panel-heading">
+
+            <!-- tabs nav -->
+            <ul class="nav nav-tabs pull-left">
+                <li class="active"><!-- TAB 1 -->
+                    <a href="#ttab1l_nobg" data-toggle="tab" aria-expanded="false"> 新建CMSVideo
+                        <span class="label label-danger">label</span></a>
+                </li>
+                <li class=""><!-- TAB 2 -->
+                    <a href="#ttab2l_nobg" data-toggle="tab" aria-expanded="false"> CMSVideo列表 <span class="caret"></span></a>
+                </li>
+            </ul>
+            <!-- /tabs nav -->
+
+            &nbsp; <!-- needed if title missing . avoid using .clearfix -->
+
+            <!-- right options -->
+            <ul class="options pull-right list-inline">
+                <li class=""><a href="#" class="opt panel_colapse" data-toggle="tooltip" title=""
+                                data-placement="bottom" data-original-title="Colapse"></a></li>
+                <li><a href="#" class="opt panel_fullscreen hidden-xs" data-toggle="tooltip" title=""
+                       data-placement="bottom" data-original-title="Fullscreen"><i class="fa fa-expand"></i></a></li>
+            </ul>
+            <!-- /right options -->
+
+        </div>
+
+        <!-- panel content -->
+        <div class="panel-body" style="display: block;">
+
+            <!-- tabs content -->
+            <div class="tab-content transparent">
+
+                <div id="ttab1l_nobg" class="tab-pane active"><!-- TAB 1 CONTENT -->
+                    <div class="login-box">
+                        <form id="createCMSVideoForm" action="/admin/CMSVideo_ajax?action=add" method="post"
+                              class="validate-plugin sky-form boxed">
+                            <header><i class="fa fa-video-camera"></i> 新建CMSVideo
+                            </header>
+
+                            <fieldset>
+                                <label class="input">
+                                    <i class="icon-append fa fa-key"></i>
+                                    <input type="text" id="cmsVideoName" name="cmsVideoName"
+                                           placeholder="CMSVideo名称" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入CMSVideo名称</b>
+                                </label>
+
+                                <label class="input">
+                                    <input type="file" id="sureLogo" value="上传文件"/>
+                                </label>
+                                <div id="uploadqueue"></div>
+                                <label class="input">
+                                    <input type="text" id="cmsVideoFilepath" name ="cmsVideoFilepath" placeholder="url"/>
+                                </label>
+                                <script>
+                                    $("#sureLogo").uploadifive({
+                                        'height': 30,
+                                        'width': 80,
+                                        'fileObjName': 'uploadfile',//后台获取使用的名字
+                                        'method': 'post',
+                                        'auto': true,
+//            'buttonClass': 'btn btn-primary',
+                                        'buttonText': '选择视频',
+                                        'fileType': '*',//只允许图片格式的文件
+                                        'queueID': 'uploadqueue',
+                                        'queueSizeLimit': 2,//这里我只允许单个图片上传
+                                        'fileSizeLimit':'200MB',
+                                        'removeCompleted': true,//文件上传完成之后去除进度条
+                                        'uploadScript': '/uploadVideos',//处理上传文件的后台url
+                                        'onFallback': function () {
+                                            alert("请使用支持HTML5的浏览器");
+                                        },
+                                        //上传到服务器，服务器返回相应信息到data里
+                                        'onUploadComplete': function (file, data) {//上传文件完成file即文件名,data为后台返回的数据
+                                            var jsondata = JSON.parse(data);
+//                                            var image=$("<image src='"+jsondata[0]+"'/>");
+//                                            $("#showAvatar").attr('src',jsondata[0]);
+                                            $("#cmsVideoFilepath").val(jsondata[0]);
+                                            console.log(data);
+                                        }
+                                    });
+                                </script>
+
+                                <label class="input">
+                                    <i class="icon-append fa fa-commenting-o"></i>
+                                    <input type="text" id="comment" name="comment"
+                                           placeholder="备注信息" minlength="2" required="true" class="form-control "/>
+                                    <b class="tooltip tooltip-bottom-right">输入CMSVideo备注信息</b>
+                                </label>
+                            </fieldset>
+
+                            <footer>
+                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-check"></i>
+                                    确认新建
+                                </button>
+                            </footer>
+
+                        </form>
+                    </div>
+                </div><!-- /TAB 1 CONTENT -->
+
+                <div id="ttab2l_nobg" class="tab-pane "><!-- TAB 2 CONTENT -->
+                    <table id="myTableId" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>CMSVideo名称</th>
+                            <th>CMSVideo说明</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="d : ${CMSVideo_list}">
+                            <td th:text="${d.id}">20</td>
+                            <td th:text="${d.cmsVideoName}">Name</td>
+                            <td th:text="${d?.cmsVideoFilepath}">CMSVideo地址</td>
+                            <td th:text="${d?.comment}">备注</td>
+                            <td th:text="${d?.id}">操作</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /TAB 2 CONTENT -->
+
+            </div>
+            <!-- /tabs content -->
+
+        </div>
+        <!-- /panel content -->
+        <div class="modal fade " tabindex="-1" id="ajax" role="basic" aria-hidden="true">
+            <div class="modal-dialog  modal-full">
+                <div class="modal-content">
+
+
+                </div>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                    </div>
+
+                    <!-- Modal Body -->
+                    <div class="modal-body">
+                        <h4>Text in a modal</h4>
+
+                    </div>
+
+                    <!-- Modal Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+        //必须重新初始化，否则不起作用
+        jQuery(window).ready(function () {
+            Init(true);
+            initTable2();
+            initCreate();
+
+            //不注册则不重新加载
+            $('.modal').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+//                $(this).empty();
+            })
+        });
+
+        function deleteDepartment(btn, sid) {
+//            console.log(btn);
+//            console.log(sid);
+            var tourl = "/admin/cMSVideo_ajax?action=delete&sid=" + sid;
+            jQuery.ajax({
+                url: tourl,
+                context: btn,
+                success: function (data) {
+                    console.log(data);
+                    $(this).parents("tr").addClass("disable_done");
+                    var table = $('#myTableId').DataTable();
+                    table.row('.disable_done').remove().draw(false);
+
+                }
+            });
+        }
+
+        function initTable2() {
+
+            loadScript(plugin_path + "datatables/js/jquery.dataTables.min.js", function () {
+                loadScript(plugin_path + "datatables/dataTables.bootstrap.js", function () {
+
+                    if (jQuery().dataTable) {
+
+                        var table = jQuery('#myTableId');
+                        table.dataTable({
+
+                            "columns": [
+                                {"data": "did"},
+                                {"orderable": true, "data": "cMSVideoname"},
+                                {"orderable": true, "data": "cMSVideoNameCN"},
+                                {"orderable": true, "data": "comment"},
+                                {
+                                    "orderable": true,
+                                    "data": "did",
+                                    "type": "display",
+                                    "render": function (data, type, full, meta) {
+//                                        console.log(full);
+                                        return '<a class="btn btn-info" data-target="#ajax" data-toggle="modal" href="/admin/CMSVideo?action=edit&sid=' + data + '"> 修改 </a> <a class="btn btn-danger" onclick="deleteDepartment(this,\'' + data + '\')" href="#' + data + '"> 删除 </a> ';
+                                    }
+                                }
+                            ],
+                            "lengthMenu": [
+                                [10, 25, 50, -1],
+                                [10, 25, 50, "All"] // change per page values here
+                            ],
+                            // set the initial value
+                            "pageLength": 10,
+                            "pagingType": "bootstrap_full_number",
+
+                            language: {
+                                "sProcessing": "处理中...",
+                                "sLengthMenu": "显示 _MENU_ 项结果",
+                                "sZeroRecords": "没有匹配结果",
+                                "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                                "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                                "sInfoPostFix": "",
+                                "sSearch": "在表格中搜索:",
+                                "sUrl": "",
+                                "sEmptyTable": "表中数据为空",
+                                "sLoadingRecords": "载入中...",
+                                "sInfoThousands": ",",
+                                "oPaginate": {
+                                    "sFirst": "首页",
+                                    "sPrevious": "上页",
+                                    "sNext": "下页",
+                                    "sLast": "末页"
+                                },
+                                "oAria": {
+                                    "sSortAscending": ": 以升序排列此列",
+                                    "sSortDescending": ": 以降序排列此列"
+                                }
+                            },
+                        });
+
+                        var tableWrapper = jQuery('#datatable_sample_wrapper');
+
+                        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+
+                    }
+
+                });
+            });
+
+
+        }
+
+        function initCreate() {
+            if (jQuery().validate) {
+
+
+                jQuery('form.validate-plugin').each(function () {
+
+                    var _t = jQuery(this),
+                            _Tposition = _t.attr('data-toastr-position') || "top-full-width";
+                    _Turl = _t.attr('data-toastr-url') || false;
+
+//                    toastr.options = {
+//                        "timeOut": "10000",
+//                        "progressBar": true,
+//                    }
+
+                    // Append 'is_ajax' hidden input field!
+                    _t.append('<input type="hidden" name="is_ajax" value="true" />');
+
+                    _t.validate({
+                        submitHandler: function (form) {
+
+
+                            jQuery(form).ajaxSubmit({
+
+                                target: jQuery(form).find('.validate-result').length > 0 ? jQuery(form).find('.validate-result') : '',
+
+                                error: function (data) {
+                                    _toastr("Sent Failed!", _Tposition, "error", false);
+                                },
+
+                                success: function (data, textStatus) {
+
+//                                var data = data.trim();
+//                                    console.log(textStatus);
+
+
+                                    if (typeof(data.error) === "undefined"&&data.status === "success") {
+                                        _toastr(data.msg, "top-center", "success", "#");
+                                        // Clear the form
+                                        jQuery(form).find('input.form-control').val('');
+                                    } else {
+                                        _toastr(data.msg, _Tposition, "error", false);
+                                    }
+
+                                }
+                            });
+
+                        }
+                    });
+
+                });
+
+            }
+        }
+
+        /*]]>*/
+    </script>
+    <link href="/ui/smarty/css/layout-datatables.css" rel="stylesheet" type="text/css"/>
+
+</section>
+<!-- /MIDDLE -->
+</body>
+</html>

@@ -25,9 +25,9 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "CMSVideo";
-//    String subpackage = ".labthink";//如果需要放到labthink下，则为".labthink"
-    String subpackage = "";//如果需要放到labthink下，则为".labthink"
+    String model_name = "DeviceSubInfo";
+    String subpackage = ".labthink";//如果需要放到labthink下，则为".labthink"
+//    String subpackage = "";//如果需要放到labthink下，则为".labthink"
     boolean createEntity,createRepository,createService,createAdminManagement;
 
     public static void main(String[] args) throws Exception {

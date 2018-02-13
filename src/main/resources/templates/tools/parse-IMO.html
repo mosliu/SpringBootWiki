@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+
+    <!-- Uploadifive FILES -->
+</head>
+<body>
+<div class="container" layout:fragment="content">
+
+    <!--http://127.0.0.1/goget/test-upload-->
+    <div>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a th:href="@{/}">首页</a></li>
+            <li class="active">自定义上传</li>
+        </ol>
+        <!-- breadcrumbs -->
+        <h1 class="blog-post-title" th:text="${news?.title}">BLOG POST TITLE HERE</h1>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-12 col-sm-12">
+                    <label>文字 *</label>
+                    <textarea id="infotext" class="" contenteditable="true"
+                              style="width: 60%;height: 600px; background: #f0fff0 ;border: 3px solid #ccc;overflow: scroll">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+
+        <div class="divider divider-dotted"><!-- divider --></div>
+        <div id="result"></div>
+        <br/>
+        <br/>
+        <br/>
+    </div>
+    <script>
+        /*<![CDATA[*/
+        let infotext = $('#infotext');
+        let result = $('#result');
+        infotext.on('keyup', function (event) {
+
+            if($('#infotext').is('div')){
+                let text = infotext.text();
+                let retstr =
+                    text.replace(/----------(刘轩)\s+\d+:\d+/g, "\nA:")
+                    //                    .replace(/----------([^\sA]+)\s+\d+:\d+/gm,"\nQ:")
+                    //                    .replace(/----------([^A\n]+)\s+\d+:\d+/gm,"\nQ:")
+                        .replace(/----------([^(\n:]+):\d\d/gm, "\nQ:")
+                        .replace(/\s提示：如需查看最近的对话记录，请点击最近记录。/, "")
+                        .replace(/\s*[Q|A]:\s*[\n\r]([Q|A]):/gm, "$1:");
+                result.html(retstr.split("\n").join("<br/>"));
+            }else{
+                let text = infotext.val();
+                let retstr =
+                    text.replace(/----------\n(刘轩)\s+\d\d:\d\d\n\n\n/g, "\nA:")
+                        .replace(/----------\n([^(\n:]+):\d\d\n\n\n/gm, "\nQ:")
+                        .replace(/\s提示：如需查看最近的对话记录，请点击最近记录。/, "")
+                        .replace(/刘轩20[\d- :]+ \d{4}/g, "\nA:")
+                        .replace(/[^A\n]+20[\d- :]+ \d{4}/g,"\nQ:")
+                        .replace(/\s*[Q|A]:\s*[\n\r]([Q|A]):/gm, "$1:");
+                let rtnlist =  retstr.split("\n");
+                let header ='';
+                let rethtml = ''
+                for(let i=0;i<rtnlist.length;i++){
+                    let line = rtnlist[i].trim();
+                    if(line !== ''){
+
+                        let linehead = line.substr(0,2);
+                        if(header === linehead){
+                            rethtml = rethtml + line.substr(2) +  "  ";
+                        }else{
+                            rethtml =  rethtml +"<br/>"+ line ;
+                        }
+                        header = linehead;
+                    }
+                }
+                result.html(rethtml);
+            }
+
+
+        });
+
+        /*]]>*/
+    </script>
+
+</div>
+
+</body>
+</html>

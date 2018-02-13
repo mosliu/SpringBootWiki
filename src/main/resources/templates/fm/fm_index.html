@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--<html>-->
+<html
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorate="layouts/base" data-ng-app="FileManagerApp">
+
+<!--layout:decorate="layouts/base_withoutJQuery">-->
+
+<head>
+    <!-- third party -->
+    <!--<script type="text/javascript" src="/ui/fm/3rd/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/ui/fm/3rd/angular.min.js"></script>
+    <script type="text/javascript" src="/ui/fm/3rd/angular-translate.min.js"></script>
+    <script type="text/javascript" src="/ui/fm/3rd/ng-file-upload.min.js"></script>
+    <!--<script type="text/javascript" src="/ui/fm/3rd/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="/ui/fm/3rd/paper/bootstrap.min.css"/>
+    <link href="/ui/fm/angular-filemanager.min.css" rel="stylesheet">
+    <script src="/ui/fm/angular-filemanager.min.js"></script>
+    <!-- /third party -->
+    <script type="text/javascript">
+        //example to override angular-filemanager default config
+        angular.module('FileManagerApp').config(['fileManagerConfigProvider', function (config) {
+            var defaults = config.$get();
+            config.set({
+                appName: 'angular-filemanager',
+                defaultLang: 'zh',
+                listUrl: '/fm/list/',
+                uploadUrl: '/fm/upload/',
+                downloadFileUrl: '/fm/preview/',
+                createFolderUrl: '/fm/createFolder/',
+                permissionsUrl: '/fm/changePermissions/',
+                copyUrl: '/fm/copy/',
+                moveUrl: '/fm/move/',
+                removeUrl: '/fm/remove/',
+                renameUrl: '/fm/rename/',
+                getContentUrl: '/fm/getContent/',
+                editUrl: '/fm/edit/',
+                compressUrl: '/fm/compress/',
+                extractUrl: '/fm/extract/',
+                pickCallback: function (item) {
+                    var msg = 'Picked %s "%s" for external use'
+                        .replace('%s', item.type)
+                        .replace('%s', item.fullPath());
+                    window.alert(msg);
+                },
+
+                allowedActions: angular.extend(defaults.allowedActions, {
+                    pickFiles: false,
+                    pickFolders: false,
+                    downloadMultiple: false,
+                    changePermissions: false,
+                }),
+                tplPath: '/ui/fm/templates'
+            });
+        }]);
+    </script>
+</head>
+<body class="smoothscroll enable-animation">
+
+<div layout:fragment="content">
+    <p></p>
+    <div class="container">
+
+        <div class="row">
+            <!-- RIGHT -->
+            <angular-filemanager></angular-filemanager>
+        </div>
+
+        <div>
+            <BR/>
+            <BR/>
+            <BR/>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -84,7 +84,7 @@
                         >
                             <div class="owl-slide" th:each="pic,iter:${sliderPicsList}">
                                 <img class="img-responsive" th:src="${pic.url}" alt="">
-                                <div class="owl--text" th:utext="${pic.comment}">
+                                <div class="ohwl--text" th:utext="${pic.comment}">
                                     国内技术支持组恭祝您<strong>鸡年大吉！</strong></div>
                             </div>
                         </div>
@@ -174,54 +174,6 @@
                                 <small th:text="${#dates.format(news.showDate, 'yyyy-MM-dd')}">2017 03 06</small>
                             </div>
                         </div><!-- /post -->
-
-                    <div class="row tab-post"><!-- post -->
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <a href="blog-sidebar-left.html">
-                                <!--<img src="/ui/smarty/images/demo/people/300x300/3-min.jpg" width="50" alt=""/>-->
-                            </a>
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <a href="blog-sidebar-left.html" class="tab-post-link">项目添加Breadcum</a>
-                            <small>2017 03 06</small>
-                        </div>
-                    </div><!-- /post -->
-
-                    <div class="row tab-post"><!-- post -->
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <a href="blog-sidebar-left.html">
-                                <!--<img src="/ui/smarty/images/demo/people/300x300/3-min.jpg" width="50" alt=""/>-->
-                            </a>
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <strong><a href="/tools/OCR" th:href="@{/tools/OCR}">在线OCR 系统最新上线</a></strong>
-                            <small>快速转换图片中的文字，极大方便日常工作</small>
-                            <small>2016 12 15</small>
-                        </div>
-                    </div><!-- /post -->
-                    <div class="row tab-post"><!-- post -->
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <a href="blog-sidebar-left.html">
-                                <!--<img src="/ui/smarty/images/demo/people/300x300/2-min.jpg" width="50" alt=""/>-->
-                            </a>
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <a href="blog-sidebar-left.html" class="tab-post-link">支持系统重新上线开发</a>
-                            <small>2016 06 21</small>
-                        </div>
-                    </div><!-- /post -->
-
-                    <div class="row tab-post"><!-- post -->
-                        <div class="col-md-2 col-sm-2 col-xs-3">
-                            <a href="blog-sidebar-left.html">
-                                <!--<img src="/ui/smarty/images/demo/people/300x300/1-min.jpg" width="50" alt=""/>-->
-                            </a>
-                        </div>
-                        <div class="col-md-10 col-sm-10 col-xs-9">
-                            <a href="blog-sidebar-left.html" class="tab-post-link">搭建支持系统原型</a>
-                            <small>2016 04 10</small>
-                        </div>
-                    </div><!-- /post -->
 
 
                 </div>

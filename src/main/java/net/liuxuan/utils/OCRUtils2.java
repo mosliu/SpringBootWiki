@@ -1,12 +1,9 @@
 package net.liuxuan.utils;
 
 import com.baidu.aip.ocr.AipOcr;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStreamReader;
 import java.util.Base64;
 import java.util.HashMap;
 

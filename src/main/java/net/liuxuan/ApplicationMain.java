@@ -43,6 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 // 让 spring boot 根据应用所声明的依赖来对 spring 框架进行自动配置，这就减少了开发人员的工作量。
 
 @SpringBootApplication(exclude = {GsonAutoConfiguration.class})
+//@SpringBootApplication()
 //等同于 @Configuration @EnableAutoConfiguration @ComponentScan
 //@Configuration
 //@ComponentScan(basePackages = "net.liuxuan.spring.security , net.liuxuan.spring.mvc.** , ")

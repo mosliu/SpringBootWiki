@@ -15,6 +15,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.Formatter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -78,6 +79,8 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
      */
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        GsonHttpMessageConverter gsonHttpMessageConverter = new GsonHttpMessageConverter();
+        converters.add(gsonHttpMessageConverter);
 //        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder()
 //                .indentOutput(true)
 //                .dateFormat(new SimpleDateFormat("yyyy-MM-dd"))

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--[if IE 8]>
+<html class="ie ie8" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> <![endif]-->
+<!--[if IE 9]>
+<html class="ie ie9" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Support Management System</title>
+
+    <meta name="Author" content="LiuXuan "/>
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0"/>
+    <!--[if IE]>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+
+    <!-- WEB FONTS : use %7C instead of | (pipe) -->
+    <link href="/ui/smarty/css/googlefont.css"
+          rel="stylesheet" type="text/css"/>
+
+    <!-- CORE CSS -->
+    <link href="/ui/smarty/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+    <!-- THEME CSS -->
+    <link href="/ui/smarty/css/essentials.css" rel="stylesheet" type="text/css"/>
+    <link href="/ui/smarty/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="/ui/smarty/css/layout_moses.css" rel="stylesheet" type="text/css"/>
+
+    <!-- PAGE LEVEL SCRIPTS -->
+    <link href="/ui/smarty/css/header-1.css" rel="stylesheet" type="text/css"/>
+    <link href="/ui/smarty/css/color_scheme/green.css" rel="stylesheet" type="text/css" id="color_scheme"/>
+
+    <!-- JAVASCRIPT FILES -->
+    <script type="text/javascript">var plugin_path = '/ui/smarty/plugins/';</script>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+
+
+</head>
+<body class="smoothscroll enable-animation">
+
+<!-- wrapper -->
+<div id="wrapper">
+    <div id="header" class="sticky shadow-after-3 clearfix ">
+        <div th:replace="layouts/base-header::searchHeader"></div>
+        <div th:replace="layouts/base-header::topNav"></div>
+    </div>
+
+    <div layout:fragment="content" class="container">Fake content</div>
+    <div class="pusher"><br/></div>
+</div>
+<!-- /wrapper -->
+
+<footer th:replace="layouts/base-footer::footer"> </footer>
+
+<!-- SCROLL TO TOP -->
+<a href="#" id="toTop"></a>
+
+<!-- PRELOADER -->
+<div id="preloader">
+    <div class="inner">
+        <span class="loader"></span>
+    </div>
+</div>
+<!-- /PRELOADER -->
+
+
+
+<!-- STYLESWITCHER - REMOVE -->
+<!--<script async="true" type="text/javascript" src="/ui/smarty/plugins/styleswitcher/styleswitcher.js"></script>-->
+<script type="text/javascript" src="/ui/smarty/js/scripts.js"></script>
+<script type="text/javascript" src="/ui/smarty/js/scripts_moses.js"></script>
+</body>
+</html>

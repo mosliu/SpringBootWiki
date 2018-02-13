@@ -98,7 +98,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "role", key = "'list_allRoleNames'")
+    @CacheEvict(cacheNames = "role", key = "'list_allRoleNames'",allEntries = true)
     public Map<String, Object> updateAuths(String rolename, String[] authArrays) {
         Map<String, Object> map = new HashMap<String, Object>();
 

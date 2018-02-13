@@ -1,15 +1,9 @@
 package net.liuxuan.SprKi.controller.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import net.liuxuan.spring.Helper.ResponseHelper;
 import net.liuxuan.utils.upload.UploadUtil;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.ui.Model;
@@ -61,8 +55,8 @@ public class UploadFileController {
     @Value("${SprKi.upload.videoPath}")
     private String videoPath;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+//    @Autowired
+//    private ObjectMapper objectMapper;
     /**
      * The Context.
      */

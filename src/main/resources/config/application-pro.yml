@@ -248,6 +248,8 @@ SprKi:
     videoPath: d:/restrictedFiles
   editor:
     acl: ROLE_USER
+  filemanage:
+      basepath: D:/files
   ticket:
     enablemail: true
     mailto: liuxuan@liuxuan.net
