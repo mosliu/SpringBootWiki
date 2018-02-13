@@ -27,13 +27,13 @@ public class DeviceKind {
 
     //类型名
     @Column(nullable = false,length = 100)
-    String deviceKindName;
+    private String deviceKindName;
 
     @Column(nullable = false,length = 100)
-    String deviceKindNameEN;
+    private String deviceKindNameEN;
 
     @Column(nullable = false,length = 100)
-    String deviceKindNameCN;
+    private String deviceKindNameCN;
 
     boolean enable=true;
 

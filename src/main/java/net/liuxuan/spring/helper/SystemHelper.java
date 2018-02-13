@@ -47,9 +47,9 @@ public final class SystemHelper {
     static UserDetailInfoService userDetailInfoService;
     static RoleService roleService;
     @Resource
-    UserDetailInfoService userDetailInfoService1;
+    private UserDetailInfoService userDetailInfoService1;
     @Resource
-    RoleService roleService1;
+    private RoleService roleService1;
 
 //    @Resource
 //    UsersRepository usersRepository1;

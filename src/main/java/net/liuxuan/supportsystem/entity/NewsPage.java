@@ -34,13 +34,13 @@ import java.util.Date;
 @IgnoreSizeOf
 public class NewsPage extends CMSContent{
     @Column(nullable = true,length=250)
-    String picStr;
+    protected String picStr;
     @Column(nullable = true,length=250)
-    String picType;
+    protected String picType;
 
     @Column(columnDefinition = "TIMESTAMP",nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
-    Date showDate;
+    protected Date showDate;
 
     public Date getShowDate(){
         if(showDate==null){

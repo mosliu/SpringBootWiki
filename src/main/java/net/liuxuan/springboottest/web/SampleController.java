@@ -36,15 +36,15 @@ public class SampleController {
 
     private static Logger log = LoggerFactory.getLogger(SampleController.class);
     @Autowired
-    PersonRepository personRepository;
+    private PersonRepository personRepository;
     @Autowired
-    AddressRepository addressRepository;
+    private AddressRepository addressRepository;
     @Autowired
-    TownRepository townRepository;
+    private TownRepository townRepository;
     @Autowired
-    CompanyRepository companyRepository;
+    private CompanyRepository companyRepository;
 
-    PersonMemoryRepository personMemoryRepository = new PersonMemoryRepository();
+    private PersonMemoryRepository personMemoryRepository = new PersonMemoryRepository();
 
     /**
      * <p>

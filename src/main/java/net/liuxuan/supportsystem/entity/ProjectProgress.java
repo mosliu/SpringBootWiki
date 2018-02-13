@@ -31,24 +31,24 @@ public class ProjectProgress {
      * The Project progress name.
      */
     @Column(nullable = false,length = 200)
-    String projectProgressName;
+    protected String projectProgressName;
 
     /**
      * The Project progress.
      */
     @Column(nullable = false)
-    Integer projectProgress;
+    protected Integer projectProgress;
 
     /**
      * The Comment.
      */
     @Column(nullable = true,length = 200)
-    String comment;
+    protected String comment;
 
 
     /**
      * The Disabled.
      */
     @Column(name = "disabled", nullable = false)
-    boolean disabled=false;
+    protected boolean disabled=false;
 }

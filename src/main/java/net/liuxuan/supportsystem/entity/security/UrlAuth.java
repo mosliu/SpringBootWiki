@@ -36,13 +36,13 @@ public class UrlAuth {
     private Long id;
 
     @Column(nullable = false,length = 200)
-    String urlAuthName;
+    protected String urlAuthName;
 
     @Column(nullable = false,length = 200)
-    String urlAuthNameCN;
+    protected String urlAuthNameCN;
 
     @Column(nullable = false,length = 200)
-    String comment;
+    protected String comment;
 
     @ManyToMany(mappedBy="urlAuths")
     //只需要设置mappedBy="urlAuths"表明UrlAuth实体是关系被维护端就可以了
@@ -51,5 +51,5 @@ public class UrlAuth {
     private Set<Role> roles = new HashSet<Role>();
 
     @Column(name = "disabled", nullable = false)
-    boolean disabled=false;
+    protected boolean disabled=false;
 }

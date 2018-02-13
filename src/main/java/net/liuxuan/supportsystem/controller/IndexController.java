@@ -35,10 +35,10 @@ public class IndexController {
     private static Logger log = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
-    IndexService indexService;
+    private IndexService indexService;
 
     @Autowired
-    SliderPicsService sliderPicsService;
+    private SliderPicsService sliderPicsService;
 
 
     @RequestMapping("/")

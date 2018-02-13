@@ -27,20 +27,20 @@ public class Devices {
     private Long id;
 
     @Column(nullable = false,length = 100)
-    String devicename;
+    protected String devicename;
     @Column(nullable = false,length = 100)
-    String devicenameCN;
+    protected String devicenameCN;
     @Column(nullable = false,length = 100)
-    String devicenameEN;
+    protected String devicenameEN;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="device_type")
-    DeviceType deviceType;
+    protected DeviceType deviceType;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="device_kind")
-    DeviceKind deviceKind;
+    protected DeviceKind deviceKind;
 
 }

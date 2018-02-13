@@ -37,10 +37,10 @@ public class RoleServiceImpl implements RoleService {
     private static Logger log = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     @Autowired
-    RoleRepository roleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
-    UrlAuthRepository urlAuthRepository;
+    private UrlAuthRepository urlAuthRepository;
 
     @Override
     @Cacheable(cacheNames = "role", key = "'list_disablefalse'")

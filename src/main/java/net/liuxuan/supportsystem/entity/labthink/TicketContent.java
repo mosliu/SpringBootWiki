@@ -34,22 +34,22 @@ import java.util.Date;
 @Table(name = "Sprki_CMS_ContentTicket")
 @PrimaryKeyJoinColumn(name = "Ticket_ID")
 @IgnoreSizeOf
-public class TicketContent extends CMSContent{
+public class TicketContent extends CMSContent {
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "departmentBy_")
-    @JoinColumn(name="department")
+    @JoinColumn(name = "department")
     protected Department department;//来源部门
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="devices")
+    @JoinColumn(name = "devices")
     protected Devices devices;//设备
 
     @Lob
     @Field
     @Column(columnDefinition = "longtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
-    protected String question =""; // 正文
+    protected String question = ""; // 正文
 
 //    @Lob
 //    @Field
@@ -61,7 +61,7 @@ public class TicketContent extends CMSContent{
     @Temporal(TemporalType.TIMESTAMP)
     protected Date submitDate; // 问题的时间
 
-    protected boolean resolved=false;
+    protected boolean resolved = false;
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     protected FAQContent faq;//来源部门
@@ -71,11 +71,11 @@ public class TicketContent extends CMSContent{
     protected Date resolvedDate; // 问题的时间
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="assignToUser")
-    UserDetailInfo assignToUser;
+    @JoinColumn(name = "assignToUser")
+    protected UserDetailInfo assignToUser;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="answerUser")
-    UserDetailInfo answerUser;
+    @JoinColumn(name = "answerUser")
+    protected UserDetailInfo answerUser;
 
 }

@@ -35,15 +35,15 @@ import java.util.Date;
 @Table(name = "Sprki_CMS_ContentFAQ")
 @PrimaryKeyJoinColumn(name = "FAQ_ID")
 @IgnoreSizeOf
-public class FAQContent extends CMSContent{
+public class FAQContent extends CMSContent {
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "departmentBy_")
-    @JoinColumn(name="department")
+    @JoinColumn(name = "department")
     protected Department department;//来源部门
 
     @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name="devices")
+    @JoinColumn(name = "devices")
     protected Devices devices;//设备
 
     /**
@@ -51,7 +51,7 @@ public class FAQContent extends CMSContent{
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "deviceTypeBy_")
-    @JoinColumn(name="devicetype")
+    @JoinColumn(name = "devicetype")
     protected DeviceType deviceType; // 设备类型
 
 
@@ -60,20 +60,20 @@ public class FAQContent extends CMSContent{
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @IndexedEmbedded(depth = 1, prefix = "deviceSubInfoBy_")
-    @JoinColumn(name="deviceSubInfo")
+    @JoinColumn(name = "deviceSubInfo")
     protected DeviceSubInfo deviceSubInfo; // 设备子类型
 
     @Lob
     @Field
     @Column(columnDefinition = "longtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
-    protected String question =""; // 正文
+    protected String question = ""; // 正文
 
     @Lob
     @Field
     @Column(columnDefinition = "longtext", nullable = false)
     @Basic(fetch = FetchType.LAZY)
-    protected String answer =""; // 正文
+    protected String answer = ""; // 正文
 
     @Column(columnDefinition = "TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)

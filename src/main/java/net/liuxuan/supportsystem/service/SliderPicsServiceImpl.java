@@ -29,7 +29,7 @@ public class SliderPicsServiceImpl implements SliderPicsService{
     private static Logger log = LoggerFactory.getLogger(SliderPicsServiceImpl.class);
 
     @Autowired
-    SliderPicsRepository sliderPicsRepository;
+    private SliderPicsRepository sliderPicsRepository;
 
     @Override
 //    @CachePut(cacheNames = "sliderPics",key = "#sliderPics.id")

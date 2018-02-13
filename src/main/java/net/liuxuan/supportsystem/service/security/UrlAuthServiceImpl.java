@@ -33,7 +33,7 @@ public class UrlAuthServiceImpl implements UrlAuthService {
      * The Url auth repository.
      */
     @Autowired
-    UrlAuthRepository urlAuthRepository;
+    private UrlAuthRepository urlAuthRepository;
 
     @Override
     @CacheEvict(cacheNames = "urlAuth", key = "'list_disablefalse'",allEntries = true)

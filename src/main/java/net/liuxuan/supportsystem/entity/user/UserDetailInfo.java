@@ -28,31 +28,31 @@ public class UserDetailInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
-    Long id;
+    protected Long id;
 
     //    @OneToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "dbUser")
     @OneToOne(mappedBy = "userDetailInfo")
-    DbUser dbUser;
+    protected DbUser dbUser;
     @Column(name = "disabled", nullable = false)
-    boolean disabled = false;
+    protected boolean disabled = false;
     @Column(nullable = true, length = 50)
-    String firstName;
+    protected String firstName;
     @Column(nullable = true, length = 50)
-    String lastName;
+    protected String lastName;
     @Column(nullable = true, length = 20)
-    String gender;
+    protected String gender;
     @Column(nullable = true, length = 50)
-    String email;
+    protected String email;
     @Column(nullable = true, length = 300)
-    String avatar;
+    protected String avatar;
     @Column(nullable = true, length = 500)
-    String selfDescribe;
+    protected String selfDescribe;
     @OneToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "department")
-    Department department;
+    protected Department department;
     @Transient
-    boolean onlinestatus;
+    protected boolean onlinestatus;
 
 
     public String getFullNameCN() {

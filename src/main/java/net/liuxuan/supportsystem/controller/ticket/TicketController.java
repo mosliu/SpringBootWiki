@@ -87,7 +87,7 @@ TicketController {
 //    @Autowired
 //    private SimpleMailMessage templateMessage;
     @Autowired
-    FAQContentService faqContentService;
+    private FAQContentService faqContentService;
 
     @RequestMapping(value = "/ticket", method = RequestMethod.GET)
     public String getTicket(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {

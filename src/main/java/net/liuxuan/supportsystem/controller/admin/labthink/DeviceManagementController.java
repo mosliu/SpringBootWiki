@@ -44,13 +44,13 @@ public class DeviceManagementController {
     private static Logger log = LoggerFactory.getLogger(DeviceManagementController.class);
 
     @Autowired
-    DevicesService devicesService;
+    private DevicesService devicesService;
 
     @Autowired
-    DeviceTypeService deviceTypeService;
+    private DeviceTypeService deviceTypeService;
 
     @Autowired
-    DeviceKindService deviceKindService;
+    private DeviceKindService deviceKindService;
 
 
     @RequestMapping("deviceManage")

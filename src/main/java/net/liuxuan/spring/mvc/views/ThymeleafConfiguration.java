@@ -58,7 +58,7 @@ public class ThymeleafConfiguration {
     private static final String VIEWS = "templates/";
 
     @Autowired
-    ServletContext context;
+    private ServletContext context;
     @Autowired
     private ApplicationContext appContext;
 

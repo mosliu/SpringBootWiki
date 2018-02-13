@@ -27,15 +27,15 @@ public class DeviceType {
 
     //类型名
     @Column(nullable = false,length = 100)
-    String deviceTypeName;
+    protected String deviceTypeName;
     //类型名
     @Column(nullable = false,length = 100)
-    String deviceTypeNameEN;
+    protected String deviceTypeNameEN;
     //类型名
     @Column(nullable = false,length = 100)
-    String deviceTypeNameCN;
+    protected String deviceTypeNameCN;
 
-    boolean enable=true;
+    protected boolean enable=true;
 //
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "deviceType")
 //    private Set<Devices> items = new HashSet<Devices>();

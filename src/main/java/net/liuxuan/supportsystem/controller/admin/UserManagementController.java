@@ -47,11 +47,11 @@ import java.util.*;
 public class UserManagementController {
     private static Logger log =  LoggerFactory.getLogger(UserManagementController.class);
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
     @Autowired
-    RoleService roleService;
+    private RoleService roleService;
     @Resource
-    DepartmentRepository departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @RequestMapping("userManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

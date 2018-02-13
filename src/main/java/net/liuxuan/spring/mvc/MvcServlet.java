@@ -22,7 +22,7 @@ import java.io.IOException;
 public class MvcServlet implements Servlet {
 
     @Autowired
-    SecurityLogService securityLogService;
+    private SecurityLogService securityLogService;
 
     /**
      * @see javax.servlet.Servlet#destroy()

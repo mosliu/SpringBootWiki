@@ -54,15 +54,15 @@ import java.util.Properties;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
     @Autowired
-    SecurityUserDetailsServiceImpl securityUserDetailsService;
+    private SecurityUserDetailsServiceImpl securityUserDetailsService;
     @Autowired
-    MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
+    private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
     @Autowired
-    MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
     //    @Resource
 //    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
     @Resource
-    MyLogoutHandler myLogoutHandler;
+    private MyLogoutHandler myLogoutHandler;
     //    @Resource
 //    IPRoleAuthenticationFilter iPRoleAuthenticationFilter;
     @Autowired
@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 //    @Qualifier("customSecurityFilter")
     @Autowired
-    CustomSecurityFilter customSecurityFilter;
+    private CustomSecurityFilter customSecurityFilter;
 
 
     /**

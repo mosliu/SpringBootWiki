@@ -21,18 +21,16 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity  //实体类
 @Table(name = "Sprki_Labthink_Department")
-public class Department{
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(unique = true, nullable = false)
     private Long id;
+
     @Field
-    @Column(nullable = false,length = 80)
-    String departmentName;
+    @Column(nullable = false, length = 80)
+    protected String departmentName;
 
-    @Column(nullable = false,length = 80)
-    String departmentNameCN;
-
-
-
+    @Column(nullable = false, length = 80)
+    protected String departmentNameCN;
 }

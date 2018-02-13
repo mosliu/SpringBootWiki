@@ -39,7 +39,7 @@ public class CMSContentTagsManagementController {
     private static Logger log = LoggerFactory.getLogger(CMSContentTagsManagementController.class);
 
     @Autowired
-    CMSContentTagsService cMSContentTagsService;
+    private CMSContentTagsService cMSContentTagsService;
 
     @RequestMapping("cMSContentTagsManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

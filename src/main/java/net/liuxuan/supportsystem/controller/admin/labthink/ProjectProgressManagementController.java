@@ -40,7 +40,7 @@ public class ProjectProgressManagementController {
     private static Logger log = LoggerFactory.getLogger(ProjectProgressManagementController.class);
 
     @Autowired
-    ProjectProgressService projectProgressService;
+    private ProjectProgressService projectProgressService;
 
     @RequestMapping("projectProgressManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

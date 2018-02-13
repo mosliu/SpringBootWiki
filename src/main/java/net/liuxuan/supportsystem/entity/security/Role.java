@@ -32,16 +32,16 @@ public class Role {
     @Id
     @NotNull
     @Column(nullable = false, length = 200)
-    String rolename;
+    protected String rolename;
 
     @Column(nullable = false, length = 200)
-    String roleDescribe;
+    protected String roleDescribe;
 
     @Column(nullable = false, length = 200)
-    String comment;
+    protected String comment;
 
     @Column(name = "disabled", nullable = false)
-    boolean disabled = false;
+    protected boolean disabled = false;
 
     //关系维护端，负责多对多关系的绑定和解除
     //@JoinTable注解的name属性指定关联表的名字，joinColumns指定外键的名字，关联到关系维护端(Player)

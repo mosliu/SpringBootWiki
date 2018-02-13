@@ -30,16 +30,16 @@ public class SliderPics {
     private Long id;
 
     @Column(nullable = false,length = 200)
-    String sliderPicsName;
+    private String sliderPicsName;
 
     @Column(nullable = false,length = 200)
-    String sliderPicsNameCN;
+    private String sliderPicsNameCN;
 
     @Column(nullable = false,length = 200)
-    String comment;
+    private String comment;
 
     @Column(nullable = false,length = 400)
-    String url;
+    private String url;
 
     @Column(name = "disabled", nullable = false)
     boolean disabled=false;

@@ -33,7 +33,7 @@ import java.util.Map;
 public class NewsController {
 
     @Autowired
-    NewsPageService newsPageService;
+    private NewsPageService newsPageService;
 
 
     @RequestMapping("/news2")
