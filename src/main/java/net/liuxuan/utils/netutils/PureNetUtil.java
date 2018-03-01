@@ -58,7 +58,8 @@ public class PureNetUtil {
                     sb.append(s.getKey()).append("=").append(s.getValue()).append("&");
                 }
                 //将参数通过输出流写入
-                writer.write(sb.deleteCharAt(sb.toString().length() - 1).toString());
+//                writer.write(sb.deleteCharAt(sb.toString().length() - 1).toString());
+                writer.write(sb.deleteCharAt(sb.length() - 1).toString());
                 writer.close();//一定要关闭,不然可能出现参数不全的错误
                 sb = null;
             }
