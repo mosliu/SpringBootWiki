@@ -37,7 +37,7 @@
                             <div class="row">
                                 <div class="form-group">
                                     <div class="col-md-5 col-sm-5">
-                                        <label>标题</label>
+                                        <label>标题/内容</label>
                                         <input type="text" th:field="*{keyword}" class="form-control"/>
                                     </div>
                                     <div class="col-md-3 col-sm-3">
@@ -72,7 +72,7 @@
                                             <option value="-1">ALL</option>
                                             <option th:each="type : ${DevicesType_list}"
                                                     th:value="${type.id}"
-                                                    th:text="${'类型:' + type.deviceTypeName}">库伦
+                                                    th:text="${type.deviceTypeName}">库伦
                                             </option>
                                         </select>
                                     </div>
@@ -82,7 +82,7 @@
                                             <option value="-1">ALL</option>
                                             <option th:each="type : ${Department_list}"
                                                     th:value="${type.id}"
-                                                    th:text="${'department:' + type.departmentName}">售后
+                                                    th:text="${type.departmentName}">售后
                                             </option>
                                         </select>
                                     </div>
@@ -92,7 +92,7 @@
                                             <option value="-1">ALL</option>
                                             <option th:each="type : ${Devices_list}"
                                                     th:value="${type.id}"
-                                                    th:text="${'devices:' + type.devicename}">W3/230
+                                                    th:text="${type.devicename}">W3/230
                                             </option>
                                         </select>
                                     </div>

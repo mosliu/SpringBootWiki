@@ -21,8 +21,8 @@ import java.io.IOException;
 @Component("mvcServlet")
 public class MvcServlet implements Servlet {
 
-    @Autowired
-    private SecurityLogService securityLogService;
+//    @Autowired
+//    private SecurityLogService securityLogService;
 
     /**
      * @see javax.servlet.Servlet#destroy()

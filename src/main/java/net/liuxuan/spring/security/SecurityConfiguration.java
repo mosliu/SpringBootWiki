@@ -61,8 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
     //    @Resource
 //    MyLoginUrlAuthEntryPoint myLoginUrlAuthEntryPoint;
-    @Resource
-    private MyLogoutHandler myLogoutHandler;
+//    @Resource
+//    private MyLogoutHandler myLogoutHandler;
     //    @Resource
 //    IPRoleAuthenticationFilter iPRoleAuthenticationFilter;
     @Autowired

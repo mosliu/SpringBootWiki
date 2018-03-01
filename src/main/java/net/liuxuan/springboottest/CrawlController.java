@@ -23,8 +23,8 @@ public class CrawlController {
 
     @Autowired(required = false)
     private  IndexWriter indexWriter;
-    @Autowired(required = false)
-    private IndexSearcher indexSearcher;
+//    @Autowired(required = false)
+//    private IndexSearcher indexSearcher;
 
     @ResponseBody
     @RequestMapping("ntes")
