@@ -58,6 +58,6 @@ public class BuildSearchIndex implements ApplicationListener {
 //            e.printStackTrace();
             log.error("An error occurred trying to build the serach index! ",e);
         }
-        return;
+//        return;
     }
 }
