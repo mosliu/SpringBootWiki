@@ -31,7 +31,7 @@ public class wordSplitController {
     public String splitWord(String text,String isMaxLength) throws IOException {
 
         List<Word> words;
-        boolean maxmatching = isMaxLength.equals("1");
+        boolean maxmatching = "1".equals(isMaxLength);
 
         if(maxmatching){
             words = WordSegmenter.segWithStopWords(text, SegmentationAlgorithm.MaximumMatching);
