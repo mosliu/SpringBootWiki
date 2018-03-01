@@ -8,6 +8,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import net.liuxuan.utils.codec.HEXUtils;
+
 /**
  * Copyright (c) 2010-2017.  by Liuxuan   All rights reserved. <br/>
  * ***************************************************************************
@@ -81,17 +83,7 @@ public class DrawUtils {
         return d;
     }
 
-    public static String byte2hex(byte[] bytes) {
-        StringBuilder sign = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(bytes[i] & 0xFF);
-            if (hex.length() == 1) {
-                sign.append("0");
-            }
-            sign.append(hex.toUpperCase());
-        }
-        return sign.toString();
-    }
+
     private static byte charToByte(char c) {
         return (byte) "0123456789ABCDEF".indexOf(c);
     }
@@ -115,7 +107,7 @@ public class DrawUtils {
         if(!path.exists()) {
             path.mkdirs();
         }
-        String filename =DrawUtils.byte2hex(md5) + ".png";
+        String filename =HEXUtils.byte2hex(md5) + ".png";
         try {
             File imageFile = new File(path.getAbsolutePath()+File.separatorChar + filename);
             ImageIO.write(image, "PNG",imageFile);

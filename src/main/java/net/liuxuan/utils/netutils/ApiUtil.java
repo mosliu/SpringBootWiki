@@ -1,5 +1,7 @@
 package net.liuxuan.utils.netutils;
 
+import net.liuxuan.utils.codec.HEXUtils;
+
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -94,7 +96,7 @@ public class ApiUtil {
         }
 
         // 第四步：把二进制转化为大写的十六进制
-        return byte2hex(bytes);
+        return HEXUtils.byte2hex(bytes);
     }
 
     /**
@@ -134,20 +136,6 @@ public class ApiUtil {
         return bytes;
     }
 
-    /**
-     * 把字节流转换为十六进制表示方式。
-     */
-    private static String byte2hex(byte[] bytes) {
-        StringBuilder sign = new StringBuilder();
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(bytes[i] & 0xFF);
-            if (hex.length() == 1) {
-                sign.append("0");
-            }
-            sign.append(hex.toUpperCase());
-        }
-        return sign.toString();
-    }
 
     private static String callApi(URL url, Map<String, String> params) throws IOException {
         String query = buildQuery(params, CHARSET_UTF8);
@@ -269,7 +257,7 @@ public class ApiUtil {
             return false;
         }
         for (int i = 0; i < strLen; i++) {
-            if ((Character.isWhitespace(value.charAt(i)) == false)) {
+            if ((!Character.isWhitespace(value.charAt(i)))) {
                 return true;
             }
         }

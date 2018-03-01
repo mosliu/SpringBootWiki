@@ -361,7 +361,8 @@ public class UserDetailInfoServiceImpl implements UserDetailInfoService {
                 }
             }
 
-            if (inold == true) {
+            if (inold) {
+                //重置标志位
                 inold = false;
             } else {
                 Authorities new_authorities = new Authorities();

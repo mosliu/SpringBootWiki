@@ -158,7 +158,8 @@ public class FAQController {
             model.put("faq", faq);
             return "faq/faq_show";
         }
-        if(faq.isDisabled()==true){
+//        if(faq.isDisabled()==true){
+        if(faq.isDisabled()){
             faq = createNoAccessRightFaqContent("该条信息已删除");
             faq.setId(id);
             model.put("faq", faq);
