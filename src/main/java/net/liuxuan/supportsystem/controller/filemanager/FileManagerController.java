@@ -130,7 +130,8 @@ public class FileManagerController {
 
                     File f = new File(path, FMFileUtils.getFileName(part.getHeader("content-disposition")));
                     if (!FMFileUtils.write(part.getInputStream(), f)) {
-                        throw new Exception("文件上传失败");
+
+                        throw new FileManageException("文件上传失败");
                     }
                 }
             }
@@ -179,7 +180,7 @@ public class FileManagerController {
             String newPath = json.get("newPath") == null ? "" : json.get("newPath").getAsString();
             File newDir = new File(basePath + newPath);
             if (!newDir.mkdir()) {
-                throw new Exception("不能创建目录: " + newPath);
+                throw new FileManageException("不能创建目录: " + newPath);
             }
             return success();
         } catch (Exception e) {
@@ -275,7 +276,7 @@ public class FileManagerController {
                 String path = items.get(i).getAsString();
                 File srcFile = new File(basePath, path);
                 if (!FileUtils.deleteQuietly(srcFile)) {
-                    throw new Exception("删除失败: " + srcFile.getAbsolutePath());
+                    throw new FileManageException("删除失败: " + srcFile.getAbsolutePath());
                 }
             }
             return success();
