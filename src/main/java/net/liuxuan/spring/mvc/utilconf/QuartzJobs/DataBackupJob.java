@@ -38,8 +38,11 @@ public class DataBackupJob extends QuartzJobBean {
 //    private String path = SystemHelper.getRootPath() + "/backup/";
 //    private String sqlFileName = null;
     //    private String lastStr = null;
-    private String name;
-
+//    private String name;
+//
+//    public void setName(String name) {
+//        this.name = name;
+//    }
     public void excuteCmd(String lastStr) throws IOException {
 //        String temp = ("cmd /c " + lastStr).replaceAll("//", "\"\\\\\"").replaceAll("\\\\", "\"\\\\\"");//把\换成windows的地址分隔符/
         String temp = ("cmd /c " + lastStr);//把\换成windows的地址分隔符/
@@ -154,8 +157,6 @@ public class DataBackupJob extends QuartzJobBean {
         return path;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+
 
 }

@@ -49,7 +49,7 @@ public class PinYinTools {
             -10838, -10832, -10815, -10800, -10790, -10780, -10764, -10587, -10544, -10533, -10519, -10331, -10329, -10328, -10322, -10315, -10309,
             -10307, -10296, -10281, -10274, -10270, -10262, -10260, -10256, -10254};
     private static PinYinTools characterParser = new PinYinTools();
-    private StringBuilder buffer;
+
     private String resource;
 
     public static PinYinTools getInstance() {
@@ -118,11 +118,12 @@ public class PinYinTools {
     public String getSelling(String chs) {
         String key;
         String value;
+        StringBuilder buffer;
         buffer = new StringBuilder();
         for (int i = 0; i < chs.length(); i++) {
             key = chs.substring(i, i + 1);
             if (key.getBytes().length >= 2) {
-                value = (String) convert(key);
+                value = convert(key);
                 if (value == null) {
                     value = "unknown";
                 }
