@@ -53,12 +53,10 @@ public class FileManagerController {
      */
 //    public static String ROOT = "F:\\SSS\\";
     public static String ROOT = "F:/SSS";
-
-    @Value("${SprKi.filemanage.basepath}")
-    private String basePath;
-
     //获取发送短消息界面
     private static Logger log = LoggerFactory.getLogger(FileManagerController.class);
+    @Value("${SprKi.filemanage.basepath}")
+    private String basePath;
 
     @RequestMapping("/")
     public String news(HttpServletRequest request,
@@ -113,7 +111,6 @@ public class FileManagerController {
 
 
     }
-
 
 
     /**
@@ -399,6 +396,7 @@ public class FileManagerController {
                 case ".rar":
                     RarUtils.unRarFile(file, basePath + destination);
                     break;
+                default:
             }
             return success();
         } catch (Exception e) {
