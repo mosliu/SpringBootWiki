@@ -18,8 +18,8 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipUtils {
 
-    public static void zipFiles(ZipOutputStream out, String path, File... srcFiles) {
-        path = path.replaceAll("\\*", "/");
+    public static void zipFiles(ZipOutputStream out, String _path, File... srcFiles) {
+        String path = _path.replaceAll("\\*", "/");
         if (!path.endsWith("/")) {
             path += "/";
         }
@@ -51,7 +51,8 @@ public class ZipUtils {
         }
     }
 
-    public static void unZipFiles(File zipFile, String descDir) throws IOException {
+    public static void unZipFiles(File zipFile, String _descDir) throws IOException {
+        String descDir = _descDir;
         if (!descDir.endsWith("/")) {
             descDir += "/";
         }

@@ -57,7 +57,7 @@ public class CommonController {
      * Init.
      */
     @PostConstruct
-    public void init(){
+    public void init() {
         Map<RequestMappingInfo, HandlerMethod> handlerMethods = requestMappingHandlerMapping.getHandlerMethods();
         Set<RequestMappingInfo> requestMappingInfos = handlerMethods.keySet();
         UrlMappingList = requestMappingInfos
@@ -79,52 +79,53 @@ public class CommonController {
      */
     @RequestMapping(value = "/goget/{path}", method = RequestMethod.GET)
     public String getMsg(
-            @PathVariable String path,
+            @PathVariable String _path,
             HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
-
-        System.out.println("PATH IS:"+path);
-        path = path.replaceAll("-","/");
-        System.out.println(UrlMappingList.contains("/"+path));
-        if(UrlMappingList.contains("/"+path)){
-            return "redirect:/"+path;
+        String path = _path;
+        System.out.println("PATH IS:" + path);
+        path = path.replaceAll("-", "/");
+        System.out.println(UrlMappingList.contains("/" + path));
+        if (UrlMappingList.contains("/" + path)) {
+            return "redirect:/" + path;
         }
 
-        System.out.println("PATH TRANSLATE TO:"+path);
+        System.out.println("PATH TRANSLATE TO:" + path);
 
         return path;
     }
 
     @RequestMapping(value = "/moses", method = RequestMethod.GET)
-    public String mosesParse(){
+    public String mosesParse() {
         return "tools/parse";
     }
 
 
     @RequestMapping(value = "/func/get", method = RequestMethod.GET)
     @ResponseBody
-    public String getFile(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+    public String getFile(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         String path = request.getParameter("file");
-        path = restrictedFilePath +'/'+path;
+        path = restrictedFilePath + '/' + path;
         File f = new File(path);
         String rtn;
-        if(f.exists()&&(!f.isDirectory())){
+        if (f.exists() && (!f.isDirectory())) {
             rtn = path;
-        }else{
-            rtn = path+ "  :   Not Existed!!!";
+        } else {
+            rtn = path + "  :   Not Existed!!!";
         }
 
         return rtn;
     }
+
     @RequestMapping(value = "/func/get2", method = RequestMethod.GET)
 //    @ResponseBody
     public void getFile2(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) throws IOException {
         String path = request.getParameter("file");
-        path = restrictedFilePath +'/'+path;
+        path = restrictedFilePath + '/' + path;
         File f = new File(path);
 //        String rtn =null;
-        if(f.exists()&&(!f.isDirectory())){
+        if (f.exists() && (!f.isDirectory())) {
 //            rtn = path;
-        }else{
+        } else {
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);
             ServletOutputStream outputStream = response.getOutputStream();
@@ -133,25 +134,25 @@ public class CommonController {
             return;
         }
 
-        String mimeType= URLConnection.guessContentTypeFromName(f.getName());
-        if(mimeType==null){
+        String mimeType = URLConnection.guessContentTypeFromName(f.getName());
+        if (mimeType == null) {
             System.out.println("mimetype is not detectable, will take default");
             mimeType = "application/octet-stream";
         }
 
-        System.out.println("mimetype : "+mimeType);
+        System.out.println("mimetype : " + mimeType);
 //        mimeType = "application/force-download";
         response.setContentType(mimeType);
         /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
             while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
 //        response.setHeader("Content-Disposition", String.format("inline; filename=\"" + f.getName() +"\""));
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + f.getName() +"\""));
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"" + f.getName() + "\""));
 
 
         /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
         //response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
 
-        response.setContentLength((int)f.length());
+        response.setContentLength((int) f.length());
 
         InputStream inputStream = new BufferedInputStream(new FileInputStream(f));
 
@@ -159,7 +160,6 @@ public class CommonController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
 
     }
-
 
 
     /**
@@ -172,7 +172,7 @@ public class CommonController {
      */
     @RequestMapping(value = "/func/add_avatar", method = RequestMethod.GET)
     @ResponseBody
-    public String addAvatar(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+    public String addAvatar(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         UserDetailInfoService userDetailInfoService = (UserDetailInfoService) SpringContextHelper.getBean("userDetailInfoServiceImpl");
         userDetailInfoService.checkAllUserDetailInfoAvatar();
         return "OK";
@@ -188,7 +188,7 @@ public class CommonController {
      */
     @RequestMapping(value = "/func/addDepartmentRole", method = RequestMethod.GET)
     @ResponseBody
-    public String addDepartmentRole(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model){
+    public String addDepartmentRole(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         DepartmentService departmentServiceImpl = (DepartmentService) SpringContextHelper.getBean("departmentServiceImpl");
         departmentServiceImpl.checkDeparmentRole();
         return "OK";

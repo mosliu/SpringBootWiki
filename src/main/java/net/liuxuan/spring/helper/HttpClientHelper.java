@@ -218,7 +218,8 @@ public class HttpClientHelper {
         return EntityUtils.toString(entity, "UTF-8");
     }
 
-    private static String gethPath(String path, Map<String, String> params) throws UnsupportedEncodingException {
+    private static String gethPath(String _path, Map<String, String> params) throws UnsupportedEncodingException {
+        String path = _path;
         if (params != null) {
             if (path.indexOf("?") > -1) {
                 path += "&";

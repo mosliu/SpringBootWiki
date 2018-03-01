@@ -20,7 +20,7 @@ import java.util.Set;
  * 2016/3/8  |    Moses       |     Created <br/>
  */
 public class EntityTargetStrategy implements ExclusionStrategy {
-    private static Logger log = LoggerFactory.getLogger(EntityTargetStrategy.class);
+//    private static Logger log = LoggerFactory.getLogger(EntityTargetStrategy.class);
 
     @Override
     public boolean shouldSkipClass(Class<?> class1) {

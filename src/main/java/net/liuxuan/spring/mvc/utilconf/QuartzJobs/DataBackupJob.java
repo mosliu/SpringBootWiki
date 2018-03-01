@@ -138,8 +138,7 @@ public class DataBackupJob extends QuartzJobBean {
         } else {
             toPath.mkdirs();
         }
-        path = toPath.getAbsolutePath();
-        return path;
+        return toPath.getAbsolutePath();
     }
 
     /**

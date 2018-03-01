@@ -82,18 +82,18 @@ public class UserManagementController {
         switch (dto.action) {
             case "edit":
 
-                userDetailInfo = userDetailInfoService.findUserDetailInfoByUsers(u);
+                UserDetailInfo userDetailInfo2 = userDetailInfoService.findUserDetailInfoByUsers(u);
                 if (userDetailInfo == null) {
                     redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
 //                    model.put("error","无用户，请检查进入入口");
                 }
 //                redirectAttributesModelMap.put("user", userDetailInfo);
-                model.put("user", userDetailInfo);
+                model.put("user", userDetailInfo2);
                 return "admin/snipplets/div_user :: useredit";
 //                break;
             case "roleEdit":
-                userDetailInfo = userDetailInfoService.findUserDetailInfoByUsers(u);
-                if (userDetailInfo == null) {
+                UserDetailInfo userDetailInfo3 = userDetailInfoService.findUserDetailInfoByUsers(u);
+                if (userDetailInfo3 == null) {
                     redirectAttributesModelMap.put("error", "无用户，请检查进入入口");
 //                    model.put("error","无用户，请检查进入入口");
                 }
@@ -103,10 +103,10 @@ public class UserManagementController {
 //                redirectAttributesModelMap.put("user", userDetailInfo);
 //                redirectAttributesModelMap.put("authslist", authslist);
 //                redirectAttributesModelMap.put("allRole", allRole);
-                model.put("user", userDetailInfo);
+                model.put("user", userDetailInfo3);
                 model.put("authslist", authslist);
                 model.put("allRole", allRole);
-                Set<Authorities> authoritiesSet = userDetailInfo.getDbUser().getAuths();
+                Set<Authorities> authoritiesSet = userDetailInfo3.getDbUser().getAuths();
                 Set<String> userauth = new HashSet<String>();
                 authoritiesSet.forEach(auths -> userauth.add(auths.getAuthority()));
                 model.put("userauth", userauth);
