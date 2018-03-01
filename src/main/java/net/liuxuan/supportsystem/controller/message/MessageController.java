@@ -145,10 +145,11 @@ public class MessageController {
     }
 
     @RequestMapping(value = "/msg/delete/{id}", method = RequestMethod.GET)
-    public String deleteMsgID(            @PathVariable Long id,
-            HttpServletRequest request,
-            HttpServletResponse response, Map<String, Object> model) {
-        boolean deleteSuccess = messageService.deleteMessageById(id);
+    public String deleteMsgID(@PathVariable Long id,
+                              HttpServletRequest request,
+                              HttpServletResponse response, Map<String, Object> model) {
+//        boolean deleteSuccess = messageService.deleteMessageById(id);
+         messageService.deleteMessageById(id);
         return "redirect:/msg/list";
     }
 
@@ -176,29 +177,29 @@ public class MessageController {
 
         log.info("-MessageController.getMsgList() Method");
         model.put("title", "站内信列表");
-        Page<Message> messageList = messageService.findMessageToUserPageable(page,size,SystemHelper.getCurrentUserDetailInfo());
+        Page<Message> messageList = messageService.findMessageToUserPageable(page, size, SystemHelper.getCurrentUserDetailInfo());
 //        model.put("messageList", messageList);
         model.put("datas", messageList);
 
-        List<TicketContent> assignedTo = ticketContentService.findAllTicketContentsAssignedTo(SystemHelper.getCurrentUserDetailInfo(),false);
-        model.put("assignedTicket",assignedTo);
+        List<TicketContent> assignedTo = ticketContentService.findAllTicketContentsAssignedTo(SystemHelper.getCurrentUserDetailInfo(), false);
+        model.put("assignedTicket", assignedTo);
 
         return "message/msg_list";
     }
 
-    @RequestMapping(value ="/msg/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/msg/delete", method = RequestMethod.POST)
     @ResponseBody
-    public  String deleteMsgs(HttpServletRequest request,HttpServletResponse response, Map<String, Object> model){
+    public String deleteMsgs(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         String ids = request.getParameter("ids");
-        if(StringUtils.isBlank(ids)){
+        if (StringUtils.isBlank(ids)) {
             return "error!";
-        }else{
+        } else {
             System.out.println(ids);
         }
         String[] split = ids.split(",");
         Set<Long> collect = Arrays.stream(split).map(s -> Long.parseLong(s)).collect(Collectors.toSet());
         messageService.deleteMessageByIds(collect);
-        Gson g =new Gson();
+        Gson g = new Gson();
         return g.toJson("ok");
 //        return "redirect:/msg/list";
     }

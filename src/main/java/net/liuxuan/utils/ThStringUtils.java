@@ -29,7 +29,7 @@ public class ThStringUtils {
     private static Pattern p_html = Pattern.compile(regEx_html, Pattern.CASE_INSENSITIVE);
 
     public static String removeHtmlTag(String instr) {
-        StringBuilder sb = new StringBuilder();
+//        StringBuilder sb = new StringBuilder();
         if (instr == null)
             return null;
         String htmlStr = instr; // 含html标签的字符串

@@ -58,7 +58,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void checkDeparmentRole(){
         List<Department> allDepartment = getAllDepartment();
         allDepartment.forEach(e->{
-            Long id = e.getId();
+//            Long id = e.getId();
             String roleName = getDeparmentRoleName(e);
             boolean match = isDeparmentRoleExists(roleName);
             if(!match){

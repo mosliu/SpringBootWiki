@@ -149,8 +149,8 @@ public class Identicon {
 
     private void drawRotatedPolygon(Graphics2D g, GeneralPath polygon, double x, double y,
                                     double angle, double blocksize, Color fillColor, Color strokeColor) {
-        double offset = blocksize / 2.0d;
-        AffineTransform savet = g.getTransform();
+//        double offset = blocksize / 2.0d;
+//        AffineTransform savet = g.getTransform();
 //        g.translate(x + offset, y + offset);
         g.translate(x, y);
         g.scale(1, 1);

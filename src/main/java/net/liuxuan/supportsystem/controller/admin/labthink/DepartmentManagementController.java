@@ -85,7 +85,7 @@ public class DepartmentManagementController {
         switch (_dto.action) {
             case "add":
                 String department_name = request.getParameter("department_name");
-                String department_name_cn = request.getParameter("department_name_cn");
+//                String department_name_cn = request.getParameter("department_name_cn");
                 boolean departmentexist = departmentService.checkDepartmentExists(department_name);
                 if (departmentexist) {
                     log.info("===departmentManageAjax logged ,添加部门已存在 : {}");

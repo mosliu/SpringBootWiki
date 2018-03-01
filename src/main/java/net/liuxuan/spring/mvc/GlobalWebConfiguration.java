@@ -130,6 +130,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 
     /**
      * Configure asynchronous request handling options.
+     * @param configurer
      */
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
@@ -292,7 +293,12 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
 //    }
 
 
-    //    @Bean
+    /**
+     * Locale resolver session locale resolver.
+     *
+     * @return the session locale resolver
+     */
+//    @Bean
 //    public LocaleResolver localeResolver() {
     public SessionLocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();
@@ -300,7 +306,12 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
         return slr;
     }
 
-    //    @Bean
+    /**
+     * Locale change interceptor locale change interceptor.
+     *
+     * @return the locale change interceptor
+     */
+//    @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
@@ -310,7 +321,7 @@ public class GlobalWebConfiguration extends WebMvcConfigurerAdapter {
     /**
      * 国际化
      *
-     * @return
+     * @return resource bundle message source
      */
 //    @Bean
 //    @Qualifier("messageSource")

@@ -227,9 +227,9 @@ public class SampleController {
         String draw = "0";
         draw = request.getParameter("draw");
         //数据起始位置
-        String start = request.getParameter("start");
+//        String start = request.getParameter("start");
         //数据长度
-        String length = request.getParameter("length");
+//        String length = request.getParameter("length");
 
         //总记录数
         String recordsTotal = "500";
@@ -239,12 +239,12 @@ public class SampleController {
         //定义列名
         String[] cols = {"id", "LastName", "FirstName", "City", "Mail", "salary", "BirthDate", "Company"};
         //获取客户端需要那一列排序
-        String orderColumn = "0";
+//        String orderColumn = "0";
 //		orderColumn = request.getParameter("order[0][column]");
 //		orderColumn = cols[Integer.parseInt(orderColumn)];
         //获取排序方式 默认为asc
-        String orderDir = "asc";
-        orderDir = request.getParameter("order[0][dir]");
+//        String orderDir = "asc";
+        String orderDir = request.getParameter("order[0][dir]");
 
         //获取用户过滤框里的字符
         String searchValue = request.getParameter("search[value]");
@@ -340,7 +340,7 @@ public class SampleController {
 
 
         Gson gson = EntityGsonHelper.goGsonWithNoCheck();
-        String json = gson.toJson(modelMap);
+//        String json = gson.toJson(modelMap);
 
 
 //		response.getWriter().write(json);

@@ -471,7 +471,7 @@ public class FAQController {
             }
 
 
-            LinkedHashMap<String, String> infos = new LinkedHashMap<>();
+//            LinkedHashMap<String, String> infos = new LinkedHashMap<>();
 
         }
 

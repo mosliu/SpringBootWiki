@@ -83,7 +83,7 @@ public class MessageManagementController {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
         log.info("===messageManageAjax logged ,the value is : {}", _dto.toString());
-        Long id = _dto.getStr2LongID();
+//        Long id = _dto.getStr2LongID();
 
 //        response.setContentType("application/json");
 //        ObjectMapper mapper = new ObjectMapper();

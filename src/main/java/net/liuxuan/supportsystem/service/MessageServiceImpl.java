@@ -105,9 +105,9 @@ public class MessageServiceImpl implements MessageService {
     @Override
     @Cacheable(cacheNames = "message", key = "#id")
     public Message findMessageById(Long id) {
-        Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = new PageRequest(1, 15, sort);
-        Page<Message> all = messageRepository.findAll(pageable);
+//        Sort sort = new Sort(Sort.Direction.DESC, "id");
+//        Pageable pageable = new PageRequest(1, 15, sort);
+//        Page<Message> all = messageRepository.findAll(pageable);
         Message message = messageRepository.findOne(id);
         return message;
     }

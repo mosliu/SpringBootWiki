@@ -121,9 +121,9 @@ public class CommonController {
         String path = request.getParameter("file");
         path = restrictedFilePath +'/'+path;
         File f = new File(path);
-        String rtn =null;
+//        String rtn =null;
         if(f.exists()&&(!f.isDirectory())){
-            rtn = path;
+//            rtn = path;
         }else{
             String errorMessage = "Sorry. The file you are looking for does not exist";
             System.out.println(errorMessage);

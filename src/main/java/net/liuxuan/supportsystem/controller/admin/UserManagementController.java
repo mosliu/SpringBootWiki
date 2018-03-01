@@ -170,7 +170,7 @@ public class UserManagementController {
                 rtnData.put("success", "success!");
                 break;
             case "list":
-                List<DbUser> users = userDetailInfoService.listAllUsers();
+//                List<DbUser> users = userDetailInfoService.listAllUsers();
 
 //                return users;
 //                    return mapper.writeValueAsString(users);

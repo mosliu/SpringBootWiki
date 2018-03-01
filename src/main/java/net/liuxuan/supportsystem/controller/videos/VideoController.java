@@ -142,10 +142,10 @@ public class VideoController {
 //        Path p = Paths.get(path);
 
         File f = new File(path);
-        String rtn;
-        if (f.exists() && (!f.isDirectory())) {
-            rtn = path;
-        } else {
+//        String rtn;
+        if (!(f.exists() && (!f.isDirectory()))) {
+//            rtn = path;
+//        } else {
             String errorMessage = "Sorry. The file you are looking for does not exist";
 //            System.out.println(errorMessage);
             ServletOutputStream outputStream = response.getOutputStream();
