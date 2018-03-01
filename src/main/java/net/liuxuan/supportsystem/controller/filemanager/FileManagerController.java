@@ -398,6 +398,7 @@ public class FileManagerController {
                     break;
                 case ".rar":
                     RarUtils.unRarFile(file, basePath + destination);
+                    break;
             }
             return success();
         } catch (Exception e) {
