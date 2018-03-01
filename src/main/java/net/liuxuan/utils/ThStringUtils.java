@@ -35,7 +35,9 @@ public class ThStringUtils {
         String htmlStr = instr; // 含html标签的字符串
         String textStr = "";
 
-        Matcher m_script, m_style, m_html;
+        Matcher m_script;
+        Matcher m_style;
+        Matcher m_html;
 
         try {
             m_script = p_script.matcher(htmlStr);
@@ -52,18 +54,18 @@ public class ThStringUtils {
     }
 
 
-    public static String limitStringLen(String str,int len){
-        if (str==null) {
-              return null;
+    public static String limitStringLen(String str, int len) {
+        if (str == null) {
+            return null;
         }
-        len = len> str.length()? str.length():len;
+        len = len > str.length() ? str.length() : len;
 
-        return str.substring(0,len);
+        return str.substring(0, len);
 
     }
 
-    public static String removeTagAndlimitStringLen(String str,int len){
-        return limitStringLen(removeHtmlTag(str),len);
+    public static String removeTagAndlimitStringLen(String str, int len) {
+        return limitStringLen(removeHtmlTag(str), len);
 
     }
 

@@ -13,6 +13,7 @@ package net.liuxuan.kt
  *  2017/5/19  |    Moses       |     Created
  */
 class test1(val name: String) {
+
     fun greet() {
         println("Hello, ${name}");
     }

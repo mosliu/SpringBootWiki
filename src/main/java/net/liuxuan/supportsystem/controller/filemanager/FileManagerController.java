@@ -375,6 +375,9 @@ public class FileManagerController {
 
     /**
      * 文件解压
+     *
+     * @param json the json
+     * @return the json object
      */
     @RequestMapping("extract")
     @ResponseBody
@@ -382,7 +385,7 @@ public class FileManagerController {
         try {
             String destination = json.get("destination") == null ? "" : json.get("destination").getAsString();
             String zipName = json.get("item") == null ? "" : json.get("item").getAsString();
-            String folderName = json.get("folderName") == null ? "" : json.get("folderName").getAsString();
+//            String folderName = json.get("folderName") == null ? "" : json.get("folderName").getAsString();
             File file = new File(basePath, zipName);
 
             String extension = FMFileUtils.getExtension(zipName);

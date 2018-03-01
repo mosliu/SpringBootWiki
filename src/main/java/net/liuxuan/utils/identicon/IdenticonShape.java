@@ -167,14 +167,14 @@ public class IdenticonShape {
             shape3, shape4, shape5, shape6, shape7, shape8, shape9, shape10,
             shape11, shape12, shape13, shape14, shape15, shape_default};
 
-    public static double[] getsprite(int prototypeNo, double size,int style) {
+    public static double[] getsprite(int prototypeNo, double size, int style) {
         double rtn[];
         rtn = getColonedDoubles(prototypeNo);
-        if(style%2==1){
+        if (style % 2 == 1) {
             mirrorMatrix(rtn);
         }
-        rotateMatrix(rtn, (style/2)%4*90); //1,2 对应0度 3,4对应90度 etc
-        shiftMatrix(rtn,(style/2)%4*90);
+        rotateMatrix(rtn, (style / 2) % 4 * 90); //1,2 对应0度 3,4对应90度 etc
+        shiftMatrix(rtn, (style / 2) % 4 * 90);
         for (int i = 0; i < rtn.length; i++) {
             rtn[i] = 1 - rtn[i];
             rtn[i] = rtn[i] * size;
@@ -227,6 +227,7 @@ public class IdenticonShape {
 
     /**
      * X轴镜像
+     *
      * @param rtn
      */
     private static void mirrorMatrix(double[] rtn) {
@@ -239,49 +240,51 @@ public class IdenticonShape {
 
     /**
      * 旋转矩阵
+     *
      * @param rtn
      * @param degree
      */
     private static void rotateMatrix(double[] rtn, int degree) {
         double cosV = Math.cos(Math.toRadians(degree));
         double sinV = Math.sin(Math.toRadians(degree));
-        for (int i = 0; i < rtn.length; i=i+2) {
+        for (int i = 0; i < rtn.length; i = i + 2) {
             double x = rtn[i];
-            double y = rtn[i+1];
-            rtn[i]= x*cosV-y*sinV;
-            rtn[i+1] = x*sinV+y*cosV;
+            double y = rtn[i + 1];
+            rtn[i] = x * cosV - y * sinV;
+            rtn[i + 1] = x * sinV + y * cosV;
         }
     }
 
     /**
      * 平移象限
+     *
      * @param degree
      */
-    private static void shiftMatrix(double[] rtn,int degree){
-        degree = degree%360;
-        int x,y;
-        if(degree<45){
-            x=0;
-            y=0;
-        }else if(degree<135) {
+    private static void shiftMatrix(double[] rtn, int degree) {
+        degree = degree % 360;
+        int x;
+        int y;
+        if (degree < 45) {
+            x = 0;
+            y = 0;
+        } else if (degree < 135) {
             x = 1;
             y = 0;
-        }else if(degree<225) {
+        } else if (degree < 225) {
             x = 1;
             y = 1;
-        }else if(degree<315) {
+        } else if (degree < 315) {
             x = 0;
             y = 1;
-        }else{
-            x=0;
-            y=0;
+        } else {
+            x = 0;
+            y = 0;
         }
-        for (int i = 0; i < rtn.length; i=i+2) {
-            rtn[i]+=x;
-            rtn[i+1]+=y;
+        for (int i = 0; i < rtn.length; i = i + 2) {
+            rtn[i] += x;
+            rtn[i + 1] += y;
         }
     }
-
 
 
     private static double[] getColonedDoubles(int csh) {

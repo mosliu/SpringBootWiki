@@ -116,7 +116,8 @@ public class PinYinTools {
      * 词组解析 * * @param chs * @return
      */
     public String getSelling(String chs) {
-        String key, value;
+        String key;
+        String value;
         buffer = new StringBuilder();
         for (int i = 0; i < chs.length(); i++) {
             key = chs.substring(i, i + 1);
