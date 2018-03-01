@@ -42,5 +42,5 @@ public class SliderPics {
     private String url;
 
     @Column(name = "disabled", nullable = false)
-    boolean disabled=false;
+    private boolean disabled=false;
 }

@@ -21,9 +21,9 @@ import java.awt.image.BufferedImage;
  */
 public class Identicon {
     //MD5 hash
-    byte[] hash;
+    private byte[] hash;
     //image imageWidth
-    int imageWidth;
+    private int imageWidth;
 
     private Font charfont;
 

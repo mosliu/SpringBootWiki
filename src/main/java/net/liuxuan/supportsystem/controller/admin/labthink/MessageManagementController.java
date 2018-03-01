@@ -40,7 +40,7 @@ public class MessageManagementController {
     private static Logger log = LoggerFactory.getLogger(MessageManagementController.class);
 
     @Autowired
-    MessageService messageService;
+    private MessageService messageService;
 
     @RequestMapping("messageManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

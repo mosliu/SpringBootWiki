@@ -47,7 +47,7 @@ public class NewsPageManagementController {
     private static Logger log = LoggerFactory.getLogger(NewsPageManagementController.class);
 
     @Autowired
-    NewsPageService newsPageService;
+    private NewsPageService newsPageService;
 
     @RequestMapping("newsPageManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")

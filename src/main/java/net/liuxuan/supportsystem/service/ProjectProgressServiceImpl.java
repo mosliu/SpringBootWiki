@@ -29,7 +29,7 @@ public class ProjectProgressServiceImpl implements ProjectProgressService{
     private static Logger log = LoggerFactory.getLogger(ProjectProgressServiceImpl.class);
 
     @Autowired
-    ProjectProgressRepository projectProgressRepository;
+    private ProjectProgressRepository projectProgressRepository;
 
     @Override
 //    @CachePut(cacheNames = "projectProgress",key = "#projectProgress.id")

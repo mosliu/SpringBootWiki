@@ -35,7 +35,7 @@ public class DeviceKind {
     @Column(nullable = false,length = 100)
     private String deviceKindNameCN;
 
-    boolean enable=true;
+    private boolean enable=true;
 
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "deviceKind")
 //    private Set<Devices> items = new HashSet<Devices>();

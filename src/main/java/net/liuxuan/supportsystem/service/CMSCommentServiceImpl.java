@@ -33,10 +33,10 @@ public class CMSCommentServiceImpl implements CMSCommentService{
     private static Logger log = LoggerFactory.getLogger(CMSCommentServiceImpl.class);
 
     @Autowired
-    CMSCommentRepository cmsCommentRepository;
+    private CMSCommentRepository cmsCommentRepository;
 
     @Autowired
-    UserDetailInfoService userDetailInfoService;
+    private UserDetailInfoService userDetailInfoService;
 
     @Override
 //    @Cacheable(cacheNames = "comment", key = "#cmsComment.id")

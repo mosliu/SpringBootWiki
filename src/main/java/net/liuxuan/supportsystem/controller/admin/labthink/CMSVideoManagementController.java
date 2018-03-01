@@ -39,7 +39,7 @@ public class CMSVideoManagementController {
     private static Logger log = LoggerFactory.getLogger(CMSVideoManagementController.class);
 
     @Autowired
-    CMSVideoService cMSVideoService;
+    private CMSVideoService cmsVideoService;
 
     @RequestMapping("CMSVideoManage")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -59,7 +59,7 @@ public class CMSVideoManagementController {
                 CMSVideo cMSVideo;
                 Long id = dto.getStr2LongID();
                 
-                cMSVideo = cMSVideoService.findCMSVideoById(id);
+                cMSVideo = .findCMSVideoById(id);
                 if (cMSVideo != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
@@ -90,7 +90,7 @@ public class CMSVideoManagementController {
                 String cmsVideoName = request.getParameter("cmsVideoName");
 //                String cmsVideoFilepath = request.getParameter("cmsVideoFilepath");
 //                String comment = request.getParameter("comment");
-                boolean cMSVideoExists = cMSVideoService.checkCMSVideoExists(cmsVideoName);
+                boolean cMSVideoExists = .checkCMSVideoExists(cmsVideoName);
                 if (cMSVideoExists) {
                     log.info("===cMSVideoManageAjax logged ,添加CMSVideo已存在 : {}");
                     rtnData.put("error", "ERROR_CMSVideoExists");
@@ -100,12 +100,12 @@ public class CMSVideoManagementController {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加CMSVideo");
                     SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _cMSVideo, "添加角色", "");
-                    cMSVideoService.saveCMSVideo(_cMSVideo);
+                    .saveCMSVideo(_cMSVideo);
                 }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");
-                boolean b = cMSVideoService.deleteCMSVideoById(id);
+                boolean b = .deleteCMSVideoById(id);
                 if (b) {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功删除CMSVideo");
@@ -116,7 +116,7 @@ public class CMSVideoManagementController {
                 }
                 break;
             case "update":
-                cMSVideoService.saveCMSVideo(_cMSVideo);
+                .saveCMSVideo(_cMSVideo);
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _cMSVideo, "更新CMSVideo", "");
                 rtnData.put("success1", "success!");
                 break;
@@ -132,6 +132,6 @@ public class CMSVideoManagementController {
 
     @ModelAttribute("CMSVideo_list")
     public List<CMSVideo> CMSVideolist() {
-        return cMSVideoService.getAllCMSVideo();
+        return .getAllCMSVideo();
     }
 }

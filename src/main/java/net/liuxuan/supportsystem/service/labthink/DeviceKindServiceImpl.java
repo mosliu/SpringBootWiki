@@ -32,7 +32,7 @@ public class DeviceKindServiceImpl implements DeviceKindService {
     private static Logger log = LoggerFactory.getLogger(DeviceKindServiceImpl.class);
 
     @Autowired
-    DeviceKindRepository deviceKindRepository;
+    private DeviceKindRepository deviceKindRepository;
 
     /**
      * Gets all device kind.

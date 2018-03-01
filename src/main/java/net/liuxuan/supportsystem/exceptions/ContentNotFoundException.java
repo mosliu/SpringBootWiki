@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "No Such Content")  // 404
 public class ContentNotFoundException extends RuntimeException {
 
-    Long id;
+    private Long id;
 
     public ContentNotFoundException(String msg, Long id) {
         super(msg);

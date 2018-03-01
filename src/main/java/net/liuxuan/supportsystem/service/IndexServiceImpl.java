@@ -23,10 +23,10 @@ import java.util.List;
 @Transactional
 public class IndexServiceImpl implements IndexService {
     @Autowired
-    ProjectProgressService projectProgressService;
+    private ProjectProgressService projectProgressService;
 
     @Autowired
-    NewsPageService newsPageService;
+    private NewsPageService newsPageService;
 
     @Override
     public List<ProjectProgress> getProjectProgressList() {

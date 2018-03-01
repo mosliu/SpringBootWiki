@@ -25,17 +25,20 @@ import java.util.Map;
 public class FreeMarkerUtil {
     private Configuration cfg;
 
-    String model_name = "DeviceSubInfo";
-    String subpackage = ".labthink";//如果需要放到labthink下，则为".labthink"
+    private String model_name = "DeviceSubInfo";
+    private String subpackage = ".labthink";//如果需要放到labthink下，则为".labthink"
 //    String subpackage = "";//如果需要放到labthink下，则为".labthink"
-    boolean createEntity,createRepository,createService,createAdminManagement;
+    private boolean createEntityFlag;
+    private boolean createRepositoryFlag;
+    private boolean createServiceFlag;
+    private boolean createAdminManagementFlag;
 
     public static void main(String[] args) throws Exception {
         FreeMarkerUtil hf = new FreeMarkerUtil();
-        hf.createEntity = true;
-        hf.createRepository = true;
-        hf.createService = true;
-        hf.createAdminManagement = true;
+        hf.createEntityFlag = true;
+        hf.createRepositoryFlag = true;
+        hf.createServiceFlag = true;
+        hf.createAdminManagementFlag = true;
         hf.init();
         hf.process(hf);
     }
@@ -74,21 +77,21 @@ public class FreeMarkerUtil {
         String savePath;
         String fileName;
         Template template;
-        if(createEntity) {
+        if(createEntityFlag) {
             savePath = getPathString("/entity/");
             fileName = model_name + ".java";
             template = cfg.getTemplate("entity.ftl");
             util.buildTemplate(root, projectPath, savePath, fileName, template);
         }
 
-        if(createRepository) {
+        if(createRepositoryFlag) {
             fileName = model_name + "Repository.java";
             savePath = getPathString("/repository/");
             template = cfg.getTemplate("repository.ftl");
             util.buildTemplate(root, projectPath, savePath, fileName, template);
         }
 
-        if(createService) {
+        if(createServiceFlag) {
             fileName = model_name + "Service.java";
             savePath = getPathString("/service/");
             template = cfg.getTemplate("service.ftl");
@@ -100,7 +103,7 @@ public class FreeMarkerUtil {
             util.buildTemplate(root, projectPath, savePath, fileName, template);
         }
 
-        if(createAdminManagement) {
+        if(createAdminManagementFlag) {
             fileName = model_name + "ManagementController.java";
             savePath = ("/controller/admin/labthink/");
             template = cfg.getTemplate("managementcontroller.ftl");

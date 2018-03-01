@@ -39,9 +39,9 @@ public class NewsPageServiceImpl implements NewsPageService {
     public static final String NEWSPAGECATEGORY = NewsPage.class.getSimpleName();
     private static Logger log = LoggerFactory.getLogger(NewsPageServiceImpl.class);
     @Autowired
-    NewsPageRepository newsPageRepository;
+    private NewsPageRepository newsPageRepository;
     @Autowired
-    CMSCategoryService cmsCategoryService;
+    private CMSCategoryService cmsCategoryService;
 
 
     @Override

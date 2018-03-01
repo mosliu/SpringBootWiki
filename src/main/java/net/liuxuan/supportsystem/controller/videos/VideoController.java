@@ -43,7 +43,7 @@ public class VideoController {
     private static Logger log = LoggerFactory.getLogger(VideoController.class);
 
     @Autowired
-    CMSVideoService cmsVideoService;
+    private CMSVideoService cmsVideoService;
 
 
     @RequestMapping(value = "/video/list", method = RequestMethod.GET)

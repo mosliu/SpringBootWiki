@@ -37,7 +37,7 @@ public class CMSContentTagsServiceImpl implements CMSContentTagsService {
      * The Cms content tags repository.
      */
     @Autowired
-    CMSContentTagsRepository cmsContentTagsRepository;
+    private CMSContentTagsRepository cmsContentTagsRepository;
 
     @Override
     public void saveCMSContentTags(CMSContentTags contentTags) {

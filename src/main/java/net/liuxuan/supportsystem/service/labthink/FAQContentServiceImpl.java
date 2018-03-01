@@ -46,13 +46,13 @@ public class FAQContentServiceImpl implements FAQContentService {
     public static final String FAQCATEGORY = FAQContent.class.getSimpleName();
     private static Logger log = LoggerFactory.getLogger(FAQContentServiceImpl.class);
     @Autowired
-    FAQContentRepository faqContentRepository;
+    private FAQContentRepository faqContentRepository;
 
     @Autowired
-    CMSCategoryService cmsCategoryService;
+    private CMSCategoryService cmsCategoryService;
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 
 
     @Override
