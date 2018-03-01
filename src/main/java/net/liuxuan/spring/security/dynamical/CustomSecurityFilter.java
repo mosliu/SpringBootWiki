@@ -27,7 +27,7 @@ import java.io.IOException;
 @Component("customSecurityFilter")
 public class CustomSecurityFilter extends FilterSecurityInterceptor {
 
-
+    private static final String FILTER_APPLIED = "__spring_security_myFilterSecurityInterceptor_filterApplied";
 
     @Autowired
     public void setMyAccessDecisionManager(CustomAccessDecisionManager myAccessDecisionManager) {
@@ -36,8 +36,6 @@ public class CustomSecurityFilter extends FilterSecurityInterceptor {
 
 // ~ Static fields/initializers
     // =====================================================================================
-
-    private static final String FILTER_APPLIED = "__spring_security_myFilterSecurityInterceptor_filterApplied";
 
 
     @Autowired

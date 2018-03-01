@@ -87,7 +87,7 @@ public class IndexController {
         model.put("message", "Hello World");
         model.put("title", "Hello Home");
         model.put("date", new Date());
-        if (true) {
+        if (1==1) {
             throw new MissingServletRequestPartException("400");
         }
         return "index";

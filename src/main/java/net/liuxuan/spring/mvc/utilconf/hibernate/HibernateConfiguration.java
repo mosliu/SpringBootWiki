@@ -35,19 +35,17 @@ public class HibernateConfiguration {
     @Autowired
     private Environment environment;
 
-    @Bean
-    public OpenSessionInViewInterceptor openSessionInViewInterceptor(){
-        OpenSessionInViewInterceptor openSessionInViewInterceptor = new OpenSessionInViewInterceptor();
-        return openSessionInViewInterceptor;
-    }
-
     @Autowired
     private DataSource dataSource;
 
 //    @Autowired
 //    private LocalSessionFactoryBean sessionFactory;
 
-
+    @Bean
+    public OpenSessionInViewInterceptor openSessionInViewInterceptor(){
+        OpenSessionInViewInterceptor openSessionInViewInterceptor = new OpenSessionInViewInterceptor();
+        return openSessionInViewInterceptor;
+    }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
