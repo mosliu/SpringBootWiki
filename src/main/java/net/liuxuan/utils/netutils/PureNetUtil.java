@@ -82,7 +82,7 @@ public class PureNetUtil {
                 }
                 //关闭输入流
                 reader.close();
-                if (sb.toString().length() == 0) {
+                if (sb.length() == 0) {
                     return null;
                 }
                 return sb.toString().substring(0,

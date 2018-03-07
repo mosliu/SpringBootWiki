@@ -289,6 +289,8 @@ public class FAQController {
             //参数全为空
         }
 
+        //这里添加部门和角色过滤
+
         List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
         Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
 

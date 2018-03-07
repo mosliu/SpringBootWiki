@@ -15,4 +15,6 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
  */
 public interface CustomInvocationSecurityMetadataSource extends FilterInvocationSecurityMetadataSource {
     //reload auth from database;
+
+    void reload();
 }

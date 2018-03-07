@@ -102,8 +102,8 @@
                     <div class="col-md-10 col-sm-9">
                         <select id="authArray" multiple="multiple" name="authArray"
                                 style="width: 600px; height: 400px;">
-                            <option th:each="url : ${urlAuthsList}" th:value="${url.id}" th:text="${url.urlAuthName}"
-                                    th:selected="${role.urlAuths.contains(url)}"/>
+                            <option th:each="url : ${urlAuthsList}" th:value="${url.id}" th:text="${role.urlAuths.contains(url)+':'+url.urlAuthName}"
+                                    th:selected="${userHasRoleId.contains(url.id)}"/>
                         </select>
                     </div>
                     <div class="col-md-12 col-sm-12">

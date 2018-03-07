@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,13 +77,17 @@ public class RoleManagementController {
             case "authedit":
 
                 role = roleService.findRoleById(id);
-                if(role==null){
-                    model.put("error","无用户，请检查进入入口!!!!!!!!!!");
+                if (role == null) {
+                    model.put("error", "无用户，请检查进入入口!!!!!!!!!!");
                 }
                 model.put("role", role);
 
-                List<UrlAuth> urlAuths= urlAuthService.getAllUrlAuth();
+                List<UrlAuth> urlAuths = urlAuthService.getAllUrlAuth();
                 model.put("urlAuthsList", urlAuths);
+                List<Long> ids = new ArrayList<>();
+                role.getUrlAuths().forEach(e -> ids.add(e.getId()));
+
+                model.put("userHasRoleId", ids);
 
                 return "admin/snipplets/div_role :: urlAuthEdit";
 //                break;

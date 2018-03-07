@@ -99,18 +99,18 @@ public class DeviceSubInfoManagementController {
                 String deviceSubInfoName = request.getParameter("deviceSubInfoName");
 //                String deviceSubInfoNameCN = request.getParameter("deviceSubInfoNameCN");
 //                String comment = request.getParameter("comment");
-                boolean deviceSubInfoExists = deviceSubInfoService.checkDeviceSubInfoExists(deviceSubInfoName);
-                if (deviceSubInfoExists) {
-                    log.info("===deviceSubInfoManageAjax logged ,添加DeviceSubInfo已存在 : {}");
-                    rtnData.put("error", "ERROR_DeviceSubInfoExists");
-                    rtnData.put("status", "fail");
-                    rtnData.put("msg", "添加DeviceSubInfo已存在");
-                } else {
+//                boolean deviceSubInfoExists = deviceSubInfoService.checkDeviceSubInfoExists(deviceSubInfoName);
+//                if (deviceSubInfoExists) {
+//                    log.info("===deviceSubInfoManageAjax logged ,添加DeviceSubInfo已存在 : {}");
+//                    rtnData.put("error", "ERROR_DeviceSubInfoExists");
+//                    rtnData.put("status", "fail");
+//                    rtnData.put("msg", "添加DeviceSubInfo已存在");
+//                } else {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加DeviceSubInfo");
                     SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _deviceSubInfo, "添加角色", "");
                     deviceSubInfoService.saveDeviceSubInfo(_deviceSubInfo);
-                }
+//                }
                 break;
             case "delete":
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_DELETE, _dto, "删除角色", "");

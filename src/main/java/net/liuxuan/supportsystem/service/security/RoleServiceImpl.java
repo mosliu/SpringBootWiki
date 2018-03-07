@@ -1,6 +1,7 @@
 package net.liuxuan.supportsystem.service.security;
 
 
+import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSource;
 import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSourceImpl;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
@@ -40,7 +41,10 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     @Autowired
-    private UrlAuthRepository urlAuthRepository;
+    private UrlAuthService urlAuthService;
+
+    @Autowired
+    private CustomInvocationSecurityMetadataSource customInvocationSecurityMetadataSource;
 
     @Override
     @Cacheable(cacheNames = "role", key = "'list_disablefalse'")
@@ -52,6 +56,7 @@ public class RoleServiceImpl implements RoleService {
     @CacheEvict(cacheNames = "role", key = "'list_disablefalse'")
     public void saveRole(Role role) {
         roleRepository.save(role);
+        customInvocationSecurityMetadataSource.reload();
 //        roleRepository.flush();
     }
 
@@ -78,6 +83,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = roleRepository.getOne(id);
         if (role != null) {
             role.setDisabled(true);
+            customInvocationSecurityMetadataSource.reload();
             return true;
         }
         return false;
@@ -96,7 +102,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "role", key = "'list_allRoleNames'",allEntries = true)
+    @CacheEvict(cacheNames = "role",allEntries = true)
     public Map<String, Object> updateAuths(String rolename, String[] authArrays) {
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -112,12 +118,13 @@ public class RoleServiceImpl implements RoleService {
         for (int i = 0; i < authArrays.length; i++) {
 
             Long id = Long.parseLong(authArrays[i]);
-            old_auths.add(urlAuthRepository.findOne(id));
+//            old_auths.add(urlAuthRepository.findOne(id));
+            old_auths.add(urlAuthService.findUrlAuthById(id));
         }
 
         roleRepository.save(role);
-
-        CustomInvocationSecurityMetadataSourceImpl.reload();
+        urlAuthService.resetCache();
+        customInvocationSecurityMetadataSource.reload();
 
         map.put("success", "权限处理成功");
         return map;

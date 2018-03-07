@@ -1,5 +1,6 @@
 package net.liuxuan.supportsystem.service.security;
 
+import net.liuxuan.spring.security.dynamical.CustomInvocationSecurityMetadataSource;
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
 import net.liuxuan.supportsystem.repository.security.UrlAuthRepository;
 import org.slf4j.Logger;
@@ -35,10 +36,14 @@ public class UrlAuthServiceImpl implements UrlAuthService {
     @Autowired
     private UrlAuthRepository urlAuthRepository;
 
+    @Autowired
+    private CustomInvocationSecurityMetadataSource customInvocationSecurityMetadataSource;
+
     @Override
-    @CacheEvict(cacheNames = "urlAuth", key = "'list_disablefalse'",allEntries = true)
+    @CacheEvict(cacheNames = "urlAuth",allEntries = true)
     public void saveUrlAuth(UrlAuth urlAuth) {
         urlAuthRepository.save(urlAuth);
+        customInvocationSecurityMetadataSource.reload();
     }
 
     @Override
@@ -52,12 +57,15 @@ public class UrlAuthServiceImpl implements UrlAuthService {
     @CacheEvict(cacheNames = "urlAuth", allEntries = true)
     public boolean deleteUrlAuthById(Long id) {
         UrlAuth urlAuth = urlAuthRepository.getOne(id);
-        urlAuth.getRoles().forEach(role -> {
-            role.getUrlAuths().remove(urlAuth);
-        });
+
         if (urlAuth != null) {
+            urlAuth.getRoles().forEach(role -> {
+                role.getUrlAuths().remove(urlAuth);
+            });
+
             urlAuthRepository.delete(urlAuth);
 //            urlAuth.setDisabled(true);
+            customInvocationSecurityMetadataSource.reload();
             return true;
         }
 
@@ -84,6 +92,12 @@ public class UrlAuthServiceImpl implements UrlAuthService {
     @Cacheable(cacheNames = "urlAuth", key = "'list_disablefalse'")
     public List<UrlAuth> getAllUrlAuth() {
         return urlAuthRepository.findByDisabledFalse();
+    }
+
+    @Override
+    @CacheEvict(cacheNames = "urlAuth",allEntries = true)
+    public void resetCache(){
+
     }
 
 }

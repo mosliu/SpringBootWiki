@@ -2,6 +2,7 @@ package net.liuxuan.supportsystem.service.security;
 
 
 import net.liuxuan.supportsystem.entity.security.UrlAuth;
+import org.springframework.cache.annotation.CacheEvict;
 
 import java.util.List;
 
@@ -64,4 +65,5 @@ public interface UrlAuthService {
      */
     List<UrlAuth> findByUrlAuthName(String urlAuthname);
 
+    void resetCache();
 }

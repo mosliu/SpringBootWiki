@@ -180,8 +180,7 @@ public class CustomInvocationSecurityMetadataSourceImpl implements CustomInvocat
         return true;
     }
 
-    public static boolean reload() {
+    public void reload() {
         loaded = false;
-        return true;
     }
 }

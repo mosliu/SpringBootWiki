@@ -16,7 +16,7 @@ import org.springframework.util.PathMatcher;
  * YYYY-MM-DD |    Author      |	 Change Description	<br/>
  * 2017/3/15  |    Moses       |     Created <br/>
  */
-public class AntUrlPathMatcher implements UrlMatcher{
+public class AntUrlPathMatcher implements UrlMatcher {
     private static Logger log = LoggerFactory.getLogger(AntUrlPathMatcher.class);
 
     private boolean requiresLowerCaseUrl;
