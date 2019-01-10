@@ -5,9 +5,11 @@ import net.liuxuan.spring.helper.bean.BeanHelper;
 import net.liuxuan.supportsystem.entity.dto.TicketSearchDTO;
 import net.liuxuan.supportsystem.entity.labthink.TicketContent;
 import net.liuxuan.supportsystem.entity.security.DbUser;
+import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 import net.liuxuan.supportsystem.repository.labthink.TicketContentRepository;
 import net.liuxuan.supportsystem.service.CMSCategoryService;
+import net.liuxuan.supportsystem.service.util.RoleHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static net.liuxuan.supportsystem.service.util.SearchHelper.*;
 
@@ -44,14 +44,16 @@ import static net.liuxuan.supportsystem.service.util.SearchHelper.*;
 @Transactional
 public class TicketContentServiceImpl implements TicketContentService {
 
+    public static final String TICKETCATEGORY = TicketContent.class.getSimpleName();
     private static Logger log = LoggerFactory.getLogger(TicketContentServiceImpl.class);
-
-    public  static final  String TICKETCATEGORY = TicketContent.class.getSimpleName();
     @Autowired
     private CMSCategoryService cmsCategoryService;
 
     @Autowired
     private TicketContentRepository ticketContentRepository;
+
+    @Autowired
+    private RoleHelper roleHelper;
 
 
     @Override
@@ -78,10 +80,10 @@ public class TicketContentServiceImpl implements TicketContentService {
                 BeanHelper.copyWhenDestFieldNull(ticket, load);
                 log.trace("===saveTicketContent logged ,the value After  COPY is : {}", ticket);
             } catch (InvocationTargetException e) {
-                log.error("Copy ticket error!",e);
+                log.error("Copy ticket error!", e);
 //                e.printStackTrace();
             } catch (IllegalAccessException e) {
-                log.error("Copy ticket error!",e);
+                log.error("Copy ticket error!", e);
 //                e.printStackTrace();
             }
         }
@@ -92,83 +94,95 @@ public class TicketContentServiceImpl implements TicketContentService {
     }
 
     @Override
-    @Cacheable(cacheNames = "ticketContent", key="#dto")
+    @Cacheable(cacheNames = "ticketContent", key = "#dto")
     public List<TicketContent> findAllTicketContentsByDto(TicketSearchDTO dto) {
-
+        List<TicketContent> rtnList;
         if (dto.isAllNull()) {
             //全空，返回top100
-            return ticketContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
-        }
+            rtnList = ticketContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
+        } else {
 
-        return ticketContentRepository.findAll(new Specification<TicketContent>() {
-            @Override
-            public Predicate toPredicate(Root<TicketContent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+            rtnList = ticketContentRepository.findAll(new Specification<TicketContent>() {
+                @Override
+                public Predicate toPredicate(Root<TicketContent> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
-                //形成条件列表
-                List<Predicate> pl = new ArrayList<Predicate>();
+                    //形成条件列表
+                    List<Predicate> pl = new ArrayList<Predicate>();
 
-                //按lastUpdateDate比较时间条件
-                List<Predicate> pl_datecompare = buildDateComparePredicates(root, cb, "lastUpdateDate", dto.fromDate, dto.toDate);
+                    //按lastUpdateDate比较时间条件
+                    List<Predicate> pl_datecompare = buildDateComparePredicates(root, cb, "lastUpdateDate", dto.fromDate, dto.toDate);
 
-                pl.addAll(pl_datecompare);
+                    pl.addAll(pl_datecompare);
 
-                String[] sl_and = {"category", "devices", "department", "disabled"};
+                    String[] sl_and = {"category", "devices", "department", "disabled"};
 
-                //先将Object 转为Map，这样好向内添加属性
-                Map<String, Object> objectMap = object2Map(dto);
-                objectMap.put("disabled", false);
-
-
-                pl.addAll(buildEqualsAndPredicate(root, cb, sl_and, objectMap));
-
-                //比较用户名项的比较列
-                String[] sl_or = {"author", "lastUpdateUser"};
-                List<Predicate> pl_usercompare = buildUserEqualsPredicates(root, cb, sl_or, dto.user);
-                pl.addAll(pl_usercompare);
-
-                //TODO 这里有问题
-                String[] likepaths = {"title", "question"};
-                pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, dto.keyword), cb));
+                    //先将Object 转为Map，这样好向内添加属性
+                    Map<String, Object> objectMap = object2Map(dto);
+                    objectMap.put("disabled", false);
 
 
-                log.debug("pl size is:{}", pl.size());
-                query.where(pl.toArray(new Predicate[pl.size()])).orderBy(cb.desc(root.get("lastUpdateDate")));
+                    pl.addAll(buildEqualsAndPredicate(root, cb, sl_and, objectMap));
+
+                    //比较用户名项的比较列
+                    String[] sl_or = {"author", "lastUpdateUser"};
+                    List<Predicate> pl_usercompare = buildUserEqualsPredicates(root, cb, sl_or, dto.user);
+                    pl.addAll(pl_usercompare);
+
+                    //TODO 这里有问题
+                    String[] likepaths = {"title", "question"};
+                    pl.addAll(convertToOrPredict(buildStringAndLikePredict(root, cb, likepaths, dto.keyword), cb));
+
+
+                    log.debug("pl size is:{}", pl.size());
+                    query.where(pl.toArray(new Predicate[pl.size()])).orderBy(cb.desc(root.get("lastUpdateDate")));
 //                query.where(cb.like(namePath, "%李%"), cb.like(nicknamePath, "%王%")); //这里可以设置任意条查询条件
 //                Path<String> nameExp = root.get("name");
-                return null;
-            }
-        });
+                    return null;
+                }
+            });
+        }
 
+        return rtnList;
 //        return ticketContentRepository.findAll();
     }
 
     @Override
-    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser){
+    public List<TicketContent> filterListByAccessRight(List<TicketContent> allTicketContents, Set<String> rolenames) {
+        List<TicketContent> ticketContentList = allTicketContents
+                .stream()
+                .filter(ticket -> hasAccessRight(rolenames, ticket))
+                .collect(Collectors.toList());
+        return ticketContentList;
+    }
+
+
+    @Override
+    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser) {
         List<TicketContent> ticketContents = ticketContentRepository.findAllByDisabledFalseAndAssignToUserOrderByLastUpdateDateDesc(assignToUser);
         return ticketContents;
     }
 
     @Override
-    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser, boolean isResolved){
+    public List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser, boolean isResolved) {
         List<TicketContent> ticketContents =
-                ticketContentRepository.findAllByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser,isResolved);
+                ticketContentRepository.findAllByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser, isResolved);
         return ticketContents;
     }
 
     @Override
-    public  Long getCountByAssignAndResolved(UserDetailInfo assignToUser, boolean isResolved){
-        return ticketContentRepository.countByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser,isResolved);
+    public Long getCountByAssignAndResolved(UserDetailInfo assignToUser, boolean isResolved) {
+        return ticketContentRepository.countByDisabledFalseAndAssignToUserAndResolvedOrderByLastUpdateDateDesc(assignToUser, isResolved);
     }
 
     @Override
-    @CacheEvict(cacheNames = "ticketContent",key="#id")
+    @CacheEvict(cacheNames = "ticketContent", key = "#id")
     public void deleteTicketContentById(Long id) {
         ticketContentRepository.findOne(id).setDisabled(true);
         //ticketContentRepository.delete(id);
     }
 
     @Override
-    @Cacheable(cacheNames = "ticketContent", key="#id")
+    @Cacheable(cacheNames = "ticketContent", key = "#id")
     public TicketContent findById(Long id) {
         TicketContent ticket = ticketContentRepository.findOne(id);
         ticket.setClicks(ticket.getClicks() + 1);
@@ -177,13 +191,35 @@ public class TicketContentServiceImpl implements TicketContentService {
     }
 
 
-
     @Override
     public long getTicketContentsCount() {
         return ticketContentRepository.count();
     }
 
+    /**
+     * Has access right boolean.
+     *
+     * @param rolenames the rolenames
+     * @param ticket    the faq
+     * @return the boolean
+     */
+    public boolean hasAccessRight(Set<String> rolenames, TicketContent ticket) {
+        //rolename 获取一次，节省处理时间
+        boolean rtn = roleHelper.isAdmin(rolenames) || roleHelper.isAuthor(ticket) || roleHelper.hasDepartmentRole(rolenames, ticket.getDepartment());
+        return rtn;
+    }
 
-
+    /**
+     * Has access right boolean.
+     *
+     * @param ticket the faq
+     * @return the boolean
+     */
+    @Override
+    public boolean hasAccessRight(TicketContent ticket) {
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+        return hasAccessRight(rolenames, ticket);
+    }
 
 }

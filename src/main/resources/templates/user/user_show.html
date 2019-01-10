@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorate="layouts/base">
+<head>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <link href="/ui/mosesadd/upload/uploadifive.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="/ui/mosesadd/upload/jquery.uploadifive.js"></script>
+</head>
+<body>
+<div class="container" layout:fragment="content">
+    <br/>
+    <ol class="breadcrumb">
+        <li><a th:href="@{/}">首页</a></li>
+        <li class="active">用户信息查看</li>
+    </ol>
+    <h1 th:unless="${title==null}" th:text="${title}">用户信息查看</h1>
+    <div class="faqs-form col-md-push-1 col-md-10">
+
+        <!-- LEFT -->
+        <div class="col-lg-3 col-md-3 col-sm-4">
+
+            <div class="thumbnail text-center">
+                <img th:src="${user.avatar}"/>
+                <h2 class="size-18 margin-top-10 margin-bottom-0" th:text="${user.lastName+user.firstName}">Felica Doe</h2>
+                <h3 class="size-11 margin-top-0 margin-bottom-10 text-muted" th:text="${user.department.departmentName}">部门</h3>
+            </div>
+
+            <!-- completed -->
+            <div class="margin-bottom-30">
+                <!--TODO 待做分析判断-->
+                <label>88% completed profile</label>
+                <div class="progress progress-xxs">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="width: 88%; min-width: 2em;"></div>
+                </div>
+            </div>
+            <!-- /completed -->
+
+            <!-- SIDE NAV -->
+            <ul class="side-nav list-group margin-bottom-60" id="sidebar-nav">
+                <li class="list-group-item active"><a th:href="'/detail/show/'+${user.id}" href="page-profile.html"><i class="fa fa-eye"></i> 个人信息</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-tasks"></i> 项目</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-comments-o"></i> 留言</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-history"></i> 历史信息</a></li>
+                <li class="list-group-item"><a href="#"><i class="fa fa-gears"></i> 设置</a></li>
+            </ul>
+            <!-- /SIDE NAV -->
+        </div>
+
+
+        <!-- RIGHT -->
+        <div class="col-lg-9 col-md-9 col-sm-8">
+
+            <!-- FLIP BOX -->
+            <div class="box-flip box-icon box-icon-center box-icon-round box-icon-large text-center nomargin">
+                <div class="front">
+                    <div class="box1 noradius">
+                        <div class="box-icon-title">
+                            <i class="fa fa-user"></i>
+                            <h2 th:text="${user.lastName+user.firstName}+'个人档案'">Felica Doe &ndash; Profile</h2>
+                        </div>
+                        <p th:text="${user.email}">aaa@bb.cc</p>
+                    </div>
+                </div>
+
+                <div class="back">
+                    <div class="box2 noradius">
+                        <h4>WHO AM I?</h4>
+                        <hr />
+                        <p th:text="${user.selfDescribe}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque. Ut enim massa, sodales tempor convallis et, iaculis ac massa. Maecenas metus nulla, commodo a sodales sed, dignissim pretium nunc. Nam et lacus neque.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- /FLIP BOX -->
+
+
+            <div class="box-light"><!-- .box-light OR .box-dark -->
+
+                <div class="row">
+
+                    <!-- POPULAR POSTS -->
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="box-inner">
+                            <h3>
+                                <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                                Recent faqs
+                            </h3>
+                            <div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true">
+
+                                <div class="clearfix margin-bottom-10"><!-- post item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/b-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                    <span class="size-11 text-muted">June 29, 2015</span>
+                                </div><!-- /post item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- post item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                    <span class="size-11 text-muted">June 29, 2015</span>
+                                </div><!-- /post item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- post item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/d-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                    <span class="size-11 text-muted">June 29, 2015</span>
+                                </div><!-- /post item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- post item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/a-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                    <span class="size-11 text-muted">June 29, 2015</span>
+                                </div><!-- /post item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- post item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-13 nomargin noborder nopadding"><a href="blog-single-default.html">Nullam Vitae Nibh Un Odiosters</a></h4>
+                                    <span class="size-11 text-muted">June 29, 2015</span>
+                                </div><!-- /post item -->
+
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <!-- INLINE SEARCH -->
+                            <div class="inline-search clearfix">
+                                <form action="#" method="get" class="widget_search nomargin">
+                                    <input type="search" placeholder="Search Post..." name="s" class="serch-input">
+                                    <button type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                            <!-- /INLINE SEARCH -->
+
+                        </div>
+
+                    </div>
+                    <!-- /POPULAR POSTS -->
+
+                    <!-- FRIENDS -->
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="box-inner">
+                            <h3>
+                                <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                                FRIENDS
+                            </h3>
+                            <div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true">
+
+                                <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/1-min.jpg" width="40" height="40" alt="" />
+                                    <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Joana Doe</a></h4>
+                                    <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                                </div><!-- /squared item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- rounded item -->
+                                    <img class="thumbnail pull-left rounded" src="assets/images/demo/people/300x300/2-min.jpg" width="40" height="40" alt="" />
+                                    <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Melissa Doe</a></h4>
+                                    <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                                </div><!-- /rounded item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/3-min.jpg" width="40" height="40" alt="" />
+                                    <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Felicia Doe</a></h4>
+                                    <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                                </div><!-- /squared item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- rounded item -->
+                                    <img class="thumbnail pull-left rounded" src="assets/images/demo/people/300x300/4-min.jpg" width="40" height="40" alt="" />
+                                    <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Suzana Doe</a></h4>
+                                    <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                                </div><!-- /rounded item -->
+
+                                <div class="clearfix margin-bottom-10"><!-- squared item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="40" height="40" alt="" />
+                                    <h4 class="size-14 nomargin noborder nopadding bold"><a href="#">Jolie Doe</a></h4>
+                                    <span class="size-12 text-muted">Lorem ipsum dolor sit amet.</span>
+                                </div><!-- /squared item -->
+
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <!-- INLINE SEARCH -->
+                            <div class="inline-search clearfix">
+                                <form action="#" method="get" class="widget_search nomargin">
+                                    <input type="search" placeholder="Search Friend..." name="s" class="serch-input">
+                                    <button type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                            <!-- /INLINE SEARCH -->
+
+                        </div>
+
+                    </div>
+                    <!-- /FRIENDS -->
+
+                </div>
+
+
+                <div class="row margin-top-30">
+
+                    <!-- DISCUSSIONS -->
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="box-inner">
+                            <h3>
+                                <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                                DISCUSSIONS
+                            </h3>
+                            <div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true">
+
+                                <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/3-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Joana Doe</a></h4>
+                                    <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">12 min. ago</span>
+												</span>
+                                </div><!-- /discussion item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/4-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Melissa Doe</a></h4>
+                                    <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">54 min. ago</span>
+												</span>
+                                </div><!-- /discussion item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/5-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">juliet Doe</a></h4>
+                                    <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">8 days ago</span>
+												</span>
+                                </div><!-- /discussion item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/6-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Suanna Doe</a></h4>
+                                    <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">12 day ago</span>
+												</span>
+                                </div><!-- /discussion item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- discussion item -->
+                                    <img class="thumbnail pull-left" src="assets/images/demo/people/300x300/7-min.jpg" width="60" height="60" alt="" />
+                                    <h4 class="size-15 nomargin noborder nopadding bold"><a href="#">Felicia Doe</a></h4>
+                                    <span class="size-13 text-muted">
+													Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+													<span class="text-success size-11">1 month ago</span>
+												</span>
+                                </div><!-- /discussion item -->
+
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <!-- INLINE SEARCH -->
+                            <div class="inline-search clearfix">
+                                <form action="#" method="get" class="widget_search nomargin">
+                                    <input type="search" placeholder="Search Discussion..." name="s" class="serch-input">
+                                    <button type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                            <!-- /INLINE SEARCH -->
+
+                        </div>
+
+                    </div>
+                    <!-- /DISCUSSIONS -->
+
+                    <!-- NOTIFICATIONS -->
+                    <div class="col-md-6 col-sm-6">
+
+                        <div class="box-inner">
+                            <h3>
+                                <a class="pull-right size-11 text-warning" href="#">VIEW ALL</a>
+                                NOTIFICATIONS
+                            </h3>
+                            <div class="height-250 slimscroll" data-always-visible="true" data-size="5px" data-position="right" data-opacity="0.4" disable-body-scroll="true">
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-success label-square pull-left">
+													<i class="fa fa-comment"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>New Comment</b>: <a href="blog-single-default.html">Lorem ipsum Dolor</a></span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-danger label-square pull-left">
+													<i class="glyphicon glyphicon-remove"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Rejected</b>: <a href="#">Joana Doe</a> rejected friendship</span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-warning label-square pull-left">
+													<i class="fa fa-warning"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Warning</b>: Lorem ipsum Dolor</span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-info label-square pull-left">
+													<i class="fa fa-info-circle"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Info</b>: Lorem ipsum Dolor</span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-primary label-square pull-left">
+													<i class="fa fa-check"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Primary</b>: Lorem ipsum Dolor</span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-default label-square pull-left">
+													<i class="fa fa-heart-o"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Default</b>: Lorem ipsum Dolor</span>
+                                </div><!-- /notification item -->
+
+                                <div class="clearfix margin-bottom-20"><!-- notification item -->
+                                    <span class="label label-purple label-square pull-left">
+													<i class="fa fa-clock-o"></i>
+												</span>
+                                    <span class="size-14 text-muted"><b>Various</b>: Lorem ipsum Dolor</span>
+                                </div><!-- /notification item -->
+
+                            </div>
+                        </div>
+
+                        <div class="box-footer">
+                            <!-- INLINE SEARCH -->
+                            <div class="inline-search clearfix">
+                                <form action="#" method="get" class="widget_search nomargin">
+                                    <input type="search" placeholder="Search notification..." name="s" class="serch-input">
+                                    <button type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <div class="clear"></div>
+                                </form>
+                            </div>
+                            <!-- /INLINE SEARCH -->
+
+                        </div>
+
+                    </div>
+                    <!-- /NOTIFICATIONS -->
+
+                </div>
+
+
+            </div>
+
+
+            <form method="post" action="#" class="box-light margin-top-20"><!-- .box-light OR .box-dark -->
+                <div class="box-inner">
+                    <h4 class="uppercase">LEAVE A MESSAGE TO <strong>FELICIA DOE</strong></h4>
+
+                    <textarea required class="form-control word-count" data-maxlength="100" rows="5" placeholder="Type your message here..."></textarea>
+                    <div class="text-muted text-right margin-top-3 size-12 margin-bottom-10">
+                        <span>0/100</span> Words
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
+                </div>
+            </form>
+
+        </div>
+
+
+
+        <!-- header modal -->
+        <!--<div class="modal-header">-->
+        <!--<h4 class="modal-title" id="myLargeModalLabel">修改用户</h4>-->
+        <!--</div>-->
+        <form id="updateform" action="/user/detail/modify" method="post"
+              class="validate-plugin sky-form boxed"
+              novalidate="novalidate" th:object="${user}">
+            <!-- body modal -->
+            <div class="">
+                <div class="login-box">
+
+                    <header><i class="fa fa-users"></i> 修改账户 <b><span th:text="*{dbUser.username}">zhangsan</span></b>
+                        <small class="note bold">请谨慎操作</small>
+                    </header>
+
+                    <fieldset>
+
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{dbUser.username}"/>
+                        <input type="hidden" th:field="*{dbUser.enabled}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>密码操作，不需要修改请留空</h4>
+                                <label>修改密码</label>
+                                <label class="input">
+                                    <input type="password" name="password" id="password"
+                                           placeholder="密码" minlength="4" th:field="*{dbUser.password}"/>
+                                    <b class="tooltip tooltip-bottom-right">修改密码</b>
+                                </label>
+                                <label>重复密码</label>
+                                <label class="input">
+                                    <input type="password" name="repassword" id="repassword"
+                                           placeholder="密码" minlength="4"/>
+                                    <b class="tooltip tooltip-bottom-right">重复密码</b>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <label class="input">
+                                        <img id="showAvatar" class="img-responsive" th:src="*{avatar}"/>
+                                        <input type="file" id="sureLogo" value="上传头像"/>
+                                    </label>
+                                    <div id="uploadqueue"></div>
+                                    <script>
+                                        $("#sureLogo").uploadifive({
+                                            'height': 30,
+                                            'width': 80,
+                                            'fileObjName': 'uploadfile',//后台获取使用的名字
+                                            'method': 'post',
+                                            'auto': true,
+//            'buttonClass': 'btn btn-primary',
+                                            'buttonText': '选择图片',
+                                            'fileType': 'image/*',//只允许图片格式的文件
+                                            'queueID': 'uploadqueue',
+                                            'queueSizeLimit': 2,//这里我只允许单个图片上传
+                                            'removeCompleted': true,//文件上传完成之后去除进度条
+                                            'uploadScript': '/uploadfiles',//处理上传文件的后台url
+                                            'onFallback': function () {
+                                                alert("请使用支持HTML5的浏览器");
+                                            },
+                                            //上传到服务器，服务器返回相应信息到data里
+                                            'onUploadComplete': function (file, data) {//上传文件完成file即文件名,data为后台返回的数据
+                                                var jsondata = JSON.parse(data);
+                                                var image=$("<image src='"+jsondata[0]+"'/>");
+                                                $("#showAvatar").attr('src',jsondata[0]);
+                                                $("#avatar").val(jsondata[0]);
+                                                console.log(data);
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                                <div class="col-md-12">
+                                    <label>头像地址</label>
+                                    <label class="input">
+                                        <input type="text" th:field="*{avatar}" placeholder="url"/>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>姓</label>
+                                <div class="input">
+                                    <input type="text" th:field="*{lastName}" placeholder="姓"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>名</label>
+                                <div class="input">
+                                    <input type="text" th:field="*{firstName}" placeholder="名"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>昵称</label>
+                                <label class="input">
+                                    <input type="text" th:field="*{dbUser.usernameAlias}" name="usernameAlias"
+                                           placeholder="昵称"/>
+                                    <b class="tooltip tooltip-bottom-right">昵称</b>
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>性别</label>
+                                <div class="select">
+                                    <select th:field="*{gender}">
+                                        <option value="0" selected="" disabled="">Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                    <i></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label>邮件地址</label>
+                                <div class="input">
+                                    <input type="email" th:field="*{email}" name="usernameAlias"
+                                           placeholder="邮件地址" required="true"/>
+                                    <b class="tooltip tooltip-bottom-right">邮件地址</b>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <label>个人备注</label>
+                        <div>
+                            <textarea th:field="*{selfDescribe}" class="summernote form-control required"
+                                      data-height="200"
+                                      data-lang="en-US"></textarea>
+                        </div>
+                    </fieldset>
+
+
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <!--<button type="submit" onclick="$('#updateform').validate().form()" class="btn btn-primary" >Save changes</button>-->
+                <button type="submit" class="btn btn-primary"
+                        onclick="$('#updateform').validate({
+                            rules:{
+                                email:{
+                                    required:true,
+                                    email:true
+                                },
+                                password:{
+                                    minlength:4
+                                },
+                                repassword:{
+                                    equalTo: '#password'
+                                }
+                            }
+                        }).form()"
+                >提交
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+    <div class="col-md-2"></div>
+
+
+    <div></div>
+
+</div>
+
+</body>
+</html>

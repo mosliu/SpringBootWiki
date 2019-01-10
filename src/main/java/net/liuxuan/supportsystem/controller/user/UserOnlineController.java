@@ -98,7 +98,6 @@ public class UserOnlineController {
      * @param model
      * @return
      */
-
     @RequestMapping("/onlineAll")
     public String getALL(HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
         List<UserDetailInfo> userDetailInfoList = userDetailInfoService.listAllUserDetailInfos();

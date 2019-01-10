@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,6 +49,15 @@ public class UserDetailController {
 
         model.put("user", currentUserDetailInfo);
         return "user/user_edit";
+    }
+
+    @RequestMapping(value = "/user/detail/show/{id}", method = RequestMethod.GET)
+    public String getUser(@PathVariable Long id,HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+
+        UserDetailInfo detailInfo = userDetailInfoService.findUserDetailInfoById(id);
+
+        model.put("user", detailInfo);
+        return "user/user_show";
     }
 
     @RequestMapping(value = "/user/detail/modify", method = RequestMethod.POST)

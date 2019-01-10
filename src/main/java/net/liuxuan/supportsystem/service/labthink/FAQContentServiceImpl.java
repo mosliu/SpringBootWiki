@@ -3,12 +3,12 @@ package net.liuxuan.supportsystem.service.labthink;
 import net.liuxuan.spring.helper.SystemHelper;
 import net.liuxuan.spring.helper.bean.BeanHelper;
 import net.liuxuan.supportsystem.entity.dto.FAQSearchDTO;
-import net.liuxuan.supportsystem.entity.labthink.Department;
 import net.liuxuan.supportsystem.entity.labthink.FAQContent;
 import net.liuxuan.supportsystem.entity.security.DbUser;
 import net.liuxuan.supportsystem.entity.security.Role;
 import net.liuxuan.supportsystem.repository.labthink.FAQContentRepository;
 import net.liuxuan.supportsystem.service.CMSCategoryService;
+import net.liuxuan.supportsystem.service.util.RoleHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +52,7 @@ public class FAQContentServiceImpl implements FAQContentService {
     private CMSCategoryService cmsCategoryService;
 
     @Autowired
-    private DepartmentService departmentService;
+    private RoleHelper roleHelper;
 
 
     @Override
@@ -226,21 +226,6 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
 
-    /**
-     * Judge if the User has role to access the FAQContent.
-     *
-     * @param rolenames the rolenames
-     * @param dept      the faq
-     * @return the boolean
-     */
-    public boolean hasDepartmentRole(Set<String> rolenames, Department dept) {
-        String deparmentRoleName = departmentService.getDeparmentRoleName(dept);
-        if (rolenames.contains(deparmentRoleName)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Judge if the User has role to access the FAQContent.
@@ -250,60 +235,10 @@ public class FAQContentServiceImpl implements FAQContentService {
      * @return the boolean
      */
     public boolean hasDepartmentRole(Set<String> rolenames, FAQContent faq) {
-        return hasDepartmentRole(rolenames, faq.getDepartment());
+        return roleHelper.hasDepartmentRole(rolenames, faq.getDepartment());
+//        return hasDepartmentRole(rolenames, faq.getDepartment());
     }
 
-    /**
-     * Judge if the User has role to access the FAQContent.
-     *
-     * @param faq the faq
-     * @return the boolean
-     */
-    public boolean hasDepartmentRole(FAQContent faq) {
-        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
-        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
-        return hasDepartmentRole(rolenames, faq);
-    }
-
-    /**
-     * Is admin boolean.
-     *
-     * @param rolenames the rolenames
-     * @return the boolean
-     */
-    public boolean isAdmin(Set<String> rolenames) {
-//        if (rolenames.contains("ROLE_ADMIN")) {
-//            return true;
-//        }
-//        return false;
-        return rolenames.contains("ROLE_ADMIN");
-    }
-
-    /**
-     * Is admin boolean.
-     *
-     * @return the boolean
-     */
-    public boolean isAdmin() {
-        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
-        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
-        return isAdmin(rolenames);
-    }
-
-    /**
-     * Is the faq's author
-     *
-     * @param faq the faq
-     * @return the boolean
-     */
-    public boolean isFaqAuthor(FAQContent faq) {
-        DbUser currentUser = SystemHelper.getCurrentUser();
-        if (faq.getAuthor().getUsername().equals(currentUser.getUsername())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * Has access right boolean.
@@ -313,7 +248,8 @@ public class FAQContentServiceImpl implements FAQContentService {
      * @return the boolean
      */
     public boolean hasAccessRight(Set<String> rolenames, FAQContent faq) {
-        boolean rtn = isAdmin(rolenames) || isFaqAuthor(faq) || hasDepartmentRole(rolenames, faq);
+        //rolename 获取一次，节省处理时间
+        boolean rtn = roleHelper.isAdmin(rolenames) || roleHelper.isAuthor(faq) || roleHelper.hasDepartmentRole(rolenames, faq.getDepartment());
         return rtn;
     }
 

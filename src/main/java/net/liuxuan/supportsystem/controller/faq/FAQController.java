@@ -21,6 +21,8 @@ import net.liuxuan.supportsystem.service.labthink.DepartmentService;
 import net.liuxuan.supportsystem.service.labthink.DeviceTypeService;
 import net.liuxuan.supportsystem.service.labthink.DevicesService;
 import net.liuxuan.supportsystem.service.labthink.FAQContentService;
+import net.liuxuan.supportsystem.service.util.RoleHelper;
+import org.apache.commons.beanutils.BeanUtils;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +39,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -65,6 +68,9 @@ public class FAQController {
      */
     @Autowired
     private DevicesService devicesService;
+
+    @Autowired
+    private RoleHelper roleHelper;
 
 //    @Resource
 //    DepartmentRepository departmentRepository;
@@ -136,7 +142,7 @@ public class FAQController {
     }
 
     /**
-     * Gets faq contents.
+     * Edit faq contents.
      *
      * @param id       the id
      * @param request  the request
@@ -144,9 +150,9 @@ public class FAQController {
      * @param model    the model
      * @return the faqid
      */
-    @RequestMapping(value = "/faq/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/faq/edit/{id}", method = RequestMethod.GET)
 //    @PreAuthorize("hasRole('ROLE_USER')")
-    public String getFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+    public String editFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
 
 
         FAQContent faq = faqContentService.findById(id);
@@ -178,6 +184,50 @@ public class FAQController {
 //        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
         return "faq/faq_edit";
     }
+
+    @RequestMapping(value = "/faq/copy/{id}", method = RequestMethod.GET)
+//    @PreAuthorize("hasRole('ROLE_USER')")
+    public String copyFAQID(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+
+
+        FAQContent faq = faqContentService.findById(id);
+
+        // 只有Admin 才有复制权限
+
+        //TODO 无权限时 显示内容
+        if (!roleHelper.isAdmin()) {
+            faq = createNoAccessRightFaqContent("您无权复制该条信息");
+            faq.setId(id);
+            model.put("faq", faq);
+            return "faq/faq_show";
+        }
+//        if(faq.isDisabled()==true){
+
+        log.info("-FAQController.getFAQ() Method");
+//        model.put("message", "Editor");
+        model.put("title", "FAQ 编辑界面");
+        FAQContent newfaq = new FAQContent();
+        faq.setQuestionDate(new Date());
+        faq.setDescription("copied from "+faq.getId());
+
+        try {
+            BeanUtils.copyProperties(newfaq,faq);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        newfaq.setId(null);
+
+        model.put("faq", newfaq);
+//        devicesRepository.findAll();
+//        List<Devices> devicesAll = devicesRepository.findAll();
+//        devicesAll.forEach(devices -> {devices.setDeviceType(null);devices.setDevicename(null);});
+//        model.put("devicesAll",devicesAll);
+//        UserDetails u = (UserDetails) SystemHelper.getAuthentication().getPrincipal();
+        return "faq/faq_edit";
+    }
+
 
     /**
      * Show faqid string.

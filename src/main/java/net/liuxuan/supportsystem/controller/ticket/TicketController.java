@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -139,7 +140,7 @@ TicketController {
         List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
 //        boolean anyMatchFAQ = currentUserRoles.stream().anyMatch(e -> e.getRolename().equals("ROLE_FAQ"));
         boolean anyMatchFAQ = currentUserRoles.stream().anyMatch(e -> e.getRolename().equals(editRole));
-        if(anyMatchFAQ){
+        if (anyMatchFAQ) {
             return "ticket/ticket_post";
         }
 
@@ -216,9 +217,9 @@ TicketController {
             try {
 //                MailHelper.SendMail(mailto, "New Question:"+ticket.getTitle(), variables, "mail/mailTicketSubmit");
                 String email = ticket.getAssignToUser().getEmail();
-                email= email==null?mailto:email;
+                email = email == null ? mailto : email;
 
-                MailHelper.SendMail(ticket.getAssignToUser().getEmail(), "New Question:"+ticket.getTitle(), variables, "mail/mailTicketSubmit");
+                MailHelper.SendMail(ticket.getAssignToUser().getEmail(), "New Question:" + ticket.getTitle(), variables, "mail/mailTicketSubmit");
 //                if (udi != null) {
 //                    MailHelper.SendMail(udi.getEmail(), "subject aa", variables, "mail/mailTicketSubmit");
 //                }
@@ -252,15 +253,16 @@ TicketController {
     /**
      * 打开回答页面。
      *
-     * @param id
-     * @param request
-     * @param response
-     * @param model
-     * @return
+     * @param id       id
+     * @param request  request
+     * @param response res[pnse
+     * @param model    model
+     * @return string
      */
     @RequestMapping(value = "ticket/answer/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public String AnswerTicket(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response, Map<String, Object> model) {
+    public String AnswerTicket(@PathVariable Long id, HttpServletRequest request,
+                               HttpServletResponse response, Map<String, Object> model) {
         TicketContent content = ticketContentService.findById(id);
         FAQContent faq = new FAQContent();
         BeanUtils.copyProperties(content, faq);
@@ -326,8 +328,13 @@ TicketController {
 
 
         List<TicketContent> allContents = ticketContentService.findAllTicketContentsByDto(dto);
-        log.info("list size is {}", allContents.size());
-        model.put("alllist", allContents);
+
+        List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+        Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+
+        List<TicketContent> filteredFAQContents = ticketContentService.filterListByAccessRight(allContents, rolenames);
+        log.info("list size is {}", filteredFAQContents.size());
+        model.put("alllist", filteredFAQContents);
         model.put("dto", dto);
         return "ticket/ticket_list";
     }

@@ -6,6 +6,7 @@ import net.liuxuan.supportsystem.entity.labthink.TicketContent;
 import net.liuxuan.supportsystem.entity.user.UserDetailInfo;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -34,6 +35,8 @@ public interface TicketContentService {
      */
     List<TicketContent> findAllTicketContentsByDto(TicketSearchDTO dto);
 
+    List<TicketContent> filterListByAccessRight(List<TicketContent> allTicketContents, Set<String> rolenames);
+
     List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser);
 
     List<TicketContent> findAllTicketContentsAssignedTo(UserDetailInfo assignToUser, boolean isResolved);
@@ -61,4 +64,6 @@ public interface TicketContentService {
      * @return the ticket contents count
      */
     long getTicketContentsCount();
+
+    boolean hasAccessRight(TicketContent ticket);
 }

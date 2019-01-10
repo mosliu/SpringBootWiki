@@ -267,10 +267,10 @@
                                 admin_operate = false;
                             }
                             if(admin_operate){
-                                return '<a href="/faq/' + data + '"> Edit </a> <a href="/faq/delete/' + data + '"> Delete </a> ';
+                                return '<a href="/faq/edit/' + data + '"> Edit </a> <a href="/faq/delete/' + data + '"> Delete </a> <a href="/faq/copy/' + data + '"> Copy </a>';
                             }else{
                                 if(full.author.username === authname){
-                                    return '<a href="/faq/' + data + '"> Edit </a> ';
+                                    return '<a href="/faq/edit/' + data + '"> Edit </a> ';
                                 }else{
                                     return '';
                                 }
