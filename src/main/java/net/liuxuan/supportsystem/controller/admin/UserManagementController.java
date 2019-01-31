@@ -76,6 +76,15 @@ public class UserManagementController {
 //        log.info("===userManage logged ,the value is : {}",userDetailInfo.getUsers().toString());
 
 
+        //加trim sid  2019/01/31  moses
+        try {
+            userDetailInfo.getDbUser().setUsername(userDetailInfo.getDbUser().getUsername().replaceAll("\\s",""));
+            userDetailInfo.getDbUser().setPassword(userDetailInfo.getDbUser().getPassword().replaceAll("\\s",""));
+            dto.sid=dto.sid.trim();
+        } catch (Exception e) {
+            //do nothing
+        }
+
         DbUser u = new DbUser();
         u.setUsername(dto.sid);
 
@@ -132,6 +141,16 @@ public class UserManagementController {
         log.info("===userManageAjax logged ,the value is : {}", dto.toString());
         log.info("===userManageAjax logged ,the value is : {}", userDetailInfo.toString());
 //        log.info("===userManage logged ,the value is : {}",userDetailInfo.getUsers().toString());
+
+
+        //加trim sid  2019/01/31  moses
+        try {
+            userDetailInfo.getDbUser().setUsername(userDetailInfo.getDbUser().getUsername().replaceAll("\\s",""));
+            userDetailInfo.getDbUser().setPassword(userDetailInfo.getDbUser().getPassword().replaceAll("\\s",""));
+            dto.sid=dto.sid.trim();
+        } catch (Exception e) {
+            //do nothing
+        }
 
 
         response.setContentType("application/json");

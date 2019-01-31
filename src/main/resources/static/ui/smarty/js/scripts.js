@@ -133,6 +133,12 @@
 
 		});
 
+        // console.log("!!!!!!!!")
+        // if(jQuery.browser.msie){
+        	// console.log("?????????????")
+         //    jQuery('#preloader').remove();
+		// }
+
 	}
 
 
@@ -2776,6 +2782,15 @@
 		var img= JSON.parse(imageUrl)
 		for(i in img){
 			$('.summernote').summernote('editor.insertImage',img[i][i]);
+            var aurl = "http://"+ document.domain+img[i][i]
+            var anode = $("<a></a>").attr("href",aurl).text(img[i][i])
+            $('.summernote').summernote('editor.insertNode',anode[0]);
+            // $('.summernote').summernote('createLink', {
+            //     text: document.domain+img[i][i],
+            //     url: document.domain+img[i][i],
+            //     isNewWindow: false,
+            //     range:""
+            // });
 		}
 	}
 
@@ -3646,6 +3661,7 @@
 			var isIE11 = !(window.ActiveXObject) && "ActiveXObject" in window;
 
 			if(isIE11) {
+
 				jQuery('html').removeClass('gecko').addClass('ie ie11');
 				return;
 			}
