@@ -12,8 +12,11 @@ import net.liuxuan.supportsystem.service.util.RoleHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,9 +57,23 @@ public class FAQContentServiceImpl implements FAQContentService {
     @Autowired
     private RoleHelper roleHelper;
 
+    @Value("${SprKi.faqlist.count}")
+    private int listcount;
+
 
     @Override
-//    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "faqContent", key = "topContents"),
+                    @CacheEvict(cacheNames = "faqContent", key = "FaqCount"),
+                    @CacheEvict(cacheNames = "faqContent", key = "FaqCountGroup"),
+                    @CacheEvict(cacheNames = "faqContent", key = "FaqCountGroupByAuthorAndDate")
+
+            },
+            put = {
+                    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
+            }
+    )
     public FAQContent saveFAQContent(FAQContent faq) {
 
         FAQContent load = null;
@@ -100,9 +117,23 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "faqContent",key="#id")
-    public void refreshCache(Long id){
+    @CacheEvict(cacheNames = "faqContent", key = "#id")
+    public void refreshCache(Long id) {
 
+    }
+
+
+    @Cacheable(cacheNames = "faqContent", key = "topContents")
+    public List<FAQContent> findTopFAQContents() {
+        if (listcount <= 100) {
+            return faqContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
+        } else if (listcount < 200) {
+            return faqContentRepository.findTop150ByDisabledOrderByLastUpdateDateDesc(false);
+        } else if (listcount < 400) {
+            return faqContentRepository.findTop200ByDisabledOrderByLastUpdateDateDesc(false);
+        } else {
+            return faqContentRepository.findTop400ByDisabledOrderByLastUpdateDateDesc(false);
+        }
     }
 
 
@@ -111,9 +142,10 @@ public class FAQContentServiceImpl implements FAQContentService {
     public List<FAQContent> findAllFAQContentsByDto(FAQSearchDTO dto) {
 
         if (dto.isAllNull()) {
+            return findTopFAQContents();
             //全空，返回top100
 //            return faqContentRepository.findTop100ByDisabled(false);
-            return faqContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
+
         }
 
 
@@ -164,8 +196,8 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
-    public List<FAQContent> filterListByAccessRight(List<FAQContent> allFAQContents, Set<String> rolenames){
-         List<FAQContent> filteredFAQContents = allFAQContents
+    public List<FAQContent> filterListByAccessRight(List<FAQContent> allFAQContents, Set<String> rolenames) {
+        List<FAQContent> filteredFAQContents = allFAQContents
                 .stream()
                 .filter(faq -> hasAccessRight(rolenames, faq))
                 .collect(Collectors.toList());
@@ -174,7 +206,7 @@ public class FAQContentServiceImpl implements FAQContentService {
 
 
     @Override
-    @CacheEvict(cacheNames = "faqContent",key="#id")
+    @CacheEvict(cacheNames = "faqContent", key = "#id")
     public void disableFAQContentById(Long id) {
         faqContentRepository.findOne(id).setDisabled(true);
         //faqContentRepository.delete(id);
@@ -188,14 +220,14 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
-    @CacheEvict(cacheNames = "faqContent",key="#id")
+    @CacheEvict(cacheNames = "faqContent", key = "#id")
     public void deleteFAQContentById(Long id) {
 //        faqContentRepository.findOne(id).setDisabled(true);
         faqContentRepository.delete(id);
     }
 
     @Override
-    @Cacheable(cacheNames = "faqContent", key="#id")
+    @Cacheable(cacheNames = "faqContent", key = "#id")
     public FAQContent findById(Long id) {
         FAQContent faq = faqContentRepository.findOne(id);
         if (faq != null) {
@@ -206,25 +238,22 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
+    @Cacheable(cacheNames = "faqContent", key = "FaqCount")
     public long getFAQContentsCount() {
         return faqContentRepository.count();
     }
 
     @Override
+    @Cacheable(cacheNames = "faqContent", key = "FaqCountGroup")
     public List<?> getFaqGroupByCount() {
         return faqContentRepository.findGroupByCount();
     }
 
     @Override
+    @Cacheable(cacheNames = "faqContent", key = "FaqCountGroupByAuthorAndDate")
     public List<Object[]> getFaqGroupByAuthorAndDate() {
         return faqContentRepository.findGroupByAuthorAndDate1();
     }
-
-
-
-
-
-
 
 
     /**

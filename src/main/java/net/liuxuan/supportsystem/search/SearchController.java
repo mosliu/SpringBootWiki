@@ -1,5 +1,9 @@
 package net.liuxuan.supportsystem.search;
 
+import net.liuxuan.spring.helper.SystemHelper;
+import net.liuxuan.supportsystem.entity.labthink.FAQContent;
+import net.liuxuan.supportsystem.entity.security.Role;
+import net.liuxuan.supportsystem.service.labthink.FAQContentService;
 import org.hibernate.search.exception.EmptyQueryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Copyright (c) 2010-2016.  by Liuxuan   All rights reserved. <br/>
@@ -26,7 +32,11 @@ public class SearchController {
     private static Logger log = LoggerFactory.getLogger(SearchController.class);
     @Autowired
     private SearchService searchService;
-
+    /**
+     * The Faq content service.
+     */
+    @Autowired
+    private FAQContentService faqContentService;
     /**
      * Show search results for the given query.
      *
@@ -35,10 +45,17 @@ public class SearchController {
     @RequestMapping("/search")
     public String search(String q, Model model) {
         List faqResultList = null;
+        List filteredFAQContents = null;
         List newsResultList = null;
         String errorText = null;
         try {
             faqResultList = searchService.FaqSearch(q);
+            List<Role> currentUserRoles = SystemHelper.getCurrentUserRoles();
+            Set<String> rolenames = currentUserRoles.stream().map(e -> e.getRolename()).collect(Collectors.toSet());
+            filteredFAQContents = (List<FAQContent>)faqResultList
+                    .stream()
+                    .filter(faq -> faqContentService.hasAccessRight(rolenames, (FAQContent) faq))
+                    .collect(Collectors.toList());
             newsResultList = searchService.NewPageSearch(q);
             log.debug("FAQ Search results total number:{}" , faqResultList.size());
             log.debug("NEWS Search results total number:{}" , newsResultList.size());
@@ -47,7 +64,7 @@ public class SearchController {
         }
         model.addAttribute("errorText", errorText);
 
-        model.addAttribute("faqResultList", faqResultList);
+        model.addAttribute("faqResultList", filteredFAQContents);
         model.addAttribute("newsResultList", newsResultList);
         return "search";
     }

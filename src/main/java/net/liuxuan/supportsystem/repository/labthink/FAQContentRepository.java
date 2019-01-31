@@ -23,6 +23,8 @@ public interface FAQContentRepository extends JpaRepository<FAQContent, Long>, J
     List<FAQContent> findTop100ByDisabled(Boolean disabled);
     List<FAQContent>  findTop100ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
     List<FAQContent>  findTop150ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
+    List<FAQContent>  findTop200ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
+    List<FAQContent>  findTop400ByDisabledOrderByLastUpdateDateDesc(Boolean disabled);
 
 
     @Query(value = "select count(v) as cnt, v.devices from FAQContent v group by v.devices")

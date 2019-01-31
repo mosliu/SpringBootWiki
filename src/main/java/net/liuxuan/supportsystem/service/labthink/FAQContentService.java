@@ -81,4 +81,6 @@ public interface FAQContentService {
     List<Object[]> getFaqGroupByAuthorAndDate();
 
     boolean hasAccessRight(FAQContent faq);
+
+    boolean hasAccessRight(Set<String> rolenames, FAQContent faq);
 }

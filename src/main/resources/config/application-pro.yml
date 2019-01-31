@@ -230,6 +230,8 @@ SprKi:
   druid:
     username: root
     password: Moses12345
+  faqlist:
+    count: 200
   lucene:
     chinese: true
     init: false
