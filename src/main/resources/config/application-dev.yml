@@ -36,6 +36,9 @@ spring:
   devtools:
     restart:
       enabled: true
+      exclude: target/**,static/**,log/**,.idea/**
+      additional-path: src/main/java
+
 
   cache:
     jcache:

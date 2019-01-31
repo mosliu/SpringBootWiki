@@ -158,7 +158,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         log.debug("--Viewname: {} & User: {}--", viewname, user);
         log.info("Access Log, User:{} ,url:{} {}?{} ", user, request.getMethod(), request.getRequestURL().toString(), query);
 
-        log.trace("********************Model************************");
+        log.trace("******************** Model Start ************************");
         if (modelAndView == null) {
             //可能是Restful Services
             log.trace("No Model!");
@@ -174,7 +174,7 @@ public class TestUrlInterceptor implements HandlerInterceptor {
         long consumeTime = endTime - beginTime;//3、消耗的时间
         log.trace("Consume Time {} ms", consumeTime);
 
-        log.trace("********************Model************************");
+        log.trace("******************** Model End   ************************");
 //        log.trace("*************************************************");
 //        log.trace("*************************************************");
 

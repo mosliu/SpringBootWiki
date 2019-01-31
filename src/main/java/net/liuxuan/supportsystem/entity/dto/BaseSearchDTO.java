@@ -65,6 +65,7 @@ public class BaseSearchDTO extends BaseDTO{
     public boolean isAllNull(){
         Field[] fields = this.getClass().getFields();
         boolean rtn = true;
+
 //        log.debug("===isAllNull logged ,the fields num is : {}",fields.length);
         for (int i = 0; i < fields.length; i++) {
             boolean tempbo = false;

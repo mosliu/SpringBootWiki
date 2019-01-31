@@ -64,7 +64,11 @@ public class SliderPicsManagementController {
                 sliderPics = sliderPicsService.findSliderPicsById(id);
                 if (sliderPics != null) {
                 } else {
-                    throw new IOException("Got Wrong ID");
+
+                    Map<String, Object> rtnData = new HashMap<String, Object>();
+                    ResponseHelper.writeMapToResponseAsJson(response, rtnData);
+                    ResponseHelper.fastErrorResponseAsJson(response, "ERROR_SliderPicsNotExists","fail","SliderPics不存在，修改失败");
+//                    throw new IOException("Got Wrong ID");
                 }
                 model.put("sliderPics", sliderPics);
                 return "admin/snipplets/div_sliderPics :: sliderPicsedit";
