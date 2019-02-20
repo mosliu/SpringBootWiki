@@ -77,7 +77,7 @@ public class DepartmentManagementController {
                                      HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
-        log.info("===departmentManageAjax logged ,the value is : {}", _dto.toString());
+        log.info("===manageVideoAjax logged ,the value is : {}", _dto.toString());
 
 //        response.setContentType("application/json");
 //        ObjectMapper mapper = new ObjectMapper();
@@ -88,7 +88,7 @@ public class DepartmentManagementController {
 //                String department_name_cn = request.getParameter("department_name_cn");
                 boolean departmentexist = departmentService.checkDepartmentExists(department_name);
                 if (departmentexist) {
-                    log.info("===departmentManageAjax logged ,添加部门已存在 : {}");
+                    log.info("===manageVideoAjax logged ,添加部门已存在 : {}");
                     rtnData.put("error", "ERROR_DepartmentExists");
                     rtnData.put("status", "fail");
                     rtnData.put("msg", "添加部门已存在");

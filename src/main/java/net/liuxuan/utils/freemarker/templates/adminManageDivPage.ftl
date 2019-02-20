@@ -61,8 +61,13 @@
     </form>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
-        var callback = function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+        function callback (data, success) {
+            if (success === "success") {
+                alert("Data: " + data.msg + "\nStatus: " + data.status);
+                if (data.status === "success") {
+                    $("#ajax").modal('hide');
+                }
+            }
         }
 
         ${'$'}("#updateform").on("submit", function (e) {

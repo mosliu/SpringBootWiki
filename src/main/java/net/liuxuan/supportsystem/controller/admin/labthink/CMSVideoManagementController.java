@@ -50,24 +50,24 @@ public class CMSVideoManagementController {
     }
 
     @RequestMapping("CMSVideo")
-    public String cMSVideoManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
+    public String cmsVideoManage(@ModelAttribute("dto") BaseDTO dto, HttpServletRequest request,
                                    HttpServletResponse response, Map<String, Object> model) throws IOException {
-        log.info("===cMSVideoManage logged ,the _dto value is : {}", dto.toString());
+        log.info("===cmsVideoManage logged ,the _dto value is : {}", dto.toString());
 
         switch (dto.action) {
             case "edit":
-                CMSVideo cMSVideo;
+                CMSVideo cmsVideo;
                 Long id = dto.getStr2LongID();
                 
-                cMSVideo = cmsVideoService.findCMSVideoById(id);
-                if (cMSVideo != null) {
+                cmsVideo = cmsVideoService.findCMSVideoById(id);
+                if (cmsVideo != null) {
                 } else {
                     throw new IOException("Got Wrong ID");
                 }
-                model.put("cMSVideo", cMSVideo);
-                return "admin/snipplets/div_cMSVideo :: cMSVideoedit";
+                model.put("cmsVideo", cmsVideo);
+                return "admin/snipplets/div_CMSVideo :: cmsVideoEdit";
             default:
-                return "redirect:/admin/cMSVideo_ajax";
+                return "redirect:/admin/CMSVideo_ajax";
 //                break;
         }
     }
@@ -75,11 +75,11 @@ public class CMSVideoManagementController {
 
     @RequestMapping("CMSVideo_ajax")
 //    @ResponseBody
-    public void cMSVideoManageAjax(@ModelAttribute("dto") BaseDTO _dto, CMSVideo _cMSVideo, HttpServletRequest request,
+    public void cmsVideoManageAjax(@ModelAttribute("dto") BaseDTO _dto, CMSVideo _cmsVideo, HttpServletRequest request,
                                      HttpServletResponse response) throws IOException {
 //        response.setContentType("application/json");
         Map<String, Object> rtnData = new HashMap<String, Object>();
-        log.info("===cMSVideoManageAjax logged ,the value is : {}", _dto.toString());
+        log.info("===cmsVideoManageAjax logged ,the value is : {}", _dto.toString());
         Long id = _dto.getStr2LongID();
 
 //        response.setContentType("application/json");
@@ -90,17 +90,17 @@ public class CMSVideoManagementController {
                 String cmsVideoName = request.getParameter("cmsVideoName");
 //                String cmsVideoFilepath = request.getParameter("cmsVideoFilepath");
 //                String comment = request.getParameter("comment");
-                boolean cMSVideoExists = cmsVideoService.checkCMSVideoExists(cmsVideoName);
-                if (cMSVideoExists) {
-                    log.info("===cMSVideoManageAjax logged ,添加CMSVideo已存在 : {}");
+                boolean cmsVideoExists = cmsVideoService.checkCMSVideoExists(cmsVideoName);
+                if (cmsVideoExists) {
+                    log.info("===cmsVideoManageAjax logged ,添加CMSVideo已存在 : {}");
                     rtnData.put("error", "ERROR_CMSVideoExists");
                     rtnData.put("status", "fail");
                     rtnData.put("msg", "添加CMSVideo已存在");
                 } else {
                     rtnData.put("status", "success");
                     rtnData.put("msg", "成功添加CMSVideo");
-                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _cMSVideo, "添加角色", "");
-                    cmsVideoService.saveCMSVideo(_cMSVideo);
+                    SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_CREATE, _cmsVideo, "添加角色", "");
+                    cmsVideoService.saveCMSVideo(_cmsVideo);
                 }
                 break;
             case "delete":
@@ -116,9 +116,10 @@ public class CMSVideoManagementController {
                 }
                 break;
             case "update":
-                cmsVideoService.saveCMSVideo(_cMSVideo);
-                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _cMSVideo, "更新CMSVideo", "");
-                rtnData.put("success1", "success!");
+                cmsVideoService.saveCMSVideo(_cmsVideo);
+                SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _cmsVideo, "更新CMSVideo", "");
+                rtnData.put("status", "success");
+                rtnData.put("msg", "更新成功");
                 break;
             default:
 

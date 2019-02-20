@@ -32,6 +32,16 @@ public class ResponseHelper {
         mapper.writeValue(response.getWriter(), rtnData);
     }
 
+    public static void writeStringResponseAsXml(HttpServletResponse response, String xml) throws IOException {
+        response.setContentType("application/xml");
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map<String, Object> rtnData = new HashMap<String, Object>();
+//        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+//        mapper.writeValue(response.getWriter(), rtnData);
+        response.getWriter().write(xml);
+    }
+
+
 
     //写一个map到Json Response中
     public static void writeMapToResponseAsJson(HttpServletResponse response, Map<String, Object> rtnData) throws IOException {

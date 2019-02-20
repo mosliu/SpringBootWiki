@@ -48,24 +48,7 @@ public class AuthenticationController {
     @Autowired
     private Producer captchaProducer = null;
 
-    /**
-     * Gets login user.
-     *
-     * @return the login user
-     */
-    public static User getLoginUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof User) {
-                return (User) principal;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
+
 
 //    @ModelAttribute("counter")
 //    public AtomicInteger failureCounter() {

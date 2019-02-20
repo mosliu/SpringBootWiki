@@ -125,7 +125,8 @@ public class ${model_name}ManagementController {
             case "update":
                 ${model_name_firstSmall}Service.save${model_name}(_${model_name_firstSmall});
                 SecurityLogHelper.LogHIGHRIGHT(request, LogActionType.ADMIN_UPDATE, _${model_name_firstSmall}, "更新${model_name}", "");
-                rtnData.put("success1", "success!");
+                rtnData.put("status", "success");
+                rtnData.put("msg", "更新成功");
                 break;
             default:
 

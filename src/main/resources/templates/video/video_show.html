@@ -18,26 +18,16 @@
         <h1 class="blog-post-title" th:text="${content.cmsVideoName}">BLOG POST TITLE HERE</h1>
     </div>
     <ul class="row clearfix testimonial-dotted list-unstyled">
-        <li class="col-md-9">
+        <li class="col-md-12">
             <!--<h2> 视频: </h2>-->
             <cite th:text="'说明:'+${content.comment}"></cite>
             <div>
-                <object id="vcastr3" data="/ui/mosesadd/vcastr/vcastr3.swf" height="500" type="application/x-shockwave-flash" width="650">
+                <object id="vcastr3" data="/ui/mosesadd/vcastr/vcastr3.swf" height="680" type="application/x-shockwave-flash" width="800">
                     <param name="movie" value="/ui/mosesadd/vcastr/vcastr3.swf"/>
                     <param name="allowFullScreen" value="true" />
                     <param name="FlashVars" th:value="'xml=/video/videoxml/'+${content.id}">
                 </object>
             </div>
-        </li>
-        <li class="col-md-3">
-            <ul class="side-nav list-group margin-bottom-80">
-
-                <!--<li class="list-group-item">-->
-                <!--<a href="#" th:href="@{/news/list}+'?category='+${news?.category.id}">-->
-                <!--<i class="fa fa-2x fa-history"></i>&nbsp;&nbsp;&nbsp;分类：<span th:text="${news.category.name}">category</span>-->
-                <!--</a>-->
-                <!--</li>-->
-            </ul>
         </li>
     </ul>
 

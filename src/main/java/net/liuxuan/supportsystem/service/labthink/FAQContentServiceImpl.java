@@ -64,14 +64,11 @@ public class FAQContentServiceImpl implements FAQContentService {
     @Override
     @Caching(
             evict = {
-                    @CacheEvict(cacheNames = "faqContent", key = "topContents"),
-                    @CacheEvict(cacheNames = "faqContent", key = "FaqCount"),
-                    @CacheEvict(cacheNames = "faqContent", key = "FaqCountGroup"),
-                    @CacheEvict(cacheNames = "faqContent", key = "FaqCountGroupByAuthorAndDate")
-
-            },
-            put = {
-                    @CachePut(cacheNames = "faqContent", key = "#faq.id", condition = "#{faq.id != null}")
+                    @CacheEvict(cacheNames = "faqContent", key = "'topContents'"),
+                    @CacheEvict(cacheNames = "faqContent", key = "'FaqCount'"),
+                    @CacheEvict(cacheNames = "faqContent", key = "'FaqCountGroup'"),
+                    @CacheEvict(cacheNames = "faqContent", key = "'FaqCountGroupByAuthorAndDate'"),
+                    @CacheEvict(cacheNames = "faqContent", key = "#faq.id"),
             }
     )
     public FAQContent saveFAQContent(FAQContent faq) {
@@ -123,9 +120,9 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
 
-    @Cacheable(cacheNames = "faqContent", key = "topContents")
+    @Cacheable(cacheNames = "faqContent", key = "'topContents'")
     public List<FAQContent> findTopFAQContents() {
-        if (listcount <= 100) {
+        if (listcount < 150) {
             return faqContentRepository.findTop100ByDisabledOrderByLastUpdateDateDesc(false);
         } else if (listcount < 200) {
             return faqContentRepository.findTop150ByDisabledOrderByLastUpdateDateDesc(false);
@@ -238,19 +235,19 @@ public class FAQContentServiceImpl implements FAQContentService {
     }
 
     @Override
-    @Cacheable(cacheNames = "faqContent", key = "FaqCount")
+    @Cacheable(cacheNames = "faqContent", key = "'FaqCount'")
     public long getFAQContentsCount() {
         return faqContentRepository.count();
     }
 
     @Override
-    @Cacheable(cacheNames = "faqContent", key = "FaqCountGroup")
+    @Cacheable(cacheNames = "faqContent", key = "'FaqCountGroup'")
     public List<?> getFaqGroupByCount() {
         return faqContentRepository.findGroupByCount();
     }
 
     @Override
-    @Cacheable(cacheNames = "faqContent", key = "FaqCountGroupByAuthorAndDate")
+    @Cacheable(cacheNames = "faqContent", key = "'FaqCountGroupByAuthorAndDate'")
     public List<Object[]> getFaqGroupByAuthorAndDate() {
         return faqContentRepository.findGroupByAuthorAndDate1();
     }

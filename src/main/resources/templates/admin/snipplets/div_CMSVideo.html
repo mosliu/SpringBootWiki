@@ -4,7 +4,7 @@
 <body>
 
 <!--用户修改Div-->
-<div th:fragment="cMSVideoedit">
+<div th:fragment="cmsVideoEdit">
 
     <!-- header modal -->
     <div class="modal-header">
@@ -13,7 +13,7 @@
         <h4 class="modal-title" id="myLargeModalLabel">修改CMSVideo</h4>
     </div>
     <form id="updateform" action="/admin/CMSVideo_ajax?action=update" method="post" class="sky-form boxed"
-          novalidate="novalidate" th:object="${cMSVideo}">
+          novalidate="novalidate" th:object="${cmsVideo}">
         <!-- body modal -->
         <div class="modal-body">
             <div class="login-box">
@@ -35,7 +35,8 @@
                     <label>修改CMSVideo别名</label>
                     <label class="input">
                         <i class="icon-append fa fa-tv"></i>
-                        <input type="text" th:field="*{cmsVideoFilepath}" placeholder="CMSVideo描述" minlength="2" required="true"
+                        <input type="text" th:field="*{cmsVideoFilepath}" placeholder="CMSVideo描述" minlength="2"
+                               required="true"
                                class="form-control "/>
                         <b class="tooltip tooltip-bottom-right">输入CMSVideo文件路径</b>
                     </label>
@@ -61,8 +62,13 @@
     </form>
     <script type="text/javascript" th:inline="javascript">
         /*<![CDATA[*/
-        var callback = function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+        function callback (data, success) {
+            if (success === "success") {
+                alert("Data: " + data.msg + "\nStatus: " + data.status);
+                if (data.status === "success") {
+                    $("#ajax").modal('hide');
+                }
+            }
         }
 
         $("#updateform").on("submit", function (e) {
